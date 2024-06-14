@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avuyile Mthembu</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #007bff;
+        }
+
+        /* Hero section styles */
+        .hero {
+            background-color: #007bff;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* About section styles */
+        #about {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-text {
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .about-text h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .about-image img {
+            width: 500px;
+            height: 500px;
+            margin-top: 10px; /* Adjust spacing between text and image */
+        }
+
+        /* Contact section styles */
+        #contact {
+            padding: 40px 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .contact-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        form {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Social section styles */
+        #social {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 24px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #007bff;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+    <!-- Add Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-jLKHWMniayxNUgIN6BBk9s6Hpft5bBTHzNeV+vFVUKYmYV4m+PFShoqTHh+7qhb7" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="#">Avuyile Mthembu</a>
+            </div>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#social">Social</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Avuyile Mthembu's Official Website</h1>
+                <p>Mr. A CEO</p>
+                <p>Welcome to a world of endless possibilities! Avuyile Mthembu's website is a space where innovation and creativity collide. We're here to challenge the status quo, to explore new ideas, and to bring them to life.</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Avuyile Mthembu</h2>
+                        <p>Avuyile Mthembu, based in South Africa, is a dedicated enthusiast of cutting-edge technology, particularly in areas like blockchain, cryptocurrencies, and software development. His journey is fueled by a profound commitment to leveraging technology for positive global impact. Through this platform, he shares profound insights, innovative projects, and visionary ideas, aiming to inspire others to harness technology's potential for transformative change.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/avuyile1.jpg" alt="Avuyile Mthembu">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="social">
+            <div class="container">
+                <h2>Connect with Me on Socials</h2>
+                <p><a href="https://instagram.com/mthembu_avuyile_sa" target="_blank">Instagram</a></p>
+                <p><a href="https://twitter.com/MthembuAvuyile" target="_blank">Twitter</a></p>
+                <p><a href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/?mibextid=ZbWKwL" target="_blank">Facebook</a></p>
+                <p><a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank">TikTok</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
