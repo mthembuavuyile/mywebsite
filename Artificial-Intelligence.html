@@ -33,6 +33,7 @@
       color: #fff;
       padding: 20px;
       text-align: center;
+      position: relative;
     }
 
     .logo a {
@@ -40,6 +41,10 @@
       font-weight: bold;
       color: #ff9800;
       text-decoration: none;
+    }
+
+    nav {
+      position: relative;
     }
 
     nav ul {
@@ -63,6 +68,23 @@
     nav ul li a:hover,
     nav ul li a.active {
       color: #ff9800;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      width: 30px;
+      height: 3px;
+      background: #fff;
     }
 
     .hero {
@@ -178,6 +200,10 @@
     }
 
     @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
       nav ul {
         flex-direction: column;
         position: absolute;
@@ -211,6 +237,11 @@
       <div class="logo">
         <a href="#home">Avuyile Mthembu</a>
       </div>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
       <ul>
         <li><a href="index.html">Home</a></li>
       </ul>
@@ -271,5 +302,14 @@
       <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl = document.querySelector('nav ul');
+
+    menuToggle.addEventListener('click', () => {
+      navUl.classList.toggle('nav-active');
+    });
+  </script>
 </body>
 </html>
