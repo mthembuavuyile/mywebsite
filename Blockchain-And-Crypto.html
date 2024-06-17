@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoInsight - Your Gateway to the World of Cryptocurrencies</title>
+    <meta name="description" content="Explore the dynamic world of cryptocurrencies with CryptoInsight. Dive into market trends, investment strategies, and the latest news.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.75;
+            color: #333;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+       .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background-color: #1d1f21;
+            color: #fff;
+            padding: 25px 0;
+            text-align: center;
+        }
+
+       .logo a {
+            font-size: 28px;
+            font-weight: 500;
+            color: #ff9800;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        nav ul li {
+            margin: 0 12px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 12px 18px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ff9800;
+        }
+
+       .hero {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+       .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+       .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+        }
+
+        section {
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 24px;
+            color: #ff9800;
+        }
+
+       .highlight {
+            background-color: #fff3cd;
+            padding: 22px;
+            margin: 24px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+       .highlight h3 {
+            margin-bottom: 12px;
+            color: #007bff;
+        }
+
+       .highlight p {
+            line-height: 1.65;
+        }
+
+       .ai-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+            justify-items: center;
+            margin-top: 24px;
+        }
+
+       .ai-tools li {
+            list-style: none;
+            font-size: 16px;
+            color: #666;
+            background-color: #fff;
+            padding: 14px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+       .quotes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .quote {
+            background-color: #fff;
+            padding: 26px;
+            margin: 28px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            max-width: 850px;
+            text-align: left;
+        }
+
+       .quote p {
+            font-style: italic;
+        }
+
+       .quote.author {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 14px;
+        }
+
+        footer {
+            background-color: #1d1f21;
+            color: #fff;
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ff9800;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+           .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #1d1f21;
+                display: none;
+            }
+
+            nav ul.nav-active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+        }
+
+       .hero-img {
+            width: 100%;
+            height: auto;
+        }
+
+       .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+       .fade-in.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#home">CryptoInsight</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content fade-in show">
+                    <p>By Avuyile Mthembu | Mr A CEO</p>
+                    <h2>Welcome to CryptoInsight</h2>
+                    <p>Your one-stop resource for navigating the exciting world of cryptocurrencies. Discover insights, strategies, and stay ahead of the curve.</p>
+                    <a href="#about" class="btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Cryptocurrencies</h2>
+                <p>Cryptocurrencies are digital forms of currency that use cryptography for security. Unlike traditional currencies controlled by governments, cryptocurrencies are decentralized and not controlled by a single entity. Transactions are typically recorded on a public ledger called a blockchain, which is shared across a network of computers.</p>
+                <div class="highlight">
+                    <h3>Key Features of Cryptocurrencies:</h3>
+                    <p><b style="color: black">Understand the basics:</b></p>
+                    <ul class="ai-tools">
+                        <li>Decentralization</li>
+                        <li>Security through cryptography</li>
+                        <li>Transparency via blockchain</li>
+                        <li>Potential for high returns</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <ul>
+                    <li><strong>Market Analysis:</strong> Regular updates and in-depth analysis of the cryptocurrency market, including price trends, market capitalization, and trading volumes.</li>
+                    <li><strong>Investment Strategies:</strong> Advice on investing in cryptocurrencies, portfolio diversification, and managing risk.</li>
+                    <li><strong>Blockchain Education:</strong> Educational resources explaining blockchain technology, its applications, and future potential in various industries.</li>
+                    <li><strong>Crypto News and Updates:</strong> Latest news, developments, and emerging trends in the world of cryptocurrencies and blockchain.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="resources">
+            <div class="container">
+                <h2>Recommended Resources</h2>
+                <div class="quotes">
+                    <div class="quote">
+                        <p>"Bitcoin is the most important invention in human history since the internet."</p>
+                        <p class="author">- Satoshi Nakamoto</p>
+                    </div>
+                </div>
+                <div class="highlight">
+                    <h3>"The Bitcoin Standard" by Saifedean Ammous</h3>
+                    <p>This influential book explores the history of money and argues that Bitcoin has the potential to become a new global standard, similar to the gold standard used in the past. It discusses the flaws of fiat currencies and the potential benefits of Bitcoin, such as its scarcity, divisibility, portability, and durability.</p>
+                </div>
+                <div class="highlight">
+                    <h3>Online Courses and Tutorials</h3>
+                    <ul>
+                        <li><a href="https://www.coursera.org/learn/cryptocurrency" target="_blank">Cryptocurrency and Blockchain: An Introduction to Digital Currencies (Coursera)</a></li>
+                        <li><a href="https://www.udemy.com/course/blockchain-and-cryptocurrency/" target="_blank">Blockchain and Cryptocurrency: Beginner to Master (Udemy)</a></li>
+                        <li><a href="https://www.edx.org/course/introduction-to-blockchain-theory-and-applications" target="_blank">Introduction to Blockchain Theory and Applications (edX)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="exchanges">
+            <div class="container">
+                <h2>Top Cryptocurrency Exchanges</h2>
+                <p>These exchanges are popular choices for buying, selling, and trading cryptocurrencies. Choose one that suits your needs.</p>
+                <ul>
+                    <li>Binance</li>
+                    <li>Coinbase</li>
+                    <li>OKX</li>
+                    <li>Luno</li>
+                    <li>Bybit</li>
+                    <li>Upbit</li>
+                    <li>Kraken</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="top-picks">
+            <div class="container">
+                <h2>Top Cryptocurrency Picks</h2>
+                <p><em>Editor's choice, not financial advice</em></p>
+                <ul>
+                    <li>Bitcoin (BTC)</li>
+                    <li>Ethereum (ETH)</li>
+                    <li>Solana (SOL)</li>
+                    <li>BNB (BNB)</li>
+                    <li>Ripple (XRP)</li>
+                    <li>Cardano (ADA)</li>
+                    <li>Avalanche (AVAX)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have any questions or want to learn more about our services? Feel free to reach out to us:</p>
+                <ul>
+                    <li>Email: info@cryptoinsight.com</li>
+                    <li>Phone: +1 (555) 123-4567</li>
+                    <li>Address: 123 Crypto Avenue, Blockchain City</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 CryptoInsight. All rights reserved.</p>
+            <p><em>This website is for educational purposes only and does not constitute financial advice. Cryptocurrencies are volatile and carry significant risks. Please do your own research and consult with a professional before making any investment decisions.</em></p>
+            <p>Follow us on <a href="https://www.linkedin.com/in/mthembuavuyile/" target="_blank">LinkedIn</a>, 
+                <a href="https://twitter.com/MthembuAvuyile" target="_blank">Twitter</a>, 
+                <a href="https://github.com/CryptoInsight" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navUl = document.querySelector("nav ul");
+
+        menuToggle.addEventListener("click", () => {
+            navUl.classList.toggle("nav-active");
+        });
+
+        // Fade-in effect
+        document.addEventListener("DOMContentLoaded", () => {
+            const faders = document.querySelectorAll(".fade-in");
+            const appearOptions = {
+                threshold: 0.5,
+                rootMargin: "0px 0px -50px 0px",
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+</body>
+</html>
