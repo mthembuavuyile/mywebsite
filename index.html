@@ -32,24 +32,24 @@
       background-color: #1d1f21;
       color: #fff;
       padding: 20px;
-      text-align: center; /* Centering the content in the header */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     nav {
       display: flex;
-      flex-direction: column; /* Stack items vertically on mobile */
       align-items: center;
     }
 
     nav ul {
       list-style-type: none;
       display: flex;
-      flex-wrap: wrap; /* Wrap items to prevent overflow */
-      justify-content: center;
+      align-items: center;
     }
 
     nav ul li {
-      margin: 10px; /* Adjusting margin for better spacing */
+      margin: 0 15px;
     }
 
     nav ul li a {
@@ -100,9 +100,8 @@
       }
 
       nav ul li {
-        margin-left: 0;
+        margin: 10px 0;
         text-align: center;
-        padding: 10px 0;
       }
 
       .burger {
@@ -297,17 +296,14 @@
     }
   </style>
   <!-- Add Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header>
+    <div class="logo">
+      <a href="#home">Avuyile Mthembu</a>
+    </div>
     <nav>
-      <div class="logo">
-        <a href="#home">Avuyile Mthembu</a>
-      </div>
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -397,12 +393,7 @@
             </div>
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-              ></textarea>
+              <textarea id="message" name="message" rows="5" required></textarea>
             </div>
             <button type="submit">Send Message</button>
           </form>
@@ -448,6 +439,17 @@
     burger.addEventListener('click', () => {
       nav.classList.toggle('nav-active');
       burger.classList.toggle('toggle');
+    });
+
+    // Close the nav when clicking on a link (for mobile UX)
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('nav-active')) {
+          nav.classList.remove('nav-active');
+          burger.classList.remove('toggle');
+        }
+      });
     });
   </script>
 </body>
