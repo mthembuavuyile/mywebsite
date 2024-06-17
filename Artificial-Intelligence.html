@@ -148,12 +148,17 @@
       justify-content: center;
       margin-top: 20px;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .ai-tools li {
       list-style: none;
       font-size: 16px;
       color: #666;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .quotes {
@@ -229,6 +234,15 @@
       width: 100%;
       height: auto;
     }
+
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -244,15 +258,18 @@
       </button>
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="#ai">AI</a></li>
+        <li><a href="#quotes">Quotes</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <img src="ai-image.png" alt="Artificial Intelligence" class="hero-img">
+    <img src="ai-image.png" alt="Artificial Intelligence" class="hero-img fade-in show">
     <section id="ai" class="hero">
       <div class="container">
-        <div class="hero-content">
+        <div class="hero-content fade-in">
           <h2>Artificial Intelligence (AI)</h2>
           <p>
             Explore the limitless possibilities of Artificial Intelligence with Avuyile Mthembu. Dive into the world of machine learning, neural networks, and advanced algorithms driving the future of technology and innovation.
@@ -272,34 +289,39 @@
     </section>
 
     <section>
-      <div>
-      <p><h3>Exploring new horizons<h3></p><br>
-
-      <P style="color:#000;">As I set my sights on the horizon, I realize that developing this AI website project is not a culmination, but a stepping stone. It's a foundation upon which I'll build my next great pursuit. The allure of AI's uncharted territories beckons me, and I'm compelled to explore its vast expanse. Though my previous endeavors have brought me pride, my insatiable curiosity propels me forward. The potential of AI is a boundless sea, and I'm eager to see the innovations that will emerge from its depths. To those who will carry the torch, I implore you: embrace the unknown, challenge the status quo, and be fearless in your pursuit of innovation. The future of AI is yours to shape, and though the journey won't be without its challenges, the rewards will be immeasurable. As I embark on this new path, I urge you to join me in venturing into the uncharted territories of technology.</P>
-    </div>
+      <div class="container">
+        <h2>Exploring New Horizons</h2>
+        <p style="color:#000;">As I set my sights on the horizon, I realize that developing this AI website project is not a culmination, but a stepping stone. It's a foundation upon which I'll build my next great pursuit. The allure of AI's uncharted territories beckons me, and I'm compelled to explore its vast expanse. Though my previous endeavors have brought me pride, my insatiable curiosity propels me forward. The potential of AI is a boundless sea, and I'm eager to see the innovations that will emerge from its depths. To those who will carry the torch, I implore you: embrace the unknown, challenge the status quo, and be fearless in your pursuit of innovation. The future of AI is yours to shape, and though the journey won't be without its challenges, the rewards will be immeasurable. As I embark on this new path, I urge you to join me in venturing into the uncharted territories of technology.</p>
+      </div>
     </section>
 
     <section id="quotes">
       <div class="container">
         <h2>Inspirational Quotes</h2>
         <div class="quotes">
-          <div class="quote">
-            <p>"The only limit to our realization of tomorrow is our doubts of today." </p>
+          <div class="quote fade-in">
+            <p>"The only limit to our realization of tomorrow is our doubts of today."</p>
             <div class="author">- Franklin D. Roosevelt</div>
           </div>
-          <div class="quote">
-            <p>"The future belongs to those who believe in the beauty of their dreams." </p>
+          <div class="quote fade-in">
+            <p>"The future belongs to those who believe in the beauty of their dreams."</p>
             <div class="author">- Eleanor Roosevelt</div>
           </div>
-          <div class="quote">
-            <p>"The best way to predict the future is to invent it." </p>
+          <div class="quote fade-in">
+            <p>"The best way to predict the future is to invent it."</p>
             <div class="author">- Alan Kay</div>
           </div>
-          <div class="quote">
-            <p>"Do not wait to strike till the iron is hot; but make it hot by striking." </p>
+          <div class="quote fade-in">
+            <p>"Do not wait to strike till the iron is hot; but make it hot by striking."</p>
             <div class="author">- William Butler Yeats</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="contact" style="background-color: #f0f2f5; padding: 40px 0;">
+      <div class="container">
+        <h2>Contact Me</h2>
       </div>
     </section>
   </main>
@@ -307,6 +329,11 @@
   <footer>
     <div class="container">
       <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
+      <p>Follow me on 
+        <a href="https://www.linkedin.com/in/mthembuavuyile/" target="_blank">LinkedIn</a>, 
+        <a href="https://twitter.com/MthembuAvuyile" target="_blank">Twitter</a>, 
+        <a href="https://github.com/mthembuavuyile" target="_blank">GitHub</a>
+      </p>
     </div>
   </footer>
 
@@ -316,6 +343,30 @@
 
     menuToggle.addEventListener('click', () => {
       navUl.classList.toggle('nav-active');
+    });
+
+    // Fade-in effect
+    document.addEventListener('DOMContentLoaded', () => {
+      const faders = document.querySelectorAll('.fade-in');
+      const appearOptions = {
+        threshold: 0.5,
+        rootMargin: "0px 0px -50px 0px"
+      };
+
+      const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            return;
+          } else {
+            entry.target.classList.add('show');
+            appearOnScroll.unobserve(entry.target);
+          }
+        });
+      }, appearOptions);
+
+      faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+      });
     });
   </script>
 </body>
