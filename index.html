@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avuyile Mthembu - Innovator, Developer, Entrepreneur | Mr. A CEO</title>
     <meta name="description" content="Avuyile Mthembu is a South African innovator, developer, and entrepreneur. Explore his projects in blockchain, cryptocurrencies, and software development.">
     <meta name="keywords" content="Avuyile Mthembu, Mr. A CEO, blockchain, cryptocurrency, software development, South Africa, innovator, entrepreneur">
@@ -19,473 +19,480 @@
     <meta name="twitter:image" content="https://mthembuavuyile.github.io/mywebsite/avuyile1.jpg">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
-    /* Reset styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #ff9800;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --header-bg: #1d1f21;
+        }
 
-    /* Global styles */
-    body {
-      font-family: "Poppins", sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f0f2f5;
-      overflow-x: hidden;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
 
-    /* Header styles */
-    header {
-      background-color: #1d1f21;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    nav {
-      display: flex;
-      align-items: center;
-    }
+        header {
+            background-color: var(--header-bg);
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
 
-    nav ul {
-      list-style-type: none;
-      display: flex;
-      align-items: center;
-    }
+        header.scrolled {
+            background-color: rgba(29, 31, 33, 0.9);
+        }
 
-    nav ul li {
-      margin: 0 15px;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      padding: 10px;
-      transition: color 0.3s ease;
-    }
+        .logo a {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
 
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: #ff9800;
-    }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
 
-    .logo a {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ff9800;
-      text-decoration: none;
-    }
+        nav ul li {
+            margin-left: 20px;
+        }
 
-    .burger {
-      display: none;
-      cursor: pointer;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 25px;
-      height: 20px;
-    }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      transition: all 0.3s ease;
-    }
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
 
-    /* Responsive styles */
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #1d1f21;
-        z-index: 20;
-      }
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
 
-      nav ul li {
-        margin: 10px 0;
-        text-align: center;
-      }
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
 
-      .burger {
-        display: flex;
-      }
+        .hero-content p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
 
-      .nav-active {
-        display: flex;
-      }
-    }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
 
-    /* Hero section styles */
-    .hero {
-      background: linear-gradient(to right, #007bff, #0056b3);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
+        .cta-button:hover {
+            background-color: #e68a00;
+        }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
+        section {
+            padding: 80px 0;
+        }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-    }
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-    .hero-content h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .hero-content p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
+        .about-text {
+            flex: 1;
+            padding-right: 40px;
+        }
 
-    /* Section styles */
-    section {
-      padding: 60px 0;
-      text-align: center;
-    }
+        .about-image {
+            flex: 1;
+        }
 
-    section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #ff9800;
-    }
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    /* About section */
-    #about {
-      background-color: #fff;
-    }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
 
-    .about-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .skill-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
 
-    .about-text {
-      max-width: 600px;
-      margin-bottom: 20px;
-    }
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
 
-    .about-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        .skill-card i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
 
-    /* Contact section */
-    #contact {
-      background-color: #fff;
-    }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    .contact-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .project-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    form {
-      width: 100%;
-      max-width: 600px;
-      margin-bottom: 20px;
-    }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
+        .project-info {
+            padding: 20px;
+        }
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+        .project-info h3 {
+            margin-bottom: 10px;
+        }
 
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    button[type="submit"] {
-      background-color: #ff9800;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    button[type="submit"]:hover {
-      background-color: #e68a00;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
 
-    .contact-info p {
-      margin-bottom: 10px;
-    }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
 
-    .contact-info a {
-      color: #007bff;
-      text-decoration: none;
-    }
+        .form-group textarea {
+            height: 150px;
+        }
 
-    /* Social section */
-    #social {
-      background-color: #f8f9fa;
-    }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
 
-    .social-links a {
-      display: inline-block;
-      margin: 0 10px;
-      font-size: 24px;
-      color: #333;
-      transition: color 0.3s ease;
-    }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 24px;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
 
-    .social-links a:hover {
-      color: #007bff;
-    }
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
 
-    /* Footer styles */
-    footer {
-      background-color: #1d1f21;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
+        footer {
+            background-color: var(--header-bg);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
 
-    footer a {
-      color: #ff9800;
-      text-decoration: none;
-      margin: 0 5px;
-    }
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
 
-    /* Toggle Menu Animation */
-    .burger.toggle div:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .burger.toggle div:nth-child(2) {
-      opacity: 0;
-    }
-
-    .burger.toggle div:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-  </style>
-  <!-- Add Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a href="#home">Avuyile Mthembu</a>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="Skills-And-Interests.html">Skills & Interests</a></li>
-        <li><a href="Projects-And-Services.html">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#social">Social</a></li>
-      </ul>
-      <div class="burger">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </nav>
-  </header>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="#home">Avuyile Mthembu</a>
+                </div>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <h2>Welcome to Avuyile Mthembu's Official Website</h2>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+              <br><br>
+            <h2>Welcome to Avuyile Mthembu's Official Website</h2>
         <p>Mr. A CEO - Innovator | Developer | Entrepreneur</p>
-        <p>
-          Welcome to a world of endless possibilities! Avuyile Mthembu's
+      
+         <p> Welcome to a world of endless possibilities! Avuyile Mthembu's
           website is a space where innovation and creativity collide. We're
           here to challenge the status quo, explore new ideas, and bring them
-          to life.
-        </p>
-      </div>
-    </section>
+          to life.</p>
+      
 
-    <section id="about">
-      <div class="container">
-        <div class="about-content">
-          <div class="about-text">
-            <h2>About Avuyile Mthembu</h2>
-            <p>
-              Avuyile Mthembu, based in South Africa, is a dedicated
-              enthusiast of cutting-edge technology, particularly in areas
-              like blockchain, cryptocurrencies, and software development. His
-              journey is fueled by a profound commitment to leveraging
-              technology for positive global impact. Through this platform, he
-              shares profound insights, innovative projects, and visionary
-              ideas, aiming to inspire others to harness technology's
-              potential for transformative change.
-            </p>
-          </div>
-          <div class="about-image">
-            <img src="avuyile1.jpg" alt="Avuyile Mthembu" />
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section id="future-tech">
-    <h2>Future Tech</h2>
-    <p>Discover the next revolutionary advancements in technology.</p>
-    <a href="Future-Tech.html" class="cta-button">Click here to explore</a>
-</section>
-
-
-    <section id="skills">
-      <div class="container">
-        <h2>Skills & Interests</h2>
-        <p><h3><a href="Skills-And-Interests.html">Click here to view</a></h3></p>
-      </div>
-    </section>
-    <hr>
-
-    <section id="projects">
-      <div class="container">
-        <h2>Projects & Services</h2>
-        <p><h3><a href="Projects-And-Services.html">Click here to view</a></h3></p>
-      </div>
-    </section>
-    <hr>
-
-    <section id="Artificial-Intelligence">
-      <div class="container">
-        <h2>Artificial intelligence (AI)</h2>
-        <p><h3><a href="Artificial-Intelligence.html">Click here to view</a></h3></p>
-      </div>
-    </section>
-    <hr>
-
-    <section>
-      <h2>Blockchain and Crypto</h2>
-      <p><a href="Blockchain-And-Crypto.html">Learn more about blockchain and crypto</a></p>
-    </section>
-    <hr>
-    
-
-    <section id="contact">
-      <div class="container">
-        <h2>Contact</h2>
-        <div class="contact-content">
-          <form>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required />
+                <a href="#contact" class="cta-button">Get in Touch</a>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit">Send Message</button>
-          </form>
-          <div class="contact-info">
-            <p>Email: your-email@example.com</p>
-            <p>
-              LinkedIn: <a href="#" target="_blank" rel="noopener noreferrer">Your LinkedIn Profile</a>
-            </p>
-            <p>Phone: +27 123 456 7890</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section id="social">
-      <div class="container">
-        <h2>Connect with Me on Socials</h2>
-        <div class="social-links">
-          <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://twitter.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer">Twitter</a>
-          <a href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <section id="about">
+            <div class="container">
+                <h2>About Mr A Mthembu</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Avuyile Mthembu, based in South Africa, is a dedicated enthusiast of cutting-edge technology, particularly in areas like blockchain, cryptocurrencies, and software development. His journey is fueled by a profound commitment to leveraging technology for positive global impact.</p>
+                        <p>Through this platform, he shares profound insights, innovative projects, and visionary ideas, aiming to inspire others to harness technology's potential for transformative change.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="avuyile1.jpg" alt="Avuyile Mthembu">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        <section id="skills">
+            <div class="container">
+                <h2>Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Software Development</h3>
+                        <p>Proficient in multiple programming languages and frameworks</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-link"></i>
+                        <h3>Blockchain Technology</h3>
+                        <p>Expert in blockchain architecture and smart contract development</p>
+                    </div>
+                    <div class="skill-card">
+                      <i class="fas fa-lock"></i>
+                      <h3>Cybersecurity</h3>
+                      <p>Proficient in network security and ethical hacking practices.</p>
+                  </div>
+                  <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Programming</h3>
+                    <p>Expert in languages such as JavaScript, Python, and C++.</p>
+                </div>
+
+                <div class="skill-card">
+                  <i class="fab fa-python"></i>
+                  <h3>Python Development</h3>
+                  <p>Experienced in building scalable applications using Python.</p>
+              </div>
+              <div class="skill-card">
+                  <i class="fab fa-java"></i>
+                  <h3>Java Development</h3>
+                  <p>Proficient in creating robust and efficient applications with Java.</p>
+              </div>
+
+              <div class="skill-card">
+                <i class="fas fa-robot"></i>
+                <h3>AI & Machine Learning</h3>
+            </div>
+
+            <div class="skill-card">
+              <i class="fab fa-android"></i>
+              <h3>Android Apps</h3>
+          </div>
+
+              <div class="skill-card">
+                  <i class="fab fa-node-js"></i>
+                  <h3>Node.js</h3>
+                  <p>Skilled in developing server-side applications with Node.js.</p>
+              </div>
+
+                <div class="skill-card">
+                  <i class="fas fa-database"></i>
+                  <h3>Data Analysis</h3>
+                  <p>Experienced in analyzing and interpreting complex data sets.</p>
+              </div>
+
+
+                    <div class="skill-card">
+                      <i class="fas fa-cloud"></i>
+                      <h3>Cloud Computing</h3>
+                      <p>Knowledgeable in cloud platforms such as AWS and Azure.</p>
+                  </div>
+                  
+                    <div class="skill-card">
+                        <i class="fas fa-coins"></i>
+                        <h3>Cryptocurrency</h3>
+                        <p>Deep understanding of cryptocurrency ecosystems and DeFi</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Innovation</h3>
+                        <p>Proven track record of developing innovative solutions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="future-tech">
+          <div class="container">
+              <h2 style="text-align: center;">Future Tech</h2>
+              <p style="text-align: center;">Discover the next revolutionary advancements in technology.</p>
+              <h3 style="text-align: center;">
+                  <a href="Future-Tech.html">Click here to explore</a>
+              </h3>
+          </div>
+      </section>
+      <hr>
+      
+      <section id="skills">
+          <div class="container">
+              <h2 style="text-align: center;">Skills & Interests</h2>
+              <h3 style="text-align: center;">
+                  <a href="Skills-And-Interests.html">Click here to view</a>
+              </h3>
+          </div>
+      </section>
+      <hr>
+      
+      <section id="projects">
+          <div class="container">
+              <h2 style="text-align: center;">Projects & Services</h2>
+              <h3 style="text-align: center;">
+                  <a href="Projects-And-Services.html">Click here to view</a>
+              </h3>
+          </div>
+      </section>
+      <hr>
+      
+      <section id="artificial-intelligence">
+          <div class="container">
+              <h2 style="text-align: center;">Artificial Intelligence (AI)</h2>
+              <h3 style="text-align: center;">
+                  <a href="Artificial-Intelligence.html">Click here to view</a>
+              </h3>
+          </div>
+      </section>      
+      <hr>
+      
+      <section id="Blockchain-And-Crypto">
+        <div class="container">
+          <h2 style="text-align: center;">Blockchain and Crypto</h2>
+          <h3 style="text-align: center;">
+            <a href="Blockchain-And-Crypto.html">Learn more about blockchain and crypto</a>
+          </h3>
+          </div>
+      </section>
+      <hr>
+      
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+                <div class="social-links">
+                  <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/?mibextid=ZbWKwL"><i class="fab fa-facebook"></i></a>
           <a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer">TikTok</a>
         </div>
       </div>
     </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
-      <p>
-        <a href="#home">Home</a> | <a href="#about">About</a> |
-        <a href="#skills">Skills & Interests</a> | <a href="#projects">Projects</a> | <a href="#contact">Contact</a> |
-        <a href="#social">Social</a>
-      </p>
-    </div>
-  </footer>
 
-  <script>
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('nav ul');
-
-    burger.addEventListener('click', () => {
-      nav.classList.toggle('nav-active');
-      burger.classList.toggle('toggle');
-    });
-
-    // Close the nav when clicking on a link (for mobile UX)
-    const navLinks = document.querySelectorAll('nav ul li a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (nav.classList.contains('nav-active')) {
-          nav.classList.remove('nav-active');
-          burger.classList.remove('toggle');
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+      
