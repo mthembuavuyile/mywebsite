@@ -82,8 +82,9 @@
         }
 
         nav ul li {
-            margin-left: 20px;
-        }
+        margin: 10px 0; /* Stack the links vertically */
+        text-align: center; /* Center align text */
+    }
 
         nav ul li a {
             color: #fff;
@@ -109,12 +110,12 @@
         }
 
         .hero-content h1 {
-            font-size: 48px;
+            font-size: 32px;
             margin-bottom: 20px;
         }
 
         .hero-content p {
-            font-size: 18px;
+            font-size: 16px;
             max-width: 600px;
             margin: 0 auto 30px;
         }
@@ -154,7 +155,8 @@
 
         .about-text {
             flex: 1;
-            padding-right: 40px;
+            padding-right: 0px;
+            margin-bottom: 30px;
         }
 
         .about-image {
@@ -273,9 +275,23 @@
         }
 
         @media (max-width: 768px) {
-            .about-content {
-                flex-direction: column;
-            }
+    nav ul {
+        display: none; /* Hide the nav links initially */
+        flex-direction: column;
+        position: absolute;
+        background-color: var(--header-bg);
+        top: 60px; /* Adjust as needed */
+        left: 0;
+        right: 0;
+        padding: 20px 0;
+        z-index: 999; /* Ensure it's above other elements */
+    }
+
+    .burger {
+        display: block; /* Show burger icon on mobile */
+        cursor: pointer;
+    }
+    
 
             .about-text {
                 padding-right: 0;
@@ -292,7 +308,10 @@
                 <div class="logo">
                     <a href="#home">Avuyile Mthembu</a>
                 </div>
-                <ul>
+                <div class="burger" id="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul id="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
@@ -302,6 +321,7 @@
             </nav>
         </div>
     </header>
+    
 
     <main>
         <section id="home" class="hero">
@@ -492,7 +512,20 @@
           <a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer">TikTok</a>
         </div>
       </div>
+      <script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('nav-links');
+    
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                navLinks.style.display = 'flex'; // Show the links
+            } else {
+                navLinks.style.display = 'none'; // Hide the links
+            }
+        });
+    </script>    
     </section>
-
-
-      
+</main>
+</body>
+</html>
