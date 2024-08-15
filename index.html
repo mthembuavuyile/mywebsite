@@ -49,7 +49,7 @@
         }
 
         header {
-            background-color: var(--header-bg);
+            background-color: transparent;
             color: #fff;
             padding: 20px 0;
             position: fixed;
@@ -60,13 +60,14 @@
         }
 
         header.scrolled {
-            background-color: rgba(29, 31, 33, 0.9);
+            background-color: rgba(1, 25, 49, 0.9);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: gold;
         }
 
         .logo a {
@@ -79,6 +80,8 @@
         nav ul {
             display: flex;
             list-style-type: none;
+            background-color: rgba(155, 164, 173, 0.9); /* Make the background semi-transparent */
+
         }
 
         nav ul li {
@@ -310,7 +313,7 @@
         display: none; /* Hide the nav links initially */
         flex-direction: column;
         position: absolute;
-        background-color: var(--header-bg);
+        background-color: rgba(29, 31, 33, 0.9);
         top: 60px; /* Adjust as needed */
         left: 0;
         right: 0;
@@ -322,6 +325,7 @@
         display: block; /* Show burger icon on mobile */
         cursor: pointer;
     }
+    
     
 
             .about-text {
