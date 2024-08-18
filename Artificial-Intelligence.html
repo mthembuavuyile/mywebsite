@@ -100,13 +100,23 @@
             font-size: 0.9rem;
             color: #68d391;
         }
-        .timeline {
-            background-color: #2d3748;
-            border: 1px solid #4299e1;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+        .hero-img{
+            width: 100%;
+            height: 400px;
+            content: none;
+            overflow: hidden;
         }
+        .timeline {
+    background-position: center; /* Position the image at the center */
+    background-size: cover; /* Scale the image to cover the entire element */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: scroll; /* Scroll the image with the page */
+    border: 1px solid #4299e1;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
         .timeline-event {
             margin-bottom: 1rem;
         }
@@ -117,7 +127,7 @@
         footer {
             text-align: center;
             padding: 1rem;
-            background-color: #1a202c;
+            background: #1a202c;
             color: #a0aec0;
         }
         .footer-branding {
@@ -159,56 +169,137 @@
 
         <div class="tools-grid">
             <div class="tool-card">
-                <div class="tool-name">Claude</div>
-                <div class="tool-company">Anthropic</div>
-                <div class="tool-category">Chatbot</div>
+                <a href="https://www.anthropic.com/" target="_blank">
+                    <div class="tool-name">Claude</div>
+                    <div class="tool-company">Anthropic</div>
+                    <div class="tool-category">Chatbot</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">ChatGPT</div>
-                <div class="tool-company">OpenAI</div>
-                <div class="tool-category">Chatbot</div>
+                <a href="https://openai.com/chatgpt" target="_blank">
+                    <div class="tool-name">ChatGPT</div>
+                    <div class="tool-company">OpenAI</div>
+                    <div class="tool-category">Chatbot</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">Gemini</div>
-                <div class="tool-company">Google</div>
-                <div class="tool-category">Multimodal AI</div>
+                <a href="https://gemini.google.com/app" target="_blank">
+                    <div class="tool-name">Gemini</div>
+                    <div class="tool-company">Google</div>
+                    <div class="tool-category">Multimodal AI</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">GitHub Copilot</div>
-                <div class="tool-company">Microsoft</div>
-                <div class="tool-category">Code Assistant</div>
+                <a href="https://github.com/features/copilot" target="_blank">
+                    <div class="tool-name">GitHub Copilot</div>
+                    <div class="tool-company">Microsoft</div>
+                    <div class="tool-category">Code Assistant</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">Phind</div>
-                <div class="tool-company">Mistral AI</div>
-                <div class="tool-category">AI Search</div>
+                <a href="https://www.phind.com/" target="_blank">
+                    <div class="tool-name">Phind</div>
+                    <div class="tool-company">Phind</div>
+                    <div class="tool-category">AI Search</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">LLaMA</div>
-                <div class="tool-company">Meta</div>
-                <div class="tool-category">Language Model</div>
+                <a href="https://ai.meta.com/llama/" target="_blank">
+                    <div class="tool-name">LLaMA</div>
+                    <div class="tool-company">Meta</div>
+                    <div class="tool-category">Language Model</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">Microsoft Copilot</div>
-                <div class="tool-company">Microsoft</div>
-                <div class="tool-category">Coding AI</div>
+                <a href="https://www.microsoft.com/en-us/microsoft-365/copilot" target="_blank">
+                    <div class="tool-name">Microsoft Copilot</div>
+                    <div class="tool-company">Microsoft</div>
+                    <div class="tool-category">Coding AI</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">Grok</div>
-                <div class="tool-company">X (formerly Twitter)</div>
-                <div class="tool-category">AI Assistant</div>
+                <a href="https://twitter.com/i/grok" target="_blank">
+                    <div class="tool-name">Grok</div>
+                    <div class="tool-company">X (formerly Twitter)</div>
+                    <div class="tool-category">AI Assistant</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">Poe</div>
-                <div class="tool-company">Quora</div>
-                <div class="tool-category">AI Chatbot Aggregator</div>
+                <a href="https://poe.com/" target="_blank">
+                    <div class="tool-name">Poe</div>
+                    <div class="tool-company">Quora</div>
+                    <div class="tool-category">AI Chatbot Aggregator</div>
+                </a>
             </div>
             <div class="tool-card">
-                <div class="tool-name">Mistral AI</div>
-                <div class="tool-company">Mistral</div>
-                <div class="tool-category">Open-Source AI Models</div>
+                <a href="https://www.mistral.ai/" target="_blank">
+                    <div class="tool-name">Le Chat</div>
+                    <div class="tool-company">Mistral</div>
+                    <div class="tool-category">Open-Source AI Models</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://www.cohere.com/" target="_blank">
+                    <div class="tool-name">Cohere</div>
+                    <div class="tool-company">Cohere</div>
+                    <div class="tool-category">Language Model</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://huggingface.co/" target="_blank">
+                    <div class="tool-name">Hugging Face</div>
+                    <div class="tool-company">Hugging Face</div>
+                    <div class="tool-category">AI Model Hub</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://www.stability.ai/" target="_blank">
+                    <div class="tool-name">Stable Diffusion</div>
+                    <div class="tool-company">Stability AI</div>
+                    <div class="tool-category">Text-to-Image</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://midjourney.com/" target="_blank">
+                    <div class="tool-name">Midjourney</div>
+                    <div class="tool-company">Midjourney</div>
+                    <div class="tool-category">Text-to-Image</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://www.deepmind.com/" target="_blank">
+                    <div class="tool-name">AlphaFold</div>
+                    <div class="tool-company">DeepMind</div>
+                    <div class="tool-category">Protein Structure Prediction</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://replit.com/" target="_blank">
+                    <div class="tool-name">Ghostwriter</div>
+                    <div class="tool-company">Replit</div>
+                    <div class="tool-category">Code Assistant</div>
+                </a>
             </div>
         </div>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <a href="https://explorer.globe.engineer/" target="_blank">
+                    <div class="tool-name">Explorer</div>
+                    <div class="tool-company">Globe Engineer</div>
+                    <div class="tool-category">AI Search Engine</div>
+                </a>
+            </div>
+            <div class="tool-card">
+                <a href="https://gamma.app/" target="_blank">
+                    <div class="tool-name">Gamma</div>
+                    <div class="tool-company">Gamma</div>
+                    <div class="tool-category">Presentations</div>
+                </a>
+            </div>
+        </div>
+        
+        
+        
 
         <div class="timeline">
             <h2>AI Timeline</h2>
