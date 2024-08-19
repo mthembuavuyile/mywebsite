@@ -142,6 +142,38 @@
         a:hover {
             text-decoration: underline;
         }
+        body.light-mode {
+    background: linear-gradient(to bottom right, #f7fafc, #edf2f7);
+    color: #1a202c;
+}
+
+body.light-mode .tool-card {
+    background-color: #fff;
+    border-color: #e2e8f0;
+}
+
+body.light-mode .tool-company {
+    color: #4a5568;
+}
+
+body.light-mode .tool-category {
+    color: #38a169;
+}
+
+body.light-mode input[type="text"] {
+    background-color: #fff;
+    color: #1a202c;
+    border-color: #e2e8f0;
+}
+
+body.light-mode .category-button {
+    background-color: #4299e1;
+    color: #fff;
+}
+
+body.light-mode .category-button:hover {
+    background-color: #3182ce;
+}
     </style>
 </head>
 <body>
@@ -150,6 +182,7 @@
             <h1>AI Tools Explorer</h1>
             <p>Discover the latest AI tools for productivity and daily life</p>
             <p>By <strong>Mr. A Mthembu</strong></p>
+            <button id="modeToggle" aria-label="Toggle dark/light mode">Toggle Mode🔆🔅</button>
         </header>
 
         <div class="search-filter">
@@ -175,6 +208,7 @@
                     <div class="tool-category">Chatbot</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://openai.com/chatgpt" target="_blank">
                     <div class="tool-name">ChatGPT</div>
@@ -182,6 +216,7 @@
                     <div class="tool-category">Chatbot</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://gemini.google.com" target="_blank">
                     <div class="tool-name">Gemini</div>
@@ -189,27 +224,7 @@
                     <div class="tool-category">Multimodal AI</div>
                 </a>
             </div>
-            <div class="tool-card">
-                <a href="https://github.com/features/copilot" target="_blank">
-                    <div class="tool-name">GitHub Copilot</div>
-                    <div class="tool-company">Microsoft</div>
-                    <div class="tool-category">Code Assistant</div>
-                </a>
-            </div>
-            <div class="tool-card">
-                <a href="https://www.phind.com/" target="_blank">
-                    <div class="tool-name">Phind</div>
-                    <div class="tool-company">Phind</div>
-                    <div class="tool-category">AI Search</div>
-                </a>
-            </div>
-            <div class="tool-card">
-                <a href="https://ai.meta.com/llama/" target="_blank">
-                    <div class="tool-name">LLaMA</div>
-                    <div class="tool-company">Meta</div>
-                    <div class="tool-category">Language Model</div>
-                </a>
-            </div>
+
             <div class="tool-card">
                 <a href="https://copilot.microsoft.com/" target="_blank">
                     <div class="tool-name">Microsoft Copilot</div>
@@ -217,6 +232,31 @@
                     <div class="tool-category">Coding AI</div>
                 </a>
             </div>
+
+            <div class="tool-card">
+                <a href="https://github.com/features/copilot" target="_blank">
+                    <div class="tool-name">GitHub Copilot</div>
+                    <div class="tool-company">Microsoft</div>
+                    <div class="tool-category">Code Assistant</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://www.phind.com/" target="_blank">
+                    <div class="tool-name">Phind</div>
+                    <div class="tool-company">Phind</div>
+                    <div class="tool-category">AI Search</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://ai.meta.com/llama/" target="_blank">
+                    <div class="tool-name">LLaMA</div>
+                    <div class="tool-company">Meta</div>
+                    <div class="tool-category">Language Model</div>
+                </a>
+            </div>
+
             <div class="tool-card">
                 <a href="https://twitter.com/i/grok" target="_blank">
                     <div class="tool-name">Grok</div>
@@ -224,6 +264,7 @@
                     <div class="tool-category">AI Assistant</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://poe.com/" target="_blank">
                     <div class="tool-name">Poe</div>
@@ -231,6 +272,7 @@
                     <div class="tool-category">AI Chatbot Aggregator</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://www.mistral.ai/" target="_blank">
                     <div class="tool-name">Le Chat</div>
@@ -238,6 +280,7 @@
                     <div class="tool-category">Open-Source AI Models</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://www.cohere.com/" target="_blank">
                     <div class="tool-name">Cohere</div>
@@ -245,6 +288,7 @@
                     <div class="tool-category">Language Model</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://huggingface.co/" target="_blank">
                     <div class="tool-name">Hugging Face</div>
@@ -252,6 +296,7 @@
                     <div class="tool-category">AI Model Hub</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://www.stability.ai/" target="_blank">
                     <div class="tool-name">Stable Diffusion</div>
@@ -259,6 +304,7 @@
                     <div class="tool-category">Text-to-Image</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://midjourney.com/" target="_blank">
                     <div class="tool-name">Midjourney</div>
@@ -266,13 +312,63 @@
                     <div class="tool-category">Text-to-Image</div>
                 </a>
             </div>
+
             <div class="tool-card">
-                <a href="https://www.deepmind.com/" target="_blank">
+                <a href="https://www.canva.com/" target="_blank">
+                    <div class="tool-name">Canva</div>
+                    <div class="tool-company">Canva Pty Ltd</div>
+                    <div class="tool-category">Graphic Design</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://openai.com/index/dall-e-3/" target="_blank">
+                    <div class="tool-name">DALL-E 3</div>
+                    <div class="tool-company">OpenAI</div>
+                    <div class="tool-category">Image Generation</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://www.duolingo.com/" target="_blank">
+                    <div class="tool-name">Duolingo</div>
+                    <div class="tool-company">Duolingo Inc.</div>
+                    <div class="tool-category">Language Learning</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://www.freecodecamp.org/" target="_blank">
+                    <div class="tool-name">freeCodeCamp</div>
+                    <div class="tool-company">freeCodeCamp Inc.</div>
+                    <div class="tool-category">Coding Education</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://www.sololearn.com/" target="_blank">
+                    <div class="tool-name">SoloLearn</div>
+                    <div class="tool-company">SoloLearn Inc.</div>
+                    <div class="tool-category">Coding Education</div>
+                </a>
+            </div>
+
+            <div class="tool-card">
+                <a href="https://quillbot.com/paraphrasing-tool" target="_blank">
+                    <div class="tool-name">QuillBot</div>
+                    <div class="tool-company">QuillBot Inc.</div>
+                    <div class="tool-category">Paraphrasing Tool</div>
+                </a>
+            </div>
+            
+            <div class="tool-card">
+                <a href="https://alphafold.ebi.ac.uk/" target="_blank">
                     <div class="tool-name">AlphaFold</div>
                     <div class="tool-company">DeepMind</div>
                     <div class="tool-category">Protein Structure Prediction</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://replit.com/" target="_blank">
                     <div class="tool-name">Ghostwriter</div>
@@ -280,8 +376,7 @@
                     <div class="tool-category">Code Assistant</div>
                 </a>
             </div>
-        </div>
-        <div class="tools-grid">
+
             <div class="tool-card">
                 <a href="https://explorer.globe.engineer/" target="_blank">
                     <div class="tool-name">Explorer</div>
@@ -289,6 +384,7 @@
                     <div class="tool-category">AI Search Engine</div>
                 </a>
             </div>
+
             <div class="tool-card">
                 <a href="https://gamma.app/" target="_blank">
                     <div class="tool-name">Gamma</div>
@@ -297,6 +393,8 @@
                 </a>
             </div>
         </div>
+
+        
         
         <div class="timeline">
             <h2>AI Timeline</h2>
@@ -322,5 +420,49 @@
         <p>&copy; 2024 Avuyile Mthembu. All Rights Reserved.</p>
         <p class="footer-branding">Visit my official website: <a href="https://mthembuavuyile.github.io/mywebsite/">Avuyile Mthembu</a></p>
     </footer>
+    <script>
+        const searchInput = document.querySelector('input[type="text"]');
+        const toolCards = document.querySelectorAll('.tool-card');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            toolCards.forEach(card => {
+                const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+                const toolCompany = card.querySelector('.tool-company').textContent.toLowerCase();
+                const toolCategory = card.querySelector('.tool-category').textContent.toLowerCase();
+                
+                if (toolName.includes(searchTerm) || toolCompany.includes(searchTerm) || toolCategory.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        </script>
+        <script>
+            const categoryButtons = document.querySelectorAll('.category-button');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.textContent.toLowerCase();
+                    toolCards.forEach(card => {
+                        const toolCategory = card.querySelector('.tool-category').textContent.toLowerCase();
+                        if (category === 'all' || toolCategory === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            </script>
+            <script>
+                const modeToggle = document.getElementById('modeToggle');
+                const body = document.body;
+                
+                modeToggle.addEventListener('click', function() {
+                    body.classList.toggle('light-mode');
+                });
+                </script>
 </body>
 </html>
