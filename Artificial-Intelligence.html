@@ -174,6 +174,9 @@ body.light-mode .category-button {
 body.light-mode .category-button:hover {
     background-color: #3182ce;
 }
+.active-button {
+            background-color: #38a169 !important; /* New color */
+        }
     </style>
 </head>
 <body>
@@ -463,6 +466,17 @@ body.light-mode .category-button:hover {
                 modeToggle.addEventListener('click', function() {
                     body.classList.toggle('light-mode');
                 });
+                </script>
+                 <script>
+                    // JavaScript to handle button click
+                    document.querySelectorAll('.category-button').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // Remove 'active-button' class from all buttons
+                            document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active-button'));
+                            // Add 'active-button' class to the clicked button
+                            this.classList.add('active-button');
+                        });
+                    });
                 </script>
 </body>
 </html>
