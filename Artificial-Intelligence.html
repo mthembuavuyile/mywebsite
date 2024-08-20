@@ -8,7 +8,372 @@
     <meta name="keywords" content="AI tools, artificial intelligence, AI productivity, Chatbot, Multimodal AI, Code Assistant, AI Search, Language Model, AI Development, Image Generation">
     <meta name="author" content="Avuyile Mthembu">
     <link rel="canonical" href="https://mthembuavuyile.github.io/mywebsite/Artificial-Intelligence.html">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial:400,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?f<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Explorer | Avuyile Mthembu</title>
+    <meta name="description" content="Explore the latest AI tools for productivity and daily life. Discover cutting-edge AI applications like Chatbots, Multimodal AI, and more.">
+    <meta name="keywords" content="AI tools, artificial intelligence, AI productivity, Chatbot, Multimodal AI, Code Assistant, AI Search, Language Model, AI Development, Image Generation">
+    <meta name="author" content="Avuyile Mthembu">
+    <link rel="canonical" href="https://mthembuavuyile.github.io/mywebsite/Artificial-Intelligence.html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        :root {
+            --primary-color: #4299e1;
+            --secondary-color: #3182ce;
+            --text-color: white;
+            --background-color: #1a202c;
+            --card-background: #2d3748;
+            --border-color: #4299e1;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, var(--background-color), #2a4365);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-filter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-background);
+            color: var(--text-color);
+            margin-right: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .category-button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .category-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-card {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-company {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-category {
+            font-size: 0.9rem;
+            color: #68d391;
+        }
+
+        .timeline {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-event {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: var(--background-color);
+            color: #a0aec0;
+        }
+
+        .footer-branding {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #68d391;
+        }
+
+        a {
+            color: #68d391;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #48bb78;
+        }
+
+        #modeToggle {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+
+        #modeToggle:hover {
+            background-color: var(--secondary-color);
+        }
+
+        body.light-mode {
+            --text-color: #1a202c;
+            --background-color: #f7fafc;
+            --card-background: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        .active-button {
+            background-color: #38a169 !important;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+
+            .tool-card {
+                padding: 1rem;
+            }
+
+            .tool-name {
+                font-size: 1rem;
+            }
+
+            .tool-company, .tool-category {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Tools Explorer</h1>
+            <p>Discover the latest AI tools for productivity and daily life</p>
+            <p>By <strong>Mr. A Mthembu</strong></p>
+            <button id="modeToggle" aria-label="Toggle dark/light mode">Toggle Mode 🌓</button>
+        </header>
+
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search AI tools..." aria-label="Search AI tools">
+            <div class="category-buttons" role="navigation" aria-label="Category buttons">
+                <button class="category-button active-button" data-category="all" aria-label="View all AI tools">All</button>
+                <button class="category-button" data-category="chatbot" aria-label="View Chatbot tools">Chatbot</button>
+                <button class="category-button" data-category="multimodal ai" aria-label="View Multimodal AI tools">Multimodal AI</button>
+                <button class="category-button" data-category="code assistant" aria-label="View Code Assistant tools">Code Assistant</button>
+                <button class="category-button" data-category="ai search" aria-label="View AI Search tools">AI Search</button>
+                <button class="category-button" data-category="language model" aria-label="View Language Model tools">Language Model</button>
+                <button class="category-button" data-category="ai exploration" aria-label="View AI Exploration tools">AI Exploration</button>
+                <button class="category-button" data-category="ai development" aria-label="View AI Development tools">AI Development</button>
+                <button class="category-button" data-category="image generation" aria-label="View Image Generation tools">Image Generation</button>
+            </div>
+        </div>
+
+        <div class="tools-grid" id="toolsGrid">
+            <!-- Tool cards will be dynamically inserted here -->
+        </div>
+
+        <div class="timeline">
+            <h2>AI Timeline</h2>
+            <div class="timeline-event">
+                <span class="timeline-year">1950:</span> Alan Turing proposes the Turing Test
+            </div>
+            <div class="timeline-event">
+                <span class="timeline-year">1956:</span> Dartmouth Conference coins the term 'Artificial Intelligence'
+            </div>
+            <div class="timeline-event">
+                <span class="timeline-year">1997:</span> IBM's Deep Blue defeats world chess champion Garry Kasparov
+            </div>
+            <div class="timeline-event">
+                <span class="timeline-year">2011:</span> IBM Watson wins Jeopardy!
+            </div>
+            <div class="timeline-event">
+                <span class="timeline-year">2023:</span> OpenAI's ChatGPT-4 is released
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Avuyile Mthembu. All Rights Reserved.</p>
+        <p class="footer-branding">Visit my official website: <a href="https://mthembuavuyile.github.io/mywebsite/">Avuyile Mthembu</a></p>
+    </footer>
+
+    <script>
+        const toolsData = [
+            { name: "Claude", company: "Anthropic", category: "Chatbot", url: "https://claude.ai/new" },
+            { name: "ChatGPT", company: "OpenAI", category: "Chatbot", url: "https://chatgpt.com/" },
+            { name: "Gemini", company: "Google", category: "Multimodal AI", url: "https://gemini.google.com" },
+            { name: "Microsoft Copilot", company: "Microsoft", category: "Coding AI", url: "https://copilot.microsoft.com/" },
+            { name: "GitHub Copilot", company: "Microsoft", category: "Code Assistant", url: "https://github.com/features/copilot" },
+            { name: "Phind", company: "Phind", category: "AI Search", url: "https://www.phind.com/" },
+            { name: "LLaMA", company: "Meta", category: "Language Model", url: "https://ai.meta.com/llama/" },
+            { name: "Grok", company: "X (formerly Twitter)", category: "AI Assistant", url: "https://twitter.com/i/grok" },
+            { name: "Poe", company: "Quora", category: "AI Chatbot Aggregator", url: "https://poe.com/" },
+            { name: "Le Chat", company: "Mistral", category: "Open-Source AI Models", url: "https://www.mistral.ai/" },
+            { name: "Cohere", company: "Cohere", category: "Language Model", url: "https://www.cohere.com/" },
+            { name: "Hugging Face", company: "Hugging Face", category: "AI Model Hub", url: "https://huggingface.co/" },
+            { name: "Stable Diffusion", company: "Stability AI", category: "Text-to-Image", url: "https://www.stability.ai/" },
+            { name: "Midjourney", company: "Midjourney", category: "Text-to-Image", url: "https://midjourney.com/" },
+            { name: "Canva", company: "Canva Pty Ltd", category: "Graphic Design", url: "https://www.canva.com/" },
+            { name: "DALL-E 3", company: "OpenAI", category: "Image Generation", url: "https://openai.com/index/dall-e-3/" },
+            { name: "Duolingo", company: "Duolingo Inc.", category: "Language Learning", url: "https://www.duolingo.com/" },
+            { name: "freeCodeCamp", company: "freeCodeCamp Inc.", category: "Coding Education", url: "https://www.freecodecamp.org/" },
+            { name: "SoloLearn", company: "SoloLearn Inc.", category: "Coding Education", url: "https://www.sololearn.com/" },
+            { name: "QuillBot", company: "QuillBot Inc.", category: "Paraphrasing Tool", url: "https://quillbot.com/paraphrasing-tool" },
+            { name: "AlphaFold", company: "DeepMind", category: "Protein Structure Prediction", url: "https://alphafold.ebi.ac.uk/" },
+            { name: "Ghostwriter", company: "Replit", category: "Code Assistant", url: "https://replit.com/" },
+            { name: "Explorer", company: "Globe Engineer", category: "AI Search Engine", url: "https://explorer.globe.engineer/" },
+            { name: "Gamma", company: "Gamma", category: "Presentations", url: "https://gamma.app/" }
+        ];
+
+        const toolsGrid = document.getElementById('toolsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const modeToggle = document.getElementById('modeToggle');
+        const body = document.body;
+
+        function createToolCard(tool) {
+            return `
+                <div class="tool-card">
+                    <a href="${tool.url}" target="_blank">
+                        <div class="tool-name">${tool.name}</div>
+                        <div class="tool-company">${tool.company}</div>
+                        <div class="tool-category">${tool.category}</div>
+                    </a>
+                </div>
+            `;
+        }
+
+        function renderTools(tools) {
+            toolsGrid.innerHTML = tools.map(createToolCard).join('');
+        }
+
+        function filterTools() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-button.active-button').dataset.category;
+            
+            const filteredTools = toolsData.filter(tool => {
+                const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
+                                      tool.company.toLowerCase().includes(searchTerm) ||
+                                      tool.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' || tool.category.toLowerCase() === activeCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderTools(filteredTools);
+        }
+
+        searchInput.addEventListener('input', filterTools);
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                categoryButtons.forEach(btn => btn.classList.remove('active-button'));
+                this.classList.add('active-button');
+                filterTools();
+            });
+        });
+
+        modeToggle.addEventListener('click', function() {
+            body.classList.toggle('light-mode');
+        });
+
+        // Initial render
+        renderTools(toolsData);
+    </script>
+</body>
+</html>amily=Arial:400,700&display=swap">
    <style>
         body {
             font-family: Arial, sans-serif;
