@@ -71,6 +71,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+.logo a {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--secondary-color);
+  text-decoration: none;
+}
 
 body {
   font-family: "Poppins", sans-serif;
@@ -110,21 +116,15 @@ nav {
   color: gold;
 }
 
-.logo a {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--secondary-color);
-  text-decoration: none;
-}
 
 nav ul {
   display: flex;
   list-style-type: none;
-  background-color: rgba(155, 164, 173, 0.9);
+  color: #007bff;
 }
 
 nav ul li {
-  margin: 10px 0;
+  margin: 0 25px;
   text-align: center;
 }
 
@@ -165,7 +165,7 @@ nav ul li a:hover {
 
 /* Hero Section */
 .hero {
-  background-image: url(https://i.gifer.com/PX5H.gif);
+  background-image: url(https://i.gifer.com/IrM.gif);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -270,6 +270,7 @@ section h2 {
 }
 
 .about-content {
+
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -331,33 +332,53 @@ section h2 {
 }
 
 #skills1 {
-  background-color: black;
+  background: linear-gradient(135deg, #ff0099, #4900ff);
   color: white;
 }
 
 #future-tech {
-  background-color: #2c394c;
+  background: linear-gradient(135deg, #00f5a0, #00d9f5);
   color: white;
 }
 
 #projects {
-  background-color: #1d719d;
+  background: linear-gradient(135deg, #ff4d00, #ff0066);
   color: white;
 }
 
+
 #Blockchain-And-Crypto {
-  background-color: #99a9c0;
+  background-image: url(https://i.gifer.com/J4o.gif);
+  background-position: center; /* Center the background GIF */
+  background-size: cover; /* Ensure the GIF covers the entire section */
+  background-blend-mode: overlay; /* Blend the image with a color overlay */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay for readability */
   color: white;
+  padding: 40px;
+  text-align: center;
 }
 
 #artificial-intelligence {
   background-image: url(https://i.gifer.com/SUV4.gif);
   background-size: cover;
   background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay for readability */
   color: #fff;
   padding: 40px;
   text-align: center;
 }
+
+a {
+  color: #ffd900;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ff00ff; /* Add a cyberpunk neon color on hover */
+}
+
 
 /* Projects Section */
 .projects-grid {
@@ -612,11 +633,8 @@ footer {
       <section id="future-tech">
         <div class="container">
           <h2 style="text-align: center">Future Tech</h2>
-          <p style="text-align: center">
-            Discover the next revolutionary advancements in technology.
-          </p>
           <h3 style="text-align: center">
-            <a href="Future-Tech.html">Click here to explore</a>
+            <a href="Future-Tech.html">Click here to view</a>
           </h3>
         </div>
       </section>
@@ -647,7 +665,7 @@ footer {
           <h2 style="text-align: center">Blockchain and Crypto</h2>
           <h3 style="text-align: center">
             <a href="Blockchain-And-Crypto.html"
-              >Learn more about blockchain and crypto</a
+              >Learn more</a
             >
           </h3>
         </div>
