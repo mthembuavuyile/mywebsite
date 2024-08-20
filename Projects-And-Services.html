@@ -1,181 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects and Services - Avuyile Mthembu</title>
-  <style>
-    /* Reset styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* Global styles */
-    body {
-      font-family: "Poppins", sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f0f2f5;
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Header styles */
-    header {
-      background-color: #1d1f21;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-
-    header a {
-      color: #ff9800;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* Projects section styles */
-    section {
-      padding: 60px 0;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #ff9800;
-    }
-
-    .project {
-      margin-bottom: 40px;
-      text-align: left;
-    }
-
-    .project h3 {
-      font-size: 24px;
-      color: #007bff;
-      margin-bottom: 10px;
-    }
-
-    .project ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
-    .project p {
-      margin-bottom: 10px;
-    }
-    .other-projects {
-    font-family: 'Arial', sans-serif;
-    font-size: 15px;
-    text-align: center;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: #9ebec7;
-    
-}
-
-.other-projects h2 {
-    color: blue; /* Applying the color to the h2 element specifically */
-}
-
-.other-projects p a {
-    color: #0c0c0c; /* Set link color */
-    text-decoration: none; /* Optional: Removes underline */
-}
-
-.other-projects p a:hover {
-    color: #fff; /* Change color on hover */
-}
-footer{
-  background-color: #333;
-  color: aliceblue;
-  text-align: center;
-}
-  </style>
-  <!-- Add Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects and Services - Avuyile Mthembu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00ffff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a0a;
+            --light-bg: #1a1a1a;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background-color: var(--dark-bg);
+            background-image: 
+                linear-gradient(45deg, #000000 25%, transparent 25%),
+                linear-gradient(-45deg, #000000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #000000 75%),
+                linear-gradient(-45deg, transparent 75%, #000000 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--neon-blue);
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--neon-pink);
+        }
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        header a {
+            color: var(--neon-pink);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        header a:hover {
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+        main {
+            padding: 2rem 0;
+        }
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project {
+            background-color: var(--light-bg);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--neon-blue);
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+        }
+        .project h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        ul li::before {
+            content: ">";
+            color: var(--neon-blue);
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .web-projects {
+            margin-top: 2rem;
+        }
+        .web-projects a {
+            display: block;
+            color: var(--neon-blue);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .web-projects a:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--neon-blue);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            border-top: 2px solid var(--neon-pink);
+        }
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+        }
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-pink);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--neon-blue);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(9px, 9999px, 43px, 0);
+            }
+            100% {
+                clip: rect(83px, 9999px, 95px, 0);
+            }
+        }
+        @keyframes glitch-anim-2 {
+            0% {
+                clip: rect(46px, 9999px, 85px, 0);
+            }
+            100% {
+                clip: rect(28px, 9999px, 38px, 0);
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Projects and Services</h1>
-    <p><a href="index.html">Back to Home</a></p>
-  </header>
+    <header>
+        <div class="container">
+            <h1 class="glitch" data-text="Projects and Services">Projects and Services</h1>
+            <p><a href="index.html">Back to Home</a></p>
+        </div>
+    </header>
 
-  <main class="container">
-    <section id="projects">
-      <h2>Projects</h2>
+    <main class="container">
+        <section id="projects">
+            <h2 class="glitch" data-text="Projects">Projects</h2>
+            <div class="project-grid">
+                <div class="project">
+                    <h3>Android App Development</h3>
+                    <p>Projects:</p>
+                    <ul>
+                        <li>Book Library: A comprehensive book library app with CRUD operations database.</li>
+                        <li>Diet Tracker: A fitness app to track diet and health metrics.</li>
+                        <li>Music Playlist Recommender: A music app recommending playlists based on artists and genre.</li>
+                        <li>Tally Counter: A simple counter app for various counting purposes.</li>
+                        <li>Calculator: A basic calculator app for daily calculations.</li>
+                    </ul>
+                </div>
 
-      <div class="project">
-        <h3>Android App Development</h3>
-        <p>Projects:</p>
-        <ul>
-          <li>Book Library: A comprehensive book library app with CRUD operations database.</li>
-          <li>Diet Tracker: A fitness app to track diet and health metrics.</li>
-          <li>Music Playlist Recommender: A music app recommending playlists based on artists and genre.</li>
-          <li>Tally Counter: A simple counter app for various counting purposes.</li>
-          <li>Calculator: A basic calculator app for daily calculations.</li>
-        </ul>
-      </div>
+                <div class="project">
+                    <h3>Web Development</h3>
+                    <p>Projects:</p>
+                    <ul>
+                        <li>Personal Website: Designing and developing personal portfolio websites.</li>
+                        <li>Clothing Online Shop: Building e-commerce websites for clothing brands.</li>
+                        <li>Affordable Business Websites: Offering cost-effective website development services to help your business establish a strong online presence.</li>
+                    </ul>
+                </div>
 
-      <div class="project">
-        <h3>Web Development</h3>
-        <p>Projects:</p>
-        <ul>
-          <li>Personal Website: Designing and developing personal portfolio websites.</li>
-          <li>Clothing Online Shop: Building e-commerce websites for clothing brands.</li>
-        </ul>
-      </div>
+                <div class="project">
+                    <h3>Blockchain and Crypto Advisory</h3>
+                    <p>Services:</p>
+                    <ul>
+                        <li>Advising on blockchain technology and crypto investments across platforms like Luno, Binance, Trust Wallet, Phantom Wallet, and Coinbase.</li>
+                    </ul>
+                </div>
 
-      <div class="project">
-        <h3>Blockchain and Crypto Advisory</h3>
-        <p>Services:</p>
-        <ul>
-          <li>Advising on blockchain technology and crypto investments across platforms like Luno, Binance, Trust Wallet, Phantom Wallet, and Coinbase.</li>
-        </ul>
-      </div>
+                <div class="project">
+                    <h3>Graphic Design Services</h3>
+                    <ul>
+                        <li>Creating professional marketing materials using tools like Canva, including magazine covers, photo editing, posters, logos, and more.</li>
+                    </ul>
+                </div>
 
-      <div class="project">
-        <h3>Graphic Design Services</h3>
-        <ul>
-          <li>Creating professional marketing materials using tools like Canva, including magazine covers, photo editing, posters, logos, and more.</li>
-        </ul>
-      </div>
+                <div class="project">
+                    <h3>Coming Soon</h3>
+                    <p>Stay tuned for more innovative solutions and groundbreaking projects.</p>
+                </div>
+            </div>
+        </section>
 
-      <div class="project">
-        <h3>Coming Soon</h3>
-        <p>Stay tuned for more innovative solutions and groundbreaking projects.</p>
-      </div>
-    </section>
+        <section class="web-projects">
+            <h2 class="glitch" data-text="Web Projects">Web Projects</h2>
+            <a href="index.html" target="_blank">Main website (Official Avuyile Mthembu)</a>
+            <a href="https://aj-vehicle-registration-services.b12sites.com/index" target="_blank">AJ Vehicle Registration Services (B12)</a>
+            <a href="https://mthembuavuyile.github.io/Aj-Vehicle-Registration/index.html" target="_blank">AJ Vehicle Registration (GitHub)</a>
+            <a href="https://mthembuavuyile.my.canva.site/avuyile-mthembu" target="_blank">Avuyile Mthembu - Canva Site</a>
+            <a href="https://mthembuavuyile.wixsite.com/avuyilemthembu" target="_blank">Avuyile Mthembu - Wix</a>
+            <a href="https://lanceclothingza.wixsite.com/my-site" target="_blank">Lance Clothing ZA</a>
+            <a href="https://mthembuavuyile.github.io/ShutterStyle/" target="_blank">Shutters and blinds</a>
+            <a href="https://mthembuavuyile.wixsite.com/ceo-site" target="_blank">Mr A CEO Site</a>
+            <a href="https://mthembuavuyile.github.io/mywebsite/cyberspace.html" target="_blank">Cyberspace</a>
+            <a href="https://mthembuavuyile.github.io/mywebsite/Artificial-Intelligence.html" target="_blank">AI Tools</a>
+        </section>
+    </main>
 
-
-    <section class="other-projects">
-      <div>
-          <h2 id="other-projects">Other project links</h2>
-          <p><a href="https://aj-vehicle-registration-services.b12sites.com/index" target="_blank">AJ Vehicle Registration Services (B12)</a></p>
-          <p><a href="https://mthembuavuyile.github.io/Aj-Vehicle-Registration/index.html" target="_blank">AJ Vehicle Registration (GitHub)</a></p>
-          <p><a href="https://mthembuavuyile.my.canva.site/avuyile-mthembu" target="_blank">Avuyile Mthembu - Canva Site</a></p>
-          <p><a href="https://mthembuavuyile.wixsite.com/avuyilemthembu" target="_blank">Avuyile Mthembu - Wix</a></p>
-          <p><a href="https://lanceclothingza.wixsite.com/my-site" target="_blank">Lance Clothing ZA</a></p>
-          <p><a href="https://mthembuavuyile.wixsite.com/ceo-site" target="_blank">Mr A CEO Site</a></p>
-      </div>
-  </section>
-
-  <footer>
-    <p>&copy;2024 Avuyile Mthembu. All rights reserved.</p>
-</footer>
-
-  </body>
-  </main>
+    <footer>
+        <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
+    </footer>
 </body>
 </html>
