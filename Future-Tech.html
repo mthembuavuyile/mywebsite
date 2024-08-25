@@ -1,215 +1,727 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovations for the Future</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avuyile Mthembu - Cyber Innovator | Quantum Developer | Neon Entrepreneur</title>
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --neon-blue: #00ffff;
+            --neon-purple: #ff00ff;
+            --dark-bg: #0a0a0a;
+            --text-color: #e0e0e0;
+        }
+
+        * {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: #333;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
-        header h2 {
-            font-size: 1.5rem;
-            margin: 0.5rem 0 0;
-            font-weight: 300;
-        }
-        #hero {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        #hero img {
-            max-width: 100%;
-            height: auto;
-        }
-        #introduction, #vision, #contact {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        #projects {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        #projects h3 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        #projects article {
-            margin-bottom: 2rem;
-        }
-        #projects article h4 {
-            font-size: 1.5rem;
-            color: #1a1a1a;
-        }
-        #projects article p {
-            font-size: 1rem;
-            margin: 0.5rem 0 1rem;
-        }
-        #projects ul {
-            list-style-type: none;
             padding: 0;
+            box-sizing: border-box;
         }
-        #projects ul li {
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            background-color: #e9e9e9;
-            border-radius: 4px;
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo a {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        #nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        #nav-links li {
+            margin-left: 20px;
+        }
+
+        #nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .cta-button {
             display: inline-block;
-            margin: 1rem 0;
-            padding: 0.75rem 1.5rem;
-            background-color: #0073e6;
-            color: #fff;
+            background-color: transparent;
+            color: var(--neon-purple);
+            padding: 0.8rem 1.5rem;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
         }
+
         .cta-button:hover {
-            background-color: #005bb5;
+            background-color: var(--neon-purple);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-purple);
         }
-        form {
-            display: flex;
-            flex-direction: column;
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.5s;
         }
-        form label {
-            margin: 0.5rem 0 0.25rem;
+
+        .cta-button:hover::before {
+            left: 100%;
         }
-        form input, form textarea {
-            padding: 0.5rem;
+
+        #about, #skills, #projects, #contact, #vision, #contribute {
+            padding: 6rem 0;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .about-content, .skills-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-text, .skill-card, .project-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .about-text:hover, .skill-card:hover, .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 255, 255, 0.1);
+        }
+
+        .skill-card i, .project-card i {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
+            color: var(--neon-purple);
         }
-        form input[type="submit"] {
-            background-color: #0073e6;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
         }
-        form input[type="submit"]:hover {
-            background-color: #005bb5;
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-        @media (max-width: 600px) {
-            header h1 {
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--neon-purple);
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        #introduction, #vision {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        article {
+            margin-bottom: 2rem;
+        }
+
+        article h4 {
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+        }
+
+        article ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        article li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .burger {
+                display: block;
+            }
+
+            #nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 10, 10, 0.9);
+                padding: 1rem;
+            }
+
+            #nav-links.active {
+                display: flex;
+            }
+
+            #nav-links li {
+                margin: 10px 0;
+            }
+
+            .hero-content h2 {
                 font-size: 2rem;
             }
-            header h2 {
-                font-size: 1.25rem;
+
+            .hero-content p {
+                font-size: 1rem;
             }
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-5px, 5px);
+            }
+            40% {
+                transform: translate(-5px, -5px);
+            }
+            60% {
+                transform: translate(5px, 5px);
+            }
+            80% {
+                transform: translate(5px, -5px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .glitch {
+            animation: glitch 1s infinite;
+            display: inline-block;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--neon-purple);
+            color: var(--dark-bg);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .skills-progress {
+            width: 100%;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .skills-progress-bar {
+            height: 10px;
+            background-color: var(--neon-purple);
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        .project-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .project-technologies span {
+            background-color: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to the Future of Technology</h1>
-        <h2>Innovations that Shape Tomorrow</h2>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="#home" class="glitch">AV_MTHMB</a>
+                </div>
+                <div class="burger" id="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul id="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#vision">Vision</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <section id="hero">
-        <img src="https://cdn.pixabay.com/photo/2022/01/14/07/50/physics-6936704_1280.jpg" alt="Futuristic Technology">
-    </section>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2 class="glitch">Avuyile Mthembu</h2>
+                <p>Cyber Innovator | Quantum Developer | Neon Entrepreneur</p>
+                <p>Welcome to the nexus of innovation and cybernetic dreams. Prepare to interface with the future.</p>
+                <a href="#contact" class="cta-button">Initiate Contact</a>
+            </div>
+        </section>
 
-    <section id="introduction">
-        <p>Welcome, Innovators. Here, we explore groundbreaking systems and inventions that push the boundaries of what’s possible. Our projects harness the power of advanced AI, blockchain, neural interfaces, and more to create a future where technology works seamlessly with humanity.</p>
-    </section>
+        <section id="introduction">
+            <div class="container">
+                <h2>Welcome to the Future of Technology</h2>
+                <p>Here, we explore groundbreaking systems and inventions that push the boundaries of what's possible. Our projects harness the power of advanced AI, blockchain, neural interfaces, and more to create a future where technology works seamlessly with humanity.</p>
+            </div>
+        </section>
 
-    <center>
-        <h1>
-            <P>Click below to view our</P>
-            <a href="my-blog.html">Blog</a>
-        </h1>
-    </center>
+        <section id="about">
+            <div class="container">
+                <h2>Neural Interface</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Avuyile Mthembu, a digital architect from the neon-lit streets of South Africa, pushes the boundaries of what's possible in the realms of blockchain, quantum computing, and cybernetic enhancements.</p>
+                    </div>
+                    <div class="about-text">
+                        <p>This hub serves as a beacon, broadcasting visionary ideas and groundbreaking projects across the global network, inspiring a new generation of cyber-pioneers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="projects">
-        <h3>Our Cutting-Edge Projects</h3>
+        <section id="skills">
+            <div class="container">
+                <h2>Skill Matrix</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Quantum Development</h3>
+                        <p>Manipulating qubits to solve impossible problems</p>
+                        <div class="skills-progress">
+                            <div class="skills-progress-bar" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Neural Networks</h3>
+                        <p>Architecting AI systems that think beyond human limits</p>
+                        <div class="skills-progress">
+                            <div class="skills-progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-lock"></i>
+                        <h3>Cryptographic Security</h3>
+                        <p>Designing unbreakable codes for the digital age</p>
+                        <div class="skills-progress">
+                            <div class="skills-progress-bar" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <h3>Virtual Reality Engineering</h3>
+                        <p>Building worlds beyond the limits of physical reality</p>
+                        <div class="skills-progress">
+                            <div class="skills-progress-bar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <article id="dap">
-            <h4>Autonomous Programming Entities (DAPEs)</h4>
-            <p>Imagine a system where coding tasks are executed by autonomous entities rather than individual developers or centralized teams.</p>
-            <ul>
-                <li><strong>Autonomous Code Contributors:</strong> Capable of independently solving coding challenges and proposing solutions.</li>
-                <li><strong>Collaborative Learning:</strong> Interact within a decentralized network, sharing knowledge and refining solutions collectively.</li>
-                <li><strong>Continuous Evolution:</strong> Learn from experiences to improve coding methodologies and problem-solving approaches over time.</li>
-                <li><strong>Open Source Integration:</strong> Enhance contributions in open-source communities, automating tasks and accelerating development cycles effectively.</li>
-            </ul>
-        </article>
+        <section id="projects">
+            <div class="container">
+                <h2>Project Nexus</h2>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23ddd'/><text x='50%' y='50%' font-size='18' text-anchor='middle' alignment-baseline='middle' font-family='Arial, sans-serif' fill='%23555'>Project Helix</text></svg>" alt="Project Helix" class="project-image">
+                        <h3>Project Helix</h3>
+                        <p>Revolutionizing blockchain with DNA-based cryptography</p>
+                        <div class="project-technologies">
+                            <span>Blockchain</span>
+                            <span>Cryptography</span>
+                            <span>Bioinformatics</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23ddd'/><text x='50%' y='50%' font-size='18' text-anchor='middle' alignment-baseline='middle' font-family='Arial, sans-serif' fill='%23555'>Neuromancer AI</text></svg>" alt="Neuromancer AI" class="project-image">
+                        <h3>Neuromancer AI</h3>
+                        <p>An AI system pushing the boundaries of machine consciousness</p>
+                        <div class="project-technologies">
+                            <span>Artificial Intelligence</span>
+                            <span>Machine Learning</span>
+                            <span>Neural Networks</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23ddd'/><text x='50%' y='50%' font-size='18' text-anchor='middle' alignment-baseline='middle' font-family='Arial, sans-serif' fill='%23555'>Quantum Net</text></svg>" alt="Quantum Net" class="project-image">
+                        <h3>Quantum Net</h3>
+                        <p>A quantum internet prototype for instantaneous global communication</p>
+                        <div class="project-technologies">
+                            <span>Quantum Computing</span>
+                            <span>Network Protocol</span>
+                            <span>Cryptography</span>
+                        </div>
+                    </article>
+                </div>
 
-        <article id="nrdh">
-            <h4>Neuro-Responsive Digital Habitat (NRDH)</h4>
-            <p>An immersive digital environment using neural interfaces, AI, IoT, and AR, personalizing experiences based on real-time neurological data.</p>
-            <ul>
-                <li><strong>Personalized Environmental Control:</strong> Tailors lighting and temperature to individual preferences.</li>
-                <li><strong>Enhanced Productivity and Focus:</strong> Optimizes the environment to boost efficiency and concentration.</li>
-                <li><strong>Health Monitoring and Well-being Enhancements:</strong> Tracks health metrics to promote well-being.</li>
-                <li><strong>Immersive Entertainment Experiences:</strong> Delivers highly engaging and interactive digital entertainment.</li>
-            </ul>
-        </article>
+                <article id="dap">
+                    <h4>Autonomous Programming Entities (DAPEs)</h4>
+                    <p>Imagine a system where coding tasks are executed by autonomous entities rather than individual developers or centralized teams.</p>
+                    <ul>
+                        <li><strong>Autonomous Code Contributors:</strong> Capable of independently solving coding challenges and proposing solutions.</li>
+                        <li><strong>Collaborative Learning:</strong> Interact within a decentralized network, sharing knowledge and refining solutions collectively.</li>
+                        <li><strong>Continuous Evolution:</strong> Learn from experiences to improve coding methodologies and problem-solving approaches over time.</li>
+                        <li><strong>Open Source Integration:</strong> Enhance contributions in open-source communities, automating tasks and accelerating development cycles effectively.</li>
+                    </ul>
+                </article>
 
-        <article id="dep">
-            <h4>Decentralized Educational Platform (DEP)</h4>
-            <p>A blockchain-based platform leveraging mobile apps and AI to enable accessible, personalized learning worldwide.</p>
-            <ul>
-                <li><strong>Secure Credentialing:</strong> Provides verifiable certifications and secure credentialing.</li>
-                <li><strong>Personalized Learning Paths:</strong> Offers adaptive assessments tailored to individual learning needs.</li>
-                <li><strong>Global Access:</strong> Ensures educational resources are accessible to everyone, everywhere.</li>
-                <li><strong>Peer-to-Peer Collaboration:</strong> Facilitates collaborative learning communities and peer interactions.</li>
-            </ul>
-        </article>
+                <article id="nrdh">
+                    <h4>Neuro-Responsive Digital Habitat (NRDH)</h4>
+                    <p>An immersive digital environment using neural interfaces, AI, IoT, and AR, personalizing experiences based on real-time neurological data.</p>
+                    <ul>
+                        <li><strong>Personalized Environmental Control:</strong> Tailors lighting and temperature to individual preferences.</li>
+                        <li><strong>Enhanced Productivity and Focus:</strong> Optimizes the environment to boost efficiency and concentration.</li>
+                        <li><strong>Health Monitoring and Well-being Enhancements:</strong> Tracks health metrics to promote well-being.</li>
+                        <li><strong>Immersive Entertainment Experiences:</strong> Delivers highly engaging and interactive digital entertainment.</li>
+                    </ul>
+                </article>
 
-        <article id="dmsis">
-            <h4>Decentralized Mobile Security and Identity Solution</h4>
-            <p>A mobile app integrating AI, blockchain, and cryptography to provide secure, decentralized digital identity management.</p>
-            <ul>
-                <li><strong>Secure Digital Identities:</strong> Creates digital identities using biometrics for enhanced security.</li>
-                <li><strong>Encrypted Storage:</strong> Stores personal data securely on the blockchain.</li>
-                <li><strong>AI-Powered Verification:</strong> Utilizes AI for robust identity verification.</li>
-                <li><strong>Decentralized Authentication:</strong> Supports secure transactions with cryptocurrency integration.</li>
-            </ul>
-        </article>
-    </section>
+                <article id="dep">
+                    <h4>Decentralized Educational Platform (DEP)</h4>
+                    <p>A blockchain-based platform leveraging mobile apps and AI to enable accessible, personalized learning worldwide.</p>
+                    <ul>
+                        <li><strong>Secure Credentialing:</strong> Provides verifiable certifications and secure credentialing.</li>
+                        <li><strong>Personalized Learning Paths:</strong> Offers adaptive assessments tailored to individual learning needs.</li>
+                        <li><strong>Global Access:</strong> Ensures educational resources are accessible to everyone, everywhere.</li>
+                        <li><strong>Peer-to-Peer Collaboration:</strong> Facilitates collaborative learning communities and peer interactions.</li>
+                    </ul>
+                </article>
 
-    <section id="vision">
-        <h2>Our Vision</h2>
-        <p>To break the boundaries of what is possible and lead humanity into a new age of technological enlightenment. Our mission is to create a world where technology works harmoniously with nature and society.</p>
-        <a href="#contact" class="cta-button">Join the Revolution</a>
-    </section>
+                <article id="dmsis">
+                    <h4>Decentralized Mobile Security and Identity Solution</h4>
+                    <p>A mobile app integrating AI, blockchain, and cryptography to provide secure, decentralized digital identity management.</p>
+                    <ul>
+                        <li><strong>Secure Digital Identities:</strong> Creates digital identities using biometrics for enhanced security.</li>
+                        <li><strong>Encrypted Storage:</strong> Stores personal data securely on the blockchain.</li>
+                        <li><strong>AI-Powered Verification:</strong> Utilizes AI for robust identity verification.</li>
+                        <li><strong>Decentralized Authentication:</strong> Supports secure transactions with cryptocurrency integration.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
 
-    <section id="contact">
-        <h2>Get in Touch</h2>
-        <p>To be part of this groundbreaking movement, reach out to us. Let's change the world together.</p>
-        <form action="#" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <input type="submit" value="Submit">
-        </form>
-    </section>
+        <section id="fourth-industrial-revolution">
+            <div class="container">
+                <h2>Fourth Industrial Revolution (4IR)</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>The Fourth Industrial Revolution is marked by a convergence of cutting-edge technologies that are transforming industries, economies, and societies. These technologies are blurring the boundaries between the physical, digital, and biological domains. Key elements include:</p>
+                        <ul>
+                            <li><strong>Artificial Intelligence (AI) & Machine Learning:</strong> AI is driving automation, enhancing decision-making processes, and enabling predictive analytics and personalized services across various sectors.</li>
+                            <li><strong>Big Data & Analytics:</strong> Massive data processing capabilities are being used to derive insights, optimize operations, and customize user experiences.</li>
+                            <li><strong>Internet of Things (IoT):</strong> IoT connects devices that communicate and operate autonomously, creating smart environments in homes, cities, and industries.</li>
+                            <li><strong>Blockchain Technology:</strong> Decentralized ledgers provide secure, transparent, and immutable records, revolutionizing finance, supply chains, healthcare, and more.</li>
+                            <li><strong>5G Connectivity:</strong> High-speed, low-latency communication networks enable real-time data exchange and enhance IoT capabilities.</li>
+                            <li><strong>3D Printing:</strong> 3D printing is transforming manufacturing by enabling on-demand production and reducing waste.</li>
+                            <li><strong>Automation and Robotics:</strong> Smart manufacturing integrates AI and robotics into production processes, increasing efficiency and precision while reducing human intervention.</li>
+                            <li><strong>Biotechnology and Genomics:</strong> Advances in genetic engineering, such as CRISPR and synthetic biology, are leading to breakthroughs in medical treatments, agriculture, and environmental solutions.</li>
+                            <li><strong>Augmented and Virtual Reality (AR/VR):</strong> AR/VR technologies create immersive experiences, enhancing training, entertainment, and design.</li>
+                            <li><strong>Cybersecurity:</strong> AI-driven solutions are being developed to protect against increasingly sophisticated cyber threats.</li>
+                            <li><strong>Sustainability and Green Technologies:</strong> Innovations in renewable energy and circular economy practices are aimed at reducing waste and promoting sustainable development.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="fifth-industrial-revolution">
+            <div class="container">
+                <h2>Potential Fifth Industrial Revolution (5IR) and Beyond</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>The potential Fifth Industrial Revolution represents a future where human-centric technology and sustainable development take center stage. This phase may involve:</p>
+                        <ul>
+                            <li><strong>Human-Centric Technology:</strong> A shift from automation to collaboration, where machines assist and augment human capabilities rather than replace them. This includes empathy-driven AI that understands and responds to human emotions.</li>
+                            <li><strong>Sustainable Development and Ethical Innovation:</strong> Technologies that not only sustain but restore natural environments, alongside ethical AI development with a focus on bias mitigation and transparent decision-making.</li>
+                            <li><strong>Biological and Technological Convergence:</strong> The integration of technology with the human body, including advanced prosthetics, brain-computer interfaces, and cognitive enhancements aimed at extending human healthspan and longevity.</li>
+                            <li><strong>Quantum Computing:</strong> Quantum computers offering revolutionary computing power, with potential impacts on cryptography, materials science, and drug discovery.</li>
+                            <li><strong>Space Exploration and Colonization:</strong> Advances in space technology that pave the way for human settlements on other planets, expanding the space economy through activities like asteroid mining, space tourism, and manufacturing in space.</li>
+                            <li><strong>Global Collaboration Platforms:</strong> The emergence of decentralized, peer-to-peer platforms for governance, finance, and social interaction, reducing reliance on traditional institutions.</li>
+                            <li><strong>Universal Basic Income (UBI) and New Economic Models:</strong> Exploration of new economic models to address inequality and ensure fair distribution of wealth in a highly automated world.</li>
+                        </ul>
+                        <p>Looking further into the future, we might see:</p>
+                        <ul>
+                            <li><strong>Integration of Consciousness and AI:</strong> Theoretical advancements that could enable the uploading of human consciousness to digital platforms, achieving a form of digital immortality.</li>
+                            <li><strong>Post-Scarcity Economy:</strong> A state where automation and advanced technologies provide for all human needs, potentially eliminating poverty and creating a post-scarcity society.</li>
+                            <li><strong>Interplanetary Civilization:</strong> Establishing self-sustaining human civilizations on multiple planets, ensuring the long-term survival of humanity.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>        
+
+        <section id="vision">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <p>To break the boundaries of what is possible and lead humanity into a new age of technological enlightenment. Our mission is to create a world where technology works harmoniously with nature and society.</p>
+                <a href="#contact" class="cta-button">Join the Revolution</a>
+            </div>
+        </section>
+
+        <section id="contribute">
+            <div class="container">
+                <h2>Contribute to the Revolution</h2>
+                <p>At the crossroads of technology and innovation, Avuyile Mthembu is committed to shaping the future. Our mission centers on harnessing the power of cryptography, blockchain, cybersecurity, artificial intelligence, and software development. We are dedicated to creating tools, platforms, and technologies that address significant societal issues, whether it's improving privacy, democratizing access to technology, or enhancing security. In a rapidly evolving tech landscape, staying ahead is not just an option—it's a necessity.</p>
+                <p>We believe in leading with integrity, grounded in strong morals and Christian values, ensuring that our innovations align with ethical standards and have a positive social impact. Join us as we take risks, challenge the status quo, and build a world where technology works for everyone, seamlessly integrating with our daily lives and advancing human potential. It's time to escape the matrix, innovate, and make a lasting difference.</p>
+                <a href="#contact" class="cta-button">Get Involved</a>
+            </div>
+        </section>
+        
+
+        <section id="contact">
+            <div class="container">
+                <h2>Synaptic Link</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Designator</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Neural Address</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Data Packet</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Transmit</button>
+                </form>
+                <div class="social-links">
+                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <script>
+        const burger = document.getElementById("burger");
+        const navLinks = document.getElementById("nav-links");
+
+        burger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        const scrollToTop = document.getElementById("scrollToTop");
+
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 100) {
+                scrollToTop.classList.add("visible");
+            } else {
+                scrollToTop.classList.remove("visible");
+            }
+        });
+
+        scrollToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        const skillBars = document.querySelectorAll('.skills-progress-bar');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.style.width;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        skillBars.forEach(bar => {
+            bar.style.width = '0%';
+            observer.observe(bar);
+        });
+    </script>
 </body>
 </html>
