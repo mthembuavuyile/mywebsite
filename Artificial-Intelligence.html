@@ -150,6 +150,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative; /* Add for tool details icon */
         }
 
         .tool-card:hover {
@@ -346,6 +347,15 @@
             color: var(--text-color);
         }
 
+        .tool-details-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: var(--hover-color);
+            cursor: pointer;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -409,82 +419,86 @@
 
         <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
         <div id="toolModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalToolName"></h2>
-            <p id="modalToolCompany"></p>
-            <p id="modalToolCategory"></p>
-            <a id="modalToolLink" href="" target="_blank" rel="noopener noreferrer">Visit Tool</a>
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h2 id="modalToolName"></h2>
+                <p id="modalToolCompany"></p>
+                <p id="modalToolCategory"></p>
+                <a id="modalToolLink" href="" target="_blank" rel="noopener noreferrer">Visit Tool</a>
+            </div>
         </div>
-       </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Avuyile Mthembu. All Rights Reserved.</p>
+        <p>© 2024 Avuyile Mthembu. All Rights Reserved.</p>
         <p class="footer-branding">Visit my official website: <a href="https://mthembuavuyile.github.io/mywebsite/">Avuyile Mthembu</a></p>
     </footer>
 
     <script>
         const toolsData = [
-        // Chatbots
-        { name: "Claude", company: "Anthropic", category: "Chatbot", url: "https://claude.ai/new" },
-        { name: "ChatGPT", company: "OpenAI", category: "Chatbot", url: "https://chatgpt.com/" },
-        { name: "Grok", company: "X (formerly Twitter)", category: "AI Assistant", url: "https://twitter.com/i/grok" },
-        { name: "Poe", company: "Quora", category: "AI Chatbot Aggregator", url: "https://poe.com/" },
+            // Chatbots
+            { name: "Claude", company: "Anthropic", category: "Chatbot", url: "https://claude.ai/new" },
+            { name: "ChatGPT", company: "OpenAI", category: "Chatbot", url: "https://chatgpt.com/" },
+            { name: "Grok", company: "X (formerly Twitter)", category: "AI Assistant", url: "https://twitter.com/i/grok" },
+            { name: "Poe", company: "Quora", category: "AI Chatbot Aggregator", url: "https://poe.com/" },
         
-        // Coding & Code Assistance
-        { name: "GitHub Copilot", company: "Microsoft", category: "Code Assistant", url: "https://github.com/features/copilot" },
-        { name: "Ghostwriter", company: "Replit", category: "Code Assistant", url: "https://replit.com/" },
-        { name: "Microsoft Copilot", company: "Microsoft", category: "Coding AI", url: "https://copilot.microsoft.com/" },
+            // Coding & Code Assistance
+            { name: "GitHub Copilot", company: "Microsoft", category: "Code Assistant", url: "https://github.com/features/copilot" },
+            { name: "Ghostwriter", company: "Replit", category: "Code Assistant", url: "https://replit.com/" },
+            { name: "Microsoft Copilot", company: "Microsoft", category: "Coding AI", url: "https://copilot.microsoft.com/" },
 
-        // Language Models
-        { name: "LLaMA", company: "Meta", category: "Language Model", url: "https://www.meta.ai/" },
-        { name: "Cohere", company: "Cohere", category: "Language Model", url: "https://dashboard.cohere.com/playground/chat" },
+            // Language Models
+            { name: "LLaMA", company: "Meta", category: "Language Model", url: "https://www.meta.ai/" },
+            { name: "Cohere", company: "Cohere", category: "Language Model", url: "https://dashboard.cohere.com/playground/chat" },
 
-        // Multimodal AI
-        { name: "Gemini", company: "Google", category: "Multimodal AI", url: "https://gemini.google.com" },
+            // Multimodal AI
+            { name: "Gemini", company: "Google", category: "Multimodal AI", url: "https://gemini.google.com" },
         
-        // AI Search Engines
-        { name: "Phind", company: "Phind", category: "AI Search Engine", url: "https://www.phind.com/" },
-        { name: "Explorer", company: "Globe Engineer", category: "AI Search Engine", url: "https://explorer.globe.engineer/" },
-        { name: "Perplexity", company: "Perplexity AI", category: "AI Search Engine/LLM", url: "https://www.perplexity.ai/" },
+            // AI Search Engines
+            { name: "Phind", company: "Phind", category: "AI Search Engine", url: "https://www.phind.com/" },
+            { name: "Explorer", company: "Globe Engineer", category: "AI Search Engine", url: "https://explorer.globe.engineer/" },
+            { name: "Perplexity", company: "Perplexity AI", category: "AI Search Engine/LLM", url: "https://www.perplexity.ai/" },
         
-        // Image Generation
-        { name: "DALL-E 3", company: "OpenAI", category: "Image Generation", url: "https://openai.com/index/dall-e-3/" },
-        { name: "Ideogram", company: "Ideogram AI", category: "Image Generation", url: "https://ideogram.ai/login" },
-        { name: "Image FX", company: "Google", category: "Image Generation", url: "https://aitestkitchen.withgoogle.com/tools/image-fx" },
-        { name: "Civitai", company: "Civitai", category: "Image Generation", url: "https://civitai.com/" },
-        { name: "Stable Diffusion", company: "Stability AI", category: "Image Generation", url: "https://www.stability.ai/" },
-        { name: "Midjourney", company: "Midjourney", category: "Image Generation", url: "https://midjourney.com/" },
-        { name: "fal", company: "Fal AI", category: "Image Generation", url: "https://fal.ai/models" },
-        { name: "flux", company: "Black Forest", category: "Image Generation", url: "https://replicate.com/explore#featured-models" },
+            // Image Generation
+            { name: "DALL-E 3", company: "OpenAI", category: "Image Generation", url: "https://openai.com/index/dall-e-3/" },
+            { name: "Ideogram", company: "Ideogram AI", category: "Image Generation", url: "https://ideogram.ai/login" },
+            { name: "Image FX", company: "Google", category: "Image Generation", url: "https://aitestkitchen.withgoogle.com/tools/image-fx" },
+            { name: "Civitai", company: "Civitai", category: "Image Generation", url: "https://civitai.com/" },
+            { name: "Stable Diffusion", company: "Stability AI", category: "Image Generation", url: "https://www.stability.ai/" },
+            { name: "Midjourney", company: "Midjourney", category: "Image Generation", url: "https://midjourney.com/" },
+            { name: "fal", company: "Fal AI", category: "Image Generation", url: "https://fal.ai/models" },
+            { name: "flux", company: "Black Forest", category: "Image Generation", url: "https://replicate.com/explore#featured-models" },
 
-        // AI Model Hubs & Tools
-        { name: "Hugging Face", company: "Hugging Face", category: "AI Model Hub", url: "https://huggingface.co/" },
-        { name: "Le Chat", company: "Mistral", category: "Open-Source AI Models", url: "https://www.mistral.ai/" },
+            // AI Model Hubs & Tools
+            { name: "Hugging Face", company: "Hugging Face", category: "AI Model Hub", url: "https://huggingface.co/" },
+            { name: "Le Chat", company: "Mistral", category: "Open-Source AI Models", url: "https://www.mistral.ai/" },
         
-        // Graphic Design & Education
-        { name: "Canva", company: "Canva Pty Ltd", category: "Graphic Design", url: "https://www.canva.com/" },
-        { name: "freeCodeCamp", company: "freeCodeCamp Inc.", category: "Coding Education", url: "https://www.freecodecamp.org/" },
-        { name: "SoloLearn", company: "SoloLearn Inc.", category: "Coding Education", url: "https://www.sololearn.com/" },
-        { name: "Duolingo", company: "Duolingo Inc.", category: "Language Learning", url: "https://www.duolingo.com/" },
+            // Graphic Design & Education
+            { name: "Canva", company: "Canva Pty Ltd", category: "Graphic Design", url: "https://www.canva.com/" },
+            { name: "freeCodeCamp", company: "freeCodeCamp Inc.", category: "Coding Education", url: "https://www.freecodecamp.org/" },
+            { name: "SoloLearn", company: "SoloLearn Inc.", category: "Coding Education", url: "https://www.sololearn.com/" },
+            { name: "Duolingo", company: "Duolingo Inc.", category: "Language Learning", url: "https://www.duolingo.com/" },
 
-        // Paraphrasing & Protein Structure Prediction
-        { name: "QuillBot", company: "QuillBot Inc.", category: "Paraphrasing Tool", url: "https://quillbot.com/paraphrasing-tool" },
-        { name: "AlphaFold", company: "DeepMind", category: "Protein Structure Prediction", url: "https://alphafold.ebi.ac.uk/" },
+            // Paraphrasing & Protein Structure Prediction
+            { name: "QuillBot", company: "QuillBot Inc.", category: "Paraphrasing Tool", url: "https://quillbot.com/paraphrasing-tool" },
+            { name: "AlphaFold", company: "DeepMind", category: "Protein Structure Prediction", url: "https://alphafold.ebi.ac.uk/" },
 
-        // Presentations
-        { name: "Gamma", company: "Gamma", category: "Presentations", url: "https://gamma.app/" },
+            // Presentations
+            { name: "Gamma", company: "Gamma", category: "Presentations", url: "https://gamma.app/" },
 
-        // Additional Tools
-        { name: "Google AI Studio", company: "Google", category: "AI Studio", url: "https://aistudio.google.com/app/prompts/new_chat" },
-        { name: "OpenAI Playground", company: "OpenAI", category: "AI Playground", url: "https://platform.openai.com/playground/chat?models=gpt-4o-mini" }
-    ];
-    const toolsGrid = document.getElementById('toolsGrid');
+            // Additional Tools
+            { name: "Google AI Studio", company: "Google", category: "AI Studio", url: "https://aistudio.google.com/app/prompts/new_chat" },
+            { name: "OpenAI Playground", company: "OpenAI", category: "AI Playground", url: "https://platform.openai.com/playground/chat?models=gpt-4o-mini" }
+        ];
+        const toolsGrid = document.getElementById('toolsGrid');
         const searchInput = document.getElementById('searchInput');
         const categoryButtons = document.querySelectorAll('.category-button');
         const modeToggle = document.getElementById('modeToggle');
         const body = document.body;
+        const modal = document.getElementById('toolModal');
+        const modalClose = document.querySelector('.close');
+        const noResults = document.getElementById('noResults');
+        const backToTop = document.getElementById('backToTop');
 
         function createToolCard(tool) {
             return `
@@ -492,7 +506,7 @@
                     <div class="tool-name">${tool.name}</div>
                     <div class="tool-company">${tool.company}</div>
                     <div class="tool-category">${tool.category}</div>
-                </div>
+                    <span class="tool-details-icon" aria-label="View details for ${tool.name}"></span> </div>
             `;
         }
 
@@ -520,6 +534,7 @@
         function addToolCardListeners() {
             const toolCards = document.querySelectorAll('.tool-card');
             toolCards.forEach((card, index) => {
+                card.querySelector('.tool-details-icon').addEventListener('click', () => showToolDetails(toolsData[index]));
                 card.addEventListener('click', () => showToolDetails(toolsData[index]));
                 card.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
@@ -552,11 +567,6 @@
             body.classList.toggle('light-mode');
             localStorage.setItem('mode', body.classList.contains('light-mode') ? 'light' : 'dark');
         });
-
-        const backToTop = document.getElementById('backToTop');
-        const modal = document.getElementById('toolModal');
-        const modalClose = document.getElementsByClassName('close')[0];
-        const noResults = document.getElementById('noResults');
 
         modalClose.onclick = function() {
             modal.style.display = 'none';
