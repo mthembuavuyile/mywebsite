@@ -13,10 +13,11 @@
         :root {
             --primary-color: #4299e1;
             --secondary-color: #3182ce;
-            --text-color: white;
+            --text-color: #ffffff;
             --background-color: #1a202c;
             --card-background: #2d3748;
             --border-color: #4299e1;
+            --hover-color: #68d391;
         }
 
         body {
@@ -24,7 +25,7 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background: linear-gradient(to bottom right, var(--background-color), #2a4365);
+            background: linear-gradient(135deg, var(--background-color), #2a4365);
             color: var(--text-color);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
@@ -39,11 +40,43 @@
         header {
             text-align: center;
             margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateX(-50%);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         h2 {
@@ -61,13 +94,19 @@
 
         input[type="text"] {
             width: 80%;
-            padding: 0.5rem;
+            padding: 0.75rem;
             font-size: 1rem;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             background-color: var(--card-background);
             color: var(--text-color);
             margin-right: 1rem;
-            border-radius: 0.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
         }
 
         .category-buttons {
@@ -81,21 +120,23 @@
             background-color: var(--primary-color);
             color: var(--text-color);
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
             margin: 0.25rem;
             cursor: pointer;
-            border-radius: 0.25rem;
-            transition: background-color 0.3s, transform 0.1s;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
         }
 
-        .category-button:hover {
+        .category-button:hover, .category-button:focus {
             background-color: var(--secondary-color);
             transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -103,20 +144,24 @@
         .tool-card {
             background-color: var(--card-background);
             border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             padding: 1.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .tool-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .tool-name {
             font-size: 1.25rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
+            color: var(--primary-color);
         }
 
         .tool-company {
@@ -127,21 +172,23 @@
 
         .tool-category {
             font-size: 0.9rem;
-            color: #68d391;
+            color: var(--hover-color);
+            font-weight: bold;
         }
 
         .timeline {
             background-color: var(--card-background);
             border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
+            border-radius: 0.75rem;
+            padding: 2rem;
             margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .timeline-event {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             position: relative;
-            padding-left: 20px;
+            padding-left: 30px;
         }
 
         .timeline-event::before {
@@ -149,52 +196,60 @@
             position: absolute;
             left: 0;
             top: 5px;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background-color: var(--primary-color);
             border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(66, 153, 225, 0.3);
         }
 
         .timeline-year {
             font-weight: bold;
             color: var(--primary-color);
+            margin-right: 0.5rem;
         }
 
         footer {
             text-align: center;
-            padding: 1rem;
+            padding: 2rem;
             background: var(--background-color);
             color: #a0aec0;
+            border-top: 1px solid var(--border-color);
         }
 
         .footer-branding {
             margin-top: 1rem;
             font-size: 0.9rem;
-            color: #68d391;
+            color: var(--hover-color);
         }
 
         a {
-            color: #68d391;
+            color: var(--hover-color);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         a:hover {
             color: #48bb78;
+            text-decoration: underline;
         }
 
         #modeToggle {
             background-color: var(--primary-color);
             color: var(--text-color);
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
             cursor: pointer;
-            border-radius: 0.25rem;
-            transition: background-color 0.3s;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 1rem;
         }
 
-        #modeToggle:hover {
+        #modeToggle:hover, #modeToggle:focus {
             background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         body.light-mode {
@@ -210,19 +265,25 @@
 
         @media (max-width: 768px) {
             .tools-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
 
             .tool-card {
-                padding: 1rem;
+                padding: 1.25rem;
             }
 
             .tool-name {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .tool-company, .tool-category {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1rem;
             }
         }
     </style>
@@ -282,36 +343,60 @@
 
     <script>
         const toolsData = [
-            { name: "Claude", company: "Anthropic", category: "Chatbot", url: "https://claude.ai/new" },
-            { name: "ChatGPT", company: "OpenAI", category: "Chatbot", url: "https://chatgpt.com/" },
-            { name: "Gemini", company: "Google", category: "Multimodal AI", url: "https://gemini.google.com" },
-            { name: "Microsoft Copilot", company: "Microsoft", category: "Coding AI", url: "https://copilot.microsoft.com/" },
-            { name: "GitHub Copilot", company: "Microsoft", category: "Code Assistant", url: "https://github.com/features/copilot" },
-            { name: "Phind", company: "Phind", category: "AI Search", url: "https://www.phind.com/" },
-            { name: "LLaMA", company: "Meta", category: "Language Model", url: "https://ai.meta.com/llama/" },
-            { name: "Grok", company: "X (formerly Twitter)", category: "AI Assistant", url: "https://twitter.com/i/grok" },
-            { name: "Poe", company: "Quora", category: "AI Chatbot Aggregator", url: "https://poe.com/" },
-            { name: "Le Chat", company: "Mistral", category: "Open-Source AI Models", url: "https://www.mistral.ai/" },
-            { name: "Cohere", company: "Cohere", category: "Language Model", url: "https://www.cohere.com/" },
-            { name: "Hugging Face", company: "Hugging Face", category: "AI Model Hub", url: "https://huggingface.co/" },
-            { name: "Stable Diffusion", company: "Stability AI", category: "Text-to-Image", url: "https://www.stability.ai/" },
-            { name: "Midjourney", company: "Midjourney", category: "Text-to-Image", url: "https://midjourney.com/" },
-            { name: "Canva", company: "Canva Pty Ltd", category: "Graphic Design", url: "https://www.canva.com/" },
-            { name: "DALL-E 3", company: "OpenAI", category: "Image Generation", url: "https://openai.com/index/dall-e-3/" },
-            { name: "Duolingo", company: "Duolingo Inc.", category: "Language Learning", url: "https://www.duolingo.com/" },
-            { name: "freeCodeCamp", company: "freeCodeCamp Inc.", category: "Coding Education", url: "https://www.freecodecamp.org/" },
-            { name: "SoloLearn", company: "SoloLearn Inc.", category: "Coding Education", url: "https://www.sololearn.com/" },
-            { name: "QuillBot", company: "QuillBot Inc.", category: "Paraphrasing Tool", url: "https://quillbot.com/paraphrasing-tool" },
-            { name: "AlphaFold", company: "DeepMind", category: "Protein Structure Prediction", url: "https://alphafold.ebi.ac.uk/" },
-            { name: "Ghostwriter", company: "Replit", category: "Code Assistant", url: "https://replit.com/" },
-            { name: "Ideogram", company: "Ideogram AI", category: "Image Generation", url: "https://ideogram.ai/login" }, // Added entry
-            { name: "Explorer", company: "Globe Engineer", category: "AI Search Engine", url: "https://explorer.globe.engineer/" },
-            { name: "Gamma", company: "Gamma", category: "Presentations", url: "https://gamma.app/" },
-            { name: "Image FX", company: "Google", category: "Image Generation", url: "https://aitestkitchen.withgoogle.com/tools/image-fx" },
-            { name: "Civitai", company: "Civitai", category: "Image Generation", url: "https://civitai.com/" },
-            { name: "Perplexity", company: "Perplexity AI", category: "AI Search Engine/LLM", url: "https://www.perplexity.ai/" }
-        ];
+        // Chatbots
+        { name: "Claude", company: "Anthropic", category: "Chatbot", url: "https://claude.ai/new" },
+        { name: "ChatGPT", company: "OpenAI", category: "Chatbot", url: "https://chatgpt.com/" },
+        { name: "Grok", company: "X (formerly Twitter)", category: "AI Assistant", url: "https://twitter.com/i/grok" },
+        { name: "Poe", company: "Quora", category: "AI Chatbot Aggregator", url: "https://poe.com/" },
+        
+        // Coding & Code Assistance
+        { name: "GitHub Copilot", company: "Microsoft", category: "Code Assistant", url: "https://github.com/features/copilot" },
+        { name: "Ghostwriter", company: "Replit", category: "Code Assistant", url: "https://replit.com/" },
+        { name: "Microsoft Copilot", company: "Microsoft", category: "Coding AI", url: "https://copilot.microsoft.com/" },
 
+        // Language Models
+        { name: "LLaMA", company: "Meta", category: "Language Model", url: "https://www.meta.ai/" },
+        { name: "Cohere", company: "Cohere", category: "Language Model", url: "https://dashboard.cohere.com/playground/chat" },
+
+        // Multimodal AI
+        { name: "Gemini", company: "Google", category: "Multimodal AI", url: "https://gemini.google.com" },
+        
+        // AI Search Engines
+        { name: "Phind", company: "Phind", category: "AI Search Engine", url: "https://www.phind.com/" },
+        { name: "Explorer", company: "Globe Engineer", category: "AI Search Engine", url: "https://explorer.globe.engineer/" },
+        { name: "Perplexity", company: "Perplexity AI", category: "AI Search Engine/LLM", url: "https://www.perplexity.ai/" },
+        
+        // Image Generation
+        { name: "DALL-E 3", company: "OpenAI", category: "Image Generation", url: "https://openai.com/index/dall-e-3/" },
+        { name: "Ideogram", company: "Ideogram AI", category: "Image Generation", url: "https://ideogram.ai/login" },
+        { name: "Image FX", company: "Google", category: "Image Generation", url: "https://aitestkitchen.withgoogle.com/tools/image-fx" },
+        { name: "Civitai", company: "Civitai", category: "Image Generation", url: "https://civitai.com/" },
+        { name: "Stable Diffusion", company: "Stability AI", category: "Image Generation", url: "https://www.stability.ai/" },
+        { name: "Midjourney", company: "Midjourney", category: "Image Generation", url: "https://midjourney.com/" },
+        { name: "fal", company: "Fal AI", category: "Image Generation", url: "https://fal.ai/models" },
+        { name: "flux", company: "Black Forest", category: "Image Generation", url: "https://replicate.com/explore#featured-models" },
+
+        // AI Model Hubs & Tools
+        { name: "Hugging Face", company: "Hugging Face", category: "AI Model Hub", url: "https://huggingface.co/" },
+        { name: "Le Chat", company: "Mistral", category: "Open-Source AI Models", url: "https://www.mistral.ai/" },
+        
+        // Graphic Design & Education
+        { name: "Canva", company: "Canva Pty Ltd", category: "Graphic Design", url: "https://www.canva.com/" },
+        { name: "freeCodeCamp", company: "freeCodeCamp Inc.", category: "Coding Education", url: "https://www.freecodecamp.org/" },
+        { name: "SoloLearn", company: "SoloLearn Inc.", category: "Coding Education", url: "https://www.sololearn.com/" },
+        { name: "Duolingo", company: "Duolingo Inc.", category: "Language Learning", url: "https://www.duolingo.com/" },
+
+        // Paraphrasing & Protein Structure Prediction
+        { name: "QuillBot", company: "QuillBot Inc.", category: "Paraphrasing Tool", url: "https://quillbot.com/paraphrasing-tool" },
+        { name: "AlphaFold", company: "DeepMind", category: "Protein Structure Prediction", url: "https://alphafold.ebi.ac.uk/" },
+
+        // Presentations
+        { name: "Gamma", company: "Gamma", category: "Presentations", url: "https://gamma.app/" },
+
+        // Additional Tools
+        { name: "Google AI Studio", company: "Google", category: "AI Studio", url: "https://aistudio.google.com/app/prompts/new_chat" },
+        { name: "OpenAI Playground", company: "OpenAI", category: "AI Playground", url: "https://platform.openai.com/playground/chat?models=gpt-4o-mini" }
+    ];
         const toolsGrid = document.getElementById('toolsGrid');
         const searchInput = document.getElementById('searchInput');
         const categoryButtons = document.querySelectorAll('.category-button');
@@ -321,7 +406,7 @@
         function createToolCard(tool) {
             return `
                 <div class="tool-card">
-                    <a href="${tool.url}" target="_blank">
+                    <a href="${tool.url}" target="_blank" rel="noopener noreferrer">
                         <div class="tool-name">${tool.name}</div>
                         <div class="tool-company">${tool.company}</div>
                         <div class="tool-category">${tool.category}</div>
