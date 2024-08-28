@@ -286,6 +286,74 @@
                 margin-bottom: 1rem;
             }
         }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: var(--card-background);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tool-card {
+            animation: fadeIn 0.5s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -316,6 +384,10 @@
             <!-- Tool cards will be dynamically inserted here -->
         </div>
 
+        <div id="noResults" class="no-results" style="display: none;">
+            No results found. Please try a different search or category.
+        </div>
+
         <div class="timeline">
             <h2>AI Timeline</h2>
             <div class="timeline-event">
@@ -334,6 +406,17 @@
                 <span class="timeline-year">2023:</span> OpenAI's ChatGPT-4 is released
             </div>
         </div>
+
+        <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+        <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalToolName"></h2>
+            <p id="modalToolCompany"></p>
+            <p id="modalToolCategory"></p>
+            <a id="modalToolLink" href="" target="_blank" rel="noopener noreferrer">Visit Tool</a>
+        </div>
+       </div>
     </div>
 
     <footer>
@@ -397,7 +480,7 @@
         { name: "Google AI Studio", company: "Google", category: "AI Studio", url: "https://aistudio.google.com/app/prompts/new_chat" },
         { name: "OpenAI Playground", company: "OpenAI", category: "AI Playground", url: "https://platform.openai.com/playground/chat?models=gpt-4o-mini" }
     ];
-        const toolsGrid = document.getElementById('toolsGrid');
+    const toolsGrid = document.getElementById('toolsGrid');
         const searchInput = document.getElementById('searchInput');
         const categoryButtons = document.querySelectorAll('.category-button');
         const modeToggle = document.getElementById('modeToggle');
@@ -405,18 +488,18 @@
 
         function createToolCard(tool) {
             return `
-                <div class="tool-card">
-                    <a href="${tool.url}" target="_blank" rel="noopener noreferrer">
-                        <div class="tool-name">${tool.name}</div>
-                        <div class="tool-company">${tool.company}</div>
-                        <div class="tool-category">${tool.category}</div>
-                    </a>
+                <div class="tool-card" tabindex="0" role="button" aria-label="View details for ${tool.name}">
+                    <div class="tool-name">${tool.name}</div>
+                    <div class="tool-company">${tool.company}</div>
+                    <div class="tool-category">${tool.category}</div>
                 </div>
             `;
         }
 
         function renderTools(tools) {
             toolsGrid.innerHTML = tools.map(createToolCard).join('');
+            noResults.style.display = tools.length === 0 ? 'block' : 'none';
+            addToolCardListeners();
         }
 
         function filterTools() {
@@ -434,19 +517,86 @@
             renderTools(filteredTools);
         }
 
+        function addToolCardListeners() {
+            const toolCards = document.querySelectorAll('.tool-card');
+            toolCards.forEach((card, index) => {
+                card.addEventListener('click', () => showToolDetails(toolsData[index]));
+                card.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        showToolDetails(toolsData[index]);
+                    }
+                });
+            });
+        }
+
+        function showToolDetails(tool) {
+            document.getElementById('modalToolName').textContent = tool.name;
+            document.getElementById('modalToolCompany').textContent = tool.company;
+            document.getElementById('modalToolCategory').textContent = tool.category;
+            document.getElementById('modalToolLink').href = tool.url;
+            modal.style.display = 'block';
+        }
+
         searchInput.addEventListener('input', filterTools);
 
         categoryButtons.forEach(button => {
             button.addEventListener('click', function() {
                 categoryButtons.forEach(btn => btn.classList.remove('active-button'));
                 this.classList.add('active-button');
+                localStorage.setItem('category', this.dataset.category);
                 filterTools();
             });
         });
 
         modeToggle.addEventListener('click', function() {
             body.classList.toggle('light-mode');
+            localStorage.setItem('mode', body.classList.contains('light-mode') ? 'light' : 'dark');
         });
+
+        const backToTop = document.getElementById('backToTop');
+        const modal = document.getElementById('toolModal');
+        const modalClose = document.getElementsByClassName('close')[0];
+        const noResults = document.getElementById('noResults');
+
+        modalClose.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Load user preferences from local storage
+        const savedMode = localStorage.getItem('mode');
+        if (savedMode === 'light') {
+            body.classList.add('light-mode');
+        }
+
+        const savedCategory = localStorage.getItem('category');
+        if (savedCategory) {
+            categoryButtons.forEach(btn => {
+                if (btn.dataset.category === savedCategory) {
+                    btn.classList.add('active-button');
+                } else {
+                    btn.classList.remove('active-button');
+                }
+            });
+            filterTools();
+        }
 
         // Initial render
         renderTools(toolsData);
