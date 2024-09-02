@@ -41,6 +41,9 @@
             text-align: center;
             padding: 2rem 0;
             border-bottom: 2px solid var(--neon-pink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         header h1 {
             font-family: 'Orbitron', sans-serif;
@@ -79,6 +82,7 @@
             padding: 1.5rem;
             transition: all 0.3s ease;
             border: 1px solid var(--neon-blue);
+            cursor: pointer;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -128,7 +132,6 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* Glitch effect */
         .glitch {
             position: relative;
         }
@@ -169,6 +172,71 @@
                 clip: rect(28px, 9999px, 38px, 0);
             }
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: var(--light-bg);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid var(--neon-blue);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        .close {
+            color: var(--neon-pink);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: var(--neon-blue);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--neon-pink);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        #back-to-top:hover {
+            background-color: var(--neon-blue);
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 0.3rem 0; /* Even smaller padding for very small screens */
+            }
+            header h1 {
+                font-size: 1.3rem; /* Reduced font size for smaller screens */
+            }
+            header p {
+                margin-top: 0.3rem; /* Reduced margin for smaller screens */
+                font-size: 0.9rem; /* Reduced font size for smaller screens */
+            }
+        }
+    </style>
     </style>
 </head>
 <body>
@@ -183,44 +251,45 @@
         <section id="projects">
             <h2 class="glitch" data-text="Projects">Projects</h2>
             <div class="project-grid">
-                <div class="project">
+                <div class="project" onclick="openModal('Android App Development')">
                     <h3>Android App Development</h3>
                     <p>Projects:</p>
                     <ul>
-                        <li>Book Library: A comprehensive book library app with CRUD operations database.</li>
-                        <li>Diet Tracker: A fitness app to track diet and health metrics.</li>
-                        <li>Music Playlist Recommender: A music app recommending playlists based on artists and genre.</li>
-                        <li>Tally Counter: A simple counter app for various counting purposes.</li>
-                        <li>Calculator: A basic calculator app for daily calculations.</li>
+                        <li>Book Library</li>
+                        <li>Personal AI</li>
+                        <li>Diet Tracker</li>
+                        <li>Music Playlist Recommender</li>
+                        <li>Tally Counter</li>
+                        <li>Calculator</li>
                     </ul>
                 </div>
 
-                <div class="project">
+                <div class="project" onclick="openModal('Web Development')">
                     <h3>Web Development</h3>
                     <p>Projects:</p>
                     <ul>
-                        <li>Personal Website: Designing and developing personal portfolio websites.</li>
-                        <li>Clothing Online Shop: Building e-commerce websites for clothing brands.</li>
-                        <li>Affordable Business Websites: Offering cost-effective website development services to help your business establish a strong online presence.</li>
+                        <li>Personal Website</li>
+                        <li>Clothing Online Shop</li>
+                        <li>Affordable Business Websites</li>
                     </ul>
                 </div>
 
-                <div class="project">
+                <div class="project" onclick="openModal('Blockchain and Crypto Advisory')">
                     <h3>Blockchain and Crypto Advisory</h3>
                     <p>Services:</p>
                     <ul>
-                        <li>Advising on blockchain technology and crypto investments across platforms like Luno, Binance, Trust Wallet, Phantom Wallet, and Coinbase.</li>
+                        <li>Advising on blockchain technology and crypto investments</li>
                     </ul>
                 </div>
 
-                <div class="project">
+                <div class="project" onclick="openModal('Graphic Design Services')">
                     <h3>Graphic Design Services</h3>
                     <ul>
-                        <li>Creating professional marketing materials using tools like Canva, including magazine covers, photo editing, posters, logos, and more.</li>
+                        <li>Creating professional marketing materials</li>
                     </ul>
                 </div>
 
-                <div class="project">
+                <div class="project" onclick="openModal('Coming Soon')">
                     <h3>Coming Soon</h3>
                     <p>Stay tuned for more innovative solutions and groundbreaking projects.</p>
                 </div>
@@ -229,30 +298,150 @@
 
         <section class="web-projects">
             <h2 class="glitch" data-text="Web Projects">Web Projects</h2>
-            <a href="index.html" target="_blank">Main website (Official Avuyile Mthembu)</a>
-            <a href="https://aj-vehicle-registration-services.b12sites.com/index" target="_blank">AJ Vehicle Registration Services (B12)</a>
-            <a href="https://mthembuavuyile.github.io/Aj-Vehicle-Registration/index.html" target="_blank">AJ Vehicle Registration (GitHub)</a>
-            <a href="https://mthembuavuyile.my.canva.site/avuyile-mthembu" target="_blank">Avuyile Mthembu - Canva Site</a>
-            <a href="https://mthembuavuyile.wixsite.com/avuyilemthembu" target="_blank">Avuyile Mthembu - Wix</a>
-            <a href="https://mthembuavuyile.wixsite.com/ceo-site" target="_blank">Mr Avuyile CEO Site</a>
-            <a href="https://mthembuavuyile.github.io/ShutterStyle/" target="_blank">Shutters and blinds</a>
-            <a href="https://lanceclothingza.wixsite.com/my-site" target="_blank">Lance Clothing ZA</a>
-            <a href="https://mthembuavuyile.github.io/lance/lance-clothing-za.html">Lance Clothing 2</a>
-            <a href="https://mthembuavuyile.github.io/mywebsite/Future-Tech.html">Future tech</a>
-            <a href="https://mthembuavuyile.github.io/mywebsite/cyberspace.html" target="_blank">Cyberspace</a>
-            <a href="https://mthembuavuyile.github.io/mywebsite/scams.html" target="_blank">AntiPyramid</a>
-            <a href="https://mthembuavuyile.github.io/mywebsite/Artificial-Intelligence.html" target="_blank">AI Tools</a>
-            <a href="https://mthembuavuyile.github.io/mywebsite/my-blog.html">Blog</a>
-            <a href="https://mthembuavuyile.github.io/VylexNexys/">VylexNexys</a>
-            <a href="https://mthembuavuyile.github.io/TallyTracker">Tally Tracker</a>
-            <a href="https://mthembuavuyile.github.io/AndrewsSwimmingPoolServices">Andrew's swimming pools</a>
-
-            
+            <div id="web-projects-list"></div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p> 
+        <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
     </footer>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="back-to-top" title="Go to top">↑</button>
+
+    <script>
+        const webProjects = [
+            {name: "Main website (Official Avuyile Mthembu)", url: "index.html"},
+            {name: "AJ Vehicle Registration Services (B12)", url: "https://aj-vehicle-registration-services.b12sites.com/index"},
+            {name: "AJ Vehicle Registration (GitHub)", url: "https://mthembuavuyile.github.io/Aj-Vehicle-Registration/index.html"},
+            {name: "Avuyile Mthembu - Canva Site", url: "https://mthembuavuyile.my.canva.site/avuyile-mthembu"},
+            {name: "Avuyile Mthembu - Wix", url: "https://mthembuavuyile.wixsite.com/avuyilemthembu"},
+            {name: "Mr Avuyile CEO Site", url: "https://mthembuavuyile.wixsite.com/ceo-site"},
+            {name: "Shutters and blinds", url: "https://mthembuavuyile.github.io/ShutterStyle/"},
+            {name: "Lance Clothing ZA", url: "https://lanceclothingza.wixsite.com/my-site"},
+            {name: "Lance Clothing 2", url: "https://mthembuavuyile.github.io/lance/lance-clothing-za.html"},
+            {name: "AntiPyramid", url: "https://mthembuavuyile.github.io/mywebsite/scams.html"},
+            {name: "Future tech", url: "https://mthembuavuyile.github.io/mywebsite/Future-Tech.html"},
+            {name: "Cyberspace", url: "https://mthembuavuyile.github.io/mywebsite/cyberspace.html"},
+            {name: "Blog", url: "https://mthembuavuyile.github.io/mywebsite/my-blog.html"},
+            {name: "AI Tools", url: "https://mthembuavuyile.github.io/mywebsite/Artificial-Intelligence.html"},
+            {name: "VylexNexys", url: "https://mthembuavuyile.github.io/VylexNexys/"},
+            {name: "Tally Tracker", url: "https://mthembuavuyile.github.io/TallyTracker"},
+            {name: "Cryptosphere", url: "https://mthembuavuyile.github.io/VylexNexys/Cryptosphere.html"},
+            {name: "Vylex Clothing", url: "https://mthembuavuyile.github.io/VylexNexys/clothing.html"},
+            {name: "Andrew's swimming pools", url: "https://mthembuavuyile.github.io/AndrewsSwimmingPoolServices"}
+        ];
+
+        const webProjectsList = document.getElementById('web-projects-list');
+        webProjects.forEach(project => {
+            const link = document.createElement('a');
+            link.href = project.url;
+            link.target = "_blank";
+            link.textContent = project.name;
+            webProjectsList.appendChild(link);
+        });
+
+        const modal = document.getElementById("projectModal");
+        const span = document.getElementsByClassName("close")[0];
+
+        function openModal(title) {
+            const modalTitle = document.getElementById("modalTitle");
+            const modalContent = document.getElementById("modalContent");
+            modalTitle.textContent = title;
+            modalContent.innerHTML = getModalContent(title);
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function getModalContent(title) {
+            switch(title) {
+                case "Android App Development":
+                    return `
+                        <p>Our Android app development projects include:</p>
+                        <ul>
+                            <li>Book Library: A comprehensive book library app with CRUD operations database.</li>
+                            <li>Diet Tracker: A fitness app to track diet and health metrics.</li>
+                            <li>Music Playlist Recommender: A music app recommending playlists based on artists and genre.</li>
+                            <li>Tally Counter: A simple counter app for various counting purposes.</li>
+                            <li>Calculator: A basic calculator app for daily calculations.</li>
+                        </ul>
+                    `;
+                case "Web Development":
+                    return `
+                        <p>Our web development services include:</p>
+                        <ul>
+                            <li>Personal Website: Designing and developing personal portfolio websites.</li>
+                            <li>Clothing Online Shop: Building e-commerce websites for clothing brands.</li>
+                            <li>Affordable Business Websites: Offering cost-effective website development services to help your business establish a strong online presence.</li>
+                        </ul>
+                    `;
+                case "Blockchain and Crypto Advisory":
+                    return `
+                        <p>We offer expert advice on blockchain technology and crypto investments across platforms like:</p>
+                        <ul>
+                            <li>Luno</li>
+                            <li>Binance</li>
+                            <li>Trust Wallet</li>
+                            <li>Phantom Wallet</li>
+                            <li>Coinbase</li>
+                        </ul>
+                    `;
+                case "Graphic Design Services":
+                    return `
+                        <p>We create professional marketing materials using tools like Canva, including:</p>
+                        <ul>
+                            <li>Magazine covers</li>
+                            <li>Photo editing</li>
+                            <li>Posters</li>
+                            <li>Logos</li>
+                            <li>And more!</li>
+                        </ul>
+                    `;
+                case "Coming Soon":
+                    return `
+                        <p>We're constantly working on new and exciting projects. Stay tuned for:</p>
+                        <ul>
+                            <li>Innovative software solutions</li>
+                            <li>Cutting-edge web applications</li>
+                            <li>Advanced mobile apps</li>
+                            <li>And much more!</li>
+                        </ul>
+                    `;
+                default:
+                    return "<p>No additional information available.</p>";
+            }
+        }
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("back-to-top").style.display = "block";
+            } else {
+                document.getElementById("back-to-top").style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </body>
 </html>
