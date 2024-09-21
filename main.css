@@ -323,12 +323,36 @@ section h2 {
 #Vylex-Nexys {
     background-size: cover;
     background-position: center;
-    background-blend-mode: overlay;
-    background-color: rgba(30, 0, 50, 0.85);
+    background-attachment: fixed;
+    background-image: url('path-to-your-cyberpunk-image.jpg');
+    background-blend-mode: color-dodge;
+    background-color: rgba(15, 0, 30, 0.9);
     color: #ff00d4;
-    box-shadow: var(--neon-glow);
-    text-shadow: var(--neon-text-shadow);
+    box-shadow: 0 0 20px #ff00d4, 0 0 30px #ff00d4, 0 0 40px #ff00d4;
+    text-shadow: 0 0 5px #ff00d4, 0 0 10px #ff00d4, 0 0 15px #ff00d4;
     font-family: 'Orbitron', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+#Vylex-Nexys::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 0, 212, 0.1) 0%, 
+        rgba(0, 255, 255, 0.1) 50%, 
+        rgba(255, 0, 212, 0.1) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+#Vylex-Nexys > * {
+    position: relative;
+    z-index: 2;
 }
 
 a {
