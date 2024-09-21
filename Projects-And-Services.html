@@ -3,445 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects and Services - Avuyile Mthembu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>Avuyile Mthembu - Projects and Services</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
         :root {
-            --neon-blue: #00ffff;
+            --neon-blue: #00f3ff;
             --neon-pink: #ff00ff;
-            --dark-bg: #0a0a0a;
-            --light-bg: #1a1a1a;
+            --bg-color: #121212;
+            --text-color: #ffffff;
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
-            color: #fff;
-            background-color: var(--dark-bg);
-            background-image: 
-                linear-gradient(45deg, #000000 25%, transparent 25%),
-                linear-gradient(-45deg, #000000 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #000000 75%),
-                linear-gradient(-45deg, transparent 75%, #000000 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
-        header {
-            background-color: rgba(0, 0, 0, 0.8);
+
+        h1, h2, h3 {
             color: var(--neon-blue);
-            text-align: center;
-            padding: 2rem 0;
-            border-bottom: 2px solid var(--neon-pink);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header h1 {
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
             text-shadow: 0 0 10px var(--neon-blue);
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        header a {
-            color: var(--neon-pink);
-            text-decoration: none;
-            transition: all 0.3s ease;
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 30px;
         }
-        header a:hover {
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
-        main {
-            padding: 2rem 0;
-        }
+
         h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 2em;
+            border-bottom: 2px solid var(--neon-pink);
+            padding-bottom: 10px;
+            margin-top: 40px;
         }
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .project {
-            background-color: var(--light-bg);
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            border: 1px solid var(--neon-blue);
-            cursor: pointer;
-        }
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-        }
-        .project h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-pink);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
+
         ul {
             list-style-type: none;
-            padding-left: 1rem;
+            padding: 0;
         }
-        ul li::before {
-            content: ">";
-            color: var(--neon-blue);
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+
+        li {
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
         }
-        .web-projects {
-            margin-top: 2rem;
+
+        li:hover {
+            transform: translateX(10px);
         }
-        .web-projects a {
-            display: block;
-            color: var(--neon-blue);
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-        }
-        .web-projects a:hover {
+
+        a {
             color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
-        footer {
-            background-color: rgba(0, 0, 0, 0.8);
+
+        a:hover {
             color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .back-to-home {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--neon-pink);
+            color: var(--bg-color);
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background-color: var(--neon-blue);
+            transform: scale(1.05);
+        }
+
+        footer {
             text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
+            margin-top: 50px;
+            padding: 20px;
             border-top: 2px solid var(--neon-pink);
         }
-        @media (max-width: 768px) {
-            .project-grid {
-                grid-template-columns: 1fr;
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+            }
+            to {
+                text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
             }
         }
-        .glitch {
-            position: relative;
+
+        #web-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--neon-pink);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 var(--neon-blue);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim {
-            0% {
-                clip: rect(9px, 9999px, 43px, 0);
-            }
-            100% {
-                clip: rect(83px, 9999px, 95px, 0);
-            }
-        }
-        @keyframes glitch-anim-2 {
-            0% {
-                clip: rect(46px, 9999px, 85px, 0);
-            }
-            100% {
-                clip: rect(28px, 9999px, 38px, 0);
-            }
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1001;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-        }
-        .modal-content {
-            background-color: var(--light-bg);
-            margin: 15% auto;
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             padding: 20px;
-            border: 1px solid var(--neon-blue);
-            width: 80%;
-            max-width: 600px;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .close {
-            color: var(--neon-pink);
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
         }
-        .close:hover,
-        .close:focus {
-            color: var(--neon-blue);
-            text-decoration: none;
-            cursor: pointer;
-        }
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: var(--neon-pink);
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 50%;
-            font-size: 18px;
-            transition: all 0.3s ease;
-        }
-        #back-to-top:hover {
-            background-color: var(--neon-blue);
-        }
-        @media (max-width: 768px) {
-            header {
-                padding: 0.3rem 0; /* Even smaller padding for very small screens */
-            }
-            header h1 {
-                font-size: 1.3rem; /* Reduced font size for smaller screens */
-            }
-            header p {
-                margin-top: 0.3rem; /* Reduced margin for smaller screens */
-                font-size: 0.9rem; /* Reduced font size for smaller screens */
-            }
-        }
-    </style>
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1 class="glitch" data-text="Projects and Services">Projects and Services</h1>
-            <p><a href="index.html">Back to Home</a></p>
-        </div>
-    </header>
+    <div class="container">
+        <h1>Projects and Services</h1>
+        <a href="index.html" class="back-to-home">Back to Home</a>
 
-    <main class="container">
-        <section id="projects">
-            <h2 class="glitch" data-text="Projects">Projects</h2>
-            <div class="project-grid">
-                <div class="project" onclick="openModal('Android App Development')">
-                    <h3>Android App Development</h3>
-                    <p>Projects:</p>
-                    <ul>
-                        <li>Book Library</li>
-                        <li>Personal AI</li>
-                        <li>Diet Tracker</li>
-                        <li>Music Playlist Recommender</li>
-                        <li>Tally Counter</li>
-                        <li>Calculator</li>
-                    </ul>
-                </div>
+        <h2>Projects</h2>
+        <h3>Android App Development</h3>
+        <ul>
+            <li>Book Library</li>
+            <li>Personal AI</li>
+            <li>Diet Tracker</li>
+            <li>Music Playlist Recommender</li>
+            <li>Tally Counter</li>
+            <li>Calculator</li>
+        </ul>
 
-                <div class="project" onclick="openModal('Web Development')">
-                    <h3>Web Development</h3>
-                    <p>Projects:</p>
-                    <ul>
-                        <li>Personal Website</li>
-                        <li>Clothing Online Shop</li>
-                        <li>Affordable Business Websites</li>
-                    </ul>
-                </div>
+        <h3>Web Development</h3>
+        <ul>
+            <li>Personal Website</li>
+            <li>Clothing Online Shop</li>
+            <li>Affordable Business Websites</li>
+        </ul>
 
-                <div class="project" onclick="openModal('Blockchain and Crypto Advisory')">
-                    <h3>Blockchain and Crypto Advisory</h3>
-                    <p>Services:</p>
-                    <ul>
-                        <li>Advising on blockchain technology and crypto investments</li>
-                    </ul>
-                </div>
+        <h2>Services</h2>
+        <h3>Blockchain and Crypto Advisory</h3>
+        <ul>
+            <li>Advising on blockchain technology and crypto investments</li>
+        </ul>
 
-                <div class="project" onclick="openModal('Graphic Design Services')">
-                    <h3>Graphic Design Services</h3>
-                    <ul>
-                        <li>Creating professional marketing materials</li>
-                    </ul>
-                </div>
+        <h3>Graphic Design Services</h3>
+        <ul>
+            <li>Creating professional marketing materials</li>
+        </ul>
 
-                <div class="project" onclick="openModal('Coming Soon')">
-                    <h3>Coming Soon</h3>
-                    <p>Stay tuned for more innovative solutions and groundbreaking projects.</p>
-                </div>
-            </div>
-        </section>
+        <h2>Coming Soon</h2>
+        <p>Stay tuned for more innovative solutions and groundbreaking projects.</p>
 
-        <section class="web-projects">
-            <h2 class="glitch" data-text="Web Projects">Web Projects</h2>
-            <div id="web-projects-list"></div>
-        </section>
-    </main>
+        <h2>Web Projects</h2>
+        <div id="web-projects"></div>
+    </div>
 
     <footer>
         <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
     </footer>
 
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <button onclick="topFunction()" id="back-to-top" title="Go to top">↑</button>
-
     <script>
         const webProjects = [
-            {name: "Main website (Official Avuyile Mthembu)", url: "index.html"},
-            {name: "AJ Vehicle Registration Services (B12)", url: "https://aj-vehicle-registration-services.b12sites.com/index"},
-            {name: "AJ Vehicle Registration (GitHub)", url: "https://mthembuavuyile.github.io/Aj-Vehicle-Registration/index.html"},
+            {name: "Main website (Official Avuyile Mthembu)", url: "https://avuyilemthembu.co.za/"},
             {name: "Avuyile Mthembu - Canva Site", url: "https://mthembuavuyile.my.canva.site/avuyile-mthembu"},
             {name: "Avuyile Mthembu - Wix", url: "https://mthembuavuyile.wixsite.com/avuyilemthembu"},
             {name: "Mr Avuyile CEO Site", url: "https://mthembuavuyile.wixsite.com/ceo-site"},
-            {name: "Shutters and blinds", url: "https://mthembuavuyile.github.io/shuttersandblinds/"},
+            {name: "Skills And Interests", url: "https://avuyilemthembu.co.za/Skills-And-Interests.html"},
+            {name: "Blog", url: "https://avuyilemthembu.co.za/my-blog.html"},
+            {name: "AJ Vehicle Registration Services (B12)", url: "https://aj-vehicle-registration-services.b12sites.com/index"},
+            {name: "AJ Vehicle Registration (GitHub)", url: "https://mthembuavuyile.github.io/Aj-Vehicle-Registration/index.html"},
+            {name: "Shutters and blinds", url: "https://luxuryshuttersandblinds.co.za/"},
+            {name: "Luxury Shutters and Blinds", url: "https://luxuryshuttersandblinds.co.za/"},
+            {name: "Andrew's swimming pools", url: "https://mthembuavuyile.github.io/AndrewsSwimmingPoolServices"},
             {name: "Lance Clothing ZA", url: "https://lanceclothingza.wixsite.com/my-site"},
             {name: "Lance Clothing 2", url: "https://mthembuavuyile.github.io/lance/lance-clothing-za.html"},
-            {name: "AntiPyramid", url: "https://mthembuavuyile.github.io/mywebsite/scams.html"},
-            {name: "Future tech", url: "https://mthembuavuyile.github.io/mywebsite/Future-Tech.html"},
-            {name: "Cyberspace", url: "https://mthembuavuyile.github.io/mywebsite/cyberspace.html"},
-            {name: "Blog", url: "https://mthembuavuyile.github.io/mywebsite/my-blog.html"},
-            {name: "AI Tools", url: "https://mthembuavuyile.github.io/mywebsite/Artificial-Intelligence.html"},
-            {name: "VylexNexys", url: "https://mthembuavuyile.github.io/VylexNexys/"},
-            {name: "Tally Tracker", url: "https://mthembuavuyile.github.io/TallyTracker"},
-            {name: "Cryptosphere", url: "https://mthembuavuyile.github.io/VylexNexys/Cryptosphere.html"},
             {name: "Vylex Clothing", url: "https://mthembuavuyile.github.io/VylexNexys/clothing.html"},
-            {name: "Andrew's swimming pools", url: "https://mthembuavuyile.github.io/AndrewsSwimmingPoolServices"}
+            {name: "CryptoNexus", url: "https://mthembuavuyile.github.io/VylexNexys/CryptoNexus.html"},
+            {name: "Cryptosphere", url: "https://mthembuavuyile.github.io/VylexNexys/Cryptosphere.html"},
+            {name: "Blockchain And Crypto", url: "https://avuyilemthembu.co.za/Blockchain-And-Crypto.html"},
+            {name: "Future tech", url: "https://avuyilemthembu.co.za/Future-Tech.html"},
+            {name: "AI Tools", url: "https://avuyilemthembu.co.za/Artificial-Intelligence.html"},
+            {name: "Tally Tracker", url: "https://mthembuavuyile.github.io/VylexNexys/TallyTracker.html"},
+            {name: "Doge Survive and Speed Clicker", url: "https://mthembuavuyile.github.io/VylexNexys/doge-survive-and-speed-clicker.html"},
+            {name: "Snake Game", url: "https://mthembuavuyile.github.io/VylexNexys/snake-game.html"},
+            {name: "VylexNexys", url: "https://mthembuavuyile.github.io/VylexNexys/"},
+            {name: "AntiPyramid", url: "https://avuyilemthembu.co.za/scams.html"},
+            {name: "The Shadow Net", url: "https://mthembuavuyile.github.io/VylexNexys/TheShadowNet.html"},
+            {name: "Animations", url: "https://mthembuavuyile.github.io/VylexNexys/animations.html"},
+            {name: "Location", url: "https://mthembuavuyile.github.io/VylexNexys/location.html"},
+            {name: "Nexys Gallery", url: "https://mthembuavuyile.github.io/VylexNexys/nexys-gallery.html"}
         ];
 
-        const webProjectsList = document.getElementById('web-projects-list');
+        const webProjectsContainer = document.getElementById('web-projects');
+
         webProjects.forEach(project => {
-            const link = document.createElement('a');
-            link.href = project.url;
-            link.target = "_blank";
-            link.textContent = project.name;
-            webProjectsList.appendChild(link);
+            const projectCard = document.createElement('div');
+            projectCard.className = 'project-card';
+            
+            const projectLink = document.createElement('a');
+            projectLink.href = project.url;
+            projectLink.textContent = project.name;
+            projectLink.target = '_blank';
+            projectLink.rel = 'noopener noreferrer';
+
+            projectCard.appendChild(projectLink);
+            webProjectsContainer.appendChild(projectCard);
         });
-
-        const modal = document.getElementById("projectModal");
-        const span = document.getElementsByClassName("close")[0];
-
-        function openModal(title) {
-            const modalTitle = document.getElementById("modalTitle");
-            const modalContent = document.getElementById("modalContent");
-            modalTitle.textContent = title;
-            modalContent.innerHTML = getModalContent(title);
-            modal.style.display = "block";
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        function getModalContent(title) {
-            switch(title) {
-                case "Android App Development":
-                    return `
-                        <p>Our Android app development projects include:</p>
-                        <ul>
-                            <li>Book Library: A comprehensive book library app with CRUD operations database.</li>
-                            <li>Diet Tracker: A fitness app to track diet and health metrics.</li>
-                            <li>Music Playlist Recommender: A music app recommending playlists based on artists and genre.</li>
-                            <li>Tally Counter: A simple counter app for various counting purposes.</li>
-                            <li>Calculator: A basic calculator app for daily calculations.</li>
-                        </ul>
-                    `;
-                case "Web Development":
-                    return `
-                        <p>Our web development services include:</p>
-                        <ul>
-                            <li>Personal Website: Designing and developing personal portfolio websites.</li>
-                            <li>Clothing Online Shop: Building e-commerce websites for clothing brands.</li>
-                            <li>Affordable Business Websites: Offering cost-effective website development services to help your business establish a strong online presence.</li>
-                        </ul>
-                    `;
-                case "Blockchain and Crypto Advisory":
-                    return `
-                        <p>We offer expert advice on blockchain technology and crypto investments across platforms like:</p>
-                        <ul>
-                            <li>Luno</li>
-                            <li>Binance</li>
-                            <li>Trust Wallet</li>
-                            <li>Phantom Wallet</li>
-                            <li>Coinbase</li>
-                        </ul>
-                    `;
-                case "Graphic Design Services":
-                    return `
-                        <p>We create professional marketing materials using tools like Canva, including:</p>
-                        <ul>
-                            <li>Magazine covers</li>
-                            <li>Photo editing</li>
-                            <li>Posters</li>
-                            <li>Logos</li>
-                            <li>And more!</li>
-                        </ul>
-                    `;
-                case "Coming Soon":
-                    return `
-                        <p>We're constantly working on new and exciting projects. Stay tuned for:</p>
-                        <ul>
-                            <li>Innovative software solutions</li>
-                            <li>Cutting-edge web applications</li>
-                            <li>Advanced mobile apps</li>
-                            <li>And much more!</li>
-                        </ul>
-                    `;
-                default:
-                    return "<p>No additional information available.</p>";
-            }
-        }
-
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("back-to-top").style.display = "block";
-            } else {
-                document.getElementById("back-to-top").style.display = "none";
-            }
-        }
-
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
     </script>
 </body>
 </html>
