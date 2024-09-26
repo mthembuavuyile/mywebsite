@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shadow Network | CMD Commands for Cybersecurity Experts</title>
+    <meta name="description" content="Explore essential CMD commands, network diagnostics, and system monitoring tools for cybersecurity professionals. Secure your Windows PC with advanced security techniques.">
+    <meta name="keywords" content="CMD commands for security, Windows CMD security tools, network diagnostics CMD, system monitoring tools, cybersecurity commands, task management CMD, Windows security tips, secure Windows PC, network security tools, advanced CMD utilities">
+    <meta name="author" content="Avuyile Mthembu">
+    <style>
+
+    body {
+        background-color: #000;
+        color: #fff;
+        font-family: 'Courier New', Courier, monospace;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+    
+    .container {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+        animation: glitch 1s infinite;
+    }
+    h2 {
+    color: #2ECC71; /* Emerald green for subtler text */
+    border-bottom: 2px solid #00FF00; /* Neon green border */
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #00FFFF; /* Electric blue for secondary headings */
+    margin-top: 30px;
+}
+    
+    .warning {
+        color: #f00;
+        font-style: italic;
+        animation: blink 0.5s infinite;
+    }
+    
+    main {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        overflow-y: auto; /* Enable scrolling within main content */
+    }
+    
+    .cli {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #0f0;
+        margin-bottom: 20px;
+    }
+    
+    .terminal {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .prompt {
+        font-weight: bold;
+        color: #0f0;
+    }
+    
+    .command-input {
+        background-color: transparent;
+        color: #fff;
+        border: none;
+        border-bottom: 1px solid #0f0;
+        padding: 5px;
+        margin-left: 10px;
+        flex-grow: 1;
+        font-family: inherit;
+        font-size: 1em;
+    }
+    
+    .command-input:focus {
+        outline: none;
+        box-shadow: 0 0 5px #0f0;
+    }
+    
+    .output {
+        flex-grow: 1;
+        overflow-y: auto;
+        margin-top: 10px;
+    }
+    
+    .messages {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #0f0;
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+    
+    .message {
+        background-color: rgba(0, 255, 0, 0.1);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border-left: 3px solid #0f0;
+    }
+    
+    .timestamp {
+        display: block;
+        text-align: right;
+        font-size: 0.8em;
+        color: #0f0;
+    }
+    
+    .matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    .matrix span {
+        position: absolute;
+        color: #0f0;
+        text-shadow: 0 0 5px #0f0;
+        animation: fall linear infinite;
+    }
+    
+    footer {
+        text-align: center;
+        padding: 10px;
+        font-size: 0.8em;
+        color: #0f0;
+    }
+    
+    @keyframes fall {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100vh); }
+    }
+    
+    @keyframes glitch {
+        0% { text-shadow: 0 0 5px #0f0, 0 0 10px #0f0; }
+        25% { text-shadow: -2px 0 #f00, 2px 2px #0ff; }
+        50% { text-shadow: 2px -2px #ff0, -2px 2px #f0f; }
+        75% { text-shadow: -2px -2px #0ff, 2px -2px #f00; }
+        100% { text-shadow: 0 0 5px #0f0, 0 0 10px #0f0; }
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    
+    @media (max-width: 768px) {
+        main {
+            flex-direction: column;
+        }
+    }
+
+    
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Shadow Network</h1>
+            <img style="padding: 10px;" src="https://www.shutterstock.com/image-vector/moscow-russia-april-4-2022-600nw-2142695819.jpg" width="85px" height="80px" >
+            <p class="warning">Warning: Unauthorized Access Detected</p>
+        </header>
+        <main>
+            <p>Playground: &lt;/&gt;</p>
+            <section class="cli">
+                <div class="terminal">
+                    <div class="prompt">shadow@network:~$ </div>
+                    <input type="text" class="command-input" placeholder="Enter Command">
+                </div>
+                <div class="output" id="output"></div>
+            </section>
+            <section class="messages">
+                <h2>Recent Activity</h2>
+                <div class="message">
+                    <p>Data Breach in Progress...</p>
+                    <span class="timestamp">12:34:56</span>
+                </div>
+                <div class="message">
+                    <p>Encryption Unlocked. Accessing hidden files...</p>
+                    <span class="timestamp">12:35:02</span>
+                </div>
+                <div class="message">
+                    <p>Your secrets are no longer safe.</p>
+                    <span class="timestamp">12:35:15</span>
+                </div>
+                <div class="message">
+                    <p>Project Nightshade: Phase 2 initiated.</p>
+                    <span class="timestamp">12:36:00</span>
+                </div>
+                <div class="message">
+                    <p>Quantum backdoor established. System compromised.</p>
+                    <span class="timestamp">12:36:30</span>
+                </div>
+            </section>
+
+            <h2>Useful commands for security experts</h2>
+
+            <h3>Networking Commands:</h3>
+            <ul>
+                <li><strong>ipconfig /all</strong> - Displays detailed network configuration.</li>
+                <li><strong>ping [ip/domain]</strong> - Tests connectivity to a specified address.</li>
+                <li><strong>tracert [ip/domain]</strong> - Traces the route to a destination.</li>
+                <li><strong>nslookup [domain]</strong> - Queries DNS records.</li>
+                <li><strong>netstat -ano</strong> - Displays active network connections and listening ports.</li>
+                <li><strong>route print</strong> - Shows the routing table.</li>
+                <li><strong>arp -a</strong> - Displays the ARP cache, showing IP to physical address mappings.</li>
+            </ul>
+        
+            <h3>Netsh WLAN Commands:</h3>
+            <ul>
+                <li><strong>netsh wlan show networks</strong> - Displays available Wi-Fi networks.</li>
+                <li><strong>netsh wlan show interfaces</strong> - Shows wireless network adapter information.</li>
+                <li><strong>netsh wlan show profiles</strong> - Lists saved Wi-Fi profiles.</li>
+                <li><strong>netsh wlan export profile folder=C:\ key=clear</strong> - Exports Wi-Fi profiles with passwords.</li>
+                <li><strong>netsh wlan connect name="NetworkName"</strong> - Connects to a specific Wi-Fi network.</li>
+                <li><strong>netsh wlan show all</strong> - Displays all wireless network information.</li>
+            </ul>
+        
+            <h3>Other Useful CMD Commands:</h3>
+            <ul>
+                <li><strong>tasklist</strong> - Lists running processes.</li>
+                <li><strong>taskkill /F /IM process.exe</strong> - Forcefully terminates a process.</li>
+                <li><strong>systeminfo</strong> - Displays detailed system information.</li>
+                <li><strong>sfc /scannow</strong> - Scans and repairs system files.</li>
+                <li><strong>chkdsk C: /f</strong> - Checks and repairs disk errors.</li>
+                <li><strong>diskpart</strong> - Launches disk partitioning tool.</li>
+                <li><strong>powercfg /energy</strong> - Generates an energy efficiency report.</li>
+                <li><strong>driverquery</strong> - Lists installed device drivers.</li>
+                <li><strong>wmic</strong> - Windows Management Instrumentation Command-line.</li>
+                <li><strong>netsh advfirewall set allprofiles state off</strong> - Disables Windows Firewall (use with caution).</li>
+                <li><strong>reg query HKLM /f password /t REG_SZ /s</strong> - Searches for stored passwords in registry.</li>
+                <li><strong>cipher /W:C:</strong> - Securely wipes free space on drive C:.</li>
+                <li><strong>tasklist /svc</strong> - Lists running processes and associated services.</li>
+                <li><strong>schtasks /query /fo LIST /v</strong> - Displays detailed information about scheduled tasks.</li>
+                <li><strong>wmic startup get command,caption</strong> - Lists programs that run at startup.</li>
+                <li><strong>net user</strong> - Lists all user accounts on the system.</li>
+                <li><strong>net localgroup administrators</strong> - Shows members of the administrators group.</li>
+                <li><strong>wmic qfe list brief</strong> - Lists installed Windows updates.</li>
+                <li><strong>whoami /all</strong> - Displays current user's privileges and group memberships.</li>
+                <li><strong>netsh advfirewall show allprofiles</strong> - Shows Windows Firewall configuration.</li>
+                <li><strong>wmic process get caption,executablepath,commandline</strong> - Lists running processes with full command lines.</li>
+                <li><strong>sc query</strong> - Lists all services and their statuses.</li>
+                <li><strong>reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run</strong> - Shows programs set to run at startup (Registry).</li>
+                <li><strong>wevtutil qe Security /c:25 /f:text</strong> - Displays the last 25 security event log entries.</li>
+                <li><strong>cipher /c</strong> - Shows encryption status of the current directory.</li>
+                <li><strong>net share</strong> - Displays information about shared resources on the computer.</li>
+                <li><strong>netsh interface ipv4 show subinterfaces</strong> - Shows detailed network interface information.</li>
+                <li><strong>powershell "Get-WmiObject -Class Win32_Product | Select-Object Name, Version"</strong> - Lists installed software.</li>
+                <li><strong>wmic os get osarchitecture</strong> - Shows if the system is 32-bit or 64-bit.</li>
+                <li><strong>wmic logicaldisk get caption,description,providername</strong> - Lists disk drives and their types.</li>
+                <li><strong>certutil -store -user my</strong> - Lists personal certificates for the current user.</li>
+                <li><strong>gpresult /r</strong> - Shows which Group Policy settings are applied to the current user and computer.</li>
+            </ul>
+        
+            <h3>Commands for Developers and Programmers:</h3>
+            <ul>
+                <li><strong>git status</strong> - Shows the status of the current Git repository.</li>
+                <li><strong>npm list</strong> - Lists installed npm packages.</li>
+                <li><strong>python --version</strong> - Displays the installed Python version.</li>
+                <li><strong>javac -version</strong> - Shows the Java compiler version.</li>
+                <li><strong>dotnet --info</strong> - Displays information about the installed .NET SDK.</li>
+                <li><strong>docker ps</strong> - Lists running Docker containers.</li>
+                <li><strong>kubectl get pods</strong> - Lists Kubernetes pods in the current context.</li>
+            </ul>
+        
+            <h3>Commands for Cybersecurity Experts:</h3>
+            <ul>
+                <li><strong>netstat -nao | findstr LISTENING</strong> - Shows all listening ports and their associated PIDs.</li>
+                <li><strong>tasklist /m</strong> - Lists all running processes and their associated DLLs.</li>
+                <li><strong>wmic process where processid="PID" get commandline</strong> - Shows the command line of a specific process.</li>
+                <li><strong>reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</strong> - Lists autorun programs in the registry.</li>
+                <li><strong>schtasks /query /fo LIST /v</strong> - Lists all scheduled tasks with details.</li>
+                <li><strong>wevtutil qe Security /c:100 /f:text</strong> - Displays the last 100 security event log entries.</li>
+            </ul>
+        
+            <h3>Commands for Checking if Machine is Hacked:</h3>
+            <ul>
+                <li><strong>netstat -ano</strong> - Look for suspicious outbound connections.</li>
+                <li><strong>tasklist /v</strong> - Check for unfamiliar processes.</li>
+                <li><strong>wmic startup list full</strong> - Examine startup programs for anything suspicious.</li>
+                <li><strong>wmic process list full</strong> - Review all running processes in detail.</li>
+                <li><strong>dir %SystemRoot%\prefetch</strong> - Check recently run programs.</li>
+                <li><strong>wevtutil qe Security /c:50 /f:text</strong> - Review recent security events.</li>
+                <li><strong>schtasks /query /fo LIST /v</strong> - Check for suspicious scheduled tasks.</li>
+            </ul>
+        </main>
+
+        <footer>
+            Created by <a href="https://avuyilemthembu.co.za">Avuyile Mthembu</a>
+        </footer>
+        
+    </div>
+
+    <script>
+        // Simulate typing effect in CLI
+        const commandInput = document.querySelector('.command-input');
+        const output = document.getElementById('output');
+
+        commandInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const command = commandInput.value.trim();
+                handleCommand(command);
+                commandInput.value = ''; // Clear input field
+            }
+        });
+
+        function handleCommand(command) {
+            const response = document.createElement('div');
+            response.innerHTML = `<span class="prompt">shadow@network:~$</span> ${command}<br>`;
+            
+            switch(command.toLowerCase()) {
+                case 'help':
+                    response.innerHTML += 'Available commands: help, status, breach, encrypt, decrypt, hack, exit.';
+                    break;
+                case 'status':
+                    response.innerHTML += 'System Status: COMPROMISED';
+                    break;
+                case 'breach':
+                    response.innerHTML += 'Initiating data breach... Access granted.';
+                    playEerieSound(); // Play the sound when "breach" is entered
+                    break;
+                case 'encrypt':
+                    response.innerHTML += 'Encrypting all files... Encryption complete.';
+                    break;
+                case 'decrypt':
+                    response.innerHTML += 'Decryption failed. Ac    cess denied.';
+                    break;
+                case 'hack':
+                    response.innerHTML += 'Initiating hack sequence...\nAccessing mainframe...\nBreaching firewalls...\nHack complete. System compromised.';
+                    playEerieSound2();
+                case 'exit' :arguments
+                response.innerHTML += 'Logout attempt detected. Access denied.';            
+
+                default:
+                    response.innerHTML += 'Command not recognized. Type "help" for available commands.';
+            }
+
+            output.appendChild(response);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // Add matrix-style binary digits
+        function generateBinaryDigits() {
+            const digits = '01';
+            const matrixContainer = document.createElement('div');
+            matrixContainer.classList.add('matrix');
+            document.body.appendChild(matrixContainer);
+
+            for (let i = 0; i < 200; i++) {
+                const digit = document.createElement('span');
+                digit.textContent = digits.charAt(Math.floor(Math.random() * digits.length));
+                digit.style.left = `${Math.random() * 100}%`;
+                digit.style.animationDuration = `${Math.random() * 5 + 2}s`;
+                digit.style.fontSize = `${Math.random() * 15 + 10}px`;
+                digit.style.opacity = `${Math.random()}`;
+                matrixContainer.appendChild(digit);
+            }
+        }
+
+        generateBinaryDigits();
+
+        // Add eerie sound effect
+        function playEerieSound() {
+            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZSA0PVK3n77BdGAg+ltryxnYpBSl+zPLaizsIGGS57OihUBELTqXh8bllHgU2jdXzzn0vBSF1xe/glEILElyx6OyrWBUIQ5zd8sFvJAUuhM/z1YU2Bhxqvu7mnEoODlGq5O+zYBoGPJPY88p5KwUme8rx3I4+CRZiturqpVITC0uj4PK8aB8GM4nU8tGAMQYfcsLu45ZFDBFZr+ftrVoXCECY3PLEcyYELIHO8diJOQcZaLvt559NEAxPqOPwtmMcBjiP1/PMeS0GI3fH8N2RQAoUXrTp66hVFApGnt/yvmwhBTCG0fPTgjQGHm7A7eSaRw0PVK3m77BeGQc9ltvyxnYpBSl+zPDaizsIGGS56+mjTxELTqXh8bllHgU1jdT0z3wvBSJ0xe/glEILElyx6OyrWRUIRJve8sFuJAUug8/y1oU2Bhxqvu3mnEoPDlGq5O+zYRsGPJLZ88p5KwUme8rx3I4+CRVht+rqpVMSC0yj4PG8aiAFM4nU8tGAMQYfccPu45ZFDBFZr+ftrVwWCEGY3PLEcyYELIHO8diJOQcZZ7zs56BODwxPpuPxtmQcBjiP1/PMeywGI3fH8N+RQAoUXrTp66hWEwlGnt/yv2wiBDCG0fPTgzQHHW/A7eSaSQ0PVKzn77BdGQc9ltv0xnYpBSh9y/HbizwIGGS56+mjUBAKT6Xh8blmHwU1jdTy0HwvBSF0xPDglEQKElyx6OyrWRUIRJzd8sFuJAUug8/y1oY2Bhxqvu3mnEwODVKp5e+zYRsGPJLX88p6KwUmfMrx3I4/CBVht+rqpVMSC0yj3/G9aiAFM4nS89GAMQYfccLv45dGCxFYr+ftrVwWCEGY3PLEcyYELH/N8tiKOQcZZ7rs56BODwxPpuPxtmQdBTiP1/PMey4FI3bH8d+RQQkUXrTp66hWEwlGnt/yv2wiBDCG0PPTgzUGHm/A7eSaSQ0PVK3n77BdGQc9ltvyxnYqBSh9y/HbizsIGGS56+mjUBALTqXh8blmHwU1jdTy0H4wBiF0xPDglEQKElux6eyrWRUIRJzd8sFuJAUug8/y1oY3Bxxqvu3mnEwODVKp5e+zYRsGO5PX88p6KwUmfMnx3I4/CBVht+nrpVQSCkyi4PG9aiAFM4nS89GBMgUfccLv45dGCxFYr+ftrVwXB0CY3PLEcycDLH/N8tiKOQcZZ7vs56BODwxPpuPxtmQdBTeP1/PMey4FI3bH8d+RQQkUXrTp66hWEwlGnt/yv2wiBDCG0PPTgzUGHm/A7eSaSQ0PVK3n77BdGQc9ltvyxnYqBSh9y/HbizsIGGS56+mjUBALTqXh8blmHwU1jdTy0H4wBiF0xPDglEQKElux6eyrWRUIRJzd8sFuJAUug8/y1oY3Bxxqvu3mnEwODVKp5e+zYRsGO5PX88p6KwUmfMnx3I4/CBVht+nrpVQSCkyi4PG9aiAFM4nS89GBMgUfccLv45dGCxFYr+ftrVwXB0CY3PLEcycDLH/N8tiKOQcZZ7vs56BODwxPpuPxtmQdBTeP1/PMey4FI3bH8d+RQQkUXrTp66hWEwlGnt/yv2wiBDCG0PPTgzUGHm/A7eSaSQ0PVK3n77BdGQc9ltvyxnYqBSh9y/HbizsIGGS56+mjUBALTqXh8blmHwU1jdTy0H4wBiF0xPDglEQKElux6eyrWRUIRJzd8sFuJAU=');
+            audio.volume = 0.2;
+            audio.loop = true;
+            audio.play();
+
+            setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // Optionally reset to the beginning
+    }, 10000); // 10 seconds in milliseconds
+
+        }
+
+        // Add eerie sound effect
+        function playEerieSound2() {
+        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZSA0PVK3n77BdGAg+ltryxnYpBSl+zPLaizsIGGS57OihUBELTqXh8bllHgU2jdXzzn0vBSF1xe/glEILElyx6OyrWBUIQ5zd8sFvJAUuhM/z1YU2Bhxqvu7mnEoODlGq5O+zYBoGPJPY88p5KwUme8rx3I4+CRZiturqpVITC0uj4PK8aB8GM4nU8tGAMQYfcsLu45ZFDBFZr+ftrVoXCECY3PLEcyYELIHO8diJOQcZaLvt559NEAxPqOPwtmMcBjiP1/PMeS0GI3fH8N2RQAoUXrTp66hVFApGnt/yvmwhBTCG0fPTgjQGHm7A7eSaRw0PVK3m77BeGQc9ltvyxnYpBSl+zPDaizsIGGS56+mjTxELTqXh8bllHgU1jdT0z3wvBSJ0xe/glEILElyx6OyrWRUIRJve8sFuJAUug8/y1oU2Bhxqvu3mnEoPDlGq5O+zYRsGPJLZ88p5KwUme8rx3I4+CRVht+rqpVMSC0yj4PG8aiAFM4nU8tGAMQYfccPu45ZFDBFZr+ftrVwWCEGY3PLEcyYELIHO8diJOQcZZ7zs56BODwxPpuPxtmQcBjiP1/PMeywGI3fH8N+RQAoUXrTp66hWEwlGnt/yv2wiBDCG0fPTgzQHHW/A7eSaSQ0PVKzn77BdGQc9ltv0xnYpBSh9y/HbizwIGGS56+mjUBAKT6Xh8blmHwU1jdTy0HwvBSF0xPDglEQKElyx6OyrWRUIRJzd8sFuJAUug8/y1oY2Bhxqvu3mnEwODVKp5e+zYRsGPJLX88p6KwUmfMrx3I4/CBVht+rqpVMSC0yj3/G9aiAFM4nS89GAMQYfccLv45dGCxFYr+ftrVwWCEGY3PLEcyYELH/N8tiKOQcZZ7rs56BODwxPpuPxtmQdBTiP1/PMey4FI3bH8d+RQQkUXrTp66hWEwlGnt/yv2wiBDCG0PPTgzUGHm/A7eSaSQ0PVK3n77BdGQc9ltvyxnYqBSh9y/HbizsIGGS56+mjUBALTqXh8blmHwU1jdTy0H4wBiF0xPDglEQKElux6eyrWRUIRJzd8sFuJAUug8/y1oY3Bxxqvu3mnEwODVKp5e+zYRsGO5PX88p6KwUmfMnx3I4/CBVht+nrpVQSCkyi4PG9aiAFM4nS89GBMgUfccLv45dGCxFYr+ftrVwXB0CY3PLEcycDLH/N8tiKOQcZZ7vs56BODwxPpuPxtmQdBTeP1/PMey4FI3bH8d+RQQkUXrTp66hWEwlGnt/yv2wiBDCG0PPTgzUGHm/A7eSaSQ0PVK3n77BdGQc9ltvyxnYqBSh9y/HbizsIGGS56+mjUBALTqXh8blmHwU1jdTy0H4wBiF0xPDglEQKElux6eyrWRUIRJzd8sFuJAUug8/y1oY3Bxxqvu3mnEwODVKp5e+zYRsGO5PX88p6KwUmfMnx3I4/CBVht+nrpVQSCkyi4PG9aiAFM4nS89GBMgUfccLv45dGCxFYr+ftrVwXB0CY3PLEcycDLH/N8tiKOQcZZ7vs56BODwxPpuPxtmQdBTeP1/PMey4FI3bH8d+RQQkUXrTp66hWEwlGnt/yv2wiBDCG0PPTgzUGHm/A7eSaSQ0PVK3n77BdGQc9ltvyxnYqBSh9y/HbizsIGGS56+mjUBALTqXh8blmHwU1jdTy0H4wBiF0xPDglEQKElux6eyrWRUIRJzd8sFuJAU=');
+         audio.volume = 0.2;
+         audio.loop = true;
+         audio.play();
+    
+    // Stop the audio after 10 seconds
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // Optionally reset to the beginning
+    }, 10000); // 10 seconds in milliseconds
+}
+
+
+        // Add system warnings
+        function showSystemWarning() {
+            const warnings = [
+                "Intrusion detected!",
+                "Firewall breach imminent!",
+                "You are being watched🔍👀",
+                "Data corruption in progress...",
+                "Unauthorized access attempt!",
+                "System integrity compromised!"
+            ];
+            const warningElement = document.createElement('div');
+            warningElement.textContent = warnings[Math.floor(Math.random() * warnings.length)];
+            warningElement.style.position = 'fixed';
+            warningElement.style.top = `${Math.random() * 100}%`;
+            warningElement.style.left = `${Math.random() * 100}%`;
+            warningElement.style.color = '#f00';
+            warningElement.style.fontWeight = 'bold';
+            warningElement.style.textShadow = '0 0 5px #f00';
+            warningElement.style.animation = 'blink 0.5s infinite';
+            document.body.appendChild(warningElement);
+            setTimeout(() => {
+                document.body.removeChild(warningElement);
+            }, 3000);
+        }
+
+        setInterval(showSystemWarning, 10000);
+    </script>
+</body>
+</html>
