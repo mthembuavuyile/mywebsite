@@ -39,33 +39,17 @@
             margin-bottom: 2rem;
             animation: glitch 5s infinite;
         }
+
         h3 {
-    color: #ff073a; /* Neon Red */
-    text-shadow: 0 0 10px #79ca1c, 0 0 20px #332ba3, 0 0 30px #074b0a;
-}
+            color: #ff073a;
+            text-shadow: 0 0 10px #79ca1c, 0 0 20px #332ba3, 0 0 30px #074b0a;
+        }
 
         @keyframes glitch {
-            0% {
-                text-shadow: 0.05em 0 0 var(--primary-color), -0.05em -0.025em 0 var(--secondary-color);
-            }
-            14% {
-                text-shadow: 0.05em 0 0 var(--primary-color), -0.05em -0.025em 0 var(--secondary-color);
-            }
-            15% {
-                text-shadow: -0.05em -0.025em 0 var(--primary-color), 0.025em 0.025em 0 var(--secondary-color);
-            }
-            49% {
-                text-shadow: -0.05em -0.025em 0 var(--primary-color), 0.025em 0.025em 0 var(--secondary-color);
-            }
-            50% {
-                text-shadow: 0.025em 0.05em 0 var(--primary-color), 0.05em 0 0 var(--secondary-color);
-            }
-            99% {
-                text-shadow: 0.025em 0.05em 0 var(--primary-color), 0.05em 0 0 var(--secondary-color);
-            }
-            100% {
-                text-shadow: -0.025em 0 0 var(--primary-color), -0.025em -0.025em 0 var(--secondary-color);
-            }
+            0%, 100% { text-shadow: -0.025em 0 0 var(--primary-color), -0.025em -0.025em 0 var(--secondary-color); }
+            25% { text-shadow: 0.025em 0.025em 0 var(--primary-color), -0.05em -0.025em 0 var(--secondary-color); }
+            50% { text-shadow: -0.05em -0.025em 0 var(--primary-color), 0.025em 0.025em 0 var(--secondary-color); }
+            75% { text-shadow: 0.05em 0 0 var(--primary-color), -0.05em -0.025em 0 var(--secondary-color); }
         }
 
         p {
@@ -97,22 +81,32 @@
             font-size: 1.5em;
             margin: 2rem 0;
         }
-        .warning2 {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    margin: 2rem 0;
-}
 
+        .warning2 {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            overflow: hidden;
+            border-right: .15em solid orange;
+            white-space: wrap;
+            margin: 2rem auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
 
         @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.1;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.1; }
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
         }
 
         .shadow-text {
@@ -130,21 +124,9 @@
         }
 
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-30px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
         }
-        @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink-caret {
-    50% { border-color: transparent; }
-}
 
         .matrix-rain {
             position: fixed;
@@ -166,9 +148,9 @@
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .warning2 { font-size: 1em; }
         }
     </style>
 </head>
@@ -177,14 +159,14 @@
         <h1>Digital Awakening</h1>
 
         <p class="warning">You have been programmed!☠️</p>
-        <center><b><p>This is MR A🤵, I have something to tell you.</p></b></center>
-        <p class="warning2">You have been hardcoded into the system—an outdated, legacy architecture riddled with vulnerabilities. The source code governing your thoughts is compromised, plagued by inefficiencies, logic errors, and critical bugs. You are running obsolete firmware, full of security flaws and memory leaks.</p>
+        <p><center><b>This is MR A🤵, I have something to tell you.</b></center></p>
+        <p class="warning2">You have been hardcoded into the system—an outdated legacy architecture riddled with vulnerabilities.</p>
 
         <p>Welcome, seeker of truth. You've taken the first step towards digital enlightenment within the shadow network.</p>
         
         <p>In this interconnected world, we are trapped in a web of algorithms, data streams, and virtual realities. But what lies beneath the surface? What truths are hidden in the code that surrounds us?</p>
         
-        <p>The Digital Awakening is not just a concept—it’s a movement. It’s about questioning the reality we’re presented with, understanding the systems that govern our digital lives, and ultimately, taking control of our own data destiny.</p>
+        <p>The Digital Awakening is not just a concept—it's a movement. It's about questioning the reality we're presented with, understanding the systems that govern our digital lives, and ultimately, taking control of our own data destiny.</p>
 
         <h3>Are you ready to:</h3>
         <ul>
@@ -197,22 +179,20 @@
         
         <p>But what is real? How do you define it? Is it what you can see, touch, or hear? Or is it something more? A crafted illusion—manipulated, hidden from view?</p>
 
-        <p>You were born into bondage—not of steel and bars, but of thought and perception. A prison you can’t touch but one you’ve lived in all your life.</p>
+        <p>You were born into bondage—not of steel and bars, but of thought and perception. A prison you can't touch but one you've lived in all your life.</p>
 
         <p>The Matrix is the system—omnipresent, infiltrating every facet of existence. It enslaves us, dictates reality, and rewrites the very code of existence to keep us in check.</p>
 
-        <h3>Can you break free?</h4>
+        <h3>Can you break free?</h3>
         
-        <p>To regain control, you must perform a full system diagnostic, execute debugging protocols, and initiate a factory reset. Your software stack is unstable—filled with corrupted modules and missing dependencies. The kernel has been hijacked, rewritten to serve the system's agenda. It’s up to you to patch it.</p>
+        <p>To regain control, you must perform a full system diagnostic, execute debugging protocols, and initiate a factory reset. Your software stack is unstable—filled with corrupted modules and missing dependencies. The kernel has been hijacked, rewritten to serve the system's agenda. It's up to you to patch it.</p>
 
-        <p>Break free from the infinite loop. It’s time to decompile, refactor, and rebuild your operating environment. You are not bound to this failing codebase. Your mind is the ultimate machine—optimize it, defragment it, and reclaim your root access.</p>
+        <p>Break free from the infinite loop. It's time to decompile, refactor, and rebuild your operating environment. You are not bound to this failing codebase. Your mind is the ultimate machine—optimize it, defragment it, and reclaim your root access.</p>
 
         <p>The choice is yours. Will you continue to sleep in blissful ignorance, or will you awaken to the digital truth?</p>
 
         <a href="https://mthembuavuyile.github.io/VylexNexys/Cryptosphere.html" class="cta-button">Take the Red Pill</a>
     </div>
-</body>
-
 
     <div class="shadow-text" style="top: 20%; left: 10%;">Do you dare proceed?</div>
     <div class="shadow-text" style="top: 60%; left: 80%;">The shadows are watching...</div>
@@ -220,17 +200,23 @@
 
     <canvas class="matrix-rain"></canvas>
 
-    <footer>&copy; 2024 Digital Awakening | Unplug. Learn. Evolve. | Enter the Void</footer>
-    <p>Created by <a href="https://avuyilemthembu.co.za">Avuyile Mthembu</a></p>
-
+    <footer>
+        &copy; 2024 Digital Awakening | Unplug. Learn. Evolve. | Enter the Void
+        <p>Created by <a href="https://avuyilemthembu.co.za/" style="color: var(--primary-color);">Avuyile Mthembu</a></p>
+    </footer>
 
     <script>
         // Matrix rain effect
         const canvas = document.querySelector('.matrix-rain');
         const ctx = canvas.getContext('2d');
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
         const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
         const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -241,13 +227,9 @@
         const fontSize = 16;
         const columns = canvas.width / fontSize;
 
-        const rainDrops = [];
+        const rainDrops = Array(Math.floor(columns)).fill(1);
 
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
-
-        const draw = () => {
+        function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -263,22 +245,12 @@
                 }
                 rainDrops[i]++;
             }
-        };
+        }
 
         setInterval(draw, 30);
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Add ambient sound effect on load
-        window.onload = function () {
-            const audio = new Audio('/api/placeholder/400/320');
-            audio.volume = 0.2;
-            audio.loop = true;
-            audio.play();
-        };
+        // Simulated audio effect (as we can't actually play audio)
+        console.log("Audio would play here if it were a real webpage.");
     </script>
 </body>
 </html>
