@@ -1,14 +1,14 @@
 /* Root Variables */
 :root {
-    --primary-color: #00aaff;
+    --primary-color: #0066cc;
     --secondary-color: #ff9800;
-    --background-color: #121212;
-    --surface-color: #1e1e1e;
-    --text-color: #e0e0e0;
-    --header-bg: #1d1f21;
-    --hover-color: #ff00ff;
-    --neon-glow: 0 0 15px #ff00ff, 0 0 30px #00ffff;
-    --neon-text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+    --background-color: #f5f5f5;
+    --surface-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #ffffff;
+    --hover-color: #0088ff;
+    --neon-glow: 0 0 15px #0088ff, 0 0 30px #00aaff;
+    --neon-text-shadow: 0 0 10px #00aaff, 0 0 20px #0088ff;
 }
 
 /* Reset and Universal Styles */
@@ -34,19 +34,19 @@ body {
 
 /* Header and Navigation */
 header {
-    background-color: rgba(29, 31, 33, 0.8);
-    color: #fff;
+    background-color: var(--header-bg);
+    color: var(--text-color);
     padding: 20px 0;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    transition: background-color 0.3s ease;
-    backdrop-filter: blur(10px);
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header.scrolled {
-    background-color: rgba(29, 31, 33, 0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 nav {
@@ -60,7 +60,7 @@ nav {
     font-weight: bold;
     color: var(--primary-color);
     text-decoration: none;
-    text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 102, 204, 0.5);
 }
 
 nav ul {
@@ -74,7 +74,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -84,14 +84,58 @@ nav ul li a:hover {
     color: var(--primary-color);
 }
 
-/* Burger Menu (for mobile) */
+/* Improved Burger Menu */
 .burger {
     display: none;
     cursor: pointer;
+    width: 30px;
+    height: 20px;
+    position: relative;
 }
 
-.burger i {
-    font-size: 24px;
+.burger span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: var(--text-color);
+    border-radius: 3px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.burger span:nth-child(1) {
+    top: 0px;
+}
+
+.burger span:nth-child(2), .burger span:nth-child(3) {
+    top: 8px;
+}
+
+.burger span:nth-child(4) {
+    top: 16px;
+}
+
+.burger.open span:nth-child(1) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+
+.burger.open span:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+.burger.open span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.burger.open span:nth-child(4) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
 }
 
 @media (max-width: 768px) {
@@ -99,12 +143,21 @@ nav ul li a:hover {
         display: none;
         flex-direction: column;
         position: absolute;
-        background-color: rgba(29, 31, 33, 0.95);
+        background-color: var(--header-bg);
         top: 60px;
         left: 0;
         right: 0;
         padding: 20px 0;
         z-index: 999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
     }
 
     .burger {
@@ -129,35 +182,27 @@ nav ul li a:hover {
     padding: 5px;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1;
-}
-
 .hero-content {
     position: relative;
     z-index: 2;
     max-width: 800px;
     padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .hero-content h1 {
     font-size: 36px;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
 }
 
 .hero-content p {
     font-size: 18px;
     max-width: 600px;
     margin: 0 auto 30px;
+    color: #fff;
 }
 
 .cta-button {
@@ -172,9 +217,9 @@ nav ul li a:hover {
 }
 
 .cta-button:hover {
-    background-color: #0088cc;
+    background-color: var(--hover-color);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 170, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
 }
 
 /* Typing Animation */
@@ -185,6 +230,7 @@ nav ul li a:hover {
     white-space: nowrap;
     animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
     max-width: 100%;
+    color: #fff;
 }
 
 @media (max-width: 768px) {
@@ -239,7 +285,7 @@ section h2 {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -258,14 +304,14 @@ section h2 {
     background-color: var(--surface-color);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .skill-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 170, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.2);
 }
 
 .skill-card i {
@@ -285,80 +331,43 @@ section h2 {
     margin: 10px;
     padding: 40px;
     text-align: center;
-}
-
-#skills1 {
-    background: linear-gradient(135deg, #ff0099, #4900ff);
     color: white;
-}
-
-#future-tech {
-    background: linear-gradient(135deg, #00f5a0, #00d9f5);
-    color: white;
-}
-
-#projects {
-    background: linear-gradient(135deg, #ff4d00, #ff0066);
-    color: white;
-}
-
-#artificial-intelligence {
-    background-image: url(https://i.gifer.com/SUV4.gif);
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-}
-
-#Blockchain-And-Crypto {
-    background-image: url(https://i.gifer.com/J4o.gif);
-    background-position: center;
-    background-size: cover;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-}
-
-#Vylex-Nexys {
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-image: url('path-to-your-cyberpunk-image.jpg');
-    background-blend-mode: color-dodge;
-    background-color: rgba(15, 0, 30, 0.9);
-    color: #ff00d4;
-    box-shadow: 0 0 20px #ff00d4, 0 0 30px #ff00d4, 0 0 40px #ff00d4;
-    text-shadow: 0 0 5px #ff00d4, 0 0 10px #ff00d4, 0 0 15px #ff00d4;
+    background-color: var(--surface-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     font-family: 'Orbitron', sans-serif;
     position: relative;
     overflow: hidden;
 }
-#Vylex-Nexys::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, 
-        rgba(255, 0, 212, 0.1) 0%, 
-        rgba(0, 255, 255, 0.1) 50%, 
-        rgba(255, 0, 212, 0.1) 100%
-    );
-    z-index: 1;
-    pointer-events: none;
+
+#skills1 {
+    background: linear-gradient(135deg, #3498db, #9b59b6);
 }
 
-#Vylex-Nexys > * {
-    position: relative;
-    z-index: 2;
+#Vylex-Nexys {
+    background: linear-gradient(135deg, #9b59b6, #2ecc71);
+}
+
+#future-tech {
+    background: linear-gradient(135deg, #2ecc71, #f1c40f);
+}
+
+#projects {
+    background: linear-gradient(135deg, #f1c40f, #e67e22);
+}
+
+#Blockchain-And-Crypto {
+    background: linear-gradient(135deg, #e67e22, #e74c3c);
+}
+
+#artificial-intelligence {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
 a {
-    color: var(--primary-color);
+    color: white;
     text-decoration: none;
     transition: color 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 a:hover {
@@ -376,13 +385,13 @@ a:hover {
     background-color: var(--surface-color);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 170, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.2);
 }
 
 .project-card img {
@@ -425,7 +434,7 @@ a:hover {
 .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #444;
+    border: 1px solid #ddd;
     background-color: var(--surface-color);
     color: var(--text-color);
     border-radius: 5px;
@@ -465,9 +474,10 @@ a:hover {
 /* Footer */
 footer {
     background-color: var(--header-bg);
-    color: #fff;
+    color: var(--text-color);
     text-align: center;
     padding: 20px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Styling */
@@ -495,5 +505,82 @@ footer {
 
     .contact-form {
         max-width: 90%;
+    }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+}
+
+.scroll-to-top:hover {
+    background-color: var(--hover-color);
+}
+
+/* Improved Accessibility */
+:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Print Styles */
+@media print {
+    header, footer, .social-links, .cta-button {
+        display: none;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 2cm;
     }
 }
