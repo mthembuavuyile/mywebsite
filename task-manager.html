@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vylex Nexys Task Manager - Organize Your Tasks Efficiently</title>
+    <meta name="description" content="Vylex Nexys Task Manager helps you organize, prioritize, and track your tasks efficiently. Stay productive with our user-friendly task management tool.">
+    <meta name="keywords" content="task manager, to-do list, productivity, time management, Vylex Nexys">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #taskForm, #filterContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #taskInput, #dueDateInput, #prioritySelect, #addTask, #searchInput, #sortSelect, #categorySelect, #clearAll {
+            flex: 1 1 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            transition: border-color var(--transition-speed);
+        }
+
+        #taskInput:focus, #dueDateInput:focus, #prioritySelect:focus, #searchInput:focus, #sortSelect:focus, #categorySelect:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #addTask, #clearAll {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        #addTask:hover, #clearAll:hover {
+            background-color: #2980b9;
+        }
+
+        #clearAll {
+            background-color: #e74c3c;
+        }
+
+        #clearAll:hover {
+            background-color: #c0392b;
+        }
+
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task {
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .task:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .task span {
+            flex: 1 1 100%;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .task button {
+            flex: 1 1 auto;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-speed);
+        }
+
+        .task button:hover {
+            background-color: #27ae60;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .high-priority {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .medium-priority {
+            border-left: 5px solid #f39c12;
+        }
+
+        .low-priority {
+            border-left: 5px solid #3498db;
+        }
+
+        #stats {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: var(--primary-color);
+            background-color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            color: #777;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer a{
+            color: #2ecc71;
+        }
+
+        #themeToggle {
+            position: static;
+            margin: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        #themeToggle:hover {
+            background-color: #2980b9;
+        }
+
+        .dark-theme {
+            --background-color: #2c3e50;
+            --text-color: #ecf0f1;
+        }
+
+        .dark-theme .task, .dark-theme #taskForm, .dark-theme #filterContainer, .dark-theme #stats, .dark-theme footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        .dark-theme #taskInput, .dark-theme #dueDateInput, .dark-theme #prioritySelect, .dark-theme #searchInput, .dark-theme #sortSelect, .dark-theme #categorySelect {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border-color: #4a6b8a;
+        }
+
+        @media (min-width: 768px) {
+            #taskForm, #filterContainer {
+                flex-wrap: nowrap;
+            }
+
+            #taskInput, #dueDateInput, #prioritySelect, #addTask, #searchInput, #sortSelect, #categorySelect, #clearAll {
+                flex: 1 1 auto;
+            }
+
+            .task span {
+                flex: 1 1 auto;
+                margin-bottom: 0;
+            }
+
+            .task button {
+                flex: 0 1 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vylex Nexys Task Manager</h1>
+        <center><button id="themeToggle">Toggle Theme 🔅</button></center>
+
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Enter a new task" required aria-label="Task description">
+            <input type="date" id="dueDateInput" required aria-label="Due date">
+            <select id="prioritySelect" required aria-label="Task priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <select id="categorySelect" required aria-label="Task category">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="shopping">Shopping</option>
+                <option value="other">Other</option>
+            </select>
+            <button type="submit" id="addTask">Add Task</button>
+            <button type="button" id="clearAll">Clear All</button>
+        </form>
+        <div id="filterContainer">
+            <input type="text" id="searchInput" placeholder="Search tasks" aria-label="Search tasks">
+            <select id="sortSelect" aria-label="Sort tasks">
+                <option value="dateAdded">Sort by Date Added</option>
+                <option value="dueDate">Sort by Due Date</option>
+                <option value="priority">Sort by Priority</option>
+                <option value="category">Sort by Category</option>
+            </select>
+        </div>
+        <ul id="taskList" aria-live="polite"></ul>
+        <div id="stats" aria-live="polite"></div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Vylex Nexys</p>
+        <p>Visit <a href="https://avuyilemthembu.co.za">Developer's Website</a></p>
+    </footer>
+
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            }).catch(error => {
+                console.log('Service Worker registration failed:', error);
+            });
+        }
+
+        // Request notification permission
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted');
+            }
+        });
+
+        // Task Manager Functionality
+        const taskForm = document.getElementById('taskForm');
+        const taskInput = document.getElementById('taskInput');
+        const dueDateInput = document.getElementById('dueDateInput');
+        const prioritySelect = document.getElementById('prioritySelect');
+        const categorySelect = document.getElementById('categorySelect');
+        const taskList = document.getElementById('taskList');
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const statsDiv = document.getElementById('stats');
+        const themeToggle = document.getElementById('themeToggle');
+        const clearAllButton = document.getElementById('clearAll');
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        function renderTasks() {
+            const filteredTasks = filterTasks(tasks, searchInput.value);
+            const sortedTasks = sortTasks(filteredTasks, sortSelect.value);
+
+            taskList.innerHTML = '';
+            sortedTasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.className = `task ${task.priority}-priority`;
+                if (task.completed) li.classList.add('completed');
+                li.innerHTML = `
+                    <span>${task.text} (Due: ${task.dueDate}, Category: ${task.category})</span>
+                    <button class="complete-btn" data-id="${task.id}" aria-label="${task.completed ? 'Mark as incomplete' : 'Mark as complete'}">${task.completed ? 'Undo' : 'Complete'}</button>
+                    <button class="edit-btn" data-id="${task.id}" aria-label="Edit task">Edit</button>
+                    <button class="delete-btn" data-id="${task.id}" aria-label="Delete task">Delete</button>
+                `;
+                taskList.appendChild(li);
+            });
+            saveTasks();
+            updateStats();
+        }
+
+        taskList.addEventListener('click', e => {
+            if (e.target.classList.contains('complete-btn') || 
+                e.target.classList.contains('edit-btn') || 
+                e.target.classList.contains('delete-btn')) {
+                const taskId = e.target.getAttribute('data-id');
+                const taskIndex = tasks.findIndex(task => task.id === taskId);
+                if (taskIndex !== -1) {
+                    if (e.target.classList.contains('complete-btn')) {
+                        toggleTask(taskIndex);
+                    } else if (e.target.classList.contains('edit-btn')) {
+                        editTask(taskIndex);
+                    } else if (e.target.classList.contains('delete-btn')) {
+                        deleteTask(taskIndex);
+                    }
+                }
+            }
+        });
+
+        function addTask(text, dueDate, priority, category) {
+            const newTask = {
+                id: Date.now().toString(), // Use a unique identifier
+                text,
+                dueDate,
+                priority,
+                category,
+                completed: false,
+                dateAdded: new Date().toISOString()
+            };
+            tasks.push(newTask);
+            renderTasks();
+            showNotification('Task added', text);
+        }
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            renderTasks();
+        }
+
+        function editTask(index) {
+            const task = tasks[index];
+            const newText = prompt('Edit task:', task.text);
+            if (newText !== null) {
+                task.text = newText.trim();
+                const newDueDate = prompt('Edit due date (YYYY-MM-DD):', task.dueDate);
+                if (newDueDate && /^\d{4}-\d{2}-\d{2}$/.test(newDueDate)) {
+                    task.dueDate = newDueDate;
+                }
+                const newPriority = prompt('Edit priority (low/medium/high):', task.priority);
+                if (newPriority && ['low', 'medium', 'high'].includes(newPriority.toLowerCase())) {
+                    task.priority = newPriority.toLowerCase();
+                }
+                const newCategory = prompt('Edit category (work/personal/shopping/other):', task.category);
+                if (newCategory && ['work', 'personal', 'shopping', 'other'].includes(newCategory.toLowerCase())) {
+                    task.category = newCategory.toLowerCase();
+                }
+                renderTasks();
+            }
+        }
+
+        function deleteTask(index) {
+            const task = tasks[index];
+            if (confirm(`Are you sure you want to delete the task "${task.text}"?`)) {
+                tasks.splice(index, 1);
+                renderTasks();
+                showNotification('Task deleted', task.text);
+            }
+        }
+
+        function clearAllTasks() {
+            if (confirm('Are you sure you want to clear all tasks?')) {
+                tasks = [];
+                renderTasks();
+                showNotification('All tasks cleared', 'Your task list has been cleared');
+            }
+        }
+
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function showNotification(title, body) {
+            if (Notification.permission === 'granted') {
+                navigator.serviceWorker.ready.then(registration => {
+                    registration.showNotification(title, { body });
+                });
+            }
+        }
+
+        function filterTasks(tasks, searchTerm) {
+            return tasks.filter(task => 
+                task.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                task.dueDate.includes(searchTerm) ||
+                task.category.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        function sortTasks(tasks, sortBy) {
+            return tasks.sort((a, b) => {
+                if (sortBy === 'dueDate') {
+                    return new Date(a.dueDate) - new Date(b.dueDate);
+                } else if (sortBy === 'priority') {
+                    const priorityOrder = { high: 0, medium: 1, low: 2 };
+                    return priorityOrder[a.priority] - priorityOrder[b.priority];
+                } else if (sortBy === 'category') {
+                    return a.category.localeCompare(b.category);
+                } else {
+                    return new Date(b.dateAdded) - new Date(a.dateAdded);
+                }
+            });
+        }
+
+        function updateStats() {
+            const totalTasks = tasks.length;
+            const completedTasks = tasks.filter(task => task.completed).length;
+            const pendingTasks = totalTasks - completedTasks;
+            const categories = [...new Set(tasks.map(task => task.category))];
+            const categoryStats = categories.map(category => {
+                const count = tasks.filter(task => task.category === category).length;
+                return `${category}: ${count}`;
+            }).join(' | ');
+            statsDiv.innerHTML = `
+                Total Tasks: ${totalTasks} | Completed: ${completedTasks} | Pending: ${pendingTasks}<br>
+                Categories: ${categoryStats}
+            `;
+        }
+
+        taskForm.addEventListener('submit', e => {
+            e.preventDefault();
+            if (taskInput.value.trim()) {
+                addTask(taskInput.value.trim(), dueDateInput.value, prioritySelect.value, categorySelect.value);
+                taskInput.value = '';
+                dueDateInput.value = '';
+                prioritySelect.value = 'low';
+                categorySelect.value = 'work';
+            }
+        });
+
+        searchInput.addEventListener('input', renderTasks);
+        sortSelect.addEventListener('change', renderTasks);
+        clearAllButton.addEventListener('click', clearAllTasks);
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('darkTheme') === 'true') {
+            document.body.classList.add('dark-theme');
+        }
+
+        renderTasks();
+
+        // Check for overdue tasks
+        setInterval(() => {
+            const now = new Date();
+            tasks.forEach(task => {
+                if (!task.completed && new Date(task.dueDate) < now) {
+                    showNotification('Overdue Task', `Task "${task.text}" is overdue!`);
+                }
+            });
+        }, 60000); // Check every minute
+
+        // Add sample tasks if the task list is empty
+        if (tasks.length === 0) {
+            addTask('Buy groceries', '2024-10-05', 'medium', 'shopping');
+            addTask('Finish project report', '2024-10-10', 'high', 'work');
+            addTask('Call mom', '2024-10-03', 'low', 'personal');
+        }
+    </script>
+</body>
+</html>
