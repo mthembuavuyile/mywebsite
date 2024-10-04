@@ -196,6 +196,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
+            z-index: 1000;
         }
         .burger-menu div {
             width: 25px;
@@ -205,28 +206,46 @@
             transition: 0.4s;
         }
         @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            .container {
+                padding: 10px;
+            }
             h1 {
                 font-size: 1.8em;
             }
+            .card h2 {
+                font-size: 1.5em;
+            }
             nav {
                 display: none;
-                position: absolute;
-                top: 70px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 right: 0;
-                background: #1a1a1a;
-                padding: 20px;
+                bottom: 0;
+                background: rgba(26, 26, 26, 0.95);
+                padding: 60px 20px 20px;
                 box-shadow: 0 2px 10px rgba(255, 215, 0, 0.1);
+                z-index: 999;
             }
             nav.show {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
             nav a {
                 display: block;
-                margin: 10px 0;
+                margin: 20px 0;
+                font-size: 1.2em;
             }
             .burger-menu {
                 display: block;
+            }
+            .content {
+                grid-template-columns: 1fr;
             }
             .timeline::after {
                 left: 31px;
@@ -247,6 +266,15 @@
             }
             .right {
                 left: 0%;
+            }
+            .timeline-content {
+                padding: 15px;
+            }
+            .timeline-content h2 {
+                font-size: 1.3em;
+            }
+            #bitcoin-price {
+                font-size: 1.5em;
             }
         }
     </style>
