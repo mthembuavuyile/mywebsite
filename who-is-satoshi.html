@@ -67,6 +67,9 @@
             color: #c0c0c0;
             text-shadow: 0 0 5px #ffd700;
         }
+        #author{
+            color: aqua;
+        }
         .content {
             margin-top: 40px;
             display: grid;
@@ -97,6 +100,7 @@
             font-family: 'Courier New', monospace;
             overflow: hidden;
             white-space: nowrap;
+            text-wrap: wrap;
             border-right: 2px solid #ffd700;
             animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
         }
@@ -251,7 +255,7 @@
     <header>
         <div class="container">
             <h1>The Enigma of Satoshi Nakamoto</h1>
-            <p>Author: Mr A Mthembu</p>
+            <p id="author">Author: Mr A Mthembu</p>
             <nav id="main-nav">
                 <a href="#genesis">Genesis</a>
                 <a href="#theories">Theories</a>
