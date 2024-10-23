@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Avuyile Mthembu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #0d6efd;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 120px;
+            margin-bottom: 20px;
+            color: #0d6efd;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #495057;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #0b5ed7;
+        }
+
+        .error-code {
+            font-family: monospace;
+            background: rgba(13, 110, 253, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #0d6efd;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 80px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            margin: 20px 0;
+            color: #0d6efd;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <div class="ascii-art">
+   _____          
+  / ____|         
+ | |  __  ___     
+ | | |_ |/ _ \    
+ | |__| | (_) |   
+  \_____|\___/    
+        </div>
+        <h2>Oops! Page Not Found</h2>
+        <p>The page you're looking for seems to have gone on an unexpected adventure. Don't worry, even the best developers encounter <span class="error-code">404</span> errors sometimes!</p>
+        <p>- Avuyile Mthembu, Developer & Programmer -</p>
+        <a href="/" class="btn">Return to Homepage</a>
+    </div>
+</body>
+</html>
