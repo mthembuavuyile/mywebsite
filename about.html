@@ -382,35 +382,45 @@ footer {
     </section>
 
     <script>
-    if (link.getAttribute('href') === 'index.html') {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = 'index.html'; // Direct navigation to the home page
-        // Optional: You could also trigger a smooth scroll effect if needed.
-    });
-
-    }else {
-    link.addEventListener('click', (e) => {z
-        e.preventDefault();
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        const headerHeight = document.querySelector('.header').offsetHeight;
-
-        if (targetSection) {
-            const targetPosition = targetSection.offsetTop - headerHeight;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger');
+            const navLinks = document.querySelector('.nav-links');
+            const links = document.querySelectorAll('.nav-links a');
+    
+            // Toggle navigation menu
+            burger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                burger.classList.toggle('active');
             });
-        }
-        nav.classList.remove('active');
-        burger.classList.remove('active');
-    });
-    }
-
-    </script>
-
-    <footer>
+    
+            // Close menu when clicking a link
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    burger.classList.remove('active');
+                });
+            });
+    
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const isClickInside = navLinks.contains(e.target) || burger.contains(e.target);
+                
+                if (!isClickInside && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    burger.classList.remove('active');
+                }
+            });
+    
+            // Close menu on window resize (if wider than mobile breakpoint)
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    burger.classList.remove('active');
+                }
+            });
+        });
+    </script>       
+    <footer> 
         <p>© 2024 Avuyile Mthembu - Village Kid, Code Wizard, Future Tech Mogul</p>
     </footer>
 </body>
