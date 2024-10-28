@@ -1,254 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="pE05B0HdOXMSwz3LmavEaEMql4M3Tn4sA6s-0Ba67a8" />
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Awesome world of Avuyile Mthembu</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Learn more about Avuyile Mthembu, a South African software developer and tech enthusiast with expertise in blockchain, AI, and mobile development." />
-    <meta name="keywords" content="Avuyile Mthembu, South African developer, tech enthusiast, blockchain, AI, mobile development, software engineer" />
-    <meta name="author" content="Avuyile Mthembu" />
-    <link rel="canonical" href="https://avuyilemthembu.co.za/about" />
+    <title>Avuyile's World</title>
+     <!-- SEO Meta Tags -->
+     <meta name="description" content="Learn more about Avuyile Mthembu, a South African software developer and tech enthusiast with expertise in blockchain, AI, and mobile development." />
+     <meta name="keywords" content="Avuyile Mthembu, South African developer, tech enthusiast, blockchain, AI, mobile development, software engineer" />
+     <meta name="author" content="Avuyile Mthembu" />
+     <link rel="canonical" href="https://avuyilemthembu.co.za/about" />
+ 
+     <!-- Open Graph for social media -->
+     <meta property="og:title" content="About Avuyile Mthembu - South African Software Developer & Innovator" />
+     <meta property="og:description" content="Explore Avuyile Mthembu's journey as a software developer and tech enthusiast. Discover his work in blockchain, mobile development, and problem-solving." />
+     <meta property="og:image" content="https://mthembuavuyile.github.io/mywebsite/avuyile2.jpg" />
+     <meta property="og:url" content="https://avuyilemthembu.co.za/about" />
+     <meta property="og:site_name" content="Avuyile Mthembu - Official Website" />
+     <meta property="og:type" content="website" />
+ 
+     <!-- Twitter Cards -->
+     <meta name="twitter:card" content="summary_large_image" />
+     <meta name="twitter:creator" content="@MthembuAvuyile" />
+     <meta name="twitter:title" content="About Avuyile Mthembu - South African Software Developer & Innovator" />
+     <meta name="twitter:description" content="Explore Avuyile Mthembu's journey as a software developer and tech enthusiast." />
+     <meta name="twitter:image" content="https://mthembuavuyile.github.io/mywebsite/avuyile2.jpg" /> 
+     <style>
 
-    <!-- Open Graph for social media -->
-    <meta property="og:title" content="About Avuyile Mthembu - South African Software Developer & Innovator" />
-    <meta property="og:description" content="Explore Avuyile Mthembu's journey as a software developer and tech enthusiast. Discover his work in blockchain, mobile development, and problem-solving." />
-    <meta property="og:image" content="https://mthembuavuyile.github.io/mywebsite/avuyile2.jpg" />
-    <meta property="og:url" content="https://avuyilemthembu.co.za/about" />
-    <meta property="og:site_name" content="Avuyile Mthembu - Official Website" />
-    <meta property="og:type" content="website" />
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@MthembuAvuyile" />
-    <meta name="twitter:title" content="About Avuyile Mthembu - South African Software Developer & Innovator" />
-    <meta name="twitter:description" content="Explore Avuyile Mthembu's journey as a software developer and tech enthusiast." />
-    <meta name="twitter:image" content="https://mthembuavuyile.github.io/mywebsite/avuyile2.jpg" />
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #2C3E50;
+}
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Avuyile Mthembu",
-        "alternateName": "Mr. A CEO",
-        "url": "https://avuyilemthembu.co.za/about",
-        "image": "https://mthembuavuyile.github.io/mywebsite/avuyile2.jpg",
-        "sameAs": [
-          "https://instagram.com/mthembu_avuyile_sa",
-          "https://twitter.com/MthembuAvuyile",
-          "https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/",
-          "https://www.tiktok.com/@mthembu_avuyile_sa"
-        ],
-        "jobTitle": "Software Developer and Tech Enthusiast",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Vylex Nexys"
-        },
-        "description": "Avuyile Mthembu is a South African software developer specializing in blockchain, mobile development, and problem-solving."
-      }
-      </script>
+/* Header and Navigation */
+.header {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-      .bg-fun {
-          background: linear-gradient(135deg, #4a90e2 0%, #007AFF 55%, #34aadc 100%);
-      }
-      .text-fun {
-          background: linear-gradient(135deg, #007AFF 0%, #34aadc 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: #007AFF;
-      }
-      .hover-grow {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .hover-grow:hover {
-          transform: scale(1.05);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      }
-      .nav-links {
-          display: none;
-          flex-direction: column;
-          background-color: #f0f0f0;
-          position: absolute;
-          top: 60px;
-          right: 0;
-          padding: 20px;
-          width: 200px;
-          z-index: 10;
-      }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-      .nav-links a {
-          display: block;
-          padding: 10px;
-          text-decoration: none;
-          color: #333;
-      }
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
 
-      .nav-links a:hover {
-          background-color: #e0e0e0;
-      }
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
 
-      .hamburger {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          width: 24px;
-          height: 24px;
-          cursor: pointer;
-      }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
 
-      .hamburger span {
-          width: 24px;
-          height: 3px;
-          background-color: white;
-          transition: transform 0.3s ease;
-      }
+.nav-links a:hover {
+    color: #3498DB;
+}
 
-      .hamburger.active span:nth-child(1) {
-          transform: rotate(45deg) translate(6px, 6px);
-      }
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+}
 
-      .hamburger.active span:nth-child(2) {
-          opacity: 0;
-      }
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 2rem;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
 
-      .hamburger.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(7px, -7px);
-      }
+.profile-img:hover {
+    transform: scale(1.05);
+}
 
-      @media screen and (min-width: 768px) {
-          .nav-links {
-              display: flex;
-              flex-direction: row;
-              position: static;
-              background-color: transparent;
-              width: auto;
-          }
-          .nav-links a {
-              margin-left: 20px;
-          }
-          .hamburger {
-              display: none;
-          }
-      }
-  </style>
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: white;
+    color: #2C3E50;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+    background-color: #3498DB;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Content Sections */
+.intro {
+    background-color: #f8f9fa;
+    padding: 4rem 2rem;
+}
+
+.intro p {
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+    padding: 2rem;
+    color: #2C3E50;
+    font-size: 2.5rem;
+    background-color: #f8f9fa;
+}
+
+h3 {
+    color: #34495E;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Card Sections */
+.faces, .journey, .fun-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background-color: white;
+}
+
+.face-card, .journey-card, .fact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.face-card:hover, .journey-card:hover, .fact-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    color: white;
+}
+/* Burger Menu Styles */
+.burger {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 100;
+}
+
+.burger-line {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.burger-line:nth-child(1) { top: 0; }
+.burger-line:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.burger-line:nth-child(3) { bottom: 0; }
+
+/* Active burger animation */
+.burger.active .burger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger.active .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active .burger-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: #2C3E50;
+        padding-top: 80px;
+        transition: 0.3s ease;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .profile-img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .faces, .journey, .fun-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        display: block;
+        text-align: center;
+    }
+}
+    </style>
 </head>
-<body class="font-sans bg-gray-100">
-    <header class="bg-fun text-white shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold">Avuyile's World</a>
-                <div class="space-x-4">
-                    <a href="#about" class="hover:text-yellow-300 transition duration-300">About Me</a>
-                    <a href="#journey" class="hover:text-yellow-300 transition duration-300">My Journey</a>
-                    <a href="#fun-facts" class="hover:text-yellow-300 transition duration-300">Fun Facts</a>
-                </div>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Avuyile's World</a>
+            <div class="nav-links">
+                <a href="#about">About Me</a>
+                <a href="#journey">My Journey</a>
+                <a href="#fun-facts">Fun Facts</a>
+                <a href="index.html">Home Page</a>
+            </div>
+            <div class="burger">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
             </div>
         </nav>
     </header>
 
-    <main>
-        <section id="hero" class="bg-fun text-white py-20 text-center">
-            <img src="images/avuyile2.jpg" alt="Avuyile Mthembu" class="rounded-full w-40 h-40 mx-auto mb-6 border-4 border-white shadow-lg hover-grow">
-            <h1 class="text-4xl md:text-6xl font-bold mb-2">Hey, I'm Avuyile! 👋</h1>
-            <p class="text-xl md:text-2xl mb-8">Village Kid Turned Tech Wizard</p>
-            <a href="#about" class="bg-white text-pink-500 font-bold py-2 px-6 rounded-full hover:bg-yellow-300 hover:text-pink-600 transition duration-300">Get to Know Me</a>
-        </section>
+    <section class="hero">
+        <img src="images/avuyile2.jpg" alt="Avuyile Mthembu" class="profile-img">
+        <h1>Hey, I'm Avuyile! 👋</h1>
+        <p>Village Kid Turned Tech Wizard</p>
+        <a href="#about" class="cta-button">Get to Know Me</a>
+    </section>
 
-        <section id="about" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-fun mb-12">The Many Faces of Avuyile</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <i class="fas fa-laugh-beam text-5xl text-yellow-500 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">The Jokester</h3>
-                        <p>Known for my witty comebacks and ability to make people laugh, even with my introverted nature.</p>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <i class="fas fa-brain text-5xl text-purple-500 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">The Brainiac</h3>
-                        <p>A curious mind always ready to tackle complex problems and push the boundaries of technology.</p>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <i class="fas fa-tshirt text-5xl text-blue-500 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">The Style Icon</h3>
-                        <p>Impeccable hygiene and a sharp sense of style that turns heads wherever I go.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="journey" class="py-20 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-fun mb-12">My Quirky Journey</h2>
-                <div class="space-y-8">
-                    <div class="bg-white rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">Village Roots 🌱</h3>
-                        <p>Born and raised in Sandanezwe, Donnybrook. Learned problem-solving by figuring out how to catch the fastest chicken!</p>
-                    </div>
-                    <div class="bg-white rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">School Days 📚</h3>
-                        <p>From Khethokuhle Primary to Thornhill Christian College. Known as the quiet troublemaker with a heart of gold.</p>
-                    </div>
-                    <div class="bg-white rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">Tech Awakening 💻</h3>
-                        <p>Discovered the magic of coding and never looked back. Now turning caffeine into code at Boston City Campus!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="fun-facts" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-fun mb-12">Fun Facts About Avuyile</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">🤔 The Quiet Influencer</h3>
-                        <p>Despite being an introvert, I have a knack for making impactful statements that leave people thinking.</p>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">🧼 Hygiene Hero</h3>
-                        <p>I could thrive anywhere with just my wits! Who else could turn a camping trip into a mini spa day? Staying neat and clean keeps me feeling great and ready for anything!</p>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">🚀 Tech Enthusiast</h3>
-                        <p>I dream in code and wake up with solutions. My pillow is probably stuffed with binary!</p>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-6 shadow-md hover-grow">
-                        <h3 class="text-xl font-semibold mb-2">🌍 Global Thinker</h3>
-                        <p>Passionate about using blockchain and AI to make the world a better place, one line of code at a time.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-fun text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p class="mb-4">© 2024 Avuyile Mthembu - Village Kid, Code Wizard, Future Tech Mogul</p>
-            <div class="flex justify-center space-x-4">
-                <a href="https://twitter.com" class="hover:text-yellow-300 transition duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com" class="hover:text-yellow-300 transition duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com" class="hover:text-yellow-300 transition duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-            </div>
+    <!-- Introduction Section -->
+    <section id="about" class="intro py-10">
+        <h2 class="text-3xl font-bold text-center mb-6">Introduction</h2>
+        <p class="text-center px-4 max-w-2xl mx-auto">
+        In the boundless realm of technology, where the craft meets the cutting edge, stands Avuyile Mthembu—a resolute innovator with a vision as refined as his skill. Each project becomes a testament to his mastery, where every algorithm, every interface, and every line of code speaks to purpose and precision. With a rare blend of ambition and insight, Avuyile sculpts digital experiences that go beyond functionality, transforming them into seamless bridges between vision and reality.</p>
+        <p>Driven by an ethos of integrity and excellence, Avuyile's journey in technology is marked by a continuous pursuit to not merely meet expectations, but to elevate them. His work is the convergence of rigorous technical prowess and a commitment to transformative impact. Avuyile is not just a developer; he is a craftsman, an architect of possibility, and a catalyst for change.</p>
+        <p>With every innovation, he reshapes the narrative of what technology can achieve, setting a standard that embodies dedication, clarity, and a vision for the future. At the heart of his journey lies a mission: to turn challenges into pathways and ideas into legacies, and to inspire a world where technology is a force of true transformation.</p>
+    </section>
+    
+    <h2>The Many Faces of Avuyile</h2>
+    <section class="faces">
+        <div class="face-card">
+            <h3>The Jokester</h3>
+            <p>Known for my witty comebacks and ability to make people laugh, even with my introverted nature.</p>
         </div>
-    </footer>
+        <div class="face-card">
+            <h3>The Brainiac</h3>
+            <p>A curious mind always ready to tackle complex problems and push the boundaries of technology.</p>
+        </div>
+        <div class="face-card">
+            <h3>The Style Icon</h3>
+            <p>Impeccable hygiene and a sharp sense of style that turns heads wherever I go.</p>
+        </div>
+    </section>
+
+    <h2 id="journey">My Quirky Journey</h2>
+    <section class="journey">
+        <div class="journey-card">
+            <h3>Village Roots 🌱</h3>
+            <p>Born and raised in Sandanezwe, Donnybrook. Learned problem-solving by figuring out how to catch the fastest chicken!</p>
+        </div>
+        <div class="journey-card">
+            <h3>School Days 📚</h3>
+            <p>From Khethokuhle Primary to Thornhill Christian College. Known as the quiet troublemaker with a heart of gold.</p>
+        </div>
+        <div class="journey-card">
+            <h3>Tech Awakening 💻</h3>
+            <p>Discovered the magic of coding and never looked back. Now turning caffeine into code at Boston City Campus!</p>
+        </div>
+    </section>
+
+    <h2 id="fun-facts">Fun Facts About Avuyile</h2>
+    <section class="fun-facts">
+    <div class="fact-card">
+        <h3>🤔 The Thoughtful Influencer</h3>
+        <p>I choose my words carefully, making each statement count and leaving a lasting impression.</p>
+    </div>        
+    <div class="fact-card">
+        <h3>🧼 Precision in Presentation</h3>
+        <p>I believe in maintaining a clean and polished appearance, bringing a sense of order and readiness to everything I do.</p>
+    </div>        
+    <div class="fact-card">
+        <h3>🚀 Tech Enthusiast</h3>
+        <p>I dream in code and wake up with solutions. My pillow is probably stuffed with binary!</p>
+    </div>
+    <div class="fact-card">
+        <h3>🌍 Global Thinker</h3>
+        <p>Passionate about using blockchain and AI to make the world a better place, one line of code at a time.</p>
+    </div>
+    <div class="fact-card">
+        <h3>💡 Innovation-Driven</h3>
+        <p>From creating tools for digital privacy to tracking real-world locations, I'm always exploring ways to improve lives with tech solutions.</p>
+    </div>
+    <div class="fact-card">
+        <h3>📚 Lifelong Learner</h3>
+        <p>Whether it's studying systems development or delving into philosophy, I'm committed to growing and mastering every skill I take on.</p>
+    </div>
+    </section>
 
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+    if (link.getAttribute('href') === 'index.html') {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = 'index.html'; // Direct navigation to the home page
+        // Optional: You could also trigger a smooth scroll effect if needed.
+    });
+
+    }else {
+    link.addEventListener('click', (e) => {z
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        const headerHeight = document.querySelector('.header').offsetHeight;
+
+        if (targetSection) {
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
-        });
+        }
+        nav.classList.remove('active');
+        burger.classList.remove('active');
+    });
+    }
+
     </script>
+
+    <footer>
+        <p>© 2024 Avuyile Mthembu - Village Kid, Code Wizard, Future Tech Mogul</p>
+    </footer>
 </body>
 </html>
