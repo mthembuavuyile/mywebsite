@@ -265,6 +265,7 @@
                   </div>
                   <button type="submit" class="cta-button">Send Message</button>
               </form>
+
               <div class="social-links">
                   <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                       <i class="fab fa-instagram" aria-hidden="true"></i>
@@ -286,30 +287,77 @@
         <p>&copy; 2024 Avuyile Mthembu</p>
         <p>Vylex Nexys IT Corp. All rights reserved.</p>
     </footer>
-    
-    
-      
-      </main>
-      
-      <script>
-          document.addEventListener('DOMContentLoaded', function() {
-              const burger = document.getElementById('burger');
-              const navLinks = document.getElementById('nav-links');
-      
-              if (burger && navLinks) {
-                  burger.addEventListener('click', function() {
-                      navLinks.classList.toggle('active');
-                      navLinks.style.display = navLinks.classList.contains('active') ? 'flex' : 'none';
-                  });
-              }
-      
-              window.addEventListener('scroll', function() {
-                  const header = document.querySelector('header');
-                  if (header) {
-                      header.classList.toggle('scrolled', window.scrollY > 100);
-                  }
-              });
-          });
-      </script>
-      </body>
-      </html>
+</main>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Cache DOM elements
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    const form = document.querySelector('.contact-form');
+    const header = document.querySelector('header');
+
+    // Burger menu functionality
+    if (burger && navLinks) {
+        burger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            navLinks.style.display = navLinks.classList.contains('active') ? 'flex' : 'none';
+        });
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        if (header) {
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        }
+    });
+
+    // Form submit functionality
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+
+    // Form submission handler
+    function handleFormSubmit(e) {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        // Basic validation
+        if (!name || !email || !message) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        // Validate email format
+        if (!isValidEmail(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        // Construct WhatsApp message and open URL
+        const whatsappNumber = '27648784287';
+        const whatsappMessage = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        
+        // Open WhatsApp in new tab
+        window.open(whatsappURL, '_blank');
+        
+        // Reset form
+        form.reset();
+    }
+
+    // Email validation helper function
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+});
+</script>
+</body>
+</html>
