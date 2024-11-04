@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NexysNet - A modern social media platform">
+    <meta name="keywords" content="social media, connect, posts, friends">
+    <meta name="author" content="Vylex Nexys">
+    <title>NexysNet 2.0</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #60a5fa;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            flex: 1;
+        }
+
+        .post-form {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .post-input, .comment-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+
+        .post-name {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .post-btn, .comment-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .post-btn:hover, .comment-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .post {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .post-user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .post-user {
+            font-weight: 600;
+        }
+
+        .post-time {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .post-content {
+            margin-bottom: 1rem;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 1rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #f1f5f9;
+            color: var(--primary-color);
+        }
+
+        .reactions-panel {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .reaction {
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .reaction:hover {
+            transform: scale(1.2);
+        }
+
+        .comments-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .comment {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .share-panel {
+            display: none;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .share-panel.active {
+            display: block;
+        }
+
+        .share-link {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background: var(--card-bg);
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid #e2e8f0;
+            margin-top: 2rem;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .post-actions {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>NexysNet 2.0 🌐</h1>
+            <div class="user-profile" id="userProfile">
+                <div class="post-avatar" id="userAvatar"></div>
+                <span id="currentUser">Guest</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="post-form">
+            <input id="userName" class="post-name" type="text" placeholder="Enter your name" />
+            <textarea id="postContent" class="post-input" rows="3" placeholder="What's on your mind?"></textarea>
+            <button id="submitPost" class="post-btn">Post</button>
+        </div>
+
+        <div id="posts"></div>
+    </main>
+
+    <footer class="footer">
+        <p>Created by <a href="#" target="_blank">Vylex Nexys</a> © 2024</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, set, onValue, push, update, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1ivyeUKAoNFZ-NQIlQ9AVlvfTTYqmgA0",
+            authDomain: "nexysnet-43a4d.firebaseapp.com",
+            databaseURL: "https://nexysnet-43a4d-default-rtdb.firebaseio.com",
+            projectId: "nexysnet-43a4d",
+            storageBucket: "nexysnet-43a4d.firebasestorage.app",
+            messagingSenderId: "756843839147",
+            appId: "1:756843839147:web:56a7f6bc8d797142be41ee",
+            measurementId: "G-T6F7WEKH9X"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);
+
+        const reactions = ['👍', '❤️', '😆', '😮', '😢', '😠'];
+        let currentUser = localStorage.getItem('userName') || 'Guest';
+        document.getElementById('currentUser').textContent = currentUser;
+        document.getElementById('userAvatar').textContent = currentUser[0];
+
+        function createPost() {
+            const content = document.getElementById('postContent').value;
+            const name = document.getElementById('userName').value || 'Anonymous';
+            if (!content.trim()) return;
+
+            localStorage.setItem('userName', name);
+            currentUser = name;
+            document.getElementById('currentUser').textContent = name;
+            document.getElementById('userAvatar').textContent = name[0];
+
+            const postData = {
+                content: content,
+                author: name,
+                timestamp: Date.now(),
+                reactions: {},
+                comments: [],
+                shares: 0
+            };
+
+            const newPostRef = push(ref(db, 'posts'));
+            set(newPostRef, postData);
+            
+            document.getElementById('postContent').value = '';
+        }
+
+        function addReaction(postId, reaction, currentReactions) {
+            const reactions = {...currentReactions} || {};
+            reactions[reaction] = (reactions[reaction] || 0) + 1;
+            update(ref(db, `posts/${postId}`), { reactions });
+        }
+
+        function addComment(postId, comments) {
+            const commentText = document.querySelector(`#comment-${postId}`).value;
+            if (!commentText.trim()) return;
+
+            const newComments = [...(comments || []), {
+                author: currentUser,
+                text: commentText,
+                timestamp: Date.now()
+            }];
+
+            update(ref(db, `posts/${postId}`), { comments: newComments });
+            document.querySelector(`#comment-${postId}`).value = '';
+        }
+
+        function sharePost(postId) {
+            const sharePanel = document.querySelector(`#share-${postId}`);
+            sharePanel.classList.toggle('active');
+            
+            if (sharePanel.classList.contains('active')) {
+                const shareLink = `${window.location.origin}${window.location.pathname}?post=${postId}`;
+                document.querySelector(`#shareLink-${postId}`).value = shareLink;
+                
+                update(ref(db, `posts/${postId}`), {
+                    shares: firebase.database.ServerValue.increment(1)
+                });
+            }
+        }
+
+        function displayPosts(posts) {
+            const postsContainer = document.getElementById('posts');
+            postsContainer.innerHTML = '';
+
+            Object.entries(posts || {}).reverse().forEach(([postId, post]) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                
+                const reactionsHtml = reactions.map(reaction => {
+                    const count = post.reactions?.[reaction] || 0;
+                    return `
+                        <button class="reaction" onclick="window.handleReaction('${postId}', '${reaction}', ${JSON.stringify(post.reactions)})">
+                            ${reaction} ${count}
+                        </button>
+                    `;
+                }).join('');
+
+                const commentsHtml = (post.comments || []).map(comment => `
+                    <div class="comment">
+                        <div class="post-user-info">
+                            <div class="post-avatar">${comment.author[0]}</div>
+                            <div>
+                                <div class="post-user">${comment.author}</div>
+                                <div class="post-time">${new Date(comment.timestamp).toLocaleString()}</div>
+                            </div>
+                        </div>
+                        <div class="post-content">${comment.text}</div>
+                    </div>
+                `).join('');
+
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-user-info">
+                            <div class="post-avatar">${post.author[0]}</div>
+                            <div>
+                                <div class="post-user">${post.author}</div>
+                                <div class="post-time">${new Date(post.timestamp).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">${post.content}</div>
+                    <div class="post-actions">
+                        <button class="action-btn" onclick="window.toggleReactions('${postId}')">
+                            😊 React
+                        </button>
+                        <button class="action-btn" onclick="window.toggleComments('${postId}')">
+                            💬 Comments (${(post.comments || []).length})
+                        </button>
+                        <button class="action-btn" onclick="window.handleShare('${postId}')">
+                            🔗 Share (${post.shares || 0})
+                        </button>
+                    </div>
+                    <div class="reactions-panel" id="reactions-${postId}">
+                        ${reactionsHtml}
+                    </div>
+                    <div class="share-panel" id="share-${postId}">
+                        <input type="text" class="share-link" id="shareLink-${postId}" readonly />
+                        <button class="post-btn" onclick="navigator.clipboard.writeText(document.querySelector('#shareLink-${postId}').value)">
+                            Copy Link
+                        </button>
+                    </div>
+                    <div class="comments-section" id="comments-${postId}">
+                        ${commentsHtml}
+                        <div class="comment-form">
+                            <textarea id="comment-${postId}" class="comment-input" placeholder="Write a comment..."></textarea>
+                            <button class="comment-btn" onclick="window.handleComment('${postId}', ${JSON.stringify(post.comments)})">
+                                Comment
+                            </button>
+                        </div>
+                    </div>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // Real-time listener for posts
+        onValue(ref(db, 'posts'), (snapshot) => {
+            displayPosts(snapshot.val());
+        });
+
+        // Event listeners
+        document.getElementById('submitPost').addEventListener('click', createPost);
+        window.handleReaction = addReaction;
+        window.handleComment = addComment;
+        window.handleShare = sharePost;
+        window.toggleReactions = (postId) => {
+            document.querySelector(`#reactions-${postId}`).style.display = 
+                document.querySelector(`#reactions-${postId}`).style.display === 'none' ? 'flex' : 'none';
+        };
+        window.toggleComments = (postId) => {
+            document.querySelector(`#comments-${postId}`).style.display = 
+                document.querySelector(`#comments-${postId}`).style.display === 'none' ? 'block' : 'none';
+        };
+    </script>
+</body>
+</html>
