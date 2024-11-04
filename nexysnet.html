@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NexysNet - A modern social media platform">
+    <meta name="description" content="NexysNet - A social media platform">
     <meta name="keywords" content="social media, connect, posts, friends">
     <meta name="author" content="Vylex Nexys">
-    <title>NexysNet 2.0</title>
+    <title>NexysNet</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #60a5fa;
-            --background: #f8fafc;
-            --card-bg: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-        }
+    /* Primary colors */
+    --primary-color: #2379e2;    /* Blend of both blues */
+    --secondary-color: #1b5bc0;  /* Darker blend */
+    --accent-color: #ff4081;     /* Keeping the vibrant pink accent */
+    
+    /* Background colors */
+    --background: #f8f9fa;       /* Slightly adjusted neutral background */
+    --card-bg: #ffffff;          /* Keeping pure white for cards */
+    
+    /* Text colors */
+    --text-primary: #1f293b;     /* Slightly warmer dark */
+    --text-secondary: #6a7585;   /* Balanced gray */
+    
+    /* Status colors */
+    --success-color: #4caf50;    /* Keeping the success green */
+    --error-color: #f44336;      /* Keeping the error red */
+}
 
         * {
             margin: 0;
@@ -267,7 +276,7 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <h1>NexysNet 2.0 🌐</h1>
+            <h1>NexysNet🌐</h1>
             <div class="user-profile" id="userProfile">
                 <div class="post-avatar" id="userAvatar"></div>
                 <span id="currentUser">Guest</span>
