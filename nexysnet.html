@@ -3,273 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NexysNet - A social media platform">
-    <meta name="keywords" content="social media, connect, posts, friends">
+    <meta name="description" content="NexysNet - A modern social media platform for connecting and sharing">
+    <meta name="keywords" content="social media, connect, posts, friends, community, networking">
     <meta name="author" content="Vylex Nexys">
+    <meta name="theme-color" content="#2379e2">
     <title>NexysNet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS Variables */
         :root {
-    /* Primary colors */
-    --primary-color: #2379e2;    /* Blend of both blues */
-    --secondary-color: #1b5bc0;  /* Darker blend */
-    --accent-color: #ff4081;     /* Keeping the vibrant pink accent */
-    
-    /* Background colors */
-    --background: #f8f9fa;       /* Slightly adjusted neutral background */
-    --card-bg: #ffffff;          /* Keeping pure white for cards */
-    
-    /* Text colors */
-    --text-primary: #1f293b;     /* Slightly warmer dark */
-    --text-secondary: #6a7585;   /* Balanced gray */
-    
-    /* Status colors */
-    --success-color: #4caf50;    /* Keeping the success green */
-    --error-color: #f44336;      /* Keeping the error red */
-}
+            --primary-color: #2379e2;
+            --secondary-color: #1b5bc0;
+            --accent-color: #ff4081;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #1f293b;
+            --text-secondary: #6a7585;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+            --transition-default: all 0.3s ease;
+        }
 
+        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: var(--background);
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Header Styles */
         .header {
             background: var(--card-bg);
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            padding: 1rem;
+            box-shadow: var(--shadow-md);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .header h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
             font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
+        /* User Profile Styles */
         .user-profile {
             display: flex;
             align-items: center;
             gap: 1rem;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            flex: 1;
-        }
-
-        .post-form {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .post-input, .comment-input {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            resize: vertical;
-        }
-
-        .post-name {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-
-        .post-btn, .comment-btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            transition: var(--transition-default);
         }
 
-        .post-btn:hover, .comment-btn:hover {
-            background: var(--secondary-color);
-        }
-
-        .post {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-        }
-
-        .post-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .post-user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .user-profile:hover {
+            background: rgba(0,0,0,0.05);
         }
 
         .post-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--accent-color);
+            background: var(--primary-color);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-        }
-
-        .post-user {
             font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
         }
 
-        .post-time {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+        /* Main Content Styles */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
         }
 
-        .post-content {
-            margin-bottom: 1rem;
-        }
-
-        .post-actions {
-            display: flex;
-            gap: 1rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1rem;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-
-        .action-btn:hover {
-            background: #f1f5f9;
-            color: var(--primary-color);
-        }
-
-        .reactions-panel {
-            display: flex;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-        }
-
-        .reaction {
-            cursor: pointer;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            transition: transform 0.2s;
-        }
-
-        .reaction:hover {
-            transform: scale(1.2);
-        }
-
-        .comments-section {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .comment {
-            padding: 1rem;
-            margin: 0.5rem 0;
-            background: #f8fafc;
-            border-radius: 8px;
-        }
-
-        .share-panel {
-            display: none;
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-        }
-
-        .share-panel.active {
-            display: block;
-        }
-
-        .share-link {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
-        }
-
-        .footer {
+        /* Post Form Styles */
+        .post-form {
             background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .post-input,
+        .comment-input,
+        .post-name {
+            width: 100%;
             padding: 1rem;
-            text-align: center;
-            color: var(--text-secondary);
-            border-top: 1px solid #e2e8f0;
-            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            transition: var(--transition-default);
         }
 
-        .footer a {
-            color: var(--primary-color);
-            text-decoration: none;
+        .post-input:focus,
+        .comment-input:focus,
+        .post-name:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(35,121,226,0.2);
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        /* Button Styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-default);
+            font-size: 0.9rem;
         }
 
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+        .footer {
+        background: var(--card-bg);
+        padding: 1rem;
+        text-align: center;
+        color: var(--text-secondary);
+        border-top: 1px solid #e2e8f0;
+        margin-top: 2rem;
+    }
+
+    .footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+        /* Post Styles */
+        .post {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-default);
+        }
+
+        .post:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md), 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
             .container {
                 padding: 0 1rem;
             }
-            
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .post {
+                padding: 1rem;
+            }
+
             .post-actions {
                 flex-wrap: wrap;
             }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .reactions-panel,
+        .comments-section,
+        .share-panel {
+            display: none;
+        }
+
+        .reactions-panel.active,
+        .comments-section.active,
+        .share-panel.active {
+            display: block;
         }
     </style>
 </head>
@@ -288,7 +264,7 @@
         <div class="post-form">
             <input id="userName" class="post-name" type="text" placeholder="Enter your name" />
             <textarea id="postContent" class="post-input" rows="3" placeholder="What's on your mind?"></textarea>
-            <button id="submitPost" class="post-btn">Post</button>
+            <button id="submitPost" class="btn btn-primary">Post</button>
         </div>
 
         <div id="posts"></div>
@@ -302,6 +278,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
         import { getDatabase, ref, set, onValue, push, update, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+
+        
 
         const firebaseConfig = {
             apiKey: "AIzaSyD1ivyeUKAoNFZ-NQIlQ9AVlvfTTYqmgA0",
@@ -323,6 +301,11 @@
         document.getElementById('currentUser').textContent = currentUser;
         document.getElementById('userAvatar').textContent = currentUser[0];
 
+        window.toggleUserName = function() {
+            const userName = document.getElementById('currentUser');
+            userName.classList.toggle('visible');
+        };
+
         function createPost() {
             const content = document.getElementById('postContent').value;
             const name = document.getElementById('userName').value || 'Anonymous';
@@ -332,6 +315,8 @@
             currentUser = name;
             document.getElementById('currentUser').textContent = name;
             document.getElementById('userAvatar').textContent = name[0];
+            document.getElementById('currentUser').classList.remove('visible'); 
+
 
             const postData = {
                 content: content,
@@ -439,7 +424,7 @@
                     </div>
                     <div class="share-panel" id="share-${postId}">
                         <input type="text" class="share-link" id="shareLink-${postId}" readonly />
-                        <button class="post-btn" onclick="navigator.clipboard.writeText(document.querySelector('#shareLink-${postId}').value)">
+                        <button class="btn btn-primary" onclick="navigator.clipboard.writeText(document.querySelector('#shareLink-${postId}').value)">
                             Copy Link
                         </button>
                     </div>
@@ -447,7 +432,7 @@
                         ${commentsHtml}
                         <div class="comment-form">
                             <textarea id="comment-${postId}" class="comment-input" placeholder="Write a comment..."></textarea>
-                            <button class="comment-btn" onclick="window.handleComment('${postId}', ${JSON.stringify(post.comments)})">
+                            <button class="btn btn-primary" onclick="window.handleComment('${postId}', ${JSON.stringify(post.comments)})">
                                 Comment
                             </button>
                         </div>
@@ -468,12 +453,10 @@
         window.handleComment = addComment;
         window.handleShare = sharePost;
         window.toggleReactions = (postId) => {
-            document.querySelector(`#reactions-${postId}`).style.display = 
-                document.querySelector(`#reactions-${postId}`).style.display === 'none' ? 'flex' : 'none';
+            document.querySelector(`#reactions-${postId}`).classList.toggle('active');
         };
         window.toggleComments = (postId) => {
-            document.querySelector(`#comments-${postId}`).style.display = 
-                document.querySelector(`#comments-${postId}`).style.display === 'none' ? 'block' : 'none';
+            document.querySelector(`#comments-${postId}`).classList.toggle('active');
         };
     </script>
 </body>
