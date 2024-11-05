@@ -23,6 +23,7 @@
             justify-content: center;
             color: #fff;
             padding: 1rem;
+            overflow-x: hidden; /* Prevent horizontal scrollbar on mobile */
         }
         .container {
             width: 100%;
@@ -83,6 +84,19 @@
         #resetButton:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+
+        /* Responsive design adjustments for mobile */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .video-container {
+                margin: 1rem 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -112,7 +126,7 @@
         const resultDisplay = document.getElementById('result');
         const scanResultContainer = document.getElementById('scanResult');
         const resetButton = document.getElementById('resetButton');
-
+    
         // Create QR Scanner instance
         const qrScanner = new QrScanner(
             video,
@@ -124,20 +138,34 @@
                 highlightCodeOutline: true,
             }
         );
-
+    
         // Function to handle the result from QR Scanner
         function handleQRCode(result) {
+            // Display the result
             resultDisplay.textContent = result;
             scanResultContainer.classList.remove('hidden');
+            
+            // Detect if the result is a URL
+            if (result.startsWith('http://') || result.startsWith('https://')) {
+                window.open(result, '_blank'); // Open URL in a new tab
+            } else if (result.startsWith('tel:')) {
+                window.location.href = result; // Make a phone call
+            } else if (result.startsWith('mailto:')) {
+                window.location.href = result; // Open email client
+            } else {
+                alert("Scanned text: " + result); // Display scanned text if it doesn't match a specific action
+            }
+    
+            // Stop the scanner after getting a result
             qrScanner.stop();
         }
-
+    
         // Reset button event listener
         resetButton.addEventListener('click', () => {
             scanResultContainer.classList.add('hidden');
             qrScanner.start();
         });
-
+    
         // Start scanning when the page loads
         window.addEventListener('load', async () => {
             try {
@@ -148,5 +176,6 @@
             }
         });
     </script>
+    
 </body>
 </html>
