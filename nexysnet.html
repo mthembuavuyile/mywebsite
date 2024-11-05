@@ -13,8 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
-:root {
+    /* CSS Variables */
+    :root {
     --primary-color: #2379e2;
     --secondary-color: #1b5bc0;
     --accent-color: #ff4081;
@@ -461,8 +461,6 @@ body {
         import { getDatabase, ref, set, onValue, push, update, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 
-        
-
         const firebaseConfig = {
             apiKey: "AIzaSyD1ivyeUKAoNFZ-NQIlQ9AVlvfTTYqmgA0",
             authDomain: "nexysnet-43a4d.firebaseapp.com",
@@ -521,19 +519,19 @@ body {
             update(ref(db, `posts/${postId}`), { reactions });
         }
 
-        function addComment(postId, comments) {
-            const commentText = document.querySelector(`#comment-${postId}`).value;
-            if (!commentText.trim()) return;
+        function addComment(postId) {
+    const commentText = document.querySelector(`#comment-${postId}`).value;
+    if (!commentText.trim()) return;
 
-            const newComments = [...(comments || []), {
-                author: currentUser,
-                text: commentText,
-                timestamp: Date.now()
-            }];
+    const newCommentRef = push(ref(db, `posts/${postId}/comments`));
+    set(newCommentRef, {
+        author: currentUser,
+        text: commentText,
+        timestamp: Date.now()
+    });
 
-            update(ref(db, `posts/${postId}`), { comments: newComments });
-            document.querySelector(`#comment-${postId}`).value = '';
-        }
+    document.querySelector(`#comment-${postId}`).value = '';
+}
 
         function sharePost(postId) {
             const sharePanel = document.querySelector(`#share-${postId}`);
@@ -566,18 +564,18 @@ body {
                     `;
                 }).join('');
 
-                const commentsHtml = (post.comments || []).map(comment => `
-                    <div class="comment">
-                        <div class="post-user-info">
-                            <div class="post-avatar">${comment.author[0]}</div>
-                            <div>
-                                <div class="post-user">${comment.author}</div>
-                                <div class="post-time">${new Date(comment.timestamp).toLocaleString()}</div>
-                            </div>
-                        </div>
-                        <div class="post-content">${comment.text}</div>
-                    </div>
-                `).join('');
+                const commentsHtml = Object.entries(post.comments || {}).map(([commentId, comment]) => `
+    <div class="comment">
+        <div class="post-user-info">
+            <div class="post-avatar">${comment.author[0]}</div>
+            <div>
+                <div class="post-user">${comment.author}</div>
+                <div class="post-time">${new Date(comment.timestamp).toLocaleString()}</div>
+            </div>
+        </div>
+        <div class="post-content">${comment.text}</div>
+    </div>
+`).join('');
 
                 postElement.innerHTML = `
                     <div class="post-header">
