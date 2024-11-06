@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Cipher Machine | Vylex Nexys</title>
+    <meta name="description" content="Discover the interactive Enigma Cipher Machine simulator by Vylex Nexys. Learn encryption and decryption using the historic Enigma machine right from your browser.">
+    <meta name="keywords" content="Enigma cipher, Enigma machine, encryption, decryption, Vylex Nexys, cryptography, online simulator, encryption technology">
+    <meta name="author" content="Avuyile Mthembu">
+    <meta property="og:title" content="Enigma Cipher Machine | Vylex Nexys">
+    <meta property="og:description" content="Experience the Enigma Cipher Machine simulator by Vylex Nexys. Dive into the history and mechanics of cryptography with this online interactive tool.">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/enigma.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://avuyilemthembu.co.za/images/enigma-machine-thumbnail.jpg"> <!-- Update with an actual image URL if available -->
+    <link rel="canonical" href="https://avuyilemthembu.co.za/enigma.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #0a0f18;
+            --accent-color: #1a2634;
+            --text-glow: 0 0 10px rgba(0, 255, 0, 0.7);
+            --neon-border: 2px solid var(--primary-color);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            min-height: 100vh;
+            perspective: 1000px;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 60%),
+                linear-gradient(45deg, rgba(0, 255, 0, 0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0, 255, 0, 0.05) 25%, transparent 25%);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(20, 30, 44, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .branding {
+            position: absolute;
+            margin-top: 15px;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+            opacity: 0.7;
+            text-shadow: var(--text-glow);
+        }
+
+        .branding a {
+            color: var(--primary-color);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .branding a:hover {
+            opacity: 1;
+            text-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .gear {
+            position: absolute;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 10s linear infinite;
+            opacity: 0.5;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .gear:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: -40px;
+            right: -40px;
+            border-left: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .gear:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            bottom: -60px;
+            left: -60px;
+            animation-direction: reverse;
+            border-right: 5px solid transparent;
+            border-top: 5px solid transparent;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            text-shadow: var(--text-glow);
+            font-size: 2em;
+            margin-bottom: 20px;
+            position: relative;
+            letter-spacing: 3px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background: var(--primary-color);
+            box-shadow: var(--text-glow);
+        }
+
+        .machine-body {
+            background: linear-gradient(45deg, var(--accent-color), #2a3644);
+            padding: 20px;
+            border-radius: 15px;
+            border: var(--neon-border);
+            box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.2);
+            position: relative;
+        }
+
+        .machine-body::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+            border-radius: 15px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .rotor-settings {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            position: relative;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .rotor {
+            text-align: center;
+            position: relative;
+            perspective: 1000px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .rotor label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1em;
+            text-shadow: var(--text-glow);
+        }
+
+        .rotor::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+            box-shadow: var(--text-glow);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        input[type="number"] {
+            width: 70px;
+            padding: 10px;
+            background-color: rgba(10, 15, 24, 0.9);
+            border: var(--neon-border);
+            color: var(--primary-color);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1em;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(10, 15, 24, 0.9);
+            border: var(--neon-border);
+            color: var(--primary-color);
+            border-radius: 10px;
+            resize: vertical;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1em;
+        }
+
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        button {
+            width: 100px;
+            padding: 10px;
+            background: linear-gradient(45deg, #006600, #008800);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(10, 15, 24, 0.9);
+            border: var(--neon-border);
+            border-radius: 10px;
+            min-height: 60px;
+            word-wrap: break-word;
+            position: relative;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .output::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        .calculation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .calculation-animation {
+            font-size: 2em;
+            color: var(--primary-color);
+            text-shadow: var(--text-glow);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .rotor-settings {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gear"></div>
+        <div class="gear"></div>
+        
+        <h1>ENIGMA CIPHER MACHINE</h1>
+        
+        <div class="machine-body">
+            <div class="rotor-settings">
+                <div class="rotor">
+                    <label for="rotor1">ROTOR I</label>
+                    <input type="number" id="rotor1" min="0" max="25" value="0">
+                </div>
+                <div class="rotor">
+                    <label for="rotor2">ROTOR II</label>
+                    <input type="number" id="rotor2" min="0" max="25" value="0">
+                </div>
+                <div class="rotor">
+                    <label for="rotor3">ROTOR III</label>
+                    <input type="number" id="rotor3" min="0" max="25" value="0">
+                </div>
+            </div>
+
+            <div>
+                <label for="input">MESSAGE:</label>
+                <textarea id="input" placeholder="Enter message to encrypt/decrypt..."></textarea>
+            </div>
+
+            <div class="button-container">
+                <button onclick="processWithAnimation('encrypt')">ENCRYPT</button>
+                <button onclick="processWithAnimation('decrypt')">DECRYPT</button>
+            </div>
+
+            <div>
+                <label>RESULT:</label>
+                <div id="output" class="output"></div>
+            </div>
+        </div>
+
+        <div class="branding">
+            By Vylex Nexys<br>
+            <a href="https://avuyilemthembu.co.za" target="_blank">avuyilemthembu.co.za</a>
+        </div>
+    </div>
+
+    <div class="calculation-overlay">
+        <div class="calculation-animation">PROCESSING ENIGMA CIPHER...</div>
+    </div>
+
+    <script>
+        const rotor1 = 'EKMFLGDQVZNTOWYHXUSPAIBRCJ';
+        const rotor2 = 'AJDKSIRUXBLHWTMCQGZNPYFVOE';
+        const rotor3 = 'BDFHJLCPRTXVZNYEIWGAKMUSQO';
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        function rotateString(str, positions) {
+            return str.slice(positions) + str.slice(0, positions);
+        }
+
+        function processCharacter(char, r1pos, r2pos, r3pos, reverse = false) {
+            if (!alphabet.includes(char.toUpperCase())) {
+                return char;
+            }
+
+            const rot1 = rotateString(rotor1, r1pos);
+            const rot2 = rotateString(rotor2, r2pos);
+            const rot3 = rotateString(rotor3, r3pos);
+
+            let c = char.toUpperCase();
+            
+            if (!reverse) {
+                let pos = alphabet.indexOf(c);
+                c = rot1[pos];
+                pos = alphabet.indexOf(c);
+                c = rot2[pos];
+                pos = alphabet.indexOf(c);
+                c = rot3[pos];
+            } else {
+                let pos = rot3.indexOf(c);
+                c = alphabet[pos];
+                pos = rot2.indexOf(c);
+                c = alphabet[pos];
+                pos = rot1.indexOf(c);
+                c = alphabet[pos];
+            }
+
+            return char === char.toLowerCase() ? c.toLowerCase() : c;
+        }
+
+        function processText(text, reverse = false) {
+            const r1pos = parseInt(document.getElementById('rotor1').value) % 26;
+            const r2pos = parseInt(document.getElementById('rotor2').value) % 26;
+            const r3pos = parseInt(document.getElementById('rotor3').value) % 26;
+
+            let result = '';
+            let currentR1 = r1pos;
+            let currentR2 = r2pos;
+            let currentR3 = r3pos;
+
+            for (let i = 0; i < text.length; i++) {
+                result += processCharacter(text[i], currentR1, currentR2, currentR3, reverse);
+
+                currentR1 = (currentR1 + 1) % 26;
+                if (currentR1 === 0) {
+                    currentR2 = (currentR2 + 1) % 26;
+                    if (currentR2 === 0) {
+                        currentR3 = (currentR3 + 1) % 26;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        function showCalculationOverlay() {
+            const overlay = document.querySelector('.calculation-overlay');
+            overlay.style.display = 'flex';
+        }
+
+        function hideCalculationOverlay() {
+            const overlay = document.querySelector('.calculation-overlay');
+            overlay.style.display = 'none';
+        }
+
+        async function processWithAnimation(action) {
+            showCalculationOverlay();
+            const input = document.getElementById('input').value;
+            
+            // Artificial delay for effect
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const result = action === 'encrypt' ? processText(input, false) : processText(input, true);
+            document.getElementById('output').textContent = result;
+            
+            hideCalculationOverlay();
+        }
+
+        window.onload = function() {
+            document.getElementById('rotor1').value = Math.floor(Math.random() * 26);
+            document.getElementById('rotor2').value = Math.floor(Math.random() * 26);
+            document.getElementById('rotor3').value = Math.floor(Math.random() * 26);
+        }
+    </script>
+</body>
+</html>
