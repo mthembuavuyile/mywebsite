@@ -16,69 +16,73 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         
-        :root {
-            --primary-color: #00ff00;
-            --secondary-color: #0a0f18;
-            --accent-color: #1a2634;
-            --text-glow: 0 0 10px rgba(0, 255, 0, 0.7);
-            --neon-border: 2px solid var(--primary-color);
-        }
+        
+:root {
+    --primary-color: #00ff00;
+    --secondary-color: #0a0f18;
+    --accent-color: #1a2634;
+    --text-glow: 0 0 10px rgba(0, 255, 0, 0.7);
+    --neon-border: 2px solid var(--primary-color);
+}
 
-        * {
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
+* {
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
 
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            margin: 0;
-            padding: 10px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            min-height: 100vh;
-            perspective: 1000px;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 60%),
-                linear-gradient(45deg, rgba(0, 255, 0, 0.05) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(0, 255, 0, 0.05) 25%, transparent 25%);
-            background-size: 100% 100%, 20px 20px, 20px 20px;
-        }
+body {
+    font-family: 'Share Tech Mono', monospace;
+    margin: 0;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    min-height: 100vh;
+    perspective: 1000px;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 60%),
+        linear-gradient(45deg, rgba(0, 255, 0, 0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 255, 0, 0.05) 25%, transparent 25%);
+    background-size: 100% 100%, 20px 20px, 20px 20px;
+}
 
-        .container {
-            width: 90%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(20, 30, 44, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0, 255, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(20, 30, 44, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 255, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    min-height: calc(100vh - 20px);
+    display: flex;
+    flex-direction: column;
+}
 
-        .branding {
-            position: absolute;
-            margin-top: 15px;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 0.9em;
-            opacity: 0.7;
-            text-shadow: var(--text-glow);
-        }
+.branding {
+    margin-top: auto;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em;
+    opacity: 0.7;
+    text-shadow: var(--text-glow);
+}
 
-        .branding a {
-            color: var(--primary-color);
-            text-decoration: none;
-            position: relative;
-        }
+.branding a {
+    color: var(--primary-color);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    margin-top: 5px;
+}
 
-        .branding a:hover {
-            opacity: 1;
-            text-shadow: 0 0 15px var(--primary-color);
-        }
+.branding a:hover {
+    opacity: 1;
+    text-shadow: 0 0 15px var(--primary-color);
+}
 
         .gear {
             position: absolute;
@@ -136,13 +140,16 @@
         }
 
         .machine-body {
-            background: linear-gradient(45deg, var(--accent-color), #2a3644);
-            padding: 20px;
-            border-radius: 15px;
-            border: var(--neon-border);
-            box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.2);
-            position: relative;
-        }
+    background: linear-gradient(45deg, var(--accent-color), #2a3644);
+    padding: 20px;
+    border-radius: 15px;
+    border: var(--neon-border);
+    box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.2);
+    position: relative;
+    margin-bottom: 60px;
+}
+
+
 
         .machine-body::before {
             content: '';
@@ -163,15 +170,16 @@
         }
 
         .rotor-settings {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            position: relative;
-            border: 1px solid rgba(0, 255, 0, 0.3);
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
 
         .rotor {
             text-align: center;
@@ -307,25 +315,59 @@
         }
 
         .calculation-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.15), rgba(0, 0, 0, 0.95));
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(8px) brightness(0.8);
+    overflow: hidden;
+}
 
-        .calculation-animation {
-            font-size: 2em;
-            color: var(--primary-color);
-            text-shadow: var(--text-glow);
-            animation: pulse 1.5s ease-in-out infinite;
-        }
+.calculation-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(circle, transparent, transparent 20px, rgba(0, 255, 0, 0.1) 25px);
+    animation: scanOverlay 6s linear infinite;
+}
+
+.calculation-animation {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.5);
+    animation: textPulse 1s ease-in-out infinite alternate, spinText 8s linear infinite;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 10;
+}
+
+/* Pulsing animation */
+@keyframes textPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Slow rotation animation */
+@keyframes spinText {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Overlay scan effect */
+@keyframes scanOverlay {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 0.8; }
