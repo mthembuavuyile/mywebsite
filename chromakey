@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ChromaKey Pro - Free online background removal tool. Remove backgrounds from images instantly with our AI-powered tool.">
+    <meta name="keywords" content="background remover, remove background, transparent background, image editing, online tool">
+    <title>ChromaKey Pro - AI Background Remover</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqk1w2/knoG80k+it3+Q+8pLRz7A9voi0tTf9zQ+grc4yCgA+M/oIi5/Y+QKeMY0W+zL+1lbhFa5" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+        body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex: 1;
+    margin-bottom: 60px; /* Add space for footer */
+}
+    
+        .developer {
+            color: #f471b5;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+    
+        header {
+            text-align: center;
+            padding: 2.5rem 0;
+        }
+    
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(45deg, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.25rem;
+        }
+    
+        .upload-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+    
+        #drop-zone {
+            border: 2px dashed #4facfe;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    
+        #drop-zone:hover {
+            background: rgba(79, 172, 254, 0.1);
+        }
+    
+        #drop-zone.dragover {
+            background: rgba(79, 172, 254, 0.2);
+            border-color: #00f2fe;
+        }
+    
+        #file-input {
+            display: none;
+        }
+    
+        .btn {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            margin: 1rem 0;
+        }
+    
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+    
+        .preview-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            backdrop-filter: blur(12px);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .preview-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+    
+        .download-btn {
+            background: linear-gradient(45deg, #60a5fa, #a855f7);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            width: calc(100% - 2rem);
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+        }
+    
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(96, 165, 250, 0.3);
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        }
+    
+        .download-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(96, 165, 250, 0.2);
+        }
+    
+        .download-btn i {
+            font-size: 1.1rem;
+        }
+    
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+    
+        .loading {
+            display: none;
+            margin: 1rem auto;
+        }
+    
+        .loading div {
+            width: 10px;
+            height: 10px;
+            background: #4facfe;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            animation: bounce 0.5s infinite alternate;
+        }
+    
+        .loading div:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+    
+        .loading div:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+    
+        .controls {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(5px);
+        }
+    
+        .control-group {
+            margin: 1rem 0;
+        }
+    
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    
+        .control-group input[type="range"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 8px;
+            outline: none;
+        }
+    
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+    
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #4facfe;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        .filter-btn:hover {
+            background: rgba(79, 172, 254, 0.2);
+        }
+    
+        #canvas {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    
+        @keyframes bounce {
+            to {
+                transform: translateY(-10px);
+            }
+        }
+    
+        .info-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #4facfe;
+        }
+    
+        .info-modal {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+    
+        .info-modal-content {
+            background:#0f172a;
+            padding: 2rem;
+            border-radius: 5px;
+            max-width: 600px;
+        }
+    
+        .info-modal-content h2 {
+            margin-bottom: 1rem;
+        }
+    
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #333;
+        }
+    
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+    
+            .upload-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+    
+            .preview-box {
+                max-width: 100%;
+            }
+    
+            #drop-zone {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .download-btn {
+                width: calc(100% - 2rem);
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ChromaKey Pro</h1>
+            <p class="developer">Developed by Avuyile Mthembu</p>
+            <p>Remove image backgrounds instantly with AI-powered technology</p>
+        </header>
+
+        <div class="upload-container">
+            <div id="drop-zone">
+                <i class="fas fa-cloud-upload-alt fa-2x"></i>
+                <p>Drag and drop your image here</p>
+                <p>or</p>
+                <input type="file" id="file-input" accept="image/*">
+                <button class="btn" onclick="document.getElementById('file-input').click()">Choose File</button>
+            </div>
+            <div class="loading">
+                <div></div><div></div><div></div>
+            </div>
+        </div>
+
+        <div class="preview-container">
+            <div class="preview-box" id="original">
+                <h3>Original Image</h3>
+                <img id="original-img" src="#" alt="Original image">
+                <i class="fas fa-info-circle info-icon" onclick="openModal()"></i>
+            </div>
+            <div class="preview-box" id="processed">
+                <h3>Processed Image</h3>
+                <canvas id="canvas"></canvas>
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Brightness</label>
+                        <input type="range" id="brightness" min="-100" max="100" value="0">
+                    </div>
+                    <div class="control-group">
+                        <label>Contrast</label>
+                        <input type="range" id="contrast" min="-100" max="100" value="0">
+                    </div>
+                    <div class="control-group">
+                        <label>Saturation</label>
+                        <input type="range" id="saturation" min="-100" max="100" value="0">
+                    </div>
+                    <div class="control-group">
+                        <label>Blur</label>
+                        <input type="range" id="blur" min="0" max="20" value="0">
+                    </div>
+                    <div class="filters-container">
+                        <button class="filter-btn" data-filter="grayscale">Grayscale</button>
+                        <button class="filter-btn" data-filter="sepia">Sepia</button>
+                        <button class="filter-btn" data-filter="invert">Invert</button>
+                        <button class="filter-btn" onclick="resetImage()">Reset</button>
+                    </div>
+                </div>
+                <button class="download-btn" onclick="downloadImage()">Download</button>
+            </div>
+        </div>
+
+        <div class="info-modal">
+            <div class="info-modal-content">
+                <i class="fas fa-times close-modal" onclick="closeModal()"></i>
+                <h2>About ChromaKey Pro</h2>
+                <p>ChromaKey Pro is a free online background removal tool that uses AI-powered technology to automatically remove backgrounds from your images.</p>
+                <ul>
+                    <li>Fast and easy background removal</li>
+                    <li>High-quality results</li>
+                    <li>Free to use</li>
+                    <li>Download your processed images in PNG format</li>
+                    <li>Adjust brightness, contrast, saturation, blur, and apply filters</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>by vylex nexys</p>
+    </footer>
+
+    <script>
+        let originalImage = null;
+        let currentFilters = {
+            brightness: 100,
+            contrast: 100,
+            saturation: 100,
+            blur: 0,
+            special: 'none'
+        };
+
+        const elements = {
+            dropZone: document.getElementById('drop-zone'),
+            fileInput: document.getElementById('file-input'),
+            loading: document.querySelector('.loading'),
+            originalPreview: document.getElementById('original'),
+            processedPreview: document.getElementById('processed'),
+            originalImg: document.getElementById('original-img'),
+            canvas: document.getElementById('canvas'),
+            infoModal: document.querySelector('.info-modal')
+        };
+
+        const ctx = elements.canvas.getContext('2d');
+
+        // Event Listeners
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+            elements.dropZone.addEventListener(event, preventDefault);
+            document.body.addEventListener(event, preventDefault);
+        });
+
+        ['dragenter', 'dragover'].forEach(event => {
+            elements.dropZone.addEventListener(event, () => elements.dropZone.classList.add('dragover'));
+        });
+
+        ['dragleave', 'drop'].forEach(event => {
+            elements.dropZone.addEventListener(event, () => elements.dropZone.classList.remove('dragover'));
+        });
+
+        elements.dropZone.addEventListener('drop', handleDrop);
+        elements.fileInput.addEventListener('change', handleFiles);
+
+        // Setup range input listeners
+        document.querySelectorAll('input[type="range"]').forEach(input => {
+            input.addEventListener('input', () => updateImage(input.id, input.value));
+        });
+
+        // Setup filter buttons
+        document.querySelectorAll('.filter-btn[data-filter]').forEach(button => {
+            button.addEventListener('click', () => applySpecialFilter(button.dataset.filter));
+        });
+
+        function preventDefault(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function handleDrop(e) {
+            const files = e.dataTransfer.files;
+            handleFiles({ target: { files } });
+        }
+
+        function handleFiles(e) {
+            const file = e.target.files[0];
+            if (file?.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => loadImage(e.target.result);
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function loadImage(src) {
+            elements.loading.style.display = 'block';
+            elements.originalImg.src = src;
+            
+            const img = new Image();
+            img.onload = () => {
+                originalImage = img;
+                elements.canvas.width = img.width;
+                elements.canvas.height = img.height;
+                resetImage();
+                elements.originalPreview.style.display = 'block';
+                elements.processedPreview.style.display = 'block';
+                elements.loading.style.display = 'none';
+            };
+            img.src = src;
+        }
+
+        function updateImage(property, value) {
+            if (!originalImage) return;
+
+            switch(property) {
+                case 'brightness':
+                    currentFilters.brightness = parseInt(value) + 100;
+                    break;
+                case 'contrast':
+                    currentFilters.contrast = parseInt(value) + 100;
+                    break;
+                case 'saturation':
+                    currentFilters.saturation = parseInt(value) + 100;
+                    break;
+                case 'blur':
+                    currentFilters.blur = parseInt(value);
+                    break;
+            }
+
+            applyFilters();
+        }
+
+        function applySpecialFilter(filter) {
+            if (!originalImage) return;
+            currentFilters.special = filter;
+            applyFilters();
+        }
+
+        function applyFilters() {
+            ctx.filter = `
+                brightness(${currentFilters.brightness}%) 
+                contrast(${currentFilters.contrast}%) 
+                saturate(${currentFilters.saturation}%) 
+                blur(${currentFilters.blur}px)
+                ${currentFilters.special !== 'none' ? `${currentFilters.special}(100%)` : ''}
+            `;
+            ctx.drawImage(originalImage, 0, 0);
+        }
+
+        function resetImage() {
+            if (!originalImage) return;
+            
+            currentFilters = {
+                brightness: 100,
+                contrast: 100,
+                saturation: 100,
+                blur: 0,
+                special: 'none'
+            };
+
+            // Reset range inputs
+            document.querySelectorAll('input[type="range"]').forEach(input => {
+                input.value = 0;
+            });
+
+            ctx.filter = 'none';
+            ctx.drawImage(originalImage, 0, 0);
+        }
+
+        function downloadImage() {
+            if (!originalImage) return;
+            const link = document.createElement('a');
+            link.download = 'processed-image.png';
+            link.href = elements.canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function openModal() {
+            elements.infoModal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            elements.infoModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
