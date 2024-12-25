@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Celebrate Christmas 2024 & New Year 2025 with Avuyile Mthembu. Season's Greetings and warm wishes for the festive period!">
+    <meta name="keywords" content="Avuyile Mthembu, Christmas 2024, New Year 2025, Season's Greetings, South Africa">
+    <meta name="author" content="Avuyile Mthembu">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/christmas2024.html">
+    <meta property="og:title" content="🎄 Merry Christmas 2024 & Happy New Year 2025 | Avuyile Mthembu">
+    <meta property="og:description" content="Join Avuyile Mthembu in celebrating the festive season with joy, peace, and prosperity!">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d42426'/><text x='50' y='50' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle'>🎄</text></svg>">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://avuyilemthembu.co.za/christmas2024.html">
+    <meta property="twitter:title" content="🎄 Merry Christmas 2024 & Happy New Year 2025 | Avuyile Mthembu">
+    <meta property="twitter:description" content="Join Avuyile Mthembu in celebrating the festive season with joy, peace, and prosperity!">
+
+    <title>🎄 Merry Christmas 2024 & Happy New Year 2025 | Avuyile Mthembu</title>
+
+    <style>
+        :root {
+            --christmas-red: #d42426;
+            --christmas-green: #165B33;
+            --christmas-gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10vh) translateX(-10vw);
+            }
+            100% {
+                transform: translateY(110vh) translateX(10vw);
+            }
+        }
+
+        @keyframes treeGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px var(--christmas-gold));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--christmas-gold));
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .snow {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: snowfall linear infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            animation: treeGlow 2s infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--christmas-gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .christmas-tree {
+            font-size: 5rem;
+            margin: 2rem 0;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            transform: translateZ(0);
+        }
+
+        .countdown {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: var(--christmas-red);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 100px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .christmas-tree {
+                font-size: 3rem;
+            }
+
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snow" id="snow"></div>
+    
+    <div class="container">
+        <header>
+            <h1>🎄 Merry Christmas 2024 🎅</h1>
+            <p>From Avuyile Mthembu</p>
+        </header>
+
+        <div class="message">
+            <p>Wishing you and your loved ones a blessed Christmas filled with joy, peace, and wonderful memories. May the magic of the season bring warmth to your heart and happiness to your home.</p>
+        </div>
+
+        <div class="countdown">
+            <h2>Countdown to New Year 2025</h2>
+            <div class="countdown-timer" id="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
+            <p>Website: <a href="https://avuyilemthembu.co.za" style="color: var(--christmas-gold);">avuyilemthembu.co.za</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Create snowflakes
+        function createSnow() {
+            const snow = document.getElementById('snow');
+            const numberOfSnowflakes = 50;
+
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.opacity = Math.random();
+                snowflake.style.width = snowflake.style.height = `${Math.random() * 4 + 2}px`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.animationDelay = `${Math.random() * 2}s`;
+                snow.appendChild(snowflake);
+            }
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            const newYear = new Date('January 1, 2025 00:00:00').getTime();
+            
+            function update() {
+                const now = new Date().getTime();
+                const distance = newYear - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById('countdown').innerHTML = '<h2>Happy New Year 2025! 🎉</h2>';
+                }
+            }
+
+            const interval = setInterval(update, 1000);
+            update();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createSnow();
+            updateCountdown();
+        });
+    </script>
+</body>
+</html>
