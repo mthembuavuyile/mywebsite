@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome 2025 with Avuyile Mthembu. Join the countdown to the New Year and celebrate together!">
+    <meta name="keywords" content="Avuyile Mthembu, New Year 2025, Countdown, Celebration, South Africa">
+    <meta name="author" content="Avuyile Mthembu">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/newyear2025.html">
+    <meta property="og:title" content="🎉 New Year 2025 Countdown | Avuyile Mthembu">
+    <meta property="og:description" content="Join Avuyile Mthembu in welcoming 2025 with joy and celebration!">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000066'/><text x='50' y='50' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle'>🎉</text></svg>">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://avuyilemthembu.co.za/newyear2025.html">
+    <meta property="twitter:title" content="🎉 New Year 2025 Countdown | Avuyile Mthembu">
+    <meta property="twitter:description" content="Join Avuyile Mthembu in welcoming 2025 with joy and celebration!">
+
+    <title>🎉 New Year 2025 Countdown | Avuyile Mthembu</title>
+
+    <style>
+        :root {
+            --nye-blue: #000066;
+            --nye-gold: #FFD700;
+            --nye-silver: #C0C0C0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10vh) translateX(-10vw);
+            }
+            100% {
+                transform: translateY(110vh) translateX(10vw);
+            }
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateZ(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes celebrationGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px var(--nye-gold);
+            }
+            50% {
+                text-shadow: 0 0 30px var(--nye-silver);
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000033, #000066);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .confetti-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--nye-gold);
+            opacity: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            animation: celebrationGlow 2s infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--nye-gold);
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            transform: translateZ(0);
+        }
+
+        .countdown {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: var(--nye-blue);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 100px;
+            border: 2px solid var(--nye-gold);
+        }
+
+        .celebration-message {
+            display: none;
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--nye-gold);
+            animation: celebrationGlow 1s infinite;
+            margin: 2rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti-container" id="confetti"></div>
+    
+    <div class="container">
+        <header>
+            <h1>🎉 New Year 2025 Countdown 🎊</h1>
+            <p>With Avuyile Mthembu</p>
+        </header>
+
+        <div class="message">
+            <p>As we bid farewell to 2024 and welcome 2025, let's embrace the endless possibilities that lie ahead. May the New Year bring you joy, success, and wonderful opportunities.</p>
+        </div>
+
+        <div class="countdown">
+            <h2>Countdown to 2025</h2>
+            <div class="countdown-timer" id="countdown">
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="celebration-message" id="celebrationMessage">
+            🎉 Happy New Year 2025! 🎊
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
+            <p>Website: <a href="https://avuyilemthembu.co.za" style="color: var(--nye-gold);">avuyilemthembu.co.za</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Create confetti effect
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            confettiContainer.style.display = 'block';
+            const colors = ['#FFD700', '#C0C0C0', '#FF0000', '#00FF00', '#0000FF'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear`;
+                confetti.style.opacity = 1;
+                confettiContainer.appendChild(confetti);
+
+                confetti.addEventListener('animationend', () => {
+                    confetti.remove();
+                });
+            }
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            const newYear = new Date('January 1, 2025 00:00:00').getTime();
+            
+            function update() {
+                const now = new Date().getTime();
+                const distance = newYear - now;
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById('countdown').style.display = 'none';
+                    document.getElementById('celebrationMessage').style.display = 'block';
+                    createConfetti();
+                    // Create new confetti every few seconds
+                    setInterval(createConfetti, 3000);
+                }
+            }
+
+            const interval = setInterval(update, 1000);
+            update();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCountdown();
+        });
+    </script>
+</body>
+</html>
