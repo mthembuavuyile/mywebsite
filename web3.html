@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus of the Future | Vylex Nexys</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.css" rel="stylesheet">
+    <style>
+        :root {
+            --accent-green: #32CD32;
+            --bg-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-white);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        .globe {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .globe-wireframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border: 2px solid var(--accent-green);
+            border-radius: 50%;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg) rotateX(0deg); }
+            to { transform: rotateY(360deg) rotateX(360deg); }
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #333, var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #666;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hexagon-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--accent-green);
+        }
+
+        .timeline-item {
+            margin: 2rem 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: var(--accent-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="globe">
+            <div class="globe-wireframe"></div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hexagon-bg" id="hexagonPattern"></div>
+        <div class="hero-content">
+            <h1>Nexus of the Future</h1>
+            <p>Empowering Decentralization, AI, and a Utopian Web3 Future</p>
+            <button class="start-button">Start Your Journey</button>
+        </div>
+    </section>
+
+    <section class="section" id="web3">
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Birth of Web3</h3>
+                <p>The emergence of blockchain technology and decentralized networks</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Smart Contracts</h3>
+                <p>Revolutionary self-executing contracts on the blockchain</p>
+            </div>
+            <div class="timeline-item">
+                <h3>DeFi Revolution</h3>
+                <p>Democratizing finance through decentralized protocols</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="dapps">
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-front">
+                    <h3>Decentralized Finance</h3>
+                    <p>Revolutionizing traditional financial systems</p>
+                </div>
+                <div class="card-back">
+                    <p>Access borderless financial services powered by smart contracts</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-front">
+                    <h3>NFT Marketplace</h3>
+                    <p>Digital ownership reimagined</p>
+                </div>
+                <div class="card-back">
+                    <p>Create, buy, and sell unique digital assets on the blockchain</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-front">
+                    <h3>DAO Governance</h3>
+                    <p>Community-driven decision making</p>
+                </div>
+                <div class="card-back">
+                    <p>Participate in decentralized governance and shape the future</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-pattern"></div>
+        <p>Powered by Vylex Nexys IT Corp.</p>
+        <p>Designed by Vylex Nexys. Engineered for the Future.</p>
+        <p>By Avuyile Mthembu, CEO</p>
+    </footer>
+
+    <script>
+        // Loading screen animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.loading-screen').style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Hexagon background pattern
+        function createHexagonPattern() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            
+            const pattern = document.createElementNS("http://www.w3.org/2000/svg", "pattern");
+            pattern.setAttribute("id", "hexagonPattern");
+            pattern.setAttribute("width", "50");
+            pattern.setAttribute("height", "43.4");
+            pattern.setAttribute("patternUnits", "userSpaceOnUse");
+            
+            const hexagon = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            hexagon.setAttribute("d", "M25 0 L50 14.433 L50 28.867 L25 43.3 L0 28.867 L0 14.433 Z");
+            hexagon.setAttribute("fill", "none");
+            hexagon.setAttribute("stroke", "#32CD32");
+            hexagon.setAttribute("stroke-width", "1");
+            
+            pattern.appendChild(hexagon);
+            svg.appendChild(pattern);
+            
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("width", "100%");
+            rect.setAttribute("height", "100%");
+            rect.setAttribute("fill", "url(#hexagonPattern)");
+            
+            svg.appendChild(rect);
+            document.querySelector('.hexagon-bg').appendChild(svg);
+        }
+
+        createHexagonPattern();
+
+        // Intersection Observer for timeline items
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
