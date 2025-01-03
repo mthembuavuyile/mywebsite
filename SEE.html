@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Primary Meta Tags -->
+        <title>Sandanezwe Embodiment of Excellence | Youth Development & Education</title>
+        <meta name="title" content="Sandanezwe Embodiment of Excellence | Youth Development & Education">
+        <meta name="description" content="Empowering youth through academic support, leadership development, and community initiatives in Sandanezwe Rural Area. Join our mission to create lasting change through education.">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://see.org/">
+        <meta property="og:title" content="Sandanezwe Embodiment of Excellence | Youth Development & Education">
+        <meta property="og:description" content="Empowering youth through academic support, leadership development, and community initiatives in Sandanezwe Rural Area. Join our mission to create lasting change through education.">
+        <meta property="og:image" content="https://see.org/images/og-image.jpg">
+    
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://see.org/">
+        <meta property="twitter:title" content="Sandanezwe Embodiment of Excellence | Youth Development & Education">
+        <meta property="twitter:description" content="Empowering youth through academic support, leadership development, and community initiatives in Sandanezwe Rural Area. Join our mission to create lasting change through education.">
+        <meta property="twitter:image" content="https://see.org/images/twitter-image.jpg">
+    
+        <!-- Additional SEO Meta Tags -->
+        <meta name="keywords" content="youth development, education, academic support, leadership development, rural development, Sandanezwe, NSFAS applications, CAO applications, community initiatives">
+        <meta name="author" content="Sandanezwe Embodiment of Excellence">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="English">
+        <meta name="revisit-after" content="7 days">
+        <meta name="geo.region" content="ZA">
+        <meta name="geo.placename" content="Sandanezwe Rural Area">
+    
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+    
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://see.org/">
+    
+        <!-- External Resources -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+        <!-- Additional CSS -->
+        <style>
+    
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #bfdbfe;
+            --text-light: #f8fafc;
+            --text-dark: #1e293b;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: rgba(30, 58, 138, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('/api/placeholder/1920/1080') center/cover;
+            opacity: 0.1;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--text-light);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-light);
+            color: var(--primary);
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary-light);
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--primary);
+            padding: 2rem;
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">S.E.E</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#vision">Vision</a>
+                <a href="#about">About</a>
+                <a href="#programs">Programs</a>
+                <a href="#initiatives">Initiatives</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav">
+        <button class="close-menu">✕</button>
+        <a href="#home">Home</a>
+        <a href="#vision">Vision</a>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#initiatives">Initiatives</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Ye Are the Light of the World</h1>
+            <p>A Chosen Generation</p>
+            <div class="btn-group">
+                <a href="#programs" class="btn btn-primary">Our Programs</a>
+                <a href="#contact" class="btn btn-outline">Get Involved</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="container" data-aos="fade-up">
+        <h2 class="section-title">Our Vision</h2>
+        <div class="card">
+            <p>To be a leading youth development organization, recognized for our innovative programs, passionate team, and commitment to empowering young people. We envision a future where all young people have access to opportunities, resources, and support to thrive and reach their full potential.</p>
+        </div>
+    </section>
+
+    <section id="about" class="container" data-aos="fade-up">
+        <h2 class="section-title">Our Mission</h2>
+        <div class="card">
+            <p>To provide a supportive and inclusive environment where young people can develop their skills, build their confidence, and unlock their full potential. We strive to foster a sense of belonging, promote social responsibility, and encourage young people to become active contributors to their communities.</p>
+        </div>
+    </section>
+
+    <section id="programs" class="container">
+        <h2 class="section-title">Our Programs</h2>
+        <div class="grid grid-2">
+            <div class="card" data-aos="fade-right">
+                <h3>Academic Support</h3>
+                <ul>
+                    <li>NSFAS Applications</li>
+                    <li>CAO Applications</li>
+                    <li>TVET College Applications</li>
+                    <li>Exam Prayer Sessions</li>
+                    <li>Exam Care Packages</li>
+                </ul>
+            </div>
+            <div class="card" data-aos="fade-left">
+                <h3>Development Programs</h3>
+                <ul>
+                    <li>Academic Camps with Tutors</li>
+                    <li>Safe Transportation</li>
+                    <li>Cross-night Programmes</li>
+                    <li>Computer Literacy</li>
+                    <li>Sports Tournaments</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="initiatives" class="container">
+        <h2 class="section-title">Our Initiatives</h2>
+        <div class="grid grid-2">
+            <div class="card" data-aos="fade-up">
+                <h3>Leadership Development</h3>
+                <p>Our board members lead by example with strong educational qualifications and commitment to excellence. We foster leadership through mentorship, training, and practical experience.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Community Impact</h3>
+                <p>Focused on rural development through sustainable projects and educational initiatives. We believe in creating lasting change through empowerment and education.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="card" data-aos="fade-up">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+                <p>info@see.org</p>
+            </div>
+            <div class="contact-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                <p>+27 123 456 789</p>
+            </div>
+            <div class="contact-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                <p>Sandanezwe Rural Area</p>
+            </div>
+    
+            <!-- Contact Form -->
+            <form class="contact-form" onsubmit="sendWhatsAppMessage(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+    
+            <!-- Quick Action Button -->
+            <button class="btn btn-secondary" onclick="sendHi()">Send a greeting message via WhatsApp to 064 878 4287</button>
+        </div>
+    </section>
+    
+    <footer>
+        <p class="scripture">"I can do all things through Christ who strengthens me" (Philippians 4:13)</p>
+        <p>&copy; 2025 Sandanezwe Embodiment of Excellence. All Rights Reserved.</p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 1000, once: true });
+    
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+    
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    
+        closeMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    
+        // Send Hi Button Action
+        function sendHi() {
+            const phoneNumber = '27648784287'; // WhatsApp number with country code
+            const message = 'Hi';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    
+        // Contact Form Submission (Optional Functionality)
+        function sendWhatsAppMessage(event) {
+            event.preventDefault();
+            alert('Thank you for reaching out!');
+        }
+    
+        // Navbar Scroll Effect
+        const nav = document.querySelector('nav');
+        let lastScroll = 0;
+    
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+    
+            if (currentScroll <= 0) {
+                nav.style.transform = 'translateY(0)';
+                return;
+            }
+    
+            if (currentScroll > lastScroll && currentScroll > 80) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+    
+            lastScroll = currentScroll;
+        });
+    </script>    
+</body>
+</html>
