@@ -25,13 +25,12 @@
         }
 
         .hero-section {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 2rem 0;
         }
 
         .title-card {
@@ -112,7 +111,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .circuit-bg {
@@ -149,6 +148,7 @@
             width: 200px;
             height: 200px;
             perspective: 1000px;
+            margin: 2rem auto;
             animation: fadeIn 1s ease forwards;
         }
 
@@ -174,6 +174,7 @@
             color: var(--light);
         }
 
+        /* Animations */
         @keyframes scaleDots {
             0% { opacity: 1; background-size: 20px 20px; }
             50% { opacity: 1; background-size: 200px 200px; }
@@ -212,8 +213,17 @@
                 width: calc(90vw / 4);
                 height: calc((90vw / 4) * 1.33);
             }
+            .rotating-cube {
+                width: 150px;
+                height: 150px;
+            }
+            .cube-face {
+                width: 150px;
+                height: 150px;
+                font-size: 1.5rem;
+            }
             .vylex-section {
-                text-align: center;
+                padding: 4rem 1rem;
             }
         }
     </style>
@@ -267,12 +277,12 @@
 
         <div class="rotating-cube">
             <div class="cube">
-                <div class="cube-face" style="transform: translateZ(100px)">Vylex</div>
-                <div class="cube-face" style="transform: rotateY(180deg) translateZ(100px)">Nexys</div>
-                <div class="cube-face" style="transform: rotateY(90deg) translateZ(100px)">Web</div>
-                <div class="cube-face" style="transform: rotateY(-90deg) translateZ(100px)">Apps</div>
-                <div class="cube-face" style="transform: rotateX(90deg) translateZ(100px)">Tech</div>
-                <div class="cube-face" style="transform: rotateX(-90deg) translateZ(100px)">Software</div>
+                <div class="cube-face" style="transform: translateZ(75px)">Vylex</div>
+                <div class="cube-face" style="transform: rotateY(180deg) translateZ(75px)">Nexys</div>
+                <div class="cube-face" style="transform: rotateY(90deg) translateZ(75px)">Web</div>
+                <div class="cube-face" style="transform: rotateY(-90deg) translateZ(75px)">Apps</div>
+                <div class="cube-face" style="transform: rotateX(90deg) translateZ(75px)">Tech</div>
+                <div class="cube-face" style="transform: rotateX(-90deg) translateZ(75px)">Future</div>
             </div>
         </div>
     </section>
