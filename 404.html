@@ -4,92 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | Avuyile Mthembu</title>
+    <meta name="description" content="Page not found - 404 error on Avuyile Mthembu's website. Return to the homepage or contact for support.">
     <style>
+        /* CSS Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Root Variables */
+        :root {
+            --color-primary: #2d3436;
+            --color-secondary: #0984e3;
+            --color-accent: #00cec9;
+            --color-text: #dfe6e9;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition-standard: all 0.3s ease;
+        }
+
+        /* Body Styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            font-family: var(--font-primary);
+            text-align: center;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #0d6efd;
-        }
-
-        .container {
-            text-align: center;
             padding: 20px;
-            max-width: 600px;
         }
 
         h1 {
-            font-size: 120px;
-            margin-bottom: 20px;
-            color: #0d6efd;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #495057;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #6c757d;
-            line-height: 1.6;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #0d6efd;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-
-        .btn:hover {
-            background: #0b5ed7;
-        }
-
-        .error-code {
-            font-family: monospace;
-            background: rgba(13, 110, 253, 0.1);
-            padding: 5px 10px;
-            border-radius: 4px;
-            color: #0d6efd;
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 80px;
-            }
-            
-            h2 {
-                font-size: 20px;
-            }
-            
-            p {
-                font-size: 16px;
-            }
+            font-size: 6rem;
+            color: var(--color-accent);
+            margin-bottom: 10px;
         }
 
         .ascii-art {
             font-family: monospace;
-            white-space: pre;
+            color: var(--color-secondary);
             margin: 20px 0;
-            color: #0d6efd;
-            font-size: 14px;
+            white-space: pre;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: var(--transition-standard);
+        }
+
+        .btn:hover {
+            background-color: var(--color-accent);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -105,9 +107,12 @@
   \_____|\___/    
         </div>
         <h2>Oops! Page Not Found</h2>
-        <p>The page you're looking for seems to have gone on an unexpected adventure. Don't worry, even the best developers encounter <span class="error-code">404</span> errors sometimes!</p>
+        <p>The page you're looking for seems to have gone on an unexpected adventure. Don’t worry, even the best developers encounter <span class="error-code">404</span> errors sometimes!</p>
         <p>- Avuyile Mthembu, Developer & Programmer -</p>
-        <a href="/" class="btn">Return to Homepage</a>
+        <a href="/" class="btn" aria-label="Return to Homepage">Return to Homepage</a>
     </div>
+    <footer class="footer">
+        &copy; 2024 Avuyile Mthembu - Vylex Nexys. All Rights Reserved.
+    </footer>
 </body>
 </html>

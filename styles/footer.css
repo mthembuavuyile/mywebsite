@@ -1,0 +1,34 @@
+/* Footer */
+.footer {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    margin-top: 50px;
+}
+footer a{
+    color: rgb(150, 156, 161);
+}
+
+.footer__links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.footer__link:hover {
+    color: var(--color-accent);
+}
+
+.footer__copyright {
+    text-align: center;
+    font-size: 0.9rem;
+}
+@media screen and (max-width: 768px) {
+    .footer__links {
+            display: flex;
+            flex-wrap: wrap; /* Allows links to wrap to the next line */
+            gap: 1rem; /* Adds space between links */
+            justify-content: center; /* Centers the links */
+            text-align: center;
+        }
+    }

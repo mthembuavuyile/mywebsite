@@ -1,0 +1,259 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #2C3E50;
+}
+
+/* Header and Navigation */
+.header {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure header stays on top */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #3498DB;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 2rem;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: white;
+    color: #2C3E50;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+    background-color: #3498DB;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Content Sections */
+.intro {
+    background-color: #f8f9fa;
+    padding: 4rem 2rem;
+}
+
+.intro p {
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+    padding: 2rem;
+    color: #2C3E50;
+    font-size: 2.5rem;
+    background-color: #f8f9fa;
+}
+
+h3 {
+    color: #34495E;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Card Sections */
+.faces, .journey, .fun-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background-color: white;
+}
+
+.face-card, .journey-card, .fact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.face-card:hover, .journey-card:hover, .fact-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    color: white;
+}
+/* Burger Menu Styles */
+.burger {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 100;
+}
+
+.burger-line {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.burger-line:nth-child(1) { top: 0; }
+.burger-line:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.burger-line:nth-child(3) { bottom: 0; }
+
+/* Active burger animation */
+.burger.active .burger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger.active .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active .burger-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: #2C3E50;
+        padding-top: 80px;
+        transition: 0.3s ease;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .profile-img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .faces, .journey, .fun-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        display: block;
+        text-align: center;
+    }
+}
