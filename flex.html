@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avuyile Mthembu | Vylex Nexys</title>
     <link href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Noto+Serif+Vithkuqi:wght@400;700&family=Space+Mono&family=Rajdhani:wght@300;700&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --primary: #00ffff;
             --secondary: #00b7ff;
             --dark: #000000;
             --light: #ffffff;
+            --accent: #ff00ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -41,8 +47,7 @@
             justify-content: center;
             position: relative;
             transform-style: preserve-3d;
-            animation: scaling linear 0.15s 2500ms backwards,
-                       shaking linear 0.45s 2500ms;
+            animation: scaling linear 0.15s 2500ms backwards, shaking linear 0.45s 2500ms;
             margin-bottom: 2rem;
         }
 
@@ -87,8 +92,7 @@
             transform: translate(-50%, -50%);
             z-index: 2;
             height: min(150px, 15vw);
-            animation: fallin 0.5s cubic-bezier(0.32, 0.58, 0.69, 0.88) 2500ms,
-                       resize 0.5s ease-in 3500ms;
+            animation: fallin 0.5s cubic-bezier(0.32, 0.58, 0.69, 0.88) 2500ms, resize 0.5s ease-in 3500ms;
             animation-fill-mode: both;
         }
 
@@ -120,9 +124,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(90deg, transparent 95%, rgba(0,255,255,0.1) 95%),
-                linear-gradient(transparent 95%, rgba(0,255,255,0.1) 95%);
+            background: linear-gradient(90deg, transparent 95%, rgba(0,255,255,0.1) 95%), linear-gradient(transparent 95%, rgba(0,255,255,0.1) 95%);
             background-size: 20px 20px;
             opacity: 0.3;
             animation: circuitMove 20s linear infinite;
@@ -174,118 +176,398 @@
             color: var(--light);
         }
 
-        /* Animations */
         @keyframes scaleDots {
-            0% { opacity: 1; background-size: 20px 20px; }
-            50% { opacity: 1; background-size: 200px 200px; }
-            100% { opacity: 0.5; background-size: 20px 20px; }
+            0% {
+                opacity: 1;
+                background-size: 20px 20px;
+            }
+            50% {
+                opacity: 1;
+                background-size: 200px 200px;
+            }
+            100% {
+                opacity: 0.5;
+                background-size: 20px 20px;
+            }
         }
 
         @keyframes scaleLetters {
-            0%, 80% { transform: translate(-50%, -50%) scale(0); }
-            100% { transform: translate(-50%, -50%) scale(1); }
+            0%, 80% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
 
         @keyframes fallin {
-            0% { transform: translate(-50%, -50%) translateZ(10000px) rotateY(225deg); }
-            100% { transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg); }
+            0% {
+                transform: translate(-50%, -50%) translateZ(10000px) rotateY(225deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg);
+            }
         }
 
         @keyframes rotate {
-            from { transform: rotateX(0) rotateY(0); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
+            from {
+                transform: rotateX(0) rotateY(0);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
         }
 
         @keyframes circuitMove {
-            from { background-position: 0 0; }
-            to { background-position: 20px 20px; }
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 20px 20px;
+            }
         }
 
         @keyframes glitch {
-            0%, 100% { text-shadow: 0 0 10px var(--primary); }
-            2%, 52% { text-shadow: 3px 3px 0 red, -3px -3px 0 blue; }
-            4%, 54% { text-shadow: 0 0 10px var(--primary); }
+            0%, 100% {
+                text-shadow: 0 0 10px var(--primary);
+            }
+            2%, 52% {
+                text-shadow: 3px 3px 0 red, -3px -3px 0 blue;
+            }
+            4%, 54% {
+                text-shadow: 0 0 10px var(--primary);
+            }
         }
 
         @media (max-width: 768px) {
-            .title-card { transform: scale(0.8); }
+            .title-card {
+                transform: scale(0.8);
+            }
+
             .box {
                 width: calc(90vw / 4);
                 height: calc((90vw / 4) * 1.33);
             }
+
             .rotating-cube {
                 width: 150px;
                 height: 150px;
             }
+
             .cube-face {
                 width: 150px;
                 height: 150px;
                 font-size: 1.5rem;
             }
+
             .vylex-section {
                 padding: 4rem 1rem;
+            }
+        }
+
+        /* City Styles */
+        .scene {
+            perspective: 1000px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .city {
+            transform-style: preserve-3d;
+            animation: rotateCity 20s infinite linear;
+            position: relative;
+        }
+
+        .building {
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .face {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .window {
+            position: absolute;
+            background: rgba(255, 255, 100, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 100, 0.5);
+        }
+
+        @keyframes rotateCity {
+            from {
+                transform: rotateY(0deg) rotateX(20deg);
+            }
+            to {
+                transform: rotateY(360deg) rotateX(20deg);
+            }
+        }
+
+        .ui-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .connect-btn {
+            background: #6a1b9a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .connect-btn:hover {
+            background: #4a0d6e;
+            transform: scale(1.05);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+        }
+
+
+        .scroll-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .parallax-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .story-container {
+            position: relative;
+            padding: 2rem;
+            color: var(--light);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .story-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary), transparent);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(100px, 100px) rotate(360deg);
+            }
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center top;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 50px 50px;
+            }
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Previous styles remain the same */
+        /* ... (keep all your previous styles) ... */
+
+        @media (max-width: 768px) {
+            .story-container {
+                padding: 1rem;
+            }
+
+            .story-title {
+                font-size: 2rem;
+            }
+
+            .story-text {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="progress-bar"></div>
+    <div class="cyber-grid"></div>
     <div class="circuit-bg"></div>
-    
-    <section class="hero-section">
-        <div class="title-card">
-            <div class="box">
-                <div class="dots"></div>
-            </div>
-            <div class="box" style="--delay: 150ms">
-                <div class="dots animate"></div>
-                <div class="letter">C</div>
-            </div>
-            <div class="box" style="--delay: 300ms">
-                <div class="dots animate"></div>
-                <div class="letter">O</div>
-            </div>
-            <div class="box" style="--delay: 450ms">
-                <div class="dots animate"></div>
-                <div class="letter">D</div>
-            </div>
-            <div class="box" style="--delay: 600ms">
-                <div class="dots animate"></div>
-                <div class="letter">E</div>
-            </div>
-            <div class="box" style="--delay: 750ms">
-                <div class="dots animate"></div>
-                <div class="letter">R</div>
-            </div>
-            <div class="box">
-                <div class="dots"></div>
-            </div>
-            <div class="name">
-                <div class="text">AVUYILE</div>
-            </div>
-        </div>
-    </section>
 
-    <section class="vylex-section">
-        <div class="glitch-container">
-            <h1 class="glitch-text">Vylex Nexys</h1>
-            <h2 style="color: var(--primary); font-family: 'Space Mono', monospace;">Pioneering the Future of Technology</h2>
-            <p style="color: var(--light); max-width: 600px; margin: 2rem auto;">
-                Innovation meets excellence in software development. From web applications to system architecture, 
-                we transform ideas into powerful digital solutions.
-            </p>
-        </div>
-
-        <div class="rotating-cube">
-            <div class="cube">
-                <div class="cube-face" style="transform: translateZ(75px)">Vylex</div>
-                <div class="cube-face" style="transform: rotateY(180deg) translateZ(75px)">Nexys</div>
-                <div class="cube-face" style="transform: rotateY(90deg) translateZ(75px)">Web</div>
-                <div class="cube-face" style="transform: rotateY(-90deg) translateZ(75px)">Apps</div>
-                <div class="cube-face" style="transform: rotateX(90deg) translateZ(75px)">Tech</div>
-                <div class="cube-face" style="transform: rotateX(-90deg) translateZ(75px)">Future</div>
+    <div class="scroll-content">
+        <section class="parallax-section">
+            <div class="story-container" data-scroll>
+                <h2 class="story-title">The Dawn of Decentralization</h2>
+                <p class="story-text">
+                    In a world increasingly controlled by centralized powers, <span class="highlight-text">Vylex Nexys</span> 
+                    emerges as a beacon of digital freedom. We're not just building technology; we're architecting the future 
+                    of digital autonomy.
+                </p>
             </div>
-        </div>
-    </section>
+            <div class="floating-elements"></div>
+        </section>
+
+        <section class="parallax-section">
+            <div class="story-container" data-scroll>
+                <h2 class="story-title">Web3 Revolution</h2>
+                <p class="story-text">
+                    Through blockchain technology and decentralized systems, we're dismantling the old paradigms of digital 
+                    control. Every line of code we write is a step towards a more equitable digital future.
+                </p>
+            </div>
+        </section>
+        <section class="hero-section">
+            <div class="title-card">
+                <div class="box">
+                    <div class="dots"></div>
+                </div>
+                <div class="box" style="--delay: 150ms">
+                    <div class="dots animate"></div>
+                    <div class="letter">C</div>
+                </div>
+                <div class="box" style="--delay: 300ms">
+                    <div class="dots animate"></div>
+                    <div class="letter">O</div>
+                </div>
+                <div class="box" style="--delay: 450ms">
+                    <div class="dots animate"></div>
+                    <div class="letter">D</div>
+                </div>
+                <div class="box" style="--delay: 600ms">
+                    <div class="dots animate"></div>
+                    <div class="letter">E</div>
+                </div>
+                <div class="box" style="--delay: 750ms">
+                    <div class="dots animate"></div>
+                    <div class="letter">R</div>
+                </div>
+                <div class="box">
+                    <div class="dots"></div>
+                </div>
+                <div class="name">
+                    <div class="text">AVUYILE</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="vylex-section">
+            <div class="glitch-container">
+                <h1 class="glitch-text">Vylex Nexys</h1>
+                <h2 style="color: var(--primary); font-family: 'Space Mono', monospace;">Pioneering the Future of Technology</h2>
+                <p style="color: var(--light); max-width: 600px; margin: 2rem auto;">
+                    Innovation meets excellence in software development. From web applications to system architecture, 
+                    we transform ideas into powerful digital solutions.
+                </p>
+            </div>
+
+            <div class="rotating-cube">
+                <div class="cube">
+                    <div class="cube-face" style="transform: translateZ(75px)">Vylex</div>
+                    <div class="cube-face" style="transform: rotateY(180deg) translateZ(75px)">Nexys</div>
+                    <div class="cube-face" style="transform: rotateY(90deg) translateZ(75px)">Web</div>
+                    <div class="cube-face" style="transform: rotateY(-90deg) translateZ(75px)">Apps</div>
+                    <div class="cube-face" style="transform: rotateX(90deg) translateZ(75px)">Tech</div>
+                    <div class="cube-face" style="transform: rotateX(-90deg) translateZ(75px)">Future</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="scene">
+        <div class="city"></div>
+    </div>
+
+    <div class="ui-container">
+        <h2 class="neon-text">Vylex Nexys</h2>
+        <button class="connect-btn"><a href="index.html">Connect</a></button>
+        <p>The future of Web</p>
+    </div>
 
     <script>
         document.addEventListener('mousemove', (e) => {
@@ -293,6 +575,123 @@
             const x = (e.clientX - window.innerWidth / 2) / 50;
             const y = (e.clientY - window.innerHeight / 2) / 50;
             cube.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        });
+        class Building {
+            constructor(x, y, z, width, height, depth, color) {
+                this.element = document.createElement('div');
+                this.element.className = 'building';
+                this.element.style.width = width + 'px';
+                this.element.style.height = height + 'px';
+                this.element.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+
+                const faces = [
+                    { transform: `rotateY(0deg) translateZ(${depth/2}px)`, width: width, height: height },
+                    { transform: `rotateY(180deg) translateZ(${depth/2}px)`, width: width, height: height },
+                    { transform: `rotateY(90deg) translateZ(${width/2}px)`, width: depth, height: height },
+                    { transform: `rotateY(-90deg) translateZ(${width/2}px)`, width: depth, height: height },
+                    { transform: `rotateX(90deg) translateZ(${height/2}px)`, width: width, height: depth },
+                    { transform: `rotateX(-90deg) translateZ(${height/2}px)`, width: width, height: depth }
+                ];
+
+                faces.forEach(face => {
+                    const faceElement = document.createElement('div');
+                    faceElement.className = 'face';
+                    faceElement.style.width = face.width + 'px';
+                    faceElement.style.height = face.height + 'px';
+                    faceElement.style.transform = face.transform;
+                    faceElement.style.backgroundColor = color;
+
+                    for(let i = 0; i < 4; i++) {
+                        for(let j = 0; j < 3; j++) {
+                            if(Math.random() > 0.3) {
+                                const window = document.createElement('div');
+                                window.className = 'window';
+                                window.style.width = '10px';
+                                window.style.height = '10px';
+                                window.style.left = (face.width * 0.2 + i * 20) + 'px';
+                                window.style.top = (face.height * 0.2 + j * 30) + 'px';
+                                faceElement.appendChild(window);
+                            }
+                        }
+                    }
+                    this.element.appendChild(faceElement);
+                });
+            }
+        }
+        const city = document.querySelector('.city');
+            const colors = ['#ff00ff33', '#00ffff33', '#ffff0033'];
+
+            for(let i = 0; i < 50; i++) {
+                const x = (Math.random() - 0.5) * 1000;
+                const z = (Math.random() - 0.5) * 1000;
+                const height = 100 + Math.random() * 300;
+                const width = 40 + Math.random() * 60;
+                const depth = 40 + Math.random() * 60;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                const building = new Building(x, -height/2, z, width, height, depth, color);
+                city.appendChild(building.element);
+            }
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = (e.clientX - window.innerWidth/2) * 0.05;
+            const mouseY = (e.clientY - window.innerHeight/2) * 0.05;
+            city.style.transform = `rotateY(${mouseX}deg) rotateX(${mouseY}deg)`;
+        });
+        const connectBtn = document.querySelector('.connect-btn');
+            let isConnected = false;
+
+            connectBtn.addEventListener('click', () => {
+                isConnected = !isConnected;
+                connectBtn.textContent = isConnected ? 'Disconnect' : 'Connect';
+                connectBtn.style.backgroundColor = isConnected ? '#4CAF50' : '#6a1b9a';
+                document.querySelectorAll('.face').forEach(face => {
+                    face.style.boxShadow = isConnected ?
+                        '0 0 20px rgba(0, 255, 0, 0.3)' :
+                        '0 0 20px rgba(0, 255, 255, 0.3)';
+                });
+            });
+    
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-scroll]').forEach((element) => {
+            observer.observe(element);
+        });
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.progress-bar').style.width = scrolled + "%";
+        });
+
+        // Create floating elements
+        const floatingContainers = document.querySelectorAll('.floating-elements');
+        floatingContainers.forEach(container => {
+            for (let i = 0; i < 5; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.width = Math.random() * 100 + 50 + 'px';
+                element.style.height = element.style.width;
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 5 + 's';
+                element.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(element);
+            }
         });
     </script>
 </body>
