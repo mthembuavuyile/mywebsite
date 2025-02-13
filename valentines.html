@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Love 💝</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 30px auto;
+            transform-origin: center;
+            animation: pulse 1.5s ease infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .heart.interactive:hover {
+            transform: scale(1.5) rotate(360deg);
+            animation: none;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: #ff3366;
+            border-radius: 50px 50px 0 0;
+            transition: background 0.3s ease;
+        }
+
+        .heart:hover::before, .heart:hover::after {
+            background: #ff66b2;
+            filter: drop-shadow(0 0 10px #ff3366);
+        }
+
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff3366, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.5em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+            opacity: 0;
+            animation: fadeIn 2s 0.5s forwards;
+        }
+
+        .signature {
+            font-style: italic;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #ff3366;
+            opacity: 0;
+            animation: fadeIn 2s 1s forwards;
+        }
+
+        .music-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .music-btn {
+            background: none;
+            border: 2px solid #ff3366;
+            color: #ff3366;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .music-btn:hover {
+            background: #ff3366;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .interactive-elements {
+            margin-top: 30px;
+        }
+
+        .glow-button {
+            background: linear-gradient(45deg, #ff3366, #ff6b6b);
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: buttonGlow 2s infinite;
+        }
+
+        .glow-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ff3366;
+        }
+
+        .love-meter {
+            width: 200px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff3366, #ff6b6b);
+            transition: width 1s ease;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(45deg, #ff3366, #ff6b6b);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            max-width: 80%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff3366;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px #ff3366); }
+            50% { filter: drop-shadow(0 0 20px #ff3366); }
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% { box-shadow: 0 0 5px #ff3366; }
+            50% { box-shadow: 0 0 20px #ff3366; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(45deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .message { font-size: 1.2em; }
+            .modal-content { width: 90%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="music-controls">
+        <button id="toggleMusic" class="music-btn">♪</button>
+        <audio id="bgMusic" loop>
+            <source src="assets/audio/Ella-Mai-Trip-INSTRUMENTAL.m4a" type="audio/mp3">
+        </audio>
+    </div>
+    
+    <div class="container">
+        <h1>Happy Valentine's Day, My Love</h1>
+        <div class="heart interactive"></div>
+        <div class="message">
+            In the vast code of life,<br>
+            You are my perfect function.<br>
+            No syntax error could describe<br>
+            The beauty of our connection.<br><br>
+            Like an infinite loop of love,<br>
+            My heart beats endlessly for you.<br>
+            You're the only variable I need,<br>
+            In everything I do.
+        </div>
+        <div class="signature">
+            With all my love,<br>Avuyile Mthembu
+        </div>
+        
+        <div class="interactive-elements">
+            <button class="glow-button" onclick="showSpecialMessage()">Click for a Special Message</button>
+            <div class="love-meter">
+                <div class="meter-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="specialMessage" class="modal">
+        <div class="modal-content">
+            <h2>My Special Message</h2>
+            <p>Every moment with you is pure magic. You make my world complete! ❤️</p>
+            <button class="glow-button" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Music controls
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('toggleMusic');
+        let isMusicPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                music.pause();
+                musicBtn.style.background = 'none';
+                musicBtn.style.color = '#ff3366';
+            } else {
+                music.play();
+                musicBtn.style.background = '#ff3366';
+                musicBtn.style.color = 'white';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+
+        // Love meter animation
+        const meterFill = document.querySelector('.meter-fill');
+        setTimeout(() => {
+            meterFill.style.width = '100%';
+        }, 1000);
+
+        // Modal controls
+        function showSpecialMessage() {
+            const modal = document.getElementById('specialMessage');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('specialMessage');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Floating hearts animation
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animation = `float ${Math.random() * 3 + 2}s linear`;
+            document.body.appendChild(heart);
+
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        setInterval(createFloatingHeart, 300);
+
+        // Interactive heart
+        const heart = document.querySelector('.heart');
+        heart.addEventListener('click', () => {
+            heart.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                heart.style.transform = 'scale(1)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
