@@ -14,11 +14,13 @@
             background: #000;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column; /* Changed to column for better mobile layout */
+            justify-content: center; /* Center vertically */
+            align-items: center;    /* Center horizontally */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll */
             position: relative;
+            padding: 20px; /* Add padding for spacing */
         }
 
         .container {
@@ -29,6 +31,8 @@
             padding: 20px;
             opacity: 0;
             animation: fadeIn 2s forwards;
+            width: 100%; /* Take up the full width */
+            max-width: 600px; /* Limit maximum width on larger screens */
         }
 
         @keyframes fadeIn {
@@ -37,9 +41,9 @@
 
         .heart {
             position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 30px auto;
+            width: 80px; /* Adjusted size for smaller screens */
+            height: 80px; /* Adjusted size for smaller screens */
+            margin: 20px auto; /* Adjusted margin */
             transform-origin: center;
             animation: pulse 1.5s ease infinite;
             cursor: pointer;
@@ -47,15 +51,15 @@
         }
 
         .heart.interactive:hover {
-            transform: scale(1.5) rotate(360deg);
+            transform: scale(1.2) rotate(360deg); /* Adjusted scale */
             animation: none;
         }
 
         .heart::before, .heart::after {
             content: "";
             position: absolute;
-            width: 50px;
-            height: 80px;
+            width: 40px; /* Adjusted size */
+            height: 65px; /* Adjusted size */
             background: #ff3366;
             border-radius: 50px 50px 0 0;
             transition: background 0.3s ease;
@@ -67,7 +71,7 @@
         }
 
         .heart::before {
-            left: 50px;
+            left: 40px; /* Adjusted position */
             transform: rotate(-45deg);
             transform-origin: 0 100%;
         }
@@ -79,8 +83,8 @@
         }
 
         h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 2.5em; /* Adjusted font size */
+            margin-bottom: 15px; /* Adjusted margin */
             background: linear-gradient(45deg, #ff3366, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -88,9 +92,9 @@
         }
 
         .message {
-            font-size: 1.5em;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            font-size: 1.3em; /* Adjusted font size */
+            line-height: 1.5;
+            margin-bottom: 20px; /* Adjusted margin */
             text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
             opacity: 0;
             animation: fadeIn 2s 0.5s forwards;
@@ -98,8 +102,8 @@
 
         .signature {
             font-style: italic;
-            font-size: 1.2em;
-            margin-top: 20px;
+            font-size: 1.1em; /* Adjusted font size */
+            margin-top: 15px; /* Adjusted margin */
             color: #ff3366;
             opacity: 0;
             animation: fadeIn 2s 1s forwards;
@@ -107,8 +111,8 @@
 
         .music-controls {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             z-index: 100;
         }
 
@@ -116,13 +120,13 @@
             background: none;
             border: 2px solid #ff3366;
             color: #ff3366;
-            padding: 10px;
+            padding: 8px; /* Adjusted padding */
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 20px;
-            width: 50px;
-            height: 50px;
+            font-size: 18px; /* Adjusted font size */
+            width: 40px; /* Adjusted size */
+            height: 40px; /* Adjusted size */
         }
 
         .music-btn:hover {
@@ -132,16 +136,16 @@
         }
 
         .interactive-elements {
-            margin-top: 30px;
+            margin-top: 20px; /* Adjusted margin */
         }
 
         .glow-button {
             background: linear-gradient(45deg, #ff3366, #ff6b6b);
             border: none;
-            padding: 15px 30px;
+            padding: 12px 25px; /* Adjusted padding */
             color: white;
             border-radius: 25px;
-            font-size: 1.2em;
+            font-size: 1em; /* Adjusted font size */
             cursor: pointer;
             transition: all 0.3s ease;
             animation: buttonGlow 2s infinite;
@@ -153,11 +157,11 @@
         }
 
         .love-meter {
-            width: 200px;
-            height: 20px;
+            width: 150px; /* Adjusted width */
+            height: 15px; /* Adjusted height */
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            margin: 20px auto;
+            margin: 15px auto; /* Adjusted margin */
             overflow: hidden;
         }
 
@@ -179,15 +183,16 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            overflow: auto; /* Enable scrolling within modal */
         }
 
         .modal-content {
             background: linear-gradient(45deg, #ff3366, #ff6b6b);
-            padding: 30px;
+            padding: 20px; /* Adjusted padding */
             border-radius: 15px;
             text-align: center;
             color: white;
-            max-width: 80%;
+            max-width: 90%; /* Adjusted max width */
             transform: scale(0);
             transition: transform 0.3s ease;
         }
@@ -198,8 +203,8 @@
 
         .floating-heart {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 15px; /* Adjusted size */
+            height: 15px; /* Adjusted size */
             background: #ff3366;
             transform: rotate(45deg);
             opacity: 0;
@@ -227,9 +232,9 @@
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            .message { font-size: 1.2em; }
-            .modal-content { width: 90%; }
+            h1 { font-size: 2.2em; }
+            .message { font-size: 1.1em; }
+            .modal-content { width: 95%; }
         }
     </style>
 </head>
@@ -326,7 +331,7 @@
 
         const heart = document.querySelector('.heart');
         heart.addEventListener('click', () => {
-            heart.style.transform = 'scale(1.5)';
+            heart.style.transform = 'scale(1.2)'; // Reduce scale on click
             setTimeout(() => {
                 heart.style.transform = 'scale(1)';
             }, 200);
