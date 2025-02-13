@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For My Love 💝</title>
+    <title>My Heart Beats For You 💝</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -242,24 +242,24 @@
     </div>
     
     <div class="container">
-        <h1>Happy Valentine's Day, My Love</h1>
+        <h1>To My Beloved</h1>
         <div class="heart interactive"></div>
         <div class="message">
-            In the vast code of life,<br>
-            You are my perfect function.<br>
-            No syntax error could describe<br>
-            The beauty of our connection.<br><br>
-            Like an infinite loop of love,<br>
-            My heart beats endlessly for you.<br>
-            You're the only variable I need,<br>
-            In everything I do.
+            Every sunrise reminds me of your smile,<br>
+            Every star reflects the sparkle in your eyes.<br>
+            My love for you grows deeper each day,<br>
+            Like an ocean that knows no bounds.<br><br>
+            You are my morning coffee and midnight dreams,<br>
+            My reason to smile and my shoulder to lean.<br>
+            In this beautiful journey called life,<br>
+            You're the most precious gift I've received.
         </div>
         <div class="signature">
-            With all my love,<br>Avuyile Mthembu
+            Forever Yours,<br>With All My Heart ❤️
         </div>
         
         <div class="interactive-elements">
-            <button class="glow-button" onclick="showSpecialMessage()">Click for a Special Message</button>
+            <button class="glow-button" onclick="showSpecialMessage()">Open My Heart</button>
             <div class="love-meter">
                 <div class="meter-fill"></div>
             </div>
@@ -268,14 +268,13 @@
 
     <div id="specialMessage" class="modal">
         <div class="modal-content">
-            <h2>My Special Message</h2>
-            <p>Every moment with you is pure magic. You make my world complete! ❤️</p>
+            <h2>My Promise To You</h2>
+            <p>I promise to love you more with each passing day. You are my today and all of my tomorrows. I cherish every moment spent with you, every laugh we share, and every challenge we overcome together. You make my world beautiful simply by being in it. ❤️</p>
             <button class="glow-button" onclick="closeModal()">Close</button>
         </div>
     </div>
 
     <script>
-        // Music controls
         const music = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('toggleMusic');
         let isMusicPlaying = false;
@@ -293,13 +292,11 @@
             isMusicPlaying = !isMusicPlaying;
         });
 
-        // Love meter animation
         const meterFill = document.querySelector('.meter-fill');
         setTimeout(() => {
             meterFill.style.width = '100%';
         }, 1000);
 
-        // Modal controls
         function showSpecialMessage() {
             const modal = document.getElementById('specialMessage');
             modal.style.display = 'flex';
@@ -312,7 +309,6 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
 
-        // Floating hearts animation
         function createFloatingHeart() {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
@@ -327,7 +323,6 @@
 
         setInterval(createFloatingHeart, 300);
 
-        // Interactive heart
         const heart = document.querySelector('.heart');
         heart.addEventListener('click', () => {
             heart.style.transform = 'scale(1.5)';
