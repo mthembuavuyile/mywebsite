@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /Academic-Record-HDIPSD2-Systems-Development-2023-2024.html
+Allow: /
+
+Sitemap: https://avuyilemthembu.co.za/sitemap.xml
