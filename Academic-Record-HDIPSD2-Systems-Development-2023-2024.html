@@ -13,9 +13,21 @@
             --danger: #ef4444;
             --gray: #6b7280;
             --dark-gray: #374151;
-            --light-gray: #e5e7eb; /* Added light gray */
+            --light-gray: #e5e7eb;
+            --background-color: #f9fafb; /* Background color variable */
+            --text-color: var(--dark-gray); /* Default text color variable */
+            --card-background: white; /* Card background variable */
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Card shadow variable */
+            --card-hover-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Card hover shadow variable */
+            --border-radius: 0.5rem; /* Standard border radius */
+            --section-padding: 1.5rem; /* Standard section padding */
+            --header-margin-bottom: 2rem; /* Header margin bottom */
+            --semester-margin-bottom: 1.5rem; /* Semester margin bottom */
+            --record-margin-bottom: 0.5rem; /* Record margin bottom */
+            --table-border: 1px solid var(--light-gray); /* Table border */
         }
 
+        /* Basic Reset & Base Styles (Mobile First) */
         * {
             margin: 0;
             padding: 0;
@@ -24,25 +36,27 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: #f9fafb;
-            color: var(--dark-gray);
+            background-color: var(--background-color);
+            color: var(--text-color);
             min-height: 100vh;
-            padding: 2rem 1rem;
-            line-height: 1.6;
+            padding: 1rem; /* Reduced padding for mobile */
+            line-height: 1.5; /* Slightly reduced line-height for mobile */
+            font-size: 1rem; /* Base font size for mobile */
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px; /* Increased max-width for larger screens */
             margin: 0 auto;
+            padding: 0 1rem; /* Horizontal padding for container */
         }
 
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: var(--header-margin-bottom);
         }
 
         .header h1 {
-            font-size: 2.5rem; /* Slightly larger for main title */
+            font-size: 2rem; /* Adjusted font size for mobile */
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
@@ -50,20 +64,20 @@
         .header h2 {
             color: var(--gray);
             font-weight: 500;
-            font-size: 1.25rem; /* Slightly larger for subtitle */
+            font-size: 1rem; /* Adjusted font size for mobile */
         }
 
-        .year-section, .analysis-section {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s ease; /* Added transition for hover effect */
+        .year-section, .analysis-section, .year-planner {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: var(--section-padding);
+            margin-bottom: var(--section-padding);
+            box-shadow: var(--card-shadow);
+            transition: box-shadow 0.3s ease;
         }
 
-        .year-section:hover, .analysis-section:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced hover shadow */
+        .year-section:hover, .analysis-section:hover, .year-planner:hover {
+            box-shadow: var(--card-hover-shadow);
         }
 
         .year-header {
@@ -75,37 +89,37 @@
         .year-badge {
             background: var(--primary-light);
             color: var(--primary);
-            padding: 0.5rem 0.75rem;
+            padding: 0.4rem 0.6rem; /* Adjusted padding for mobile */
             border-radius: 9999px;
             font-weight: 600;
-            font-size: 0.9rem; /* Slightly larger badge text */
-            margin-right: 1rem;
+            font-size: 0.8rem; /* Adjusted font size for mobile badge */
+            margin-right: 0.75rem; /* Adjusted margin for mobile */
         }
 
         .semester {
-            margin-bottom: 1.5rem;
+            margin-bottom: var(--semester-margin-bottom);
         }
 
         .semester h3 {
             color: var(--gray);
-            font-size: 1.1rem; /* Slightly larger semester title */
+            font-size: 1rem; /* Adjusted font size for mobile semester title */
             margin-bottom: 0.75rem;
             font-weight: 500;
         }
 
         .record {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stacked for mobile by default */
             padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            transition: transform 0.2s, box-shadow 0.2s; /* Transition for box-shadow as well */
-            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--record-margin-bottom);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: var(--table-border);
         }
 
         .record:hover {
-            transform: translateX(5px);
-            box-shadow: 0 2px 7px rgba(0,0,0,0.15); /* Enhanced hover shadow */
+            transform: translateX(3px); /* Reduced hover effect for mobile */
+            box-shadow: var(--card-hover-shadow);
         }
 
         .record-header {
@@ -113,15 +127,18 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.5rem;
+            flex-direction: column; /* Stack subject and module code on mobile */
+            align-items: flex-start; /* Align items to the start on mobile */
         }
 
         .subject {
             font-weight: 600;
-            margin-right: 0.5rem;
+            margin-right: 0; /* Removed right margin for mobile */
+            margin-bottom: 0.25rem; /* Added bottom margin to subject on mobile */
         }
 
         .module-code {
-            font-size: 0.9rem; /* Slightly larger module code */
+            font-size: 0.8rem; /* Adjusted module code size for mobile */
             color: var(--gray);
         }
 
@@ -129,34 +146,43 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-direction: column; /* Stack details on mobile */
+            align-items: flex-start; /* Align details to the start on mobile */
         }
 
         .credits {
-            font-size: 0.9rem; /* Slightly larger credits text */
+            font-size: 0.8rem; /* Adjusted credits text size for mobile */
             color: var(--gray);
+            margin-bottom: 0.25rem; /* Added bottom margin to credits on mobile */
         }
 
         .mark {
             font-weight: bold;
-            padding: 0.4rem 0.9rem; /* Slightly larger mark padding */
+            padding: 0.3rem 0.7rem; /* Adjusted mark padding for mobile */
             border-radius: 9999px;
-            font-size: 0.9rem; /* Slightly larger mark text */
-            margin-left: 1rem;
+            font-size: 0.8rem; /* Adjusted mark text size for mobile */
+            margin-left: 0; /* Removed left margin for mobile */
+        }
+
+        .high, .medium, .low {
+            border-left: 3px solid transparent; /* Reduced border width for mobile */
+            padding-left: 0.7rem; /* Adjusted padding to align with reduced border */
+            margin-left: -0.7rem; /* Compensate for padding to align text */
         }
 
         .high {
             background: #dcfce7;
-            border-left: 4px solid var(--success);
+            border-left-color: var(--success);
         }
 
         .medium {
             background: #fff7ed;
-            border-left: 4px solid var(--warning);
+            border-left-color: var(--warning);
         }
 
         .low {
             background: #fee2e2;
-            border-left: 4px solid var(--danger);
+            border-left-color: var(--danger);
         }
 
         .high .mark {
@@ -180,86 +206,234 @@
         }
 
         .analysis-section h2 {
-            font-size: 1.75rem; /* Slightly larger analysis section title */
+            font-size: 1.5rem; /* Adjusted analysis section title for mobile */
         }
 
         .analysis-section h3 {
-            font-size: 1.35rem; /* Slightly larger analysis subsection title */
-            margin-top: 1.5rem;
-            color: var(--dark-gray);
+            font-size: 1.2rem; /* Adjusted analysis subsection title for mobile */
+            margin-top: 1rem; /* Adjusted top margin for mobile */
+            color: var(--text-color);
         }
 
         .analysis-section ul, .analysis-section ol {
-            margin-left: 1.5rem;
+            margin-left: 1.2rem; /* Adjusted list indent for mobile */
             margin-bottom: 1rem;
         }
 
         .analysis-section li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem; /* Adjusted list item margin for mobile */
+            font-size: 0.95rem; /* Adjusted list item font size for mobile */
         }
 
-        /* Table Styles for Year 3 Modules */
-        h1 + h2, h1 + h2 + h3 { /* Targets h2 and h3 immediately after h1 for Year 3 section */
-            text-align: center; /* Center align Year 3 headers */
-            margin-top: 2rem;
+        /* Year 3 Planner Section */
+        .year-planner {
+            text-align: center;
+        }
+
+        .planner-title {
+            font-size: 1.8rem; /* Adjusted planner title for mobile */
+            color: var(--primary);
             margin-bottom: 1rem;
-            color: var(--primary); /* Consistent color for Year 3 headers */
         }
 
-        table {
+        .academic-year {
+            margin-bottom: 1.5rem;
+        }
+
+        .year-title, .semester-title, .year-total {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem; /* Adjusted year/semester title for mobile */
+            font-weight: bold;
+        }
+
+        .semester-section {
+            margin-bottom: 1rem;
+        }
+
+        .modules-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 1.5rem;
-            border-radius: 0.5rem;
-            overflow: hidden; /* To make border-radius work with table */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid var(--light-gray); /* Added border to the table */
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: var(--table-border);
+            display: block; /* Make table responsive */
+            overflow-x: auto; /* Enable horizontal scroll for wider tables on mobile */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        .table-caption {
+            caption-side: bottom;
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-align: left;
         }
 
         th, td {
-            padding: 0.9rem 1rem; /* Increased padding for table cells */
+            padding: 0.7rem; /* Adjusted table cell padding for mobile */
             text-align: left;
+            white-space: nowrap; /* Prevent text wrapping in table cells */
         }
 
         th {
             background-color: var(--primary-light);
             color: var(--primary);
             font-weight: bold;
-            border-bottom: 2px solid var(--primary); /* Stronger border for header bottom */
+            border-bottom: 2px solid var(--primary);
         }
 
         td {
-            border-bottom: 1px solid var(--light-gray); /* Separator for rows */
+            border-bottom: 1px solid var(--light-gray);
         }
 
         tr:last-child td {
-            border-bottom: none; /* Remove border from last row cells */
+            border-bottom: none;
         }
 
         tr.total td {
-            background-color: #f0f0f0; /* Light gray for total row */
+            background-color: #f0f0f0;
             font-weight: bold;
-            border-top: 2px solid var(--light-gray); /* Stronger top border for total row */
+            border-top: 2px solid var(--light-gray);
         }
 
         tr.total:hover td {
-            background-color: #e0e0e0; /* Slightly darker on hover for total row */
+            background-color: #e0e0e0;
+        }
+
+        /* Analysis Summary Table */
+        .analysis-summary-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: var(--table-border);
+            display: block; /* Make table responsive */
+            overflow-x: auto; /* Enable horizontal scroll for wider tables on mobile */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        .analysis-summary-table th, .analysis-summary-table td {
+            padding: 0.7rem; /* Adjusted table cell padding for mobile */
+            text-align: left;
+            white-space: normal; /* Allow text wrapping in analysis table for better mobile fit */
+            font-size: 0.9rem; /* Slightly smaller font size for table text on mobile */
         }
 
 
-        @media (min-width: 640px) {
+        /* Media Query for larger screens (min-width: 768px - Tablets and larger) */
+        @media (min-width: 768px) {
+            body {
+                padding: 2rem 1rem; /* Restore larger body padding for wider screens */
+                font-size: 1.1rem; /* Slightly larger base font size for larger screens */
+                line-height: 1.6; /* Restore larger line-height for wider screens */
+            }
+
+            .container {
+                padding: 0 2rem; /* Wider horizontal padding for container on larger screens */
+            }
+
+            .header h1 {
+                font-size: 2.5rem; /* Larger header font size for wider screens */
+            }
+
+            .header h2 {
+                font-size: 1.25rem; /* Larger subtitle font size for wider screens */
+            }
+
+            .year-badge {
+                padding: 0.5rem 0.75rem; /* Restore larger badge padding for wider screens */
+                font-size: 0.9rem; /* Restore larger badge text size for wider screens */
+                margin-right: 1rem; /* Restore larger badge margin for wider screens */
+            }
+
+            .semester h3 {
+                font-size: 1.1rem; /* Larger semester title font size for wider screens */
+            }
+
             .record {
-                flex-direction: row;
+                flex-direction: row; /* Row layout for records on wider screens */
                 align-items: center;
                 justify-content: space-between;
             }
+
+            .record:hover {
+                transform: translateX(5px); /* Restore larger hover effect for wider screens */
+            }
+
             .record-header {
-                flex-direction: row;
+                flex-direction: row; /* Row layout for record header on wider screens */
                 margin-bottom: 0;
+                align-items: center; /* Align items in the center in header row */
             }
+
+            .subject {
+                margin-right: 0.5rem; /* Restore right margin for subject on wider screens */
+                margin-bottom: 0; /* Remove bottom margin for subject on wider screens */
+            }
+
             .record-details {
+                flex-direction: row; /* Row layout for record details on wider screens */
                 justify-content: flex-start;
+                align-items: center; /* Align items in the center in details row */
             }
+
+            .credits {
+                margin-bottom: 0; /* Remove bottom margin for credits on wider screens */
+            }
+
+            .mark {
+                padding: 0.4rem 0.9rem; /* Restore larger mark padding for wider screens */
+                font-size: 0.9rem; /* Restore larger mark text size for wider screens */
+                margin-left: 1rem; /* Restore left margin for mark on wider screens */
+            }
+
+            .analysis-section h2 {
+                font-size: 1.75rem; /* Larger analysis section title for wider screens */
+            }
+
+            .analysis-section h3 {
+                font-size: 1.35rem; /* Larger analysis subsection title for wider screens */
+                margin-top: var(--section-padding); /* Restore larger top margin for wider screens */
+            }
+
+            .analysis-section ul, .analysis-section ol {
+                margin-left: var(--section-padding); /* Restore larger list indent for wider screens */
+            }
+
+            .analysis-section li {
+                margin-bottom: 0.5rem; /* Restore larger list item margin for wider screens */
+                font-size: 1rem; /* Restore larger list item font size for wider screens */
+            }
+
+            .planner-title {
+                font-size: 2rem; /* Larger planner title for wider screens */
+            }
+
+            .year-title, .semester-title, .year-total {
+                font-size: 1.5rem; /* Larger year/semester title for wider screens */
+            }
+
+            th, td {
+                padding: 0.9rem 1rem; /* Restore larger table cell padding for wider screens */
+            }
+
+            .analysis-summary-table th, .analysis-summary-table td {
+                padding: 0.9rem 1rem; /* Restore larger table cell padding for analysis table on wider screens */
+                font-size: 1rem; /* Larger font size for table text on wider screens */
+            }
+        }
+
+        /* Larger screens (Desktops - min-width: 1200px) - Optional further adjustments */
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0 3rem; /* Even wider horizontal padding for very large screens */
+            }
+            /* You can add more adjustments here for very large screens if needed */
         }
     </style>
 </head>
@@ -444,7 +618,7 @@
             <h1 class="planner-title">2025? Whats next what to do and how to improve?</h1>
             <div class="academic-year" id="year3">
                 <h2 class="year-title">Academic Year 3</h2>
-                
+
                 <div class="semester-section" id="semester1">
                     <h3 class="semester-title">Semester 1</h3>
                     <table class="modules-table">
@@ -484,7 +658,7 @@
                         </tbody>
                     </table>
                 </div>
-        
+
                 <div class="semester-section" id="semester2">
                     <h3 class="semester-title">Semester 2</h3>
                     <table class="modules-table">
@@ -519,7 +693,7 @@
                         </tbody>
                     </table>
                 </div>
-        
+
                 <h2 class="year-total">Total for Academic Year 3: 120 Credits</h2>
             </div>
         </div>
