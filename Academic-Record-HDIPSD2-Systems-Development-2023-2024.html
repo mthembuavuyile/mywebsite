@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Record & Progress</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #e0e7ff;
+            --success: #22c55e;
+            --warning: #f97316;
+            --danger: #ef4444;
+            --gray: #6b7280;
+            --dark-gray: #374151;
+            --light-gray: #e5e7eb; /* Added light gray */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f9fafb;
+            color: var(--dark-gray);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem; /* Slightly larger for main title */
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 1.25rem; /* Slightly larger for subtitle */
+        }
+
+        .year-section, .analysis-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease; /* Added transition for hover effect */
+        }
+
+        .year-section:hover, .analysis-section:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced hover shadow */
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .year-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.5rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem; /* Slightly larger badge text */
+            margin-right: 1rem;
+        }
+
+        .semester {
+            margin-bottom: 1.5rem;
+        }
+
+        .semester h3 {
+            color: var(--gray);
+            font-size: 1.1rem; /* Slightly larger semester title */
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .record {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s; /* Transition for box-shadow as well */
+            border: 1px solid var(--light-gray);
+        }
+
+        .record:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 7px rgba(0,0,0,0.15); /* Enhanced hover shadow */
+        }
+
+        .record-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .subject {
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .module-code {
+            font-size: 0.9rem; /* Slightly larger module code */
+            color: var(--gray);
+        }
+
+        .record-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .credits {
+            font-size: 0.9rem; /* Slightly larger credits text */
+            color: var(--gray);
+        }
+
+        .mark {
+            font-weight: bold;
+            padding: 0.4rem 0.9rem; /* Slightly larger mark padding */
+            border-radius: 9999px;
+            font-size: 0.9rem; /* Slightly larger mark text */
+            margin-left: 1rem;
+        }
+
+        .high {
+            background: #dcfce7;
+            border-left: 4px solid var(--success);
+        }
+
+        .medium {
+            background: #fff7ed;
+            border-left: 4px solid var(--warning);
+        }
+
+        .low {
+            background: #fee2e2;
+            border-left: 4px solid var(--danger);
+        }
+
+        .high .mark {
+            background: #bbf7d0;
+            color: #15803d;
+        }
+
+        .medium .mark {
+            background: #fed7aa;
+            color: #c2410c;
+        }
+
+        .low .mark {
+            background: #fecaca;
+            color: #b91c1c;
+        }
+
+        .analysis-section h2, .analysis-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section h2 {
+            font-size: 1.75rem; /* Slightly larger analysis section title */
+        }
+
+        .analysis-section h3 {
+            font-size: 1.35rem; /* Slightly larger analysis subsection title */
+            margin-top: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .analysis-section ul, .analysis-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Table Styles for Year 3 Modules */
+        h1 + h2, h1 + h2 + h3 { /* Targets h2 and h3 immediately after h1 for Year 3 section */
+            text-align: center; /* Center align Year 3 headers */
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary); /* Consistent color for Year 3 headers */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden; /* To make border-radius work with table */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--light-gray); /* Added border to the table */
+        }
+
+        th, td {
+            padding: 0.9rem 1rem; /* Increased padding for table cells */
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: bold;
+            border-bottom: 2px solid var(--primary); /* Stronger border for header bottom */
+        }
+
+        td {
+            border-bottom: 1px solid var(--light-gray); /* Separator for rows */
+        }
+
+        tr:last-child td {
+            border-bottom: none; /* Remove border from last row cells */
+        }
+
+        tr.total td {
+            background-color: #f0f0f0; /* Light gray for total row */
+            font-weight: bold;
+            border-top: 2px solid var(--light-gray); /* Stronger top border for total row */
+        }
+
+        tr.total:hover td {
+            background-color: #e0e0e0; /* Slightly darker on hover for total row */
+        }
+
+
+        @media (min-width: 640px) {
+            .record {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .record-header {
+                flex-direction: row;
+                margin-bottom: 0;
+            }
+            .record-details {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1>Academic Record & Progress</h1>
+            <h2>HDIPSD2 - Diploma in Systems Development</h2>
+        </header>
+
+        <section class="year-section">
+            <div class="year-header">
+                <span class="year-badge">Second Year</span>
+                <h2>2024</h2>
+            </div>
+
+            <div class="semester">
+                <h3>July - December</h3>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Systems Development 2A</span>
+                        <span class="module-code">(HSYD201-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 40</span>
+                        <span class="mark">84%</span>
+                    </div>
+                </div>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Systems Development 2B (Security+)</span>
+                        <span class="module-code">(HSYD202-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 20</span>
+                        <span class="mark">92%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester">
+                <h3>January - June</h3>
+                <div class="record low">
+                    <div class="record-header">
+                        <span class="subject">Business Ethics</span>
+                        <span class="module-code">(HBMN201-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 16</span>
+                        <span class="mark">41%</span>
+                    </div>
+                </div>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Database Programming 2 (DB Technologies & SQL)</span>
+                        <span class="module-code">(HDBP200-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 20</span>
+                        <span class="mark">84%</span>
+                    </div>
+                </div>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Praxis S2 (DB Technologies, SQL & Android Development)</span>
+                        <span class="module-code">(HPXS200-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 20</span>
+                        <span class="mark">86%</span>
+                    </div>
+                </div>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Android App Development</span>
+                        <span class="module-code">(HASD200-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 10</span>
+                        <span class="mark">87%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="year-section">
+            <div class="year-header">
+                <span class="year-badge">First Year</span>
+                <h2>2023</h2>
+            </div>
+
+            <div class="semester">
+                <h3>July - December</h3>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Praxis 1</span>
+                        <span class="module-code">(HPX100-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 20</span>
+                        <span class="mark">95%</span>
+                    </div>
+                </div>
+                <div class="record medium">
+                    <div class="record-header">
+                        <span class="subject">Computer Literacy Advanced (Spreadsheets, Database, Presentation Graphics)</span>
+                        <span class="module-code">(HCLT108-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 10</span>
+                        <span class="mark">77%</span>
+                    </div>
+                </div>
+                <div class="record medium">
+                    <div class="record-header">
+                        <span class="subject">Technical Systems and Support (A+)</span>
+                        <span class="module-code">(HTSS100-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 24</span>
+                        <span class="mark">56%</span>
+                    </div>
+                </div>
+                <div class="record medium">
+                    <div class="record-header">
+                        <span class="subject">Introduction to Business Management</span>
+                        <span class="module-code">(HBMN102-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 10</span>
+                        <span class="mark">68%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester">
+                <h3>January - June</h3>
+                <div class="record high">
+                    <div class="record-header">
+                        <span class="subject">Systems Development 1 (Java)</span>
+                        <span class="module-code">(HSYD100-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 12</span>
+                        <span class="mark">75%</span>
+                    </div>
+                </div>
+                <div class="record medium">
+                    <div class="record-header">
+                        <span class="subject">Academic Literacy</span>
+                        <span class="module-code">(HALP100-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 14</span>
+                        <span class="mark">62%</span>
+                    </div>
+                </div>
+                <div class="record medium">
+                    <div class="record-header">
+                        <span class="subject">Computer Literacy Introduction (Word, Outlook)</span>
+                        <span class="module-code">(HCLT101-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 16</span>
+                        <span class="mark">58%</span>
+                    </div>
+                </div>
+                <div class="record medium">
+                    <div class="record-header">
+                        <span class="subject">IT Systems Management 1</span>
+                        <span class="module-code">(HISM100-1)</span>
+                    </div>
+                    <div class="record-details">
+                        <span class="credits">Credits: 12</span>
+                        <span class="mark">66%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="year-planner" id="year3-planner">
+            <h1 class="planner-title">2025? Whats next what to do and how to improve?</h1>
+            <div class="academic-year" id="year3">
+                <h2 class="year-title">Academic Year 3</h2>
+                
+                <div class="semester-section" id="semester1">
+                    <h3 class="semester-title">Semester 1</h3>
+                    <table class="modules-table">
+                        <caption class="table-caption">Year 3 Semester 1 Modules</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Module</th>
+                                <th scope="col">Code</th>
+                                <th scope="col">Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="module-row">
+                                <td class="module-name">Systems Analysis and Design 3</td>
+                                <td class="module-code">HSAD300-1</td>
+                                <td class="module-credits">20</td>
+                            </tr>
+                            <tr class="module-row">
+                                <td class="module-name">Workflow Management 3</td>
+                                <td class="module-code">HWFM300-1</td>
+                                <td class="module-credits">20</td>
+                            </tr>
+                            <tr class="module-row">
+                                <td class="module-name">Systems Development Project Management 3</td>
+                                <td class="module-code">HSPM300-1</td>
+                                <td class="module-credits">15</td>
+                            </tr>
+                            <tr class="module-row">
+                                <td class="module-name">Praxis S3A (Ethical Hacking)</td>
+                                <td class="module-code">HPXS301-1</td>
+                                <td class="module-credits">5</td>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="2">Total Credits</td>
+                                <td class="total-credits">60</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <div class="semester-section" id="semester2">
+                    <h3 class="semester-title">Semester 2</h3>
+                    <table class="modules-table">
+                        <caption class="table-caption">Year 3 Semester 2 Modules</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Module</th>
+                                <th scope="col">Code</th>
+                                <th scope="col">Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="module-row">
+                                <td class="module-name">Systems Development 3</td>
+                                <td class="module-code">HSYD300-1</td>
+                                <td class="module-credits">30</td>
+                            </tr>
+                            <tr class="module-row">
+                                <td class="module-name">Software Testing 3</td>
+                                <td class="module-code">HSFT300-1</td>
+                                <td class="module-credits">15</td>
+                            </tr>
+                            <tr class="module-row">
+                                <td class="module-name">Praxis S3B (Cyber Law & Project Development & Execution)</td>
+                                <td class="module-code">HPXS302-1</td>
+                                <td class="module-credits">15</td>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="2">Total Credits</td>
+                                <td class="total-credits">60</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <h2 class="year-total">Total for Academic Year 3: 120 Credits</h2>
+            </div>
+        </div>
+
+        <section class="analysis-section">
+            <h2>Academic Performance Analysis & Recommendations</h2>
+
+            <div class="analysis-summary-table">
+                <h3>Performance Summary</h3>
+                <table>
+                    <caption>Key Performance Indicators</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Year</th>
+                            <th scope="col">Average Mark (Excl. Business Ethics)</th>
+                            <th scope="col">Total Credits Completed</th>
+                            <th scope="col">Key Strengths</th>
+                            <th scope="col">Areas for Focus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Year 1 (2023)</td>
+                            <td>Approx. 69%</td>
+                            <td>84</td>
+                            <td>Praxis, Java Fundamentals</td>
+                            <td>Business Management, Technical Support Basics</td>
+                        </tr>
+                        <tr>
+                            <td>Year 2 (2024)</td>
+                            <td>Approx. 87%</td>
+                            <td>116</td>
+                            <td>Android Dev, DB Programming, Security</td>
+                            <td>Business Ethics</td>
+                        </tr>
+                        <tr>
+                            <td>Overall (Years 1 & 2)</td>
+                            <td>Approx. 79%</td>
+                            <td>200</td>
+                            <td>Programming, Databases, Cybersecurity, Practical Skills</td>
+                            <td>Business & Management, Technical Foundations</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="marks-overview">
+                <h3>Module Marks Overview</h3>
+                <p>A detailed view of your module scores, highlighting strengths and areas needing attention.</p>
+                <ul>
+                    <li><strong>Java (Systems Development 1):</strong> 75%</li>
+                    <li><strong>Android Development:</strong> 87%</li>
+                    <li><strong>Systems Development 2A:</strong> 84%</li>
+                    <li><strong>Database Programming 2:</strong> 84%</li>
+                    <li><strong>Security+ (Systems Development 2B):</strong> 92%</li>
+                    <li><strong>Business Ethics:</strong> 41%</li>
+                    <li><strong>Business Management:</strong> 68%</li>
+                    <li><strong>A+ (Technical Systems & Support):</strong> 56%</li>
+                    <li><strong>IT Systems Management 1:</strong> 66%</li>
+                    <li><strong>Praxis 1:</strong> 95%</li>
+                    <li><strong>Computer Literacy Advanced:</strong> 77%</li>
+                    <li><strong>Introduction to Business Management:</strong> 68%</li>
+                    <li><strong>Academic Literacy:</strong> 62%</li>
+                    <li><strong>Computer Literacy Introduction:</strong> 58%</li>
+                </ul>
+            </div>
+
+            <div class="strengths">
+                <h3>Key Strengths</h3>
+                <p>Your academic record showcases significant strengths in the following domains:</p>
+                <ul>
+                    <li><strong>Programming & Systems Development:</strong> Consistent high performance in Java, Android Development, and Systems Development modules demonstrates a strong aptitude for software creation and system architecture.</li>
+                    <li><strong>Database Technologies & SQL:</strong> Excellent scores in Database Programming and Praxis S2 indicate robust database knowledge and SQL proficiency, crucial for data-driven applications.</li>
+                    <li><strong>Cybersecurity Focus:</strong> The exceptional mark in Security+ suggests a pronounced interest and capability in cybersecurity. Coupled with Ethical Hacking in Year 3, this presents a promising specialization avenue.</li>
+                    <li><strong>Practical Application (Praxis):</strong>  Consistently high marks in Praxis modules across both years underscore your ability to effectively apply theoretical concepts in practical, hands-on scenarios.</li>
+                </ul>
+            </div>
+
+            <div class="improvement">
+                <h3>Areas for Development</h3>
+                <p>To achieve a more balanced academic profile and broaden your skill set, consider focusing on these areas:</p>
+                <ul>
+                    <li><strong>Business & Management Acumen:</strong> The lower score in Business Ethics points to a need to deepen your understanding of business principles and ethical considerations within commercial environments. This is vital for holistic professional growth.</li>
+                    <li><strong>Technical Support Foundations:</strong> The mark in Technical Systems and Support (A+) indicates an opportunity to strengthen your knowledge base in hardware and technical support domains. While not core to development, foundational understanding is advantageous.</li>
+                    <li><strong>IT Systems Management Fundamentals:</strong> A moderate score in IT Systems Management 1 suggests room for improvement in basic IT management concepts. Comprehending IT infrastructure and management enhances your overall IT skill set.</li>
+                </ul>
+            </div>
+
+            <div class="advice">
+                <h3>Guidance for Final Year & Career Trajectory</h3>
+                <p>Considering your strengths and areas for development, here’s tailored advice for your final year and future career path:</p>
+                <ul>
+                    <li><strong>Career Specialization:</strong>  Direct your career focus towards roles that capitalize on your strengths, such as <strong>full-stack development</strong>, <strong>DevOps engineering</strong> (integrating development and systems management), or <strong>cybersecurity analysis</strong>. Your strong programming, database, and cybersecurity skills align perfectly with these high-demand fields.</li>
+                    <li><strong>Business Knowledge Enhancement:</strong>  Proactively work on improving your business acumen. If feasible, consider retaking Business Ethics. Supplement formal learning by engaging with business case studies, monitoring industry trends, and seeking opportunities to observe ethical business practices in action.</li>
+                    <li><strong>Software Testing Preparation:</strong> With Software Testing slated for Year 3, begin exploring software testing methodologies and tools. Familiarizing yourself with automation testing tools like Selenium and JUnit can provide a competitive edge.</li>
+                    <li><strong>Portfolio Development:</strong>  Continue to excel in Praxis and project-based modules. Prioritize creating impactful projects that showcase your abilities and serve as a compelling portfolio for job applications. Explore contributing to open-source projects or developing personal projects to further enrich your portfolio.</li>
+                </ul>
+            </div>
+
+
+            <div class="analysis-summary">
+                <h3>Key Analysis & Recommendations Summary</h3>
+                <ul>
+                    <li><strong>Current Overall Average:</strong> Approximately 79% (excluding Business Ethics - calculated from provided marks across all other modules).</li>
+                    <li><strong>Business Ethics - Priority Focus:</strong>  Retaking Business Ethics is highly advised to improve your overall academic standing and address a crucial area for development in professional ethics.</li>
+                    <li><strong>Strong Technical Proficiency:</strong> Your performance in technical subjects is exceptionally strong, positioning you favorably for a technology-centric career.</li>
+                    <li><strong>Cum Laude Potential:</strong> Achieving Cum Laude honors remains a realistic goal with continued strong performance in your final year, particularly if you successfully address the Business Ethics module and excel in high-credit-value modules.</li>
+                </ul>
+            </div>
+
+            <div class="action-plan">
+                <h3>Action Plan for 3rd Year (Starting February 17, 2024)</h3>
+                <p>Based on the comprehensive analysis, here’s a structured action plan for your upcoming 3rd year, Semester 1:</p>
+                <ol>
+                    <li><strong>Re-engage with Business Ethics:</strong> Prioritize retaking Business Ethics at the earliest opportunity (Semester 1 if possible, or as soon as offered). Focus on understanding core ethical theories and their practical application in business scenarios.</li>
+                    <li><strong>Strategic Focus on High-Credit Modules:</strong> Allocate significant study time and effort to high-credit modules in Year 3, especially <strong>Systems Development 3 (30 credits)</strong>. Strong performance here will substantially impact your final cumulative grade.</li>
+                    <li><strong>Maintain Technical Subject Excellence & Deepen Understanding:</strong> Continue to excel in technical subjects, aiming for mastery. Pay particular attention to:
+                        <ul>
+                            <li><strong>Systems Analysis and Design 3 (20 Credits):</strong> Focus on mastering software development lifecycle methodologies and project planning techniques.</li>
+                            <li><strong>Workflow Management 3 (20 Credits):</strong> Explore advanced workflow automation and system optimization concepts, relevant for DevOps and efficient operations.</li>
+                            <li><strong>Systems Development Project Management 3 (15 Credits):</strong> Develop robust project management skills, essential for leading software development teams and projects effectively.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Proactive Course Engagement:</strong>  Review Year 3 module outlines and preliminary materials in advance. This proactive approach will provide a head start and allow for more effective preparation and deeper learning.</li>
+                    <li><strong>Active Feedback Seeking & Resource Utilization:</strong>  Engage actively with lecturers and tutors. Seek constructive feedback on your work and leverage all available academic support resources (workshops, tutoring, online forums) to maximize learning and performance.</li>
+                </ol>
+            </div>
+
+            <p style="font-style: italic; color: var(--gray); margin-top: 1.5rem;">Updated: February 17, 2024 - Based on academic record up to Second Year.</p>
+
+        </section>
+
+    </main>
+</body>
+</html>
