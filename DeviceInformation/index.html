@@ -238,45 +238,225 @@
       animation: fadeOut 0.3s forwards;
     }
     
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      z-index: 1001;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .modal.active {display: flex;}
-    
-    .modal-content {
-      background-color: var(--card);
-      border-radius: 0.5rem;
-      width: 90%;
-      max-width: 500px;
-      animation: scaleIn 0.3s;
-    }
-    
-    .modal-header {
-      padding: 1rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .modal-body {padding: 1rem;}
-    .modal-footer {
-      padding: 1rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-    }
+    /* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--card, #fff);
+    border-radius: 0.5rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    animation: scaleIn 0.3s ease-in-out;
+}
+
+/* Modal Header */
+.modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border, #ddd);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Close Button */
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-icon:hover {
+    color: red;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 1rem;
+}
+
+.settings-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border, #ddd);
+}
+
+.settings-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.settings-desc {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+}
+
+.info-label {
+    font-weight: 600;
+}
+
+.info-value a {
+    color: var(--link-color, #007bff);
+    text-decoration: none;
+}
+
+.info-value a:hover {
+    text-decoration: underline;
+}
+
+/* Form Controls */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.form-control {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--border, #ccc);
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--focus-color, #007bff);
+}
+
+/* Toggle Switch */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.4s;
+}
+
+.toggle-slider:before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.toggle input:checked + .toggle-slider {
+    background-color: var(--toggle-on, #007bff);
+}
+
+.toggle input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* Terminal Style for License */
+.terminal {
+    background-color: #222;
+    color: #ddd;
+    font-family: monospace;
+    font-size: 0.85rem;
+    padding: 1rem;
+    border-radius: 5px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border, #ddd);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.modal-content {
+    max-height: 90vh; /* Prevents modal from exceeding screen */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-body {
+    flex-grow: 1;
+    overflow-y: auto; /* Enables scrolling inside the modal */
+    max-height: 60vh; /* Adjust as needed */
+    padding-right: 1rem; /* Prevents content cut-off */
+}
+
+
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+
     
     .form-group {
       margin-bottom: 1rem;
@@ -764,28 +944,79 @@
   
   <div id="settingsModal" class="modal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3>Settings</h3>
-        <button id="closeModalBtn" class="btn btn-icon">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">Auto Refresh</label>
-          <label class="toggle">
-            <input type="checkbox" id="autoRefreshToggle">
-            <span class="toggle-slider"></span>
-          </label>
+        <div class="modal-header">
+            <h3>Settings & About DeviceInfo</h3>
+            <button id="closeModalBtn" class="btn btn-icon">&times;</button>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="refreshRateInput">Refresh Rate (seconds)</label>
-          <input type="number" id="refreshRateInput" class="form-control" min="5" max="3600" value="60">
+        <div class="modal-body">
+            <!-- Auto Refresh Section -->
+            <div class="settings-section">
+                <h3 class="settings-title">Auto Refresh</h3>
+                <div class="form-group">
+                    <label class="form-label">Enable Auto Refresh</label>
+                    <label class="toggle">
+                        <input type="checkbox" id="autoRefreshToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="refreshRateInput">Refresh Rate (seconds)</label>
+                    <input type="number" id="refreshRateInput" class="form-control" min="5" max="3600" value="60">
+                </div>
+            </div>
+
+            <!-- Application Information -->
+            <div class="settings-section">
+                <h3 class="settings-title">Application Information</h3>
+                <p class="settings-desc">Comprehensive System Diagnostics Tool</p>
+                <div class="info-item"><span class="info-label">Version:</span> <span class="info-value">2.1.0</span></div>
+                <div class="info-item"><span class="info-label">Released:</span> <span class="info-value">March 12, 2025</span></div>
+                <div class="info-item"><span class="info-label">Developed by:</span> <span class="info-value">Avuyile Mthembu</span></div>
+                <div class="info-item"><span class="info-label">Company:</span> <span class="info-value">Vylex Nexys</span></div>
+            </div>
+
+            <!-- Open Source Information -->
+            <div class="settings-section">
+                <h3 class="settings-title">Open Source</h3>
+                <p class="settings-desc">DeviceInfo is an open source project available on GitHub under the MIT License.</p>
+                <div class="info-item"><span class="info-label">Repository:</span> <span class="info-value"><a href="https://github.com/vylexnexys/deviceinfo" target="_blank">github.com/vylexnexys/deviceinfo</a></span></div>
+                <div class="info-item"><span class="info-label">License:</span> <span class="info-value">MIT License</span></div>
+            </div>
+
+            <!-- License Section -->
+            <div class="settings-section">
+                <h3 class="settings-title">MIT License</h3>
+                <div class="terminal" style="height: 200px; overflow-y: auto; margin-top: 0.5rem;">
+                    <div class="terminal-result">
+                        Copyright (c) 2025 Vylex Nexys
+                    
+                        Permission is hereby granted, free of charge, to any person obtaining a copy
+                        of this software and associated documentation files (the "Software"), to deal
+                        in the Software without restriction, including without limitation the rights
+                        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                        copies of the Software, and to permit persons to whom the Software is
+                        furnished to do so, subject to the following conditions:
+                    
+                        The above copyright notice and this permission notice shall be included in all
+                        copies or substantial portions of the Software.
+                    
+                        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                        SOFTWARE.
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button id="closeModalFooterBtn" class="btn">Close</button>
-      </div>
+        <div class="modal-footer">
+            <button id="closeModalFooterBtn" class="btn">Close</button>
+        </div>
     </div>
-  </div>
+</div>
+</div>
   
   <div id="toastContainer" class="toast-container"></div>
   
