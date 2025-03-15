@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -390,98 +389,129 @@
     </div>
 
     <script>
-        const video = document.getElementById('video');
-        const resultDisplay = document.getElementById('result');
-        const scanResultContainer = document.getElementById('scanResult');
-        const resetButton = document.getElementById('resetButton');
-    
-        // Create QR Scanner instance
-        const qrScanner = new QrScanner(
-            video,
-            result => {
-                handleQRCode(result.data);
-            },
-            {
-                highlightScanRegion: true,
-                highlightCodeOutline: true,
-            }
-        );
-    
-        // Function to handle the result from QR Scanner
-        function handleQRCode(result) {
-            // Display the result
-            resultDisplay.textContent = result;
-            scanResultContainer.classList.remove('hidden');
-            
-            // Detect if the result is a URL
-            if (result.startsWith('http://') || result.startsWith('https://')) {
-                window.open(result, '_blank'); // Open URL in a new tab
-            } else if (result.startsWith('tel:')) {
-                window.location.href = result; // Make a phone call
-            } else if (result.startsWith('mailto:')) {
-                window.location.href = result; // Open email client
-            } else {
-                alert("Scanned text: " + result); // Display scanned text if it doesn't match a specific action
-            }
-    
-            // Stop the scanner after getting a result
+        document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('video');
+    const startButton = document.getElementById('startButton');
+    const switchCameraButton = document.getElementById('switchCameraButton');
+    const resultContainer = document.getElementById('result-container');
+    const resultText = document.getElementById('resultText');
+    const closeResultButton = document.getElementById('closeResultButton');
+    const copyButton = document.getElementById('copyButton');
+    const openButton = document.getElementById('openButton');
+    const scanAgainButton = document.getElementById('scanAgainButton');
+    const permissionDenied = document.getElementById('permissionDenied');
+    const toast = document.getElementById('toast');
+
+    let qrScanner = null;
+    let currentCamera = 'environment';
+
+    function showToast(message, duration = 3000) {
+        toast.textContent = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, duration);
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                showToast('Copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Could not copy text: ', err);
+                showToast('Failed to copy to clipboard');
+            });
+    }
+
+    function handleQRCode(result) {
+        resultText.textContent = result;
+        resultContainer.classList.add('show');
+        if (qrScanner) {
             qrScanner.stop();
         }
-    
-        // Reset button event listener
-        resetButton.addEventListener('click', () => {
-            scanResultContainer.classList.add('hidden');
-            qrScanner.start();
-        });
-    
-        // Start scanning when the page loads
-        window.addEventListener('load', async () => {
-            try {
-                await qrScanner.start();
-            } catch (error) {
-                console.error('Failed to start QR scanner:', error);
-                alert('Failed to start camera. Please make sure you have granted camera permissions.');
+        startButton.classList.remove('active');
+
+        // Check if the result is a URL
+        const isUrl = result.startsWith('http://') || result.startsWith('https://');
+        openButton.style.display = isUrl ? 'flex' : 'none';
+    }
+
+    async function initQRScanner() {
+        try {
+            // Check if camera is available
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                throw new Error('Camera not supported in this browser');
             }
-        });
+
+            // Create QR Scanner instance
+            qrScanner = new QrScanner(
+                video,
+                result => handleQRCode(result.data),
+                {
+                    preferredCamera: currentCamera,
+                    highlightScanRegion: true,
+                    highlightCodeOutline: true,
+                }
+            );
+
+            await qrScanner.start();
+            startButton.classList.add('active');
+            permissionDenied.style.display = 'none';
+        } catch (error) {
+            console.error('QR Scanner error:', error);
+            permissionDenied.style.display = 'block';
+            startButton.classList.remove('active');
+        }
+    }
+
+    // Event listeners
+    startButton.addEventListener('click', async () => {
+        if (qrScanner && qrScanner._active) {
+            qrScanner.stop();
+            startButton.classList.remove('active');
+        } else {
+            await initQRScanner();
+        }
+    });
+
+    switchCameraButton.addEventListener('click', async () => {
+        if (qrScanner) {
+            await qrScanner.stop();
+            // Toggle between environment and user cameras
+            currentCamera = currentCamera === 'environment' ? 'user' : 'environment';
+            qrScanner._preferredCamera = currentCamera;
+            await qrScanner.start();
+            showToast(`Switched to ${currentCamera === 'user' ? 'front' : 'back'} camera`);
+        }
+    });
+
+    closeResultButton.addEventListener('click', () => {
+        resultContainer.classList.remove('show');
+    });
+
+    copyButton.addEventListener('click', () => {
+        copyToClipboard(resultText.textContent);
+    });
+
+    openButton.addEventListener('click', () => {
+        const url = resultText.textContent;
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            window.open(url, '_blank');
+        }
+    });
+
+    scanAgainButton.addEventListener('click', async () => {
+        resultContainer.classList.remove('show');
+        await initQRScanner();
+    });
+
+    // Initialize scanner when page loads
+    initQRScanner().catch(error => {
+        console.error('Failed to initialize QR scanner:', error);
+    });
+});
     </script>
     
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
