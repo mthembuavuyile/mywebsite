@@ -6,7 +6,7 @@
     <title>Vylex Nexys QR Scanner</title>
     <meta name="description" content="Scan QR codes quickly and easily with Vylex Nexys QR Scanner. Our free online tool lets you scan any QR code and access the information it contains.">
     <meta name="keywords" content="QR code scanner, free QR code scanner, Vylex Nexys QR Scanner, scan QR code online, QR reader, QR code decoder">
-    <script src="https://unpkg.com/qr-scanner"></script>
+    <script src="https://unpkg.com/qr-scanner" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -237,6 +237,7 @@
             gap: 1rem;
             justify-content: center;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -329,7 +330,7 @@
             opacity: 1;
         }
 
-        .loader {
+        .loading-container {
             width: 100%;
             height: 100%;
             display: flex;
@@ -345,7 +346,7 @@
             border-radius: 15px;
         }
         
-        .loader.hidden {
+        .loading-container.hidden {
             display: none;
         }
         
@@ -360,6 +361,47 @@
         
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+        
+        #cameraPermissionBtn {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(141, 141, 255, 0.4);
+        }
+        
+        #cameraPermissionBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(141, 141, 255, 0.6);
+        }
+        
+        .camera-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            background: rgba(36, 36, 62, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+        
+        .camera-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            animation: pulse 2s infinite;
         }
 
         /* Responsive design adjustments */
@@ -378,13 +420,42 @@
             }
             
             .result-actions {
-                flex-direction: column;
                 gap: 0.8rem;
             }
             
             .scanner-frame {
                 width: 80%;
                 height: 60%;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Device orientation styles */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.3rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .video-container {
+                margin: 0.5rem 0;
+            }
+            
+            video {
+                aspect-ratio: 16/9;
             }
         }
     </style>
@@ -405,9 +476,17 @@
                     <div class="scanner-corners"><span></span></div>
                 </div>
             </div>
-            <div id="loader" class="loader hidden">
+            <div id="cameraLoader" class="loading-container hidden">
                 <div class="spinner"></div>
                 <p>Initializing camera...</p>
+            </div>
+            <div id="cameraPlaceholder" class="camera-placeholder">
+                <i class="fas fa-camera camera-icon"></i>
+                <p>Camera access is needed to scan QR codes</p>
+                <button id="cameraPermissionBtn">
+                    <i class="fas fa-video"></i>
+                    Start Camera
+                </button>
             </div>
         </div>
 
@@ -433,130 +512,283 @@
     </div>
 
     <script>
-        const video = document.getElementById('video');
-        const resultDisplay = document.getElementById('result');
-        const scanResultContainer = document.getElementById('scanResult');
-        const resetButton = document.getElementById('resetButton');
-        const copyButton = document.getElementById('copyButton');
-        const actionButton = document.getElementById('actionButton');
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toastMessage');
-        const loader = document.getElementById('loader');
-        
-        let currentResult = '';
-        let isUrl = false;
-        
-        // Show toast message function
-        function showToast(message, duration = 3000) {
-            toastMessage.textContent = message;
-            toast.classList.add('show');
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('video');
+            const resultDisplay = document.getElementById('result');
+            const scanResultContainer = document.getElementById('scanResult');
+            const resetButton = document.getElementById('resetButton');
+            const copyButton = document.getElementById('copyButton');
+            const actionButton = document.getElementById('actionButton');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const cameraLoader = document.getElementById('cameraLoader');
+            const cameraPlaceholder = document.getElementById('cameraPlaceholder');
+            const cameraPermissionBtn = document.getElementById('cameraPermissionBtn');
             
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
-        }
-        
-        // Create QR Scanner instance with improved error handling
-        const qrScanner = new QrScanner(
-            video,
-            result => {
-                handleQRCode(result.data);
-            },
-            {
-                highlightScanRegion: true,
-                highlightCodeOutline: true,
-                returnDetailedScanResult: true,
-            }
-        );
-        
-        // Function to handle the result from QR Scanner
-        function handleQRCode(result) {
-            // Store the current result
-            currentResult = result;
+            let qrScanner = null;
+            let currentResult = '';
+            let isUrl = false;
+            let isScannerInitialized = false;
             
-            // Display the result
-            resultDisplay.textContent = result;
-            scanResultContainer.classList.remove('hidden');
-            
-            // Determine the type of content in the QR code
-            isUrl = result.startsWith('http://') || result.startsWith('https://');
-            const isTel = result.startsWith('tel:');
-            const isEmail = result.startsWith('mailto:');
-            
-            // Update action button based on content type
-            if (isUrl) {
-                actionButton.innerHTML = '<i class="fas fa-external-link-alt"></i> Open URL';
-                actionButton.style.display = 'flex';
-            } else if (isTel) {
-                actionButton.innerHTML = '<i class="fas fa-phone"></i> Call';
-                actionButton.style.display = 'flex';
-            } else if (isEmail) {
-                actionButton.innerHTML = '<i class="fas fa-envelope"></i> Email';
-                actionButton.style.display = 'flex';
-            } else {
-                actionButton.style.display = 'none';
+            // Show toast message function
+            function showToast(message, duration = 3000) {
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, duration);
             }
             
-            // Stop the scanner after getting a result
-            qrScanner.stop();
+            // Initialize QR Scanner
+            function initQRScanner() {
+                if (isScannerInitialized) return;
+                
+                qrScanner = new QrScanner(
+                    video,
+                    result => {
+                        handleQRCode(result.data);
+                    },
+                    {
+                        highlightScanRegion: true,
+                        highlightCodeOutline: true,
+                        returnDetailedScanResult: true,
+                        preferredCamera: 'environment', // Prefer back camera for mobile
+                    }
+                );
+                
+                isScannerInitialized = true;
+            }
             
-            // Vibrate if supported
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
+            // Start camera and QR scanning
+            async function startCamera() {
+                cameraPlaceholder.style.display = 'none';
+                cameraLoader.classList.remove('hidden');
+                
+                try {
+                    if (!isScannerInitialized) {
+                        initQRScanner();
+                    }
+                    
+                    await qrScanner.start();
+                    cameraLoader.classList.add('hidden');
+                    
+                    // Check if camera selected is the rear camera
+                    // If front camera was activated on mobile, try to switch to back camera
+                    const cameras = await QrScanner.listCameras();
+                    if (cameras.length > 1) {
+                        const currentCameraId = await qrScanner.getActiveCamera()?.id;
+                        const backCamera = cameras.find(camera => 
+                            camera.label.toLowerCase().includes('back') || 
+                            camera.label.toLowerCase().includes('rear') ||
+                            camera.label.toLowerCase().includes('environment')
+                        );
+                        
+                        if (backCamera && currentCameraId !== backCamera.id) {
+                            await qrScanner.setCamera(backCamera.id);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Camera access error:', error);
+                    cameraLoader.classList.add('hidden');
+                    cameraPlaceholder.style.display = 'flex';
+                    showToast('Camera access was denied. Please try again.', 5000);
+                }
             }
-        }
-        
-        // Action button event listener
-        actionButton.addEventListener('click', () => {
-            if (isUrl) {
-                window.open(currentResult, '_blank'); // Open URL in a new tab
-                showToast('Opening URL in new tab');
-            } else if (currentResult.startsWith('tel:')) {
-                window.location.href = currentResult; // Make a phone call
-                showToast('Initiating phone call');
-            } else if (currentResult.startsWith('mailto:')) {
-                window.location.href = currentResult; // Open email client
-                showToast('Opening email client');
+            
+            // Function to handle the result from QR Scanner
+            function handleQRCode(result) {
+                // Store the current result
+                currentResult = result;
+                
+                // Display the result
+                resultDisplay.textContent = result;
+                scanResultContainer.classList.remove('hidden');
+                
+                // Determine the type of content in the QR code
+                isUrl = result.startsWith('http://') || result.startsWith('https://');
+                const isTel = result.startsWith('tel:');
+                const isEmail = result.startsWith('mailto:');
+                const isSms = result.startsWith('sms:');
+                const isWifi = result.startsWith('WIFI:');
+                const isGeo = result.startsWith('geo:');
+                
+                // Update action button based on content type
+                if (isUrl) {
+                    actionButton.innerHTML = '<i class="fas fa-external-link-alt"></i> Open URL';
+                    actionButton.style.display = 'flex';
+                } else if (isTel) {
+                    actionButton.innerHTML = '<i class="fas fa-phone"></i> Call';
+                    actionButton.style.display = 'flex';
+                } else if (isEmail) {
+                    actionButton.innerHTML = '<i class="fas fa-envelope"></i> Email';
+                    actionButton.style.display = 'flex';
+                } else if (isSms) {
+                    actionButton.innerHTML = '<i class="fas fa-sms"></i> SMS';
+                    actionButton.style.display = 'flex';
+                } else if (isWifi) {
+                    actionButton.innerHTML = '<i class="fas fa-wifi"></i> Connect';
+                    actionButton.style.display = 'flex';
+                } else if (isGeo) {
+                    actionButton.innerHTML = '<i class="fas fa-map-marker-alt"></i> View Location';
+                    actionButton.style.display = 'flex';
+                } else {
+                    actionButton.style.display = 'none';
+                }
+                
+                // Stop the scanner after getting a result
+                if (qrScanner) {
+                    qrScanner.stop();
+                }
+                
+                // Vibrate if supported
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+                
+                // Play success sound if supported
+                playSuccessSound();
             }
-        });
-        
-        // Copy button event listener
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(currentResult)
-                .then(() => {
-                    showToast('Copied to clipboard!');
-                })
-                .catch(err => {
-                    showToast('Failed to copy: ' + err);
-                });
-        });
-        
-        // Reset button event listener
-        resetButton.addEventListener('click', () => {
-            scanResultContainer.classList.add('hidden');
-            qrScanner.start();
-        });
-        
-        // Start scanning when the page loads
-        window.addEventListener('load', async () => {
-            loader.classList.remove('hidden');
-            try {
-                await qrScanner.start();
-                loader.classList.add('hidden');
-            } catch (error) {
-                console.error('Failed to start QR scanner:', error);
-                loader.classList.add('hidden');
-                showToast('Camera access denied. Please check permissions.', 5000);
+            
+            // Play a success sound
+            function playSuccessSound() {
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(1318.51, audioCtx.currentTime); // E6
+                    oscillator.frequency.setValueAtTime(1396.91, audioCtx.currentTime + 0.1); // F6
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.3);
+                } catch (e) {
+                    console.log('Audio context not supported');
+                }
             }
-        });
-        
-        // Handle visibility change to restart scanner when tab becomes visible again
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible' && scanResultContainer.classList.contains('hidden')) {
-                qrScanner.start();
-            } else if (document.visibilityState === 'hidden') {
-                qrScanner.stop();
+            
+            // Action button event listener
+            actionButton.addEventListener('click', () => {
+                if (isUrl) {
+                    window.open(currentResult, '_blank'); // Open URL in a new tab
+                    showToast('Opening URL in new tab');
+                } else if (currentResult.startsWith('tel:')) {
+                    window.location.href = currentResult; // Make a phone call
+                    showToast('Initiating phone call');
+                } else if (currentResult.startsWith('mailto:')) {
+                    window.location.href = currentResult; // Open email client
+                    showToast('Opening email client');
+                } else if (currentResult.startsWith('sms:')) {
+                    window.location.href = currentResult; // Open SMS
+                    showToast('Opening messaging app');
+                } else if (currentResult.startsWith('WIFI:')) {
+                    showToast('Wi-Fi info copied to clipboard');
+                    // Extract Wi-Fi details but just copy for now since direct connection isn't possible
+                    navigator.clipboard.writeText(currentResult);
+                } else if (currentResult.startsWith('geo:')) {
+                    // Open in maps app if supported, otherwise Google Maps
+                    try {
+                        window.location.href = currentResult;
+                    } catch {
+                        const coords = currentResult.replace('geo:', '').split(',');
+                        if (coords.length >= 2) {
+                            window.open(`https://maps.google.com/maps?q=${coords[0]},${coords[1]}`, '_blank');
+                        }
+                    }
+                    showToast('Opening location');
+                }
+            });
+            
+            // Copy button event listener
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(currentResult)
+                    .then(() => {
+                        showToast('Copied to clipboard!');
+                    })
+                    .catch(err => {
+                        showToast('Failed to copy: ' + err);
+                    });
+            });
+            
+            // Reset button event listener
+            resetButton.addEventListener('click', () => {
+                scanResultContainer.classList.add('hidden');
+                if (qrScanner) {
+                    qrScanner.start();
+                } else {
+                    startCamera();
+                }
+            });
+            
+            // Camera Permission button event listener
+            cameraPermissionBtn.addEventListener('click', startCamera);
+            
+            // Check if device has a camera
+            async function checkForCamera() {
+                try {
+                    const devices = await navigator.mediaDevices.enumerateDevices();
+                    const cameras = devices.filter(device => device.kind === 'videoinput');
+                    return cameras.length > 0;
+                } catch (e) {
+                    console.error('Error checking for cameras:', e);
+                    return false;
+                }
             }
+            
+            // Initialize when the page is fully loaded
+            window.addEventListener('load', async () => {
+                const hasCamera = await checkForCamera();
+                
+                if (!hasCamera) {
+                    cameraPlaceholder.innerHTML = `
+                        <i class="fas fa-exclamation-circle camera-icon" style="color: #ff6b6b;"></i>
+                        <p>No camera detected on your device</p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Please use a device with a camera to scan QR codes</p>
+                    `;
+                    return;
+                }
+                
+                // Check if we have camera permissions already
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({video: true});
+                    // If we got here, permission is already granted
+                    stream.getTracks().forEach(track => track.stop()); // Stop the stream
+                    startCamera(); // Start QR scanner
+                } catch (err) {
+                    // Permission not granted or denied
+                    // Show the camera permission button
+                    cameraPlaceholder.style.display = 'flex';
+                }
+            });
+            
+            // Handle visibility change to restart scanner when tab becomes visible again
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible' && 
+                    scanResultContainer.classList.contains('hidden') && 
+                    qrScanner) {
+                    qrScanner.start();
+                } else if (document.visibilityState === 'hidden' && qrScanner) {
+                    qrScanner.stop();
+                }
+            });
+            
+            // Handle orientation changes for better mobile experience
+            window.addEventListener('orientationchange', () => {
+                if (qrScanner && scanResultContainer.classList.contains('hidden')) {
+                    // Restart scanner after orientation change
+                    setTimeout(() => {
+                        qrScanner.stop();
+                        qrScanner.start();
+                    }, 200);
+                }
+            });
         });
     </script>
 </body>
