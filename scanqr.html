@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vylex Nexys QR Scanner</title>
+    <meta name="description" content="Scan QR codes instantly with Vylex Nexys QR Scanner. A free, easy-to-use tool that works on any device with a camera. Perfect for businesses, marketing, and personal use.">
+    <meta name="keywords" content="QR code scanner, free QR scanner, Vylex Nexys QR Scanner, scan QR codes, QR code reader, mobile QR scanner, online QR scanner">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qr-scanner/1.4.2/qr-scanner.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0f0c29;
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(137, 137, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .header a {
+            color: #a5a5ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .header a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(48, 43, 99, 0.3);
+        }
+
+        .scanner-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            aspect-ratio: 1.33;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #000;
+            border-radius: 15px;
+        }
+
+        .scan-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #a5a5ff;
+            box-shadow: 0 0 10px 2px rgba(165, 165, 255, 0.7);
+            animation: scanLine 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .scanner-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #302b63, #24243e);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(48, 43, 99, 0.3);
+        }
+
+        .control-btn.active {
+            background: #4CAF50;
+        }
+
+        .control-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-header h3 {
+            color: #a5a5ff;
+            font-size: 1.2rem;
+        }
+
+        .result-header button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .result-header button:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .result-content {
+            word-break: break-all;
+        }
+
+        .result-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .result-content a {
+            color: #a5a5ff;
+            text-decoration: none;
+        }
+
+        .result-content a:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 130px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        #permissionDenied {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 1rem;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .permission-message h3 {
+            color: #ff7e7e;
+            margin-bottom: 1rem;
+        }
+
+        .permission-message p {
+            margin-bottom: 1rem;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #8d8dff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .scanner-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .control-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Vylex Nexys QR Scanner</h1>
+            <p>Scan any QR code with your camera.</p>
+            <a href="https://avuyilemthembu.co.za" target="_blank">Visit our website</a>
+        </div>
+
+        <div class="scanner-container">
+            <video id="video"></video>
+            <div class="scan-animation"></div>
+        </div>
+
+        <div class="scanner-controls">
+            <button id="startButton" class="control-btn active">
+                <span>Start Scanner</span>
+            </button>
+            <button id="switchCameraButton" class="control-btn">
+                <span>Switch Camera</span>
+            </button>
+        </div>
+
+        <div id="result-container" class="result-container">
+            <div class="result-header">
+                <h3>Scan Result</h3>
+                <button id="closeResultButton">×</button>
+            </div>
+            <div class="result-content">
+                <p id="resultText"></p>
+            </div>
+            <div class="action-buttons">
+                <button id="copyButton" class="action-btn">
+                    <span>Copy</span>
+                </button>
+                <button id="openButton" class="action-btn">
+                    <span>Open Link</span>
+                </button>
+                <button id="scanAgainButton" class="action-btn">
+                    <span>Scan Again</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="permissionDenied" class="permission-message">
+            <h3>Camera Access Denied</h3>
+            <p>Please allow camera access to use the QR scanner.</p>
+            <p>You can change this in your browser settings.</p>
+        </div>
+
+        <div id="toast"></div>
+
+        <div class="footer">
+            <p>Made with ❤️ by Vylex Nexys. <a href="https://avuyilemthembu.co.za" target="_blank">Visit our website</a></p>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const resultDisplay = document.getElementById('result');
+        const scanResultContainer = document.getElementById('scanResult');
+        const resetButton = document.getElementById('resetButton');
+    
+        // Create QR Scanner instance
+        const qrScanner = new QrScanner(
+            video,
+            result => {
+                handleQRCode(result.data);
+            },
+            {
+                highlightScanRegion: true,
+                highlightCodeOutline: true,
+            }
+        );
+    
+        // Function to handle the result from QR Scanner
+        function handleQRCode(result) {
+            // Display the result
+            resultDisplay.textContent = result;
+            scanResultContainer.classList.remove('hidden');
+            
+            // Detect if the result is a URL
+            if (result.startsWith('http://') || result.startsWith('https://')) {
+                window.open(result, '_blank'); // Open URL in a new tab
+            } else if (result.startsWith('tel:')) {
+                window.location.href = result; // Make a phone call
+            } else if (result.startsWith('mailto:')) {
+                window.location.href = result; // Open email client
+            } else {
+                alert("Scanned text: " + result); // Display scanned text if it doesn't match a specific action
+            }
+    
+            // Stop the scanner after getting a result
+            qrScanner.stop();
+        }
+    
+        // Reset button event listener
+        resetButton.addEventListener('click', () => {
+            scanResultContainer.classList.add('hidden');
+            qrScanner.start();
+        });
+    
+        // Start scanning when the page loads
+        window.addEventListener('load', async () => {
+            try {
+                await qrScanner.start();
+            } catch (error) {
+                console.error('Failed to start QR scanner:', error);
+                alert('Failed to start camera. Please make sure you have granted camera permissions.');
+            }
+        });
+    </script>
+    
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
