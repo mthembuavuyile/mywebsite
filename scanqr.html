@@ -71,7 +71,6 @@
         #video {
             width: 100%;
             height: auto;
-            transform: scaleX(-1);
             background-color: #000;
             border-radius: 12px;
         }
@@ -549,650 +548,545 @@
 
     <script>
         // QR Code Scanner Implementation
-        class QRCodeScanner {
-            constructor() {
-                this.video = document.getElementById('video');
-                this.scanBtn = document.getElementById('scan-btn');
-                this.pauseBtn = document.getElementById('pause-btn');
-                this.resultContainer = document.getElementById('result-container');
-                this.result = document.getElementById('result');
-                this.historyContainer = document.getElementById('history-container');
-                this.cameraSelect = document.getElementById('camera-select');
-                this.cameraLoader = document.getElementById('camera-loader');
-                this.noCameraEl = document.getElementById('no-camera');
-                this.flipCameraBtn = document.getElementById('flip-camera');
-                this.fileInput = document.getElementById('file-input');
-                
-                this.copyBtn = document.getElementById('copy-btn');
-                this.openBtn = document.getElementById('open-btn');
-                this.modalOverlay = document.getElementById('modal-overlay');
-                this.modalClose = document.getElementById('modal-close');
-                this.modalContent = document.getElementById('modal-content');
-                this.modalCopyBtn = document.getElementById('modal-copy-btn');
-                this.modalOpenBtn = document.getElementById('modal-open-btn');
-                this.toast = document.getElementById('toast');
-                
-                this.stream = null;
-                this.scanning = false;
-                this.canvasElement = document.createElement('canvas');
-                this.canvas = this.canvasElement.getContext('2d');
-                this.history = this.loadHistory();
-                this.currentCamera = 0;
-                this.cameras = [];
-                
-                this.initEvents();
-                this.displayHistory();
-                this.setupCamera();
+class QRCodeScanner {
+    constructor() {
+        this.video = document.getElementById('video');
+        this.scanBtn = document.getElementById('scan-btn');
+        this.pauseBtn = document.getElementById('pause-btn');
+        this.resultContainer = document.getElementById('result-container');
+        this.result = document.getElementById('result');
+        this.historyContainer = document.getElementById('history-container');
+        this.cameraSelect = document.getElementById('camera-select');
+        this.cameraLoader = document.getElementById('camera-loader');
+        this.noCameraEl = document.getElementById('no-camera');
+        this.flipCameraBtn = document.getElementById('flip-camera');
+        this.fileInput = document.getElementById('file-input');
+        
+        this.copyBtn = document.getElementById('copy-btn');
+        this.openBtn = document.getElementById('open-btn');
+        this.modalOverlay = document.getElementById('modal-overlay');
+        this.modalClose = document.getElementById('modal-close');
+        this.modalContent = document.getElementById('modal-content');
+        this.modalCopyBtn = document.getElementById('modal-copy-btn');
+        this.modalOpenBtn = document.getElementById('modal-open-btn');
+        this.toast = document.getElementById('toast');
+        
+        this.stream = null;
+        this.scanning = false;
+        this.canvasElement = document.createElement('canvas');
+        this.canvas = this.canvasElement.getContext('2d');
+        this.history = this.loadHistory();
+        this.currentCamera = 0;
+        this.cameras = [];
+        this.animationFrame = null;
+        
+        this.initEvents();
+        this.displayHistory();
+        this.setupCamera();
+    }
+    
+    initEvents() {
+        this.scanBtn.addEventListener('click', () => this.toggleScan());
+        this.pauseBtn.addEventListener('click', () => this.togglePause());
+        this.copyBtn.addEventListener('click', () => this.copyResult());
+        this.openBtn.addEventListener('click', () => this.openResult());
+        this.cameraSelect.addEventListener('change', () => this.switchCamera());
+        this.flipCameraBtn.addEventListener('click', () => this.flipCamera());
+        this.fileInput.addEventListener('change', (e) => this.handleFileInput(e));
+        
+        this.modalClose.addEventListener('click', () => this.closeModal());
+        this.modalCopyBtn.addEventListener('click', () => this.copyModalContent());
+        this.modalOpenBtn.addEventListener('click', () => this.openModalContent());
+        this.modalOverlay.addEventListener('click', (e) => {
+            if (e.target === this.modalOverlay) this.closeModal();
+        });
+    }
+    
+    async setupCamera() {
+        try {
+            this.cameras = await this.getCameras();
+            this.populateCameraOptions();
+            
+            if (this.cameras.length === 0) {
+                this.showNoCameraUI();
+                return;
             }
             
-            initEvents() {
-                this.scanBtn.addEventListener('click', () => this.toggleScan());
-                this.pauseBtn.addEventListener('click', () => this.togglePause());
-                this.copyBtn.addEventListener('click', () => this.copyResult());
-                this.openBtn.addEventListener('click', () => this.openResult());
-                this.cameraSelect.addEventListener('change', () => this.switchCamera());
-                this.flipCameraBtn.addEventListener('click', () => this.flipCamera());
-                this.fileInput.addEventListener('change', (e) => this.handleFileInput(e));
-                
-                this.modalClose.addEventListener('click', () => this.closeModal());
-                this.modalCopyBtn.addEventListener('click', () => this.copyModalContent());
-                this.modalOpenBtn.addEventListener('click', () => this.openModalContent());
-                this.modalOverlay.addEventListener('click', (e) => {
-                    if (e.target === this.modalOverlay) this.closeModal();
-                });
-            }
-            
-            async setupCamera() {
-                try {
-                    this.cameras = await this.getCameras();
-                    this.populateCameraOptions();
-                    
-                    if (this.cameras.length === 0) {
-                        this.showNoCameraUI();
-                        return;
-                    }
-                    
-                    await this.startCamera();
-                    this.cameraLoader.classList.add('hidden');
-                } catch (error) {
-                    console.error('Error setting up camera:', error);
-                    this.showNoCameraUI();
+            await this.startCamera();
+            this.cameraLoader.classList.add('hidden');
+        } catch (error) {
+            console.error('Error setting up camera:', error);
+            this.showNoCameraUI();
+        }
+    }
+    
+    async getCameras() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+            return [];
+        }
+        
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        return devices.filter(device => device.kind === 'videoinput');
+    }
+    
+    populateCameraOptions() {
+        this.cameraSelect.innerHTML = '';
+        this.cameras.forEach((camera, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.text = camera.label || `Camera ${index + 1}`;
+            this.cameraSelect.appendChild(option);
+        });
+        
+        if (this.cameras.length <= 1) {
+            this.cameraSelect.classList.add('hidden');
+            this.flipCameraBtn.classList.add('hidden');
+        } else {
+            this.cameraSelect.classList.remove('hidden');
+            this.flipCameraBtn.classList.remove('hidden');
+        }
+    }
+    
+    async startCamera() {
+        if (this.stream) {
+            this.stopCamera();
+        }
+        
+        if (this.cameras.length === 0) {
+            this.showNoCameraUI();
+            return;
+        }
+        
+        try {
+            const constraints = {
+                video: {
+                    deviceId: this.cameras[this.currentCamera]?.deviceId
+                        ? { exact: this.cameras[this.currentCamera].deviceId }
+                        : undefined,
+                    facingMode: "environment",
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
                 }
-            }
+            };
             
-            async getCameras() {
-                if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-                    return [];
-                }
-                
-                const devices = await navigator.mediaDevices.enumerateDevices();
-                return devices.filter(device => device.kind === 'videoinput');
-            }
+            this.stream = await navigator.mediaDevices.getUserMedia(constraints);
+            this.video.srcObject = this.stream;
             
-            populateCameraOptions() {
-                this.cameraSelect.innerHTML = '';
-                this.cameras.forEach((camera, index) => {
-                    const option = document.createElement('option');
-                    option.value = index;
-                    option.text = camera.label || `Camera ${index + 1}`;
-                    this.cameraSelect.appendChild(option);
-                });
-                
-                if (this.cameras.length <= 1) {
-                    this.cameraSelect.classList.add('hidden');
-                    this.flipCameraBtn.classList.add('hidden');
-                } else {
-                    this.cameraSelect.classList.remove('hidden');
-                    this.flipCameraBtn.classList.remove('hidden');
-                }
-            }
-            
-            async startCamera() {
-                if (this.stream) {
-                    this.stopCamera();
-                }
-                
-                if (this.cameras.length === 0) {
-                    this.showNoCameraUI();
-                    return;
-                }
-                
-                try {
-                    const constraints = {
-                        video: {
-                            deviceId: this.cameras[this.currentCamera]?.deviceId 
-                                ? { exact: this.cameras[this.currentCamera].deviceId } 
-                                : undefined,
-                            facingMode: "environment",
-                            width: { ideal: 1280 },
-                            height: { ideal: 720 }
-                        }
-                    };
-                    
-                    this.stream = await navigator.mediaDevices.getUserMedia(constraints);
-                    this.video.srcObject = this.stream;
-                    
-                    return new Promise((resolve) => {
-                        this.video.onloadedmetadata = () => {
-                            this.video.play();
-                            resolve();
-                        };
-                    });
-                } catch (error) {
-                    console.error('Error starting camera:', error);
-                    this.showNoCameraUI();
-                    throw error;
-                }
-            }
-            
-            stopCamera() {
-                if (this.stream) {
-                    this.stream.getTracks().forEach(track => {
-                        track.stop();
-                    });
-                    this.stream = null;
-                    this.video.srcObject = null;
-                }
-            }
-            
-            showNoCameraUI() {
-                this.cameraLoader.classList.add('hidden');
-                this.noCameraEl.classList.remove('hidden');
-                this.pauseBtn.disabled = true;
-                this.scanBtn.disabled = true;
-                this.scanBtn.classList.remove('pulse');
-            }
-            
-            async switchCamera() {
-                const selectedCamera = parseInt(this.cameraSelect.value);
-                if (selectedCamera !== this.currentCamera) {
-                    this.currentCamera = selectedCamera;
-                    await this.startCamera();
-                    if (this.scanning) {
-                        this.scan();
-                    }
-                }
-            }
-            
-            async flipCamera() {
-                if (this.cameras.length <= 1) return;
-                
-                this.currentCamera = (this.currentCamera + 1) % this.cameras.length;
-                this.cameraSelect.value = this.currentCamera;
-                await this.startCamera();
-                if (this.scanning) {
-                    this.scan();
-                }
-            }
-            
-            toggleScan() {
-                if (!this.scanning) {
-                    this.scan();
-                    this.scanBtn.textContent = 'Stop Scanning';
-                    this.scanBtn.classList.remove('pulse');
-                    this.pauseBtn.disabled = false;
-                    this.pauseBtn.textContent = 'Pause';
-                } else {
-                    this.stopScanning();
-                    this.scanBtn.textContent = 'Start Scanning';
-                    this.scanBtn.classList.add('pulse');
-                    this.pauseBtn.disabled = true;
-                }
-            }
-            
-            togglePause() {
-                if (this.video.paused) {
+            return new Promise((resolve) => {
+                this.video.onloadedmetadata = () => {
                     this.video.play();
-                    this.pauseBtn.textContent = 'Pause';
-                    if (this.scanning) {
-                        this.scan();
-                    }
-                } else {
-                    this.video.pause();
-                    this.pauseBtn.textContent = 'Resume';
-                    if (this.scanning) {
-                        cancelAnimationFrame(this.animationFrame);
-                    }
-                }
-            }
-            
-            scan() {
-                this.scanning = true;
-                this.scanFrame();
-            }
-            
-            stopScanning() {
-                this.scanning = false;
-                if (this.animationFrame) {
-                    cancelAnimationFrame(this.animationFrame);
-                    this.animationFrame = null;
-                }
-            }
-            
-            scanFrame() {
-                if (!this.scanning) return;
-                
-                if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
-                    this.canvasElement.height = this.video.videoHeight;
-                    this.canvasElement.width = this.video.videoWidth;
-                    
-                    this.canvas.drawImage(this.video, 0, 0, this.canvasElement.width, this.canvasElement.height);
-                    const imageData = this.canvas.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height);
-                    
-                    try {
-                        const code = this.decodeQR(imageData);
-                        if (code) {
-                            this.handleScanResult(code);
-                            return;
-                        }
-                    } catch (e) {
-                        // No QR code found, continue scanning
-                    }
-                }
-                
-                this.animationFrame = requestAnimationFrame(() => this.scanFrame());
-            }
-            
-            decodeQR(imageData) {
-                // Simple implementation of QR code decoding
-                // This is a basic implementation and may not detect all codes
-                // For production use, consider using libraries like jsQR
-                
-                const width = imageData.width;
-                const height = imageData.height;
-                const data = imageData.data;
-                
-                // Find potential finder patterns (the three squares in the corners of QR codes)
-                const potentialFinderPatterns = this.findPotentialFinderPatterns(data, width, height);
-                
-                if (potentialFinderPatterns.length >= 3) {
-                    // For simplicity, we're just looking for high contrast areas
-                    // that might contain QR code information
-                    
-                    // In a real implementation, we would:
-                    // 1. Verify the finder patterns are in the correct positions
-                    // 2. Locate the alignment pattern
-                    // 3. Determine the module size and version
-                    // 4. Extract the raw binary data
-                    // 5. Apply error correction
-                    // 6. Decode the data
-                    
-                    // For this example, we'll use a native browser API if available
-                    if (typeof BarcodeDetector !== 'undefined') {
-                        return this.decodeWithBarcodeDetector(imageData);
-                    }
-                    
-                    // Fallback: check for high contrast areas in the center
-                    // This is a very basic heuristic and will only work for simple QR codes
-                    const centerX = Math.floor(width / 2);
-                    const centerY = Math.floor(height / 2);
-                    const sampleSize = Math.min(width, height) / 4;
-                    
-                    let hasHighContrast = false;
-                    for (let y = centerY - sampleSize; y < centerY + sampleSize; y += 10) {
-                        for (let x = centerX - sampleSize; x < centerX + sampleSize; x += 10) {
-                            const idx = (y * width + x) * 4;
-                            const r = data[idx];
-                            const g = data[idx + 1];
-                            const b = data[idx + 2];
-                            
-                            // Check nearby pixels for contrast
-                            if (x + 10 < width && y + 10 < height) {
-                                const idx2 = ((y + 10) * width + (x + 10)) * 4;
-                                const r2 = data[idx2];
-                                const g2 = data[idx2 + 1];
-                                const b2 = data[idx2 + 2];
-                                
-                                const contrast = Math.abs(r - r2) + Math.abs(g - g2) + Math.abs(b - b2);
-                                if (contrast > 200) {
-                                    hasHighContrast = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (hasHighContrast) break;
-                    }
-                    
-                    if (hasHighContrast) {
-                        // This is not actually decoding the QR code, 
-                        // but it suggests there might be one in the image
-                        // We'll return null here, and let the real implementation 
-                        // be handled by the file input method
-                        return null;
-                    }
-                }
-                
-                return null;
-            }
-            
-            async decodeWithBarcodeDetector(imageData) {
-                try {
-                    const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
-                    const barcodes = await barcodeDetector.detect(imageData);
-                    
-                    if (barcodes.length > 0) {
-                        return barcodes[0].rawValue;
-                    }
-                } catch (error) {
-                    console.error('BarcodeDetector error:', error);
-                }
-                
-                return null;
-            }
-            
-            findPotentialFinderPatterns(data, width, height) {
-                const patterns = [];
-                const step = 10; // Check every 10 pixels for performance
-                
-                for (let y = 0; y < height; y += step) {
-                    for (let x = 0; x < width; x += step) {
-                        const idx = (y * width + x) * 4;
-                        const r = data[idx];
-                        const g = data[idx + 1];
-                        const b = data[idx + 2];
-                        
-                        // Check if this pixel is dark (potentially part of a finder pattern)
-                        if (r < 100 && g < 100 && b < 100) {
-                            // Check if there's a pattern of light-dark-light-dark-light
-                            if (this.checkFinderPattern(data, width, height, x, y)) {
-                                patterns.push({ x, y });
-                            }
-                        }
-                    }
-                }
-                
-                return patterns;
-            }
-            
-            checkFinderPattern(data, width, height, startX, startY) {
-                // A very simplified check for finder pattern
-                // Real implementations would have more sophisticated methods
-                
-                const checkSize = 7; // Standard finder pattern is 7x7 modules
-                const halfSize = Math.floor(checkSize / 2);
-                
-                // Check if we have enough space to examine
-                if (startX - halfSize < 0 || startX + halfSize >= width ||
-                    startY - halfSize < 0 || startY + halfSize >= height) {
-                    return false;
-                }
-                
-                // Check horizontal line
-                let darkCount = 0;
-                let lightCount = 0;
-                
-                for (let x = startX - halfSize; x <= startX + halfSize; x++) {
-                    const idx = (startY * width + x) * 4;
-                    const r = data[idx];
-                    const g = data[idx + 1];
-                    const b = data[idx + 2];
-                    
-                    if (r < 100 && g < 100 && b < 100) {
-                        darkCount++;
-                    } else {
-                        lightCount++;
-                    }
-                }
-                
-                // Check for a roughly equal distribution for dark and light
-                return darkCount > 0 && lightCount > 0;
-            }
-            
-            handleScanResult(result) {
-                this.stopScanning();
-                this.scanBtn.textContent = 'Start Scanning';
-                this.scanBtn.classList.add('pulse');
-                this.pauseBtn.disabled = true;
-                
-                this.showResult(result);
-                this.addToHistory(result);
-                this.showToast('QR Code detected!');
-            }
-            
-            handleFileInput(event) {
-                const file = event.target.files[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        this.canvasElement.width = img.width;
-                        this.canvasElement.height = img.height;
-                        this.canvas.drawImage(img, 0, 0, img.width, img.height);
-                        
-                        const imageData = this.canvas.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height);
-                        
-                        if (typeof BarcodeDetector !== 'undefined') {
-                            const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
-                            barcodeDetector.detect(imageData)
-                                .then(barcodes => {
-                                    if (barcodes.length > 0) {
-                                        this.handleScanResult(barcodes[0].rawValue);
-                                    } else {
-                                        this.showToast('No QR code found in image');
-                                    }
-                                })
-                                .catch(err => {
-                                    console.error('Barcode detection error:', err);
-                                    this.showToast('Failed to process image');
-                                });
-                        } else {
-                            // Fallback to a library or tell user to try another image
-                            this.tryDecodingWithJsQR(imageData);
-                        }
-                    };
-                    img.src = e.target.result;
+                    resolve();
                 };
-                reader.readAsDataURL(file);
-                
-                // Reset the input so the same file can be selected again
-                this.fileInput.value = '';
+            });
+        } catch (error) {
+            console.error('Error starting camera:', error);
+            this.showNoCameraUI();
+            throw error;
+        }
+    }
+    
+    stopCamera() {
+        if (this.stream) {
+            this.stream.getTracks().forEach(track => {
+                track.stop();
+            });
+            this.stream = null;
+            this.video.srcObject = null;
+        }
+    }
+    
+    showNoCameraUI() {
+        this.cameraLoader.classList.add('hidden');
+        this.noCameraEl.classList.remove('hidden');
+        this.pauseBtn.disabled = true;
+        this.scanBtn.disabled = true;
+        this.scanBtn.classList.remove('pulse');
+    }
+    
+    async switchCamera() {
+        const selectedCamera = parseInt(this.cameraSelect.value);
+        if (selectedCamera !== this.currentCamera) {
+            this.currentCamera = selectedCamera;
+            await this.startCamera();
+            if (this.scanning) {
+                this.scan();
             }
+        }
+    }
+    
+    async flipCamera() {
+        if (this.cameras.length <= 1) return;
+        
+        this.currentCamera = (this.currentCamera + 1) % this.cameras.length;
+        this.cameraSelect.value = this.currentCamera;
+        await this.startCamera();
+        if (this.scanning) {
+            this.scan();
+        }
+    }
+    
+    toggleScan() {
+        if (!this.scanning) {
+            this.scan();
+            this.scanBtn.textContent = 'Stop Scanning';
+            this.scanBtn.classList.remove('pulse');
+            this.pauseBtn.disabled = false;
+            this.pauseBtn.textContent = 'Pause';
+        } else {
+            this.stopScanning();
+            this.scanBtn.textContent = 'Start Scanning';
+            this.scanBtn.classList.add('pulse');
+            this.pauseBtn.disabled = true;
+        }
+    }
+    
+    togglePause() {
+        if (this.video.paused) {
+            this.video.play();
+            this.pauseBtn.textContent = 'Pause';
+            if (this.scanning) {
+                this.scan();
+            }
+        } else {
+            this.video.pause();
+            this.pauseBtn.textContent = 'Resume';
+            if (this.scanning) {
+                cancelAnimationFrame(this.animationFrame);
+            }
+        }
+    }
+    
+    scan() {
+        this.scanning = true;
+        this.scanFrame();
+    }
+    
+    stopScanning() {
+        this.scanning = false;
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+    }
+    
+    scanFrame() {
+        if (!this.scanning) return;
+        
+        if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+            this.canvasElement.height = this.video.videoHeight;
+            this.canvasElement.width = this.video.videoWidth;
             
-            tryDecodingWithJsQR(imageData) {
-                // Implementation of a simple QR code reader
-                // This is a very basic approach and may not work for all QR codes
-                
-                // We'll use a simplified version that looks for patterns of black and white
-                const data = imageData.data;
-                const width = imageData.width;
-                const height = imageData.height;
-                
-                // Convert to grayscale and find high contrast regions
-                let highContrastPoints = 0;
-                const threshold = 100;
-                
-                for (let y = 0; y < height; y += 5) {  // Sample every 5 pixels for speed
-                    for (let x = 0; x < width; x += 5) {
-                        const idx = (y * width + x) * 4;
-                        const r = data[idx];
-                        const g = data[idx + 1];
-                        const b = data[idx + 2];
-                        
-                        // Check nearby pixels for contrast
-                        if (x + 5 < width && y + 5 < height) {
-                            const idx2 = ((y + 5) * width + (x + 5)) * 4;
-                            const r2 = data[idx2];
-                            const g2 = data[idx2 + 1];
-                            const b2 = data[idx2 + 2];
-                            
-                            const contrast = Math.abs(r - r2) + Math.abs(g - g2) + Math.abs(b - b2);
-                            if (contrast > threshold) {
-                                highContrastPoints++;
+            this.canvas.drawImage(this.video, 0, 0, this.canvasElement.width, this.canvasElement.height);
+            const imageData = this.canvas.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height);
+            
+            let codeResult = null;
+            
+            // Try BarcodeDetector first (if available)
+            if (typeof BarcodeDetector !== 'undefined') {
+                this.decodeWithBarcodeDetector(imageData)
+                    .then(barcodeResult => {
+                        if (barcodeResult) {
+                            this.handleScanResult(barcodeResult);
+                        } else {
+                            // BarcodeDetector failed or didn't find a QR code, try jsQR
+                            codeResult = this.decodeQR(imageData); // Use jsQR as fallback
+                            if (codeResult) {
+                                this.handleScanResult(codeResult);
                             }
                         }
-                    }
-                }
-                
-                // If there are enough high contrast points, it might be a QR code
-                // This is a very naive approach and will have false positives
-                const minPoints = (width * height) / (5 * 5) * 0.05;  // At least 5% of sampled points
-                
-                if (highContrastPoints > minPoints) {
-                    this.showToast('Image might contain a QR code, but I cannot decode it without a proper library');
-                } else {
-                    this.showToast('No QR code detected in image');
-                }
-            }
-            
-            showResult(result) {
-                this.result.textContent = result;
-                this.resultContainer.classList.add('active');
-                
-                const isUrl = this.isValidUrl(result);
-                this.openBtn.style.display = isUrl ? 'block' : 'none';
-            }
-            
-            isValidUrl(text) {
-                try {
-                    new URL(text);
-                    return true;
-                } catch (e) {
-                    return false;
-                }
-            }
-            
-            copyResult() {
-                const text = this.result.textContent;
-                navigator.clipboard.writeText(text)
-                    .then(() => {
-                        this.showToast('Copied to clipboard!');
                     })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err);
-                        this.showToast('Failed to copy');
+                    .catch(error => {
+                        console.error('BarcodeDetector error:', error);
+                        // BarcodeDetector had an error, fallback to jsQR
+                        codeResult = this.decodeQR(imageData); // Use jsQR as fallback
+                        if (codeResult) {
+                            this.handleScanResult(codeResult);
+                        }
                     });
-            }
-            
-            openResult() {
-                const url = this.result.textContent;
-                if (this.isValidUrl(url)) {
-                    window.open(url, '_blank');
-                } else {
-                    this.showToast('Not a valid URL');
+            } else {
+                // BarcodeDetector is not available, use jsQR directly
+                codeResult = this.decodeQR(imageData);
+                if (codeResult) {
+                    this.handleScanResult(codeResult);
+                    return; // If jsQR found a result, return to avoid double scanning
                 }
-            }
-            
-            addToHistory(result) {
-                const timestamp = new Date().toISOString();
-                this.history.unshift({ result, timestamp });
-                
-                // Limit history size
-                if (this.history.length > 10) {
-                    this.history = this.history.slice(0, 10);
-                }
-                
-                this.saveHistory();
-                this.displayHistory();
-            }
-            
-            displayHistory() {
-                this.historyContainer.innerHTML = '';
-                
-                if (this.history.length === 0) {
-                    return;
-                }
-                
-                const historyTitle = document.createElement('div');
-                historyTitle.className = 'result-title';
-                historyTitle.style.marginBottom = '1rem';
-                historyTitle.textContent = 'History';
-                this.historyContainer.appendChild(historyTitle);
-                
-                this.history.forEach((item, index) => {
-                    const historyItem = document.createElement('div');
-                    historyItem.className = 'history-item';
-                    
-                    const historyContent = document.createElement('div');
-                    historyContent.className = 'history-content';
-                    historyContent.textContent = item.result;
-                    
-                    const historyTime = document.createElement('div');
-                    historyTime.className = 'history-time';
-                    historyTime.textContent = this.formatTimestamp(item.timestamp);
-                    
-                    historyItem.appendChild(historyContent);
-                    historyItem.appendChild(historyTime);
-                    
-                    historyItem.addEventListener('click', () => {
-                        this.showModal(item.result);
-                    });
-                    
-                    this.historyContainer.appendChild(historyItem);
-                });
-            }
-            
-            formatTimestamp(timestamp) {
-                const date = new Date(timestamp);
-                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            }
-            
-            showModal(content) {
-                this.modalContent.textContent = content;
-                this.modalOverlay.classList.add('active');
-                
-                const isUrl = this.isValidUrl(content);
-                this.modalOpenBtn.style.display = isUrl ? 'block' : 'none';
-            }
-            
-            closeModal() {
-                this.modalOverlay.classList.remove('active');
-            }
-            
-            copyModalContent() {
-                const text = this.modalContent.textContent;
-                navigator.clipboard.writeText(text)
-                    .then(() => {
-                        this.showToast('Copied to clipboard!');
-                    })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err);
-                        this.showToast('Failed to copy');
-                    });
-            }
-            
-            openModalContent() {
-                const url = this.modalContent.textContent;
-                if (this.isValidUrl(url)) {
-                    window.open(url, '_blank');
-                } else {
-                    this.showToast('Not a valid URL');
-                }
-            }
-            
-            loadHistory() {
-                try {
-                    const savedHistory = localStorage.getItem('qrScannerHistory');
-                    return savedHistory ? JSON.parse(savedHistory) : [];
-                } catch (e) {
-                    console.error('Error loading history:', e);
-                    return [];
-                }
-            }
-            
-            saveHistory() {
-                try {
-                    localStorage.setItem('qrScannerHistory', JSON.stringify(this.history));
-                } catch (e) {
-                    console.error('Error saving history:', e);
-                }
-            }
-            
-            showToast(message) {
-                this.toast.textContent = message;
-                this.toast.classList.add('show');
-                
-                setTimeout(() => {
-                    this.toast.classList.remove('show');
-                }, 3000);
             }
         }
         
-        // Initialize the QR Code Scanner
-        document.addEventListener('DOMContentLoaded', () => {
-            const scanner = new QRCodeScanner();
+        this.animationFrame = requestAnimationFrame(() => this.scanFrame());
+    }
+    
+    decodeQR(imageData) {
+        try {
+            const code = jsqr(imageData.data, imageData.width, imageData.height);
+            if (code) {
+                return code.data; // jsQR returns an object, we need the 'data' property which is the decoded string
+            } else {
+                return null; // No QR code found by jsQR
+            }
+        } catch (e) {
+            console.error('jsQR error:', e);
+            return null;
+        }
+    }
+    
+    async decodeWithBarcodeDetector(imageData) {
+        try {
+            const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
+            const barcodes = await barcodeDetector.detect(imageData);
+            
+            if (barcodes.length > 0) {
+                return barcodes[0].rawValue;
+            }
+        } catch (error) {
+            console.error('BarcodeDetector error:', error);
+        }
+        
+        return null;
+    }
+    
+    handleScanResult(result) {
+        this.stopScanning();
+        this.scanBtn.textContent = 'Start Scanning';
+        this.scanBtn.classList.add('pulse');
+        this.pauseBtn.disabled = true;
+        
+        this.showResult(result);
+        this.addToHistory(result);
+        this.showToast('QR Code detected!');
+        
+        // Auto-handle special URLs (optional enhancement)
+        if (this.isValidUrl(result)) {
+            if (result.startsWith('tel:')) {
+                // Optionally ask before making a phone call
+                if (confirm('Make a phone call to ' + result.replace('tel:', '') + '?')) {
+                    window.location.href = result;
+                }
+            } else if (result.startsWith('mailto:')) {
+                // Optionally ask before opening email client
+                if (confirm('Open email client?')) {
+                    window.location.href = result;
+                }
+            }
+            // For http/https URLs, we'll let the user decide via the open button
+        }
+    }
+    
+    handleFileInput(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                this.canvasElement.width = img.width;
+                this.canvasElement.height = img.height;
+                this.canvas.drawImage(img, 0, 0, img.width, img.height);
+                
+                const imageData = this.canvas.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height);
+                
+                // Try BarcodeDetector API first
+                if (typeof BarcodeDetector !== 'undefined') {
+                    const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
+                    barcodeDetector.detect(imageData)
+                        .then(barcodes => {
+                            if (barcodes.length > 0) {
+                                this.handleScanResult(barcodes[0].rawValue);
+                            } else {
+                                // Fallback to jsQR if no codes detected
+                                this.tryDecodingWithJsQR(imageData);
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Barcode detection error:', err);
+                            // Fallback to jsQR on error
+                            this.tryDecodingWithJsQR(imageData);
+                        });
+                } else {
+                    // Fallback to jsQR if BarcodeDetector not available
+                    this.tryDecodingWithJsQR(imageData);
+                }
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        
+        // Reset the input so the same file can be selected again
+        this.fileInput.value = '';
+    }
+    
+    tryDecodingWithJsQR(imageData) {
+        try {
+            const code = jsqr(imageData.data, imageData.width, imageData.height);
+            if (code) {
+                this.handleScanResult(code.data);
+            } else {
+                this.showToast('No QR code found in image');
+            }
+        } catch (e) {
+            console.error('jsQR error:', e);
+            this.showToast('Failed to process image');
+        }
+    }
+    
+    showResult(result) {
+        this.result.textContent = result;
+        this.resultContainer.classList.add('active');
+        
+        const isUrl = this.isValidUrl(result);
+        this.openBtn.style.display = isUrl ? 'block' : 'none';
+    }
+    
+    isValidUrl(text) {
+        try {
+            new URL(text);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+    
+    copyResult() {
+        const text = this.result.textContent;
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                this.showToast('Copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Could not copy text: ', err);
+                this.showToast('Failed to copy');
+            });
+    }
+    
+    openResult() {
+        const url = this.result.textContent;
+        if (this.isValidUrl(url)) {
+            window.open(url, '_blank');
+        } else {
+            this.showToast('Not a valid URL');
+        }
+    }
+    
+    addToHistory(result) {
+        const timestamp = new Date().toISOString();
+        this.history.unshift({ result, timestamp });
+        
+        // Limit history size
+        if (this.history.length > 10) {
+            this.history = this.history.slice(0, 10);
+        }
+        
+        this.saveHistory();
+        this.displayHistory();
+    }
+    
+    displayHistory() {
+        this.historyContainer.innerHTML = '';
+        
+        if (this.history.length === 0) {
+            return;
+        }
+        
+        const historyTitle = document.createElement('div');
+        historyTitle.className = 'result-title';
+        historyTitle.style.marginBottom = '1rem';
+        historyTitle.textContent = 'History';
+        this.historyContainer.appendChild(historyTitle);
+        
+        this.history.forEach((item) => {
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            
+            const historyContent = document.createElement('div');
+            historyContent.className = 'history-content';
+            historyContent.textContent = item.result;
+            
+            const historyTime = document.createElement('div');
+            historyTime.className = 'history-time';
+            historyTime.textContent = this.formatTimestamp(item.timestamp);
+            
+            historyItem.appendChild(historyContent);
+            historyItem.appendChild(historyTime);
+            
+            historyItem.addEventListener('click', () => {
+                this.showModal(item.result);
+            });
+            
+            this.historyContainer.appendChild(historyItem);
         });
+    }
+    
+    formatTimestamp(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    showModal(content) {
+        this.modalContent.textContent = content;
+        this.modalOverlay.classList.add('active');
+        
+        const isUrl = this.isValidUrl(content);
+        this.modalOpenBtn.style.display = isUrl ? 'block' : 'none';
+    }
+    
+    closeModal() {
+        this.modalOverlay.classList.remove('active');
+    }
+    
+    copyModalContent() {
+        const text = this.modalContent.textContent;
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                this.showToast('Copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Could not copy text: ', err);
+                this.showToast('Failed to copy');
+            });
+    }
+    
+    openModalContent() {
+        const url = this.modalContent.textContent;
+        if (this.isValidUrl(url)) {
+            window.open(url, '_blank');
+        } else {
+            this.showToast('Not a valid URL');
+        }
+    }
+    
+    loadHistory() {
+        try {
+            const savedHistory = localStorage.getItem('qrScannerHistory');
+            return savedHistory ? JSON.parse(savedHistory) : [];
+        } catch (e) {
+            console.error('Error loading history:', e);
+            return [];
+        }
+    }
+    
+    saveHistory() {
+        try {
+            localStorage.setItem('qrScannerHistory', JSON.stringify(this.history));
+        } catch (e) {
+            console.error('Error saving history:', e);
+        }
+    }
+    
+    showToast(message) {
+        this.toast.textContent = message;
+        this.toast.classList.add('show');
+        
+        setTimeout(() => {
+            this.toast.classList.remove('show');
+        }, 3000);
+    }
+}
+
+// Initialize the QR Code Scanner
+document.addEventListener('DOMContentLoaded', () => {
+    new QRCodeScanner();
+});
     </script>
 </body>
 </html>
