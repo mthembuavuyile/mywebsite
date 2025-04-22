@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empowering Youth | About Us</title>
+  <title>Pathfinders Empowerment Hub | Empowering Youth</title>
   <meta name="description" content="Empowering youth across South Africa through leadership, entrepreneurship, and academic excellence.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --maroon: #800000;
@@ -89,6 +91,7 @@
       letter-spacing: 1px;
     }
     
+    
     /* Navigation */
     .navbar {
       position: sticky;
@@ -106,10 +109,29 @@
     }
     
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: 700;
       font-size: 1.5rem;
       color: var(--white);
       text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--maroon);
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
     
     .nav-links {
@@ -185,9 +207,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       font-size: 2rem;
       color: var(--maroon);
       font-weight: 700;
+    }
+    
+    .about-image i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
     }
     
     /* What We Do Section */
@@ -215,6 +243,14 @@
       color: var(--maroon);
       margin-bottom: 1rem;
       font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .service-card h3 i {
+      font-size: 1.3rem;
+      color: var(--maroon);
     }
     
     .service-card ul {
@@ -383,6 +419,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      font-size: 1.2rem;
     }
     
     .social-icon:hover {
@@ -502,7 +539,12 @@
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="#" class="logo">Empowering Youth</a>
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-mountain-sun"></i>
+        </div>
+        Pathfinders
+      </a>
       <button class="mobile-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#vision">Vision</a></li>
@@ -517,7 +559,7 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <h1>Empowering Youth</h1>
+      <h1>Pathfinders Empowerment Hub</h1>
       <p>Building a generation of values-driven, opportunity-ready youth across South Africa</p>
     </div>
   </header>
@@ -547,6 +589,7 @@
         </p>
       </div>
       <div class="about-image">
+        <i class="fas fa-people-group"></i>
         Empowering Youth
       </div>
     </section>
@@ -556,7 +599,7 @@
       <h2 class="section-title">What We Do</h2>
       <div class="services-grid">
         <div class="service-card">
-          <h3>Youth Development Programs</h3>
+          <h3><i class="fas fa-bullseye"></i> Youth Development Programs</h3>
           <ul>
             <li>School-based empowerment sessions</li>
             <li>Motivational talks & assemblies</li>
@@ -565,7 +608,7 @@
           </ul>
         </div>
         <div class="service-card">
-          <h3>Entrepreneurship & Skills Training</h3>
+          <h3><i class="fas fa-lightbulb"></i> Entrepreneurship & Skills Training</h3>
           <ul>
             <li>Small business and startup development</li>
             <li>Financial literacy workshops</li>
@@ -574,7 +617,7 @@
           </ul>
         </div>
         <div class="service-card">
-          <h3>Academic Excellence Support</h3>
+          <h3><i class="fas fa-graduation-cap"></i> Academic Excellence Support</h3>
           <ul>
             <li>Study skills & performance coaching</li>
             <li>Goal-setting & discipline frameworks</li>
@@ -583,7 +626,7 @@
           </ul>
         </div>
         <div class="service-card">
-          <h3>Partnership & Collaboration</h3>
+          <h3><i class="fas fa-handshake"></i> Partnership & Collaboration</h3>
           <ul>
             <li>Engaging schools, NGOs, and businesses</li>
             <li>Co-developing youth-focused solutions</li>
@@ -610,7 +653,7 @@
     <section class="cta-section">
       <h2>Ready to Make a Difference?</h2>
       <p>Join us in our mission to empower the next generation of leaders.</p>
-      <a href="#" class="cta-btn">Get Involved</a>
+      <a href="#" class="cta-btn">Get Involved <i class="fas fa-arrow-right"></i></a>
     </section>
   </main>
 
@@ -619,29 +662,29 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-column">
-          <h3>Empowering Youth</h3>
+          <h3>Pathfinders Hub</h3>
           <p>Building a generation of values-driven, opportunity-ready youth across South Africa.</p>
           <div class="social-icons">
-            <div class="social-icon">f</div>
-            <div class="social-icon">in</div>
-            <div class="social-icon">ig</div>
+            <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+            <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
+            <div class="social-icon"><i class="fab fa-instagram"></i></div>
           </div>
         </div>
         <div class="footer-column">
           <h3>Contact</h3>
-          <p>info@empoweringyouth.org</p>
-          <p>+27 12 345 6789</p>
-          <p>Durban, South Africa</p>
+          <p><i class="fas fa-envelope"></i> info@pathfindershub.org</p>
+          <p><i class="fas fa-phone"></i> +27 12 345 6789</p>
+          <p><i class="fas fa-map-marker-alt"></i> Durban, South Africa</p>
         </div>
         <div class="footer-column">
           <h3>Quick Links</h3>
-          <p><a href="#vision" style="color: white; text-decoration: none;">Our Vision</a></p>
-          <p><a href="#about" style="color: white; text-decoration: none;">About Us</a></p>
-          <p><a href="#services" style="color: white; text-decoration: none;">Programs</a></p>
+          <p><a href="#vision" style="color: white; text-decoration: none;"><i class="fas fa-chevron-right"></i> Our Vision</a></p>
+          <p><a href="#about" style="color: white; text-decoration: none;"><i class="fas fa-chevron-right"></i> About Us</a></p>
+          <p><a href="#services" style="color: white; text-decoration: none;"><i class="fas fa-chevron-right"></i> Programs</a></p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Empowering Youth. All rights reserved.</p>
+        <p>&copy; 2025 Pathfinders Empowerment Hub. All rights reserved.</p>
         <p class="developer">Powered by <a href="https://vylexnexys.co.za" style="color: #e71616; text-decoration: dotted;">Vylex Nexys</a></p>
       </div>
     </div>
