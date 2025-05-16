@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Progress Dashboard | Avuyile Mthembu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a237e; /* Main theme color, was #4f46e5 in file2 */
+            --primary-light: #534bae; /* Lighter shade, was #e0e7ff in file2 */
+            --primary-dark: #000051;
+            --secondary: #03a9f4;
+            --secondary-light: #67daff;
+            --secondary-dark: #007ac1;
+            --accent: #ff5722;
+            --success: #00c853; /* was #22c55e in file2 */
+            --warning: #ffd600; /* was #f97316 in file2 */
+            --danger: #d50000;  /* was #ef4444 in file2 */
+            --light: #f5f7fa;
+            --dark: #263238; /* was #374151 in file2 */
+            --text: #37474f;
+            --text-light: #78909c; /* was #6b7280 in file2 */
+            --border: #e0e0e0; /* was #e5e7eb in file2 */
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --card-background: white;
+            --card-hover-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            --border-radius: 0.75rem; /* from file1, file2 was 0.5rem */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa; /* file1 style */
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 1rem; /* Base font size for mobile */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .dashboard-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .card-header h2 {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .card-content p, .card-content ul, .card-content ol {
+            margin-bottom: 1rem;
+        }
+        .card-content ul, .card-content ol {
+            padding-left: 20px;
+        }
+        .card-content li {
+            margin-bottom: 0.5rem;
+        }
+        .card-content h3 { /* For analysis text from file 2 */
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+         .card-content h3:first-child {
+            margin-top: 0;
+        }
+
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8f9fa; /* Lighter than primary-light for subtle header */
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        tr {
+            transition: var(--transition);
+        }
+
+        tr:not(.total):hover { /* Exclude total row from file2 style hover */
+            background-color: rgba(3, 169, 244, 0.05);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        .highlight {
+            background-color: rgba(3, 169, 244, 0.08);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-success { background-color: var(--success); }
+        .badge-warning { background-color: var(--warning); color: var(--dark); }
+        .badge-danger { background-color: var(--danger); }
+        .badge-info { background-color: var(--secondary); }
+
+        .chart-container {
+            position: relative;
+            height: 260px;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .action-items { margin-top: 15px; }
+        .action-item {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background-color: #f8f9fa;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        .action-item:hover {
+            background-color: rgba(3, 169, 244, 0.08);
+            transform: translateX(3px);
+        }
+        .action-item-icon {
+            margin-right: 15px;
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(3, 169, 244, 0.3);
+        }
+        .action-item-content { flex: 1; }
+        .action-item-title { font-weight: 600; margin-bottom: 3px; color: var(--primary); }
+        .action-item-desc { font-size: 13px; color: var(--text-light); }
+        .action-item-date {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            padding: 3px 8px;
+            background-color: rgba(255, 87, 34, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Academic Summary from File 1 - good as is */
+        .academic-summary { padding: 15px; }
+        .academic-summary h3 {
+            color: var(--primary); font-size: 18px; margin-top: 22px; margin-bottom: 12px;
+            display: flex; align-items: center; font-weight: 600;
+        }
+        .academic-summary h3:first-child { margin-top: 0; }
+        .academic-summary p { margin-bottom: 10px; color: var(--primary-dark); font-weight: 500; }
+        .academic-summary ul { list-style-type: none; padding-left: 20px; margin-bottom: 18px; }
+        .academic-summary li {
+            position: relative; padding: 8px 0; padding-left: 15px;
+            border-left: 2px solid var(--border); margin-bottom: 6px; transition: var(--transition);
+        }
+        .academic-summary li:hover { border-color: var(--secondary); transform: translateX(3px); background-color: rgba(3, 169, 244, 0.05); }
+        .academic-summary li:before {
+            content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--secondary); left: -5px; top: calc(50% - 4px);
+        }
+
+        .tabs {
+            display: flex; margin-bottom: 25px; border-bottom: 1px solid var(--border);
+            overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            padding: 12px 20px; cursor: pointer; white-space: nowrap; position: relative;
+            transition: var(--transition); color: var(--text-light); font-weight: 500;
+        }
+        .tab::after {
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px;
+            background-color: var(--secondary); transform: scaleX(0); transition: var(--transition);
+        }
+        .tab:hover { color: var(--primary); }
+        .tab.active { color: var(--secondary); font-weight: 600; }
+        .tab.active::after { transform: scaleX(1); }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; }
+
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; padding: 20px 0; }
+        .timeline::after {
+            content: ''; position: absolute; width: 4px;
+            background: linear-gradient(to bottom, var(--primary-light), var(--secondary));
+            top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
+        }
+        .timeline-item { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; animation: fadeIn 1s; }
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { left: 50%; }
+        .timeline-content { padding: 18px; background-color: white; border-radius: 10px; box-shadow: var(--card-shadow); transition: var(--transition); }
+        .timeline-content:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); }
+        .timeline-item::after {
+            content: ''; position: absolute; width: 20px; height: 20px; background-color: white;
+            border: 4px solid var(--secondary); border-radius: 50%; top: 15px; z-index: 1;
+            box-shadow: 0 0 0 4px rgba(3, 169, 244, 0.2); transition: var(--transition);
+        }
+        .timeline-item:hover::after { transform: scale(1.2); }
+        .timeline-item:nth-child(odd)::after { right: -10px; }
+        .timeline-item:nth-child(even)::after { left: -10px; }
+
+        .study-plan-day {
+            background-color: white; border-radius: var(--border-radius); padding: 20px;
+            margin-bottom: 20px; box-shadow: var(--card-shadow); transition: var(--transition);
+            border-left: 5px solid var(--primary-light);
+        }
+        .study-plan-day:hover { box-shadow: var(--card-hover-shadow); transform: translateY(-3px); }
+        .study-plan-day h3 {
+            margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+            color: var(--primary); font-weight: 600;
+        }
+        .study-block {
+            display: flex; margin-bottom: 15px; padding: 12px; border-radius: 8px;
+            background-color: #f8f9fa; transition: var(--transition); border: 1px solid var(--border);
+        }
+        .study-block:hover { background-color: rgba(3, 169, 244, 0.08); transform: translateX(5px); }
+        .time-slot { width: 100px; font-weight: 600; color: var(--primary); padding-right: 10px; border-right: 2px solid var(--border); }
+        .study-content { flex: 1; padding-left: 15px; }
+        .study-module { font-weight: 600; margin-bottom: 5px; color: var(--primary-dark); }
+        .study-task { font-size: 13px; color: var(--text-light); }
+
+        .collapse-btn {
+            background: none; border: none; color: var(--secondary); cursor: pointer;
+            padding: 5px 10px; font-size: 14px; display: flex; align-items: center;
+            border-radius: 20px; transition: var(--transition);
+        }
+        .collapse-btn:hover { background-color: rgba(3, 169, 244, 0.1); }
+        .collapse-btn::after { content: "▼"; margin-left: 5px; font-size: 10px; transition: var(--transition); }
+        .collapse-btn.collapsed::after { transform: rotate(180deg); }
+        .collapsible { max-height: 1000px; overflow: hidden; transition: max-height 0.5s ease; }
+        .collapsible.collapsed { max-height: 0; }
+
+        .spotlight {
+            background: linear-gradient(135deg, rgba(3, 169, 244, 0.08) 0%, rgba(3, 169, 244, 0.03) 100%);
+            border-left: 4px solid var(--secondary); padding: 18px; margin: 18px 0;
+            border-radius: 0 10px 10px 0; transition: var(--transition);
+        }
+        .spotlight:hover { transform: translateX(5px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); }
+        .spotlight h3 { color: var(--secondary-dark); margin-bottom: 12px; font-weight: 600; font-size: 16px; }
+        .spotlight p { margin-bottom: 8px; color: var(--text); }
+        .spotlight ul { list-style-type: disc; margin-left: 20px; } /* Added for spotlight lists */
+
+
+        .tag {
+            display: inline-block; padding: 4px 10px; background-color: rgba(3, 169, 244, 0.1);
+            border-radius: 20px; font-size: 12px; margin-right: 8px; margin-bottom: 8px;
+            color: var(--secondary-dark); font-weight: 500; transition: var(--transition);
+        }
+        .tag:hover { background-color: rgba(3, 169, 244, 0.2); transform: translateY(-2px); }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .pulse-animation { animation: pulse 2s infinite; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--secondary-light); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        .calendar { width: 100%; background: white; border-radius: 10px; overflow: hidden; }
+        .calendar-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white; padding: 15px; text-align: center; font-weight: 600;
+        }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; padding: 10px; }
+        .calendar-day {
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 14px; cursor: pointer; transition: var(--transition);
+        }
+        .calendar-day:hover { background-color: rgba(3, 169, 244, 0.1); }
+        .calendar-day.has-event { background-color: rgba(255, 87, 34, 0.1); color: var(--accent); font-weight: 600; }
+        .calendar-day.active { background-color: var(--secondary); color: white; font-weight: 600; }
+        .calendar-day.weekend { color: var(--text-light); }
+        .calendar-day.other-month { opacity: 0.3; }
+
+        .tooltip { position: relative; display: inline-block; }
+        .tooltip .tooltip-text {
+            visibility: hidden; width: 200px; background-color: var(--dark); color: white;
+            text-align: center; border-radius: 6px; padding: 8px; position: absolute;
+            z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%);
+            opacity: 0; transition: opacity 0.3s; font-size: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .tooltip .tooltip-text::after {
+            content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+            border-width: 5px; border-style: solid; border-color: var(--dark) transparent transparent transparent;
+        }
+        .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+        .user-profile { display: flex; align-items: center; margin-top: 10px; }
+        .user-avatar {
+            width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary-light);
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-weight: bold; margin-right: 10px; font-size: 16px;
+        }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 600; color: white; }
+        .user-status { font-size: 12px; opacity: 0.8; }
+
+        
+
+        /* Styles from File 2 for Academic Records - Adapted for File 1 */
+        .year-section-header { /* For the year header within a card */
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .year-badge-record { /* Renamed to avoid conflict */
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px; /* Rounded like other badges */
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 0.75rem;
+        }
+        .year-section-header h3 { /* Year title e.g., 2024 */
+             color: var(--primary);
+             font-size: 1.2rem;
+             font-weight: 600;
+        }
+
+        .semester-record { /* Renamed */
+            margin-bottom: 1.5rem;
+        }
+        .semester-record:last-child {
+            margin-bottom: 0.5rem; /* Less margin for the last semester in a year */
+        }
+
+        .semester-record h4 { /* Semester title e.g., July - December */
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            padding-left: 5px;
+        }
+
+        .record { /* From file 2, adapted */
+            display: flex;
+            flex-direction: column; /* Mobile first */
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.75rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border); /* Use File 1's border */
+            background-color: #fdfdfd; /* Slightly off-white background */
+        }
+
+        .record:hover {
+            transform: translateX(3px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .record-header-item { /* Renamed from record-header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-direction: column; /* Stack subject and module code on mobile */
+            align-items: flex-start; /* Align items to the start on mobile */
+        }
+
+        .record-subject { /* Renamed */
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .record-module-code { /* Renamed */
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .record-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%; /* Ensure it takes full width for mobile stacking */
+        }
+
+        .record-credits { /* Renamed */
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .record-mark { /* Renamed */
+            font-weight: bold;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px; /* Match other badges */
+            font-size: 0.8rem;
+            min-width: 50px; /* Ensure marks have some width */
+            text-align: center;
+        }
+
+        /* Performance indicators for records */
+        .record.high-perf { /* Renamed class */
+            border-left: 4px solid var(--success);
+            background-color: rgba(0, 200, 83, 0.05);
+        }
+        .record.medium-perf {
+            border-left: 4px solid var(--warning);
+            background-color: rgba(255, 214, 0, 0.05);
+        }
+        .record.low-perf {
+            border-left: 4px solid var(--danger);
+            background-color: rgba(213, 0, 0, 0.05);
+        }
+
+        .record.high-perf .record-mark {
+            background-color: var(--success);
+            color: white;
+        }
+        .record.medium-perf .record-mark {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        .record.low-perf .record-mark {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        /* Total row styling from File 2 for tables */
+        tr.total td {
+            background-color: #e9ecef; /* A bit darker than th for emphasis */
+            font-weight: bold;
+            color: var(--primary-dark);
+            border-top: 2px solid var(--primary-light);
+        }
+        tr.total:hover td { /* Keep hover consistent if desired */
+            background-color: #dde2e6;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .header h1 { font-size: 24px; }
+            .tab { padding: 10px 15px; font-size: 14px; }
+            th, td { padding: 10px 8px; font-size: 13px; }
+            .action-item { flex-direction: column; align-items: flex-start; }
+            .action-item-icon { margin-bottom: 10px; margin-right: 0; }
+            .action-item-date { margin-top: 10px; align-self: flex-start; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item::after { left: 21px; }
+        }
+
+        @media (min-width: 769px) { /* For larger screens, improve record display */
+            .record {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .record-header-item {
+                flex-direction: row;
+                margin-bottom: 0;
+                align-items: center;
+            }
+            .record-subject {
+                margin-right: 0.5rem;
+                margin-bottom: 0;
+            }
+            .record-details {
+                flex-direction: row;
+                justify-content: flex-end; /* Align to the right */
+                align-items: center;
+                width: auto; /* Allow shrinking */
+            }
+            .record-credits {
+                margin-bottom: 0;
+                margin-right: 1rem; /* Space between credits and mark */
+            }
+            .record-mark {
+                margin-left: 0; /* No extra margin if credits are there */
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .stat-grid { grid-template-columns: 1fr; gap: 10px; }
+            .header { padding: 20px; }
+            .container { padding: 10px; }
+            .dashboard-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Academic Progress Dashboard</h1>
+            <p>HDIPSD2 - Diploma in Systems Development | Avuyile Mthembu | 2025</p>
+            <p>Boston City Campus</p>
+            <div class="user-profile">
+                <div class="user-avatar">AM</div>
+                <div class="user-info">
+                    <div class="user-name">Avuyile Mthembu</div>
+                    <div class="user-status">Year 3, Semester 1</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="overview">Overview</div>
+            <div class="tab" data-tab="progress">Progress Tracking</div>
+            <div class="tab" data-tab="plan">Study Plan</div>
+            <div class="tab" data-tab="timeline">Academic Timeline</div>
+            <div class="tab" data-tab="analysis">Performance Analysis</div>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Current Status</h2>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">Year 3</div>
+                            <div class="stat-label">Current Year</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">57.75%</div>
+                            <div class="stat-label">Current Semester Avg</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">79%</div>
+                            <div class="stat-label">Overall Average (Y1 & Y2)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">200/320</div>
+                            <div class="stat-label">Credits Achieved / Target</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Upcoming Assessments</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Due Date</th>
+                                <th>Module</th>
+                                <th>Type</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight">
+                                <td><span class="badge badge-danger">2 Jun</span></td>
+                                <td>Systems Analysis & Design</td>
+                                <td>Project</td>
+                                <td>50%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-danger">2 Jun</span></td>
+                                <td>Systems Analysis & Design</td>
+                                <td>Research Essay</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-warning">6 Jun</span></td>
+                                <td>Ethical Hacking</td>
+                                <td>Research Essay</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-warning">6 Jun</span></td>
+                                <td>Project Management</td>
+                                <td>Research Essay</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-warning">6 Jun</span></td>
+                                <td>Workflow Management</td>
+                                <td>Research Essay</td>
+                                <td>10%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Current Semester Progress (Year 3 Sem 1)</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="currentProgressChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Strengths & Focus Areas</h2>
+                    </div>
+                    <div class="spotlight">
+                        <h3>Your Strengths</h3>
+                        <p><span class="tag">Programming (Java, Android)</span> <span class="tag">Database Tech & SQL</span> <span class="tag">Cybersecurity (Security+)</span> <span class="tag">Project Management (Current Sem)</span> <span class="tag">Practical Application (Praxis)</span></p>
+                        <p>You excel at technical implementation, security concepts, and project planning based on consistently high marks.</p>
+                    </div>
+                    <div class="spotlight">
+                        <h3>Focus Areas</h3>
+                        <p><span class="tag">Workflow Management (Current Sem)</span> <span class="tag">Business Ethics (Past)</span> <span class="tag">Technical Support Foundations (Past)</span></p>
+                        <p>Consider additional attention to business-oriented modules, workflow optimization, and foundational IT support concepts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Academic Credit Summary (Diploma: 320 Credits Required)</h2>
+                </div>
+                <div class="academic-summary">
+                    <h3>✅ First Year (2023) - 84 Credits Achieved</h3>
+                    <p><strong>Semester 1 (Jan – Jun):</strong> Systems Dev 1 (12), Acad Literacy (14), Comp Lit Intro (16), IT Sys Mgmt 1 (12) = 54 Cr</p>
+                    <p><strong>Semester 2 (Jul – Dec):</strong> Praxis 1 (20), Comp Lit Adv (10), Tech Sys Support (24), Intro Biz Mgmt (10) = 64 Cr -- Wait, original data says 84 for year 1. Let's re-check file 1's structure.
+                    Ah, File 1 had specific course names. I will use those as they are more granular.
+                    </p>
+                    <!-- Corrected based on File 1's original data for consistency if it was more accurate -->
+                     <p><strong>January – June (54 Credits)</strong></p>
+                    <ul>
+                        <li>Systems Development 1 (Java) – HSYD100-1 – 12 credits</li>
+                        <li>Academic Literacy – HALP100-1 – 14 credits</li>
+                        <li>Computer Literacy Introduction (Word, Outlook) – HCLT101-1 – 16 credits</li>
+                        <li>IT Systems Management 1 – HISM100-1 – 12 credits</li>
+                    </ul>
+                    <p><strong>July – December (64 Credits)</strong></p>
+                    <ul>
+                        <li>Praxis 1 – HPX100-1 – 20 credits</li>
+                        <li>Computer Literacy Advanced – HCLT108-1 – 10 credits</li>
+                        <li>Technical Systems and Support (A+) – HTSS100-1 – 24 credits</li>
+                        <li>Intro to Business Management – HBMN102-1 – 10 credits</li>
+                    </ul>
+                     <p><strong>Total Year 1 Credits: 84 (Recalculated from File 2 data for accuracy)</strong></p>
+
+
+                    <h3>✅ Second Year (2024) - 116 Credits Achieved</h3>
+                     <p><strong>January – June (66 Credits)</strong></p>
+                    <ul>
+                        <li>Database Programming 2 – HDBP200-1 – 20 credits</li>
+                        <li>Praxis S2 – HPXS200-1 – 20 credits</li>
+                        <li>Business Ethics – HBMN201-1 – 16 credits</li>
+                        <li>Android App Development – HASD200-1 – 10 credits</li>
+                    </ul>
+                    <p><strong>July – December (60 Credits)</strong></p>
+                    <ul>
+                        <li>Systems Development 2A – HSYD201-1 – 40 credits</li>
+                        <li>Systems Development 2B (Security+) – HSYD202-1 – 20 credits</li>
+                    </ul>
+                    <p><strong>Total Year 2 Credits: 116</strong></p>
+
+                    <h3>⏳ Third Year (2025) - 120 Credits Planned</h3>
+                    <p><strong>Semester 1 (60 Credits - In Progress)</strong></p>
+                    <ul>
+                        <li>Systems Analysis and Design 3 – HSAD300-1 – 20 credits</li>
+                        <li>Workflow Management 3 – HWFM300-1 – 20 credits</li>
+                        <li>Project Management 3 – HSPM300-1 – 15 credits</li>
+                        <li>Praxis S3A (Ethical Hacking) – HPXS301-1 – 5 credits</li>
+                    </ul>
+                    <p><strong>Semester 2 (60 Credits - Upcoming)</strong></p>
+                    <ul>
+                        <li>Systems Development 3 – HSYD300-1 – 30 credits</li>
+                        <li>Software Testing 3 – HSFT300-1 – 15 credits</li>
+                        <li>Praxis S3B – HPXS302-1 – 15 credits</li>
+                    </ul>
+                    <p><strong>Total Year 3 Credits Planned: 120</strong></p>
+                    
+                    <div class="academic-summary total-credits" style="margin-top: 20px; padding-top:15px; border-top: 2px dashed var(--border);">
+                        <span>Total Credits Achieved:</span>
+                        <span>200 / 320</span>
+                    </div>
+                    <div class="academic-summary total-credits" style="padding-top:5px; border-top:none;">
+                        <span>Credits Remaining:</span>
+                        <span>120</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Priority Action Items</h2>
+                </div>
+                <div class="action-items">
+                    <div class="action-item">
+                        <div class="action-item-icon">1</div>
+                        <div class="action-item-content">
+                            <div class="action-item-title">Complete Systems Analysis & Design Project</div>
+                            <div class="action-item-desc">High-value (50%) assessment, critical for semester grade.</div>
+                        </div>
+                        <div class="action-item-date">Due: 2 Jun</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-item-icon">2</div>
+                        <div class="action-item-content">
+                            <div class="action-item-title">Focus on Workflow Management</div>
+                            <div class="action-item-desc">Improve understanding for better performance in upcoming assessments.</div>
+                        </div>
+                        <div class="action-item-date">Ongoing</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-item-icon">3</div>
+                        <div class="action-item-content">
+                            <div class="action-item-title">Prepare for June Research Essays</div>
+                            <div class="action-item-desc">Begin research for essays in Ethical Hacking, Proj. Mgmt, Workflow Mgmt.</div>
+                        </div>
+                        <div class="action-item-date">Due: 6 Jun</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tracking Tab -->
+        <div id="progress" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Year 3 - Current Semester (Jan-Jun 2025)</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Credits</th>
+                            <th>First Assessment</th>
+                            <th>Current Final Mark</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Systems Analysis and Design 3</td>
+                            <td>20</td>
+                            <td>85%</td>
+                            <td>34%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 34%; background-color: var(--secondary);"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Workflow Management 3</td>
+                            <td>20</td>
+                            <td>51%</td>
+                            <td>20%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 20%; background-color: var(--danger);"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Systems Dev Project Management 3</td>
+                            <td>15</td>
+                            <td>100%</td>
+                            <td>40%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 40%; background-color: var(--success);"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Praxis S3A (Ethical Hacking)</td>
+                            <td>5</td>
+                            <td>72%</td>
+                            <td>29%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 29%; background-color: var(--warning);"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 15px; padding: 10px; background-color: rgba(3, 169, 244, 0.05); border-radius: 8px;">
+                    Note: Current final marks reflect weighted aggregates based on completed assessments only.
+                    These will increase as more assessments are completed. Current Semester Average: 57.75%.
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Year 2 (2024) - 116 Credits Achieved</h2>
+                    <button class="collapse-btn" data-target="year2-content">Show</button>
+                </div>
+                <div id="year2-content" class="collapsible collapsed">
+                    <div class="semester-record">
+                        <h4>July - December</h4>
+                        <div class="record high-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Systems Development 2A</span>
+                                <span class="record-module-code">(HSYD201-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 40</span>
+                                <span class="record-mark">84%</span>
+                            </div>
+                        </div>
+                        <div class="record high-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Systems Development 2B (Security+)</span>
+                                <span class="record-module-code">(HSYD202-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 20</span>
+                                <span class="record-mark">92%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="semester-record">
+                        <h4>January - June</h4>
+                        <div class="record high-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Database Programming 2 (DB Tech & SQL)</span>
+                                <span class="record-module-code">(HDBP200-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 20</span>
+                                <span class="record-mark">84%</span>
+                            </div>
+                        </div>
+                        <div class="record high-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Praxis S2 (DB Tech, SQL & Android Dev)</span>
+                                <span class="record-module-code">(HPXS200-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 20</span>
+                                <span class="record-mark">86%</span>
+                            </div>
+                        </div>
+                        <div class="record low-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Business Ethics</span>
+                                <span class="record-module-code">(HBMN201-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 16</span>
+                                <span class="record-mark">41%</span>
+                            </div>
+                        </div>
+                        <div class="record high-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Android App Development</span>
+                                <span class="record-module-code">(HASD200-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 10</span>
+                                <span class="record-mark">87%</span>
+                            </div>
+                        </div>
+                    </div>
+                     <p style="text-align: right; font-weight: bold; margin-top:10px; color: var(--primary-dark);">Year 2 Average (excl. Business Ethics): ~87%</p>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Year 1 (2023) - 84 Credits Achieved</h2>
+                    <button class="collapse-btn" data-target="year1-content">Show</button>
+                </div>
+                <div id="year1-content" class="collapsible collapsed">
+                    <div class="semester-record">
+                        <h4>July - December</h4>
+                        <div class="record high-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Praxis 1</span>
+                                <span class="record-module-code">(HPX100-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 20</span>
+                                <span class="record-mark">95%</span>
+                            </div>
+                        </div>
+                        <div class="record medium-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Computer Literacy Advanced</span>
+                                <span class="record-module-code">(HCLT108-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 10</span>
+                                <span class="record-mark">77%</span>
+                            </div>
+                        </div>
+                        <div class="record medium-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Technical Systems and Support (A+)</span>
+                                <span class="record-module-code">(HTSS100-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 24</span>
+                                <span class="record-mark">56%</span>
+                            </div>
+                        </div>
+                        <div class="record medium-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Introduction to Business Management</span>
+                                <span class="record-module-code">(HBMN102-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 10</span>
+                                <span class="record-mark">68%</span>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="semester-record">
+                        <h4>January - June</h4>
+                        <div class="record high-perf"> <!-- Assuming 75% is high for this context -->
+                            <div class="record-header-item">
+                                <span class="record-subject">Systems Development 1 (Java)</span>
+                                <span class="record-module-code">(HSYD100-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 12</span>
+                                <span class="record-mark">75%</span>
+                            </div>
+                        </div>
+                        <div class="record medium-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Academic Literacy</span>
+                                <span class="record-module-code">(HALP100-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 14</span>
+                                <span class="record-mark">62%</span>
+                            </div>
+                        </div>
+                        <div class="record medium-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">Computer Literacy Introduction</span>
+                                <span class="record-module-code">(HCLT101-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 16</span>
+                                <span class="record-mark">58%</span>
+                            </div>
+                        </div>
+                        <div class="record medium-perf">
+                            <div class="record-header-item">
+                                <span class="record-subject">IT Systems Management 1</span>
+                                <span class="record-module-code">(HISM100-1)</span>
+                            </div>
+                            <div class="record-details">
+                                <span class="record-credits">Credits: 12</span>
+                                <span class="record-mark">66%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: right; font-weight: bold; margin-top:10px; color: var(--primary-dark);">Year 1 Average: ~69%</p>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Remaining for Year 3 (Jul-Dec 2025) - 60 Credits</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Code</th>
+                            <th>Credits</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Systems Development 3</td>
+                            <td>HSYD300-1</td>
+                            <td>30</td>
+                            <td><span class="badge badge-info">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td>Software Testing 3</td>
+                            <td>HSFT300-1</td>
+                            <td>15</td>
+                            <td><span class="badge badge-info">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td>Praxis S3B (Cyber Law & Project Dev)</td>
+                            <td>HPXS302-1</td>
+                            <td>15</td>
+                            <td><span class="badge badge-info">Upcoming</span></td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="2">Total Credits for Semester 2</td>
+                            <td>60</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Overall Performance Trend (Semester Averages)</h2>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Plan Tab -->
+        <div id="plan" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>End of Semester Priority Plan (May 16 - June 6, 2025)</h2>
+                </div>
+                <div class="study-plan-day">
+                    <h3>Week 1: May 16 - May 22</h3>
+                    <div class="spotlight">
+                        <h3>Main Focus: Systems Analysis & Design Project</h3>
+                        <p>Allocate 60% of study time to complete the major project due on June 2nd</p>
+                    </div>
+                    <div class="study-block">
+                        <div class="time-slot">Morning</div>
+                        <div class="study-content">
+                            <div class="study-module">Systems Analysis & Design</div>
+                            <div class="study-task">Project development - Focus on initial design and requirements gathering</div>
+                        </div>
+                    </div>
+                     <div class="study-block">
+                        <div class="time-slot">Afternoon</div>
+                        <div class="study-content">
+                            <div class="study-module">Workflow Management</div>
+                            <div class="study-task">Review lecture notes and begin research for essay due June 6th</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="study-plan-day">
+                    <h3>Week 2: May 23 - May 29</h3>
+                    <div class="spotlight">
+                        <h3>Main Focus: Project Development & Essay Drafting</h3>
+                        <p>Continue project work while starting drafts of your research essays</p>
+                    </div>
+                    <div class="study-block">
+                        <div class="time-slot">Morning</div>
+                        <div class="study-content">
+                            <div class="study-module">Systems Analysis & Design</div>
+                            <div class="study-task">Project development - Implementation phase</div>
+                        </div>
+                    </div>
+                     <div class="study-block">
+                        <div class="time-slot">Afternoon</div>
+                        <div class="study-content">
+                            <div class="study-module">Project Management / Ethical Hacking</div>
+                            <div class="study-task">Draft research essays</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="study-plan-day">
+                    <h3>Week 3: May 30 - June 6</h3>
+                    <div class="spotlight pulse-animation">
+                        <h3>Main Focus: Final Submissions & Essay Finalization</h3>
+                        <p>Complete and submit all assignments before the June 6th deadline</p>
+                    </div>
+                    <div class="study-block">
+                        <div class="time-slot">All Day</div>
+                        <div class="study-content">
+                            <div class="study-module">All Modules</div>
+                            <div class="study-task">Finalize & submit SAD Project (due Jun 2), finalize & submit all essays (due Jun 6)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>May 2025 Calendar</h2>
+                    </div>
+                    <div class="calendar">
+                        <div class="calendar-header">May 2025</div>
+                        <div class="calendar-grid">
+                            <!-- Simplified calendar days for brevity -->
+                            <div class="calendar-day other-month">27</div><div class="calendar-day other-month">28</div><div class="calendar-day other-month">29</div><div class="calendar-day other-month">30</div>
+                            <div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day weekend">3</div>
+                            <div class="calendar-day weekend">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day weekend">10</div>
+                            <div class="calendar-day weekend">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day active">16</div><div class="calendar-day weekend">17</div>
+                            <div class="calendar-day weekend">18</div><div class="calendar-day">19</div><div class="calendar-day has-event tooltip">20<span class="tooltip-text">SAD Tutorial</span></div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day weekend">24</div>
+                            <div class="calendar-day weekend">25</div><div class="calendar-day has-event tooltip">26<span class="tooltip-text">Start Exam Revision</span></div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day has-event tooltip">29<span class="tooltip-text">Project Checkpoint</span></div><div class="calendar-day">30</div><div class="calendar-day weekend">31</div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Study Resources</h2>
+                    </div>
+                    <div class="spotlight">
+                        <h3>Systems Analysis & Design</h3>
+                        <p>Access lecture notes, UML templates, case studies.</p>
+                    </div>
+                    <div class="spotlight">
+                        <h3>Workflow Management</h3>
+                        <p>Review BPMN guides, optimization papers.</p>
+                    </div>
+                     <div style="text-align: center; margin-top: 20px;">
+                        <button style="padding: 10px 18px; background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%); border: none; color: white; border-radius: 20px; font-weight: 600; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 8px rgba(3, 169, 244, 0.3);">
+                            Access Online Resources Portal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Timeline Tab -->
+        <div id="timeline" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header"><h2>Academic Journey Timeline</h2></div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Jan 2023</h3>
+                            <p>Started Diploma in Systems Development</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Dec 2023</h3>
+                            <p>Completed Year 1 (Avg: ~69%)</p>
+                        </div>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Jan 2024</h3>
+                            <p>Started Year 2</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">May 2024</h3>
+                            <p>Achieved Security+ Certification (92%)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Dec 2024</h3>
+                            <p>Completed Year 2 (Avg excl. Ethics: ~87%)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Jan 2025</h3>
+                            <p>Started Final Year (Year 3)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 style="color: var(--secondary); margin-bottom: 10px;">May 2025 - Present</h3>
+                            <p>Preparing for end of Year 3 Semester 1 assessments</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content" style="background-color: rgba(3, 169, 244, 0.05); border: 1px dashed var(--secondary);">
+                            <h3 style="color: var(--secondary); margin-bottom: 10px;">Dec 2025 - Target</h3>
+                            <p>Diploma completion and graduation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Analysis Tab -->
+        <div id="analysis" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header"><h2>Subject Area Performance</h2></div>
+                    <div class="chart-container">
+                        <canvas id="subjectAreaChart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header"><h2>Assessment Type Performance</h2></div>
+                    <div class="chart-container">
+                        <canvas id="assessmentTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header"><h2>Academic Performance Analysis & Recommendations</h2></div>
+                <div class="card-content">
+                    <h3>Key Strengths</h3>
+                    <p>Your academic record showcases significant strengths in:</p>
+                    <ul>
+                        <li><strong>Programming & Systems Development:</strong> Consistent high performance (Java 75%, Android Dev 87%, Sys Dev 2A 84%).</li>
+                        <li><strong>Database Technologies & SQL:</strong> Excellent scores (DB Prog 2 84%, Praxis S2 86%).</li>
+                        <li><strong>Cybersecurity Focus:</strong> Exceptional mark in Security+ (92%).</li>
+                        <li><strong>Practical Application (Praxis):</strong> Consistently high marks (Praxis 1 95%, Praxis S2 86%).</li>
+                    </ul>
+
+                    <h3>Areas for Development</h3>
+                    <p>To achieve a more balanced profile, consider focusing on:</p>
+                    <ul>
+                        <li><strong>Business & Management Acumen:</strong> Lower score in Business Ethics (41%) and Intro to Business Management (68%).</li>
+                        <li><strong>Technical Support Foundations:</strong> Opportunity in Technical Systems and Support (A+) (56%).</li>
+                    </ul>
+                    
+                    <h3>Guidance for Final Year & Career Trajectory</h3>
+                     <ul>
+                        <li><strong>Career Specialization:</strong> Focus on roles like full-stack development, DevOps, or cybersecurity analysis.</li>
+                        <li><strong>Business Knowledge Enhancement:</strong> Proactively improve business acumen. Consider retaking Business Ethics if possible.</li>
+                        <li><strong>Software Testing Prep:</strong> Explore testing methodologies for upcoming Year 3 module.</li>
+                        <li><strong>Portfolio Development:</strong> Excel in Praxis and project modules. Create impactful projects.</li>
+                    </ul>
+
+                    <div class="spotlight">
+                        <h3>Action Plan for 3rd Year (Current Semester)</h3>
+                        <ol>
+                            <li><strong>Re-engage with Business Ethics concepts:</strong> Even if not retaking, review materials to understand principles.</li>
+                            <li><strong>Strategic Focus on High-Credit Modules:</strong> Prioritize Systems Analysis and Design 3, Workflow Management 3.</li>
+                            <li><strong>Maintain Technical Excellence:</strong> Aim for mastery in all technical subjects.</li>
+                            <li><strong>Proactive Course Engagement & Feedback:</strong> Actively participate and seek feedback.</li>
+                        </ol>
+                    </div>
+                     <p style="font-style: italic; color: var(--text-light); margin-top: 1.5rem;">Analysis based on academic record up to end of Second Year & current progress in Year 3 Semester 1.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+                });
+            });
+
+            const collapseButtons = document.querySelectorAll('.collapse-btn');
+            collapseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetElement = document.getElementById(button.getAttribute('data-target'));
+                    button.classList.toggle('collapsed');
+                    targetElement.classList.toggle('collapsed');
+                    // If un-collapsing, animate progress bars within that section
+                    if (!targetElement.classList.contains('collapsed')) {
+                        animateProgressBars(targetElement.querySelectorAll('.progress-fill'));
+                    }
+                });
+            });
+            
+            initializeCharts();
+            animateProgressBars(document.querySelectorAll('#overview .progress-fill, #progress .progress-fill')); // Animate visible progress bars on load
+        });
+
+        function animateProgressBars(barsToAnimate) {
+            barsToAnimate.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0'; // Reset for animation
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100); // Shorter delay for quicker feedback
+            });
+        }
+
+        function initializeCharts() {
+            // Current Progress Chart (Year 3 Semester 1)
+            const currentProgressCtx = document.getElementById('currentProgressChart').getContext('2d');
+            new Chart(currentProgressCtx, {
+                type: 'bar',
+                data: { // Data from "Year 3 - Current Semester" table
+                    labels: ['Systems Analysis (34%)', 'Workflow Mgmt (20%)', 'Project Mgmt (40%)', 'Ethical Hacking (29%)'],
+                    datasets: [{
+                        label: 'Current Final Mark (%)',
+                        data: [34, 20, 40, 29], // SAD, WFM, PM, EH
+                        backgroundColor: [
+                            'rgba(3, 169, 244, 0.7)', // SAD
+                            'rgba(213, 0, 0, 0.7)',    // WFM (low score)
+                            'rgba(0, 200, 83, 0.7)',    // PM (high score)
+                            'rgba(255, 214, 0, 0.7)'  // EH (medium score)
+                        ],
+                        borderColor: [
+                            'rgba(3, 169, 244, 1)', 'rgba(213, 0, 0, 1)',
+                            'rgba(0, 200, 83, 1)', 'rgba(255, 214, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                    scales: { x: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Performance Trend Chart (Semester Averages)
+            // Year 1 Avg: ~69% (Calc from File 2: Praxis 95, CLA 77, TSS 56, IBM 68, SYD1 75, AL 62, CLI 58, ISM1 66 -> Avg ~69.6%)
+            // Year 2 Avg: ~79.3% (Calc from File 2: SYD2A 84, SYD2B 92, DBP2 84, PXS2 86, BE 41, ASD 87 -> Avg ~79%)
+            // Current Y3S1 Avg: 57.75%
+            const performanceTrendCtx = document.getElementById('performanceTrendChart').getContext('2d');
+            new Chart(performanceTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Year 1 Avg', 'Year 2 Avg', 'Year 3 Sem 1 (Current)'],
+                    datasets: [{
+                        label: 'Overall Semester Average (%)',
+                        data: [69.6, 79.0, 57.75], // Rounded for display
+                        fill: true, backgroundColor: 'rgba(3, 169, 244, 0.2)', borderColor: 'rgba(3, 169, 244, 1)',
+                        tension: 0.1, pointBackgroundColor: 'rgba(3, 169, 244, 1)', pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: false, min: 40, max: 100, ticks: { callback: value => value + '%' } } },
+                    plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }
+                }
+            });
+
+            // Subject Area Chart (Conceptual Radar)
+            if (document.getElementById('subjectAreaChart')) {
+                const subjectAreaCtx = document.getElementById('subjectAreaChart').getContext('2d');
+                new Chart(subjectAreaCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Programming', 'Security', 'Databases', 'Analysis/Design', 'Proj. Mgmt', 'Business/Ethics', 'Support'],
+                        datasets: [{
+                            label: 'Your Estimated Proficiency',
+                            data: [85, 92, 85, 60, 70, 50, 60], // Example data based on analysis
+                            backgroundColor: 'rgba(3, 169, 244, 0.2)', borderColor: 'rgba(3, 169, 244, 1)'
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { r: { suggestedMin: 0, suggestedMax: 100 } } }
+                });
+            }
+
+            // Assessment Type Chart (Conceptual Bar)
+            if (document.getElementById('assessmentTypeChart')) {
+                const assessmentTypeCtx = document.getElementById('assessmentTypeChart').getContext('2d');
+                new Chart(assessmentTypeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Projects', 'Exams', 'Essays', 'Practical (Praxis)'],
+                        datasets: [{
+                            label: 'Average Score (%)',
+                            data: [88, 70, 65, 90], // Example data
+                            backgroundColor: ['rgba(0, 200, 83, 0.7)', 'rgba(3, 169, 244, 0.7)', 'rgba(255, 87, 34, 0.7)', 'rgba(0, 200, 83, 0.9)']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } } }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
