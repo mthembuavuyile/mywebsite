@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avuyile Mthembu Finance | Personal Finance & Investment Tips for South Africans</title>
+    <meta name="description" content="Learn personal finance, investing, and wealth building strategies for South Africans. Expert tips on budgeting, saving, JSE investing, and building multiple income streams.">
+    <meta name="keywords" content="personal finance South Africa, JSE investing, budgeting tips, money management, wealth building, financial literacy, investment guide, saving money">
+    <meta name="author" content="Avuyile Mthembu">
+
+    <meta name="google-adsense-account" content="ca-pub-4553474747804756">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Avuyile Mthembu Finance | Personal Finance & Investment Tips">
+    <meta property="og:description" content="Expert personal finance advice and investment strategies for South Africans">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avuyilefinance.co.za">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Avuyile Mthembu Finance">
+    <meta name="twitter:description" content="Personal finance and investment advice for South Africans">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://avuyilefinance.co.za">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense (Replace with your actual AdSense code) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+            crossorigin="anonymous"></script>
+    
+    <style>
+        /* [Previous CSS styles remain the same] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-green: #10B981;
+            --dark-green: #059669;
+            --light-green: #D1FAE5;
+            --gold: #F59E0B;
+            --dark-gold: #D97706;
+            --navy: #1E293B;
+            --light-gray: #F8FAFC;
+            --gray: #64748B;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-menu {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding: 2rem 1.5rem;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-nav.active {
+            right: 0;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .mobile-nav-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-nav-links a {
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+        
+        .mobile-nav-links a:hover {
+            color: var(--primary-green);
+        }
+        
+        /* Search Bar */
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            margin-top: 80px;
+        }
+        
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #E2E8F0;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-green);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-green);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                              radial-gradient(circle at 80% 40%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                              radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px, 120px 120px;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: var(--dark-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.4);
+        }
+        
+        /* Ad Slots */
+        .ad-banner {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 20px;
+            text-align: center;
+            margin: 2rem auto;
+            border-radius: 8px;
+            max-width: 728px;
+        }
+        
+        .ad-square {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 20px;
+            text-align: center;
+            margin: 2rem auto;
+            border-radius: 8px;
+            max-width: 336px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+            padding: 60px 0;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        /* Featured Articles */
+        .featured {
+            background: var(--light-gray);
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .articles-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .article-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+            height: fit-content;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .article-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-green), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-category {
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .article-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--navy);
+            line-height: 1.4;
+        }
+        
+        .article-excerpt {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--white);
+            padding: 80px 0;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-green), var(--gold));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2);
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .about-stat {
+            text-align: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+        
+        .about-stat h4 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--navy), var(--primary-green));
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .newsletter h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .newsletter p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .newsletter-button {
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .newsletter-button:hover {
+            background: var(--dark-gold);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            opacity: 0.6;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .search-container {
+                padding: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .newsletter h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .article-content {
+                padding: 1rem;
+            }
+            
+            .nav {
+                padding: 0 0.5rem;
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Search Results */
+        .search-results {
+            display: none;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="/" class="logo">💰 Avuyile Finance</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles/">Articles</a></li>
+                <li><a href="/investing/">Investing</a></li>
+                <li><a href="/budgeting/">Budgeting</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="nav-overlay" onclick="closeMobileMenu()"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <span class="logo">💰 Avuyile Finance</span>
+            <div class="mobile-nav-close" onclick="closeMobileMenu()">✕</div>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="/" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="/articles/" onclick="closeMobileMenu()">Articles</a></li>
+            <li><a href="/investing/" onclick="closeMobileMenu()">Investing</a></li>
+            <li><a href="/budgeting/" onclick="closeMobileMenu()">Budgeting</a></li>
+            <li><a href="/about/" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="/contact/" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="search-container">
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search articles... (budgeting, investing, saving)" onkeyup="searchArticles()" id="searchInput">
+            <button class="search-btn" onclick="searchArticles()">🔍</button>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Master Your Money, <span style="color: var(--gold);">Build Your Wealth</span></h1>
+            <p class="subtitle">Expert personal finance advice, investment strategies, and practical money management tips for South Africans ready to take control of their financial future.</p>
+            <a href="#articles" class="cta-button">Start Learning Today 🚀</a>
+        </div>
+    </section>
+
+    <!-- AdSense Banner -->
+    <div class="ad-banner">
+        <!-- Google AdSense Banner 728x90 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item fade-in">
+                <h3>150+</h3>
+                <p>Financial Articles</p>
+            </div>
+            <div class="stat-item fade-in">
+                <h3>5K+</h3>
+                <p>Monthly Readers</p>
+            </div>
+            <div class="stat-item fade-in">
+                <h3>3</h3>
+                <p>Years Experience</p>
+            </div>
+            <div class="stat-item fade-in">
+                <h3>24/7</h3>
+                <p>Free Access</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <section class="search-results" id="searchResults">
+        <div class="section-header">
+            <h2>Search Results</h2>
+        </div>
+        <div class="articles-grid" id="searchResultsGrid">
+            <!-- Search results will be populated here -->
+        </div>
+        <div class="no-results" id="noResults" style="display: none;">
+            <p>No articles found. Try different keywords like "budget", "invest", or "save".</p>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section class="featured" id="articles">
+        <div class="section-header fade-in">
+            <h2>Latest Financial Insights</h2>
+            <p>Practical strategies and expert advice to help you make smarter financial decisions and build lasting wealth.</p>
+        </div>
+
+        <div class="articles-grid">
+            <article class="article-card fade-in" onclick="window.location.href='/articles/emergency-fund-guide-south-africa.html'">
+                <div class="article-image">🛡️</div>
+                <div class="article-content">
+                    <span class="article-category">Saving</span>
+                    <h3 class="article-title">How to Build an Emergency Fund in South Africa</h3>
+                    <p class="article-excerpt">Complete guide to building your financial safety net. Learn exactly how much to save and where to keep your emergency fund for maximum growth...</p>
+                    <div class="article-meta">
+                        <span>8 min read</span>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/jse-investing-beginners-guide.html'">
+                <div class="article-image">📈</div>
+                <div class="article-content">
+                    <span class="article-category">Investing</span>
+                    <h3 class="article-title">JSE Investing for Beginners: Complete Guide</h3>
+                    <p class="article-excerpt">Step-by-step guide to start investing in the Johannesburg Stock Exchange. Learn about brokers, fees, and how to pick your first stocks...</p>
+                    <div class="article-meta">
+                        <span>12 min read</span>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/budgeting-50-30-20-rule-south-africa.html'">
+                <div class="article-image">💳</div>
+                <div class="article-content">
+                    <span class="article-category">Budgeting</span>
+                    <h3 class="article-title">The 50/30/20 Budget Rule: South African Edition</h3>
+                    <p class="article-excerpt">Master budgeting with this proven formula adapted for South African salaries. Includes free budget template and real-world examples...</p>
+                    <div class="article-meta">
+                        <span>6 min read</span>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/tax-free-savings-account-guide.html'">
+                <div class="article-image">💰</div>
+                <div class="article-content">
+                    <span class="article-category">Tax</span>
+                    <h3 class="article-title">Tax-Free Savings Account: Complete Guide</h3>
+                    <p class="article-excerpt">Maximize your TFSA benefits with expert strategies. Compare providers, understand fees, and learn the best investment options...</p>
+                    <div class="article-meta">
+                        <span>10 min read</span>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/retirement-annuity-vs-preservation-fund.html'">
+                <div class="article-image">🏦</div>
+                <div class="article-content">
+                    <span class="article-category">Retirement</span>
+                    <h3 class="article-title">Retirement Annuity vs Preservation Fund</h3>
+                    <p class="article-excerpt">Which retirement investment is right for you? Compare benefits, tax implications, and withdrawal rules to make the best choice...</p>
+                    <div class="article-meta">
+                        <span>9 min read</span>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/debt-consolidation-south-africa.html'">
+                <div class="article-image">💳</div>
+                <div class="article-content">
+                    <span class="article-category">Debt</span>
+                    <h3 class="article-title">Debt Consolidation Guide: South Africa</h3>
+                    <p class="article-excerpt">Learn how to consolidate debt effectively in South Africa. Compare options, understand costs, and create a debt-free plan...</p>
+                    <div class="article-meta">
+                        <span>7 min read</span>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/side-hustles-south-africa.html'">
+                <div class="article-image">💼</div>
+                <div class="article-content">
+                    <span class="article-category">Income</span>
+                    <h3 class="article-title">Top Side Hustles for South Africans</h3>
+                    <p class="article-excerpt">Discover profitable side hustles you can start today. From online businesses to local services - boost your income streams...</p>
+                    <div class="article-meta">
+                        <span>11 min read</span>
+                        <span>Dec 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/property-investment-south-africa.html'">
+                <div class="article-image">🏠</div>
+                <div class="article-content">
+                    <span class="article-category">Investing</span>
+                    <h3 class="article-title">Property Investment in South Africa</h3>
+                    <p class="article-excerpt">Complete guide to property investing. Learn about financing, areas to target, rental yields, and legal requirements...</p>
+                    <div class="article-meta">
+                        <span>15 min read</span>
+                        <span>Dec 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card fade-in" onclick="window.location.href='/articles/crypto-investing-beginners-south-africa.html'">
+                <div class="article-image">₿</div>
+                <div class="article-content">
+                    <span class="article-category">Crypto</span>
+                    <h3 class="article-title">Crypto Investing for South African Beginners</h3>
+                    <p class="article-excerpt">Safe introduction to cryptocurrency investing. Learn about exchanges, wallets, regulations, and risk management strategies...</p>
+                    <div class="article-meta">
+                        <span>13 min read</span>
+                        <span>Dec 2024</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Square Ad -->
+    <div class="ad-square">
+        <!-- Google AdSense Square 336x280 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image fade-in">
+                👨🏾‍💼
+            </div>
+            <div class="about-content fade-in">
+                <h2>About Avuyile Mthembu</h2>
+                <p>I'm a passionate personal finance educator dedicated to helping South Africans achieve financial freedom. With over 3 years of experience in financial planning and investment strategies, I've helped thousands of people take control of their money.</p>
+                <p>My mission is to make financial literacy accessible to everyone, regardless of their background or income level. Through practical advice, real-world examples, and actionable strategies, I believe everyone can build wealth and secure their financial future.</p>
+                <p>I specialize in South African financial products, investment opportunities, and the unique challenges we face in our economic environment. From understanding the JSE to navigating tax-free savings accounts, I'm here to guide you every step of the way.</p>
+                
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <h4>5K+</h4>
+                        <p>People Helped</p>
+                    </div>
+                    <div class="about-stat">
+                        <h4>150+</h4>
+                        <p>Articles Written</p>
+                    </div>
+                    <div class="about-stat">
+                        <h4>3+</h4>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="about-stat">
+                        <h4>24/7</h4>
+                        <p>Free Content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Stay Updated with Weekly Finance Tips</h2>
+            <p>Join 2,000+ South Africans receiving practical money advice, investment insights, and exclusive financial strategies every week.</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+            <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">No spam. Unsubscribe anytime. Your privacy is protected.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms-of-service.html">Terms of Service</a>
+                <a href="/disclaimer.html">Disclaimer</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/sitemap.xml">Sitemap</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Avuyile Mthembu Finance. All rights reserved. | Empowering South Africans to achieve financial freedom.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Article data for search functionality
+        const articles = [
+            {
+                title: "How to Build an Emergency Fund in South Africa",
+                excerpt: "Complete guide to building your financial safety net. Learn exactly how much to save and where to keep your emergency fund for maximum growth...",
+                category: "Saving",
+                icon: "🛡️",
+                url: "/articles/emergency-fund-guide-south-africa.html",
+                readTime: "8 min read",
+                date: "Jan 2025",
+                keywords: ["emergency", "fund", "saving", "safety", "financial", "security"]
+            },
+            {
+                title: "JSE Investing for Beginners: Complete Guide",
+                excerpt: "Step-by-step guide to start investing in the Johannesburg Stock Exchange. Learn about brokers, fees, and how to pick your first stocks...",
+                category: "Investing",
+                icon: "📈",
+                url: "/articles/jse-investing-beginners-guide.html",
+                readTime: "12 min read",
+                date: "Jan 2025",
+                keywords: ["jse", "investing", "stocks", "shares", "broker", "beginners", "johannesburg"]
+            },
+            {
+                title: "The 50/30/20 Budget Rule: South African Edition",
+                excerpt: "Master budgeting with this proven formula adapted for South African salaries. Includes free budget template and real-world examples...",
+                category: "Budgeting",
+                icon: "💳",
+                url: "/articles/budgeting-50-30-20-rule-south-africa.html",
+                readTime: "6 min read",
+                date: "Jan 2025",
+                keywords: ["budget", "budgeting", "50/30/20", "rule", "money", "management", "salary"]
+            },
+            {
+                title: "Tax-Free Savings Account: Complete Guide",
+                excerpt: "Maximize your TFSA benefits with expert strategies. Compare providers, understand fees, and learn the best investment options...",
+                category: "Tax",
+                icon: "💰",
+                url: "/articles/tax-free-savings-account-guide.html",
+                readTime: "10 min read",
+                date: "Jan 2025",
+                keywords: ["tfsa", "tax-free", "savings", "account", "investment", "providers"]
+            },
+            {
+                title: "Retirement Annuity vs Preservation Fund",
+                excerpt: "Which retirement investment is right for you? Compare benefits, tax implications, and withdrawal rules to make the best choice...",
+                category: "Retirement",
+                icon: "🏦",
+                url: "/articles/retirement-annuity-vs-preservation-fund.html",
+                readTime: "9 min read",
+                date: "Jan 2025",
+                keywords: ["retirement", "annuity", "preservation", "fund", "pension", "tax"]
+            },
+            {
+                title: "Debt Consolidation Guide: South Africa",
+                excerpt: "Learn how to consolidate debt effectively in South Africa. Compare options, understand costs, and create a debt-free plan...",
+                category: "Debt",
+                icon: "💳",
+                url: "/articles/debt-consolidation-south-africa.html",
+                readTime: "7 min read",
+                date: "Jan 2025",
+                keywords: ["debt", "consolidation", "credit", "loan", "repayment", "finance"]
+            },
+            {
+                title: "Top Side Hustles for South Africans",
+                excerpt: "Discover profitable side hustles you can start today. From online businesses to local services - boost your income streams...",
+                category: "Income",
+                icon: "💼",
+                url: "/articles/side-hustles-south-africa.html",
+                readTime: "11 min read",
+                date: "Dec 2024",
+                keywords: ["side", "hustle", "income", "business", "extra", "money", "online"]
+            },
+            {
+                title: "Property Investment in South Africa",
+                excerpt: "Complete guide to property investing. Learn about financing, areas to target, rental yields, and legal requirements...",
+                category: "Investing",
+                icon: "🏠",
+                url: "/articles/property-investment-south-africa.html",
+                readTime: "15 min read",
+                date: "Dec 2024",
+                keywords: ["property", "real", "estate", "investment", "rental", "yield", "financing"]
+            },
+            {
+                title: "Crypto Investing for South African Beginners",
+                excerpt: "Safe introduction to cryptocurrency investing. Learn about exchanges, wallets, regulations, and risk management strategies...",
+                category: "Crypto",
+                icon: "₿",
+                url: "/articles/crypto-investing-beginners-south-africa.html",
+                readTime: "13 min read",
+                date: "Dec 2024",
+                keywords: ["crypto", "cryptocurrency", "bitcoin", "investing", "blockchain", "digital"]
+            }
+        ];
+
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            const overlay = document.querySelector('.nav-overlay');
+            
+            mobileNav.style.display = 'block';
+            overlay.style.display = 'block';
+            
+            setTimeout(() => {
+                mobileNav.classList.add('active');
+            }, 10);
+        }
+
+        function closeMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            const overlay = document.querySelector('.nav-overlay');
+            
+            mobileNav.classList.remove('active');
+            
+            setTimeout(() => {
+                mobileNav.style.display = 'none';
+                overlay.style.display = 'none';
+            }, 300);
+        }
+
+        // Search functionality
+        function searchArticles() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const searchResults = document.getElementById('searchResults');
+            const searchResultsGrid = document.getElementById('searchResultsGrid');
+            const noResults = document.getElementById('noResults');
+            const featuredSection = document.getElementById('articles');
+
+            if (searchTerm === '') {
+                searchResults.classList.remove('active');
+                featuredSection.style.display = 'block';
+                return;
+            }
+
+            // Filter articles based on search term
+            const filteredArticles = articles.filter(article => {
+                return article.title.toLowerCase().includes(searchTerm) ||
+                       article.excerpt.toLowerCase().includes(searchTerm) ||
+                       article.category.toLowerCase().includes(searchTerm) ||
+                       article.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm));
+            });
+
+            // Clear previous results
+            searchResultsGrid.innerHTML = '';
+
+            if (filteredArticles.length > 0) {
+                // Populate search results
+                filteredArticles.forEach(article => {
+                    const articleCard = createArticleCard(article);
+                    searchResultsGrid.appendChild(articleCard);
+                });
+                
+                noResults.style.display = 'none';
+                searchResults.classList.add('active');
+                featuredSection.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+                searchResults.classList.add('active');
+                featuredSection.style.display = 'none';
+            }
+        }
+
+        // Create article card element
+        function createArticleCard(article) {
+            const card = document.createElement('article');
+            card.className = 'article-card fade-in visible';
+            card.onclick = () => window.location.href = article.url;
+            
+            card.innerHTML = `
+                <div class="article-image">${article.icon}</div>
+                <div class="article-content">
+                    <span class="article-category">${article.category}</span>
+                    <h3 class="article-title">${article.title}</h3>
+                    <p class="article-excerpt">${article.excerpt}</p>
+                    <div class="article-meta">
+                        <span>${article.readTime}</span>
+                        <span>${article.date}</span>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Newsletter subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            const button = event.target.querySelector('.newsletter-button');
+            
+            // Simulate subscription process
+            button.innerHTML = 'Subscribing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for subscribing! Check your email for confirmation.');
+                event.target.reset();
+                button.innerHTML = 'Subscribe';
+                button.disabled = false;
+            }, 2000);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchArticles();
+            }
+        });
+
+        // Smooth scrolling for CTA button
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Initialize AdSense ads (if AdSense code is properly configured)
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof adsbygoogle !== 'undefined') {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            
+            if (!mobileNav.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                if (mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
