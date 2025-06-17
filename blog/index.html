@@ -12,6 +12,10 @@
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="Avuyile Mthembu, Tech Blog, AI, Software Development, Web Development, Programming, System Design, Full-Stack, Computer Science">
 
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"> <!-- Create a 180x180px icon -->
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://avuyilemthembu.co.za/blog/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -20,9 +24,59 @@
     <meta property="og:title" content="Tech & AI Insights | Avuyile Mthembu">
     <meta property="og:description" content="Explore insightful posts about programming, AI, and the latest in tech innovation.">
     <meta property="og:url" content="https://avuyilemthembu.co.za/blog/">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="blog"> <!-- Changed to "blog" as it's a blog listing -->
     <meta property="og:image" content="https://avuyilemthembu.co.za/assets/images/blog-cover.png">
+    <meta property="og:image:width" content="1200"> <!-- Optional: specify image dimensions -->
+    <meta property="og:image:height" content="630">
 
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MthembuAvuyile"> <!-- Replace with your actual Twitter handle -->
+    <meta name="twitter:creator" content="@MthembuAvuyile"> <!-- Replace with author's Twitter handle -->
+    <meta name="twitter:title" content="Tech & AI Insights | Avuyile Mthembu">
+    <meta name="twitter:description" content="Explore cutting-edge content on software development, AI, systems design, programming, and tech innovation.">
+    <meta name="twitter:image" content="https://avuyilemthembu.co.za/assets/images/blog-cover.png"> <!-- Should be same as og:image -->
+
+    <!-- Schema.org for Blog -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Tech & AI Insights | Avuyile Mthembu",
+      "description": "Explore cutting-edge content on software development, AI, systems design, programming, and tech innovation. Curated by Avuyile Mthembu.",
+      "url": "https://avuyilemthembu.co.za/blog/",
+      "author": {
+        "@type": "Person",
+        "name": "Avuyile Mthembu",
+        "url": "https://avuyilemthembu.co.za/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Avuyile Mthembu",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://avuyilemthembu.co.za/assets/images/logo.png" /* Replace with your actual logo URL */
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://avuyilemthembu.co.za/blog/"
+      }
+      /* 
+        For individual blog posts on this page, you could list them in an "blogPost" array:
+        "blogPost": [
+          {
+            "@type": "BlogPosting",
+            "headline": "The Evolution of AI: Navigating the Future",
+            "url": "https://avuyilemthembu.co.za/blog/the-evolution-of-ai-navigating-the-future.html",
+            ... more properties ...
+          },
+          ... more posts ...
+        ]
+        However, it's more critical to have detailed BlogPosting schema on each individual article page.
+      */
+    }
+    </script>
 
     <style>
         :root {
@@ -32,6 +86,7 @@
             --color-accent: #3b82f6;
             --color-text: #1f2937;
             --color-bg: #f9fafb;
+            --color-bg-alt: #f0f4f8; /* Added for alternate section background */
             --transition: all 0.3s ease;
         }
 
@@ -42,6 +97,7 @@
         }
         a{
             text-decoration: none;
+            color: inherit; /* Inherit color by default, specific links can override */
         }
 
         body {
@@ -49,6 +105,19 @@
             line-height: 1.6;
             color: var(--color-text);
             background: var(--color-bg);
+        }
+
+        /* Visually Hidden Class for Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         /* Navigation Styles */
@@ -181,29 +250,43 @@
             gap: 2rem;
         }
 
+        .post-card-link { /* Wrapper for the card if <a> is outside <article> */
+            text-decoration: none;
+            color: inherit;
+            display: block; /* Ensures the link takes up the card space */
+        }
+
         .post-card {
             background: white;
             border-radius: 1rem;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transition: var(--transition);
+            display: flex; /* Added for better structure if needed */
+            flex-direction: column; /* Ensure content flows top to bottom */
+            height: 100%; /* Make cards in a row equal height if desired by grid */
         }
 
-        .post-card:hover {
+        .post-card-link:hover .post-card { /* Apply hover to card when link is hovered */
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-
-        .post-image {
+        
+        /* UPDATED: Changed from .post-image div to .post-image-tag img */
+        .post-image-tag {
             width: 100%;
             height: 200px;
-            background: #e5e7eb;
-            background-size: cover;
-            background-position: center;
+            object-fit: cover; /* Replaces background-size */
+            object-position: center; /* Replaces background-position */
+            background-color: #e5e7eb; /* Fallback/placeholder color */
+            display: block; /* Remove extra space under image */
         }
 
         .post-content {
             padding: 1.5rem;
+            flex-grow: 1; /* Allows content to expand if card heights are unified */
+            display: flex;
+            flex-direction: column;
         }
 
         .post-category {
@@ -225,6 +308,7 @@
             color: #6b7280;
             font-size: 0.875rem;
             margin-bottom: 1rem;
+            flex-grow: 1; /* Pushes meta to bottom if content is short */
         }
 
         .post-meta {
@@ -233,7 +317,122 @@
             gap: 1rem;
             font-size: 0.875rem;
             color: #6b7280;
+            margin-top: auto; /* Pushes meta to the bottom of post-content */
         }
+
+
+        /* Section for More Articles - ENHANCED */
+        .more-articles {
+            padding: 4rem 1rem;
+            background-color: var(--color-bg-alt); /* Use alternate background */
+        }
+
+        .more-articles-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-size: clamp(1.75rem, 4vw, 2.25rem); /* Responsive font size */
+            font-weight: 700;
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: 3rem; /* Increased margin */
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        .section-heading::after { /* Underline accent */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
+        }
+
+        .articles-list-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Increased gap */
+        }
+
+        .article-link-item {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background-color: #ffffff; /* Card-like background */
+            padding: 1.25rem 1.5rem; /* Added padding */
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+
+        .article-link-item:hover {
+            transform: translateY(-5px) scale(1.015); /* Enhanced hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-link-content {
+            flex: 1; 
+            margin-right: 1.5rem; /* More space for icon */
+        }
+
+        .article-link-title {
+            font-size: 1.15rem; 
+            font-weight: 600;
+            color: var(--color-text); 
+            margin-bottom: 0.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .article-link-item:hover .article-link-title {
+            color: var(--color-primary); 
+        }
+
+        .article-link-caption {
+            font-size: 0.875rem;
+            color: #555c66; /* Slightly darker for better contrast */
+            line-height: 1.5;
+        }
+
+        .article-link-icon {
+            width: 48px;  /* Slightly larger icon */
+            height: 48px;
+            object-fit: cover; /* Use cover for better fill */
+            border-radius: 0.5rem; /* Rounded corners for the image icon */
+            flex-shrink: 0; 
+            user-select: none; 
+            background-color: #e9ecef; /* Placeholder if image fails */
+        }
+
+        @media (max-width: 768px) {
+            .more-articles {
+                padding: 3rem 1rem;
+            }
+            .section-heading {
+                font-size: 1.75rem;
+                margin-bottom: 2.5rem;
+            }
+            /* .article-link-item adjustments are minor if it stays row-based */
+            .article-link-item {
+                padding: 1rem 1.25rem;
+            }
+            .article-link-title {
+                font-size: 1.05rem; /* Slightly smaller for mobile */
+            }
+            .article-link-caption {
+                font-size: 0.85rem;
+            }
+            .article-link-icon {
+                width: 40px; /* Adjust icon size for mobile if needed */
+                height: 40px;
+            }
+        }
+      
 
         /* Newsletter Section */
         .newsletter {
@@ -347,11 +546,11 @@
 
     <nav class="nav">
         <div class="nav-container">
-            <a href="#" class="nav-logo">Avuyile's Blog</a>
-            <button class="nav-menu-button" id="menuToggle" aria-label="Toggle Navigation">☰</button>
+            <a href="https://avuyilemthembu.co.za/blog/" class="nav-logo">Avuyile's Blog</a>
+            <button class="nav-menu-button" id="menuToggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="navLinks">☰</button>
              <div class="nav-links" id="navLinks">
-                <a href="../about.html" class="nav-link">About</a>
-                <a href="https://vylexnexys.co.za" class="nav-link">Vylex Nexys</a>
+                <a href="../about.html" class="nav-link">Avuyile</a>
+                <a href="https://vylexnexys.co.za" class="nav-link" target="_blank" rel="noopener">Vylex Nexys</a>
             </div>
         </div>
     </nav>
@@ -362,10 +561,11 @@
     </section>
 
     <main class="posts-grid">
-
-        <a href="the-evolution-of-ai-navigating-the-future.html">
+        <!-- NOTE on post images: For best performance & SEO, download images, optimize them, host locally, and use descriptive filenames. -->
+        <a href="the-evolution-of-ai-navigating-the-future.html" class="post-card-link">
             <article class="post-card">
-                <div class="post-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZXxlbnwwfHwwfHx8MA%3D%3D');"></div>
+                <!-- OLD: <div class="post-image" style="background-image: url('...');"></div> -->
+                <img src="https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZXxlbnwwfHwwfHx8MA%3D%3D" alt="Abstract representation of interconnected AI neural networks" class="post-image-tag">
                 <div class="post-content">
                     <span class="post-category">Artificial Intelligence</span>
                     <h2 class="post-title">The Evolution of AI: Navigating the Future</h2>
@@ -379,9 +579,9 @@
             </article>
         </a>
 
-        <a href="the-rise-of-quantum-computing.html">
+        <a href="the-rise-of-quantum-computing.html" class="post-card-link">
             <article class="post-card">
-                <div class="post-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1690297733164-958ea1f806ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cXVhbnR1bXxlbnwwfHwwfHx8MA%3D%3D');"></div>
+                <img src="https://plus.unsplash.com/premium_photo-1690297733164-958ea1f806ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cXVhbnR1bXxlbnwwfHwwfHx8MA%3D%3D" alt="Futuristic imagery symbolizing quantum computing concepts" class="post-image-tag">
                 <div class="post-content">
                     <span class="post-category">Quantum Computing</span>
                     <h2 class="post-title">The Rise of Quantum Computing</h2>
@@ -395,9 +595,9 @@
             </article>
         </a>
         
-        <a href="mastering-full-stack-development.html">
+        <a href="mastering-full-stack-development.html" class="post-card-link">
             <article class="post-card">
-                <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?w=500&auto=format&fit=crop&q=60');"></div>
+                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=500&auto=format&fit=crop&q=60" alt="Bookshelf filled with programming and development books" class="post-image-tag">
                 <div class="post-content">
                     <span class="post-category">Programming</span>
                     <h2 class="post-title">Mastering Full-Stack Development</h2>
@@ -411,9 +611,9 @@
             </article>
         </a>
     
-        <a href="modern-development-practices-2025.html">
+        <a href="modern-development-practices-2025.html" class="post-card-link">
             <article class="post-card">
-                <div class="post-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1720287601300-cf423c3d6760?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fEZ1dHVyaXN0aWMlMjBDb2RlJTIwSW50ZXJmYWN8ZW58MHx8MHx8fDA%3D');"></div>
+                <img src="https://plus.unsplash.com/premium_photo-1720287601300-cf423c3d6760?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fEZ1dHVyaXN0aWMlMjBDb2RlJTIwSW50ZXJmYWN8ZW58MHx8MHx8fDA%3D" alt="Futuristic code interface representing modern development" class="post-image-tag">
                 <div class="post-content">
                     <span class="post-category">Programming</span>
                     <h2 class="post-title">Modern Development Practices in 2025</h2>
@@ -427,9 +627,9 @@
             </article>
         </a>
     
-        <a href="future-of-work-in-tech.html">
+        <a href="future-of-work-in-tech.html" class="post-card-link">
             <article class="post-card">
-                <div class="post-image" style="background-image: url('https://media.istockphoto.com/id/1226085374/vector/artificial-intelligence-and-business-man-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=Ud1SmPzP3gWLR3G7GzKf-3AjINb7nDZmqDG8bWvGHlE=');"></div>
+                <img src="https://media.istockphoto.com/id/1226085374/vector/artificial-intelligence-and-business-man-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=Ud1SmPzP3gWLR3G7GzKf-3AjINb7nDZmqDG8bWvGHlE=" alt="Illustration of a businessman interacting with AI, symbolizing future of work" class="post-image-tag">
                 <div class="post-content">
                     <span class="post-category">Technology</span>
                     <h2 class="post-title">The Future of Work in Tech</h2>
@@ -443,9 +643,9 @@
             </article>
         </a>
 
-        <a href="systems-analysis-and-design.html" class="post-link">
+        <a href="systems-analysis-and-design.html" class="post-card-link">
             <article class="post-card">
-                <div class="post-image" style="background-image: url('https://media.istockphoto.com/id/858118324/vector/database.jpg?s=1024x1024&w=is&k=20&c=9sAmnqIkfREeMJFYjm2ojPODJg2ImVNEXX0JklmUOTQ=');"></div>
+                <img src="https://media.istockphoto.com/id/858118324/vector/database.jpg?s=1024x1024&w=is&k=20&c=9sAmnqIkfREeMJFYjm2ojPODJg2ImVNEXX0JklmUOTQ=" alt="Diagram illustrating database structure for systems analysis" class="post-image-tag">
                 <div class="post-content">
                     <span class="post-category">Systems Development</span>
                     <h2 class="post-title">Systems Analysis and Design</h2>
@@ -463,49 +663,110 @@
     
     </main>    
 
+
+    <!-- START: More Articles Section (Enhanced) -->
+    <section class="more-articles">
+        <div class="more-articles-container">
+            <h2 class="section-heading">More To Read</h2>
+            <div class="articles-list-simple">
+
+                <a href="ai-generated-video-revolution.html" class="article-link-item">
+                    <div class="article-link-content">
+                        <h3 class="article-link-title">AI Video Generation Breakthroughs</h3>
+                        <p class="article-link-caption">Transforming creativity with tools like Runway and Google’s Imagen Video.</p>
+                    </div>
+                    <img src="https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2024/10/user-interface-of-ai-video-generator.jpg" alt="User interface of an AI video generation tool" class="article-link-icon" />
+                </a>
+
+                <a href="btc/the-economics-of-bitcoin.html" class="article-link-item">
+    <div class="article-link-content">
+        <h3 class="article-link-title">Fiat-to-Bitcoin Value Conservation</h3>
+        <p class="article-link-caption">A mathematical exploration of how economic energy shifts between fiat and Bitcoin during inflationary periods.</p>
+    </div>
+    <img src="https://cdn.bitpanda.com/media/360%20Design%20Contest%20page/240524blog-header-bitcoin-global-economyblog2000x1200-1.jpg" alt="Bitcoin as monetary energy concept" class="article-link-icon" />
+</a>
+
+
+                
+
+            </div>
+        </div>
+    </section>
+    <!-- END: More Articles Section -->
+
+
     <section class="newsletter">
         <div class="newsletter-content">
             <h2 class="newsletter-title">Subscribe to My Newsletter</h2>
             <p>Get the latest insights on AI, programming, and technology delivered to your inbox.</p>
-            <form class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Enter your email address">
+            <form class="newsletter-form" action="YOUR_NEWSLETTER_ENDPOINT" method="POST"> <!-- Add your endpoint -->
+                <label for="newsletterEmail" class="sr-only">Email Address</label>
+                <input type="email" id="newsletterEmail" name="email" class="newsletter-input" placeholder="Enter your email address" required>
                 <button type="submit" class="btn">Subscribe</button>
             </form>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About</h3>
-                <p>Exploring the intersection of technology, AI, and human potential through insightful articles and analysis.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Articles</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul class="footer-links">
-                    <li>Email: mthembuavuyile@outlook.com</li>
-                    <li>Twitter: @avuyilemthembu</li>
-                    <li>LinkedIn: /in/avuyilemthembu</li>
-                </ul>
-            </div>
+      <div class="footer-content">
+        <div class="footer-section about">
+          <h3>About</h3>
+          <p>Exploring the intersection of technology, AI, and human potential through insightful articles and analysis.</p>
         </div>
+
+        <div class="footer-section quick-links">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="https://avuyilemthembu.co.za/blog/">Blog Home</a></li> <!-- Points to this page -->
+            <li><a href="https://avuyilemthembu.co.za/blog/">Articles</a></li> <!-- Same as blog home -->
+            <li><a href="https://avuyilemthembu.co.za/about.html">About Avuyile</a></li> <!-- Changed text slightly for clarity -->
+          </ul>
+        </div>
+
+        <div class="footer-section contact">
+          <h3>Connect</h3>
+          <div class="social-links">
+            <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/mthembuavuyile/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br><br>
+      <center><p>© <span id="currentYear">2025</span> Avuyile Mthembu. All rights reserved.</p></center>
     </footer>
 
-    <script src="../scripts/main.js"></script>
+<script>
+    // Basic script for nav toggle and dynamic year
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = navLinks.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            // Optional: Change icon on toggle
+            // menuToggle.innerHTML = isExpanded ? '<i class="fas fa-times"></i>' : '☰';
+        });
+    }
+
+    // Update copyright year dynamically
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    
+</script>
 
 </body>
 </html>
