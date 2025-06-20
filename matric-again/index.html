@@ -117,7 +117,7 @@
             transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* Hero Section - Simplified */
+        /* Hero Section */
         .hero {
             height: 60vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -182,21 +182,23 @@
             box-shadow: 0 6px 20px rgba(255,107,107,0.6);
         }
 
-        /* Registration Section - Now Priority */
+        /* Registration Section - FLATTENED DESIGN */
         .registration-section {
-            padding: 80px 0;
+            padding: 60px 0 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
         }
 
+        /* Bold gradient line at top */
         .registration-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 6px;
             background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .container {
@@ -217,38 +219,29 @@
             text-align: center;
             font-size: 1.2rem;
             color: #666;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
+        /* FLATTENED FORM WRAPPER - Full Width, No Padding Constraints */
         .form-wrapper {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            max-width: none;
-            width: 100%;
+            /* Remove all container constraints */
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
             position: relative;
-            overflow: hidden;
-        }
-
-        .form-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
+            background: white;
+            /* Add thin bottom border */
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .form-wrapper iframe {
             width: 100%;
             height: 800px;
             border: none;
-            border-radius: 15px;
+            display: block;
         }
 
         /* Quick Info Section */
@@ -296,7 +289,7 @@
             font-size: 0.95rem;
         }
 
-        /* Features Section - Simplified */
+        /* Features Section */
         .features {
             padding: 80px 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -406,6 +399,16 @@
             }
         }
 
+        /* Enhanced Breathing Effect */
+        .registration-section .section-title {
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
         /* Mobile Styles */
         @media (max-width: 768px) {
             .hamburger {
@@ -456,9 +459,10 @@
                 grid-template-columns: 1fr;
             }
 
+            /* Mobile form adjustments */
             .form-wrapper {
-                margin: 0 10px;
-                padding: 15px;
+                margin-left: calc(-50vw + 50%);
+                width: 100vw;
             }
 
             .form-wrapper iframe {
@@ -468,14 +472,35 @@
             .section-title {
                 font-size: 2rem;
             }
-            .cta-button{
-                            margin-bottom: 5px;
 
+            .cta-button {
+                margin-bottom: 5px;
+            }
+
+            /* Ensure mobile horizontal scroll is controlled */
+            .registration-section {
+                overflow-x: hidden;
             }
         }
 
         .hide {
             display: none;
+        }
+
+        /* Additional enhancement - subtle gradient overlay on form */
+        .form-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, 
+                rgba(102, 126, 234, 0.02) 0%, 
+                transparent 10%, 
+                transparent 90%, 
+                rgba(118, 75, 162, 0.02) 100%);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -508,25 +533,26 @@
             </div>
         </section>
 
-        <!-- Registration Section - Priority Position -->
+        <!-- Registration Section - FLATTENED WITH BREATHING EFFECT -->
         <section id="registration" class="registration-section">
             <div class="container">
                 <h2 class="section-title">📚 Start Your Journey Today</h2>
                 <p class="section-description">
                     Ready to complete your matric? Fill out our registration form below and take the first step towards your academic success.
                 </p>
-                
-                <div class="form-wrapper">
-                    <iframe 
-                        src="https://docs.google.com/forms/d/e/1FAIpQLSe5qEZwY_bZYNytvIZVGScBWsIp3NIXTN2ZFOwVeq13Mte_wQ/viewform" 
-                        frameborder="0" 
-                        marginheight="0" 
-                        marginwidth="0"
-                        loading="lazy"
-                        title="Student Registration Form">
-                        Loading…
-                    </iframe>
-                </div>
+            </div>
+            
+            <!-- FLATTENED FORM - No container constraints, full width -->
+            <div class="form-wrapper">
+                <iframe 
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSe5qEZwY_bZYNytvIZVGScBWsIp3NIXTN2ZFOwVeq13Mte_wQ/viewform" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0"
+                    loading="lazy"
+                    title="Student Registration Form">
+                    Loading…
+                </iframe>
             </div>
         </section>
 
@@ -672,7 +698,7 @@
                     
                     <div class="contact-form">
                         <h3 style="margin-bottom: 20px; text-align: center;">Quick Registration</h3>
-                        <div class="form-wrapper" style="box-shadow: none; padding: 0;">
+                        <div class="form-wrapper" style="box-shadow: none; padding: 0; margin-left: 0; width: 100%; border-bottom: none;">
                             <iframe 
                                 src="https://docs.google.com/forms/d/e/1FAIpQLSe5qEZwY_bZYNytvIZVGScBWsIp3NIXTN2ZFOwVeq13Mte_wQ/viewform" 
                                 frameborder="0" 
