@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Learning Portal</title>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #007bff;
+            --primary-color-dark: #0056b3;
+            --secondary-color: #6c757d;
+            --background-color: #f4f7f6;
+            --card-background: #ffffff;
+            --text-color: #333;
+            --text-color-light: #555;
+            --light-gray: #e9ecef;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+
+            --sidebar-width: 260px;
+            --sidebar-width-collapsed: 80px; /* For potential future collapsed state */
+            --sidebar-bg: #2c3e50; /* Dark blue/gray */
+            --sidebar-text-color: #ecf0f1;
+            --sidebar-link-hover-bg: #34495e;
+            --sidebar-link-active-bg: var(--primary-color);
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s;
+            overflow-x: hidden; /* Prevent horizontal scroll with sidebar transitions */
+        }
+        body.sidebar-open {
+            overflow: hidden; /* Prevent body scroll when mobile sidebar is open */
+        }
+
+        .container-fluid { /* Replaces .container for sections that need full width bleed */
+             padding: 1.5rem;
+        }
+        .content-container { /* For main content areas needing max-width */
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        a:hover {
+            color: var(--primary-color-dark);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+
+        .card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        .card-header { /* General card header styling */
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+        }
+        .card-header i {
+            margin-right: 0.75rem;
+            font-size: 1.2em;
+        }
+
+        /* --- Login Section --- */
+        #login-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-container { /* Unchanged */
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-background);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .login-container h1 { margin-bottom: 0.5rem; color: var(--primary-color); font-weight: 700; font-size: 1.8rem; }
+        .login-container .logo-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .login-container p { margin-bottom: 2rem; color: var(--text-color-light); }
+        .input-group { margin-bottom: 1.5rem; text-align: left; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; border-radius: var(--border-radius-sm); border: 1px solid #ccc; font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); }
+        #login-form .btn { width: 100%; font-size: 1.1rem; }
+        #test-credentials { margin-top: 2rem; padding: 1rem; background-color: #eef7ff; border: 1px dashed var(--primary-color); border-radius: var(--border-radius-sm); font-size: 0.9rem; text-align: left; }
+        #test-credentials code { font-weight: 600; color: #d63384; background-color: #f8f9fa; padding: 0.2em 0.4em; border-radius: 3px; }
+
+        /* --- App Shell & Main Structure --- */
+        #app-shell {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        #global-sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text-color);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1rem;
+        }
+        .sidebar-header .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--sidebar-text-color);
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-header .logo i {
+            margin-right: 0.75rem;
+            font-size: 1.8rem;
+        }
+        #global-sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.9rem 1.5rem;
+            color: var(--sidebar-text-color);
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s, border-left-color 0.2s;
+            border-left: 4px solid transparent;
+        }
+        #global-sidebar .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        #global-sidebar .nav-link:hover {
+            background-color: var(--sidebar-link-hover-bg);
+            color: #fff;
+        }
+        #global-sidebar .nav-link.active {
+            background-color: var(--sidebar-link-active-bg);
+            color: #fff;
+            font-weight: 600;
+            border-left-color: var(--warning-color); /* Or white/primary */
+        }
+        .sidebar-footer {
+            margin-top: auto; /* Pushes to bottom */
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar-footer .logout-btn-sidebar {
+            display: block;
+            text-align: center;
+            background-color: var(--secondary-color);
+            color: white;
+        }
+         .sidebar-footer .logout-btn-sidebar:hover {
+            background-color: #5a6268;
+        }
+
+
+        #main-content-wrapper {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #main-header {
+            height: var(--header-height);
+            background: var(--card-background);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+        #burger-menu {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: none; /* Hidden by default, shown on mobile */
+        }
+        #main-header #page-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0;
+            color: var(--primary-color);
+        }
+        .header-user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        #welcome-message-header {
+            font-weight: 500;
+            color: var(--text-color-light);
+        }
+        .logout-btn-header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .logout-btn-header:hover { background: #5a6268; color:white; }
+        .logout-btn-header i { margin-right: 0.5rem; }
+
+        .page-content-area { /* Wrapper for actual page content below header */
+            flex-grow: 1;
+            overflow-y: auto; /* Allow scrolling for content longer than viewport */
+        }
+
+        .page-section {
+            display: none; /* All pages hidden by default */
+        }
+        .page-section.active-page {
+            display: block; /* Active page is shown */
+        }
+
+        /* --- Dashboard Section --- */
+        .dashboard-content-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column */
+            gap: 2rem;
+        }
+        .live-lesson-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .live-lesson-btn i { margin-right: 0.5rem; }
+
+        .todo-list ul, .notifications-list ul { list-style: none; padding-left: 0; }
+        .todo-list li { display: flex; align-items: center; margin-bottom: 0.8rem; font-size: 0.9rem; }
+        .todo-list input[type="checkbox"] { margin-right: 0.8rem; width: 18px; height: 18px; accent-color: var(--primary-color); }
+        .todo-list label.completed { text-decoration: line-through; color: var(--secondary-color); }
+        .notifications-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--light-gray); font-size: 0.9rem; color: var(--text-color-light); }
+        .notifications-list li:last-child { border-bottom: none; }
+        .notifications-list i { margin-right: 0.5rem; color: var(--primary-color); }
+
+        .dashboard-main-area h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .subject-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: white; padding: 1.5rem; border-radius: var(--border-radius);
+            text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 180px;
+        }
+        .subject-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3); }
+        .subject-card .icon { font-size: 2.8rem; margin-bottom: 1rem; }
+        .subject-card h4 { font-size: 1.15rem; font-weight: 600; margin:0; }
+
+
+        /* --- Subject Detail Section --- */
+        .subject-detail-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+        }
+        .subject-detail-header h2 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 0; }
+        .subject-detail-grid {
+            display: grid; grid-template-columns: 260px 1fr; gap: 2rem;
+        }
+        .subject-sidebar {
+            background: var(--card-background); padding: 1.5rem; border-radius: var(--border-radius);
+            box-shadow: var(--shadow); height: fit-content;
+        }
+        .subject-sidebar h3 { font-size: 1.2rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--light-gray); }
+        .subject-sidebar .nav-link { display: block; padding: 0.8rem 1rem; margin-bottom: 0.5rem; color: var(--text-color-light); border-radius: var(--border-radius-sm); transition: background-color 0.2s, color 0.2s; font-weight: 500; }
+        .subject-sidebar .nav-link:hover, .subject-sidebar .nav-link.active { background-color: var(--primary-color); color: white; }
+        .subject-sidebar .nav-link i { margin-right: 0.8rem; }
+        .subject-content-area .content-section { margin-bottom: 2rem; }
+        .subject-content-area .content-section h4 { font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600; color: var(--primary-color-dark); border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem; display: inline-block; }
+        .subject-content-area ul { list-style: none; padding-left: 0; }
+        .subject-content-area li { padding: 0.75rem 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; }
+        .subject-content-area li:last-child { border-bottom: none; }
+        .subject-content-area li i { margin-right: 0.8rem; color: var(--secondary-color); width: 20px; text-align: center; }
+        .subject-content-area li a { font-weight: 500; }
+        .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: var(--border-radius-sm); margin-bottom: 1rem; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .assignment-card {
+            background-color: var(--card-background); border: 1px solid var(--light-gray); border-left: 5px solid var(--primary-color);
+            padding: 1rem 1.5rem; border-radius: var(--border-radius-sm); margin-bottom: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .assignment-card h5 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .assignment-card p { font-size: 0.9rem; color: var(--text-color-light); margin-bottom: 0.8rem; }
+        .assignment-card .due-date { font-weight: 500; color: var(--danger-color); }
+        .assignment-card .status { font-weight: 500; padding: 0.2em 0.5em; border-radius: 4px; font-size: 0.85em; }
+        .assignment-card .status.pending { background-color: var(--warning-color); color: #333;}
+        .assignment-card .status.submitted { background-color: var(--success-color); color: white;}
+        .assignment-card .actions a { margin-right: 0.5rem; }
+
+        /* --- Live Stream Section --- */
+        .live-stream-embed-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin-top: 1.5rem;
+            border-radius: var(--border-radius-sm);
+            background-color: #1a1a1a; /* Darker placeholder background */
+        }
+        .live-stream-embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #teacher-stream-setup ol, #teacher-stream-setup ul,
+        #student-live-view ul {
+            padding-left: 20px; /* Indent lists */
+            margin-bottom: 1rem;
+        }
+        #teacher-stream-setup li, #student-live-view li {
+            margin-bottom: 0.5rem;
+        }
+        #teacher-stream-setup code {
+            background-color: #e9ecef;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        /* --- Sidebar Overlay for Mobile --- */
+        #sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999; /* Below sidebar, above content */
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        body.sidebar-open #sidebar-overlay {
+            display: block;
+            opacity: 1;
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (min-width: 993px) { /* Larger screens */
+            .dashboard-content-grid {
+                grid-template-columns: 1fr 320px; /* Main content and widgets side-by-side */
+            }
+             .dashboard-widgets-column {
+                order: 1; /* Widgets on the right */
+            }
+            .dashboard-main-area {
+                order: 0; /* Subject grid on the left */
+            }
+        }
+
+        @media (max-width: 992px) { /* Tablet and Mobile */
+            #global-sidebar {
+                transform: translateX(-100%); /* Hidden by default */
+            }
+            body.sidebar-open #global-sidebar {
+                transform: translateX(0);
+            }
+            #main-content-wrapper {
+                margin-left: 0;
+            }
+            #burger-menu {
+                display: block; /* Show burger menu */
+            }
+
+            .subject-detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .subject-sidebar {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+             #main-header {
+                padding: 0 1rem;
+            }
+            #main-header #page-title { font-size: 1.2rem; }
+            .header-user-actions #welcome-message-header { display: none; } /* Hide welcome on small screens if too cluttered */
+
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+            .subject-detail-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .subject-detail-header .btn { width: 100%; margin-top: 0.5rem;}
+        }
+
+        @media (max-width: 480px) {
+            :root { --sidebar-width: 240px; } /* Slightly narrower sidebar on very small screens */
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            .login-container { padding: 1.5rem; }
+            #main-header #page-title { font-size: 1.1rem; }
+            .subject-detail-header h2 { font-size: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ======== LOGIN SECTION ======== -->
+    <section id="login-section">
+        <div class="login-container">
+            <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h1>Student Portal</h1>
+            <p>Your gateway to digital learning.</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="student-number">Student Number</label>
+                    <input type="text" id="student-number" name="student-number" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div id="test-credentials">
+                <p><strong>For Testing:</strong></p>
+                <p>Student #: <code id="generated-student-number"></code></p>
+                <p>Password: <code id="generated-password"></code></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== APP SHELL (Sidebar + Main Content) ======== -->
+    <div id="app-shell" style="display: none;">
+        <!-- Global Sidebar -->
+        <nav id="global-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i> Portal
+                </div>
+            </div>
+            <a href="#" class="nav-link active" data-page="dashboard-section" id="nav-dashboard">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="#" class="nav-link" data-page="live-stream-section" id="nav-live-stream">
+                <i class="fas fa-broadcast-tower"></i> Live Stream
+            </a>
+            <a href="#" class="nav-link" data-page="profile-section" id="nav-profile">
+                <i class="fas fa-user-circle"></i> Profile
+            </a>
+            <a href="#" class="nav-link" data-page="subjects-overview-section" id="nav-subjects-overview">
+                <i class="fas fa-book"></i> Subjects
+            </a>
+            <a href="#" class="nav-link" data-page="inbox-section" id="nav-inbox">
+                <i class="fas fa-envelope"></i> Inbox
+            </a>
+            <a href="#" class="nav-link" data-page="settings-section" id="nav-settings">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+             <!-- Removed payment link for brevity -->
+            <div class="sidebar-footer">
+                 <a href="#" class="logout-btn logout-btn-sidebar btn btn-secondary btn-sm"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Wrapper -->
+        <div id="main-content-wrapper">
+            <!-- Shared Main Header -->
+            <header id="main-header">
+                <button id="burger-menu" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="page-title">Dashboard</h1>
+                <div class="header-user-actions">
+                    <span id="welcome-message-header">Welcome, Student!</span>
+                    <a href="#" class="logout-btn logout-btn-header"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </header>
+
+            <!-- Container for switchable page sections -->
+            <div class="page-content-area">
+                <section id="dashboard-section" class="page-section active-page content-container">
+                    <div class="dashboard-content-grid">
+                        <main class="dashboard-main-area card">
+                            <h2>Your Subjects</h2>
+                            <div class="subjects-grid">
+                                <!-- Subject cards will be dynamically populated -->
+                            </div>
+                        </main>
+                        <aside class="dashboard-widgets-column">
+                             <a href="#" class="live-lesson-btn btn btn-success"><i class="fas fa-video"></i> Join Live Lesson</a>
+                            <div id="todo-card" class="card">
+                                <h3 class="card-header"><i class="fas fa-check-square"></i> Upcoming Activities</h3>
+                                <div class="todo-list">
+                                    <ul>
+                                        <li><input type="checkbox" id="task1" name="task1"><label for="task1">Maths Algebra Quiz</label></li>
+                                        <li><input type="checkbox" id="task2" name="task2"><label for="task2">Geography Map Project</label></li>
+                                        <li><input type="checkbox" id="task3" name="task3"><label for="task3">Business Studies Essay</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="notifications-card" class="card">
+                                 <h3 class="card-header"><i class="fas fa-bell"></i> General Notifications</h3>
+                                <div class="notifications-list">
+                                    <ul>
+                                        <li><i class="fas fa-bullhorn"></i> Exam timetables released.</li>
+                                        <li><i class="fas fa-calendar-alt"></i> School reopens on July 20th.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <section id="live-stream-section" class="page-section content-container">
+                    <div class="card">
+                        <h2 class="card-header"><i class="fas fa-broadcast-tower"></i> Live Class Stream</h2>
+
+                        <div id="teacher-stream-setup" class="card" style="background-color: #eef7ff; border: 1px dashed var(--primary-color); margin-bottom:2rem;">
+                            <h3 class="card-header" style="color: var(--primary-color-dark); border-bottom-color: var(--primary-color-dark);"><i class="fas fa-chalkboard-teacher"></i> Teacher Setup (Demo)</h3>
+                            <p>🔥 **Teacher: Go Live!**</p>
+                            <ol>
+                                <li><strong>YouTube Studio:</strong> Go to <a href="https://studio.youtube.com" target="_blank" rel="noopener noreferrer">studio.youtube.com</a> and click "Go Live".</li>
+                                <li><strong>Setup Stream:</strong>
+                                    <ul>
+                                        <li>Choose "Schedule Stream" or "Go Live" now.</li>
+                                        <li>Title your lesson.</li>
+                                        <li><strong>Visibility: Set to `Unlisted`</strong>. This is important!</li>
+                                        <li>Category: Education. (Ensure compliance with COPPA by selecting "No, it's not made for kids" if appropriate).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Get Video ID:</strong>
+                                    <ul>
+                                        <li>After starting/scheduling, find the <strong>Share Link</strong> (e.g., <code>https://youtu.be/VIDEO_ID</code>) or the URL from the address bar (e.g., <code>https://www.youtube.com/watch?v=VIDEO_ID</code>).</li>
+                                        <li>The <strong>Video ID</strong> is the 11-character code (e.g., <code>ABC123XYZ</code>).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Paste ID/Link Below:</strong> Enter this Video ID or Share Link here:</li>
+                            </ol>
+                            <div class="input-group" style="margin-top: 1rem;">
+                                <label for="youtube-video-id-input">YouTube Video ID or Share Link:</label>
+                                <input type="text" id="youtube-video-id-input" class="form-control" placeholder="e.g., dQw4w9WgXcQ or https://youtu.be/dQw4w9WgXcQ">
+                            </div>
+                            <button id="set-live-stream-btn" class="btn btn-primary"><i class="fas fa-play-circle"></i> Start / Update Stream</button>
+                            <p id="teacher-stream-status" style="margin-top: 0.75rem; font-weight: bold;"></p>
+                        </div>
+
+                        <div id="student-live-view">
+                            <h3 class="card-header"><i class="fas fa-tv"></i> Student Live View</h3>
+                            <p>🎥 **Students: Join Live Lesson!**</p>
+                            <ul>
+                                <li>The live lesson will appear below once the teacher starts streaming and sets the Video ID.</li>
+                                <li>If you see "Video unavailable" or a similar message, the teacher might not be live yet, or an incorrect ID was entered.</li>
+                                <li>You might need to click "Play" on the video.</li>
+                            </ul>
+                            <div id="live-stream-embed-container" class="live-stream-embed-container">
+                                <!-- Player will be embedded here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="subject-detail-section" class="page-section content-container">
+                    <div class="subject-detail-header">
+                        <h2 id="subject-detail-title">Subject Name</h2>
+                        <button class="btn btn-secondary btn-sm" id="back-to-dashboard-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+                    </div>
+                    <div class="subject-detail-grid">
+                        <nav class="subject-sidebar">
+                            <h3>Subject Menu</h3>
+                            <a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                            <a href="#" class="nav-link" data-section="lessons"><i class="fas fa-book-reader"></i> Lessons</a>
+                            <a href="#" class="nav-link" data-section="assignments"><i class="fas fa-clipboard-list"></i> Assignments</a>
+                            <a href="#" class="nav-link" data-section="notifications"><i class="fas fa-bell"></i> Notifications</a>
+                        </nav>
+                        <main class="subject-content-area card">
+                            <!-- Content will be dynamically inserted here -->
+                        </main>
+                    </div>
+                </section>
+
+                <section id="profile-section" class="page-section content-container">
+                    <div class="card">
+                        <h2 class="card-header"><i class="fas fa-user-edit"></i> My Profile</h2>
+                        <p>Student Name: <span id="profile-student-name">[Student Name]</span></p>
+                        <p>Student Number: <span id="profile-student-number">[Student Number]</span></p>
+                        <p>Grade: 12</p>
+                        <p>Email: <span id="profile-student-email">[student]@example.com</span></p>
+                        <button class="btn btn-primary">Edit Profile</button>
+                    </div>
+                </section>
+
+                <section id="subjects-overview-section" class="page-section content-container">
+                     <div class="card">
+                        <h2 class="card-header"><i class="fas fa-layer-group"></i> All My Subjects</h2>
+                        <div class="subjects-grid" id="subjects-overview-grid">
+                            <!-- Could re-populate subject cards here too -->
+                        </div>
+                    </div>
+                </section>
+
+                <section id="inbox-section" class="page-section content-container">
+                    <div class="card">
+                        <h2 class="card-header"><i class="fas fa-inbox"></i> Inbox</h2>
+                        <p>No new messages.</p>
+                        <ul>
+                            <li><a href="#">Message from Admin (01/08/2024)</a></li>
+                            <li><a href="#">Message from Maths Teacher (30/07/2024)</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="settings-section" class="page-section content-container">
+                     <div class="card">
+                        <h2 class="card-header"><i class="fas fa-sliders-h"></i> Settings</h2>
+                        <div class="input-group">
+                            <label for="setting-notifications">Enable Email Notifications:</label>
+                            <input type="checkbox" id="setting-notifications" checked style="width: auto;">
+                        </div>
+                        <div class="input-group">
+                            <label for="setting-theme">Theme:</label>
+                            <select id="setting-theme">
+                                <option value="light">Light Mode</option>
+                                <option value="dark" disabled>Dark Mode (Coming Soon)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary">Save Settings</button>
+                    </div>
+                </section>
+            </div> <!-- End .page-content-area -->
+        </div> <!-- End #main-content-wrapper -->
+    </div> <!-- End #app-shell -->
+    <div id="sidebar-overlay"></div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- ELEMENTS ---
+        const loginSection = document.getElementById('login-section');
+        const appShell = document.getElementById('app-shell');
+        const loginForm = document.getElementById('login-form');
+        const studentNumberInput = document.getElementById('student-number');
+
+        const globalSidebarLinks = document.querySelectorAll('#global-sidebar .nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const pageTitleElement = document.getElementById('page-title');
+        const welcomeMessageHeader = document.getElementById('welcome-message-header');
+        const allLogoutBtns = document.querySelectorAll('.logout-btn');
+
+        const burgerMenu = document.getElementById('burger-menu');
+        const globalSidebar = document.getElementById('global-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        const dashboardSubjectsGrid = document.querySelector('#dashboard-section .subjects-grid');
+        const subjectsOverviewGrid = document.getElementById('subjects-overview-grid');
+
+        const subjectDetailSection = document.getElementById('subject-detail-section');
+        const subjectDetailTitle = document.getElementById('subject-detail-title');
+        const subjectSidebarLinks = document.querySelectorAll('.subject-sidebar .nav-link');
+        const subjectContentArea = document.querySelector('.subject-content-area');
+        const backToDashboardBtn = document.getElementById('back-to-dashboard-btn');
+
+        const generatedStudentNumEl = document.getElementById('generated-student-number');
+        const generatedPasswordEl = document.getElementById('generated-password');
+
+        const profileStudentName = document.getElementById('profile-student-name');
+        const profileStudentNumber = document.getElementById('profile-student-number');
+        const profileStudentEmail = document.getElementById('profile-student-email');
+
+        // Live Stream Elements
+        const liveLessonDashboardBtn = document.querySelector('.live-lesson-btn');
+        const liveStreamSection = document.getElementById('live-stream-section'); // For easier access if needed
+        const youtubeVideoIdInput = document.getElementById('youtube-video-id-input');
+        const setLiveStreamBtn = document.getElementById('set-live-stream-btn');
+        const liveStreamEmbedContainer = document.getElementById('live-stream-embed-container');
+        const teacherStreamStatus = document.getElementById('teacher-stream-status');
+        const LOCAL_STORAGE_LIVE_STREAM_ID = 'activeLiveStreamVideoId';
+
+
+        // --- STUDENT NUMBER GENERATOR ---
+        let studentCounter = 1;
+        function generateStudentNumber() { return `MA2025-G12-${String(studentCounter++).padStart(4, '0')}`; }
+        function generatePassword(studentNumber) { return `Mg${studentNumber}B!`; }
+
+        function setupTestCredentials() {
+            const newStudentNumber = generateStudentNumber();
+            const newPassword = generatePassword(newStudentNumber);
+            generatedStudentNumEl.textContent = newStudentNumber;
+            generatedPasswordEl.textContent = newPassword;
+            studentNumberInput.value = newStudentNumber;
+            document.getElementById('password').value = newPassword;
+        }
+        setupTestCredentials();
+
+        // --- DATA ---
+        const subjectData = {
+    "Mathematics": {
+        icon: "fas fa-calculator",
+        home: {
+            teacher: "Ms. A. Turing",
+            description: "Welcome to Mathematics Grade 12. This course covers advanced algebra, trigonometry, calculus, and statistics.",
+            officeHours: "Mon & Wed, 14:00 - 15:00"
+        },
+        lessons: {
+            videos: [
+                { title: "Intro to Calculus", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/PUB0TaZ7bhA?si=tozrh245eITBwuIJ" frameborder="0" allowfullscreen></iframe></div>' },
+                { title: "Advanced Algebra", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/BOt1DAvR0zI" frameborder="0" allowfullscreen></iframe></div>' }
+            ],
+            docs: [
+                { title: "Chapter 1 - Algebra.pdf", link: "#", icon: "fas fa-file-pdf" },
+                { title: "Trigonometry Notes.pdf", link: "#", icon: "fas fa-file-pdf" }
+            ],
+            ebooks: [
+                { title: "Grade 12 Mathematics eBook", link: "#", icon: "fas fa-book" }
+            ]
+        },
+        assignments: [
+            { title: "Algebra Set 1", dueDate: "2024-08-15", file: "#", status: "Pending", type: "Homework" },
+            { title: "Trigonometry Worksheet", dueDate: "2024-08-30", file: "#", status: "Pending", type: "Practice" }
+        ],
+        notifications: [
+            "Calculus test next Friday.",
+            "Extra class this Saturday at 10:00 AM."
+        ]
+    },
+
+    "English FAL": {
+        icon: "fas fa-book-open-reader",
+        home: {
+            teacher: "Mr. W. Shakespeare",
+            description: "Literature analysis, essay writing, and oral communication.",
+            officeHours: "Tue & Thu, 10:00 - 11:00"
+        },
+        lessons: {
+            videos: [
+                { title: "Poetic Devices", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/3a_4NWApSnQ?si=_IRtseLclan9Lx1m" frameborder="0" allowfullscreen></iframe></div>' },
+                { title: "Essay Writing Techniques", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/UEFzM1vBNcQ" frameborder="0" allowfullscreen></iframe></div>' }
+            ],
+            docs: [
+                { title: "Macbeth Summary.pdf", link: "#", icon: "fas fa-file-pdf" }
+            ],
+            ebooks: [
+                { title: "Grade 12 English Anthology", link: "#", icon: "fas fa-book" }
+            ]
+        },
+        assignments: [
+            { title: "Macbeth Essay", dueDate: "2024-09-01", file: "#", status: "Pending", type: "Essay" },
+            { title: "Reading Log: Poetry", dueDate: "2024-09-10", file: "#", status: "Pending", type: "Log" }
+        ],
+        notifications: [
+            "Poetry slam next month!",
+            "Debate tryouts this Friday."
+        ]
+    },
+
+    "Accounting": {
+        icon: "fas fa-file-invoice-dollar",
+        home: {
+            teacher: "Mr. L. Pacioli",
+            description: "Financial statements, budgeting, and cost analysis.",
+            officeHours: "Mon, 11:00 - 12:00"
+        },
+        lessons: {
+            videos: [
+                { title: "Debits & Credits", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/5hhS2a3l64I" frameborder="0" allowfullscreen></iframe></div>' },
+                { title: "Income Statements Explained", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/MKs_3iU8FFE" frameborder="0" allowfullscreen></iframe></div>' }
+            ],
+            docs: [
+                { title: "Balance Sheet Template.pdf", link: "#", icon: "fas fa-file-pdf" }
+            ],
+            ebooks: [
+                { title: "Accounting Grade 12 eBook", link: "#", icon: "fas fa-book" }
+            ]
+        },
+        assignments: [
+            { title: "Company Analysis", dueDate: "2024-09-10", file: "#", status: "Pending", type: "Project" },
+            { title: "Ledger Practice", dueDate: "2024-09-05", file: "#", status: "Pending", type: "Exercise" }
+        ],
+        notifications: [
+            "Guest speaker next week.",
+            "Quiz on financial ratios next Monday."
+        ]
+    },
+
+    "Business Studies": {
+        icon: "fas fa-briefcase",
+        home: {
+            teacher: "Ms. C. Motsepe",
+            description: "Entrepreneurship, marketing, HR, and business environments.",
+            officeHours: "Fri, 09:00 - 10:00"
+        },
+        lessons: {
+            videos: [
+                { title: "Introduction to Business Environments", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/qcE4E1dVGAk" frameborder="0" allowfullscreen></iframe></div>' }
+            ],
+            docs: [
+                { title: "SWOT Analysis.pdf", link: "#", icon: "fas fa-file-pdf" }
+            ],
+            ebooks: [
+                { title: "Business Studies Textbook", link: "#", icon: "fas fa-book" }
+            ]
+        },
+        assignments: [
+            { title: "Marketing Plan", dueDate: "2024-08-25", file: "#", status: "Pending", type: "Project" }
+        ],
+        notifications: [
+            "Business expo this term.",
+            "Group presentation deadline extended."
+        ]
+    },
+
+    "Life Sciences": {
+        icon: "fas fa-dna",
+        home: {
+            teacher: "Dr. J. Mendel",
+            description: "Cell biology, genetics, ecology, and evolution.",
+            officeHours: "Wed & Fri, 13:00 - 14:00"
+        },
+        lessons: {
+            videos: [
+                { title: "Photosynthesis Explained", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/UPBMG5EYydo" frameborder="0" allowfullscreen></iframe></div>' }
+            ],
+            docs: [
+                { title: "Genetics Practice.pdf", link: "#", icon: "fas fa-file-pdf" }
+            ],
+            ebooks: [
+                { title: "Life Sciences eBook Grade 12", link: "#", icon: "fas fa-book" }
+            ]
+        },
+        assignments: [
+            { title: "Plant Structure Report", dueDate: "2024-09-12", file: "#", status: "Pending", type: "Lab Report" }
+        ],
+        notifications: [
+            "Ecology field trip confirmed.",
+            "Lab safety contract due next week."
+        ]
+    },
+
+    "Geography": {
+        icon: "fas fa-globe-africa",
+        home: {
+            teacher: "Mr. T. Mokoena",
+            description: "Map skills, geomorphology, climate, and urban geography.",
+            officeHours: "Tue, 12:00 - 13:00"
+        },
+        lessons: {
+            videos: [
+                { title: "Understanding Plate Tectonics", embed: '<div class="video-embed"><iframe src="https://www.youtube.com/embed/kwfNGatxUJI" frameborder="0" allowfullscreen></iframe></div>' }
+            ],
+            docs: [
+                { title: "Urban Land Use Patterns.pdf", link: "#", icon: "fas fa-file-pdf" }
+            ],
+            ebooks: [
+                { title: "Grade 12 Geography Handbook", link: "#", icon: "fas fa-book" }
+            ]
+        },
+        assignments: [
+            { title: "Weather Patterns Poster", dueDate: "2024-08-28", file: "#", status: "Pending", type: "Creative Task" }
+        ],
+        notifications: [
+            "Map skills test next Wednesday.",
+            "Bring rulers and protractors to class."
+        ]
+    }
+};
+
+        let currentStudentName = '';
+
+        // --- LOGIN/LOGOUT LOGIC ---
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const studentNumber = studentNumberInput.value.trim();
+            if (studentNumber) {
+                currentStudentName = studentNumber;
+                loginSection.style.display = 'none';
+                appShell.style.display = 'flex';
+                welcomeMessageHeader.textContent = `Welcome, ${currentStudentName}`;
+                
+                if (profileStudentName) profileStudentName.textContent = currentStudentName;
+                if (profileStudentNumber) profileStudentNumber.textContent = currentStudentName;
+                if (profileStudentEmail) profileStudentEmail.textContent = `${currentStudentName.toLowerCase().replace(/[^a-z0-9]/g, '.')}@example.com`;
+
+                populateSubjectsGrid(dashboardSubjectsGrid);
+                populateSubjectsGrid(subjectsOverviewGrid);
+                navigateToPage('dashboard-section');
+            }
+        });
+
+        allLogoutBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                appShell.style.display = 'none';
+                loginSection.style.display = 'flex';
+                currentStudentName = '';
+                studentNumberInput.value = '';
+                document.getElementById('password').value = '';
+                setupTestCredentials();
+                if (document.body.classList.contains('sidebar-open')) {
+                    toggleSidebar();
+                }
+            });
+        });
+
+        // --- SIDEBAR & NAVIGATION LOGIC ---
+        burgerMenu.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        function toggleSidebar() {
+            document.body.classList.toggle('sidebar-open');
+            const isExpanded = document.body.classList.contains('sidebar-open');
+            burgerMenu.setAttribute('aria-expanded', isExpanded);
+            if(isExpanded) {
+                 globalSidebar.querySelector('a.nav-link').focus();
+            } else {
+                burgerMenu.focus();
+            }
+        }
+
+        globalSidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPageId = link.dataset.page;
+                navigateToPage(targetPageId);
+                if (window.innerWidth <= 992 && document.body.classList.contains('sidebar-open')) {
+                    toggleSidebar();
+                }
+            });
+        });
+
+        function navigateToPage(pageId) {
+            pageSections.forEach(section => {
+                section.classList.remove('active-page');
+                if (section.id === pageId) {
+                    section.classList.add('active-page');
+                }
+            });
+
+            globalSidebarLinks.forEach(navLink => {
+                navLink.classList.remove('active');
+                if (navLink.dataset.page === pageId) {
+                    navLink.classList.add('active');
+                    pageTitleElement.textContent = navLink.textContent.trim();
+                }
+            });
+            if (pageId !== 'subject-detail-section') {
+                 subjectDetailSection.classList.remove('active-page');
+            }
+             if (pageId === 'subjects-overview-section') {
+                if (subjectsOverviewGrid.innerHTML.trim() === '') {
+                    populateSubjectsGrid(subjectsOverviewGrid);
+                }
+            }
+            // Handle Live Stream Page specific logic
+            if (pageId === 'live-stream-section') {
+                const storedVideoId = localStorage.getItem(LOCAL_STORAGE_LIVE_STREAM_ID);
+                renderLiveStreamPlayer(storedVideoId); // This also updates the input field
+                if (teacherStreamStatus) teacherStreamStatus.textContent = ''; // Clear previous status
+            }
+        }
+
+        // --- LIVE STREAM FEATURE ---
+        function extractYouTubeVideoId(input) {
+            if (!input) return null;
+            const videoIdRegex = /^[a-zA-Z0-9_-]{11}$/;
+            if (videoIdRegex.test(input)) {
+                return input;
+            }
+            let videoId = null;
+            const patterns = [
+                /youtu\.be\/([a-zA-Z0-9_-]{11})/, // Short URL
+                /youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=)([a-zA-Z0-9_-]{11})/ // Long URL variations
+            ];
+            for (const pattern of patterns) {
+                const match = input.match(pattern);
+                if (match && match[1]) {
+                    videoId = match[1];
+                    break;
+                }
+            }
+            return videoId;
+        }
+
+        function renderLiveStreamPlayer(videoId) {
+            if (!liveStreamEmbedContainer) return;
+
+            if (videoId) {
+                liveStreamEmbedContainer.innerHTML = `
+                    <iframe 
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                        title="Live Class Stream" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>`;
+                if (youtubeVideoIdInput) youtubeVideoIdInput.value = videoId; // Update input field
+            } else {
+                liveStreamEmbedContainer.innerHTML = `
+                    <div style="display: flex; flex-direction:column; justify-content: center; align-items: center; height: 100%; min-height: 300px; background-color: #222; border-radius: var(--border-radius-sm);">
+                        <i class="fas fa-video-slash fa-3x" style="color: #666; margin-bottom: 1rem;"></i>
+                        <p style="color: #aaa; text-align: center; padding: 1rem;">
+                            Live stream is not currently active or has not been set up by the teacher.
+                        </p>
+                    </div>`;
+                if (youtubeVideoIdInput) youtubeVideoIdInput.value = ''; // Clear input if no ID
+            }
+        }
+
+        if (setLiveStreamBtn) {
+            setLiveStreamBtn.addEventListener('click', () => {
+                const rawInput = youtubeVideoIdInput.value.trim();
+                const parsedId = extractYouTubeVideoId(rawInput);
+
+                if (parsedId) {
+                    localStorage.setItem(LOCAL_STORAGE_LIVE_STREAM_ID, parsedId);
+                    renderLiveStreamPlayer(parsedId);
+                    if (teacherStreamStatus) {
+                        teacherStreamStatus.textContent = '✅ Live stream updated successfully! Students will see this stream.';
+                        teacherStreamStatus.style.color = 'var(--success-color)';
+                    }
+                } else {
+                    localStorage.removeItem(LOCAL_STORAGE_LIVE_STREAM_ID); // Remove if invalid
+                    renderLiveStreamPlayer(null); // Show 'not active'
+                    if (teacherStreamStatus) {
+                        teacherStreamStatus.textContent = '❌ Invalid YouTube Video ID or Link. Please check and try again.';
+                        teacherStreamStatus.style.color = 'var(--danger-color)';
+                    }
+                }
+            });
+        }
+
+        if (liveLessonDashboardBtn) {
+            liveLessonDashboardBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigateToPage('live-stream-section');
+            });
+        }
+        // Initial render for live stream page if it's the active one on load (though unlikely due to login)
+        // This is primarily handled by navigateToPage. But, ensure placeholder is shown on first ever load of the section.
+        renderLiveStreamPlayer(localStorage.getItem(LOCAL_STORAGE_LIVE_STREAM_ID));
+
+
+        // --- Populate Main Subjects Grid ---
+        function populateSubjectsGrid(gridElement) {
+            if (!gridElement) return;
+            gridElement.innerHTML = '';
+            for (const subjectName in subjectData) {
+                const subject = subjectData[subjectName];
+                const card = document.createElement('div');
+                card.classList.add('subject-card');
+                card.dataset.subject = subjectName;
+                card.innerHTML = `
+                    <div class="icon"><i class="${subject.icon}"></i></div>
+                    <h4>${subjectName}</h4>
+                `;
+                card.addEventListener('click', () => showSubjectDetail(subjectName));
+                gridElement.appendChild(card);
+            }
+        }
+
+        // --- Navigation to Subject Detail ---
+        function showSubjectDetail(subjectName) {
+            pageSections.forEach(section => section.classList.remove('active-page'));
+            subjectDetailSection.classList.add('active-page');
+            subjectDetailTitle.textContent = subjectName;
+            pageTitleElement.textContent = `Subject: ${subjectName}`;
+
+            loadSubjectContent(subjectName, 'home');
+            subjectSidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.dataset.section === 'home') link.classList.add('active');
+            });
+        }
+
+        if(backToDashboardBtn) {
+            backToDashboardBtn.addEventListener('click', () => {
+                navigateToPage('dashboard-section');
+            });
+        }
+        
+
+        // --- SUBJECT DETAIL PAGE LOGIC ---
+        subjectSidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                subjectSidebarLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const section = link.dataset.section;
+                const subjectName = subjectDetailTitle.textContent;
+                loadSubjectContent(subjectName, section);
+            });
+        });
+
+        function loadSubjectContent(subjectName, section) {
+            const data = subjectData[subjectName];
+            if (!data) {
+                subjectContentArea.innerHTML = `<p>Error: Subject data not found.</p>`;
+                return;
+            }
+            let html = '';
+            switch (section) {
+                case 'home':
+                    html = `
+                        <div class="content-section">
+                            <h4><i class="fas fa-info-circle"></i> About this Subject</h4>
+                            <p>${data.home.description}</p>
+                            <p><strong>Teacher:</strong> ${data.home.teacher}</p>
+                            <p><strong>Office Hours:</strong> ${data.home.officeHours || 'Not specified'}</p>
+                        </div>`;
+                    break;
+                case 'lessons':
+                    html = `<div class="content-section"><h4><i class="fas fa-book-reader"></i> Lessons & Resources</h4>`;
+                    if (data.lessons.videos && data.lessons.videos.length > 0) {
+                        html += `<h5><i class="fas fa-video"></i> Videos</h5><ul>`;
+                        data.lessons.videos.forEach(v => { html += v.embed ? v.embed : `<li><i class="fas fa-play-circle"></i> <a href="${v.link}" target="_blank">${v.title}</a></li>`; });
+                        html += `</ul><br>`;
+                    }
+                    if (data.lessons.docs && data.lessons.docs.length > 0) {
+                        html += `<h5><i class="fas fa-file-alt"></i> Documents & Notes</h5><ul>`;
+                        data.lessons.docs.forEach(doc => { html += `<li><i class="${doc.icon || 'fas fa-file-alt'}"></i> <a href="${doc.link}" download>${doc.title}</a></li>`; });
+                        html += `</ul><br>`;
+                    }
+                    if (data.lessons.ebooks && data.lessons.ebooks.length > 0) {
+                        html += `<h5><i class="fas fa-book"></i> eBooks & Guides</h5><ul>`;
+                        data.lessons.ebooks.forEach(book => { html += `<li><i class="${book.icon || 'fas fa-book'}"></i> <a href="${book.link}" target="_blank">${book.title}</a></li>`; });
+                        html += `</ul>`;
+                    }
+                     if (!data.lessons.videos?.length && !data.lessons.docs?.length && !data.lessons.ebooks?.length) {
+                        html += `<p>No lessons or resources uploaded yet.</p>`;
+                    }
+                    html += `</div>`;
+                    break;
+                case 'assignments':
+                    html = `<div class="content-section"><h4><i class="fas fa-clipboard-list"></i> Assignments</h4>`;
+                    if (data.assignments && data.assignments.length > 0) {
+                        data.assignments.forEach(assign => {
+                            html += `
+                                <div class="assignment-card">
+                                    <h5>${assign.title} <span class="badge bg-secondary" style="font-size: 0.7em; background-color: var(--secondary-color); color: white; padding: 0.3em 0.5em; border-radius: 4px; vertical-align: middle;">${assign.type}</span></h5>
+                                    <p><strong>Due:</strong> <span class="due-date">${assign.dueDate}</span></p>
+                                    <p><strong>Status:</strong> <span class="status ${assign.status.toLowerCase()}">${assign.status}</span></p>
+                                    <div class="actions">
+                                        <a href="${assign.file}" class="btn btn-sm btn-primary" download><i class="fas fa-download"></i> Download</a>
+                                        ${assign.status.toLowerCase() === 'pending' ? '<a href="#" class="btn btn-sm btn-success"><i class="fas fa-upload"></i> Submit</a>' : ''}
+                                    </div>
+                                </div>`;
+                        });
+                    } else { html += `<p>No assignments posted yet.</p>`; }
+                    html += `</div>`;
+                    break;
+                case 'notifications':
+                    html = `<div class="content-section"><h4><i class="fas fa-bell"></i> Subject Notifications</h4><ul>`;
+                    if (data.notifications && data.notifications.length > 0) {
+                        data.notifications.forEach(n => { html += `<li><i class="fas fa-bullhorn"></i> ${n}</li>`; });
+                    } else { html += `<li>No subject-specific notifications.</li>`; }
+                    html += `</ul></div>`;
+                    break;
+                default:
+                    html = `<p>Content for this section is not available yet.</p>`;
+            }
+            subjectContentArea.innerHTML = html;
+        }
+
+        // --- TODO LIST LOGIC ---
+        const todoCheckboxes = document.querySelectorAll('.todo-list input[type="checkbox"]');
+        todoCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const label = e.target.nextElementSibling;
+                 if (label && label.tagName === 'LABEL') {
+                    label.classList.toggle('completed', e.target.checked);
+                }
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>
