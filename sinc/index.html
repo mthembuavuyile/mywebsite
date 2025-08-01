@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SINC | Professional Legal Practice Management for South African Law Firms</title>
+    <meta name="description" content="Secure, efficient, and compliant legal practice management software designed for the unique needs of South African law firms." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        html { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth;
+        }
+        body { 
+            background-color: #111827; /* gray-900 */
+            background-image: radial-gradient(circle at top, #1f2937, #111827);
+            color: #d1d5db; /* gray-300 */
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+        }
+
+        .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Subtle entrance animation */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Professional Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .btn-primary {
+            background-color: #2563eb; /* blue-600 */
+            color: #ffffff;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.25);
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8; /* blue-700 */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #d1d5db; /* gray-300 */
+            border: 1px solid #4b5563; /* gray-600 */
+        }
+        .btn-secondary:hover {
+            background-color: #1f2937; /* gray-800 */
+            border-color: #6b7280; /* gray-500 */
+            color: #ffffff;
+        }
+
+        /* Feature Card Hover Effect */
+        .feature-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-color: #374151; /* gray-700 */
+            border-color: #4b5563; /* gray-600 */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Main container -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        
+        <!-- Main content card -->
+        <div class="fade-in-up bg-gray-800/50 border border-gray-700/80 rounded-2xl p-8 md:p-12 max-w-4xl w-full text-center shadow-2xl shadow-black/30">
+            
+            <!-- Logo/Brand section -->
+            <div class="mb-8">
+                <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-2 tracking-tight">
+                    SINC
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 font-medium">
+                    Smart Legal Systems
+                </p>
+                <div class="h-0.5 w-20 bg-blue-600 mx-auto mt-6"></div>
+            </div>
+
+            <!-- Value proposition -->
+            <div class="mb-10">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-white mb-3">
+                    The Premier Legal Practice Management Solution
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    Secure, efficient, and compliant software built from the ground up for the unique demands of South African law firms.
+                </p>
+            </div>
+            
+            <!-- Key features grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12 text-left">
+                <!-- Feature 1: Efficiency -->
+                <div class="feature-card bg-gray-900/40 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Streamlined Workflow</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Automate tasks, manage cases, and track billable hours with an intuitive, modern interface.</p>
+                </div>
+                <!-- Feature 2: Security -->
+                <div class="feature-card bg-gray-900/40 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Unyielding Security</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">POPIA compliant with all data securely hosted in South Africa to ensure client confidentiality.</p>
+                </div>
+                <!-- Feature 3: Purpose-Built -->
+                <div class="feature-card bg-gray-900/40 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18h16.5M5.25 6h13.5m-13.5 3h13.5m-13.5 3h13.5m-13.5 3h13.5M2.25 3v15a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25V3a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 3z" />
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Locally Focused</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Designed specifically for the South African legal system, courts, and regulatory environment.</p>
+                </div>
+            </div>
+
+            <!-- Call to action -->
+            <div class="space-y-4">
+                <a href="login.html" class="btn btn-primary text-lg">
+                    Proceed to login
+                </a>
+                <div class="pt-2">
+                    <a href="https://vylexnexys.co.za/sinc/whitepaper.html" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        Learn More ↓
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center">
+            <p class="text-gray-500 text-sm">
+                © 2025 SINC Legal Systems. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // In a real multi-section page, you'd scroll to the element.
+                    // For this single-view page, we can log to the console as a placeholder.
+                    console.log(`Would scroll to: ${targetId}`);
+                    // Example of actual scrolling:
+                    // targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
