@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SINC Dashboard — Smart Legal Systems</title>
+    <meta name="description" content="SINC Dashboard - A modern and responsive dashboard template for legal professionals." />
+    <meta name="author" content="Avuyile Mthembu" />
+    <meta name="keywords" content="SINC, Dashboard, Legal, Law, Management, Sethu Mkhwanazi, Productivity, Avuyile Mthembu" />
+    <link rel="canonical" href="https://vylexnexys.co.za/sinc/dashboard" />
+    
+    <!-- Deferred Tailwind script for non-blocking rendering -->
+    <script defer src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+    <!-- Preconnect for font performance -->
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    
+    <style>
+        /* --- CSS Custom Properties for Theming --- */
+        :root {
+            --color-primary-light: #e0f2fe; /* sky-100 */
+            --color-primary-dark: #0c4a6e; /* sky-900 */
+            --color-primary-accent: #0ea5e9; /* sky-500 */
+            --font-family-sans: 'Inter', sans-serif;
+            --font-family-sans-var: 'Inter var', sans-serif;
+        }
+
+        /* --- Font & Base Styles --- */
+        html { 
+            font-family: var(--font-family-sans); 
+            scroll-behavior: smooth; 
+        }
+        @supports (font-variation-settings: normal) { 
+            html { font-family: var(--font-family-sans-var); } 
+        }
+        body { 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+        }
+
+        /* --- Layout & State Classes (Unchanged for JS compatibility) --- */
+        .content-section.hidden, 
+        .modal.hidden { 
+            display: none; 
+        }
+        
+        .view-mode .editable-field, 
+        .edit-mode .viewable-field { 
+            display: none; 
+        }
+        
+        .sidebar-link.active { 
+            background-color: var(--color-primary-light); 
+            color: var(--color-primary-dark); 
+            font-weight: 600; 
+            border-left: 3px solid var(--color-primary-accent);
+        }
+        
+        #sidebar { 
+            transition: transform 0.3s ease-in-out; 
+        }
+
+        /* --- Scrollbar Enhancements --- */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* --- Animations --- */
+        .anim-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Card Hover Effects --- */
+        .stats-card { transition: all 0.2s ease; }
+        .stats-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+        /* --- Focus Management --- */
+        .focus-visible:focus { outline: 2px solid var(--color-primary-accent); outline-offset: 2px; }
+
+        /* --- Loading States & Skeletons --- */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .skeleton-row td .skeleton { height: 20px; border-radius: 0.25rem; }
+        .skeleton-row td .skeleton-sm { height: 12px; width: 60%; margin-top: 4px; }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans" style="display: none;">
+    
+    <div id="dashboard-container" class="relative min-h-screen lg:flex">
+        <!-- Mobile menu overlay -->
+        <div id="overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20 hidden lg:hidden" aria-hidden="true"></div>
+        
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed top-0 left-0 z-30 h-full w-64 bg-white border-r border-gray-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+    <div class="flex flex-col h-full">
+        <!-- Sidebar Header -->
+        <div class="h-16 flex items-center justify-between px-4 border-b border-gray-200 flex-shrink-0">
+            <div class="flex items-center gap-2">
+                <div class="text-2xl font-bold text-sky-800">SINC</div>
+                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">v2.1</span>
+            </div>
+            <button id="close-sidebar" aria-label="Close sidebar menu" class="p-2 rounded-md text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+
+        <!-- Navigation -->
+        <nav id="sidebar-nav" class="flex-1 px-4 py-6 space-y-1 overflow-y-auto no-scrollbar" aria-label="Main Navigation">
+            <a href="#dashboard" data-target="dashboard" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 active focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                Dashboard
+            </a>
+
+            <div class="pt-4"><p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Case Management</p></div>
+            <a href="#cases" data-target="cases" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2-2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>
+                Case Files
+                <span class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800">12</span>
+            </a>
+            <a href="#clients" data-target="clients" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" /></svg>
+                Clients
+            </a>
+            <a href="#billing" data-target="billing" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM6.343 12.343a.5.5 0 010-.707l3.536-3.536a.5.5 0 11.707.707L7.05 12.343a.5.5 0 01-.707 0zm4.243-4.243a.5.5 0 01.707 0l2.122 2.121a.5.5 0 010 .707l-2.122 2.122a.5.5 0 11-.707-.707L12.293 10l-1.707-1.707a.5.5 0 010-.707z" /></svg>
+                Billing
+            </a>
+            <a href="#calendar" data-target="calendar" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg>
+                Calendar
+                <span id="calendar-notification" class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">3</span>
+            </a>
+            <a href="#documents" data-target="documents" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h2a2 2 0 002-2V4a2 2 0 00-2-2H9z" /><path d="M4 5a2 2 0 012-2h1.01a.75.75 0 000-1.5H6a4 4 0 00-4 4v8a4 4 0 004 4h8a4 4 0 004-4V5a4 4 0 00-4-4h-1.01a.75.75 0 000 1.5H14a2 2 0 012 2v8a2 2 0 01-2-2H6a2 2 0 01-2-2V5z" /></svg>
+                Documents
+            </a>
+
+            <div class="pt-4"><p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Productivity</p></div>
+            <a href="#tasks" data-target="tasks" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-10.707a1 1 0 00-1.414-1.414L9 9.586 7.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                Tasks
+                <span class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">5</span>
+            </a>
+            <a href="#ai-assistant" data-target="ai-assistant" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10 3.5a1.5 1.5 0 013 0V5h-3V3.5zM10 7V5.5h3V7a2 2 0 012 2v4a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2h3zm-3 5.5a1.5 1.5 0 003 0V11h-3v1.5zM15 9a1 1 0 00-1-1H6a1 1 0 00-1 1v4a1 1 0 001 1h8a1 1 0 001-1V9z" /></svg>
+                AI Assistant
+            </a>
+            <a href="#time-tracking" data-target="time-tracking" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clip-rule="evenodd" /></svg>
+                Time Tracking
+            </a>
+
+            <div class="pt-4"><p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Admin</p></div>
+            <a href="#compliance" data-target="compliance" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.293 6.293a1 1 0 011.414 0L8 10.586l4.293-4.293a1 1 0 111.414 1.414L9.414 12l4.293 4.293a1 1 0 01-1.414 1.414L8 13.414l-4.293 4.293a1 1 0 01-1.414-1.414L6.586 12 2.293 7.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                Compliance
+            </a>
+            <a href="#team-activity" data-target="team-activity" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM4 8a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                Team Activity
+            </a>
+            <a href="#reports" data-target="reports" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg>
+                Reports
+            </a>
+            <a href="#settings" data-target="settings" class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.96.062 2.107-.948 2.287-1.561.38-1.561 2.6 0 2.98.998.248 1.488 1.33.948 2.286-.836 1.372.734 2.942 2.106 2.106.96-.54 2.107-.062 2.287.948.38 1.561 2.6 1.561 2.98 0 .248-.998 1.33-1.488 2.286-.948 1.372.836 2.942-.734 2.106-2.106-.54-.96-.062-2.107.948-2.287 1.561-.38 1.561-2.6 0-2.98-.998-.248-1.488-1.33-.948-2.286.836-1.372-.734-2.942-2.106-2.106-.96.54-2.107.062-2.287-.948zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg>
+                Settings
+            </a>
+        </nav>
+
+        <!-- User Profile Section -->
+        <div class="mt-auto border-t border-gray-200 p-4">
+            <a href="#profile" class="flex items-center group">
+                <img id="user-avatar-display" class="h-10 w-10 rounded-full object-cover bg-gray-200 ring-2 ring-white group-hover:ring-sky-200 transition-all" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NkZTVmMyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyYzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJ2LTJjMC0yLjY2LTUuMzMtNC04LTR6Ii8+PC9zdmc+" alt="User Avatar">
+                <div class="ml-3 min-w-0">
+                    <p id="user-name-display" class="text-sm font-medium text-gray-900 truncate anim-pulse bg-gray-200 rounded w-24 h-4"></p>
+                    <p id="user-email-display" class="text-xs text-gray-500 truncate">...</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</aside>
+
+        <!-- Main Content Area -->
+        <main class="lg:ml-64 flex-1 flex flex-col min-h-screen transition-all duration-300 ease-in-out">
+            <!-- Enhanced Header -->
+            <header class="sticky top-0 bg-white/95 backdrop-blur-sm shadow-sm z-10 border-b border-gray-200">
+                <div class="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                    <!-- Left Section: Toggle & Title -->
+                    <div class="flex items-center space-x-4">
+                        <button id="menu-toggle" aria-label="Open sidebar menu" class="p-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-sky-600 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        </button>
+                        <div>
+                            <h1 id="welcome-message" class="text-lg sm:text-xl font-bold text-gray-800 truncate">Welcome back! 👋</h1>
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Actions -->
+                    <div class="flex items-center space-x-4">
+                        <button aria-label="View notifications" class="relative p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-sky-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                        </button>
+
+                        <div class="relative">
+                            <button id="user-dropdown-toggle" class="block h-9 w-9 rounded-full overflow-hidden border-2 border-transparent hover:border-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                               <img id="user-avatar-button" class="h-full w-full object-cover bg-gray-200" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NkZTVmMyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyYzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJ2LTJjMC0yLjY2LTUuMzMtNC04LTR6Ii8+PC9zdmc+" alt="User menu">
+                            </button>
+                            <div id="user-dropdown-menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu">
+                                <div class="px-4 py-3 border-b border-gray-100">
+                                    <p id="dropdown-user-name" class="text-sm text-gray-900 font-medium truncate">Loading...</p>
+                                    <p id="dropdown-user-email" class="text-xs text-gray-500 truncate">...</p>
+                                </div>
+                                <a href="#profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
+                                <a href="#settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <button id="logout-button" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50" role="menuitem">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="main-content" class="p-4 sm:p-6 lg:p-8 flex-1">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="content-section space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <article class="stats-card bg-white p-6 rounded-xl shadow-md flex items-center space-x-4" aria-labelledby="active-cases-label">
+                            <div class="bg-sky-100 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg></div>
+                            <div title="Includes cases with status: Open, In Progress, On Hold">
+                                <p id="active-cases-label" class="text-sm text-gray-500">Active Case Files</p>
+                                <p id="active-cases-stat" class="text-2xl font-bold text-gray-800">0</p>
+                            </div>
+                        </article>
+                        <article class="stats-card bg-white p-6 rounded-xl shadow-md flex items-center space-x-4" aria-labelledby="total-clients-label">
+                            <div class="bg-green-100 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div>
+                            <div>
+                                <p id="total-clients-label" class="text-sm text-gray-500">Total Clients</p>
+                                <p id="total-clients-stat" class="text-2xl font-bold text-gray-800">0</p>
+                            </div>
+                        </article>
+                        <article class="stats-card bg-white p-6 rounded-xl shadow-md flex items-center space-x-4" aria-labelledby="total-cases-label">
+                            <div class="bg-gray-100 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg></div>
+                            <div>
+                                <p id="total-cases-label" class="text-sm text-gray-500">Total Case Files</p>
+                                <p id="total-cases-stat" class="text-2xl font-bold text-gray-800">0</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200"><h2 class="text-lg font-semibold text-gray-800">Recent Activity</h2><p class="text-sm text-gray-500">Last 5 updated or created case files</p></div>
+                        <div id="recent-activity-list" class="p-3"></div>
+                    </div>
+                </section>
+                
+                <!-- Other Content Sections -->
+                <section id="cases" class="content-section hidden">
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200 flex items-center justify-between"><h2 class="text-xl font-semibold text-gray-800">Case Files</h2><button id="add-case-button" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>Add Case File</button></div>
+                        <div id="cases-table-container" class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200"><thead class="bg-gray-50"><tr><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Case Details</th><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th><th scope="col" class="relative px-6 py-3"><span class="sr-only">Actions</span></th></tr></thead><tbody id="cases-table-body" class="bg-white divide-y divide-gray-200"></tbody></table>
+                        </div>
+                    </div>
+                </section>
+                <section id="clients" class="content-section hidden">
+                     <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200 flex items-center justify-between"><h2 class="text-xl font-semibold text-gray-800">Clients</h2><button id="add-client-button" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>Add Client</button></div>
+                        <div id="clients-table-container" class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200"><thead class="bg-gray-50"><tr><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th><th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Active Cases</th><th scope="col" class="relative px-6 py-3"><span class="sr-only">Actions</span></th></tr></thead><tbody id="clients-table-body" class="bg-white divide-y divide-gray-200"></tbody></table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- IMPROVEMENT: Added Profile Section -->
+                <section id="profile" class="content-section hidden">
+                    <div class="max-w-2xl mx-auto space-y-6">
+                         <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                             <h2 class="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-4">Profile Information</h2>
+                             <form id="profile-form" class="mt-6 space-y-6">
+                                 <div>
+                                    <label for="profile-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                    <input type="text" id="profile-name" name="profile-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" required>
+                                </div>
+                                <div>
+                                    <label for="profile-email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                                    <input type="email" id="profile-email" name="profile-email" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-gray-100 text-gray-500 cursor-not-allowed">
+                                </div>
+                                <div id="profile-form-feedback" class="text-sm"></div>
+                                <div class="flex justify-end">
+                                    <button type="submit" id="save-profile-button" class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors shadow-sm">Save Changes</button>
+                                </div>
+                             </form>
+                         </div>
+                    </div>
+                </section>
+
+                <!-- Placeholder sections -->
+                <section id="documents" class="content-section hidden"><div class="bg-white p-8 rounded-lg shadow-md text-center"><h2 class="text-2xl font-bold text-gray-700">Documents</h2><p class="text-gray-500 mt-2">This feature is coming soon.</p></div></section>
+                <section id="calendar" class="content-section hidden"><div class="bg-white p-8 rounded-lg shadow-md text-center"><h2 class="text-2xl font-bold text-gray-700">Calendar</h2><p class="text-gray-500 mt-2">This feature is coming soon.</p></div></section>
+                <section id="settings" class="content-section hidden"><div class="bg-white p-8 rounded-lg shadow-md text-center"><h2 class="text-2xl font-bold text-gray-700">Settings</h2><p class="text-gray-500 mt-2">This feature is coming soon.</p></div></section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="client-modal" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300" data-role="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="client-modal-title"><div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0"><h2 id="client-modal-title" class="text-xl font-bold mb-4">Add New Client</h2><form id="client-form" novalidate><input type="hidden" id="client-id-input"><div class="mb-4"><label for="client-name-input" class="block text-sm font-medium text-gray-700">Client Name</label><input type="text" id="client-name-input" placeholder="e.g., John Doe" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true"></div><div class="mb-4"><label for="client-email-input" class="block text-sm font-medium text-gray-700">Client Email</label><input type="email" id="client-email-input" placeholder="e.g., john.doe@example.com" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true"></div><div class="mb-4"><label for="client-type-select" class="block text-sm font-medium text-gray-700">Client Type</label><select id="client-type-select" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true"><option value="Individual">Individual</option><option value="Corporate">Corporate</option></select></div><p id="client-form-error" class="text-sm text-red-600 mb-4 text-center hidden" aria-live="polite"></p><div class="flex justify-end gap-3"><button type="button" data-role="cancel" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button><button type="submit" id="save-client-button" class="px-4 py-2 w-32 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors">Save Client</button></div></form></div></div>
+    <!-- OPTIMIZATION: Changed max-w-lg to max-w-3xl for a wider modal -->
+    <div id="case-modal" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300" data-role="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="case-modal-title"><div id="case-modal-content" class="bg-white p-6 rounded-lg shadow-xl w-full max-w-3xl transform transition-all duration-300 scale-95 opacity-0"><div class="flex justify-between items-start mb-4"><h2 id="case-modal-title" class="text-xl font-bold">Case File Details</h2><button id="modal-edit-case-button" class="hidden px-3 py-1.5 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 text-sm font-medium flex items-center transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L16.732 3.732z" /></svg>Edit</button></div><form id="case-form" novalidate><input type="hidden" id="case-id-input"><div class="view-mode space-y-4"><div class="viewable-field"><p class="text-sm font-medium text-gray-500">File Reference</p><p id="view-case-name" class="text-lg text-gray-900"></p></div><div class="viewable-field"><p class="text-sm font-medium text-gray-500">Client</p><p id="view-case-client" class="text-lg text-gray-900"></p></div><div class="viewable-field"><p class="text-sm font-medium text-gray-500">Status</p><p id="view-case-status" class="text-lg text-gray-900"></p></div><div class="viewable-field"><p class="text-sm font-medium text-gray-500">Description</p><!-- OPTIMIZATION: Added style for min-height for a larger note view --><p id="view-case-description" class="text-base text-gray-700 whitespace-pre-wrap bg-gray-50 p-3 rounded-md border" style="min-height: 20rem;"></p></div></div><div class="edit-mode space-y-4"><div class="editable-field">
+  <label for="case-file-input" class="block text-sm font-medium text-gray-700">Attach File</label>
+  <input type="file" id="case-file-input" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200" />
+  <p class="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOCX, PNG, JPG (Max: 10MB)</p>
+</div>
+<div class="editable-field"><label for="case-name-input" class="block text-sm font-medium text-gray-700">File Reference</label><input type="text" id="case-name-input" placeholder="e.g., RAF Claim - J. Doe" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true"></div><div class="editable-field"><label for="case-client-select" class="block text-sm font-medium text-gray-700">Client</label><select id="case-client-select" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true"><option value="">Select a client...</option></select></div><div class="editable-field"><label for="case-status-select" class="block text-sm font-medium text-gray-700">Status</label><select id="case-status-select" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true"><option>Open</option><option>In Progress</option><option>On Hold</option><option>Closed</option></select></div><div class="editable-field"><label for="case-description-textarea" class="block text-sm font-medium text-gray-700">Case Description</label><!-- OPTIMIZATION: Changed rows from 4 to 8 for easier editing --><textarea id="case-description-textarea" rows="8" placeholder="Briefly describe the case..." class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm"></textarea></div></div><p id="case-form-error" class="text-sm text-red-600 my-4 text-center hidden" aria-live="polite"></p><div id="case-modal-footer" class="flex justify-end gap-3 mt-6"></div></form></div></div>
+    <div id="confirmation-modal" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300" data-role="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirmation-title"><div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 transform transition-all duration-300 scale-95 opacity-0"><h2 id="confirmation-title" class="text-lg font-medium leading-6 text-gray-900">Confirmation</h2><div class="mt-2"><p id="confirmation-message" class="text-sm text-gray-600">Are you sure?</p></div><div class="mt-5 sm:mt-6 flex justify-end gap-3"><button type="button" id="confirmation-cancel-btn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button><button type="button" id="confirmation-confirm-btn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">Confirm</button></div></div></div>
+
+
+    <script type="module">
+    
+        // --- IMPORTS ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, getDocs, collection, addDoc, onSnapshot, query, where, updateDoc, deleteDoc, Timestamp, serverTimestamp, writeBatch, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // --- FIREBASE CONFIG & INITIALIZATION ---
+        const firebaseConfig = { apiKey: "AIzaSyCqBlHjmayoGIvlLJD58yR6phsHzLtjAH4", authDomain: "sinc-c6b24.firebaseapp.com", projectId: "sinc-c6b24", storageBucket: "sinc-c6b24.appspot.com", appId: "1:547513001470:web:7c37b34318c0ee0709ccaf" };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        // --- DOM ELEMENT SELECTORS ---
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => document.querySelectorAll(selector);
+        
+        const DOMElements = {
+            // User info displays
+            welcomeMessage: $('#welcome-message'), 
+            userNameDisplay: $('#user-name-display'), userEmailDisplay: $('#user-email-display'), userAvatarDisplay: $('#user-avatar-display'),
+            userAvatarButton: $('#user-avatar-button'), dropdownUserName: $('#dropdown-user-name'), dropdownUserEmail: $('#dropdown-user-email'),
+            // Layout & Navigation
+            sidebar: $('#sidebar'), overlay: $('#overlay'), userDropdownMenu: $('#user-dropdown-menu'),
+            // Modals & Forms
+            clientModal: $('#client-modal'), clientForm: $('#client-form'), clientFormError: $('#client-form-error'), saveClientButton: $('#save-client-button'),
+            caseModal: $('#case-modal'), caseForm: $('#case-form'), caseFormError: $('#case-form-error'),
+            confirmationModal: $('#confirmation-modal'), confirmationTitle: $('#confirmation-title'), confirmationMessage: $('#confirmation-message'), confirmationConfirmBtn: $('#confirmation-confirm-btn'),
+            // Tables
+            clientsTableBody: $('#clients-table-body'), clientsTableContainer: $('#clients-table-container'),
+            casesTableBody: $('#cases-table-body'), casesTableContainer: $('#cases-table-container'),
+            // Profile Page
+            profileForm: $('#profile-form'), profileNameInput: $('#profile-name'), profileEmailInput: $('#profile-email'),
+            saveProfileButton: $('#save-profile-button'), profileFormFeedback: $('#profile-form-feedback')
+        };
+
+        // --- GLOBAL STATE & CONSTANTS ---
+        let currentUserId = null, unsubscribeFromClients = null, unsubscribeFromCases = null, unsubscribeFromRecentCases = null;
+        let clientsMap = new Map(), casesMap = new Map();
+        let initialClientFormData = '', initialDataLoaded = { clients: false, cases: false };
+        
+        const CONSTANTS = {
+            DEFAULT_AVATAR_SVG: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NkZTVmMyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyYzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJ2LTJjMC0yLjY2LTUuMzMtNC04LTR6Ii8+PC9zdmc+",
+            SPINNER_SVG: `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`,
+            SAVE_CLIENT_TEXT: "Save Client", SAVE_CASE_TEXT: "Save Case File", SAVE_PROFILE_TEXT: "Save Changes"
+        };
+        
+        // --- CORE APPLICATION LOGIC ---
+        onAuthStateChanged(auth, user => {
+            if (user) handleUserAuthenticated(user);
+            else window.location.href = 'index.html';
+        });
+        
+        async function handleUserAuthenticated(user) {
+            currentUserId = user.uid;
+            document.body.style.display = '';
+            
+            const userDocRef = doc(db, "users", user.uid);
+            const userProfile = { 
+                email: user.email, 
+                lastLogin: Timestamp.fromDate(new Date()),
+                ...(user.displayName && { name: user.displayName }),
+                ...(user.photoURL && { photoURL: user.photoURL })
+            };
+            await setDoc(userDocRef, userProfile, { merge: true });
+            
+            const finalProfileSnap = await getDoc(userDocRef);
+            const finalProfile = finalProfileSnap.data() || {};
+
+            updateUserInfoUI(finalProfile.name || 'New User', user.email, finalProfile.photoURL);
+            
+            initDashboard(user.uid);
+        }
+
+        function initDashboard(userId) {
+            initUI();
+            initEventListeners();
+            listenForClientChanges(userId);
+            listenForCaseChanges(userId);
+            listenForRecentCases(userId);
+        }
+
+        function handleLogout() {
+            [unsubscribeFromClients, unsubscribeFromCases, unsubscribeFromRecentCases].forEach(unsub => unsub && unsub());
+            signOut(auth).catch(error => console.error("Logout Error:", error));
+        }
+
+        // --- FIRESTORE LISTENERS ---
+        function listenForClientChanges(userId) {
+            if (unsubscribeFromClients) unsubscribeFromClients();
+            const q = query(collection(db, 'clients'), where("userId", "==", userId));
+            unsubscribeFromClients = onSnapshot(q, snapshot => {
+                const newMap = new Map();
+                snapshot.forEach(doc => newMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                clientsMap.clear(); newMap.forEach((v, k) => clientsMap.set(k, v));
+                initialDataLoaded.clients = true;
+                renderClientsTable();
+                updateDashboardStats();
+                if (initialDataLoaded.cases) renderCasesTable(); 
+            }, error => { 
+                console.error(`Error loading clients:`, error); 
+                renderTableError(DOMElements.clientsTableBody, 4, "Could not load clients."); 
+            });
+        }
+        
+        function listenForCaseChanges(userId) {
+            if (unsubscribeFromCases) unsubscribeFromCases();
+            const q = query(collection(db, 'cases'), where("userId", "==", userId), orderBy('updatedAt', 'desc'));
+            unsubscribeFromCases = onSnapshot(q, snapshot => {
+                const newMap = new Map();
+                snapshot.forEach(doc => newMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                casesMap.clear(); newMap.forEach((v, k) => casesMap.set(k, v));
+                initialDataLoaded.cases = true;
+                renderCasesTable();
+                updateDashboardStats();
+                if (initialDataLoaded.clients) renderClientsTable();
+            }, error => { 
+                console.error(`Error loading cases:`, error); 
+                renderTableError(DOMElements.casesTableBody, 5, "Could not load cases. A database index is likely required."); 
+            });
+        }
+
+        function listenForRecentCases(userId) {
+            if (unsubscribeFromRecentCases) unsubscribeFromRecentCases();
+            const q = query(collection(db, 'cases'), where("userId", "==", userId), orderBy('updatedAt', 'desc'), limit(5));
+            unsubscribeFromRecentCases = onSnapshot(q, snapshot => {
+                const recentCases = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderRecentActivity(recentCases);
+            }, error => { 
+                console.error("Error listening to recent cases:", error); 
+                $('#recent-activity-list').innerHTML = `<div class="text-center py-8 text-red-500">Could not load recent activity. A database index may be required.</div>`; 
+            });
+        }
+        
+        // --- FORM & DATA HANDLERS ---
+        const getClientFormData = () => ({ name: $('#client-name-input').value.trim(), email: $('#client-email-input').value.trim().toLowerCase(), type: $('#client-type-select').value });
+        
+        async function handleClientFormSubmit(e) {
+            e.preventDefault(); if (!currentUserId) return;
+            setButtonLoading(DOMElements.saveClientButton, true, CONSTANTS.SAVE_CLIENT_TEXT); hideError(DOMElements.clientFormError);
+            const clientId = $('#client-id-input').value.trim(), clientData = { ...getClientFormData(), userId: currentUserId };
+            try {
+                const clientsRef = collection(db, 'clients'), emailQuery = query(clientsRef, where("userId", "==", currentUserId), where("email", "==", clientData.email));
+                const emailSnapshot = await getDocs(emailQuery);
+                if (!emailSnapshot.empty && emailSnapshot.docs.some(doc => doc.id !== clientId)) throw new Error("A client with this email already exists.");
+                if (clientId) await updateDoc(doc(db, 'clients', clientId), clientData); else await addDoc(clientsRef, clientData);
+                closeModal(DOMElements.clientModal);
+            } catch (error) { showError(DOMElements.clientFormError, error.message || "Failed to save client.");
+            } finally { setButtonLoading(DOMElements.saveClientButton, false, CONSTANTS.SAVE_CLIENT_TEXT); }
+        }
+        
+        async function handleCaseFormSubmit(e) {
+            e.preventDefault(); if (!currentUserId) return;
+            const saveButton = $('#save-case-button');
+            setButtonLoading(saveButton, true, CONSTANTS.SAVE_CASE_TEXT); hideError(DOMElements.caseFormError);
+            const caseId = $('#case-id-input').value.trim();
+            const caseData = { caseName: $('#case-name-input').value.trim(), clientId: $('#case-client-select').value, status: $('#case-status-select').value, description: $('#case-description-textarea').value.trim(), userId: currentUserId, updatedAt: serverTimestamp() };
+            if (!caseData.caseName || !caseData.clientId) { showError(DOMElements.caseFormError, "File Reference and Client are required."); setButtonLoading(saveButton, false, CONSTANTS.SAVE_CASE_TEXT); return; }
+            try {
+                if (caseId) await updateDoc(doc(db, 'cases', caseId), caseData);
+                else { caseData.createdAt = serverTimestamp(); await addDoc(collection(db, "cases"), caseData); }
+                closeModal(DOMElements.caseModal);
+            } catch (error) { console.error("Error saving case:", error); showError(DOMElements.caseFormError, "Failed to save case file. Please try again.");
+            } finally { setButtonLoading(saveButton, false, CONSTANTS.SAVE_CASE_TEXT); }
+        }
+
+        async function handleProfileFormSubmit(e) {
+            e.preventDefault(); if (!auth.currentUser) return;
+            setButtonLoading(DOMElements.saveProfileButton, true, CONSTANTS.SAVE_PROFILE_TEXT);
+            DOMElements.profileFormFeedback.textContent = ''; DOMElements.profileFormFeedback.className = 'text-sm';
+            
+            const newName = DOMElements.profileNameInput.value.trim();
+            try {
+                await updateProfile(auth.currentUser, { displayName: newName });
+                const userDocRef = doc(db, 'users', auth.currentUser.uid);
+                await updateDoc(userDocRef, { name: newName });
+                
+                updateUserInfoUI(newName, auth.currentUser.email, auth.currentUser.photoURL);
+                DOMElements.profileFormFeedback.textContent = 'Profile updated successfully!';
+                DOMElements.profileFormFeedback.classList.add('text-green-600');
+            } catch (error) {
+                console.error("Error updating profile:", error);
+                DOMElements.profileFormFeedback.textContent = 'Failed to update profile. Please try again.';
+                DOMElements.profileFormFeedback.classList.add('text-red-600');
+            } finally {
+                setButtonLoading(DOMElements.saveProfileButton, false, CONSTANTS.SAVE_PROFILE_TEXT);
+            }
+        }
+        
+        async function handleClientDelete(clientId) {
+            const onConfirm = async () => {
+                try {
+                    const casesQuery = query(collection(db, 'cases'), where('clientId', '==', clientId), where('userId', '==', currentUserId));
+                    const casesSnapshot = await getDocs(casesQuery);
+                    const batch = writeBatch(db);
+                    casesSnapshot.forEach(doc => batch.delete(doc.ref));
+                    batch.delete(doc(db, 'clients', clientId)); await batch.commit();
+                } catch (error) { console.error("Error deleting client:", error); showConfirmation("Error", "Failed to delete client.", () => {}, true); }
+            };
+            showConfirmation("Delete Client?", "This will permanently delete the client and all associated cases. This cannot be undone.", onConfirm);
+        }
+        
+        async function handleCaseDelete(caseId) {
+            const onConfirm = async () => {
+                try { await deleteDoc(doc(db, 'cases', caseId)); closeModal(DOMElements.caseModal); }
+                catch (error) { console.error("Error deleting case:", error); showConfirmation("Error", "Failed to delete case.", () => {}, true); }
+            };
+            showConfirmation("Delete Case File?", "Are you sure you want to permanently delete this case file?", onConfirm);
+        }
+
+        // --- UI & RENDERING ---
+        function initUI() { initSidebar(); initRouter(); }
+        function initSidebar() { const toggle = () => { DOMElements.sidebar.classList.toggle('-translate-x-full'); DOMElements.overlay.classList.toggle('hidden'); }; $('#menu-toggle').addEventListener('click', toggle); $('#close-sidebar').addEventListener('click', toggle); DOMElements.overlay.addEventListener('click', toggle); }
+        function initRouter() { const route = () => { const id = (window.location.hash.substring(1) || 'dashboard'); $$('.content-section').forEach(s => s.classList.toggle('hidden', s.id !== id)); $$('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.target === id)); if (window.innerWidth < 1024 && !DOMElements.sidebar.classList.contains('-translate-x-full')) { DOMElements.sidebar.classList.add('-translate-x-full'); DOMElements.overlay.classList.add('hidden'); } }; window.addEventListener('hashchange', route); route(); }
+        
+        function updateUserInfoUI(name, email, photoURL) {
+            const avatar = photoURL || CONSTANTS.DEFAULT_AVATAR_SVG;
+            DOMElements.welcomeMessage.textContent = `Welcome back, ${name.split(' ')[0]}! 👋`;
+            DOMElements.userNameDisplay.textContent = name;
+            DOMElements.userNameDisplay.classList.remove('anim-pulse', 'bg-gray-200', 'w-24', 'h-4');
+            DOMElements.userEmailDisplay.textContent = email;
+            DOMElements.userAvatarDisplay.src = avatar;
+            DOMElements.userAvatarButton.src = avatar;
+            DOMElements.dropdownUserName.textContent = name;
+            DOMElements.dropdownUserEmail.textContent = email;
+            DOMElements.profileNameInput.value = name;
+            DOMElements.profileEmailInput.value = email;
+        }
+
+        function updateDashboardStats() { $('#total-clients-stat').textContent = clientsMap.size; $('#total-cases-stat').textContent = casesMap.size; $('#active-cases-stat').textContent = [...casesMap.values()].filter(c => c.status !== 'Closed').length; }
+        function renderRecentActivity(recentCases) { const listEl = $('#recent-activity-list'); listEl.innerHTML = ''; if (recentCases.length === 0) { listEl.innerHTML = `<div class="text-center py-8 text-gray-500">No recent activity.</div>`; return; } const fragment = document.createDocumentFragment(); recentCases.forEach(caseData => { const clientName = clientsMap.get(caseData.clientId)?.name || 'Unknown Client'; const item = document.createElement('a'); item.href = `#cases`; item.className = 'flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors'; item.innerHTML = `<div><p class="font-medium text-gray-800">${caseData.caseName}</p><p class="text-sm text-gray-500">Client: ${clientName}</p></div><div class="text-right"><p class="text-sm text-gray-500">${caseData.updatedAt?.toDate().toLocaleDateString() || 'N/A'}</p><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(caseData.status)}">${caseData.status}</span></div>`; fragment.appendChild(item); }); listEl.appendChild(fragment); }
+        function renderClientsTable() { if (!initialDataLoaded.clients) { renderTableSkeleton(DOMElements.clientsTableBody, 4, 5); return; } if (DOMElements.clientsTableContainer.querySelector('#empty-state')) DOMElements.clientsTableContainer.querySelector('#empty-state').remove(); if (clientsMap.size === 0) { renderEmptyState(DOMElements.clientsTableContainer, DOMElements.clientsTableBody, "No Clients Found", "Get started by adding your first client.", "add-client-button"); return; } const fragment = document.createDocumentFragment(); [...clientsMap.values()].sort((a,b) => a.name.localeCompare(b.name)).forEach(client => { const activeCasesCount = [...casesMap.values()].filter(c => c.clientId === client.id && c.status !== 'Closed').length; const row = document.createElement('tr'); row.className = "hover:bg-gray-50"; row.innerHTML = `<td class="px-6 py-4 whitespace-nowrap"><div class="flex items-center"><div class="h-10 w-10 flex-shrink-0"><span class="h-10 w-10 rounded-full bg-sky-100 flex items-center justify-center"><span class="text-sky-800 font-medium">${client.name.charAt(0).toUpperCase()}</span></span></div><div class="ml-4"><div class="text-sm font-medium text-gray-900">${client.name}</div><div class="text-sm text-gray-500">${client.email}</div></div></div></td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${client.type}</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${activeCasesCount} Active</td><td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"><button class="text-sky-600 hover:text-sky-900 edit-client-btn" data-id="${client.id}">Edit</button><button class="text-red-600 hover:text-red-900 ml-4 delete-client-btn" data-id="${client.id}">Delete</button></td>`; fragment.appendChild(row); }); DOMElements.clientsTableBody.innerHTML = ''; DOMElements.clientsTableBody.appendChild(fragment); }
+        function renderCasesTable() { if (!initialDataLoaded.cases) { renderTableSkeleton(DOMElements.casesTableBody, 5, 5); return; } if (DOMElements.casesTableContainer.querySelector('#empty-state')) DOMElements.casesTableContainer.querySelector('#empty-state').remove(); if (casesMap.size === 0) { renderEmptyState(DOMElements.casesTableContainer, DOMElements.casesTableBody, "No Case Files Found", "Add your first case file to see it here.", "add-case-button"); return; } const fragment = document.createDocumentFragment(); [...casesMap.values()].forEach(caseData => { const clientInfo = clientsMap.get(caseData.clientId) || { name: 'Unknown Client' }; const row = document.createElement('tr'); row.className = "hover:bg-gray-50"; row.innerHTML = `<td class="px-6 py-4 whitespace-nowrap"><div class="text-sm font-medium text-gray-900">${caseData.caseName}</div><div class="text-sm text-gray-500 max-w-xs truncate">${caseData.description || 'No description'}</div></td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${clientInfo.name}</td><td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(caseData.status)}">${caseData.status}</span></td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${caseData.updatedAt?.toDate().toLocaleDateString() || 'N/A'}</td><td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"><button class="text-sky-600 hover:text-sky-900 view-case-btn" data-id="${caseData.id}">View</button></td>`; fragment.appendChild(row); }); DOMElements.casesTableBody.innerHTML = ''; DOMElements.casesTableBody.appendChild(fragment); }
+        
+        // --- MODAL & UI HELPERS ---
+        function openModal(modalEl) { modalEl.classList.remove('hidden'); setTimeout(() => { modalEl.firstElementChild.classList.remove('scale-95', 'opacity-0'); modalEl.classList.remove('opacity-0'); }, 10); }
+        function closeModal(modalEl) { modalEl.firstElementChild.classList.add('scale-95', 'opacity-0'); modalEl.classList.add('opacity-0'); setTimeout(() => { modalEl.classList.add('hidden'); }, 300); }
+        function showCaseModal(mode, caseId = null) { DOMElements.caseForm.reset(); hideError(DOMElements.caseFormError); $('#case-id-input').value = caseId || ''; const modalContent = $('#case-modal-content'); modalContent.className = modalContent.className.replace(/view-mode|edit-mode/g, '').trim(); if (mode === 'add' || mode === 'edit') setupCaseEditMode(mode, caseId); else setupCaseViewMode(caseId); openModal(DOMElements.caseModal); }
+        function setupCaseViewMode(caseId) { const modalContent = $('#case-modal-content'); modalContent.classList.add('view-mode'); $('#case-modal-title').textContent = 'Case File Details'; const editBtn = $('#modal-edit-case-button'); editBtn.classList.remove('hidden'); editBtn.dataset.id = caseId; const caseData = casesMap.get(caseId), clientName = clientsMap.get(caseData.clientId)?.name || 'N/A'; $('#view-case-name').textContent = caseData.caseName; $('#view-case-client').textContent = clientName; $('#view-case-status').innerHTML = `<span class="px-2 inline-flex text-sm leading-5 font-semibold rounded-full ${getStatusClass(caseData.status)}">${caseData.status}</span>`; $('#view-case-description').textContent = caseData.description || 'No description provided.'; $('#case-modal-footer').innerHTML = `<button type="button" class="text-red-600 hover:text-red-900 text-sm font-medium mr-auto delete-case-btn" data-id="${caseId}">Delete Case</button><button type="button" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors" data-role="cancel">Close</button>`; }
+        function setupCaseEditMode(mode, caseId) { const modalContent = $('#case-modal-content'); modalContent.classList.add('edit-mode'); $('#case-modal-title').textContent = mode === 'add' ? 'Add New Case File' : 'Edit Case File'; $('#modal-edit-case-button').classList.add('hidden'); populateClientDropdown(casesMap.get(caseId)?.clientId); if (mode === 'edit') { const caseData = casesMap.get(caseId); $('#case-name-input').value = caseData.caseName; $('#case-status-select').value = caseData.status; $('#case-description-textarea').value = caseData.description || ''; } $('#case-modal-footer').innerHTML = `<button type="button" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors" data-role="cancel">Cancel</button><button type="submit" id="save-case-button" class="px-4 py-2 w-40 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors">${CONSTANTS.SAVE_CASE_TEXT}</button>`; }
+        function showConfirmation(title, message, onConfirm, isError = false) { DOMElements.confirmationTitle.textContent = title; DOMElements.confirmationMessage.innerHTML = message; DOMElements.confirmationConfirmBtn.className = isError ? 'px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700' : 'px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'; DOMElements.confirmationConfirmBtn.textContent = isError ? 'OK' : 'Confirm'; openModal(DOMElements.confirmationModal); const confirmHandler = () => { onConfirm(); closeModal(DOMElements.confirmationModal); cleanup(); }; const cancelHandler = () => { closeModal(DOMElements.confirmationModal); cleanup(); }; const cleanup = () => { DOMElements.confirmationConfirmBtn.removeEventListener('click', confirmHandler); $('#confirmation-cancel-btn').removeEventListener('click', cancelHandler); }; DOMElements.confirmationConfirmBtn.addEventListener('click', confirmHandler, { once: true }); $('#confirmation-cancel-btn').addEventListener('click', cancelHandler, { once: true }); }
+        function showError(el, msg) { el.textContent = msg; el.classList.remove('hidden'); }
+        function hideError(el) { el.textContent = ''; el.classList.add('hidden'); }
+        function getStatusClass(s) { const c={'Open':'bg-green-100 text-green-800','In Progress':'bg-yellow-100 text-yellow-800','On Hold':'bg-gray-200 text-gray-800','Closed':'bg-sky-100 text-sky-800'}; return c[s]||'bg-gray-100 text-gray-800';}
+        function setButtonLoading(btn, isLoading, defaultText) { btn.disabled = isLoading; btn.innerHTML = isLoading ? `${CONSTANTS.SPINNER_SVG} Saving...` : defaultText; }
+        function renderEmptyState(container, tbody, title, subtitle, buttonId) { tbody.innerHTML = ''; if (container.querySelector('#empty-state')) container.querySelector('#empty-state').remove(); container.insertAdjacentHTML('beforeend', `<div id="empty-state" class="text-center py-16 px-6"><svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg><h3 class="mt-2 text-lg font-medium text-gray-900">${title}</h3><p class="mt-1 text-sm text-gray-500">${subtitle}</p><div class="mt-6"><button type="button" data-trigger="${buttonId}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 empty-state-btn">+ Add New</button></div></div>`); }
+        function renderTableSkeleton(tbody, cols, rows) { tbody.innerHTML = Array.from({length: rows}, () => `<tr class="skeleton-row">${Array.from({length: cols}, () => `<td class="px-6 py-4"><div class="skeleton loading-skeleton"></div><div class="skeleton-sm loading-skeleton"></div></td>`).join('')}</tr>`).join(''); }
+        function renderTableError(tbody, colspan, message) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="${colspan}" class="text-center py-16 px-6">
+                        <div class="flex flex-col items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="mt-2 text-lg font-medium text-gray-900">An Error Occurred</h3>
+                            <p class="mt-1 text-sm text-gray-500">${message}</p>
+                            <p class="mt-2 text-xs text-gray-400">This may be due to a missing database index or network issue. See console for details.</p>
+                        </div>
+                    </td>
+                </tr>`;
+        }
+        function populateClientDropdown(selectedId = null) { const selectEl = $('#case-client-select'); selectEl.innerHTML = '<option value="">Select a client...</option>'; if (clientsMap.size === 0) { selectEl.innerHTML += '<option value="" disabled>No clients. Add a client first.</option>'; return; } [...clientsMap.values()].sort((a, b) => a.name.localeCompare(b.name)).forEach(client => { selectEl.innerHTML += `<option value="${client.id}" ${client.id === selectedId ? 'selected' : ''}>${client.name}</option>`; }); }
+        
+        // --- EVENT LISTENERS ---
+        function initEventListeners() {
+            $('#logout-button').addEventListener('click', handleLogout);
+            DOMElements.clientForm.addEventListener('submit', handleClientFormSubmit);
+            DOMElements.caseForm.addEventListener('submit', handleCaseFormSubmit);
+            DOMElements.profileForm.addEventListener('submit', handleProfileFormSubmit);
+            
+            $('#add-client-button').addEventListener('click', () => { DOMElements.clientForm.reset(); $('#client-modal-title').textContent = "Add New Client"; $('#client-id-input').value = ""; hideError(DOMElements.clientFormError); openModal(DOMElements.clientModal); });
+            $('#add-case-button').addEventListener('click', () => showCaseModal('add'));
+            
+            $('#user-dropdown-toggle').addEventListener('click', () => DOMElements.userDropdownMenu.classList.toggle('hidden'));
+
+            document.body.addEventListener('click', e => {
+                const target = e.target;
+                
+                if (!target.closest('#user-dropdown-toggle') && !target.closest('#user-dropdown-menu')) {
+                    DOMElements.userDropdownMenu.classList.add('hidden');
+                }
+
+                const modal = target.closest('.modal');
+                if (target.dataset.role === 'cancel' && modal) {
+                    if (modal.id === 'client-modal' && $('#client-id-input').value) {
+                         if (initialClientFormData !== JSON.stringify(getClientFormData())) { showConfirmation('Discard Changes?', 'You have unsaved changes. Are you sure?', () => closeModal(modal)); return; }
+                    }
+                    closeModal(modal);
+                }
+                
+                if (target.dataset.role === 'modal-backdrop') closeModal(modal);
+                if (target.matches('.empty-state-btn')) $(`#${target.dataset.trigger}`).click();
+                
+                const clientBtn = target.closest('.edit-client-btn, .delete-client-btn');
+                if (clientBtn && DOMElements.clientsTableBody.contains(clientBtn)) {
+                    const id = clientBtn.dataset.id;
+                    if (clientBtn.classList.contains('edit-client-btn')) {
+                        const client = clientsMap.get(id); $('#client-modal-title').textContent = "Edit Client"; $('#client-id-input').value = id;
+                        $('#client-name-input').value = client.name; $('#client-email-input').value = client.email; $('#client-type-select').value = client.type;
+                        hideError(DOMElements.clientFormError); initialClientFormData = JSON.stringify(getClientFormData()); openModal(DOMElements.clientModal);
+                    } else if (clientBtn.classList.contains('delete-client-btn')) { handleClientDelete(id); }
+                }
+
+                const caseBtn = target.closest('button.view-case-btn');
+                if (caseBtn && DOMElements.casesTableBody.contains(caseBtn)) showCaseModal('view', caseBtn.dataset.id);
+                if (DOMElements.caseModal.contains(target)) {
+                    if (target.closest('#modal-edit-case-button')) showCaseModal('edit', target.closest('#modal-edit-case-button').dataset.id);
+                    if (target.closest('.delete-case-btn')) handleCaseDelete(target.closest('.delete-case-btn').dataset.id);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
