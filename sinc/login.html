@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SINC — Login or Sign Up</title>
+    <meta name="description" content="Login or Sign Up for the SINC Dashboard." />
+    <meta name="author" content="Avuyile Mthembu" />
+    <meta name="keywords" content="SINC, Login, Signup, Legal, Law, Sethu Mkhwanazi, Avuyile Mthembu" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+        html { font-family: 'Inter', sans-serif; }
+        @supports (font-variation-settings: normal) { html { font-family: 'Inter var', sans-serif; } }
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- AUTHENTICATION CONTAINER -->
+    <div id="auth-container" class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div>
+                <h1 class="text-center text-4xl font-bold text-sky-800">SINC</h1>
+                <h2 id="auth-title" class="mt-2 text-center text-xl text-gray-900">Sign in to your account</h2>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="mt-8 space-y-6">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <input id="login-email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                    <input id="login-password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm" placeholder="Password">
+                </div>
+                <div class="flex items-center justify-end">
+                    <div class="text-sm">
+                        <a href="#" id="forgot-password-link" class="font-medium text-sky-600 hover:text-sky-500"> Forgot your password? </a>
+                    </div>
+                </div>
+                <p id="login-error" class="text-sm text-red-600 mt-2 text-center hidden"></p>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Sign in</button>
+            </form>
+
+            <!-- Signup Form (hidden by default) -->
+            <form id="signup-form" class="mt-8 space-y-6 hidden">
+                 <div class="rounded-md shadow-sm -space-y-px">
+                    <input id="signup-name" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm" placeholder="Your Name">
+                    <input id="signup-email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                    <input id="signup-password" type="password" autocomplete="new-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm" placeholder="Password (min. 6 characters)">
+                </div>
+                <p id="signup-error" class="text-sm text-red-600 mt-2 text-center hidden"></p>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Create Account</button>
+            </form>
+            
+            <!-- Password Reset Form (hidden by default) -->
+            <form id="password-reset-form" class="mt-8 space-y-6 hidden">
+                <p class="text-center text-sm text-gray-600">Enter your email and we'll send you a link to reset your password.</p>
+                <div class="rounded-md shadow-sm">
+                    <input id="reset-email" type="email" autocomplete="email" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm" placeholder="Email address">
+                </div>
+                <p id="reset-error" class="text-sm text-red-600 mt-2 text-center hidden"></p>
+                <p id="reset-success" class="text-sm text-green-600 mt-2 text-center hidden"></p>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Send Reset Link</button>
+            </form>
+
+            <!-- Social & Form Toggles -->
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div>
+                    <div class="relative flex justify-center text-sm"><span class="px-2 bg-gray-50 text-gray-500">Or continue with</span></div>
+                </div>
+                <div class="mt-6">
+                    <button id="google-signin-button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        <span class="sr-only">Sign in with Google</span>
+                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zM8.28 15.232c-2.35-1.42-3.83-3.98-3.83-6.852h7.66c0-3.34-2.72-6.06-6.06-6.06-3.34 0-6.06 2.72-6.06 6.06s2.72 6.06 6.06 6.06c1.56 0 2.98-.6 4.07-1.58l-1.42-1.42c-.6.48-1.38.77-2.23.77a3.83 3.83 0 0 1-3.83-3.83H10v-1.9H4.17c.06-1.56.6-3.02 1.58-4.24l-1.42-1.42A6.03 6.03 0 0 0 2.34 10c0 3.34 2.72 6.06 6.06 6.06 2.05 0 3.87-.99 5.02-2.58l-1.42-1.42c-.75 1.14-2.02 1.9-3.45 1.9z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="auth-switch-container" class="text-center mt-2 text-sm text-gray-600">
+                <p id="show-signup-container">
+                    Don't have an account? <button id="show-signup-form" class="font-medium text-sky-600 hover:text-sky-500">Create one</button>
+                </p>
+                <p id="show-login-container" class="hidden">
+                    Already have an account? <button id="show-login-form" class="font-medium text-sky-600 hover:text-sky-500">Sign in</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+<script type="module">
+    // --- FIREBASE SDK IMPORTS (v12) ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    // --- FIREBASE CONFIGURATION ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCqBlHjmayoGIvlLJD58yR6phsHzLtjAH4",
+        authDomain: "sinc-c6b24.firebaseapp.com",
+        projectId: "sinc-c6b24",
+        storageBucket: "sinc-c6b24.firebasestorage.app",
+        appId: "1:547513001470:web:7c37b34318c0ee0709ccaf",
+    };
+
+    // --- FIREBASE INITIALIZATION ---
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    // --- DOM ELEMENTS ---
+    const authTitleEl = document.getElementById('auth-title');
+    const loginFormEl = document.getElementById('login-form');
+    const signupFormEl = document.getElementById('signup-form');
+    const passwordResetFormEl = document.getElementById('password-reset-form');
+    const showLoginContainerEl = document.getElementById('show-login-container');
+    const showSignupContainerEl = document.getElementById('show-signup-container');
+    
+    // --- AUTHENTICATION STATE OBSERVER ---
+    onAuthStateChanged(auth, user => {
+        if (user) {
+            // User is signed in, redirect to the main application.
+            console.log("User already logged in, redirecting to dashboard...");
+            window.location.href = 'dashboard.html';
+        } else {
+            // User is signed out, ensure the auth form is visible.
+            console.log("User not logged in, showing auth page.");
+            document.body.style.display = 'block'; // Show page content
+        }
+    });
+
+    // Hide the body initially to prevent flash of content before redirect
+    document.body.style.display = 'none';
+
+    // --- EVENT LISTENERS ---
+    document.addEventListener('DOMContentLoaded', () => {
+        signupFormEl.addEventListener('submit', handleSignup);
+        loginFormEl.addEventListener('submit', handleLogin);
+        passwordResetFormEl.addEventListener('submit', handlePasswordReset);
+        document.getElementById('google-signin-button').addEventListener('click', handleGoogleSignIn);
+
+        document.getElementById('show-signup-form').addEventListener('click', () => switchAuthView('signup'));
+        document.getElementById('show-login-form').addEventListener('click', () => switchAuthView('login'));
+        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            switchAuthView('reset');
+        });
+    });
+
+    // --- AUTH HANDLER FUNCTIONS ---
+    async function handleSignup(e) {
+        e.preventDefault();
+        const name = signupFormEl.querySelector('#signup-name').value;
+        const email = signupFormEl.querySelector('#signup-email').value;
+        const password = signupFormEl.querySelector('#signup-password').value;
+        const errorEl = document.getElementById('signup-error');
+        
+        hideError(errorEl);
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await setDoc(doc(db, "users", userCredential.user.uid), {
+                name: name,
+                email: email,
+                createdAt: new Date()
+            });
+            // onAuthStateChanged will handle the redirect upon successful login.
+        } catch (error) {
+            showError(errorEl, error.message);
+        }
+    }
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        const email = loginFormEl.querySelector('#login-email').value;
+        const password = loginFormEl.querySelector('#login-password').value;
+        const errorEl = document.getElementById('login-error');
+        
+        hideError(errorEl);
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            // onAuthStateChanged will handle the redirect.
+        } catch (error) {
+            showError(errorEl, "Invalid email or password. Please try again.");
+        }
+    }
+
+    async function handleGoogleSignIn() {
+        const errorEl = document.getElementById('login-error');
+        hideError(errorEl);
+        try {
+            await signInWithPopup(auth, googleProvider);
+            // onAuthStateChanged will handle redirect and user profile creation in dashboard.
+        } catch (error) {
+            showError(errorEl, `Google sign-in failed: ${error.message}`);
+        }
+    }
+
+    async function handlePasswordReset(e) {
+        e.preventDefault();
+        const email = passwordResetFormEl.querySelector('#reset-email').value;
+        const errorEl = document.getElementById('reset-error');
+        const successEl = document.getElementById('reset-success');
+        
+        hideError(errorEl);
+        hideError(successEl);
+        try {
+            await sendPasswordResetEmail(auth, email);
+            successEl.textContent = "Password reset email sent! Please check your inbox.";
+            successEl.classList.remove('hidden');
+        } catch (error) {
+            showError(errorEl, error.message);
+        }
+    }
+
+    // --- UI HELPER FUNCTIONS ---
+    function switchAuthView(view) {
+        loginFormEl.classList.add('hidden');
+        signupFormEl.classList.add('hidden');
+        passwordResetFormEl.classList.add('hidden');
+        
+        switch (view) {
+            case 'signup':
+                signupFormEl.classList.remove('hidden');
+                authTitleEl.textContent = "Create an account";
+                showLoginContainerEl.classList.remove('hidden');
+                showSignupContainerEl.classList.add('hidden');
+                break;
+            case 'reset':
+                passwordResetFormEl.classList.remove('hidden');
+                authTitleEl.textContent = "Reset Your Password";
+                showLoginContainerEl.classList.remove('hidden');
+                showSignupContainerEl.classList.add('hidden');
+                break;
+            default: // 'login'
+                loginFormEl.classList.remove('hidden');
+                authTitleEl.textContent = "Sign in to your account";
+                showLoginContainerEl.classList.add('hidden');
+                showSignupContainerEl.classList.remove('hidden');
+                break;
+        }
+    }
+
+    function showError(element, message) {
+        element.textContent = message;
+        element.classList.remove('hidden');
+    }
+    
+    function hideError(element) {
+        element.textContent = '';
+        element.classList.add('hidden');
+    }
+</script>
+</body>
+</html>
