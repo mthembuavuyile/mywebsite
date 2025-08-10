@@ -369,7 +369,7 @@
                         <span
                             class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">0</span>
                     </a>
-
+                    
                     <a href="#ai-assistant" data-target="ai-assistant"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -565,6 +565,41 @@
                             <p class="text-sm text-gray-500">Last 5 updated or created case files</p>
                         </div>
                         <div id="recent-activity-list" class="p-3"></div>
+                    </div>
+                </section>
+
+                <!-- Clients Section -->
+                <section id="clients" class="content-section hidden">
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-gray-800">Clients</h2><button id="add-client-button"
+                                class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors"><svg
+                                    xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>Add Client</button>
+                        </div>
+                        <div id="clients-table-container" class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Client</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Type</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Active Cases</th>
+                                        <th scope="col" class="relative px-6 py-3"><span class="sr-only">Actions</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clients-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
 
@@ -773,71 +808,6 @@
                     </div>
                 </section>
 
-                <section id="clients" class="content-section hidden">
-                    <div class="bg-white rounded-lg shadow-md">
-                        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
-                            <h2 class="text-xl font-semibold text-gray-800">Clients</h2><button id="add-client-button"
-                                class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors"><svg
-                                    xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4v16m8-8H4" />
-                                </svg>Add Client</button>
-                        </div>
-                        <div id="clients-table-container" class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Client</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Type</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Active Cases</th>
-                                        <th scope="col" class="relative px-6 py-3"><span class="sr-only">Actions</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="clients-table-body" class="bg-white divide-y divide-gray-200"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Profile Section -->
-                <section id="profile" class="content-section hidden">
-                    <div class="max-w-2xl mx-auto space-y-6">
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-                            <h2 class="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-4">Profile
-                                Information</h2>
-                            <form id="profile-form" class="mt-6 space-y-6">
-                                <div>
-                                    <label for="profile-name" class="block text-sm font-medium text-gray-700">Full
-                                        Name</label>
-                                    <input type="text" id="profile-name" name="profile-name"
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                                        required>
-                                </div>
-                                <div>
-                                    <label for="profile-email" class="block text-sm font-medium text-gray-700">Email
-                                        Address</label>
-                                    <input type="email" id="profile-email" name="profile-email" disabled
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-gray-100 text-gray-500 cursor-not-allowed">
-                                </div>
-                                <div id="profile-form-feedback" class="text-sm"></div>
-                                <div class="flex justify-end">
-                                    <button type="submit" id="save-profile-button"
-                                        class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors shadow-sm">Save
-                                        Changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- Documents: Fully Implemented -->
                 <section id="documents" class="content-section hidden">
                     <div class="bg-white rounded-lg shadow-md">
@@ -915,80 +885,14 @@
                     </div>
                 </section>
 
-                <!-- Billing Section -->
-                <section id="billing" class="content-section hidden">
-                    <div class="bg-white rounded-lg shadow-md">
-                        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
-                            <h2 class="text-xl font-semibold text-gray-800">Billing</h2>
-                            <button id="generate-invoice-button"
-                                class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4v16m8-8H4" />
-                                </svg>
-                                Generate New Invoice
-                            </button>
-                        </div>
-                        <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Unbilled Hours</p>
-                                <p id="unbilled-hours" class="text-2xl font-bold text-gray-800">0</p>
-                            </div>
-                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Draft Invoices</p>
-                                <p id="draft-amount" class="text-2xl font-bold text-gray-800">$0.00</p>
-                            </div>
-                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Outstanding</p>
-                                <p id="outstanding-amount" class="text-2xl font-bold text-gray-800">$0.00</p>
-                            </div>
-                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Paid (30 Days)</p>
-                                <p id="paid-amount" class="text-2xl font-bold text-gray-800">$0.00</p>
-                            </div>
-                        </div>
-                        <div id="invoices-table-container" class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Invoice #</th>
-                                        <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Client</th>
-                                        <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Amount</th>
-                                        <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Status</th>
-                                        <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Due Date</th>
-                                        <th
-                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="invoices-table-body" class="bg-white divide-y divide-gray-200"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- Calendar Section: Implemented -->
                 <section id="calendar" class="content-section hidden">
                     <div class="bg-white rounded-lg shadow-md">
                         <div class="p-6 border-b border-gray-200 flex items-center justify-between">
                             <h2 class="text-xl font-semibold text-gray-800">Calendar</h2>
-                            <button id="add-event-button"
-                                class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4v16m8-8H4" />
+                            <button id="add-event-button" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>
                                 Add Event
                             </button>
@@ -996,23 +900,18 @@
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <button id="calendar-prev" class="p-2 rounded-full hover:bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 19l-7-7 7-7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
                                 <h3 id="calendar-month" class="text-lg font-semibold text-gray-800">Month Year</h3>
                                 <button id="calendar-next" class="p-2 rounded-full hover:bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>
                             </div>
-                            <div
-                                class="grid grid-cols-7 gap-px bg-gray-200 text-center text-sm font-medium text-gray-500">
+                            <div class="grid grid-cols-7 gap-px bg-gray-200 text-center text-sm font-medium text-gray-500">
                                 <div class="bg-white p-2">Sun</div>
                                 <div class="bg-white p-2">Mon</div>
                                 <div class="bg-white p-2">Tue</div>
@@ -1031,20 +930,6 @@
                                 <!-- Events populated by JS -->
                             </div>
                         </div>
-                    </div>
-                </section>
-
-                <!-- Placeholder sections -->
-                <section id="tasks" class="content-section hidden">
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 class="text-2xl font-bold text-gray-700">Tasks</h2>
-                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
-                    </div>
-                </section>
-                <section id="ai-assistant" class="content-section hidden">
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 class="text-2xl font-bold text-gray-700">AI Assistant</h2>
-                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
                     </div>
                 </section>
 
@@ -1070,11 +955,15 @@
                             </div>
                             <!-- Activity Select -->
                             <div class="lg:col-span-1">
-                                <label for="time-activity-select"
-                                    class="block text-sm font-medium text-gray-700">Activity</label>
+                                <label for="time-activity-select" class="block text-sm font-medium text-gray-700">Activity</label>
                                 <select id="time-activity-select"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                     <option value="">Select activity...</option>
+                                    <option value="Research">Research</option>
+                                    <option value="Meeting">Meeting</option>
+                                    <option value="Drafting">Drafting</option>
+                                    <option value="Court Appearance">Court Appearance</option>
+                                    <option value="Consultation">Consultation</option>
                                 </select>
                             </div>
                             <!-- Description -->
@@ -1086,24 +975,21 @@
                             </div>
                             <!-- Manual Entry Toggle -->
                             <div class="lg:col-span-1">
-                                <button id="manual-entry-toggle"
-                                    class="w-full px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
+                                <button id="manual-entry-toggle" class="w-full px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
                                     Add Manual Entry
                                 </button>
                             </div>
                         </div>
 
                         <!-- Manual Entry Fields (Hidden by default) -->
-                        <div id="manual-entry-fields"
-                            class="hidden p-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div id="manual-entry-fields" class="hidden p-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="manual-date" class="block text-sm font-medium text-gray-700">Date</label>
                                 <input type="date" id="manual-date"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
                             </div>
                             <div>
-                                <label for="manual-duration" class="block text-sm font-medium text-gray-700">Duration
-                                    (hh:mm)</label>
+                                <label for="manual-duration" class="block text-sm font-medium text-gray-700">Duration (hh:mm)</label>
                                 <input type="text" id="manual-duration" placeholder="e.g., 1:30"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
                             </div>
@@ -1199,33 +1085,59 @@
                     </div>
                 </section>
 
-                <!-- Settings Section -->
-                <section id="settings" class="content-section hidden">
-                    <div class="max-w-2xl mx-auto space-y-6">
-                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-                            <h2 class="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-4">Billing
-                                Settings</h2>
-                            <form id="billing-settings-form" class="mt-6 space-y-6">
-                                <div>
-                                    <label for="default-hourly-rate"
-                                        class="block text-sm font-medium text-gray-700">Default Hourly Rate ($)</label>
-                                    <input type="number" id="default-hourly-rate" min="0" step="0.01"
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
-                                </div>
-                                <!-- Placeholder for Activity Types -->
-                                <div>
-                                    <h3 class="text-base font-semibold text-gray-800 mb-2">Activity Types</h3>
-                                    <p class="text-sm text-gray-500">Coming soon: Customize activity types with rates.
-                                    </p>
-                                </div>
-                                <div id="billing-settings-feedback" class="text-sm"></div>
-                                <div class="flex justify-end">
-                                    <button type="submit" id="save-billing-settings"
-                                        class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors shadow-sm">Save
-                                        Settings</button>
-                                </div>
-                            </form>
+                <!-- Billing Section -->
+                <section id="billing" class="content-section hidden">
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-gray-800">Billing</h2>
                         </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Unbilled Hours</p>
+                                <p id="unbilled-hours" class="text-2xl font-bold text-gray-800">0</p>
+                            </div>
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Draft Invoices</p>
+                                <p id="draft-amount" class="text-2xl font-bold text-gray-800">ZAR 0.00</p>
+                            </div>
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Outstanding</p>
+                                <p id="outstanding-amount" class="text-2xl font-bold text-gray-800">ZAR 0.00</p>
+                            </div>
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Paid (30 Days)</p>
+                                <p id="paid-amount" class="text-2xl font-bold text-gray-800">ZAR 0.00</p>
+                            </div>
+                        </div>
+                        <div id="invoices-table-container" class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Invoice #</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoices-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Placeholder sections -->
+                <section id="tasks" class="content-section hidden">
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                        <h2 class="text-2xl font-bold text-gray-700">Tasks</h2>
+                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
+                    </div>
+                </section>
+                <section id="ai-assistant" class="content-section hidden">
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                        <h2 class="text-2xl font-bold text-gray-700">AI Assistant</h2>
+                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
                     </div>
                 </section>
 
@@ -1247,6 +1159,65 @@
                         <p class="text-gray-500 mt-2">This feature is coming soon.</p>
                     </div>
                 </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section hidden">
+                    <div class="max-w-2xl mx-auto space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                            <h2 class="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-4">Billing Settings</h2>
+                            <form id="billing-settings-form" class="mt-6 space-y-6">
+                                <div>
+                                    <label for="default-hourly-rate" class="block text-sm font-medium text-gray-700">Default Hourly Rate (ZAR)</label>
+                                    <input type="number" id="default-hourly-rate" min="0" step="0.01"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                </div>
+                                <!-- Placeholder for Activity Types -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-800 mb-2">Activity Types</h3>
+                                    <p class="text-sm text-gray-500">Coming soon: Customize activity types with rates.</p>
+                                </div>
+                                <div id="billing-settings-feedback" class="text-sm"></div>
+                                <div class="flex justify-end">
+                                    <button type="submit" id="save-billing-settings"
+                                        class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors shadow-sm">Save
+                                        Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="content-section hidden">
+                    <div class="max-w-2xl mx-auto space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                            <h2 class="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-4">Profile
+                                Information</h2>
+                            <form id="profile-form" class="mt-6 space-y-6">
+                                <div>
+                                    <label for="profile-name" class="block text-sm font-medium text-gray-700">Full
+                                        Name</label>
+                                    <input type="text" id="profile-name" name="profile-name"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        required>
+                                </div>
+                                <div>
+                                    <label for="profile-email" class="block text-sm font-medium text-gray-700">Email
+                                        Address</label>
+                                    <input type="email" id="profile-email" name="profile-email" disabled
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-gray-100 text-gray-500 cursor-not-allowed">
+                                </div>
+                                <div id="profile-form-feedback" class="text-sm"></div>
+                                <div class="flex justify-end">
+                                    <button type="submit" id="save-profile-button"
+                                        class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors shadow-sm">Save
+                                        Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </main>
     </div>
@@ -1353,25 +1324,22 @@
                 <div class="mb-4">
                     <label for="event-title-input" class="block text-sm font-medium text-gray-700">Title</label>
                     <input type="text" id="event-title-input" placeholder="e.g., Court Hearing"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required
-                        aria-required="true">
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true">
                 </div>
                 <div class="mb-4">
                     <label for="event-date-input" class="block text-sm font-medium text-gray-700">Date</label>
                     <input type="date" id="event-date-input"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required
-                        aria-required="true">
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true">
                 </div>
                 <div class="mb-4">
-                    <label for="event-case-select" class="block text-sm font-medium text-gray-700">Linked Case
-                        (optional)</label>
-                    <select id="event-case-select" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                    <label for="event-case-select" class="block text-sm font-medium text-gray-700">Linked Case (optional)</label>
+                    <select id="event-case-select"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm">
                         <option value="">None</option>
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="event-description-input"
-                        class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="event-description-input" class="block text-sm font-medium text-gray-700">Description</label>
                     <textarea id="event-description-input" placeholder="Details about the event"
                         class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
                 </div>
@@ -1380,72 +1348,7 @@
                     <button type="button" data-role="cancel"
                         class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button>
                     <button type="submit" id="save-event-button"
-                        class="px-4 py-2 w-32 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors">Save
-                        Event</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Invoice Generation Modal -->
-    <div id="invoice-modal"
-        class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300"
-        data-role="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="invoice-modal-title">
-        <div
-            class="bg-white p-6 rounded-lg shadow-xl w-full max-w-4xl transform transition-all duration-300 scale-95 opacity-0">
-            <h2 id="invoice-modal-title" class="text-xl font-bold mb-4">Generate Invoice</h2>
-            <form id="invoice-form" novalidate>
-                <div class="mb-4">
-                    <label for="invoice-client-select" class="block text-sm font-medium text-gray-700">Client</label>
-                    <select id="invoice-client-select"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
-                        <option value="">Select a client...</option>
-                    </select>
-                </div>
-                <div id="unbilled-items" class="overflow-x-auto mb-4">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Select</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Date</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Description</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Duration</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Rate</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="unbilled-items-body" class="bg-white divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-                <div class="mb-4">
-                    <label for="invoice-notes" class="block text-sm font-medium text-gray-700">Notes</label>
-                    <textarea id="invoice-notes" rows="3"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm"></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="invoice-due-date" class="block text-sm font-medium text-gray-700">Due Date</label>
-                    <input type="date" id="invoice-due-date"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
-                </div>
-                <p id="invoice-form-error" class="text-sm text-red-600 mb-4 text-center hidden" aria-live="polite"></p>
-                <div class="flex justify-end gap-3">
-                    <button type="button" data-role="cancel"
-                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button>
-                    <button type="submit" id="create-draft-invoice"
-                        class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors">Create
-                        Draft</button>
+                        class="px-4 py-2 w-32 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors">Save Event</button>
                 </div>
             </form>
         </div>
@@ -1504,6 +1407,11 @@
             calendarMonth: $('#calendar-month'), calendarGrid: $('#calendar-grid'),
             calendarPrev: $('#calendar-prev'), calendarNext: $('#calendar-next'),
             upcomingEventsList: $('#upcoming-events-list'),
+            // Settings
+            billingSettingsForm: $('#billing-settings-form'),
+            defaultHourlyRate: $('#default-hourly-rate'),
+            saveBillingSettings: $('#save-billing-settings'),
+            billingSettingsFeedback: $('#billing-settings-feedback')
         };
 
         // --- GLOBAL STATE & CONSTANTS ---
@@ -1516,7 +1424,8 @@
         const CONSTANTS = {
             DEFAULT_AVATAR_SVG: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NkZTVmMyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyYzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJ2LTJjMC0yLjY2LTUuMzMtNC04LTR6Ii8+PC9zdmc+",
             SPINNER_SVG: `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`,
-            SAVE_CLIENT_TEXT: "Save Client", SAVE_CASE_TEXT: "Save Changes", SAVE_PROFILE_TEXT: "Save Changes", UPLOAD_DOCUMENT_TEXT: "Upload", SAVE_EVENT_TEXT: "Save Event"
+            SAVE_CLIENT_TEXT: "Save Client", SAVE_CASE_TEXT: "Save Changes", SAVE_PROFILE_TEXT: "Save Changes", UPLOAD_DOCUMENT_TEXT: "Upload", SAVE_EVENT_TEXT: "Save Event",
+            SAVE_BILLING_SETTINGS_TEXT: "Save Settings"
         };
 
         // --- CORE APPLICATION LOGIC ---
@@ -1542,6 +1451,10 @@
             const finalProfile = finalProfileSnap.data() || {};
 
             updateUserInfoUI(finalProfile.name || 'New User', user.email, finalProfile.photoURL);
+
+            if (finalProfile.defaultHourlyRate) {
+                DOMElements.defaultHourlyRate.value = finalProfile.defaultHourlyRate;
+            }
 
             initDashboard(user.uid);
         }
@@ -1583,8 +1496,7 @@
                 renderClientsTable();
                 updateStatsAndCounts();
                 if (initialDataLoaded.cases) renderCasesTable();
-                populateDocumentCaseFilter();
-                populateDocumentCaseSelect();
+                if (initialDataLoaded.clients) renderClientsTable(); // Re-render to update case counts
             }, error => {
                 console.error(`Error loading clients:`, error);
                 renderTableError(DOMElements.clientsTableBody, 4, "Could not load clients.");
@@ -1734,6 +1646,28 @@
                 DOMElements.profileFormFeedback.classList.add('text-red-600');
             } finally {
                 setButtonLoading(DOMElements.saveProfileButton, false, CONSTANTS.SAVE_PROFILE_TEXT);
+            }
+        }
+
+        async function handleBillingSettingsFormSubmit(e) {
+            e.preventDefault();
+            setButtonLoading(DOMElements.saveBillingSettings, true, CONSTANTS.SAVE_BILLING_SETTINGS_TEXT);
+            DOMElements.billingSettingsFeedback.textContent = '';
+            DOMElements.billingSettingsFeedback.className = 'text-sm';
+
+            const defaultRate = parseFloat(DOMElements.defaultHourlyRate.value) || 0;
+
+            try {
+                const userDocRef = doc(db, 'users', auth.currentUser.uid);
+                await updateDoc(userDocRef, { defaultHourlyRate: defaultRate });
+                DOMElements.billingSettingsFeedback.textContent = 'Billing settings updated successfully!';
+                DOMElements.billingSettingsFeedback.classList.add('text-green-600');
+            } catch (error) {
+                console.error("Error updating billing settings:", error);
+                DOMElements.billingSettingsFeedback.textContent = 'Failed to update billing settings. Please try again.';
+                DOMElements.billingSettingsFeedback.classList.add('text-red-600');
+            } finally {
+                setButtonLoading(DOMElements.saveBillingSettings, false, CONSTANTS.SAVE_BILLING_SETTINGS_TEXT);
             }
         }
 
@@ -2165,6 +2099,7 @@
             DOMElements.profileForm.addEventListener('submit', handleProfileFormSubmit);
             DOMElements.documentForm.addEventListener('submit', handleDocumentFormSubmit);
             DOMElements.eventForm.addEventListener('submit', handleEventFormSubmit);
+            DOMElements.billingSettingsForm.addEventListener('submit', handleBillingSettingsFormSubmit);
 
             $('#add-client-button').addEventListener('click', () => { DOMElements.clientForm.reset(); $('#client-modal-title').textContent = "Add New Client"; $('#client-id-input').value = ""; hideError(DOMElements.clientFormError); openModal(DOMElements.clientModal); });
 
@@ -2322,7 +2257,7 @@
             const timeTrackerElements = {
                 container: $('#time-tracking'),
                 caseSelect: $('#time-case-select'),
-                taskSelect: $('#time-task-select'),
+                taskSelect: $('#time-activity-select'),
                 description: $('#time-description'),
                 display: $('#time-display'),
                 feedback: $('#time-feedback'),
@@ -2527,6 +2462,8 @@
 
             console.log("Time Tracker Initialized.");
         }
+
     </script>
 </body>
+
 </html>
