@@ -234,6 +234,11 @@
             background: #0ea5e9;
             transition: width 0.2s ease;
         }
+
+        /* --- Timer Pulse --- */
+        .timer-pulse {
+            animation: pulse 1.5s infinite;
+        }
     </style>
 </head>
 
@@ -304,7 +309,7 @@
                         <span id="sidebar-case-count"
                             class="ml-auto inline-block min-w-[24px] text-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800">0</span>
                     </a>
-                    
+
                     <a href="#documents" data-target="documents"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -315,7 +320,7 @@
                         </svg>
                         Documents
                     </a>
-                    
+
                     <a href="#calendar" data-target="calendar"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -343,6 +348,15 @@
                         </svg>
                         Time Tracking
                     </a>
+                    <a href="#billing" data-target="billing"
+                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                d="M10 2a8 8 0 100 16 8 8 0 000-16zM6.343 12.343a.5.5 0 010-.707l3.536-3.536a.5.5 0 11.707.707L7.05 12.343a.5.5 0 01-.707 0zm4.243-4.243a.5.5 0 01.707 0l2.122 2.121a.5.5 0 010 .707l-2.122 2.122a.5.5 0 11-.707-.707L12.293 10l-1.707-1.707a.5.5 0 010-.707z" />
+                        </svg>
+                        Billing
+                    </a>
                     <a href="#tasks" data-target="tasks"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -353,17 +367,9 @@
                         </svg>
                         Tasks
                         <span
-                            class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">5</span>
+                            class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">0</span>
                     </a>
-                    <a href="#billing" data-target="billing"
-                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path
-                                d="M10 2a8 8 0 100 16 8 8 0 000-16zM6.343 12.343a.5.5 0 010-.707l3.536-3.536a.5.5 0 11.707.707L7.05 12.343a.5.5 0 01-.707 0zm4.243-4.243a.5.5 0 01.707 0l2.122 2.121a.5.5 0 010 .707l-2.122 2.122a.5.5 0 11-.707-.707L12.293 10l-1.707-1.707a.5.5 0 010-.707z" />
-                        </svg>
-                        Billing
-                    </a>
+
                     <a href="#ai-assistant" data-target="ai-assistant"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -373,7 +379,7 @@
                         </svg>
                         AI Assistant
                     </a>
-                    
+
 
                     <div class="pt-4">
                         <p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Admin</p>
@@ -909,11 +915,66 @@
                     </div>
                 </section>
 
-                <!-- Billing Section (Placeholder) -->
+                <!-- Billing Section -->
                 <section id="billing" class="content-section hidden">
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 class="text-2xl font-bold text-gray-700">Billing</h2>
-                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-gray-800">Billing</h2>
+                            <button id="generate-invoice-button"
+                                class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                Generate New Invoice
+                            </button>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Unbilled Hours</p>
+                                <p id="unbilled-hours" class="text-2xl font-bold text-gray-800">0</p>
+                            </div>
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Draft Invoices</p>
+                                <p id="draft-amount" class="text-2xl font-bold text-gray-800">$0.00</p>
+                            </div>
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Outstanding</p>
+                                <p id="outstanding-amount" class="text-2xl font-bold text-gray-800">$0.00</p>
+                            </div>
+                            <div class="stats-card bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">Paid (30 Days)</p>
+                                <p id="paid-amount" class="text-2xl font-bold text-gray-800">$0.00</p>
+                            </div>
+                        </div>
+                        <div id="invoices-table-container" class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Invoice #</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Client</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Amount</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Due Date</th>
+                                        <th
+                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoices-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
 
@@ -922,9 +983,12 @@
                     <div class="bg-white rounded-lg shadow-md">
                         <div class="p-6 border-b border-gray-200 flex items-center justify-between">
                             <h2 class="text-xl font-semibold text-gray-800">Calendar</h2>
-                            <button id="add-event-button" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            <button id="add-event-button"
+                                class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
                                 </svg>
                                 Add Event
                             </button>
@@ -932,18 +996,23 @@
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <button id="calendar-prev" class="p-2 rounded-full hover:bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
                                 <h3 id="calendar-month" class="text-lg font-semibold text-gray-800">Month Year</h3>
                                 <button id="calendar-next" class="p-2 rounded-full hover:bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>
                             </div>
-                            <div class="grid grid-cols-7 gap-px bg-gray-200 text-center text-sm font-medium text-gray-500">
+                            <div
+                                class="grid grid-cols-7 gap-px bg-gray-200 text-center text-sm font-medium text-gray-500">
                                 <div class="bg-white p-2">Sun</div>
                                 <div class="bg-white p-2">Mon</div>
                                 <div class="bg-white p-2">Tue</div>
@@ -989,7 +1058,7 @@
                         </div>
 
                         <!-- Timer and Input Form -->
-                        <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 items-end">
                             <!-- Case Select -->
                             <div class="lg:col-span-1">
                                 <label for="time-case-select"
@@ -999,21 +1068,43 @@
                                     <option value="">Select a case...</option>
                                 </select>
                             </div>
-                            <!-- Task Select -->
+                            <!-- Activity Select -->
                             <div class="lg:col-span-1">
-                                <label for="time-task-select" class="block text-sm font-medium text-gray-700">Task
-                                    Type</label>
-                                <select id="time-task-select"
+                                <label for="time-activity-select"
+                                    class="block text-sm font-medium text-gray-700">Activity</label>
+                                <select id="time-activity-select"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
-                                    <option>Billable</option>
-                                    <option>Non-billable</option>
+                                    <option value="">Select activity...</option>
                                 </select>
                             </div>
                             <!-- Description -->
-                            <div class="md:col-span-2 lg:col-span-2">
+                            <div class="md:col-span-2 lg:col-span-1">
                                 <label for="time-description"
                                     class="block text-sm font-medium text-gray-700">Description (Optional)</label>
-                                <input type="text" id="time-description" placeholder="e.g., Drafting client affidavit, phone consultation, reviewing contracts, sending legal email, court appearance, legal research"
+                                <input type="text" id="time-description" placeholder="e.g., Drafting client affidavit"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
+                            </div>
+                            <!-- Manual Entry Toggle -->
+                            <div class="lg:col-span-1">
+                                <button id="manual-entry-toggle"
+                                    class="w-full px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
+                                    Add Manual Entry
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Manual Entry Fields (Hidden by default) -->
+                        <div id="manual-entry-fields"
+                            class="hidden p-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="manual-date" class="block text-sm font-medium text-gray-700">Date</label>
+                                <input type="date" id="manual-date"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
+                            </div>
+                            <div>
+                                <label for="manual-duration" class="block text-sm font-medium text-gray-700">Duration
+                                    (hh:mm)</label>
+                                <input type="text" id="manual-duration" placeholder="e.g., 1:30"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
                             </div>
                         </div>
@@ -1108,6 +1199,36 @@
                     </div>
                 </section>
 
+                <!-- Settings Section -->
+                <section id="settings" class="content-section hidden">
+                    <div class="max-w-2xl mx-auto space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                            <h2 class="text-xl font-semibold text-gray-800 border-b border-gray-200 pb-4">Billing
+                                Settings</h2>
+                            <form id="billing-settings-form" class="mt-6 space-y-6">
+                                <div>
+                                    <label for="default-hourly-rate"
+                                        class="block text-sm font-medium text-gray-700">Default Hourly Rate ($)</label>
+                                    <input type="number" id="default-hourly-rate" min="0" step="0.01"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                </div>
+                                <!-- Placeholder for Activity Types -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-800 mb-2">Activity Types</h3>
+                                    <p class="text-sm text-gray-500">Coming soon: Customize activity types with rates.
+                                    </p>
+                                </div>
+                                <div id="billing-settings-feedback" class="text-sm"></div>
+                                <div class="flex justify-end">
+                                    <button type="submit" id="save-billing-settings"
+                                        class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors shadow-sm">Save
+                                        Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
                 <section id="compliance" class="content-section hidden">
                     <div class="bg-white p-8 rounded-lg shadow-md text-center">
                         <h2 class="text-2xl font-bold text-gray-700">Compliance</h2>
@@ -1123,12 +1244,6 @@
                 <section id="reports" class="content-section hidden">
                     <div class="bg-white p-8 rounded-lg shadow-md text-center">
                         <h2 class="text-2xl font-bold text-gray-700">Reports</h2>
-                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
-                    </div>
-                </section>
-                <section id="settings" class="content-section hidden">
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 class="text-2xl font-bold text-gray-700">Settings</h2>
                         <p class="text-gray-500 mt-2">This feature is coming soon.</p>
                     </div>
                 </section>
@@ -1238,22 +1353,25 @@
                 <div class="mb-4">
                     <label for="event-title-input" class="block text-sm font-medium text-gray-700">Title</label>
                     <input type="text" id="event-title-input" placeholder="e.g., Court Hearing"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true">
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required
+                        aria-required="true">
                 </div>
                 <div class="mb-4">
                     <label for="event-date-input" class="block text-sm font-medium text-gray-700">Date</label>
                     <input type="date" id="event-date-input"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true">
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required
+                        aria-required="true">
                 </div>
                 <div class="mb-4">
-                    <label for="event-case-select" class="block text-sm font-medium text-gray-700">Linked Case (optional)</label>
-                    <select id="event-case-select"
-                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                    <label for="event-case-select" class="block text-sm font-medium text-gray-700">Linked Case
+                        (optional)</label>
+                    <select id="event-case-select" class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm">
                         <option value="">None</option>
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="event-description-input" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="event-description-input"
+                        class="block text-sm font-medium text-gray-700">Description</label>
                     <textarea id="event-description-input" placeholder="Details about the event"
                         class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
                 </div>
@@ -1262,7 +1380,72 @@
                     <button type="button" data-role="cancel"
                         class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button>
                     <button type="submit" id="save-event-button"
-                        class="px-4 py-2 w-32 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors">Save Event</button>
+                        class="px-4 py-2 w-32 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors">Save
+                        Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Invoice Generation Modal -->
+    <div id="invoice-modal"
+        class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300"
+        data-role="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="invoice-modal-title">
+        <div
+            class="bg-white p-6 rounded-lg shadow-xl w-full max-w-4xl transform transition-all duration-300 scale-95 opacity-0">
+            <h2 id="invoice-modal-title" class="text-xl font-bold mb-4">Generate Invoice</h2>
+            <form id="invoice-form" novalidate>
+                <div class="mb-4">
+                    <label for="invoice-client-select" class="block text-sm font-medium text-gray-700">Client</label>
+                    <select id="invoice-client-select"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                        <option value="">Select a client...</option>
+                    </select>
+                </div>
+                <div id="unbilled-items" class="overflow-x-auto mb-4">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Select</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Date</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Description</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Duration</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Rate</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="unbilled-items-body" class="bg-white divide-y divide-gray-200"></tbody>
+                    </table>
+                </div>
+                <div class="mb-4">
+                    <label for="invoice-notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                    <textarea id="invoice-notes" rows="3"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="invoice-due-date" class="block text-sm font-medium text-gray-700">Due Date</label>
+                    <input type="date" id="invoice-due-date"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                </div>
+                <p id="invoice-form-error" class="text-sm text-red-600 mb-4 text-center hidden" aria-live="polite"></p>
+                <div class="flex justify-end gap-3">
+                    <button type="button" data-role="cancel"
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button>
+                    <button type="submit" id="create-draft-invoice"
+                        class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 flex items-center justify-center transition-colors">Create
+                        Draft</button>
                 </div>
             </form>
         </div>
@@ -2344,8 +2527,6 @@
 
             console.log("Time Tracker Initialized.");
         }
-
     </script>
 </body>
-
 </html>
