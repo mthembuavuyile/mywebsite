@@ -252,7 +252,7 @@
                 <div class="h-16 flex items-center justify-between px-4 border-b border-gray-200 flex-shrink-0">
                     <div class="flex items-center gap-2">
                         <div class="text-2xl font-bold text-sky-800">SINC</div>
-                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">v2.3</span>
+                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">v3.0</span>
                     </div>
                     <button id="close-sidebar" aria-label="Close sidebar menu"
                         class="p-2 rounded-md text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 lg:hidden">
@@ -281,6 +281,17 @@
                         <p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Case
                             Management</p>
                     </div>
+                    <a href="#clients" data-target="clients"
+                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                        </svg>
+                        Clients
+                        <span id="sidebar-client-count"
+                            class="ml-auto inline-block min-w-[24px] text-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800">0</span>
+                    </a>
                     <a href="#cases" data-target="cases"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -293,17 +304,7 @@
                         <span id="sidebar-case-count"
                             class="ml-auto inline-block min-w-[24px] text-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800">0</span>
                     </a>
-                    <a href="#clients" data-target="clients"
-                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path
-                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                        </svg>
-                        Clients
-                        <span id="sidebar-client-count"
-                            class="ml-auto inline-block min-w-[24px] text-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800">0</span>
-                    </a>
+                    
                     <a href="#documents" data-target="documents"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -314,15 +315,7 @@
                         </svg>
                         Documents
                     </a>
-                    <a href="#billing" data-target="billing"
-                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path
-                                d="M10 2a8 8 0 100 16 8 8 0 000-16zM6.343 12.343a.5.5 0 010-.707l3.536-3.536a.5.5 0 11.707.707L7.05 12.343a.5.5 0 01-.707 0zm4.243-4.243a.5.5 0 01.707 0l2.122 2.121a.5.5 0 010 .707l-2.122 2.122a.5.5 0 11-.707-.707L12.293 10l-1.707-1.707a.5.5 0 010-.707z" />
-                        </svg>
-                        Billing
-                    </a>
+                    
                     <a href="#calendar" data-target="calendar"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -333,13 +326,23 @@
                         </svg>
                         Calendar
                         <span id="calendar-notification"
-                            class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">3</span>
+                            class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">0</span>
                     </a>
 
                     <div class="pt-4">
                         <p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Productivity
                         </p>
                     </div>
+                    <a href="#time-tracking" data-target="time-tracking"
+                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Time Tracking
+                    </a>
                     <a href="#tasks" data-target="tasks"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -352,6 +355,15 @@
                         <span
                             class="ml-auto inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">5</span>
                     </a>
+                    <a href="#billing" data-target="billing"
+                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                d="M10 2a8 8 0 100 16 8 8 0 000-16zM6.343 12.343a.5.5 0 010-.707l3.536-3.536a.5.5 0 11.707.707L7.05 12.343a.5.5 0 01-.707 0zm4.243-4.243a.5.5 0 01.707 0l2.122 2.121a.5.5 0 010 .707l-2.122 2.122a.5.5 0 11-.707-.707L12.293 10l-1.707-1.707a.5.5 0 010-.707z" />
+                        </svg>
+                        Billing
+                    </a>
                     <a href="#ai-assistant" data-target="ai-assistant"
                         class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
@@ -361,16 +373,7 @@
                         </svg>
                         AI Assistant
                     </a>
-                    <a href="#time-tracking" data-target="time-tracking"
-                        class="sidebar-link flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus-visible">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Time Tracking
-                    </a>
+                    
 
                     <div class="pt-4">
                         <p class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Admin</p>
@@ -728,7 +731,7 @@
                                             Description</label>
                                         <textarea id="case-edit-description" rows="10"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                                            placeholder="Use bullets (- ), headings (#, ##) and links (https://...) for clarity."></textarea>
+                                            placeholder="Use bullets (- ), headings (#, ##) and links[](https://...) for clarity."></textarea>
                                     </div>
                                     <p id="case-edit-error" class="text-sm text-red-600 hidden"></p>
                                     <div class="flex items-center justify-end gap-3">
@@ -906,19 +909,63 @@
                     </div>
                 </section>
 
-                <!-- Placeholder sections -->
+                <!-- Billing Section (Placeholder) -->
                 <section id="billing" class="content-section hidden">
                     <div class="bg-white p-8 rounded-lg shadow-md text-center">
                         <h2 class="text-2xl font-bold text-gray-700">Billing</h2>
                         <p class="text-gray-500 mt-2">This feature is coming soon.</p>
                     </div>
                 </section>
+
+                <!-- Calendar Section: Implemented -->
                 <section id="calendar" class="content-section hidden">
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <h2 class="text-2xl font-bold text-gray-700">Calendar</h2>
-                        <p class="text-gray-500 mt-2">This feature is coming soon.</p>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-gray-800">Calendar</h2>
+                            <button id="add-event-button" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 flex items-center transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add Event
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <button id="calendar-prev" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <h3 id="calendar-month" class="text-lg font-semibold text-gray-800">Month Year</h3>
+                                <button id="calendar-next" class="p-2 rounded-full hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-px bg-gray-200 text-center text-sm font-medium text-gray-500">
+                                <div class="bg-white p-2">Sun</div>
+                                <div class="bg-white p-2">Mon</div>
+                                <div class="bg-white p-2">Tue</div>
+                                <div class="bg-white p-2">Wed</div>
+                                <div class="bg-white p-2">Thu</div>
+                                <div class="bg-white p-2">Fri</div>
+                                <div class="bg-white p-2">Sat</div>
+                            </div>
+                            <div id="calendar-grid" class="grid grid-cols-7 gap-px bg-gray-200">
+                                <!-- Days populated by JS -->
+                            </div>
+                        </div>
+                        <div class="p-6 border-t border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Upcoming Events</h3>
+                            <div id="upcoming-events-list" class="space-y-4">
+                                <!-- Events populated by JS -->
+                            </div>
+                        </div>
                     </div>
                 </section>
+
+                <!-- Placeholder sections -->
                 <section id="tasks" class="content-section hidden">
                     <div class="bg-white p-8 rounded-lg shadow-md text-center">
                         <h2 class="text-2xl font-bold text-gray-700">Tasks</h2>
@@ -966,7 +1013,7 @@
                             <div class="md:col-span-2 lg:col-span-2">
                                 <label for="time-description"
                                     class="block text-sm font-medium text-gray-700">Description (Optional)</label>
-                                <input type="text" id="time-description" placeholder="e.g., Drafting client affidavit"
+                                <input type="text" id="time-description" placeholder="e.g., Drafting client affidavit, phone consultation, reviewing contracts, sending legal email, court appearance, legal research"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" />
                             </div>
                         </div>
@@ -1179,6 +1226,48 @@
         </div>
     </div>
 
+    <!-- Event Modal -->
+    <div id="event-modal"
+        class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300"
+        data-role="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="event-modal-title">
+        <div
+            class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
+            <h2 id="event-modal-title" class="text-xl font-bold mb-4">Add New Event</h2>
+            <form id="event-form" novalidate>
+                <input type="hidden" id="event-id-input">
+                <div class="mb-4">
+                    <label for="event-title-input" class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" id="event-title-input" placeholder="e.g., Court Hearing"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true">
+                </div>
+                <div class="mb-4">
+                    <label for="event-date-input" class="block text-sm font-medium text-gray-700">Date</label>
+                    <input type="date" id="event-date-input"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" required aria-required="true">
+                </div>
+                <div class="mb-4">
+                    <label for="event-case-select" class="block text-sm font-medium text-gray-700">Linked Case (optional)</label>
+                    <select id="event-case-select"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        <option value="">None</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="event-description-input" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="event-description-input" placeholder="Details about the event"
+                        class="mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
+                </div>
+                <p id="event-form-error" class="text-sm text-red-600 mb-4 text-center hidden" aria-live="polite"></p>
+                <div class="flex justify-end gap-3">
+                    <button type="button" data-role="cancel"
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">Cancel</button>
+                    <button type="submit" id="save-event-button"
+                        class="px-4 py-2 w-32 bg-sky-600 text-white rounded-md hover:bg-sky-700 disabled:bg-sky-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors">Save Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script type="module">
 
         // --- IMPORTS ---
@@ -1226,18 +1315,25 @@
             caseEditForm: $('#case-edit-form'), caseEditError: $('#case-edit-error'), saveCaseButton: $('#case-edit-save'),
             caseEditDescription: $('#case-edit-description'), caseEditPreview: $('#case-edit-preview'),
             caseEditPreviewLength: $('#case-edit-preview-length'),
+            // Calendar
+            addEventButton: $('#add-event-button'),
+            eventModal: $('#event-modal'), eventForm: $('#event-form'), eventFormError: $('#event-form-error'), saveEventButton: $('#save-event-button'),
+            calendarMonth: $('#calendar-month'), calendarGrid: $('#calendar-grid'),
+            calendarPrev: $('#calendar-prev'), calendarNext: $('#calendar-next'),
+            upcomingEventsList: $('#upcoming-events-list'),
         };
 
         // --- GLOBAL STATE & CONSTANTS ---
-        let currentUserId = null, unsubscribeFromClients = null, unsubscribeFromCases = null, unsubscribeFromRecentCases = null, unsubscribeFromDocuments = null;
-        let clientsMap = new Map(), casesMap = new Map(), documentsMap = new Map();
-        let initialClientFormData = '', initialDataLoaded = { clients: false, cases: false, documents: false };
+        let currentUserId = null, unsubscribeFromClients = null, unsubscribeFromCases = null, unsubscribeFromRecentCases = null, unsubscribeFromDocuments = null, unsubscribeFromEvents = null;
+        let clientsMap = new Map(), casesMap = new Map(), documentsMap = new Map(), eventsMap = new Map();
+        let initialClientFormData = '', initialDataLoaded = { clients: false, cases: false, documents: false, events: false };
         let documentsFilter = { caseId: 'all', search: '' };
+        let currentCalendarDate = new Date();
 
         const CONSTANTS = {
             DEFAULT_AVATAR_SVG: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NkZTVmMyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyYzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJ2LTJjMC0yLjY2LTUuMzMtNC04LTR6Ii8+PC9zdmc+",
             SPINNER_SVG: `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`,
-            SAVE_CLIENT_TEXT: "Save Client", SAVE_CASE_TEXT: "Save Changes", SAVE_PROFILE_TEXT: "Save Changes", UPLOAD_DOCUMENT_TEXT: "Upload"
+            SAVE_CLIENT_TEXT: "Save Client", SAVE_CASE_TEXT: "Save Changes", SAVE_PROFILE_TEXT: "Save Changes", UPLOAD_DOCUMENT_TEXT: "Upload", SAVE_EVENT_TEXT: "Save Event"
         };
 
         // --- CORE APPLICATION LOGIC ---
@@ -1274,6 +1370,7 @@
             listenForCaseChanges(userId);
             listenForRecentCases(userId);
             listenForDocumentChanges(userId);
+            listenForEventChanges(userId);
 
             // Initialize the time tracker since its HTML is now static on the page
             const dependencies = {
@@ -1288,7 +1385,7 @@
         }
 
         function handleLogout() {
-            [unsubscribeFromClients, unsubscribeFromCases, unsubscribeFromRecentCases, unsubscribeFromDocuments].forEach(unsub => unsub && unsub());
+            [unsubscribeFromClients, unsubscribeFromCases, unsubscribeFromRecentCases, unsubscribeFromDocuments, unsubscribeFromEvents].forEach(unsub => unsub && unsub());
             signOut(auth).catch(error => console.error("Logout Error:", error));
         }
 
@@ -1356,7 +1453,24 @@
                 updateStatsAndCounts();
             }, error => {
                 console.error("Error loading documents:", error);
-                renderTableError(DOMElements.documentsTableBody, 6, "Could not load documents.");
+                renderTableError(DOMElements.documentsTableBody, 6, "Could not load documents. Check permissions or database rules.");
+            });
+        }
+
+        function listenForEventChanges(userId) {
+            if (unsubscribeFromEvents) unsubscribeFromEvents();
+            const q = query(collection(db, 'events'), where("userId", "==", userId), orderBy('date', 'asc'));
+            unsubscribeFromEvents = onSnapshot(q, snapshot => {
+                eventsMap.clear();
+                snapshot.forEach(doc => eventsMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                initialDataLoaded.events = true;
+                renderCalendar();
+                renderUpcomingEvents();
+                const upcomingCount = [...eventsMap.values()].filter(e => e.date.toDate() > new Date()).length;
+                $('#calendar-notification').textContent = upcomingCount;
+                $('#calendar-notification').classList.toggle('hidden', upcomingCount === 0);
+            }, error => {
+                console.error("Error loading events:", error);
             });
         }
 
@@ -1553,6 +1667,38 @@
             }
         }
 
+        async function handleEventFormSubmit(e) {
+            e.preventDefault();
+            setButtonLoading(DOMElements.saveEventButton, true, CONSTANTS.SAVE_EVENT_TEXT);
+            hideError(DOMElements.eventFormError);
+            const eventId = $('#event-id-input').value.trim();
+            const eventData = {
+                title: $('#event-title-input').value.trim(),
+                date: Timestamp.fromDate(new Date($('#event-date-input').value)),
+                caseId: $('#event-case-select').value || null,
+                description: $('#event-description-input').value.trim(),
+                userId: currentUserId
+            };
+            if (!eventData.title || !$('#event-date-input').value) {
+                showError(DOMElements.eventFormError, "Title and Date are required.");
+                setButtonLoading(DOMElements.saveEventButton, false, CONSTANTS.SAVE_EVENT_TEXT);
+                return;
+            }
+            try {
+                if (eventId) {
+                    await updateDoc(doc(db, 'events', eventId), eventData);
+                } else {
+                    await addDoc(collection(db, 'events'), eventData);
+                }
+                closeModal(DOMElements.eventModal);
+            } catch (error) {
+                console.error("Error saving event:", error);
+                showError(DOMElements.eventFormError, "Failed to save event.");
+            } finally {
+                setButtonLoading(DOMElements.saveEventButton, false, CONSTANTS.SAVE_EVENT_TEXT);
+            }
+        }
+
         // --- UI & RENDERING ---
         function initUI() { initSidebar(); initRouter(); }
 
@@ -1730,6 +1876,81 @@
             DOMElements.caseEditDescription.dispatchEvent(new Event('input'));
         }
 
+        function renderCalendar() {
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            DOMElements.calendarMonth.textContent = currentCalendarDate.toLocaleString('default', { month: 'long' }) + ' ' + year;
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            DOMElements.calendarGrid.innerHTML = '';
+            // Add empty cells
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'bg-white p-2';
+                DOMElements.calendarGrid.appendChild(empty);
+            }
+            // Group events by date
+            const eventsByDate = {};
+            eventsMap.forEach(event => {
+                const dateStr = event.date.toDate().toDateString();
+                if (!eventsByDate[dateStr]) eventsByDate[dateStr] = [];
+                eventsByDate[dateStr].push(event);
+            });
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dateStr = date.toDateString();
+                const dayEvents = eventsByDate[dateStr] || [];
+                const cell = document.createElement('div');
+                cell.className = 'bg-white p-2 min-h-[80px] relative hover:bg-gray-50 cursor-pointer';
+                cell.dataset.date = date.toISOString().split('T')[0];
+                cell.innerHTML = `<span class="absolute top-1 right-2 text-sm font-medium ${date.getDate() === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? 'bg-sky-100 text-sky-800 rounded-full px-2' : 'text-gray-800'}">${day}</span>`;
+                if (dayEvents.length > 0) {
+                    const dots = document.createElement('div');
+                    dots.className = 'flex justify-start mt-6';
+                    const maxDots = Math.min(dayEvents.length, 3);
+                    for (let i = 0; i < maxDots; i++) {
+                        dots.innerHTML += '<span class="h-2 w-2 rounded-full bg-sky-500 mr-1"></span>';
+                    }
+                    if (dayEvents.length > 3) {
+                        dots.innerHTML += `<span class="text-xs text-gray-500">+${dayEvents.length - 3}</span>`;
+                    }
+                    cell.appendChild(dots);
+                }
+                DOMElements.calendarGrid.appendChild(cell);
+            }
+        }
+
+        function renderUpcomingEvents() {
+            const list = DOMElements.upcomingEventsList;
+            list.innerHTML = '';
+            const now = new Date();
+            const upcoming = [...eventsMap.values()].filter(e => e.date.toDate() >= now).sort((a, b) => a.date.seconds - b.date.seconds);
+            if (upcoming.length === 0) {
+                list.innerHTML = '<p class="text-center text-gray-500">No upcoming events.</p>';
+                return;
+            }
+            upcoming.forEach(event => {
+                const caseName = event.caseId ? casesMap.get(event.caseId)?.caseName || 'Unknown' : 'None';
+                const item = document.createElement('div');
+                item.className = 'border-b pb-4 last:border-0';
+                item.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-medium text-gray-800">${escapeHTML(event.title)}</p>
+                            <p class="text-sm text-gray-500">${formatDate(event.date)}</p>
+                            <p class="text-sm text-gray-500">Case: ${escapeHTML(caseName)}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="text-sky-600 hover:text-sky-900 edit-event-btn" data-id="${event.id}">Edit</button>
+                            <button class="text-red-600 hover:text-red-900 delete-event-btn" data-id="${event.id}">Delete</button>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">${escapeHTML(event.description || 'No description')}</p>
+                `;
+                list.appendChild(item);
+            });
+        }
+
         // --- MODAL & UI HELPERS ---
         function openModal(modalEl) { modalEl.classList.remove('hidden'); setTimeout(() => { modalEl.firstElementChild.classList.remove('scale-95', 'opacity-0'); modalEl.classList.remove('opacity-0'); }, 10); }
         function closeModal(modalEl) { modalEl.firstElementChild.classList.add('scale-95', 'opacity-0'); modalEl.classList.add('opacity-0'); setTimeout(() => { modalEl.classList.add('hidden'); }, 300); }
@@ -1745,6 +1966,13 @@
         function populateClientDropdownForEdit(selectedId = null) { const selectEl = $('#case-edit-client'); selectEl.innerHTML = '<option value="">Select a client...</option>'; if (clientsMap.size === 0) { selectEl.innerHTML += '<option value="" disabled>No clients. Add a client first.</option>'; return; } [...clientsMap.values()].sort((a, b) => a.name.localeCompare(b.name)).forEach(client => { selectEl.innerHTML += `<option value="${client.id}" ${client.id === selectedId ? 'selected' : ''}>${escapeHTML(client.name)}</option>`; }); }
         function populateDocumentCaseFilter() { const current = DOMElements.documentsFilterCase.value || 'all'; DOMElements.documentsFilterCase.innerHTML = `<option value="all">All cases</option>`;[...casesMap.values()].sort((a, b) => a.caseName.localeCompare(b.caseName)).forEach(c => DOMElements.documentsFilterCase.insertAdjacentHTML('beforeend', `<option value="${c.id}">${escapeHTML(c.caseName)}</option>`)); DOMElements.documentsFilterCase.value = current; }
         function populateDocumentCaseSelect(selectedId = '') { DOMElements.documentCaseSelect.innerHTML = '<option value="">Select a case...</option>'; if (casesMap.size === 0) { DOMElements.documentCaseSelect.insertAdjacentHTML('beforeend', '<option value="" disabled>No cases. Add a case first.</option>'); return; } [...casesMap.values()].sort((a, b) => a.caseName.localeCompare(b.caseName)).forEach(c => DOMElements.documentCaseSelect.insertAdjacentHTML('beforeend', `<option value="${c.id}" ${c.id === selectedId ? 'selected' : ''}>${escapeHTML(c.caseName)}</option>`)); }
+        function populateEventCaseSelect(selected = '') {
+            const select = $('#event-case-select');
+            select.innerHTML = '<option value="">None</option>';
+            [...casesMap.values()].sort((a, b) => a.caseName.localeCompare(b.caseName)).forEach(c => {
+                select.innerHTML += `<option value="${c.id}" ${c.id === selected ? 'selected' : ''}>${escapeHTML(c.caseName)}</option>`;
+            });
+        }
 
         // --- EVENT LISTENERS ---
         function initEventListeners() {
@@ -1753,6 +1981,7 @@
             DOMElements.caseEditForm.addEventListener('submit', handleCaseEditFormSubmit);
             DOMElements.profileForm.addEventListener('submit', handleProfileFormSubmit);
             DOMElements.documentForm.addEventListener('submit', handleDocumentFormSubmit);
+            DOMElements.eventForm.addEventListener('submit', handleEventFormSubmit);
 
             $('#add-client-button').addEventListener('click', () => { DOMElements.clientForm.reset(); $('#client-modal-title').textContent = "Add New Client"; $('#client-id-input').value = ""; hideError(DOMElements.clientFormError); openModal(DOMElements.clientModal); });
 
@@ -1772,6 +2001,18 @@
                 const text = e.target.value;
                 DOMElements.caseEditPreview.innerHTML = renderRichContent(text);
                 DOMElements.caseEditPreviewLength.textContent = `${text.length} characters`;
+            });
+
+            DOMElements.addEventButton.addEventListener('click', () => { DOMElements.eventForm.reset(); $('#event-modal-title').textContent = "Add New Event"; $('#event-id-input').value = ""; populateEventCaseSelect(); hideError(DOMElements.eventFormError); $('#event-date-input').value = new Date().toISOString().split('T')[0]; openModal(DOMElements.eventModal); });
+
+            DOMElements.calendarPrev.addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            DOMElements.calendarNext.addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                renderCalendar();
             });
 
             document.body.addEventListener('click', e => {
@@ -1807,6 +2048,32 @@
                 if (docBtn && DOMElements.documentsTableBody.contains(docBtn)) {
                     if (docBtn.classList.contains('delete-document-btn')) handleDocumentDelete(docBtn.dataset.id);
                     if (docBtn.classList.contains('download-document-btn')) handleDocumentDownload(docBtn.dataset.id);
+                }
+
+                const eventBtn = target.closest('.edit-event-btn, .delete-event-btn');
+                if (eventBtn) {
+                    const id = eventBtn.dataset.id;
+                    if (eventBtn.classList.contains('edit-event-btn')) {
+                        const event = eventsMap.get(id);
+                        if (!event) return;
+                        $('#event-modal-title').textContent = "Edit Event";
+                        $('#event-id-input').value = id;
+                        $('#event-title-input').value = event.title;
+                        $('#event-date-input').value = event.date.toDate().toISOString().split('T')[0];
+                        $('#event-case-select').value = event.caseId || '';
+                        $('#event-description-input').value = event.description || '';
+                        populateEventCaseSelect(event.caseId);
+                        hideError(DOMElements.eventFormError);
+                        openModal(DOMElements.eventModal);
+                    } else if (eventBtn.classList.contains('delete-event-btn')) {
+                        showConfirmation("Delete Event?", "This will permanently delete the event.", async () => {
+                            try {
+                                await deleteDoc(doc(db, 'events', id));
+                            } catch (error) {
+                                console.error("Error deleting event:", error);
+                            }
+                        });
+                    }
                 }
             });
         }
