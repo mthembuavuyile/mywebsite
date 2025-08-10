@@ -1,189 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SINC | Professional Legal Practice Management for South African Law Firms</title>
-    <meta name="description" content="Secure, efficient, and compliant legal practice management software designed for the unique needs of South African law firms." />
-    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-    <style>
-        html { 
-            font-family: 'Inter', sans-serif; 
-            scroll-behavior: smooth;
-        }
-        body { 
-            background-color: #111827; /* gray-900 */
-            background-image: radial-gradient(circle at top, #1f2937, #111827);
-            color: #d1d5db; /* gray-300 */
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale; 
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SINC - Smart Legal Systems | Welcome</title>
+  <meta name="description" content="SINC is a comprehensive, smart legal management system designed to enhance productivity for legal professionals. Manage clients, cases, documents, time tracking, and billing in one secure, intuitive platform." />
+  <meta name="author" content="Avuyile Mthembu" />
+  <meta name="keywords" content="SINC, Legal Practice Management, Case Management, Time Tracking, Legal Billing, Law Firm Software, Productivity" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="canonical" href="https://vylexnexys.co.za/sinc/" />
 
-        .font-serif {
-            font-family: 'Merriweather', serif;
-        }
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 
-        /* Subtle entrance animation */
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        /* Professional Button Styles */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.75rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-        .btn-primary {
-            background-color: #2563eb; /* blue-600 */
-            color: #ffffff;
-            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.25);
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8; /* blue-700 */
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: #d1d5db; /* gray-300 */
-            border: 1px solid #4b5563; /* gray-600 */
-        }
-        .btn-secondary:hover {
-            background-color: #1f2937; /* gray-800 */
-            border-color: #6b7280; /* gray-500 */
-            color: #ffffff;
-        }
+  <style>
+    :root {
+      --color-primary-dark: #0c4a6e;
+      --color-primary-accent: #0ea5e9;
+      --font-family-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    }
 
-        /* Feature Card Hover Effect */
-        .feature-card {
-            transition: all 0.3s ease-in-out;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background-color: #374151; /* gray-700 */
-            border-color: #4b5563; /* gray-600 */
-        }
-    </style>
+    html {
+      font-family: var(--font-family-sans);
+      scroll-behavior: smooth;
+    }
+
+    @supports (font-variation-settings: normal) {
+      html { font-family: 'Inter var', var(--font-family-sans); }
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Lock body scroll when mobile menu is open */
+    body.no-scroll {
+        overflow: hidden;
+    }
+
+    /* Gradient Text Animation */
+    .gradient-text {
+      background: linear-gradient(135deg, #0369a1, #0ea5e9, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent; /* Fallback */
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: shimmer 6s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Floating Element Animation */
+    .floating { animation: float 8s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    
+    /* Header Scrolled State */
+    header.stuck {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 20px -12px rgba(0, 0, 0, 0.2);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      backdrop-filter: saturate(140%) blur(10px);
+    }
+    
+    /* Feature Card Hover Effect */
+    .feature-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -12px rgba(12, 74, 110, 0.15); }
+    
+    /* Animated Burger Icon */
+    #mobile-menu-btn .icon-bar { transition: transform 0.3s ease, opacity 0.2s ease; }
+    #mobile-menu-btn .icon-cross { position: absolute; transition: transform 0.3s ease, opacity 0.2s ease; opacity: 0; transform: scale(0.6); }
+
+    header[data-mobile-menu-open="true"] #mobile-menu-btn .icon-bar { transform: scale(0.6); opacity: 0; }
+    header[data-mobile-menu-open="true"] #mobile-menu-btn .icon-cross { transform: scale(1); opacity: 1; }
+
+    /* Lightbox Modal */
+    .modal-hidden { display: none; }
+    .modal-backdrop { background: rgba(2, 6, 23, 0.75); backdrop-filter: blur(2px); }
+    .modal-enter { opacity: 0; transform: scale(0.98); }
+    .modal-enter-active { opacity: 1; transform: scale(1); transition: all 150ms ease-out; }
+    .modal-leave-active { opacity: 0; transform: scale(0.98); transition: all 120ms ease-in; }
+
+    /* Utility to prevent user drag/select on images */
+    img { -webkit-user-drag: none; user-select: none; }
+
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce) {
+      .gradient-text, .floating, .pulse-ring, * { 
+        animation: none !important;
+        transition: none !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
-<body class="min-h-screen">
-    <!-- Main container -->
-    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
-        
-        <!-- Main content card -->
-        <div class="fade-in-up bg-gray-800/50 border border-gray-700/80 rounded-2xl p-8 md:p-12 max-w-4xl w-full text-center shadow-2xl shadow-black/30">
-            
-            <!-- Logo/Brand section -->
-            <div class="mb-8">
-                <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-2 tracking-tight">
-                    SINC
-                </h1>
-                <p class="text-lg md:text-xl text-gray-400 font-medium">
-                    Smart Legal Systems
-                </p>
-                <div class="h-0.5 w-20 bg-blue-600 mx-auto mt-6"></div>
-            </div>
 
-            <!-- Value proposition -->
-            <div class="mb-10">
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-white mb-3">
-                    The Premier Legal Practice Management Solution
+<body class="font-sans text-slate-800">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 z-[100] px-3 py-2 bg-white rounded-md ring-2 ring-sky-500">Skip to content</a>
+
+  <!-- Main container with overflow-x-clip to prevent horizontal scroll -->
+  <div class="relative min-h-screen flex flex-col overflow-x-clip">
+    
+    <!-- Header -->
+    <header id="page-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" data-mobile-menu-open="false">
+      <div class="absolute inset-0 bg-white/50 backdrop-blur-md -z-10 transition-colors"></div>
+      <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#top" class="flex items-center space-x-2.5 group" aria-label="SINC Home">
+          <span class="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-sky-600 to-sky-700 rounded-lg shadow-sm">
+            <i class="fa-solid fa-scale-balanced text-white text-sm sm:text-base"></i>
+          </span>
+          <span class="text-xl sm:text-2xl font-extrabold text-sky-800 tracking-tight group-hover:text-sky-700 transition-colors">SINC</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-x-6 lg:gap-x-8" aria-label="Primary">
+          <a href="#features" class="text-sm font-medium text-slate-700 hover:text-sky-700 transition-colors">Features</a>
+          <a href="#security" class="text-sm font-medium text-slate-700 hover:text-sky-700 transition-colors">Security</a>
+          <a href="login.html" class="inline-flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-white bg-sky-600 rounded-lg shadow-sm hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-colors">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Login</span>
+          </a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-slate-100 transition-colors" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+          <i class="fas fa-bars text-slate-700 text-lg icon-bar"></i>
+          <i class="fas fa-times text-slate-700 text-xl icon-cross"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu & Overlay (Moved outside header for cleaner z-index stacking) -->
+    <div id="mobile-menu-container" class="md:hidden fixed inset-0 z-40 pointer-events-none" aria-hidden="true">
+        <!-- Overlay -->
+        <div id="mobile-overlay" class="absolute inset-0 bg-slate-900/40 opacity-0 transition-opacity duration-300"></div>
+
+        <!-- Menu Panel -->
+        <div id="mobile-menu" class="absolute top-0 right-0 h-full w-full max-w-xs bg-white shadow-2xl translate-x-full transition-transform duration-300 ease-in-out" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+            <div class="flex justify-between items-center p-4 border-b border-slate-200">
+                <h2 id="mobile-menu-title" class="flex items-center space-x-2">
+                    <span class="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-sky-600 to-sky-700 rounded-lg">
+                        <i class="fa-solid fa-scale-balanced text-white text-sm"></i>
+                    </span>
+                    <span class="text-xl font-bold text-sky-800">SINC</span>
                 </h2>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-                    Secure, efficient, and compliant software built from the ground up for the unique demands of South African law firms.
-                </p>
+                <!-- Close button is now the main burger button, but we can have a dedicated one if preferred -->
             </div>
-            
-            <!-- Key features grid -->
-            <div class="grid md:grid-cols-3 gap-6 mb-12 text-left">
-                <!-- Feature 1: Efficiency -->
-                <div class="feature-card bg-gray-900/40 p-6 rounded-lg border border-gray-700">
-                    <div class="flex items-center mb-3">
-                        <svg class="w-7 h-7 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                        </svg>
-                        <h3 class="font-semibold text-lg text-white">Streamlined Workflow</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm">Automate tasks, manage cases, and track billable hours with an intuitive, modern interface.</p>
-                </div>
-                <!-- Feature 2: Security -->
-                <div class="feature-card bg-gray-900/40 p-6 rounded-lg border border-gray-700">
-                    <div class="flex items-center mb-3">
-                        <svg class="w-7 h-7 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
-                        </svg>
-                        <h3 class="font-semibold text-lg text-white">Unyielding Security</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm">POPIA compliant with all data securely hosted in South Africa to ensure client confidentiality.</p>
-                </div>
-                <!-- Feature 3: Purpose-Built -->
-                <div class="feature-card bg-gray-900/40 p-6 rounded-lg border border-gray-700">
-                    <div class="flex items-center mb-3">
-                        <svg class="w-7 h-7 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18h16.5M5.25 6h13.5m-13.5 3h13.5m-13.5 3h13.5m-13.5 3h13.5M2.25 3v15a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25V3a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 3z" />
-                        </svg>
-                        <h3 class="font-semibold text-lg text-white">Locally Focused</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm">Designed specifically for the South African legal system, courts, and regulatory environment.</p>
-                </div>
-            </div>
-
-            <!-- Call to action -->
-            <div class="space-y-4">
-                <a href="login.html" class="btn btn-primary text-lg">
-                    Proceed to login
-                </a>
-                <div class="pt-2">
-                    <a href="https://vylexnexys.co.za/sinc/whitepaper.html" class="text-gray-400 hover:text-white transition-colors duration-200">
-                        Learn More ↓
+            <nav class="p-4 flex flex-col h-[calc(100%-65px)]">
+                <a href="#features" class="block px-3 py-3 rounded-md text-slate-700 hover:text-sky-700 hover:bg-sky-50/70 transition-colors font-medium">Features</a>
+                <a href="#security" class="block px-3 py-3 rounded-md text-slate-700 hover:text-sky-700 hover:bg-sky-50/70 transition-colors font-medium">Security</a>
+                <div class="mt-auto pt-4">
+                    <a href="login.html" class="block w-full px-4 py-3 text-center text-white bg-sky-600 rounded-lg shadow-sm hover:bg-sky-700 transition-colors font-semibold">
+                        Proceed to Login
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="mt-8 text-center">
-            <p class="text-gray-500 text-sm">
-                © 2025 SINC Legal Systems. All Rights Reserved.
-            </p>
+            </nav>
         </div>
     </div>
 
-    <script>
-        // Smooth scroll for any internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // In a real multi-section page, you'd scroll to the element.
-                    // For this single-view page, we can log to the console as a placeholder.
-                    console.log(`Would scroll to: ${targetId}`);
-                    // Example of actual scrolling:
-                    // targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    <!-- Main Content -->
+    <main id="main" class="flex-grow pt-24 sm:pt-28" tabindex="-1">
+      <section class="container mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
+          <!-- Hero Copy -->
+          <div class="order-1 text-center lg:text-left">
+            <span class="inline-flex items-center gap-2 bg-gradient-to-r from-sky-100 to-blue-100 text-sky-800 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full mb-4 border border-sky-200/80">
+              <i class="fas fa-star text-yellow-500"></i>
+              For Modern Legal Professionals
+            </span>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+              Streamline Your Practice.
+              <span class="block gradient-text">Effortlessly.</span>
+            </h1>
+
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              SINC centralises client intake, casework, documents, time, and billing in one secure, intuitive platform—so you can focus on outcomes.
+            </p>
+
+            <!-- Quick Feature Chips -->
+            <ul class="mt-6 sm:mt-8 flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-3 text-sm">
+              <li class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm border border-slate-200/80">
+                <i class="fa-solid fa-briefcase text-sky-600"></i>
+                <span class="font-medium text-slate-700">Case Management</span>
+              </li>
+              <li class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm border border-slate-200/80">
+                <i class="fa-regular fa-clock text-sky-600"></i>
+                <span class="font-medium text-slate-700">Time & Billing</span>
+              </li>
+              <li class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm border border-slate-200/80">
+                <i class="fa-solid fa-folder-open text-sky-600"></i>
+                <span class="font-medium text-slate-700">Document Hub</span>
+              </li>
+            </ul>
+
+            <!-- CTA -->
+            <div class="mt-8 sm:mt-10">
+              <a href="login.html" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-sky-600 text-white text-base sm:text-lg font-semibold rounded-xl shadow-lg shadow-sky-500/20 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-all duration-300 transform hover:scale-105">
+                <span>Proceed to Login</span>
+                <i class="fas fa-arrow-right ml-2.5"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Visual -->
+          <div class="order-2">
+            <div class="relative w-full max-w-xl lg:max-w-2xl mx-auto">
+              <!-- Decorative Blobs -->
+              <div class="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-sky-200 to-blue-300 rounded-full blur-3xl opacity-60 floating"></div>
+              <div class="absolute -bottom-12 -left-12 w-60 h-60 bg-gradient-to-br from-purple-200 to-pink-300 rounded-full blur-3xl opacity-40 floating" style="animation-delay:-3s"></div>
+
+              <!-- Screenshot Card -->
+              <figure class="relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-slate-900/10 overflow-hidden bg-white">
+                <img id="hero-screenshot" src="images/sinc-dashboard.png" alt="SINC dashboard preview showing case management, tasks, and analytics." class="w-full h-full object-cover cursor-zoom-in" decoding="async" fetchpriority="high" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 900px" />
+                <figcaption class="sr-only">Click to view the dashboard in full screen</figcaption>
+
+                <!-- Top-right expand button -->
+                <button id="open-lightbox" class="absolute top-3 right-3 inline-flex items-center justify-center rounded-lg bg-white/90 text-sky-700 hover:text-sky-900 hover:bg-white shadow-md px-2.5 py-1.5 text-xs font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 transition" aria-label="View image in full screen">
+                  <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                </button>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="container mx-auto px-4 sm:px-6 py-10 sm:py-16">
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900">
+            The Premier Legal Management Solution
+          </h2>
+          <p class="mt-4 text-base sm:text-lg text-slate-600">
+            Secure, efficient, and compliant—built for the unique demands of South African law firms.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Card 1 -->
+          <article class="feature-card bg-white/80 backdrop-blur-sm border border-slate-200/80 rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg shadow-sky-900/5">
+             <div class="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl mb-6">
+              <i class="fa-solid fa-layer-group text-2xl text-white"></i>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">Streamlined Workflow</h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Automate tasks, manage cases, and capture billable hours with a modern, intuitive interface.
+            </p>
+          </article>
+
+          <!-- Card 2 (with id for nav link) -->
+          <article id="security" class="feature-card bg-white/80 backdrop-blur-sm border border-slate-200/80 rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg shadow-sky-900/5">
+             <div class="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mb-6">
+              <i class="fa-solid fa-shield-halved text-2xl text-white"></i>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">Unyielding Security</h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              POPIA compliant with strict access controls, encryption, and SA-based hosting for confidentiality and compliance.
+            </p>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="feature-card bg-white/80 backdrop-blur-sm border border-slate-200/80 rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg shadow-sky-900/5 sm:col-span-2 lg:col-span-1">
+             <div class="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl mb-6">
+              <i class="fa-solid fa-map-location-dot text-2xl text-white"></i>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">Locally Focused</h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Tailored for South African courts and regulations—local expertise baked into every workflow.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Secondary CTA -->
+      <section class="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <div class="bg-gradient-to-r from-sky-800 to-sky-900 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center">
+          <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-3">Ready to Transform Your Practice?</h3>
+          <p class="text-sky-200 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+            Join legal professionals who have streamlined their workflow and enhanced security with SINC.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="login.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 bg-white text-sky-700 text-base font-semibold rounded-lg shadow-lg hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-sky-800 focus-visible:ring-white transition-colors">
+              <span>Proceed to Login</span>
+            </a>
+            <a href="https://vylexnexys.co.za/sinc/whitepaper.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-white font-medium rounded-lg hover:bg-white/10 transition-colors">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 text-sm"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/90 backdrop-blur-sm border-t border-slate-200/80 mt-auto">
+      <div class="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div class="flex items-center space-x-2.5">
+            <div class="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-sky-600 to-sky-700 rounded-lg">
+              <i class="fa-solid fa-scale-balanced text-white text-sm"></i>
+            </div>
+            <span class="text-lg font-bold text-sky-800">SINC Legal Systems</span>
+          </div>
+          <p class="text-sm text-slate-500 text-center sm:text-right">
+            © 2025 SINC Legal Systems. All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div id="image-modal" class="modal-hidden fixed inset-0 z-[70]" aria-hidden="true" aria-labelledby="image-modal-title" role="dialog">
+    <div class="modal-backdrop fixed inset-0"></div>
+    <div id="image-modal-panel" class="relative h-full w-full flex items-center justify-center p-4">
+      <div class="relative max-w-6xl w-full h-[85vh] bg-black rounded-xl shadow-2xl overflow-hidden modal-enter" tabindex="-1">
+        <div class="absolute top-3 right-3 z-10 flex items-center gap-2">
+          <button id="modal-fullscreen" class="inline-flex items-center justify-center rounded-md bg-white/90 hover:bg-white text-sky-800 hover:text-sky-900 shadow px-3 py-2 text-xs font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500" aria-label="Toggle fullscreen">
+            <i class="fa-solid fa-maximize"></i>
+          </button>
+          <button id="modal-close" class="inline-flex items-center justify-center rounded-md bg-white/90 hover:bg-white text-gray-700 hover:text-gray-900 shadow px-3 py-2 text-xs font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <img id="modal-image" src="" alt="" class="w-full h-full object-contain bg-black" loading="eager" />
+        <h2 id="image-modal-title" class="sr-only">Fullscreen image viewer</h2>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Header scroll state ---
+      const header = document.getElementById('page-header');
+      const onScroll = () => {
+        header.classList.toggle('stuck', window.scrollY > 24);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // --- Mobile Menu ---
+      const headerEl = document.getElementById('page-header');
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const menuContainer = document.getElementById('mobile-menu-container');
+      const menuOverlay = document.getElementById('mobile-overlay');
+      const menuPanel = document.getElementById('mobile-menu');
+
+      const toggleMenu = (open) => {
+        const isOpen = typeof open === 'boolean' ? open : headerEl.dataset.mobileMenuOpen === 'false';
+        headerEl.dataset.mobileMenuOpen = isOpen;
+        menuBtn.setAttribute('aria-expanded', isOpen);
+        document.body.classList.toggle('no-scroll', isOpen);
+        
+        if (isOpen) {
+            menuContainer.style.pointerEvents = 'auto';
+            menuOverlay.style.opacity = '1';
+            menuPanel.style.transform = 'translateX(0)';
+        } else {
+            menuOverlay.style.opacity = '0';
+            menuPanel.style.transform = 'translateX(100%)';
+            // Allow animations to finish before disabling pointer events
+            setTimeout(() => {
+                if (headerEl.dataset.mobileMenuOpen === 'false') {
+                    menuContainer.style.pointerEvents = 'none';
                 }
-            });
+            }, 300);
+        }
+      };
+
+      menuBtn.addEventListener('click', () => toggleMenu());
+      menuOverlay.addEventListener('click', () => toggleMenu(false));
+      // Close menu when a link inside it is clicked
+      document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
+      });
+      // Close menu with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && headerEl.dataset.mobileMenuOpen === 'true') {
+            toggleMenu(false);
+        }
+      });
+
+
+      // --- Smooth scrolling for internal anchors ---
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href.length > 1) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              const headerOffset = 100; // Adjust this value based on your fixed header's height
+              const elementPosition = target.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+
+              // Optional: focus target for accessibility
+              setTimeout(() => target.focus({ preventScroll: true }), 300);
+            }
+          }
         });
-    </script>
+      });
+
+      // --- Image Lightbox + Fullscreen ---
+      const heroImg = document.getElementById('hero-screenshot');
+      const openLightboxBtn = document.getElementById('open-lightbox');
+      const modal = document.getElementById('image-modal');
+      const modalPanel = document.getElementById('image-modal-panel');
+      const modalImage = document.getElementById('modal-image');
+      const modalClose = document.getElementById('modal-close');
+      const modalFs = document.getElementById('modal-fullscreen');
+
+      const imgSrc = heroImg.src;
+      const imgAlt = heroImg.alt;
+      
+      const showModal = () => {
+        modalImage.src = imgSrc;
+        modalImage.alt = imgAlt;
+        modal.classList.remove('modal-hidden');
+        document.body.classList.add('no-scroll');
+
+        const card = modalPanel.querySelector('div.relative.max-w-6xl');
+        card.classList.add('modal-enter');
+        requestAnimationFrame(() => {
+          card.classList.add('modal-enter-active');
+          card.classList.remove('modal-enter');
+        });
+        card.focus();
+      };
+      
+      const hideModal = () => {
+        const card = modalPanel.querySelector('div.relative.max-w-6xl');
+        card.classList.add('modal-leave-active');
+        card.addEventListener('transitionend', () => {
+          modal.classList.add('modal-hidden');
+          document.body.classList.remove('no-scroll');
+          card.classList.remove('modal-leave-active');
+        }, { once: true });
+
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      };
+      
+      const toggleFullscreen = () => {
+        const container = modalPanel.firstElementChild;
+        if (!document.fullscreenElement) {
+          container.requestFullscreen?.().catch(() => {});
+        } else {
+          document.exitFullscreen?.().catch(() => {});
+        }
+      };
+      
+      [heroImg, openLightboxBtn].forEach(el => el.addEventListener('click', showModal));
+      modalClose.addEventListener('click', hideModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.classList.contains('modal-backdrop')) hideModal();
+      });
+      modalFs.addEventListener('click', toggleFullscreen);
+      
+      document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('modal-hidden')) return;
+        if (e.key === 'Escape') hideModal();
+        if (e.key.toLowerCase() === 'f') toggleFullscreen();
+      });
+      
+      document.addEventListener('fullscreenchange', () => {
+        const isFs = !!document.fullscreenElement;
+        modalFs.setAttribute('aria-pressed', String(isFs));
+        modalFs.innerHTML = isFs ? '<i class="fa-solid fa-minimize"></i>' : '<i class="fa-solid fa-maximize"></i>';
+      });
+    });
+  </script>
+
 </body>
 </html>
