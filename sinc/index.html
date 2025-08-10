@@ -47,6 +47,7 @@
         overflow: hidden;
     }
 
+
     /* Gradient Text Animation */
     .gradient-text {
       background: linear-gradient(135deg, #0369a1, #0ea5e9, #06b6d4);
@@ -228,7 +229,9 @@
 
               <!-- Screenshot Card -->
               <figure class="relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-slate-900/10 overflow-hidden bg-white">
-                <img id="hero-screenshot" src="images/sinc-dashboard.png" alt="SINC dashboard preview showing case management, tasks, and analytics." class="w-full h-full object-cover cursor-zoom-in" decoding="async" fetchpriority="high" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 900px" />
+                <!-- === MODIFICATION START === -->
+                <img id="hero-screenshot" src="images/sinc-dashboard.png" alt="A screenshot of the SINC legal management system dashboard." class="w-full h-full object-contain cursor-zoom-in" />
+                <!-- === MODIFICATION END === -->
                 <figcaption class="sr-only">Click to view the dashboard in full screen</figcaption>
 
                 <!-- Top-right expand button -->
