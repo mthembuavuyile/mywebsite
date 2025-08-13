@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <style>
+    .card { display:inline-block; width:60px; height:60px; font-size:2rem; text-align:center; line-height:60px; border:1px solid #000; margin:5px; cursor:pointer; background:#ccc; }
+    .matched { background:#8f8; }
+  </style>
+</head>
+<body>
+  <h1>Memory Card Game</h1>
+  <div class="game-container">
+    <div class="card-grid" id="card-grid"></div>
+    <div id="game"></div>
+    <p id="score">Score: 0</p>
+  </div>
+
+  <script>
+    const fruits = ['🍌','🍎','🍒','🍌','🍎','🍒'].sort(() => Math.random() - 0.5);
+    const game = document.getElementById('game');
+    const scoreEl = document.getElementById('score');
+    let score = 0, first = null, second = null;
+
+    fruits.forEach(fruit => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.fruit = fruit;
+      card.onclick = () => {
+        if (card.textContent || second) return;
+        card.textContent = fruit;
+        if (!first) first = card;
+        else {
+          second = card;
+          scoreEl.textContent = `Score: ${++score}`;
+          if (first.dataset.fruit === second.dataset.fruit) {
+            first.classList.add('matched');
+            second.classList.add('matched');
+            first = second = null;
+          } else {
+            setTimeout(() => {
+              first.textContent = '';
+              second.textContent = '';
+              first = second = null;
+            }, 500);
+          }
+        }
+      };
+      game.appendChild(card);
+    });
+  </script>
+</body>
+</html>
