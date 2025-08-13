@@ -11,33 +11,39 @@
 </head>
 <body>
   <h1>Memory Card Game</h1>
-  <div class="game-container">
-    <div class="card-grid" id="card-grid"></div>
-    <div id="game"></div>
-    <p id="score">Score: 0</p>
-  </div>
+  <div id="game"></div>
+  <p id="score">Score: 0</p>
+  <p id="clicks">Clicks: 0</p>
 
   <script>
     const fruits = ['🍌','🍎','🍒','🍌','🍎','🍒'].sort(() => Math.random() - 0.5);
     const game = document.getElementById('game');
     const scoreEl = document.getElementById('score');
-    let score = 0, first = null, second = null;
+    const clicksEl = document.getElementById('clicks');
+
+    let score = 0, clicks = 0, first = null, second = null;
 
     fruits.forEach(fruit => {
       const card = document.createElement('div');
       card.className = 'card';
       card.dataset.fruit = fruit;
+
       card.onclick = () => {
         if (card.textContent || second) return;
+        clicksEl.textContent = `Clicks: ${++clicks}`;
         card.textContent = fruit;
-        if (!first) first = card;
-        else {
+
+        if (!first) {
+          first = card;
+        } else {
           second = card;
-          scoreEl.textContent = `Score: ${++score}`;
           if (first.dataset.fruit === second.dataset.fruit) {
+            score++;
+            scoreEl.textContent = `Score: ${score}`;
             first.classList.add('matched');
             second.classList.add('matched');
             first = second = null;
+            if (score === 3) alert("You win!");
           } else {
             setTimeout(() => {
               first.textContent = '';
@@ -47,6 +53,7 @@
           }
         }
       };
+
       game.appendChild(card);
     });
   </script>
