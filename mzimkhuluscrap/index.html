@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMB Recycling | Mzimkhulu Scrap Metal | Pietermaritzburg</title>
-    <meta name="description" content="PMB Recycling (Mzimkhulu Scrap Metal) is your leading partner for metal, paper, cardboard, glass, and plastic recycling in Pietermaritzburg. We offer competitive pricing and reliable service.">
-    <meta name="keywords" content="Scrap Metal, Recycling, Pietermaritzburg, PMB Recycling, Metal Recycling, Paper Recycling, Plastic Recycling">
+    <meta name="description"
+        content="PMB Recycling (Mzimkhulu Scrap Metal) is your leading partner for metal, paper, cardboard, glass, and plastic recycling in Pietermaritzburg. We offer competitive pricing and reliable service.">
+    <meta name="keywords"
+        content="Scrap Metal, Recycling, Pietermaritzburg, PMB Recycling, Metal Recycling, Paper Recycling, Plastic Recycling">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -22,17 +26,23 @@
             --font-body: 'Roboto', sans-serif;
 
             /* Color Palette */
-            --color-primary: #2E7D32;         /* Deep Green for sustainability */
-            --color-accent: #FFC107;          /* Industrial Yellow for CTAs */
-            --color-secondary: #0D47A1;       /* Corporate Blue for trust */
-            
+            --color-primary: #2E7D32;
+            /* Deep Green for sustainability */
+            --color-accent: #FFC107;
+            /* Industrial Yellow for CTAs */
+            --color-secondary: #0D47A1;
+            /* Corporate Blue for trust */
+
             --color-background-main: #FFFFFF;
-            --color-background-alt: #F4F6F9;  /* Light grey for section contrast */
-            
-            --color-text-primary: #212529;    /* Near-black for readability */
-            --color-text-secondary: #6c757d;  /* Grey for less important text */
+            --color-background-alt: #F4F6F9;
+            /* Light grey for section contrast */
+
+            --color-text-primary: #212529;
+            /* Near-black for readability */
+            --color-text-secondary: #6c757d;
+            /* Grey for less important text */
             --color-text-on-dark: #FFFFFF;
-            
+
             --color-footer-bg: #212529;
             --color-border-subtle: #dee2e6;
         }
@@ -104,7 +114,7 @@
             background: var(--color-accent);
             color: var(--color-text-primary);
         }
-        
+
         .btn-primary:hover {
             background: #ffca2c;
             transform: translateY(-3px);
@@ -116,7 +126,7 @@
             color: var(--color-text-on-dark);
             border: 2px solid var(--color-text-on-dark);
         }
-        
+
         .btn-secondary:hover {
             background: var(--color-text-on-dark);
             color: var(--color-text-primary);
@@ -148,6 +158,7 @@
             color: var(--color-text-primary);
             text-decoration: none;
         }
+
         .logo span {
             color: var(--color-primary);
         }
@@ -203,12 +214,23 @@
             transform: translateY(-2px);
             color: var(--color-text-on-dark);
         }
-        .cta-btn:hover::after { width: 0; }
 
-        .hamburger { display: none; cursor: pointer; }
+        .cta-btn:hover::after {
+            width: 0;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
         .hamburger .bar {
-            display: block; width: 25px; height: 3px; margin: 5px auto;
-            background-color: var(--color-text-primary); transition: all 0.3s ease-in-out;
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--color-text-primary);
+            transition: all 0.3s ease-in-out;
         }
 
         /* --- HERO SECTION --- */
@@ -219,7 +241,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 80px; /* Header offset */
+            padding-top: 80px;
+            /* Header offset */
             background:
                 linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
                 /* IMPORTANT: Replace with a high-quality photo of scrap metal or recycling machinery */
@@ -262,7 +285,7 @@
             border-top: 5px solid var(--color-primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
@@ -305,7 +328,7 @@
             color: var(--color-secondary);
             margin-bottom: 1rem;
         }
-        
+
         .material-card h3 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
@@ -317,9 +340,11 @@
             color: var(--color-text-secondary);
             text-align: left;
         }
+
         .material-card ul li {
             padding: 0.3rem 0;
         }
+
         .material-card ul li i {
             color: var(--color-primary);
             margin-right: 0.5rem;
@@ -332,7 +357,7 @@
             gap: 2rem;
             counter-reset: process-counter;
         }
-        
+
         .process-card {
             background: var(--color-background-alt);
             border-radius: 8px;
@@ -341,7 +366,7 @@
             position: relative;
             border-left: 5px solid var(--color-accent);
         }
-        
+
         .process-card::before {
             counter-increment: process-counter;
             content: "0" counter(process-counter);
@@ -374,6 +399,40 @@
             z-index: 2;
         }
 
+        /* --- ADDED: GALLERY SECTION --- */
+        #gallery {
+            background-color: var(--color-background-main);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-cta {
+            text-align: center;
+        }
 
         /* --- CONTACT SECTION --- */
         #contact {
@@ -386,7 +445,7 @@
             gap: 3rem;
             align-items: flex-start;
         }
-        
+
         .contact-info .info-item {
             display: flex;
             align-items: flex-start;
@@ -402,14 +461,16 @@
             text-align: center;
             margin-top: 4px;
         }
-        
+
         .contact-info h3 {
             font-family: var(--font-heading);
             font-size: 1.5rem;
             margin-bottom: 0.2rem;
         }
-        
-        .contact-info p { margin: 0; }
+
+        .contact-info p {
+            margin: 0;
+        }
 
         .contact-info a {
             color: var(--color-secondary);
@@ -418,7 +479,9 @@
             transition: color 0.3s ease;
         }
 
-        .contact-info a:hover { color: var(--color-primary); }
+        .contact-info a:hover {
+            color: var(--color-primary);
+        }
 
         .map-container {
             height: 450px;
@@ -439,12 +502,45 @@
             color: #ccc;
             padding: 4rem 0 2rem 0;
         }
-        .footer .container { text-align: center; }
 
-        .footer .logo { color: var(--color-text-on-dark); }
-        .footer .logo span { color: var(--color-accent); }
+        .footer .container {
+            text-align: center;
+        }
 
-        .footer p { margin: 1rem 0 2rem 0; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .footer .logo {
+            color: var(--color-text-on-dark);
+        }
+
+        .footer .logo span {
+            color: var(--color-accent);
+        }
+
+        .footer p {
+            margin: 1rem 0 2rem 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- ADDED: FOOTER NAVIGATION STYLES --- */
+        .footer-nav {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--color-accent);
+        }
 
         .footer-bottom {
             margin-top: 2rem;
@@ -455,39 +551,109 @@
         }
 
         /* Scroll-on-reveal Animation */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* --- RESPONSIVE STYLES --- */
         @media (max-width: 992px) {
-            .section-title h2 { font-size: 2.4rem; }
-            .hero-content h1 { font-size: 3rem; }
-            .contact-wrapper { grid-template-columns: 1fr; }
-            .map-container { grid-row: 1; height: 350px; }
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                grid-row: 1;
+                height: 350px;
+            }
         }
 
         @media (max-width: 768px) {
-            html { scroll-padding-top: 70px; }
-            .nav-container { height: 70px; }
-            .nav-menu {
-                position: fixed; left: -100%; top: 70px; flex-direction: column;
-                background-color: var(--color-background-main); width: 100%;
-                height: calc(100vh - 70px); text-align: center; transition: 0.3s; gap: 0;
+            html {
+                scroll-padding-top: 70px;
             }
-            .nav-menu li { width: 100%; }
+
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--color-background-main);
+                width: 100%;
+                height: calc(100vh - 70px);
+                text-align: center;
+                transition: 0.3s;
+                gap: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
             .nav-menu a {
-                padding: 1.5rem 0; display: block; width: 100%;
+                padding: 1.5rem 0;
+                display: block;
+                width: 100%;
                 border-bottom: 1px solid var(--color-border-subtle);
             }
-            .nav-menu.active { left: 0; }
-            .hamburger { display: block; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content p { font-size: 1.1rem; }
-            .hero-buttons { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
-            .btn { width: 80%; max-width: 300px; }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .btn {
+                width: 80%;
+                max-width: 300px;
+            }
         }
     </style>
 </head>
@@ -497,13 +663,15 @@
     <header class="header">
         <nav class="container nav-container">
             <a href="#home" class="logo">PMB <span>Recycling</span></a>
+
             <ul class="nav-menu">
-                <li><a href="#services" class="nav-link">Our Services</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#materials" class="nav-link">Materials</a></li>
-                <li><a href="#process" class="nav-link">Our Process</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="#contact" class="cta-btn">Get a Quote</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="contact.html" class="cta-btn">Get a Quote</a></li>
             </ul>
+
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -517,7 +685,8 @@
         <section id="home">
             <div class="hero-content fade-in">
                 <h1>Leading Industrial Recycling Solutions</h1>
-                <p>Your trusted partner in Pietermaritzburg for efficient and sustainable scrap metal, paper, and plastic recycling.</p>
+                <p>Your trusted partner in Pietermaritzburg for efficient and sustainable scrap metal, paper, and
+                    plastic recycling.</p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Request a Collection</a>
                     <a href="#materials" class="btn btn-secondary">See Materials We Buy</a>
@@ -528,23 +697,27 @@
         <section id="services" class="container">
             <div class="section-title fade-in">
                 <h2>Your Partner In Sustainability</h2>
-                <p>We provide comprehensive recycling services for businesses and individuals, focusing on reliability, fair pricing, and environmental responsibility.</p>
+                <p>We provide comprehensive recycling services for businesses and individuals, focusing on reliability,
+                    fair pricing, and environmental responsibility.</p>
             </div>
             <div class="services-grid">
                 <div class="service-card fade-in" style="transition-delay: 100ms;">
                     <div class="icon"><i class="fas fa-hand-holding-dollar"></i></div>
                     <h3>Competitive Pricing</h3>
-                    <p>We offer fair, transparent, and competitive prices for all your recyclable materials, ensuring you get the best value.</p>
+                    <p>We offer fair, transparent, and competitive prices for all your recyclable materials, ensuring
+                        you get the best value.</p>
                 </div>
                 <div class="service-card fade-in" style="transition-delay: 200ms;">
                     <div class="icon"><i class="fas fa-truck-fast"></i></div>
                     <h3>Reliable Service</h3>
-                    <p>Our team is committed to providing prompt and efficient collection and drop-off services to meet your schedule.</p>
+                    <p>Our team is committed to providing prompt and efficient collection and drop-off services to meet
+                        your schedule.</p>
                 </div>
                 <div class="service-card fade-in" style="transition-delay: 300ms;">
                     <div class="icon"><i class="fas fa-leaf"></i></div>
                     <h3>Environmental Focus</h3>
-                    <p>By partnering with us, you contribute to a greener planet. We adhere to responsible recycling practices.</p>
+                    <p>By partnering with us, you contribute to a greener planet. We adhere to responsible recycling
+                        practices.</p>
                 </div>
             </div>
         </section>
@@ -553,7 +726,8 @@
             <div class="container">
                 <div class="section-title fade-in">
                     <h2>Materials We Recycle</h2>
-                    <p>We accept a wide range of materials. If you are unsure about an item, please don't hesitate to contact us.</p>
+                    <p>We accept a wide range of materials. If you are unsure about an item, please don't hesitate to
+                        contact us.</p>
                 </div>
                 <div class="materials-grid">
                     <div class="material-card fade-in">
@@ -609,17 +783,48 @@
                 <div class="process-card fade-in">
                     <div class="icon"><i class="fas fa-truck-arrow-right"></i></div>
                     <h3>1. Drop-Off or Collect</h3>
-                    <p>Bring your materials to our yard in Mkondeni or schedule a convenient collection for larger quantities.</p>
+                    <p>Bring your materials to our yard in Mkondeni or schedule a convenient collection for larger
+                        quantities.</p>
                 </div>
                 <div class="process-card fade-in" style="transition-delay: 150ms;">
                     <div class="icon"><i class="fas fa-balance-scale-left"></i></div>
                     <h3>2. Weigh & Sort</h3>
-                    <p>Our expert team will accurately sort and weigh your materials using certified scales to determine their value.</p>
+                    <p>Our expert team will accurately sort and weigh your materials using certified scales to determine
+                        their value.</p>
                 </div>
                 <div class="process-card fade-in" style="transition-delay: 300ms;">
                     <div class="icon"><i class="fas fa-wallet"></i></div>
                     <h3>3. Instant Payment</h3>
-                    <p>Receive immediate and fair payment for your recyclables based on current market rates. Quick and hassle-free.</p>
+                    <p>Receive immediate and fair payment for your recyclables based on current market rates. Quick and
+                        hassle-free.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <h2>Our Work in Action</h2>
+                    <p>A glimpse into our operations, the materials we process, and our commitment to a cleaner
+                        environment.</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in">
+                        <img src="images/recycling.jpg" alt="Baled cardboard for recycling">
+                    </div>
+                    <div class="gallery-item fade-in" style="transition-delay: 100ms;">
+                        <img src="images/recycling1.jpg" alt="Pile of assorted scrap metal">
+                    </div>
+                    <div class="gallery-item fade-in" style="transition-delay: 200ms;">
+                        <img src="images/recycling2.jpg" alt="Heavy machinery processing scrap">
+                    </div>
+                    <div class="gallery-item fade-in" style="transition-delay: 300ms;">
+                        <img src="images/recycling3.jpg" alt="Sorted plastic bottles ready for processing">
+                    </div>
+                </div>
+
+                <div class="gallery-cta fade-in">
+                    <a href="gallery.html" class="btn btn-primary">View Full Gallery</a>
                 </div>
             </div>
         </section>
@@ -628,7 +833,8 @@
             <div class="container">
                 <div class="section-title fade-in">
                     <h2>Get In Touch</h2>
-                    <p>Visit our yard, give us a call, or send an enquiry. We are ready to assist with all your recycling needs.</p>
+                    <p>Visit our yard, give us a call, or send an enquiry. We are ready to assist with all your
+                        recycling needs.</p>
                 </div>
                 <div class="contact-wrapper">
                     <div class="contact-info fade-in">
@@ -636,10 +842,10 @@
                             <i class="fas fa-map-marker-alt icon"></i>
                             <div>
                                 <h3>Our Address</h3>
-                                <p>8 72 C B Downes Rd, Mkondeni, <br> Pietermaritzburg, 3201, South Africa</p>
+                                <p>872 C B Downes Rd, Mkondeni, <br> Pietermaritzburg, 3201, South Africa</p>
                             </div>
                         </div>
-                         <div class="info-item">
+                        <div class="info-item">
                             <i class="fas fa-phone icon"></i>
                             <div>
                                 <h3>Phone / WhatsApp</h3>
@@ -655,7 +861,10 @@
                         </div>
                     </div>
                     <div class="map-container fade-in">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3460.841517865261!2d30.41031407621453!3d-29.638528975037996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6b533f572c679%3A0xe54cb1160161805!2sC%20B%20Downes%20Rd%2C%20Pietermaritzburg%2C%203201%2C%20South%20Africa!5e0!3m2!1sen!2sus!4v1678886400000!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.856985790409!2d30.41235181510848!3d-29.65213608201207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6b9d1f3e7b165%3A0x6d9e0b82f1b80f14!2s872%20CB%20Downes%20Rd%2C%20Mkondeni%2C%20Pietermaritzburg%2C%203201!5e0!3m2!1sen!2sza!4v1664455883584!5m2!1sen!2sza"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -666,8 +875,17 @@
         <div class="container">
             <a href="#home" class="logo">Mzimkhulu Scrap Metal <span>(TA PMB Recycling)</span></a>
             <p>Your trusted partner in waste management and sustainable recycling solutions in Pietermaritzburg.</p>
+
+            <nav class="footer-nav">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#materials">Materials</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
             <div class="footer-bottom">
-                &copy; 2024 PMB Recycling. All Rights Reserved. K2016/350191/07
+                © 2024 PMB Recycling. All Rights Reserved. K2016/350191/07
             </div>
         </div>
     </footer>
@@ -680,9 +898,12 @@
             hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");
         });
-        document.querySelectorAll(".nav-link, .cta-btn").forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
+        document.querySelectorAll(".nav-menu a").forEach(n => n.addEventListener("click", () => {
+            // Only close menu if it's a link to the same page or hamburger is active
+            if (n.getAttribute('href').startsWith('#') || hamburger.classList.contains('active')) {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }
         }));
 
         // Scroll-on-reveal Animation
@@ -706,9 +927,15 @@
                 const sectionHeight = current.offsetHeight;
                 const sectionTop = current.offsetTop - 150;
                 let sectionId = current.getAttribute("id");
+
+                // Find a nav link that CONTAINS the sectionId, for hash links
                 const navLink = document.querySelector(".nav-menu a[href*=" + sectionId + "]");
+
                 if (navLink) {
                     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        // Remove active class from all links first
+                        document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active-link'));
+                        // Add active class to the current one
                         navLink.classList.add("active-link");
                     } else {
                         navLink.classList.remove("active-link");
@@ -719,4 +946,5 @@
     </script>
 
 </body>
+
 </html>
