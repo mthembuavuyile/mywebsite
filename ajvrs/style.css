@@ -1,0 +1,24 @@
+/* Using Tailwind's 'hidden' class handles display, but we add a fade-in for a smoother transition. */
+.screen-view {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom style for active navigation links */
+.nav-link.active {
+    background-color: #EBF4FF; /* Corresponds to Tailwind's bg-blue-100 */
+    color: #005A9C;           /* Corresponds to Tailwind's text-brand */
+}
+
+/* Custom style for active mobile tab links */
+.tab-link.active {
+    color: #005A9C;           /* Corresponds to Tailwind's text-brand */
+    font-weight: 600;         /* Corresponds to Tailwind's font-semibold */
+}
+.tab-link:not(.active) {
+    color: #6B7280;          /* Corresponds to Tailwind's text-muted */
+}
