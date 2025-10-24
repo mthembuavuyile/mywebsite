@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avuyile Mthembu | Software Developer, Systems Analyst, Cybersecurity Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Noto+Serif+Vithkuqi:wght@400;700&family=Space+Mono:wght@400;700&family=Rajdhani:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00ffff;
+            --secondary: #00b7ff;
+            --accent: #ff0080;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --dark: #000000;
+            --dark-alt: #0a0a0a;
+            --light: #ffffff;
+            --gray: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--dark);
+            min-height: 100vh;
+            font-family: "Noto Serif Vithkuqi", serif;
+            overflow-x: hidden;
+            perspective: 10000px;
+            position: relative;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+        }
+
+        .matrix-column {
+            position: absolute;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--primary);
+            animation: matrixFall linear infinite;
+        }
+
+        /* Floating Code Snippets */
+        .floating-code {
+            position: fixed;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--primary);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+            animation: floatCode 15s linear infinite;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .title-card {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90vw;
+            max-width: 960px;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: scaling linear 0.15s 2500ms backwards,
+                       shaking linear 0.45s 2500ms;
+            margin-bottom: 2rem;
+        }
+
+        .box {
+            width: calc(90vw / 8);
+            max-width: 120px;
+            height: calc((90vw / 8) * 1.33);
+            max-height: 160px;
+            position: relative;
+        }
+
+        .dots {
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--light) 0.5mm, transparent 0.5mm);
+            background-size: 20px 20px;
+            opacity: 0.5;
+        }
+
+        .animate {
+            animation: scaleDots 1.25s ease-in-out var(--delay);
+            animation-fill-mode: backwards;
+        }
+
+        .letter {
+            font-size: min(140px, 12vw);
+            color: var(--light);
+            font-family: 'Codystar', cursive;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            animation: scaleLetters 1s ease-in var(--delay);
+            animation-fill-mode: backwards;
+        }
+
+        .name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            height: min(150px, 15vw);
+            animation: fallin 0.5s cubic-bezier(0.32, 0.58, 0.69, 0.88) 2500ms,
+                       resize 0.5s ease-in 3500ms;
+            animation-fill-mode: both;
+        }
+
+        .text {
+            font-weight: 900;
+            font-size: min(90px, 8vw);
+            letter-spacing: min(10px, 1vw);
+            background: linear-gradient(160deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+
+        /* Terminal Section */
+        .terminal-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .terminal {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+            animation: terminalGlow 3s ease-in-out infinite alternate;
+        }
+
+        .terminal-header {
+            background: var(--gray);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .btn-close { background: #ff5f57; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #28ca42; }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'Space Mono', monospace;
+            color: var(--success);
+            font-size: 14px;
+            line-height: 1.6;
+            height: 400px; /* Adjusted height for new content */
+            overflow-y: auto; /* Added for scroll if content overflows */
+        }
+
+        .terminal-line {
+            opacity: 0;
+            animation: typewriter 0.5s forwards;
+            /* Ensure proper spacing for multi-line outputs */
+            margin-bottom: 0.2em; 
+        }
+        .terminal-line:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background: var(--primary);
+            animation: blink 1s infinite;
+        }
+
+        /* Skills Matrix */
+        .skills-section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid var(--primary);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            border-color: var(--accent);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-icon {
+            width: 30px;
+            height: 30px;
+            /* background: var(--primary); */ /* Icon itself is the color */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary); /* Icon color */
+            font-size: 1.5em; /* Make icon larger */
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            color: var(--light);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.9rem; /* Adjust font size for more content */
+        }
+
+        .skill-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Code Visualization */
+        .code-section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-container {
+            width: 90%;
+            max-width: 1000px;
+            display: grid;
+            /* grid-template-columns: 1fr 1fr; */ /* Changed to 1fr for single editor */
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .code-editor {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .code-header {
+            background: var(--gray);
+            padding: 10px 20px;
+            font-family: 'Space Mono', monospace;
+            color: var(--light);
+            font-size: 12px;
+        }
+
+        .code-body {
+            padding: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--light);
+            height: 400px; /* Increased height */
+            overflow: auto;
+        }
+        .code-body pre { /* Ensure preformatted text wraps and respects newlines */
+            white-space: pre-wrap;       
+            word-wrap: break-word;     
+        }
+
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; }
+        .function { color: #50fa7b; }
+        .number { color: #bd93f9; }
+
+        /* Neural Network Visualization - Not directly used by new content, kept for style consistency */
+        .neural-network {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 2rem 0;
+        }
+
+        .node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.6;
+            animation: dataFlow 3s linear infinite;
+        }
+
+        /* Vylex Section Enhanced */
+        .vylex-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            gap: 1rem; /* Adjusted gap */
+        }
+
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 95%, rgba(0,255,255,0.1) 95%),
+                linear-gradient(transparent 95%, rgba(0,255,255,0.1) 95%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            animation: circuitMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        .glitch-container {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .glitch-text {
+            font-size: clamp(2rem, 7vw, 5rem); /* Adjusted font size */
+            font-weight: 700;
+            color: var(--light);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary);
+            animation: glitch 5s infinite;
+            margin: 0;
+        }
+
+        .rotating-cube {
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            margin: 1.5rem auto; /* Adjusted margin */
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem; /* Adjusted font size */
+            background: rgba(0,255,255,0.1);
+            border: 2px solid var(--primary);
+            backdrop-filter: blur(5px);
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif; /* Consistent font */
+        }
+
+        /* Stats Dashboard - Not used by new content, kept for style consistency */
+        .stats-section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .stat-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            animation: countUp 2s ease-out;
+        }
+
+        .stat-label {
+            color: var(--light);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center; 
+            padding: 3rem 1rem; 
+            color: var(--light); 
+            font-family: 'Space Mono', monospace;
+            background: var(--dark-alt);
+            border-top: 1px solid var(--primary-translucent, rgba(0, 255, 255, 0.2));
+        }
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+
+        /* Animations */
+        @keyframes scaleDots {
+            0% { opacity: 1; background-size: 20px 20px; }
+            50% { opacity: 1; background-size: 200px 200px; }
+            100% { opacity: 0.5; background-size: 20px 20px; }
+        }
+
+        @keyframes scaleLetters {
+            0%, 80% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes fallin {
+            0% { transform: translate(-50%, -50%) translateZ(10000px) rotateY(225deg); }
+            100% { transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotateX(0) rotateY(0); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes circuitMove {
+            from { background-position: 0 0; }
+            to { background-position: 20px 20px; }
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px var(--primary); }
+            2%, 52% { text-shadow: 3px 3px 0 red, -3px -3px 0 blue; }
+            4%, 54% { text-shadow: 0 0 10px var(--primary); }
+        }
+
+        @keyframes matrixFall {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes floatCode {
+            0% { transform: translateX(-100vw) translateY(0); }
+            100% { transform: translateX(100vw) translateY(-50px); }
+        }
+
+        @keyframes typewriter {
+            from { opacity: 0; transform: translateY(10px); } /* Added subtle Y transform */
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        @keyframes terminalGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.6); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes dataFlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title-card { transform: scale(0.8); }
+            .box {
+                width: calc(90vw / 4);
+                height: calc((90vw / 4) * 1.33);
+            }
+            .rotating-cube {
+                width: 150px;
+                height: 150px;
+            }
+            .cube-face {
+                width: 150px;
+                height: 150px;
+                font-size: 1.2rem; /* Adjusted for smaller cube */
+            }
+            .code-container {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .glitch-text {
+                font-size: clamp(1.8rem, 10vw, 3.5rem);
+            }
+            .vylex-section h2 {
+                font-size: 1rem;
+            }
+            .vylex-section p {
+                font-size: 0.9rem;
+            }
+            .terminal-body {
+                font-size: 12px;
+                height: 350px;
+            }
+            .skill-title {
+                font-size: 1.3rem;
+            }
+            .skill-list li {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrix"></div>
+    
+    <!-- Floating Code Snippets -->
+    <div class="floating-code" style="top: 20%; animation-delay: 0s;">// Crafting robust solutions...</div>
+    <div class="floating-code" style="top: 40%; animation-delay: 3s;">import { Security, Innovation } from 'core';</div>
+    <div class="floating-code" style="top: 60%; animation-delay: 6s;">SELECT * FROM FutureTech WHERE impact > 0;</div>
+    <div class="floating-code" style="top: 80%; animation-delay: 9s;">system.analyze().design().develop();</div>
+
+    <section class="vylex-section">
+        <div class="glitch-container">
+            <h1 class="glitch-text">Avuyile Mthembu</h1>
+            <h2 style="color: var(--primary); font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; margin-top:0.5rem;">
+                Software Developer | Systems Analyst | Cybersecurity Professional
+            </h2>
+            <p style="color: var(--light); max-width: 700px; margin: 1.5rem auto; font-size: 1.1rem; line-height: 1.7;">
+                Versatile technology professional with comprehensive skills spanning software development, cybersecurity, and business analysis. Capable of bridging technical implementation with business requirements, making me valuable for organizations seeking integrated IT solutions and digital transformation initiatives.
+            </p>
+        </div>
+
+        <div class="rotating-cube">
+            <div class="cube">
+                <div class="cube-face" style="transform: translateZ(100px)">DEV</div>
+                <div class="cube-face" style="transform: rotateY(180deg) translateZ(100px)">SECURE</div>
+                <div class="cube-face" style="transform: rotateY(90deg) translateZ(100px)">ANALYZE</div>
+                <div class="cube-face" style="transform: rotateY(-90deg) translateZ(100px)">DESIGN</div>
+                <div class="cube-face" style="transform: rotateX(90deg) translateZ(100px)">INNOVATE</div>
+                <div class="cube-face" style="transform: rotateX(-90deg) translateZ(100px)">BUILD</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="circuit-bg"></div>
+    
+    <section class="hero-section">
+        <div class="title-card">
+            <div class="box">
+                <div class="dots"></div>
+            </div>
+            <div class="box" style="--delay: 150ms">
+                <div class="dots animate"></div>
+                <div class="letter">C</div>
+            </div>
+            <div class="box" style="--delay: 300ms">
+                <div class="dots animate"></div>
+                <div class="letter">O</div>
+            </div>
+            <div class="box" style="--delay: 450ms">
+                <div class="dots animate"></div>
+                <div class="letter">D</div>
+            </div>
+            <div class="box" style="--delay: 600ms">
+                <div class="dots animate"></div>
+                <div class="letter">E</div>
+            </div>
+            <div class="box" style="--delay: 750ms">
+                <div class="dots animate"></div>
+                <div class="letter">R</div>
+            </div>
+            <div class="box">
+                <div class="dots"></div>
+            </div>
+            <div class="name">
+                <div class="text">AVUYILE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Section -->
+    <section class="terminal-section">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-btn btn-close"></div>
+                <div class="terminal-btn btn-minimize"></div>
+                <div class="terminal-btn btn-maximize"></div>
+                <span style="color: var(--light); font-family: 'Space Mono', monospace; margin-left: 10px;">avuyile@portfolio:~$</span>
+            </div>
+            <div class="terminal-body" id="terminal">
+                <div class="terminal-line" style="animation-delay: 0s;">$ whoami</div>
+                <div class="terminal-line" style="animation-delay: 0.5s;">Avuyile Mthembu</div>
+                <div class="terminal-line" style="animation-delay: 1s;">> Software Developer | Systems Analyst | Cybersecurity Professional</div>
+                <div class="terminal-line" style="animation-delay: 1.5s;">$ show --core-skills</div>
+                <div class="terminal-line" style="animation-delay: 2s;">[+] Programming: Java, Web (PHP, JS, HTML/CSS), Android, Full-Stack</div>
+                <div class="terminal-line" style="animation-delay: 2.5s;">[+] Databases: MySQL, Access, SQL, DB Design, Data Warehouse</div>
+                <div class="terminal-line" style="animation-delay: 3s;">[+] Security: CompTIA A+/Sec+, CEH, Pen Testing, Security Analysis</div>
+                <div class="terminal-line" style="animation-delay: 3.5s;">[+] Systems: Analysis & Design, IT Support & Admin</div>
+                <div class="terminal-line" style="animation-delay: 4s;">$ echo $MISSION</div>
+                <div class="terminal-line" style="animation-delay: 4.5s;">"Bridging technical implementation with business requirements for </div>
+                <div class="terminal-line" style="animation-delay: 4.7s;"> integrated IT solutions and digital transformation."</div>
+                <div class="terminal-line" style="animation-delay: 5s;">$ status --current</div>
+                <div class="terminal-line" style="animation-delay: 5.5s;">Ready to innovate and build impactful solutions.</div>
+                <div class="terminal-line" style="animation-delay: 6s;"><span class="cursor"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="glitch-container">
+            <h2 class="glitch-text" style="font-size: 3rem;">Core Competencies</h2>
+        </div>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-title">
+                    <div class="skill-icon">⚡</div>
+                    Programming & Development
+                </div>
+                <ul class="skill-list">
+                    <li>Java (Desktop Applications, Enterprise Solutions)</li>
+                    <li>Web Dev: PHP, MySQL, JavaScript, HTML5, CSS, jQuery</li>
+                    <li>Mobile Development: Android App Development</li>
+                    <li>Full-Stack Development Capabilities</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-title">
+                    <div class="skill-icon">💾</div>
+                    Database & Systems
+                </div>
+                <ul class="skill-list">
+                    <li>Database Development & Administration (MySQL, Access)</li>
+                    <li>SQL Programming & Database Design</li>
+                    <li>Systems Analysis & Design</li>
+                    <li>Data Warehouse Development</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-title">
+                    <div class="skill-icon">🔧</div>
+                    Security & Infrastructure
+                </div>
+                <ul class="skill-list">
+                    <li>CompTIA A+ (IT Support & Systems Administration)</li>
+                    <li>CompTIA Security+</li>
+                    <li>EC-Council CEH (Certified Ethical Hacker)</li>
+                    <li>TestOut Ethical Hacker Pro</li>
+                    <li>Penetration Testing & Security Analysis</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-title">
+                    <div class="skill-icon">🤖</div>
+                    Key Development Pathways
+                </div>
+                <ul class="skill-list">
+                    <li>Software Developer/Programmer</li>
+                    <li>Web Developer (Full-Stack)</li>
+                    <li>Android App Developer</li>
+                    <li>Solution Engineer</li>
+                    <li>Data Warehouse Developer</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-title">
+                    <div class="skill-icon">🔗</div>
+                    Analysis & Design Pathways
+                </div>
+                <ul class="skill-list">
+                    <li>Junior Business Systems Analyst</li>
+                    <li>Systems Developer</li>
+                    <li>Data Analyst</li>
+                    <li>Junior Usability Analyst</li>
+                    <li>Test Analyst / QA Tester</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-title">
+                    <div class="skill-icon">☁️</div>
+                    Prominent Security Pathways
+                </div>
+                <ul class="skill-list">
+                    <li>Cybersecurity Analyst</li>
+                    <li>Security Solutions Specialist</li>
+                    <li>Ethical Hacker/Penetration Tester</li>
+                    <li>IT Support & Systems Admin (Security Focused)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Visualization Section -->
+    <section class="code-section">
+        <div class="glitch-container">
+            <h2 class="glitch-text" style="font-size: 3rem;">Code Craft</h2>
+        </div>
+        
+        <div class="code-container">
+            <div class="code-editor">
+                <div class="code-header">SystemBuilder.java</div>
+                <div class="code-body"><pre><span class="comment">// Demonstrating core principles: Design, Development, Security</span>
+<span class="keyword">package</span> com.avuyile.portfolio;
+
+<span class="keyword">interface</span> <span class="function">SecureComponent</span> {
+    <span class="keyword">boolean</span> <span class="function">runSecurityAudit</span>();
+}
+
+<span class="keyword">class</span> <span class="function">UserModule</span> <span class="keyword">implements</span> SecureComponent {
+    <span class="keyword">public boolean</span> <span class="function">authenticateUser</span>(String username, String password) {
+        <span class="comment">// Complex authentication logic here...</span>
+        System.out.println(<span class="string">"User: "</span> + username + <span class="string">" attempting login..."</span>);
+        <span class="keyword">return true</span>; <span class="comment">// Placeholder</span>
+    }
+
+    @Override
+    <span class="keyword">public boolean</span> <span class="function">runSecurityAudit</span>() {
+        System.out.println(<span class="string">"Auditing UserModule for vulnerabilities..."</span>);
+        <span class="keyword">return true</span>; <span class="comment">// Placeholder for audit result</span>
+    }
+}
+
+<span class="keyword">public class</span> <span class="function">ExampleSystemBuilder</span> {
+    <span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {
+        System.out.println(<span class="string">"Initializing System Components..."</span>);
+        
+        UserModule userAuth = <span class="keyword">new</span> UserModule();
+        userAuth.authenticateUser(<span class="string">"avuyile_dev"</span>, <span class="string">"securePass123"</span>);
+        
+        <span class="keyword">if</span> (userAuth.runSecurityAudit()) {
+            System.out.println(<span class="string">"UserModule security audit: PASSED"</span>);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"UserModule security audit: FAILED"</span>);
+        }
+        
+        System.out.println(<span class="string">"System ready. Awaiting further instructions."</span>);
+    }
+}</pre>
+                </div>
+            </div>
+            <!-- Second code editor removed for simplicity, focusing on one example -->
+        </div>
+    </section>
+
+    <footer>
+        <p>Connect with Avuyile Mthembu:</p>
+        <p>Email: <a href="mailto:mthembuavuyile@gmail.com">mthembuavuyile@gmail.com</a></p>
+        <p>
+            LinkedIn: <a href="https://linkedin.com/in/mthembuavuyile" target="_blank">linkedin.com/in/mthembuavuyile</a> | 
+            GitHub: <a href="https://github.com/mthembuavuyile" target="_blank">github.com/mthembuavuyile</a>
+        </p>
+        <p>©2025 Avuyile Mthembu. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Matrix Rain
+        const matrix = document.getElementById('matrix');
+        const chars = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const numColumns = Math.floor(window.innerWidth / 15);
+
+        for (let i = 0; i < numColumns; i++) {
+            const column = document.createElement('div');
+            column.classList.add('matrix-column');
+            column.style.left = `${i * 15}px`;
+            column.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            column.style.animationDelay = `${Math.random() * 5}s`;
+            let colText = '';
+            for (let j = 0; j < Math.floor(window.innerHeight / 15) + 10; j++) {
+                colText += chars.charAt(Math.floor(Math.random() * chars.length)) + '<br>';
+            }
+            column.innerHTML = colText;
+            matrix.appendChild(column);
+        }
+
+        // Typewriter effect for terminal
+        const lines = document.querySelectorAll('.terminal-line');
+        lines.forEach((line, index) => {
+            // Apply animation delay if not already set by inline style
+            if (!line.style.animationDelay) {
+                 line.style.animationDelay = `${index * 0.3}s`;
+            }
+        });
+    </script>
+</body>
+</html>

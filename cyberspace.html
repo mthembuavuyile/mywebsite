@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avuyile Mthembu | Mr. A in Cyberspace | Vylex Nexys</title>
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Avuyile Mthembu | Mr. A in Cyberspace | Vylex Nexys">
+    <meta property="og:description"
+        content="Explore the digital dimension of Mr. A. Coding. Cybersecurity. Creativity.">
+    <meta property="og:image" content="https://avuyilemthembu.co.za/assets/images/cyberspace2.jpg">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/cyberspace">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Avuyile Mthembu | Mr. A in Cyberspace | Vylex Nexys">
+    <meta name="twitter:description"
+        content="Explore the digital dimension of Mr. A. Coding. Cybersecurity. Creativity.">
+    <meta name="twitter:image" content="https://avuyilemthembu.co.za/assets/images/cyberspace2.jpg">
+
+    <!-- Preload Hero Image -->
+    <link rel="preload" as="image" href="https://avuyilemthembu.co.za/assets/images/cyberspace2.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://avuyilemthembu.co.za/assets/images/cyberspace2.jpg" type="image/jpeg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Avuyile Mthembu",
+    "url": "https://avuyilemthembu.co.za/cyberspace",
+    "image": "https://avuyilemthembu.co.za/assets/images/cyberspace2.jpg",
+    "sameAs": [
+      "https://github.com/avuyilemthembu",
+      "https://twitter.com/avuyilemthembu"
+    ]
+  }
+  </script>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Three.js Canvas */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 50px;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #cccccc;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            color: #00ffff;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            animation: matrixRain linear infinite;
+            opacity: 0.7;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* --- NEW: About Section Layout --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+            max-width: 600px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .about-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        /* --- NEW: 3D Rotating Cube --- */
+        .rotating-cube-container {
+            width: 300px;
+            height: 300px;
+            perspective: 1200px;
+            /* This creates the 3D space */
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            /* This is crucial for 3D transforms */
+            animation: rotate 25s linear infinite;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.1);
+            backface-visibility: hidden;
+            /* Hides the back of the element */
+        }
+
+        .cube-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        /* Positioning each face in 3D space */
+        .face-front {
+            transform: rotateY(0deg) translateZ(150px);
+        }
+
+        .face-back {
+            transform: rotateY(180deg) translateZ(150px);
+        }
+
+        .face-right {
+            transform: rotateY(90deg) translateZ(150px);
+        }
+
+        .face-left {
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+
+        .face-top {
+            transform: rotateX(90deg) translateZ(150px);
+        }
+
+        .face-bottom {
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+
+        /* Keyframe animation for the cube's rotation */
+        @keyframes rotate {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .skill-card h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-list {
+            list-style: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-list li:hover {
+            color: #00ffff;
+            padding-left: 10px;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .contact-card .icon {
+            font-size: 2rem;
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(odd) {
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(even) {
+            animation-delay: -4s;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 20px #00ffff;
+            }
+
+            to {
+                text-shadow: 0 0 30px #ff00ff, 0 0 40px #00ffff;
+            }
+        }
+
+        @keyframes matrixRain {
+            to {
+                top: 100vh;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+                /* Stack the items vertically */
+                text-align: center;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+
+            0%,
+            90%,
+            100% {
+                transform: translate(0);
+            }
+
+            10% {
+                transform: translate(-2px, 2px);
+            }
+
+            20% {
+                transform: translate(2px, -2px);
+            }
+
+            30% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(2px, -2px);
+            }
+
+            50% {
+                transform: translate(-2px, 2px);
+            }
+
+            60% {
+                transform: translate(2px, -2px);
+            }
+
+            70% {
+                transform: translate(-2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Three.js Canvas -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">MR. A</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#vylex">Vylex Nexys</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="matrix-container" id="matrix-rain"></div>
+        <div class="hero-content">
+            <h1 class="glitch">AVUYILE MTHEMBU</h1>
+            <p class="subtitle">Mr. A in Cyberspace | Polymathic Savant</p>
+            <p class="description">
+                A reclusive technologist on a quest for truth across time and space.
+                5th-dimensional prodigy mastering both machines and the metaphysical.
+                Fluent in the dialects of machines and minds alike.
+            </p>
+            <a href="#about" class="cta-button">Enter Cyberspace</a>
+        </div>
+
+        <div class="floating-element" style="top: 20%; left: 10%; font-size: 2rem;">₿</div>
+        <div class="floating-element" style="top: 30%; right: 15%; font-size: 1.5rem;">₿</div>
+        <div class="floating-element" style="bottom: 20%; left: 20%; font-size: 1.8rem;">₿</div>
+        <div class="floating-element" style="bottom: 30%; right: 10%; font-size: 2.2rem;">₿</div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2>The Architect of Digital Realities</h2>
+        <div class="about-container">
+            <!-- Text Content -->
+            <div class="about-text">
+                <p>
+                    As a 20-year-old final-year Systems Development student and CEO of Vylex Nexys,
+                    I exist at the intersection of code and consciousness. My presence is quiet,
+                    but my thoughts are seismic. Social silence isn't shyness—it's a mind perpetually computing.
+                </p>
+                <br>
+                <p>
+                    I code with prophetic clarity, play with language like a poet-engineer,
+                    and move with the urgency of someone building the future. An esoteric seeker
+                    drawn to puzzles, both digital and existential.
+                </p>
+            </div>
+            <!-- Visual Content: 3D Cube -->
+            <div class="about-visual">
+                <div class="rotating-cube-container">
+                    <div class="cube">
+                        <div class="cube-face face-front">
+                            <img src="https://avuyilemthembu.co.za/assets/images/cyberspace.jpg" alt="Avuyile Mthembu - Mr. A in Cyberspace">
+                        </div>
+                        <div class="cube-face face-back">
+                            <img src="https://avuyilemthembu.co.za/assets/images/cyberspace1.jpg" alt="Avuyile Mthembu - The Technologist">
+                        </div>
+                        <div class="cube-face face-right">
+                            <img src="https://avuyilemthembu.co.za/assets/images/cyberspace2.jpg" alt="Cyberspace Concept 1">
+                        </div>
+                        <div class="cube-face face-left">
+                            <img src="https://avuyilemthembu.co.za/assets/images/avuyile1.jpg" alt="Cyberspace Concept 2">
+                        </div>
+                        <div class="cube-face face-top">
+    <img src="https://avuyilemthembu.co.za/assets/images/avuyile3.jpg" alt="Cyberspace Top">
+</div>
+<div class="cube-face face-bottom">
+    <img src="data:image/jpeg;base64,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" alt="Cyberspace Bottom">
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2>Technical Arsenal</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Frontend Development</h3>
+                <ul class="skill-list">
+                    <li>HTML5 & CSS3</li>
+                    <li>JavaScript & jQuery</li>
+                    <li>Responsive Design</li>
+                    <li>UI/UX Implementation</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Backend Development</h3>
+                <ul class="skill-list">
+                    <li>PHP & Node.js</li>
+                    <li>Java Enterprise</li>
+                    <li>XML Processing</li>
+                    <li>API Development</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Mobile Development</h3>
+                <ul class="skill-list">
+                    <li>Android Studio</li>
+                    <li>Mobile App Development</li>
+                    <li>Cross-platform Solutions</li>
+                    <li>Mobile UI/UX</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Database & Cloud</h3>
+                <ul class="skill-list">
+                    <li>MySQL & SQLite</li>
+                    <li>Firebase</li>
+                    <li>Database Design</li>
+                    <li>Cloud Integration</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Development Tools</h3>
+                <ul class="skill-list">
+                    <li>Visual Studio Code</li>
+                    <li>Eclipse IDE & NetBeans</li>
+                    <li>GitHub & Version Control</li>
+                    <li>AMPPS Development</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Cybersecurity</h3>
+                <ul class="skill-list">
+                    <li>CompTIA Security+</li>
+                    <li>Certified Ethical Hacker</li>
+                    <li>Penetration Testing</li>
+                    <li>Security Analysis</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2>Establish Connection</h2>
+        <div class="contact-info">
+            <div class="contact-card">
+                <div class="icon">📱</div>
+                <h3>Phone</h3>
+                <p>064 878 4287</p>
+            </div>
+            <div class="contact-card">
+                <div class="icon">📧</div>
+                <h3>Email</h3>
+                <p>info@avuyilemthembu.co.za</p>
+            </div>
+            <div class="contact-card">
+                <div class="icon">🌐</div>
+                <h3>Website</h3>
+                <p>avuyilemthembu.co.za</p>
+            </div>
+            <div class="contact-card">
+                <div class="icon">🏢</div>
+                <h3>Company</h3>
+                <p>Vylex Nexys</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vylex Nexys Section -->
+    <section class="section" id="vylex">
+        <h2>VYLEX NEXYS</h2>
+        <div style="text-align: center; font-size: 1.1rem; line-height: 1.8;">
+            <p>
+                Professional solutions and client work delivered through my company,
+                showcasing enterprise-level applications and business systems.
+            </p>
+            <br>
+            <a href="#" class="cta-button">Explore Company Portfolio</a>
+        </div>
+    </section>
+
+    <script>
+        // Three.js Scene Setup
+        let scene, camera, renderer, particles;
+
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const geometry = new THREE.BufferGeometry();
+            const particlesCount = 1000;
+            const positions = new Float32Array(particlesCount * 3);
+            for (let i = 0; i < particlesCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 1000;
+            }
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                color: 0x00ffff,
+                size: 2,
+                transparent: true,
+                opacity: 0.8
+            });
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            camera.position.z = 5;
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.002;
+            renderer.render(scene, camera);
+        }
+
+        // Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixContainer = document.getElementById('matrix-rain');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            for (let i = 0; i < 50; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                column.style.animationDelay = Math.random() * 2 + 's';
+                let text = '';
+                for (let j = 0; j < 20; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                }
+                column.innerHTML = text;
+                matrixContainer.appendChild(column);
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.skill-card, .contact-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initThreeJS();
+            createMatrixRain();
+        });
+    </script>
+</body>
+
+</html>

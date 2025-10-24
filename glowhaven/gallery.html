@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Glow Haven Beauty Therapy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* --- CORE GLOW HAVEN STYLES (from your original theme) --- */
+        :root {
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --color-primary-action: #C9A96E;
+            --color-accent: #EAD1D1;
+            --color-background-main: #FAF8F4;
+            --color-background-card: #FFFFFF;
+            --color-text-primary: #333333;
+            --color-text-secondary: #757575;
+            --color-text-on-dark: #FFFFFF;
+            --color-footer-bg: #2d2d2d;
+            --color-border-subtle: #eaeaea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background-color: var(--color-background-main);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--color-text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--color-text-secondary);
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 248, 244, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-primary-action);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active-link {
+            color: var(--color-primary-action);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active-link::after {
+            width: 100%;
+        }
+
+        .book-btn {
+            background: var(--color-primary-action);
+            color: var(--color-text-on-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .book-btn:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+             color: var(--color-text-on-dark);
+        }
+
+        .hamburger { display: none; }
+        .hamburger .bar {
+            display: block; width: 25px; height: 3px; margin: 5px auto;
+            background-color: var(--color-text-primary); transition: all 0.3s ease-in-out;
+        }
+
+        /* --- GALLERY PAGE SPECIFIC STYLES --- */
+
+        /* Gallery Hero Section */
+        .gallery-hero {
+            height: 60vh; /* Shorter than main hero */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px; /* Header offset */
+            background:
+                linear-gradient(rgba(45, 45, 45, 0.6), rgba(45, 45, 45, 0.6)),
+                /* Replace with a relevant gallery background image */
+                url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            color: var(--color-text-on-dark);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Gallery Filters */
+        .gallery-filters {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--color-accent);
+            color: var(--color-text-secondary);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--color-primary-action);
+            border-color: var(--color-primary-action);
+            color: var(--color-text-on-dark);
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block; /* Default state */
+        }
+        
+        .gallery-item.hide {
+            display: none;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            color: var(--color-text-on-dark);
+            padding: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            transform: translateY(20px);
+            transition: transform 0.3s ease 0.1s;
+        }
+        
+        .gallery-item:hover .gallery-overlay h3 {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.2s;
+        }
+
+        .gallery-item:hover .gallery-overlay .icon {
+            opacity: 1;
+        }
+
+        /* Lightbox (Popup) Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(20, 20, 20, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            z-index: 2001;
+            transition: background-color 0.2s ease;
+            user-select: none;
+        }
+        
+        .lightbox-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .lightbox-btn.close {
+            top: 20px;
+            right: 20px;
+            transform: none;
+            font-size: 2rem;
+            padding: 0.2rem 1rem;
+        }
+
+        .lightbox-btn.prev { left: 10px; }
+        .lightbox-btn.next { right: 10px; }
+
+
+        /* --- Footer --- */
+        .footer {
+            background: var(--color-footer-bg);
+            color: #ccc;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer .logo { color: var(--color-text-on-dark); }
+        .footer p { margin: 1rem 0; }
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Styles --- */
+        @media (max-width: 768px) {
+            html { scroll-padding-top: 70px; }
+            .nav-container { height: 70px; }
+            .nav-menu {
+                position: fixed; left: -100%; top: 70px; flex-direction: column;
+                background-color: var(--color-background-main); width: 100%; height: calc(100vh - 70px);
+                text-align: center; transition: 0.3s; gap: 0;
+            }
+            .nav-menu li { width: 100%; }
+            .nav-menu a { padding: 1.5rem 0; display: block; width: 100%; border-bottom: 1px solid var(--color-border-subtle); }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: block; cursor: pointer;}
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .hero-content h1 { font-size: 2.5rem; }
+            section { padding: 4rem 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="container nav-container">
+            <!-- Link to index.html or your homepage file -->
+            <a href="index.html" class="logo">Glow Haven</a>
+            <ul class="nav-menu">
+                <!-- Update these links to point to your actual pages -->
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <!-- This is the active link for the gallery page -->
+                <li><a href="gallery.html" class="nav-link active-link">Gallery</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="index.html#contact" class="book-btn">Book Now</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="gallery-hero">
+            <div class="hero-content">
+                <h1>Our Gallery</h1>
+                <p>Explore moments of beauty and tranquility captured at Glow Haven. See our treatments and serene environment.</p>
+            </div>
+        </section>
+
+        <section id="gallery-main">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Work & Ambiance</h2>
+                    <p>Filter through our collection to see specific treatments or the relaxing atmosphere of our studio.</p>
+                </div>
+                
+                <!-- Gallery Filter Buttons -->
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="facials">Facial Treatments</button>
+                    <button class="filter-btn" data-filter="massage">Massage Therapy</button>
+                    <button class="filter-btn" data-filter="lashes">Lashes & Brows</button>
+                    <button class="filter-btn" data-filter="studio">Our Studio</button>
+                </div>
+
+                <!-- Gallery Image Grid -->
+                <div class="gallery-grid">
+                    <!-- 
+                        HOW TO ADD YOUR OWN IMAGES:
+                        1. Copy one of the <div class="gallery-item"> ... </div> blocks.
+                        2. Change the `data-filter` attribute to match the category (e.g., "facials", "massage").
+                        3. Change the `img src` to the path of your image.
+                        4. Update the `<h3>` text inside the overlay.
+                    -->
+                    
+                    <div class="gallery-item" data-filter="facials">
+                        <img src="https://plus.unsplash.com/premium_photo-1661478253345-41d1351f68ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGZhY2lhbCUyMHRyZWF0bWVudHxlbnwwfHwwfHx8MA%3D%3D" alt="Hydrating Facial Treatment">
+                        <div class="gallery-overlay">
+                            <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Hydrating Facial</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-filter="studio">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop" alt="Relaxing studio interior">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Tranquil Environment</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-filter="lashes">
+                        <img src="https://images.unsplash.com/photo-1661764430495-8080127b3ddb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGxhc2hlc3xlbnwwfHwwfHx8MA%3D%3D" alt="Eyelash extensions procedure">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Lash Extensions</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-filter="massage">
+                        <img src="https://plus.unsplash.com/premium_photo-1661306458301-79601a9d2696?w=500&auto=format&fit=crop" alt="Hot stone massage therapy">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Hot Stone Massage</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-filter="facials">
+                        <img src="https://media.istockphoto.com/id/1143099939/photo/health-supplement-female-face-anti-aging-beauty-cosmetics.jpg?s=612x612&w=0&k=20&c=eTCF-f2q-r1NVaw5_4XAro163g81tzzFTuemnJz4VE4=" alt="Client receiving anti-aging facial">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Anti-Aging Therapy</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-filter="studio">
+                        <img src="https://media.istockphoto.com/id/1413646879/photo/nice-and-luxurious-room-in-thai-massage-salon.jpg?s=612x612&w=0&k=20&c=3wEHiPomUNaYX05yvZKFh8nPEaretDxqOCKWk8gFqYY=" alt="Calm treatment room">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Our Treatment Room</h3>
+                        </div>
+                    </div>
+
+                     <div class="gallery-item" data-filter="massage">
+                        <img src="https://media.istockphoto.com/id/168315886/photo/foot-massage.jpg?s=612x612&w=0&k=20&c=oyFpxjsMr5oocai8ercjEYIVFaQ0CHK5wGu2HNWqkBs=" alt="Foot massage">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Foot Reflexology</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-filter="lashes">
+                        <img src="https://media.istockphoto.com/id/1346587636/photo/permanent-make-up-treatment.jpg?s=612x612&w=0&k=20&c=aPdsYUwXWELq8VGj5cpS-9jUH6vofAwwsVgvqvVvLuI=" alt="Eyebrow microblading">
+                        <div class="gallery-overlay">
+                             <span class="icon"><i class="fas fa-search-plus"></i></span>
+                            <h3>Microblading</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-btn close" id="close-btn">&times;</button>
+            <button class="lightbox-btn prev" id="prev-btn">&#10094;</button>
+            <button class="lightbox-btn next" id="next-btn">&#10095;</button>
+            <img src="" alt="Enlarged gallery view" id="lightbox-img">
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="logo">Glow Haven Beauty Therapy</a>
+            <p>Your trusted partner in wellness, beauty, and rejuvenation.</p>
+            <div class="footer-bottom">
+                &copy; 2025 Glow Haven. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll(".nav-link, .book-btn").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+
+        // --- GALLERY FUNCTIONALITY ---
+
+        // Filter Logic
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Set active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                // Show/hide gallery items
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-filter') === filter) {
+                        item.classList.remove('hide');
+                    } else {
+                        item.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        let currentIndex = 0;
+        let visibleItems = [];
+
+        function updateVisibleItems() {
+            visibleItems = [];
+            galleryItems.forEach(item => {
+                if (!item.classList.contains('hide')) {
+                    visibleItems.push(item);
+                }
+            });
+        }
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                updateVisibleItems();
+                currentIndex = visibleItems.indexOf(item);
+                openLightbox();
+            });
+        });
+
+        function openLightbox() {
+            if (currentIndex >= 0 && currentIndex < visibleItems.length) {
+                const imgSrc = visibleItems[currentIndex].querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('show');
+            }
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('show');
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+            openLightbox();
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % visibleItems.length;
+            openLightbox();
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+                closeLightbox();
+            }
+            if (e.key === 'ArrowLeft' && lightbox.classList.contains('show')) {
+                showPrev();
+            }
+            if (e.key === 'ArrowRight' && lightbox.classList.contains('show')) {
+                showNext();
+            }
+        });
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>

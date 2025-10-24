@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AJ Vehicle Registration Services | Your Trusted Vehicle Registration Partner</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* --- General & Root Styles --- */
+    :root {
+      --primary-blue: #1e3a8a;
+      --accent-blue: #3b82f6;
+      --light-gray: #f8fafc;
+      --dark-gray: #374151;
+      --white: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+    
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-blue);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background-color: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+    }
+    .btn-secondary:hover {
+      background-color: var(--primary-blue);
+      color: var(--white);
+    }
+
+    /* --- Header & Navigation --- */
+    header {
+      background-color: var(--white);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      text-decoration: none;
+    }
+
+    .logo i {
+      color: var(--accent-blue);
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 0.5rem 0;
+    }
+
+    nav a:hover {
+      color: var(--accent-blue);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary-blue);
+      background: none;
+      border: none;
+      padding: 0.5rem;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+      color: var(--white);
+      padding: 10rem 0 6rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23cars)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 2.5rem auto;
+      opacity: 0.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* --- Services Section --- */
+    #services {
+      background-color: var(--light-gray);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: var(--white);
+      padding: 2rem;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      border: 1px solid #e5e7eb;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .service-card .icon {
+      font-size: 3rem;
+      color: var(--accent-blue);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .service-card p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* --- Contact Info Section --- */
+    .contact-info-section {
+      background-color: var(--white);
+      padding: 4rem 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .contact-card {
+      background-color: var(--light-gray);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .contact-card .icon {
+      font-size: 2.5rem;
+      color: var(--accent-blue);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h3 {
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .contact-card p {
+      color: var(--dark-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .whatsapp-link {
+      color: #25d366;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .whatsapp-link:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      padding: 3rem 0 1rem 0;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+      font-size: 1.2rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 1.5rem;
+      text-align: center;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+
+    /* --- Responsive Design --- */
+
+    @media (max-width: 480px) {
+  .logo span {
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .logo i {
+    font-size: 1.4rem;
+  }
+}
+
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .section-title { 
+        font-size: 2rem; 
+      }
+      
+      .hero-content h1 { 
+        font-size: 2.5rem; 
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-buttons .btn {
+        width: 200px;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        box-shadow: var(--shadow);
+      }
+
+      nav.active {
+        max-height: 300px;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 8rem 0 4rem 0;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="container header-content">
+      <a href="#" class="logo">
+        <i class="fas fa-car"></i>
+        <span>AJ Vehicle Registration</span>
+      </a>
+      <nav id="nav">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <h1>Your Trusted Vehicle Registration Partner</h1>
+        <p>Professional vehicle registration services in Durban, KZN. Fast, reliable, and hassle-free solutions for all your vehicle documentation needs.</p>
+        <div class="hero-buttons">
+          <a href="#services" class="btn btn-primary">Our Services</a>
+          <a href="#contact" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">We provide comprehensive vehicle registration and licensing services to make your life easier</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="icon"><i class="fas fa-car"></i></div>
+            <h3>Vehicle Registration</h3>
+            <p>Complete vehicle registration services for new and existing vehicles. We handle all the paperwork and ensure everything is processed correctly.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon"><i class="fas fa-id-card"></i></div>
+            <h3>License Renewal</h3>
+            <p>Quick and efficient vehicle license renewal services. Don't let your license expire - we'll take care of the renewal process for you.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon"><i class="fas fa-file-alt"></i></div>
+            <h3>Documentation</h3>
+            <p>Professional handling of all vehicle-related documentation including duplicate logbooks, address changes, and ownership transfers.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon"><i class="fas fa-user-graduate"></i></div>
+            <h3>Driver Services</h3>
+            <p>Comprehensive driver services including learner's license applications, driver's license renewals, and temporary permits.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Police Clearance</h3>
+            <p>Fast and reliable police clearance certificate applications. We facilitate the entire process to save you time and hassle.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon"><i class="fas fa-clipboard-check"></i></div>
+            <h3>Roadworthiness Certificates</h3>
+            <p>Certificate of Roadworthiness (COR/COF) applications to ensure your vehicle meets all safety and roadworthiness standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info-section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">We're here to help with all your vehicle registration needs</p>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h3>Our Location</h3>
+            <p>123 Anton Lembede Street<br>Durban, KZN<br>South Africa</p>
+          </div>
+          <div class="contact-card">
+            <div class="icon"><i class="fas fa-phone"></i></div>
+            <h3>Contact Numbers</h3>
+            <p>Primary: <a href="tel:0714283735" class="whatsapp-link">071 428 3735</a></p>
+            <p>Alternative: <a href="tel:0793246605" class="whatsapp-link">079 324 6605</a></p>
+            <p><a href="https://wa.me/27714283735" class="whatsapp-link">📱 WhatsApp Available</a></p>
+          </div>
+          <div class="contact-card">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <h3>Business Hours</h3>
+            <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+            <p>Saturday - Sunday: Closed</p>
+            <p>Contact Person: Anele Tembe</p>
+          </div>
+          <div class="contact-card">
+            <div class="icon"><i class="fas fa-envelope"></i></div>
+            <h3>Email Us</h3>
+            <p><a href="mailto:ajvehicle@service.co.za">ajvehicle@service.co.za</a></p>
+            <p>Quick responses guaranteed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>AJ Vehicle Registration</h3>
+          <p>Your trusted partner for all vehicle registration services in Durban, KZN. Professional, reliable, and hassle-free service guaranteed.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#services">Vehicle Registration</a></li>
+            <li><a href="#services">License Renewal</a></li>
+            <li><a href="#services">Documentation</a></li>
+            <li><a href="#services">Driver Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <p>📱 <a href="https://wa.me/27714283735" class="whatsapp-link">WhatsApp: 071 428 3735</a></p>
+          <p>✉️ <a href="mailto:ajvehicle@service.co.za">ajvehicle@service.co.za</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 AJ Vehicle Registration Services. All rights reserved.</p>
+        <p>Designed by Vylex Nexys</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      const icon = menuToggle.querySelector('i');
+      if (nav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Close mobile menu when clicking on a link
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerHeight = document.querySelector('header').offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Header background change on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+      } else {
+        header.style.backgroundColor = 'var(--white)';
+        header.style.backdropFilter = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,507 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avuyile Mthembu</title>
-    <style>
-      /* Reset styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <!-- Keep: meta, SEO, analytics, verification, OG/Twitter, structured data -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FOCUSED SEO -->
+  <meta name="description" content="Avuyile Mthembu - A Full-Stack Developer building secure and scalable web and mobile applications with React, Node.js, Java, and Android.">
+  <meta name="keywords" content="Full-Stack Developer, Web Developer, Mobile Developer, React, Node.js, Java, Android Developer, MySQL, Firebase, Avuyile Mthembu">
+  <meta name="author" content="Avuyile Mthembu">
+  <meta name="google-site-verification" content="pE05B0HdOXMSwz3LmavEaEMql4M3Tn4sA6s-0Ba67a8">
 
-      /* Global styles */
-html, body {
-        overflow-x: hidden; /* Prevent horizontal overflow */
-      }
-      body {
-        font-family: "Poppins", sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f0f2f5;
-      }
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://avuyilemthembu.co.za">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-      .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
+  <title>Avuyile Mthembu - Full-Stack Web & Mobile Developer</title>
 
-      /* Header styles */
-      header {
-        background-color: #1d1f21;
-        color: #fff;
-      }
+  <!-- Open Graph -->
+  <meta property="og:title" content="Avuyile Mthembu - Full-Stack Web & Mobile Developer">
+  <meta property="og:description" content="Portfolio of Avuyile Mthembu, a developer specializing in building secure web and mobile applications with modern frameworks.">
+  <meta property="og:image" content="https://avuyilemthembu.co.za/assets/images/avuyile1.jpg">
+  <meta property="og:url" content="https://avuyilemthembu.co.za">
+  <meta property="og:site_name" content="Avuyile Mthembu - Developer Portfolio">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_ZA">
 
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-      }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@MthembuAvuyile">
+  <meta name="twitter:title" content="Avuyile Mthembu - Full-Stack Web & Mobile Developer">
+  <meta name="twitter:description" content="Portfolio of Avuyile Mthembu, a developer specializing in building secure web and mobile applications with modern frameworks.">
+  <meta name="twitter:image" content="https://avuyilemthembu.co.za/assets/images/avuyile1.jpg">
 
-      nav ul {
-        list-style-type: none;
-        display: flex;
-      }
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-72JYBX3XK2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-72JYBX3XK2');
+  </script>
 
-      nav ul li {
-        margin-left: 20px;
-      }
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Avuyile Mthembu",
+    "url": "https://avuyilemthembu.co.za",
+    "image": "https://avuyilemthembu.co.za/assets/images/avuyile1.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/mthembuavuyile",
+      "https://github.com/mthembuavuyile",
+      "https://twitter.com/MthembuAvuyile"
+    ],
+    "jobTitle": "Full-Stack Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Vylex Nexys"
+    },
+    "description": "Avuyile Mthembu is a Full-Stack Developer specializing in web and mobile applications using technologies like React, Node.js, and Java.",
+    "knowsAbout": ["Full-Stack Development","Web Development","Mobile App Development","React","Node.js","Java","Android","MySQL","Firebase","Secure Development"]
+  }
+  </script>
 
-      nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        padding: 10px;
-        transition: color 0.3s ease;
-      }
+  <!-- Styles: retain colors (white/blue palette), adopt new menu/overlay style, keep original sections look-and-feel -->
+  <style>
+    :root{
+      --primary-color:#2563eb;
+      --secondary-color:#1e40af;
+      --accent-color:#3b82f6;
+      --text-primary:#1f2937;
+      --text-secondary:#6b7280;
+      --bg-primary:#ffffff;
+      --bg-secondary:#f8fafc;
+      --bg-dark:#0f172a;
+      --border-color:#e5e7eb;
+      --header-height:70px;
 
-      nav ul li a:hover,
-      nav ul li a.active {
-        color: #ff9800;
-      }
+      /* overlay system vars (aligned to your requested menu style) */
+      --bg-color:#f4f7fa; /* stays light */
+      --card-bg:#ffffff;
+      --shadow-color:rgba(0,0,0,0.08);
+    }
 
-      .logo a {
-        font-size: 24px;
-        font-weight: bold;
-        color: #ff9800;
-        text-decoration: none;
-      }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:var(--header-height)}
+    body{
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height:1.6;
+      color:var(--text-primary);
+      background:var(--bg-primary);
+    }
+    body.no-scroll{overflow:hidden}
 
-      /* Hero section styles */
-      .hero {
-        background: linear-gradient(to right, #007bff, #0056b3);
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-      }
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
-      .hero::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-      }
+    /* Adopted Navbar (sticky) */
+    .navbar{
+      position:sticky;top:0;z-index:1000;
+      display:flex;justify-content:space-between;align-items:center;
+      height:var(--header-height);
+      padding:0 1rem;
+      background:#fff;
+      box-shadow:0 2px 6px var(--shadow-color);
+    }
+    .brand{
+      display:flex;align-items:center;gap:.6rem;
+      font-weight:700;font-size:1.25rem;text-decoration:none;color:var(--primary-color);
+    }
+    .brand .bolt{color:#fbbf24}
+    .nav-links-inline{display:flex;gap:2rem;list-style:none}
+    .nav-links-inline a{
+      text-decoration:none;color:var(--text-primary);font-weight:500;padding:.5rem 0;transition:color .2s;
+    }
+    .nav-links-inline a:hover{color:var(--primary-color)}
+    .menu-icon{
+      display:none;cursor:pointer;background:none;border:none;padding:.5rem;margin-left:.5rem;
+    }
+    .menu-icon .bar{display:block;width:25px;height:3px;margin:5px auto;background-color:var(--text-primary);border-radius:3px;transition:all .3s}
+    .menu-icon.active .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}
+    .menu-icon.active .bar:nth-child(2){opacity:0}
+    .menu-icon.active .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 600px;
-      }
+    /* Fullscreen overlay menu (adopted) */
+    .menu-overlay{
+      position:fixed;inset:0;width:100%;height:100vh;background:var(--bg-color);
+      z-index:999;display:flex;flex-direction:column;padding:1rem 1rem;
+      opacity:0;visibility:hidden;transform:translateY(-20px);
+      transition:opacity .3s, visibility .3s, transform .3s;
+    }
+    .menu-overlay.active{opacity:1;visibility:visible;transform:translateY(0)}
+    .menu-header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding: .5rem 0;
+    }
+    .menu-links{list-style:none;padding-top:1rem;overflow-y:auto}
+    .menu-item{
+      background:var(--card-bg);border-radius:12px;margin-bottom:1rem;
+      box-shadow:0 4px 10px var(--shadow-color);
+      opacity:0;transform:translateY(15px);transition:opacity .3s, transform .3s;
+    }
+    .menu-overlay.active .menu-item{opacity:1;transform:translateY(0)}
+    .menu-overlay.active .menu-item:nth-child(1){transition-delay:.08s}
+    .menu-overlay.active .menu-item:nth-child(2){transition-delay:.12s}
+    .menu-overlay.active .menu-item:nth-child(3){transition-delay:.16s}
+    .menu-overlay.active .menu-item:nth-child(4){transition-delay:.2s}
+    .menu-item a, .accordion-btn{
+      text-decoration:none;color:var(--text-primary);font-weight:600;font-size:1.05rem;
+      display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;width:100%;
+    }
+    .accordion-btn{background:none;border:none;cursor:pointer;text-align:left}
+    .arrow{font-size:1.3rem;color:#aaa;transition:transform .3s,color .3s}
+    .menu-item.active .arrow{transform:rotate(90deg);color:var(--primary-color)}
+    .submenu{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+    .menu-item.active .submenu{max-height:520px;padding-bottom:.5rem}
+    .submenu a{
+      display:flex;align-items:flex-start;gap:.75rem;padding:.7rem 1.25rem .7rem 2rem;
+      font-weight:500;font-size:.98rem;color:#555;transition:background-color .2s;
+    }
+    .submenu a:hover{background-color:#f0f3f8}
+    .submenu .icon{flex-shrink:0;width:22px;height:22px;color:var(--primary-color);margin-top:2px}
 
-      .hero-content h1 {
-        font-size: 48px;
-        margin-bottom: 20px;
-      }
+    /* Sections (preserved styles) */
+    .hero{
+      background:linear-gradient(135deg, var(--bg-dark) 0%, var(--secondary-color) 100%);
+      color:#fff; padding:calc(var(--header-height) + 60px) 0 80px; text-align:center; min-height:60vh;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .hero h1{font-size:3rem;font-weight:700;margin-bottom:1rem}
+    .hero .subtitle{font-size:1.5rem;margin-bottom:2.5rem;color:#cbd5e1;max-width:750px;margin-inline:auto;font-weight:400}
+    .tech-stack{display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+    .tech-item{background:rgba(255,255,255,.1);padding:.5rem 1.25rem;border-radius:25px;font-size:1rem;font-family:'Fira Code', monospace;transition:.3s}
+    .tech-item:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
 
-      .hero-content p {
-        font-size: 18px;
-        margin-bottom: 20px;
-      }
+    .section{padding:80px 0}
+    .alt-bg{background:var(--bg-secondary)}
+    .section-title{font-size:2.5rem;font-weight:700;text-align:center;margin-bottom:1.5rem}
+    .section-subtitle{font-size:1.125rem;text-align:center;color:var(--text-secondary);margin-bottom:3rem;max-width:700px;margin-inline:auto}
 
-      /* About section styles */
-      #about {
-        padding: 60px 0;
-        text-align: center;
-        background-color: #fff;
-      }
+    .about-content{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center}
+    .profile-image-container{text-align:center}
+    .profile-image{width:100%;max-width:350px;height:auto;border-radius:12px;box-shadow:0 10px 20px rgba(0,0,0,.1);object-fit:cover}
+    .about-text h3{font-size:1.75rem;margin-bottom:1.5rem;color:var(--text-primary)}
+    .about-text p{margin-bottom:1.5rem;color:var(--text-secondary);font-size:1.1rem}
 
-      .about-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:2rem;margin-top:2rem}
+    .skill-card{background:var(--bg-primary);padding:2rem;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,.05);border:1px solid var(--border-color);transition:.3s}
+    .skill-card:hover{transform:translateY(-5px);box-shadow:0 8px 15px rgba(0,0,0,.1)}
+    .skill-card h3{font-size:1.25rem;margin-bottom:1.5rem;color:var(--primary-color);display:flex;align-items:center;gap:.75rem}
+    .skill-list{list-style:none;padding-left:0}
+    .skill-list li{margin-bottom:.75rem;color:var(--text-secondary);font-family:'Fira Code', monospace}
 
-      .about-text {
-        max-width: 600px;
-        margin-bottom: 20px;
-      }
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;margin-top:3rem}
+    .project-item{background:var(--bg-primary);padding:2.5rem;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,.07);border:1px solid var(--border-color);transition:transform .3s ease-out, box-shadow .3s ease-out;display:flex;flex-direction:column}
+    .project-item:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+    .project-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+    .project-icon{font-size:2.25rem;color:var(--primary-color)}
+    .project-item h3{font-size:1.5rem;color:var(--text-primary);margin-bottom:0}
+    .project-item p{color:var(--text-secondary);margin-bottom:2rem;line-height:1.7;flex-grow:1}
+    .project-link{display:inline-block;background-color:var(--primary-color);color:#fff;padding:.8rem 1.8rem;border-radius:25px;text-decoration:none;font-weight:600;transition:.3s;text-align:center;margin-top:auto;align-self:flex-start}
+    .project-link:hover{background-color:var(--secondary-color);transform:translateY(-3px) scale(1.03);box-shadow:0 4px 10px rgba(37,99,235,.3)}
+    .project-link i{margin-left:.6rem}
 
-      .about-text h2 {
-        font-size: 32px;
-        margin-bottom: 20px;
-        color: #ff9800;
-      }
+    .cta-buttons{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin-top:2rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.75rem;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all .3s;border:2px solid transparent}
+    .btn-primary{background-color:var(--primary-color);color:#fff}
+    .btn-primary:hover{background-color:var(--secondary-color);transform:translateY(-3px);box-shadow:0 4px 15px rgba(37,99,235,.3)}
+    .btn-secondary{background-color:var(--bg-primary);color:var(--primary-color);border-color:var(--border-color)}
+    .btn-secondary:hover{background-color:var(--bg-secondary);border-color:var(--primary-color);color:var(--secondary-color);transform:translateY(-3px);box-shadow:0 4px 15px rgba(0,0,0,.08)}
 
-      .about-text p {
-        font-size: 16px;
-        margin-bottom: 20px;
-      }
+    .contact{background:var(--bg-dark);color:#fff}
+    .contact .section-title,.contact .section-subtitle{color:#fff}
+    .contact .section-subtitle{color:#cbd5e1}
+    .contact-content{text-align:center}
+    .contact-info{display:flex;justify-content:center;gap:3rem;margin:2rem 0;flex-wrap:wrap}
+    .contact-item{display:flex;align-items:center;gap:.75rem}
+    .contact-item a{color:#fff;text-decoration:none;transition:color .3s}
+    .contact-item a:hover{color:var(--accent-color)}
+    .social-links{display:flex;justify-content:center;gap:1.5rem;margin-top:2.5rem}
+    .social-link{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;background:var(--primary-color);color:#fff;border-radius:50%;text-decoration:none;font-size:1.25rem;transition:transform .3s, background-color .3s}
+    .social-link:hover{transform:translateY(-3px) scale(1.1);background-color:var(--accent-color)}
 
-      .about-image img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-      }
+    .footer{background:var(--text-primary);color:#fff;padding:2rem 0}
+    .footer p{text-align:center;color:#e5e7eb;margin-top:1rem}
 
-      /* Projects section styles */
-      #projects {
-        padding: 60px 0;
-        background-color: #f8f9fa;
-      }
+    @media (max-width: 992px){
+      .hero h1{font-size:2.7rem}
+    }
+    @media (max-width: 768px){
+      .nav-links-inline{display:none}
+      .menu-icon{display:block}
+      .hero h1{font-size:2.3rem}
+      .hero .subtitle{font-size:1.2rem}
+      .about-content{grid-template-columns:1fr;gap:2rem}
+      .profile-image-container{order:-1;margin-bottom:1rem}
+      .contact-info{flex-direction:column;gap:1.5rem}
+      .section-title{font-size:2.2rem}
+      .cta-buttons{flex-direction:column;gap:1rem}
+      .btn{width:100%;justify-content:center}
+    }
 
-      #projects h2 {
-        text-align: center;
-        font-size: 32px;
-        margin-bottom: 40px;
-        color: #ff9800;
-      }
+    /* Subtle entrance animations for cards/buttons */
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)}}
+    .skill-card,.project-item,.btn{animation:fadeInUp .6s ease-out;animation-fill-mode:backwards}
+    .skill-card:nth-child(2),.project-item:nth-child(2),.btn-secondary{animation-delay:.1s}
+    .skill-card:nth-child(3){animation-delay:.2s}
+    .skill-card:nth-child(4){animation-delay:.3s}
+  </style>
+</head>
+<body>
+  <!-- Adopted Navbar with inline links and mobile overlay menu -->
+  <nav class="navbar" role="navigation" aria-label="Primary">
+    <a href="#home" class="brand" aria-label="Go to home">
+      MRA<span class="bolt">⚡</span>
+    </a>
+    <ul class="nav-links-inline" aria-label="Primary links">
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="skills.html" class="nav-link">Skills</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="https://vylexnexys.co.za" class="nav-link" target="_blank" rel="noopener noreferrer">Company</a></li>
+    </ul>
+    <button class="menu-icon" id="menu-btn" aria-label="Open menu" aria-controls="menu-overlay" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </nav>
 
-      .project {
-        margin-bottom: 20px;
-      }
-
-      .project h3 {
-        font-size: 24px;
-        color: #007bff;
-        margin-bottom: 10px;
-      }
-
-      .project p {
-        margin-bottom: 10px;
-      }
-
-      .project ul {
-        list-style-type: disc;
-        padding-left: 20px;
-      }
-
-      .project ul li {
-        margin-bottom: 5px;
-      }
-
-      /* Contact section styles */
-      #contact {
-        padding: 60px 0;
-        text-align: center;
-        background-color: #fff;
-      }
-
-      #contact h2 {
-        font-size: 32px;
-        margin-bottom: 40px;
-        color: #ff9800;
-      }
-
-      .contact-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      form {
-        width: 100%;
-        max-width: 600px;
-        margin-bottom: 20px;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-        text-align: left;
-      }
-
-      label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      input[type="text"],
-      input[type="email"],
-      textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-family: "Poppins", sans-serif;
-      }
-
-      button[type="submit"] {
-        background-color: #ff9800;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button[type="submit"]:hover {
-        background-color: #e68a00;
-      }
-
-      .contact-info {
-        margin-top: 20px;
-      }
-
-      .contact-info p {
-        margin-bottom: 10px;
-      }
-
-      .contact-info a {
-        color: #007bff;
-        text-decoration: none;
-      }
-
-      /* Social section styles */
-      #social {
-        padding: 60px 0;
-        text-align: center;
-        background-color: #f8f9fa;
-      }
-
-      #social h2 {
-        font-size: 32px;
-        margin-bottom: 40px;
-        color: #ff9800;
-      }
-
-      .social-links a {
-        display: inline-block;
-        margin: 0 10px;
-        font-size: 24px;
-        color: #333;
-        transition: color 0.3s ease;
-      }
-
-      .social-links a:hover {
-        color: #007bff;
-      }
-
-      /* Footer styles */
-      footer {
-        background-color: #1d1f21;
-        color: #fff;
-        padding: 20px 0;
-        text-align: center;
-      }
-
-      footer a {
-        color: #ff9800;
-        text-decoration: none;
-        margin: 0 5px;
-      }
-
-      footer a:hover {
-        text-decoration: underline;
-      }
-    </style>
-    <!-- Add Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Add Font Awesome for social media icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha384-jLKHWMniayxNUgIN6BBk9s6Hpft5bBTHzNeV+vFVUKYmYV4m+PFShoqTHh+7qhb7"
-      crossorigin="anonymous"
-    />
-  </head>
-
-  <body>
-    <header>
-      <nav class="container">
-        <div class="logo">
-          <a href="#">Avuyile Mthembu</a>
-        </div>
-        <ul>
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#social">Social</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <section id="home" class="hero">
-        <div class="hero-content">
-          <h1>Welcome to Avuyile Mthembu's Official Website</h1>
-          <p>Mr. A CEO - Innovator | Developer | Entrepreneur</p>
-          <p>
-            Welcome to a world of endless possibilities! Avuyile Mthembu's
-            website is a space where innovation and creativity collide. We're
-            here to challenge the status quo, explore new ideas, and bring them
-            to life.
-          </p>
-        </div>
-      </section>
-
-      <section id="about">
-        <div class="container">
-          <div class="about-content">
-            <div class="about-text">
-              <h2>About Avuyile Mthembu</h2>
-              <p>
-                Avuyile Mthembu, based in South Africa, is a dedicated
-                enthusiast of cutting-edge technology, particularly in areas
-                like blockchain, cryptocurrencies, and software development. His
-                journey is fueled by a profound commitment to leveraging
-                technology for positive global impact. Through this platform, he
-                shares profound insights, innovative projects, and visionary
-                ideas, aiming to inspire others to harness technology's
-                potential for transformative change.
-              </p>
-            </div>
-            <div class="about-image">
-              <img src="avuyile1.jpg" alt="Avuyile Mthembu" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <div class="container">
-          <h2>Projects</h2>
-          <div class="project">
-            <h3>Android App Development</h3>
-            <p>Projects:</p>
-            <ul>
-              <li>
-                Book Library: A comprehensive book library app with CRUD
-                operations database.
-              </li>
-              <li>
-                Diet Tracker: A fitness app to track diet and health metrics.
-              </li>
-              <li>
-                Music Playlist Recommender: A music app recommending playlists
-                based on artists and genre.
-              </li>
-              <li>
-                Tally Counter: A simple counter app for various counting
-                purposes.
-              </li>
-              <li>
-                Calculator: A basic calculator app for daily calculations.
-              </li>
-            </ul>
-          </div>
-          <div class="project">
-            <h3>Web Development</h3>
-            <p>Projects:</p>
-            <ul>
-              <li>
-                Personal Website: Designing and developing personal portfolio
-                websites.
-              </li>
-              <li>
-                Clothing Online Shop: Building e-commerce websites for clothing
-                brands.
-              </li>
-            </ul>
-            <div class="project">
-              <h3>Blockchain and Crypto Advisory</h3>
-              <p>Services:</p>
-              <ul>
-                <li>
-                  Advising on blockchain technology and crypto investments
-                  across platforms like Luno, Binance, Trust Wallet, Phantom
-                  Wallet, Coinbase.
-                </li>
-              </ul>
-               <h3>Graphic Design Services:</h3>
-            <ul>
-                <li>Creating professional marketing materials using tools like Canva, including magazine covers, photo editing, posters, logos, and more.</li>
-            </ul>
-        </div>
-
-        <div class="project">
-            <h3>Coming Soon</h3>
-            <p>Stay tuned for more innovative solutions and groundbreaking projects.</p>
-        </div>
+  <!-- Fullscreen mobile menu overlay (adopted style) -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+    <div class="menu-header">
+      <a href="#home" class="brand" aria-label="Go to home">MRA<span class="bolt">⚡</span></a>
+      <!-- Close uses same menu icon for consistency (handled via JS) -->
     </div>
-</section>
+    <ul class="menu-links">
+      <li class="menu-item">
+        <a href="#about">About</a>
+      </li>
 
-      <section id="contact">
-        <div class="container">
-          <h2>Contact</h2>
-          <div class="contact-content">
-            <form>
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit">Send Message</button>
-            </form>
-            <div class="contact-info">
-              <p>Email: your-email@example.com</p>
-              <p>
-                LinkedIn: <a href="#" target="_blank">Your LinkedIn Profile</a>
-              </p>
-              <p>Phone: +27 123 456 7890</p>
+      <li class="menu-item has-submenu">
+        <button class="accordion-btn" aria-expanded="false">
+          <span>Skills</span>
+          <span class="arrow">&#8250;</span>
+        </button>
+        <div class="submenu" role="region" aria-label="Skills submenu">
+          <a href="skills.html">
+            <div class="icon">
+              <!-- dev icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
             </div>
+            <div class="text-content">
+              <strong>Development</strong>
+              <span>Front-end, Back-end, Mobile</span>
+            </div>
+          </a>
+          <a href="skills.html#databases">
+            <div class="icon">
+              <!-- db icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c4.97 0 9 1.567 9 3.5S16.97 10 12 10 3 8.433 3 6.5 7.03 3 12 3zm9 7.5c0 1.933-4.03 3.5-9 3.5s-9-1.567-9-3.5m18 4c0 1.933-4.03 3.5-9 3.5s-9-1.567-9-3.5m18 4c0 1.933-4.03 3.5-9 3.5s-9-1.567-9-3.5"/></svg>
+            </div>
+            <div class="text-content">
+              <strong>Databases & Tools</strong>
+              <span>MySQL, Firebase, Git</span>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <li class="menu-item has-submenu">
+        <button class="accordion-btn" aria-expanded="false">
+          <span>Projects</span>
+          <span class="arrow">&#8250;</span>
+        </button>
+        <div class="submenu" role="region" aria-label="Projects submenu">
+          <a href="https://vylexnexys.co.za/portfolio" target="_blank" rel="noopener noreferrer">
+            <div class="icon">
+              <!-- briefcase -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7V6a3 3 0 013-3h0a3 3 0 013 3v1m-9 0h12a2 2 0 012 2v7a4 4 0 01-4 4H7a4 4 0 01-4-4V9a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="text-content">
+              <strong>Vylex Nexys Portfolio</strong>
+              <span>Client work & internal apps</span>
+            </div>
+          </a>
+          <a href="https://portfolio.avuyilemthembu.co.za/" target="_blank" rel="noopener noreferrer">
+            <div class="icon">
+              <!-- user -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 19.5a7.5 7.5 0 0115 0"/></svg>
+            </div>
+            <div class="text-content">
+              <strong>Personal Showcase</strong>
+              <span>Experiments & explorations</span>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <li class="menu-item">
+        <a href="contact.html">Contact</a>
+      </li>
+      <li class="menu-item">
+        <a href="https://vylexnexys.co.za" target="_blank" rel="noopener noreferrer">Company</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container">
+      <h1>Avuyile Mthembu</h1>
+      <p class="subtitle">Full-Stack Developer building web and mobile applications.</p>
+      <div class="tech-stack">
+        <span class="tech-item">Java</span>
+        <span class="tech-item">JavaScript</span>
+        <span class="tech-item">PHP</span>
+        <span class="tech-item">SQL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-content">
+        <div class="profile-image-container">
+          <img src="assets/images/avuyile2.jpg" alt="Avuyile Mthembu - Full-Stack Developer" class="profile-image" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h3>About Me</h3>
+          <p>
+            I'm a Full-Stack Developer passionate about building robust web and mobile applications from
+            start to finish. My expertise lies in creating interactive front-end experiences with HTML, CSS,
+            and JavaScript, complemented by powerful back-end systems using PHP and Java.
+          </p>
+          <p>
+            On the mobile front, I specialize in native Android development with Java. My toolkit includes
+            VS Code, Android Studio, Firebase, GitHub, and MySQL, which I use to bring ideas to life
+            efficiently and effectively.
+          </p>
+          <p>
+            My skills extend beyond development into cybersecurity. I have a strong foundation in security
+            principles, having completed coursework covering CompTIA Security+, ethical hacking, and secure
+            coding practices. This allows me to build applications that are not only functional but also
+            secure by design.
+          </p>
+          <p style="font-size:16px;font-weight:bold;color:#333;margin:0;">
+            <a href="about.html" style="text-decoration:none;color:#007BFF;">MORE</a>&gt;
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">My Skills</h2>
+      <p class="section-subtitle">Technologies I use to build modern and efficient applications.</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3><i class="fas fa-desktop"></i> Front-End Development</h3>
+          <ul class="skill-list">
+            <li>JavaScript</li>
+            <li>HTML5 & CSS</li>
+            <li>React</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3><i class="fas fa-server"></i> Back-End Development</h3>
+          <ul class="skill-list">
+            <li>Node.js</li>
+            <li>PHP (AMPPS)</li>
+            <li>Java</li>
+            <li>RESTful APIs</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
+          <ul class="skill-list">
+            <li>Android (Native)</li>
+            <li>Java & XML</li>
+            <li>Android Studio</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3><i class="fas fa-database"></i> Databases & Tools</h3>
+          <ul class="skill-list">
+            <li>MySQL & SQLite</li>
+            <li>Firebase (Realtime DB, Firestore)</li>
+            <li>GitHub</li>
+            <li>Agile Methodologies</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">My Work</h2>
+      <p class="section-subtitle">
+        Explore a range of projects, from personal learning showcases to professional solutions developed for
+        clients.
+      </p>
+      <div class="projects-grid">
+        <div class="project-item">
+          <div class="project-header">
+            <i class="fas fa-briefcase project-icon"></i>
+            <h3>Vylex Nexys Portfolio</h3>
+          </div>
+          <p>Discover projects and solutions by <a href="https://vylexnexys.co.za/">Vylex Nexys</a>, featuring
+            professional client work and internal business applications.</p>
+          <a href="https://vylexnexys.co.za/portfolio" target="_blank" rel="noopener noreferrer" class="project-link">
+            View Company Portfolio <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+        <div class="project-item">
+          <div class="project-header">
+            <i class="fas fa-user-circle project-icon"></i>
+            <h3>Personal Showcase</h3>
+          </div>
+          <p>A curated collection of my individual projects, experiments, and tech explorations. See what I
+            build in my own time.</p>
+          <a href="https://portfolio.avuyilemthembu.co.za/" target="_blank" rel="noopener noreferrer" class="project-link">
+            View Personal Portfolio <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MORE INFO -->
+  <section id="more-info" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">Want to Know More?</h2>
+      <p class="section-subtitle">
+        My education as a final-year Systems Development student has taught me more than just code.
+        I've learned the entire software lifecycle, from business analysis and project management to testing and security.
+        Dive deeper into my journey or download my resume.
+      </p>
+      <div class="cta-buttons">
+        <a href="education.html" class="btn btn-primary">
+          My Education & Journey <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="/pdfs/Avuyile_Mthembu_Resume_2025.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          View / Download Resume <i class="fas fa-file-pdf"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact section">
+    <div class="container">
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="contact-content">
+        <p class="section-subtitle">Have a project idea or an opportunity? I'm always open to discussing new
+          challenges and collaborations.</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <a href="tel:+27648784287">064 878 4287</a>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:info@avuyilemthembu.co.za">info@avuyilemthembu.co.za</a>
           </div>
         </div>
-      </section>
 
-      <section id="social">
-        <div class="container">
-          <h2>Connect with Me on Socials</h2>
-          <p>
-            <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank"
-              >Instagram</a
-            >
-          </p>
-          <p>
-            <a href="https://twitter.com/MthembuAvuyile" target="_blank"
-              >Twitter</a
-            >
-          </p>
-          <p>
-            <a
-              href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/?mibextid=ZbWKwL"
-              target="_blank"
-              >Facebook</a
-            >
-          </p>
-          <p>
-            <a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank"
-              >TikTok</a
-            >
-          </p>
+        <div class="social-links">
+          <a href="https://github.com/mthembuavuyile" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/mthembuavuyile" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/MthembuAvuyile" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter) Profile">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://medium.com/@mthembuavuyile" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Medium Profile">
+            <i class="fab fa-medium"></i>
+          </a>
+          <a href="https://www.instagram.com/mthembu_avuyile_sa" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.facebook.com/mthembu.avuyile.sa" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook Profile">
+            <i class="fab fa-facebook"></i>
+          </a>
         </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <p>&copy; 2024 Avuyile Mthembu. All rights reserved.</p>
-        <p>
-          <a href="#home">Home</a> | <a href="#about">About</a> |
-          <a href="#projects">Projects</a> | <a href="#contact">Contact</a> |
-          <a href="#social">Social</a>
-        </p>
       </div>
-    </footer>
-  </body>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="copyright-year"></span> Avuyile Mthembu. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts: merged logic (overlay menu + accessibility + year) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('menu-btn');
+      const menuOverlay = document.getElementById('menu-overlay');
+      const accordions = document.querySelectorAll('.accordion-btn');
+
+      function toggleMenu(forceState){
+        const willOpen = typeof forceState === 'boolean' ? forceState : !menuOverlay.classList.contains('active');
+        menuOverlay.classList.toggle('active', willOpen);
+        menuBtn.classList.toggle('active', willOpen);
+        document.body.classList.toggle('no-scroll', willOpen);
+        menuBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        menuOverlay.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+      }
+
+      if(menuBtn && menuOverlay){
+        menuBtn.addEventListener('click', () => toggleMenu());
+      }
+
+      // Close when clicking a link
+      menuOverlay.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=> toggleMenu(false));
+      });
+
+      // Accordion behavior
+      accordions.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const parent = btn.closest('.menu-item');
+          const isActive = parent.classList.contains('active');
+          document.querySelectorAll('.menu-item.has-submenu').forEach(i=>i.classList.remove('active'));
+          parent.classList.toggle('active', !isActive);
+          btn.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+        });
+      });
+
+      // Escape to close menu
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && menuOverlay.classList.contains('active')){
+          toggleMenu(false);
+        }
+      });
+
+      // Dynamic year
+      const yr = document.getElementById('copyright-year');
+      if(yr) yr.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
 </html>

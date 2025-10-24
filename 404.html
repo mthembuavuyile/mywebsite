@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Avuyile Mthembu</title>
+    <meta name="description" content="Page not found - 404 error on Avuyile Mthembu's website. Return to the homepage or contact for support.">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Root Variables */
+        :root {
+            --color-primary: #2d3436;
+            --color-secondary: #0984e3;
+            --color-accent: #00cec9;
+            --color-text: #dfe6e9;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition-standard: all 0.3s ease;
+        }
+
+        /* Body Styles */
+        body {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            font-family: var(--font-primary);
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 6rem;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+
+        .ascii-art {
+            font-family: monospace;
+            color: var(--color-secondary);
+            margin: 20px 0;
+            white-space: pre;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: var(--transition-standard);
+        }
+
+        .btn:hover {
+            background-color: var(--color-accent);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <div class="ascii-art">
+   _____          
+  / ____|         
+ | |  __  ___     
+ | | |_ |/ _ \    
+ | |__| | (_) |   
+  \_____|\___/    
+        </div>
+        <h2>Oops! Page Not Found</h2>
+        <p>The page you're looking for seems to have gone on an unexpected adventure. Don’t worry, even the best developers encounter <span class="error-code">404</span> errors sometimes!</p>
+        <p>- Avuyile Mthembu, Developer & Programmer -</p>
+        <a href="/" class="btn" aria-label="Return to Homepage">Return to Homepage</a>
+    </div>
+    <footer class="footer">
+        &copy; 2024 Avuyile Mthembu - Vylex Nexys. All Rights Reserved.
+    </footer>
+</body>
+</html>

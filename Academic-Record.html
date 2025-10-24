@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avuyile Mthembu - Academic Portfolio</title>
+    <style>
+        /* CSS FIX: Corrected Google Fonts URL (removed extra 'com') */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1e40af;
+            --primary-light: #60a5fa;
+            --secondary: #0f172a;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            --gradient-warning: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+            --gradient-bg: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevents horizontal scroll on the whole page */
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-decoration: none; /* Improvement: Make logo a link */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger-menu {
+            display: none; /* Hidden by default, shown in media query */
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            z-index: 101; /* Ensure it's above the nav menu */
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 6rem 2rem 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-picture {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-image: url('https://avuyilemthembu.co.za/assets/images/avuyile2.jpg');
+            background-position: center;
+            background-size: cover;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-xl);
+            margin: 0 auto 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* Dates Display */
+        .current-date {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .updated-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: -4rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4rem;
+            height: 0.25rem;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .stat-card.warning::before {
+            background: var(--gradient-warning);
+        }
+
+        .stat-card.warning .stat-number {
+            background: var(--gradient-warning);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card.accent::before {
+            background: var(--gradient-accent);
+        }
+
+        .stat-card.accent .stat-number {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: -2.5rem -2.5rem 2rem -2.5rem;
+            padding: 1.5rem 2.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 1.5rem;
+            background: var(--gray-200);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--gradient-accent);
+            width: 0%;
+            transition: width 1.5s ease-out;
+        }
+
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Countdown Timer */
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .countdown-item span {
+            display: block;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .countdown-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+        }
+
+        /* Table Styles (Desktop) */
+        .table-wrapper {
+            overflow-x: auto; /* Fallback for very complex tables, but stacking is primary */
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table thead th {
+            background: var(--gray-50);
+            color: var(--gray-700);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tfoot {
+            background: var(--gray-100);
+            font-weight: 700;
+        }
+
+        /* Academic Records */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .collapsible-content.expanded {
+            max-height: 3000px;
+            /* Large enough for content */
+        }
+
+        .toggle-btn {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        /* ... (rest of existing styles for modules, etc.) ... */
+        .semester{margin-bottom:1.5rem}.semester-title{font-size:1.25rem;font-weight:600;color:var(--primary);margin:2rem 0 1.5rem;padding-bottom:.5rem;border-bottom:2px solid var(--primary-light)}.module{background:var(--white);border-radius:1rem;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;border-left:5px solid var(--gray-300);transition:all .3s ease;box-shadow:var(--shadow-sm)}.module:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}.module.distinction{border-left-color:var(--accent)}.module.pass{border-left-color:var(--primary)}.module.fail{border-left-color:var(--danger)}.module-info .module-name{font-weight:600;color:var(--gray-900)}.module-info .module-code{font-size:.875rem;color:var(--gray-600)}.module-details{display:flex;align-items:center;gap:1rem}.module-credits{font-size:.875rem;color:var(--gray-600);background:var(--gray-100);padding:.25rem .75rem;border-radius:.5rem}.module-mark{font-size:1.125rem;font-weight:700;padding:.5rem 1rem;border-radius:.5rem;min-width:4rem;text-align:center;color:var(--white)}.mark-distinction{background:var(--accent)}.mark-pass{background:var(--primary)}.mark-fail{background:var(--danger)}.module-detailed{border:1px solid var(--gray-200);border-radius:1rem;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:1.5rem}.module-detailed-header{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;padding:1.5rem;background:var(--white);cursor:pointer;transition:background .3s ease}.module-detailed-header:hover{background:var(--gray-50)}.module-title-detailed{font-weight:600;color:var(--gray-900);flex-grow:1}.toggle-details{display:flex;align-items:center;gap:.5rem;color:var(--primary);font-weight:600}.toggle-indicator{transition:transform .4s ease}.expanded .toggle-indicator{transform:rotate(180deg)}.breakdown-content{padding:0 1.5rem 1.5rem;background:var(--white)}.placeholder{color:var(--gray-500);font-style:italic}.calculation-note{padding:1rem 1.5rem;background:var(--gray-50);border-top:1px solid var(--gray-200);font-size:.9rem;margin:0 -1.5rem -1.5rem}.calculation-note code{background:var(--gray-200);padding:.2em .4em;border-radius:4px;color:var(--gray-900)}.status-note{padding:1.5rem;background:var(--gray-50);border-radius:1rem;border-left:4px solid var(--warning);margin-bottom:2rem;font-size:.95rem;color:var(--gray-700)}
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1rem 6rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                margin-top: -3rem;
+            }
+
+            /* --- MOBILE NAVIGATION --- */
+            .hamburger-menu {
+                display: block; /* Show hamburger on mobile */
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                box-shadow: var(--shadow-xl);
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            
+            /* --- RESPONSIVE TABLES (STACKING) --- */
+            .data-table thead {
+                display: none; /* Hide the table header on mobile */
+            }
+
+            .data-table tr {
+                display: block;
+                border: 1px solid var(--gray-200);
+                border-radius: 0.5rem;
+                margin-bottom: 1rem;
+                box-shadow: var(--shadow-sm);
+            }
+            
+            .data-table tfoot tr {
+                display: flex; /* Special handling for footer */
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 1rem;
+            }
+
+            .data-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 1rem;
+                text-align: right;
+                border-bottom: 1px dashed var(--gray-200);
+            }
+
+            .data-table td:last-child {
+                border-bottom: none;
+            }
+
+            /* Add labels using ::before pseudo-element */
+            .data-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--gray-800);
+                text-align: left;
+                padding-right: 1rem;
+            }
+            /* --- End Responsive Tables --- */
+
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .module {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .module-details {
+                align-self: flex-end;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Improvement: Logo is now a link to the top -->
+            <a href="#" class="logo">AVUYILE M.</a>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#current">Current Semester</a></li>
+                <li><a href="#records">Records</a></li>
+            </ul>
+            <!-- Improvement: Using a <button> for accessibility -->
+            <button class="hamburger-menu" id="hamburger-btn" aria-label="Open navigation menu" aria-controls="nav-menu" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="current-date" id="currentDate"></div>
+            <div class="profile-picture" aria-label="Profile picture of Avuyile Mthembu"></div>
+            <h1>Avuyile Mthembu</h1>
+            <p class="subtitle">Higher Diploma in Systems Development &bull; Final Year</p>
+            <!-- Improvement: Clearer text for the hardcoded date -->
+            <div class="updated-date">Portfolio snapshot as of: August 27, 2025</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="overview" class="section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">263</span>
+                    <div class="stat-label">Credits Completed</div>
+                </div>
+                <div class="stat-card accent">
+                    <span class="stat-number" id="progress-percent-stat">72%</span>
+                    <div class="stat-label">Program Complete</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">364</span>
+                    <div class="stat-label">Total Credits</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 class="card-title" style="border: none; margin: 0; padding: 0;">Academic Progress</h3>
+                    <div class="stat-number accent" style="font-size: 2rem; margin:0;" id="progress-percent-bar">72%
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-details">
+                    <span>263 of 364 credits completed</span>
+                    <span>101 credits remaining</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="current" class="section">
+            <h2 class="section-title">Current Semester (Final)</h2>
+            <div class="card" style="background: var(--gradient-warning); color: var(--white); padding: 2.5rem;">
+                <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 1.5rem;">Countdown to Final Exams</h3>
+                <div class="countdown-timer" id="countdown">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+
+            <div class="stats-grid" style="margin-top: 3rem;">
+                <div class="stat-card">
+                    <span class="stat-number">60</span>
+                    <div class="stat-label">Core Credits</div>
+                </div>
+                <div class="stat-card warning">
+                    <span class="stat-number">16</span>
+                    <div class="stat-label">Repeat Credits</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">76</span>
+                    <div class="stat-label">Total Semester Credits</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 3rem;">
+                <div class="card-header">
+                    <h3 class="card-title">Key Dates & Assessment Weights (Current Semester)</h3>
+                </div>
+                <p>The following dates apply to the <strong>July-Dec 2025</strong> semester. The assessment structure is
+                    consistent across most modules:</p>
+                <!-- Improvement: Added data-label attributes for mobile view -->
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Assessment</th>
+                                <th>Weight</th>
+                                <th>Due / Exam Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Assessment">Formative Assessment 1 (FA1)</td>
+                                <td data-label="Weight">40%</td>
+                                <td data-label="Due Date">05 September 2025</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Assessment">Summative Assessment 1 (SA1)</td>
+                                <td data-label="Weight">50%</td>
+                                <td data-label="Due Date">10 Oct / 03 Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Assessment">Summative Assessment 2 (SA2)</td>
+                                <td data-label="Weight">10%</td>
+                                <td data-label="Due Date">07 Nov / 14 Nov 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="records" class="section">
+            <h2 class="section-title">Academic Records</h2>
+            <div class="status-note">
+                <strong>Please Note:</strong> Some results for the previous semester are marked as 'TBA' (To Be
+                Announced). These will be updated as soon as they are officially released by the institution, pending
+                the resolution of outstanding school fees.
+            </div>
+
+            <!-- Year 3 (Current) -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">Year 3 (2025)</h3>
+                </div>
+
+                <div class="semester">
+                    <div class="semester-title">Semester 6: July - December 2025 (Current)</div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Module</th>
+                                    <th>Code</th>
+                                    <th>Credits</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Module">Systems Development 3</td>
+                                    <td data-label="Code">HSYD300-1</td>
+                                    <td data-label="Credits">30</td>
+                                    <td data-label="Notes">Main programming module, design patterns, practical systems</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Module">Software Testing 3</td>
+                                    <td data-label="Code">HSFT300-1</td>
+                                    <td data-label="Credits">15</td>
+                                    <td data-label="Notes">Test planning, automation, debugging, quality assurance</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Module">Praxis S3B – Cyber Law & Project Dev.</td>
+                                    <td data-label="Code">HPXS302-1</td>
+                                    <td data-label="Credits">15</td>
+                                    <td data-label="Notes">Legal principles in cyber law, project execution</td>
+                                </tr>
+                                <tr style="background: rgba(245, 158, 11, 0.1);">
+                                    <td data-label="Module">Business Ethics (Repeat)</td>
+                                    <td data-label="Code">HBMN201-1</td>
+                                    <td data-label="Credits">16</td>
+                                    <td data-label="Notes">Repeat from Year 2 due to a missed final exam</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"><strong>Total Final Semester Credits</strong></td>
+                                    <td style="text-align:center;"><strong>76</strong></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="semester">
+                    <div class="semester-title">Semester 5: January - June 2025 (Completed)</div>
+                    <!-- Detailed Breakdowns for Year 3, Semester 5 -->
+                    <!-- ... (Existing HTML for detailed modules is fine, no table stacking needed here as they are already structured) -->
+                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#sad3-content"><span class="module-title-detailed">Systems Analysis and Design 3 (20 Credits)</span><span class="module-mark mark-distinction">94%</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="sad3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">85/100</td><td data-label="Weight">40%</td><td data-label="Contribution">34%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td data-label="Mark">70/70</td><td data-label="Weight">50%</td><td data-label="Contribution">50%</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td data-label="Mark">20/20</td><td data-label="Weight">10%</td><td data-label="Contribution">10%</td></tr></tbody></table><div class="calculation-note">Final Mark: <code>34 + 50 + 10 = 94%</code></div></div></div>
+                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#wfm3-content"><span class="module-title-detailed">Workflow Management 3 (20 Credits)</span><span class="module-mark mark-fail">20.4%*</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="wfm3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">51/100</td><td data-label="Weight">40%</td><td data-label="Contribution">20.4%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td class="placeholder">TBA</td><td data-label="Weight">50%</td><td class="placeholder">TBA</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td class="placeholder">TBA</td><td data-label="Weight">10%</td><td class="placeholder">TBA</td></tr></tbody></table><div class="calculation-note">*Current Mark is based on FA1 only.</div></div></div>
+                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#sdpm3-content"><span class="module-title-detailed">Systems Dev Project Management 3 (15 Credits)</span><span class="module-mark mark-pass">50%*</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="sdpm3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">100/100</td><td data-label="Weight">40%</td><td data-label="Contribution">40%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td class="placeholder">TBA</td><td data-label="Weight">50%</td><td class="placeholder">TBA</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td data-label="Mark">20/20</td><td data-label="Weight">10%</td><td data-label="Contribution">10%</td></tr></tbody></table><div class="calculation-note">*Current Mark is based on FA1 & SA2.</div></div></div>
+                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#pxs3-content"><span class="module-title-detailed">Praxis S3A (Ethical Hacking) (5 Credits)</span><span class="module-mark mark-fail">38.3%*</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="pxs3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">72/100</td><td data-label="Weight">40%</td><td data-label="Contribution">28.8%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td class="placeholder">TBA</td><td data-label="Weight">50%</td><td class="placeholder">TBA</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td data-label="Mark">19/20</td><td data-label="Weight">10%</td><td data-label="Contribution">9.5%</td></tr></tbody></table><div class="calculation-note">*Current Mark is based on FA1 & SA2.</div></div></div>
+                </div>
+            </div>
+
+            <!-- ... (Existing content for Year 2 and Year 1 is fine) ... -->
+             <div class="card" style="margin-bottom: 2rem;"><div class="card-header"><h3 class="card-title">Year 2 (2024) &bull; 110/126 Credits Achieved</h3><button class="toggle-btn js-toggle-trigger" data-target="#year2-content">Show</button></div><div id="year2-content" class="collapsible-content"><div class="semester"><div class="semester-title">July - December 2024</div><div class="module distinction"><div class="module-info"><div class="module-name">Systems Development 2A</div><div class="module-code">HSYD201-1</div></div><div class="module-details"><div class="module-credits">40 Cr</div><div class="module-mark mark-distinction">84%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Systems Development 2B (Security+)</div><div class="module-code">HSYD202-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">92%</div></div></div></div><div class="semester"><div class="semester-title">January - June 2024</div><div class="module distinction"><div class="module-info"><div class="module-name">Database Programming 2</div><div class="module-code">HDBP200-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">84%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Praxis S2</div><div class="module-code">HPXS200-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">86%</div></div></div><div class="module fail"><div class="module-info"><div class="module-name">Business Ethics</div><div class="module-code">HBMN201-1 &bull; <em>Missed final exam</em></div></div><div class="module-details"><div class="module-credits">16 Cr</div><div class="module-mark mark-fail">41%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Android App Development</div><div class="module-code">HASD200-1</div></div><div class="module-details"><div class="module-credits">10 Cr</div><div class="module-mark mark-distinction">87%</div></div></div></div></div></div><div class="card"><div class="card-header"><h3 class="card-title">Year 1 (2023) &bull; 118 Credits Achieved</h3><button class="toggle-btn js-toggle-trigger" data-target="#year1-content">Show</button></div><div id="year1-content" class="collapsible-content"><div class="semester"><div class="semester-title">July - December 2023</div><div class="module distinction"><div class="module-info"><div class="module-name">Praxis 1</div><div class="module-code">HPX100-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">95%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Computer Literacy Advanced</div><div class="module-code">HCLT108-1</div></div><div class="module-details"><div class="module-credits">10 Cr</div><div class="module-mark mark-distinction">77%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Technical Systems and Support (A+)</div><div class="module-code">HTSS100-1</div></div><div class="module-details"><div class="module-credits">24 Cr</div><div class="module-mark mark-pass">56%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Introduction to Business Management</div><div class="module-code">HBMN102-1</div></div><div class="module-details"><div class="module-credits">10 Cr</div><div class="module-mark mark-pass">68%</div></div></div></div><div class="semester"><div class="semester-title">January - June 2023</div><div class="module distinction"><div class="module-info"><div class="module-name">Systems Development 1 (Java)</div><div class="module-code">HSYD100-1</div></div><div class="module-details"><div class="module-credits">12 Cr</div><div class="module-mark mark-distinction">75%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Academic Literacy</div><div class="module-code">HALP100-1</div></div><div class="module-details"><div class="module-credits">14 Cr</div><div class="module-mark mark-pass">62%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Computer Literacy Introduction</div><div class="module-code">HCLT101-1</div></div><div class="module-details"><div class="module-credits">16 Cr</div><div class="module-mark mark-pass">58%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">IT Systems Management 1</div><div class="module-code">HISM100-1</div></div><div class="module-details"><div class="module-credits">12 Cr</div><div class="module-mark mark-pass">66%</div></div></div></div></div></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Avuyile Mthembu. Academic Portfolio - Boston City Campus, Durban.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- DYNAMIC CURRENT DATE ---
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const today = new Date();
+            const currentDateEl = document.getElementById('currentDate');
+            if(currentDateEl) {
+                currentDateEl.textContent = today.toLocaleDateString('en-GB', options);
+            }
+
+            // --- MOBILE NAVIGATION MENU ---
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (hamburgerBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    const isExpanded = navMenu.classList.toggle('active');
+                    hamburgerBtn.setAttribute('aria-expanded', isExpanded);
+                });
+
+                // Close menu when a link is clicked (good for single-page sites)
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            // --- PROGRESS BAR ANIMATION ---
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                setTimeout(() => {
+                    const progressValue = document.getElementById('progress-percent-bar').textContent;
+                    progressBar.style.width = progressValue;
+                }, 300);
+            }
+
+            // --- UNIFIED COLLAPSIBLE SECTION TOGGLE ---
+            document.querySelectorAll('.js-toggle-trigger').forEach(trigger => {
+                trigger.addEventListener('click', function () {
+                    const targetId = this.dataset.target;
+                    const content = document.querySelector(targetId);
+                    if (!content) return;
+
+                    const isExpanded = content.classList.toggle('expanded');
+                    this.setAttribute('aria-expanded', isExpanded);
+
+                    if (this.classList.contains('toggle-btn')) {
+                        this.textContent = isExpanded ? 'Hide' : 'Show';
+                    } else {
+                        const textElement = this.querySelector('.toggle-text');
+                        if (textElement) textElement.textContent = isExpanded ? 'Hide' : 'Details';
+                    }
+                });
+            });
+
+            // --- COUNTDOWN TIMER ---
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                const examDate = new Date('November 14, 2025 09:00:00').getTime();
+
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = examDate - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    countdownElement.innerHTML = `
+                        <div class="countdown-item"><span class="countdown-number">${days}</span><span class="countdown-label">Days</span></div>
+                        <div class="countdown-item"><span class="countdown-number">${hours}</span><span class="countdown-label">Hours</span></div>
+                        <div class="countdown-item"><span class="countdown-number">${minutes}</span><span class="countdown-label">Minutes</span></div>
+                        <div class="countdown-item"><span class="countdown-number">${seconds}</span><span class="countdown-label">Seconds</span></div>
+                    `;
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        countdownElement.innerHTML = "The exam period has begun. Good luck!";
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

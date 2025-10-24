@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Glow Haven Beauty Therapy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+:root {
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --color-primary-action: #C9A96E;
+    --color-accent: #EAD1D1;
+    --color-background-main: #FAF8F4;
+    --color-background-card: #FFFFFF;
+    --color-text-primary: #333333;
+    --color-text-secondary: #757575;
+    --color-text-on-dark: #FFFFFF;
+    --color-footer-bg: #2d2d2d;
+    --color-border-subtle: #eaeaea;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--color-text-primary);
+    background-color: var(--color-background-main);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header & Navigation */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(250, 248, 244, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary-action);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover, .nav-menu a.active-link {
+    color: var(--color-primary-action);
+}
+
+.nav-menu a:hover::after, .nav-menu a.active-link::after {
+    width: 100%;
+}
+
+.book-btn {
+    background: var(--color-primary-action);
+    color: var(--color-text-on-dark);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    color: var(--color-text-on-dark);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--color-text-primary);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #eac6d0 0%, #9c7586 40%, #4a4a4a 100%), url(images/spa.jpeg);
+    padding: 120px 0 80px 0;
+    text-align: center;
+    color: var(--color-text-on-dark);
+
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Services Section */
+.services-section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+}
+
+.section-title p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--color-text-secondary);
+}
+
+.services-tabs {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem; /* space between buttons */
+}
+
+.tab-btn {
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 0.7rem 1.5rem;
+    margin: 0 0.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.service-card {
+    background: var(--color-background-card);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--color-accent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.service-card .icon {
+    font-size: 2.5rem;
+    color: var(--color-primary-action);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.service-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.service-list {
+    list-style: none;
+    color: var(--color-text-secondary);
+}
+
+.service-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.service-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary-action);
+    font-weight: bold;
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Booking Form Section */
+.booking-section {
+    background: var(--color-background-card);
+    padding: 6rem 0;
+}
+
+.booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--color-background-main);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--color-border-subtle);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-action);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.submit-btn {
+    background: var(--color-primary-action);
+    color: var(--color-text-on-dark);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* WhatsApp Button */
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    animation: pulse 2s infinite;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    }
+}
+
+/* Footer */
+.footer {
+    background: var(--color-footer-bg);
+    color: #ccc;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.footer .logo {
+    color: var(--color-text-on-dark);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer p {
+    margin: 1rem 0;
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #666;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    html { scroll-padding-top: 70px; }
+    .nav-container { height: 70px; }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--color-background-main);
+        width: 100%;
+        height: calc(100vh - 70px);
+        text-align: center;
+        transition: 0.3s;
+        gap: 0;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        padding: 1.5rem 0;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    .hero h1 { font-size: 2.5rem; }
+    .section-title h2 { font-size: 2.2rem; }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .booking-form {
+        padding: 2rem;
+        margin: 0 1rem;
+    }
+    
+    .whatsapp-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}
+</style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="container nav-container">
+            <a href="index.html" class="logo">Glow Haven</a>
+            <ul class="nav-menu">
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="services.html" class="nav-link active-link">Services</a></li>
+                <li><a href="index.html#specials" class="nav-link">Offers</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="#booking" class="book-btn">Book Now</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Our Professional Services</h1>
+                <p>Discover our comprehensive range of beauty treatments and wellness therapies designed for every stage of life</p>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Complete Beauty & Wellness Solutions</h2>
+                    <p>From advanced beauty treatments to therapeutic wellness services, we offer everything you need to look and feel your best.</p>
+                </div>
+                
+                <div class="services-tabs">
+                    <button class="tab-btn active" data-tab="beauty">Beauty Treatments</button>
+                    <button class="tab-btn" data-tab="wellness">Wellness & Therapy</button>
+                    <button class="tab-btn" data-tab="specials">Group Packages</button>
+                </div>
+
+                <div id="beauty" class="tab-content active">
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-magic"></i></div>
+                            <h3>Microblading</h3>
+                            <ul class="service-list">
+                                <li>Professional eyebrow microblading</li>
+                                <li>Semi-permanent brow enhancement</li>
+                                <li>Natural-looking results</li>
+                                <li>Touch-up sessions included</li>
+                                <li>Consultation and aftercare</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-eye"></i></div>
+                            <h3>Eyelash Extensions</h3>
+                            <ul class="service-list">
+                                <li>Classic lash extensions</li>
+                                <li>Volume lash techniques</li>
+                                <li>Lash lifts and tints</li>
+                                <li>Maintenance appointments</li>
+                                <li>Premium quality materials</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-leaf"></i></div>
+                            <h3>Facial Treatments</h3>
+                            <ul class="service-list">
+                                <li>Customized facials for all skin types</li>
+                                <li>Anti-aging treatments</li>
+                                <li>Deep cleansing and exfoliation</li>
+                                <li>Hydration therapy</li>
+                                <li>Acne and problem skin solutions</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-tint"></i></div>
+                            <h3>Glow Drips</h3>
+                            <ul class="service-list">
+                                <li>Skin rejuvenation infusions</li>
+                                <li>Vitamin and antioxidant therapy</li>
+                                <li>Hydration boosters</li>
+                                <li>Energy enhancement drips</li>
+                                <li>Customized nutrient blends</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="wellness" class="tab-content">
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-heartbeat"></i></div>
+                            <h3>Health Monitoring</h3>
+                            <ul class="service-list">
+                                <li>Weight management checks</li>
+                                <li>Blood pressure monitoring</li>
+                                <li>Glucose level testing</li>
+                                <li>Health consultations</li>
+                                <li>Confidential and professional service</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-hands"></i></div>
+                            <h3>Massage Therapy</h3>
+                            <ul class="service-list">
+                                <li>Relaxing foot massages</li>
+                                <li>Full body massage therapy</li>
+                                <li>Deep tissue treatments</li>
+                                <li>Stress relief sessions</li>
+                                <li>Aromatherapy options</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-baby"></i></div>
+                            <h3>Baby Wellness</h3>
+                            <ul class="service-list">
+                                <li>Soothing baby hydrotherapy</li>
+                                <li>Gentle baby massage sessions</li>
+                                <li>Development support therapy</li>
+                                <li>Relaxation for babies</li>
+                                <li>Parent guidance included</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="specials" class="tab-content">
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-user"></i></div>
+                            <h3>Singles Package</h3>
+                            <ul class="service-list">
+                                <li>Individual pampering sessions</li>
+                                <li>Customized treatment plans</li>
+                                <li>Personal consultation included</li>
+                                <li>Refreshments during treatment</li>
+                                <li>Flexible scheduling options</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-users"></i></div>
+                            <h3>Duo Package</h3>
+                            <ul class="service-list">
+                                <li>Perfect for couples or friends</li>
+                                <li>Simultaneous treatments available</li>
+                                <li>Shared relaxation experience</li>
+                                <li>Special couple pricing</li>
+                                <li>Wine or cocktails included</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <div class="icon"><i class="fas fa-user-friends"></i></div>
+                            <h3>Trio Package</h3>
+                            <ul class="service-list">
+                                <li>Group therapy sessions</li>
+                                <li>Celebration packages</li>
+                                <li>Bridal party treatments</li>
+                                <li>Group discounts available</li>
+                                <li>Full refreshment service</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Book Your Appointment</h2>
+                    <p>Ready to experience our services? Fill out the form below and we'll get back to you to confirm your appointment.</p>
+                </div>
+                
+                <form class="booking-form" id="appointmentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceCategory">Service Category *</label>
+                        <select id="serviceCategory" name="serviceCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="beauty">Beauty Treatments</option>
+                            <option value="wellness">Wellness & Therapy</option>
+                            <option value="specials">Group Packages</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specificService">Specific Service *</label>
+                        <select id="specificService" name="specificService" required>
+                            <option value="">First select a category</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferredDate">Preferred Date</label>
+                            <input type="date" id="preferredDate" name="preferredDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredTime">Preferred Time</label>
+                            <select id="preferredTime" name="preferredTime">
+                                <option value="">Select time</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="groupSize">Number of People</label>
+                        <select id="groupSize" name="groupSize">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4+ People</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Additional Notes</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Any special requests or additional information..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Book Appointment</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/27794563004?text=Hi! I'd like to book an appointment at Glow Haven Beauty Therapy." class="whatsapp-button" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="logo">Glow Haven Beauty Therapy</a>
+            <p>Your trusted partner in wellness, beauty, and rejuvenation.</p>
+            <div class="footer-bottom">
+                &copy; 2025 Glow Haven. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Service category and specific service mapping
+        const serviceOptions = {
+            beauty: [
+                'Microblading',
+                'Eyelash Extensions',
+                'Facial Treatments',
+                'Glow Drips (Skin Rejuvenation)'
+            ],
+            wellness: [
+                'Health Monitoring (Weight/BP/Glucose)',
+                'Massage Therapy',
+                'Baby Wellness (Hydrotherapy/Massage)'
+            ],
+            specials: [
+                'Singles Package',
+                'Duo Package',
+                'Trio Package'
+            ]
+        };
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll(".nav-link, .book-btn").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+        
+        // Services Tab Functionality
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(item => item.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const target = document.querySelector(`#${tab.dataset.tab}`);
+                contents.forEach(content => content.classList.remove('active'));
+                target.classList.add('active');
+            });
+        });
+
+        // Dynamic service dropdown population
+        const categorySelect = document.getElementById('serviceCategory');
+        const specificServiceSelect = document.getElementById('specificService');
+
+        categorySelect.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            specificServiceSelect.innerHTML = '<option value="">Select a service</option>';
+            
+            if (selectedCategory && serviceOptions[selectedCategory]) {
+                serviceOptions[selectedCategory].forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service;
+                    option.textContent = service;
+                    specificServiceSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('preferredDate').min = today;
+
+        // Form submission handler
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Create WhatsApp message
+            let message = `Hi! I'd like to book an appointment at Glow Haven Beauty Therapy.\n\n`;
+            message += `Name: ${data.firstName} ${data.lastName}\n`;
+            message += `Phone: ${data.phone}\n`;
+            if (data.email) message += `Email: ${data.email}\n`;
+            message += `Service Category: ${data.serviceCategory}\n`;
+            message += `Specific Service: ${data.specificService}\n`;
+            if (data.preferredDate) message += `Preferred Date: ${data.preferredDate}\n`;
+            if (data.preferredTime) message += `Preferred Time: ${data.preferredTime}\n`;
+            message += `Number of People: ${data.groupSize}\n`;
+            if (data.message) message += `Additional Notes: ${data.message}\n`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/27794563004?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NextZA - Your Future, Connected.</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              'primary': {
+                'DEFAULT': '#059669', // emerald-600
+                'light': '#10b981',   // emerald-500
+                'dark': '#047857',    // emerald-700
+                'contrast': '#ffffff',
+              },
+              'secondary': '#f59e0b', // amber-500
+              'accent': '#8b5cf6',    // violet-500
+              'danger': '#ef4444',    // red-500
+              'success': '#22c55e',   // green-500
+              'warning': '#f59e0b',   // amber-500
+              'dark': {
+                'DEFAULT': '#0f172a', // slate-900
+                'secondary': '#1e293b' // slate-800
+              },
+              'light': '#f8fafc',    // slate-50
+              'surface': '#ffffff',
+              'text-primary': '#0f172a', // slate-900
+              'text-secondary': '#64748b',// slate-500
+              'text-muted': '#94a3b8',   // slate-400
+              'border-color': '#e2e8f0', // slate-200
+            },
+            boxShadow: {
+              'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+              'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+            },
+            borderRadius: {
+              'xl': '12px',
+              '2xl': '16px',
+            },
+            backgroundImage: {
+              'primary-gradient': 'linear-gradient(135deg, #059669, #10b981)',
+              'login-gradient': 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #059669 100%)',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light font-sans text-text-primary antialiased">
+    
+    <!-- App container where JavaScript will render the content -->
+    <div id="app-root"></div>
+
+    <!-- Main JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
