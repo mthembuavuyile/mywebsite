@@ -1,701 +1,828 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SA Student Pass — Digital Student Identity</title>
-  <meta name="description" content="A secure, offline-capable digital student identity for South African universities. Dynamic QR, universal verification, and account-based recovery." />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;SA Student Pass&quot;,&quot;short_name&quot;:&quot;Student Pass&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0f172a&quot;,&quot;theme_color&quot;:&quot;#0f172a&quot;}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Premium cleaning services in Durban – residential, commercial, industrial. Eco-friendly, ISO-trained, 5-star rated. Get a free quote today."/>
+  <title>Durban Elite Cleaning | Professional Cleaning Services in KZN</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
-    :root{
-      --bg:#0b1020;          /* base background */
-      --panel:#0f172a;       /* panel background */
-      --panel-2:#121a33;
-      --text:#e5e7eb;        /* primary text */
-      --muted:#9aa4b2;
-      --brand:#5b8cff;       /* primary brand color */
-      --brand-2:#6ee7f2;     /* accent gradient */
-      --ok:#22c55e;
-      --warn:#f59e0b;
-      --err:#ef4444;
-      --ring: rgba(91,140,255,.55);
-      --glass: rgba(255,255,255,.06);
-      --glass-2: rgba(255,255,255,.08);
-      color-scheme: dark;
+    :root {
+      --primary: #00a8e8;
+      --secondary: #00c8b4;
+      --dark: #1a1a1a;
+      --light: #f8f9fb;
+      --gray: #666;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 8px 25px rgba(0,0,0,0.08);
+      --transition: all 0.3s ease;
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f5f7fb;
-        --panel:#ffffff;
-        --panel-2:#f9fafb;
-        --text:#0b1020;
-        --muted:#506070;
-        --brand:#345dff;
-        --brand-2:#06b6d4;
-        --glass: rgba(0,0,0,.04);
-        --glass-2: rgba(0,0,0,.06);
-        --ring: rgba(52,93,255,.35);
-        color-scheme: light;
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: var(--light);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      padding: 1rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+      transition: var(--transition);
+    }
+
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--secondary); }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--dark);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    .cta-nav {
+      background: var(--primary);
+      color: white !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .cta-nav:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .burger span {
+      width: 28px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5%;
+      background: linear-gradient(135deg, rgba(0,168,232,0.92), rgba(0,200,180,0.88)),
+                  url('https://images.unsplash.com/photo-1558618666-fcd0c5c80804?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      color: white;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      animation: fadeUp 1s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      opacity: 0.95;
+    }
+
+    .cta-hero {
+      background: white;
+      color: var(--primary);
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0,168,232,0.3);
+    }
+
+    .cta-hero:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,168,232,0.4);
+    }
+
+    .trust-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+    }
+
+    .trust-item i { color: #ffd700; }
+
+    /* ===== STATS SECTION ===== */
+    .stats {
+      padding: 4rem 5%;
+      background: white;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      padding: 6rem 5%;
+      background: var(--light);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: left;
+    }
+
+    .service-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+
+    .service-img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .service-content {
+      padding: 1.8rem;
+    }
+
+    .service-content h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .service-content .material-icons-outlined {
+      color: var(--secondary);
+      font-size: 1.5rem;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 6rem 5%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+    }
+
+    .about .section-title { color: white; }
+    .about p { max-width: 800px; margin: 1.5rem auto; font-size: 1.1rem; opacity: 0.95; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      padding: 6rem 5%;
+      background: white;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .review {
+      background: var(--light);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .review p {
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .review span {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .stars {
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      padding: 6rem 5%;
+      background: var(--light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+
+    .info-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .info-item i {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-top: 0.2rem;
+    }
+
+    .info-item a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 1.2rem;
+      background: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    input, textarea {
+      padding: 1rem;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0,168,232,0.15);
+    }
+
+    textarea { resize: vertical; min-height: 130px; }
+
+    form button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.05rem;
+    }
+
+    form button:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111;
+      color: #ccc;
+      padding: 4rem 5% 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 0.7rem;
+      transition: var(--transition);
+    }
+
+    .footer-col a:hover { color: var(--primary); }
+
+    .social-links a {
+      display: inline-flex;
+      width: 40px;
+      height: 40px;
+      background: #333;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 0.8rem;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #333;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .footer-bottom a { color: var(--primary); }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 992px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.8rem; }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 1rem 5%; }
+      .burger { display: flex; }
+      nav { display: none; }
+      .nav-mobile {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: white;
+        padding: 6rem 2rem 2rem;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+        transition: 0.4s ease;
+        z-index: 999;
       }
+
+      .nav-mobile.active {
+        right: 0;
+      }
+
+      .nav-mobile a {
+        display: block;
+        padding: 1rem 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-bottom: 1px solid #eee;
+      }
+
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+
+      .trust-bar { gap: 1.5rem; font-size: 0.8rem; padding: 1rem; }
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(91,140,255,.15), transparent 60%),
-        radial-gradient(1200px 800px at 110% 10%, rgba(110,231,242,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg));
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.2rem; }
+      .section-title { font-size: 2rem; }
+      .stats-grid { grid-template-columns: 1fr; }
     }
-    a{color:inherit}
-    .container{max-width:1200px;margin:0 auto;padding:24px}
-    header{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:saturate(140%) blur(12px);
-      background:linear-gradient(180deg, rgba(0,0,0,.25), transparent), var(--glass);
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;text-decoration:none;
-    }
-    .logo{
-      width:36px;height:36px;border-radius:10px;
-      background: conic-gradient(from 180deg at 50% 50%, var(--brand), var(--brand-2), var(--brand));
-      box-shadow: 0 4px 24px rgba(91,140,255,.35), inset 0 0 0 1px rgba(255,255,255,.2);
-    }
-    .brand h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
-    .nav a.btn{
-      padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;
-      border:1px solid rgba(255,255,255,.1);background:var(--glass-2);
-    }
-    .primary{
-      background: linear-gradient(90deg, var(--brand), var(--brand-2));
-      color:#0b1020;border:none;
-      box-shadow: 0 6px 24px rgba(91,140,255,.35);
-    }
-    .hero{
-      display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;
-      padding:48px 0 24px;
-    }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr; padding-top:32px} }
-    .headline{
-      font-size:40px;line-height:1.1;margin:0 0 14px;font-weight:800;
-      letter-spacing:-.02em;
-    }
-    @media (max-width: 600px){ .headline{font-size:30px} }
-    .sub{
-      color:var(--muted);font-size:18px;line-height:1.6;margin:0 0 20px;
-    }
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-    .panel{
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.03);
-    }
-    .pass-demo{
-      padding:18px;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-    }
-    .pass{
-      background:
-        radial-gradient(120% 120% at -20% -20%, rgba(91,140,255,.25), transparent 50%),
-        radial-gradient(120% 120% at 110% -20%, rgba(110,231,242,.20), transparent 50%),
-        var(--panel-2);
-      border-radius:20px;padding:18px;border:1px solid rgba(255,255,255,.1);
-      display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;
-    }
-    .student{
-      display:flex;gap:12px;align-items:center;
-    }
-    .avatar{
-      width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
-      font-weight:800;color:#0b1020;background:linear-gradient(135deg, var(--brand), var(--brand-2));
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,.5);
-    }
-    .student .meta h3{margin:0;font-size:16px}
-    .student .meta p{margin:2px 0 0;color:var(--muted);font-size:13px}
-    .qr{
-      width:140px;height:140px;background:#fff;border-radius:12px;padding:10px;
-      display:grid;place-items:center;
-      box-shadow: 0 8px 20px rgba(0,0,0,.25);
-    }
-    .qr canvas{width:100%;height:100%}
-    .status{
-      display:flex;gap:8px;align-items:center;margin-top:6px;
-      color:#a3e635;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase
-    }
-    .chip{
-      padding:6px 10px;border-radius:999px;background:rgba(91,140,255,.15);
-      border:1px solid rgba(91,140,255,.35);color:var(--text);font-size:12px;font-weight:700;
-    }
-    .grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px
-    }
-    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
-    .card{padding:18px}
-    .card h4{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:var(--muted);line-height:1.6}
-    section{padding:36px 0}
-    .sec-title{font-size:22px;margin:0 0 8px;font-weight:800}
-    .sec-sub{color:var(--muted);margin:0 0 18px}
-    .list{display:grid;gap:10px}
-    .list li{list-style:none;padding-left:26px;position:relative}
-    .list li:before{
-      content:""; position:absolute; left:0; top:.45em; width:12px; height:12px; border-radius:3px;
-      background: linear-gradient(90deg, var(--brand), var(--brand-2));
-      box-shadow: 0 0 0 3px rgba(91,140,255,.15);
-    }
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media (max-width: 900px){ .two-col{grid-template-columns:1fr} }
-    .budget{
-      overflow:auto
-    }
-    table{
-      width:100%;border-collapse:separate;border-spacing:0;min-width:640px;
-      border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden
-    }
-    th, td{padding:12px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
-    th{background:rgba(255,255,255,.04);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
-    tr:last-child td{border-bottom:none}
-    .footer{
-      padding:22px 0;color:var(--muted);font-size:13px;text-align:center
-    }
-    .note{font-size:12px;color:var(--muted)}
-    .kbd{font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:12px; background:rgba(255,255,255,.08); padding:2px 6px; border-radius:6px}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(110,231,242,.15);border:1px solid rgba(110,231,242,.35);font-size:12px}
-    .faq dt{font-weight:700}
-    .faq dd{margin:0 0 10px;color:var(--muted)}
-    .toast{
-      position:fixed;right:16px;bottom:16px;background:var(--panel);border:1px solid rgba(255,255,255,.12);
-      padding:12px 14px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);display:none
-    }
-    .sr-only{position:absolute;left:-9999px}
-    .shadow-focus:focus{outline:none;box-shadow:0 0 0 4px var(--ring)}
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="SA Student Pass home">
-        <div class="logo" aria-hidden="true"></div>
-        <h1>SA Student Pass</h1>
-      </a>
-      <nav aria-label="primary">
-        <a class="btn shadow-focus" href="#features">Features</a>
-        <a class="btn shadow-focus" href="#how">How it works</a>
-        <a class="btn shadow-focus" href="#pilot">Pilot</a>
-        <a class="btn shadow-focus" href="#budget">Budget</a>
-        <a class="btn primary shadow-focus" href="#demo">Open Demo</a>
-      </nav>
+    <div class="logo">Durban<span>Elite</span></div>
+    <div class="burger">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="cta-nav">Free Quote</a>
+    </nav>
   </header>
 
-  <main id="top">
-    <div class="container hero">
-      <div>
-        <p class="pill" aria-label="Offline capable"><span aria-hidden="true">✅</span> Offline-capable • Dynamic QR • POPIA-aware</p>
-        <h2 class="headline">A secure, digital-first student identity for South Africa</h2>
-        <p class="sub">Replace fragile plastic cards with a dynamic, offline-ready pass that works across all universities and service providers. Fast verification. Instant recovery. Universal acceptance.</p>
-        <div class="cta-row">
-          <a href="#demo" class="btn primary shadow-focus">Try the Live Demo</a>
-          <a href="#contact" class="btn shadow-focus">Talk to us</a>
-        </div>
-        <div style="margin-top:14px" class="note">Pilot launch: UNISA. Built to scale across 26+ institutions and 10M+ students.</div>
+  <!-- MOBILE NAV -->
+  <div class="nav-mobile">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="cta-nav">Get Free Quote</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Spotless Spaces, Professional Standards</h1>
+      <p>Premium cleaning services across Durban & KZN — homes, offices, factories. Eco-safe, ISO-trained, 100% satisfaction guaranteed.</p>
+      <button class="cta-hero" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+        Get Your Free Quote
+      </button>
+    </div>
+
+    <div class="trust-bar">
+      <div class="trust-item"><i class="fas fa-check-circle"></i> ISO-Certified Processes</div>
+      <div class="trust-item"><i class="fas fa-leaf"></i> Eco-Friendly Products</div>
+      <div class="trust-item"><i class="fas fa-star"></i> 4.9/5 Client Rating</div>
+      <div class="trust-item"><i class="fas fa-shield-alt"></i> Fully Insured</div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>500+</h3>
+        <p>Happy Clients</p>
       </div>
-      <div class="panel pass-demo">
-        <div class="pass" aria-labelledby="demo-pass-title">
-          <div>
-            <span id="demo-pass-title" class="chip">Digital Pass</span>
-            <div class="student" style="margin-top:10px">
-              <div class="avatar" aria-hidden="true">AM</div>
-              <div class="meta">
-                <h3>Avuyile Mthembu</h3>
-                <p>University: UNISA • Student No: 24-102938</p>
-              </div>
-            </div>
-            <div class="status"><span aria-hidden="true">●</span> Active Enrollment</div>
-          </div>
-          <div>
-            <div class="qr" aria-live="polite" aria-label="Dynamic QR code"><canvas id="qrCanvas" width="256" height="256"></canvas></div>
-            <div class="note" style="text-align:center;margin-top:8px">
-              Refreshes every 5 minutes • <span id="ttl">00:00</span> remaining
-            </div>
-          </div>
+      <div class="stat-item">
+        <h3>10+</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-item">
+        <h3>98%</h3>
+        <p>Retention Rate</p>
+      </div>
+      <div class="stat-item">
+        <h3>24/7</h3>
+        <p>Support Available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <h2 class="section-title">Our Professional Services</h2>
+    <p class="section-subtitle">Tailored cleaning solutions for every space — delivered with precision and care.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd0c5c80804?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Residential Cleaning" class="service-img">
+        <div class="service-content">
+          <h3><span class="material-icons-outlined">home</span>Residential Cleaning</h3>
+          <p>Deep cleaning for homes, apartments, and complexes — kitchens, carpets, tiles, windows, and more.</p>
         </div>
-        <div class="grid">
-          <div class="panel card">
-            <h4>Dynamic QR</h4>
-            <p>Time-bound tokens mitigate screenshot fraud and replay attacks.</p>
-          </div>
-          <div class="panel card">
-            <h4>Works Offline</h4>
-            <p>Local generation and cached keys enable low-connectivity verification.</p>
-          </div>
-          <div class="panel card">
-            <h4>Instant Recovery</h4>
-            <p>Account-linked identity revokes old devices and re-issues in seconds.</p>
-          </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Commercial Cleaning" class="service-img">
+        <div class="service-content">
+          <h3><span class="material-icons-outlined">business</span>Commercial Cleaning</h3>
+          <p>Office, retail, and medical facility cleaning with flexible schedules and hygiene focus.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Industrial Cleaning" class="service-img">
+        <div class="service-content">
+          <h3><span class="material-icons-outlined">factory</span>Industrial & Factory</h3>
+          <p>High-pressure cleaning, degreasing, shutdown maintenance, and hazardous site sanitation.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1584620655565-3d31c4e8d4f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Carpet Cleaning" class="service-img">
+        <div class="service-content">
+          <h3><span class="material-icons-outlined">chair</span>Carpet & Upholstery</h3>
+          <p>Eco-friendly stain removal, deep steam cleaning, and allergen reduction for fabrics.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Window Cleaning" class="service-img">
+        <div class="service-content">
+          <h3><span class="material-icons-outlined">window</span>Window & High Access</h3>
+          <p>Rope-access, high-rise, and interior glass cleaning with streak-free results.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1588776813674-7d0c7a3d9f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sanitation" class="service-img">
+        <div class="service-content">
+          <h3><span class="material-icons-outlined">sanitizer</span>Hygiene & Fogging</h3>
+          <p>Certified disinfection, antiviral fogging, and sanitation for high-traffic areas.</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <section id="features">
-      <div class="container">
-        <h3 class="sec-title">Why SA Student Pass</h3>
-        <p class="sec-sub">Secure, convenient, and scalable for students, universities, and service providers.</p>
-        <div class="two-col">
-          <div class="panel card">
-            <h4>Security</h4>
-            <ul class="list">
-              <li>Dynamic 5-minute QR tokens</li>
-              <li>Signed payloads; no static screenshots</li>
-              <li>Revocation and rate-limited auth</li>
-            </ul>
-          </div>
-          <div class="panel card">
-            <h4>Reliability</h4>
-            <ul class="list">
-              <li>Offline pass generation</li>
-              <li>Grace window for clock drift</li>
-              <li>Local validation with cached keys</li>
-            </ul>
-          </div>
-          <div class="panel card">
-            <h4>Interoperability</h4>
-            <ul class="list">
-              <li>One QR format, one endpoint</li>
-              <li>SDKs for POS, library gates, transit</li>
-              <li>Real-time enrollment sync via APIs</li>
-            </ul>
-          </div>
-          <div class="panel card">
-            <h4>Environmental & Cost</h4>
-            <ul class="list">
-              <li>Zero PVC cards and waste</li>
-              <li>Lower logistics and energy use</li>
-              <li>~R1m to build + Year 1 ops</li>
-            </ul>
-          </div>
-        </div>
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2 class="section-title">Why Choose Durban Elite?</h2>
+    <p>With over a decade of excellence, we’ve set the gold standard for professional cleaning in KwaZulu-Natal. Our ISO-level procedures, eco-safe products, and rigorously trained staff ensure every job is completed to perfection. We don’t just clean — we transform spaces into healthier, happier environments.</p>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="testimonials">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-subtitle">Real feedback from businesses and families across Durban.</p>
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“They transformed our office overnight! Floors sparkle, air feels fresher — unmatched professionalism.”</p>
+        <span>— KZN Tech Hub</span>
       </div>
-    </section>
-
-    <section id="how">
-      <div class="container">
-        <h3 class="sec-title">How it works</h3>
-        <div class="two-col">
-          <div class="panel card">
-            <h4>Registration & Issuance</h4>
-            <ol class="list" style="counter-reset:step">
-              <li>Enter university email (domain whitelist)</li>
-              <li>OTP verification, create account</li>
-              <li>Sync enrollment via university API</li>
-              <li>Add pass to Apple/Google Wallet or app</li>
-            </ol>
-          </div>
-          <div class="panel card">
-            <h4>Verification</h4>
-            <ul class="list">
-              <li>Scan QR via compatible app/device</li>
-              <li>Validate locally (offline) or via server</li>
-              <li>Enrollment active? Show valid/invalid instantly</li>
-            </ul>
-          </div>
-        </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“Efficient, friendly and always on time. Our retail space looks brand new every week.”</p>
+        <span>— Gateway Boutique</span>
       </div>
-    </section>
-
-    <section id="pilot">
-      <div class="container">
-        <h3 class="sec-title">UNISA Pilot</h3>
-        <p class="sec-sub">Phased rollout with planning, build, testing, training, and ongoing updates.</p>
-        <div class="grid">
-          <div class="panel card">
-            <h4>Phase 1: Planning</h4>
-            <p>Stakeholder consultations and specs: QR format, data, security, integrations.</p>
-          </div>
-          <div class="panel card">
-            <h4>Phase 2: Development</h4>
-            <p>Core module, dynamic QR, OTP, biometrics, admin portal, POPIA compliance.</p>
-          </div>
-          <div class="panel card">
-            <h4>Phase 3: QA & Pilot</h4>
-            <p>Internal testing, small-group pilot, iterate from feedback.</p>
-          </div>
-          <div class="panel card">
-            <h4>Phase 4: Rollout</h4>
-            <p>Training, comms, guides, gradual release and monitoring.</p>
-          </div>
-          <div class="panel card">
-            <h4>Phase 5: Maintain</h4>
-            <p>Performance, security, audits, continuous improvement.</p>
-          </div>
-        </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“When it comes to hygiene and quality, no one compares. Excellent work!”</p>
+        <span>— Umhlanga Private Clinic</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="budget">
-      <div class="container">
-        <h3 class="sec-title">Budget snapshot</h3>
-        <p class="sec-sub">Estimated Year 1: ~R1,012,000 (incl. operations & maintenance).</p>
-        <div class="panel budget">
-          <table role="table" aria-label="Budget">
-            <thead>
-              <tr><th>Category</th><th>Item</th><th>Description</th><th>Estimate (ZAR)</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Development</td><td>Mobile + Web</td><td>Core build, admin, integrations</td><td>R550,000</td></tr>
-              <tr><td>Infrastructure</td><td>Cloud + Security</td><td>Hosting, SSL, POPIA controls</td><td>R130,000</td></tr>
-              <tr><td>Roll-out</td><td>Pilot & Training</td><td>Comms, guides, onboarding</td><td>R120,000</td></tr>
-              <tr><td>Contingency</td><td>10%</td><td>Unforeseen costs</td><td>R92,000</td></tr>
-              <tr><td><strong>Total</strong></td><td colspan="2"></td><td><strong>R892,000 (+ R120,000 Ops)</strong></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">Full breakdown available on request. Costs scale with features (e.g., transport validators).</p>
-      </div>
-    </section>
-
-    <section id="demo">
-      <div class="container">
-        <h3 class="sec-title">Live Demo: Dynamic QR</h3>
-        <p class="sec-sub">This in-browser demo simulates a time-based token that refreshes every 5 minutes. For production, tokens are signed server-side and verified online or with cached keys offline.</p>
-        <div class="two-col">
-          <div class="panel card">
-            <h4>Student Pass</h4>
-            <p class="note">Use the controls below to simulate token changes and expiration.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0">
-              <button id="btnRefresh" class="btn primary shadow-focus">Force Refresh</button>
-              <button id="btnCopy" class="btn shadow-focus">Copy Payload</button>
-              <span class="chip">TTL: <span id="ttl2">00:00</span></span>
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2 class="section-title">Get Your Free Quote Today</h2>
+    <p class="section-subtitle">Tell us about your space. We’ll respond within 2 hours.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <strong>Call or WhatsApp</strong><br>
+              <a href="tel:+27311234567">031 123 4567</a> | <a href="https://wa.me/27821234567">082 123 4567</a>
             </div>
-            <pre id="payload" class="kbd" aria-live="polite" style="display:block;white-space:pre-wrap;word-break:break-word;padding:10px;border-radius:10px;margin:0"></pre>
           </div>
-          <div class="panel card">
-            <h4>Verifier Simulator</h4>
-            <p class="note">Paste payload to validate against local clock and shared secret.</p>
-            <textarea id="verifyInput" class="shadow-focus" rows="6" style="width:100%;padding:10px;border-radius:10px;background:var(--panel-2);color:var(--text);border:1px solid rgba(255,255,255,.12)"></textarea>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0">
-              <button id="btnVerify" class="btn primary shadow-focus">Validate</button>
-              <span id="verifyStatus" class="chip" aria-live="polite">Waiting…</span>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Email Us</strong><br>
+              <a href="mailto:info@durbanelite.co.za">info@durbanelite.co.za</a>
             </div>
-            <p class="note">Grace window ±30s for drift. Offline verification uses cached keys in production.</p>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Service Area</strong><br>
+              Durban, Umhlanga, Ballito, Hillcrest & Greater KZN
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <strong>Business Hours</strong><br>
+              Mon–Fri: 7:00 AM – 6:00 PM<br>Sat: 8:00 AM – 2:00 PM
+            </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="faq">
-      <div class="container">
-        <h3 class="sec-title">FAQ</h3>
-        <dl class="faq">
-          <dt>Does it work without internet?</dt>
-          <dd>Yes. The pass generates time-bound tokens locally and verifiers can validate with cached keys.</dd>
-          <dt>How do students recover a lost device?</dt>
-          <dd>Log in on a new device with university email + password/OTP. The old pass is revoked automatically.</dd>
-          <dt>Is it POPIA compliant?</dt>
-          <dd>Yes. Minimal data is stored centrally, no location tracking, and secure APIs with universities.</dd>
-          <dt>Can service providers integrate easily?</dt>
-          <dd>Yes. Free SDKs and a single verification endpoint simplify integration across POS, gates, and transport.</dd>
-        </dl>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <h3 class="sec-title">Contact</h3>
-        <p class="sec-sub">Ready to pilot or integrate? Let’s talk.</p>
-        <form id="contactForm" class="panel card" onsubmit="return false" aria-label="Contact form">
-          <div class="two-col">
-            <label>
-              <span class="sr-only">Name</span>
-              <input required type="text" name="name" placeholder="Full name" class="shadow-focus" style="width:100%;padding:12px;border-radius:10px;background:var(--panel-2);color:var(--text);border:1px solid rgba(255,255,255,.12)">
-            </label>
-            <label>
-              <span class="sr-only">Email</span>
-              <input required type="email" name="email" placeholder="Work email" class="shadow-focus" style="width:100%;padding:12px;border-radius:10px;background:var(--panel-2);color:var(--text);border:1px solid rgba(255,255,255,.12)">
-            </label>
-          </div>
-          <label>
-            <span class="sr-only">Message</span>
-            <textarea required name="message" rows="4" placeholder="Your message" class="shadow-focus" style="width:100%;margin-top:10px;padding:12px;border-radius:10px;background:var(--panel-2);color:var(--text);border:1px solid rgba(255,255,255,.12)"></textarea>
-          </label>
-          <div style="display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap">
-            <button class="btn primary shadow-focus">Send</button>
-            <span class="note">This demo stores nothing. Hook this form to your email/API.</span>
-          </div>
+      <div>
+        <form id="quote-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Email Address" required />
+          <input type="tel" placeholder="Phone Number" required />
+          <textarea placeholder="Tell us about your cleaning needs (e.g., office size, frequency, special requests)..."></textarea>
+          <button type="submit">Send Request →</button>
         </form>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
-
+  <!-- FOOTER -->
   <footer>
-    <div class="container footer">
-      © <span id="year"></span> SA Student Pass • Built by Anele Tembe & Avuyile Mthembu • Demo MVP
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Durban Elite Cleaning</h4>
+        <p>Premium cleaning services for homes, offices, and industrial sites across KwaZulu-Natal. Eco-safe. ISO-trained. Trusted since 2015.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#services">Our Services</a>
+        <a href="#about">About Us</a>
+        <a href="#testimonials">Client Reviews</a>
+        <a href="#contact">Get Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>031 123 4567</p>
+        <p>info@durbanelite.co.za</p>
+        <p>Durban, KZN</p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Durban Elite Cleaning | Professional Cleaning Services • <a href="#top">Back to Top ↑</a>
     </div>
   </footer>
 
   <script>
-    // Basic PWA service worker (inline registration, cached shell)
-    if ('serviceWorker' in navigator) {
-      const swCode = `
-        const CACHE = 'sa-student-pass-v1';
-        const ASSETS = ['.', location.href];
-        self.addEventListener('install', e => {
-          e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
-          self.skipWaiting();
-        });
-        self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
-        self.addEventListener('fetch', e => {
-          e.respondWith(
-            caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
-              const copy = resp.clone();
-              if (e.request.method === 'GET' && (resp.status === 200 || resp.type === 'opaque')) {
-                caches.open(CACHE).then(c => c.put(e.request, copy)).catch(()=>{});
-              }
-              return resp;
-            }).catch(()=>r))
-          );
-        });
-      `;
-      const blob = new Blob([swCode], {type: 'text/javascript'});
-      const swUrl = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swUrl).catch(()=>{});
-    }
+    // Mobile menu toggle
+    const burger = document.querySelector('.burger');
+    const navMobile = document.querySelector('.nav-mobile');
 
-    // Utility: toast
-    const toast = (msg='Copied!')=>{
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.style.display='block';
-      t.style.opacity='0';
-      t.style.transition='opacity .2s ease';
-      requestAnimationFrame(()=>{t.style.opacity='1'});
-      setTimeout(()=>{t.style.opacity='0'; setTimeout(()=>{t.style.display='none'},200)},1800);
-    };
-
-    // Minimal QR generator (no external libs) using QRCode generation (Version auto)
-    // For brevity, this is a compact implementation adapted for basic alphanumeric payloads.
-    // Reference: Project Nayuki (MIT). Reduced and inlined for demo purposes.
-    // BEGIN tiny QR
-    // eslint-disable-next-line
-    (function(){
-      function QR8bitByte(data){this.mode=4;this.data=data}
-      QR8bitByte.prototype={getLength:function(){return this.data.length},write:function(buffer){for(var i=0;i<this.data.length;i++)buffer.put(this.data.charCodeAt(i),8)}};
-      var QRUtil={PATTERN_POSITION_TABLE:[
-        [],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50]
-      ],G15: (1<<10)|(1<<8)|(1<<5)|(1<<4)|(1<<2)|(1<<1)|(1),
-      G18: (1<<12)|(1<<11)|(1<<10)|(1<<9)|(1<<8)|(1<<5),
-      G15_MASK: (1<<14)|(1<<12)|(1<<10)|(1<<4)|(1<<1),
-      getBCHTypeInfo:function(data){var d=data<<10;while(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(QRUtil.G15)>=0)d^=(QRUtil.G15<<(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(QRUtil.G15)));return (data<<10)|d},
-      getBCHDigit:function(data){var digit=0;while(data!=0){digit++;data>>>=1}return digit},
-      getPatternPosition:function(typeNumber){return QRUtil.PATTERN_POSITION_TABLE[typeNumber-1]},
-      getMask:function(maskPattern,i,j){switch(maskPattern){case 0:return (i+j)%2==0;case 1:return i%2==0;case 2:return j%3==0;case 3:return (i+j)%3==0;case 4:return (Math.floor(i/2)+Math.floor(j/3))%2==0;case 5:return ((i*j)%2)+((i*j)%3)==0;case 6:return (((i*j)%2)+((i*j)%3))%2==0;case 7:return (((i+j)%2)+((i*j)%3))%2==0;default:throw new Error("bad maskPattern:"+maskPattern)}}
-      };
-      var QRMath={glog:function(n){if(n<1)throw new Error("glog");return QRMath.LOG_TABLE[n]},gexp:function(n){while(n<0)n+=255;while(n>=256)n-=255;return QRMath.EXP_TABLE[n]};
-      QRMath.EXP_TABLE=new Array(256);QRMath.LOG_TABLE=new Array(256);
-      for(var i=0;i<8;i++)QRMath.EXP_TABLE[i]=1<<i;
-      for(i=8;i<256;i++)QRMath.EXP_TABLE[i]=QRMath.EXP_TABLE[i-4]^QRMath.EXP_TABLE[i-5]^QRMath.EXP_TABLE[i-6]^QRMath.EXP_TABLE[i-8];
-      for(i=0;i<255;i++)QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]]=i;
-      function QRPolynomial(num,shift){if(num.length==undefined)throw new Error(num.length+"/"+shift);var offset=0;while(offset<num.length&&num[offset]==0)offset++;this.num=new Array(num.length-offset+shift);for(var i=0;i<num.length-offset;i++)this.num[i]=num[i+offset]}
-      QRPolynomial.prototype={get:function(index){return this.num[index]},getLength:function(){return this.num.length},multiply:function(e){var num=new Array(this.getLength()+e.getLength()-1);for(var i=0;i<this.getLength();i++)for(var j=0;j<e.getLength();j++)num[i+j]^=QRMath.gexp(QRMath.glog(this.get(i))+QRMath.glog(e.get(j)));return new QRPolynomial(num,0)},mod:function(e){if(this.getLength()-e.getLength()<0)return this;var ratio=QRMath.glog(this.get(0))-QRMath.glog(e.get(0));var num=new Array(this.getLength());for(var i=0;i<this.getLength();i++)num[i]=this.get(i);for(i=0;i<e.getLength();i++)num[i]^=QRMath.gexp(QRMath.glog(e.get(i))+ratio);return new QRPolynomial(num,0).mod(e)}};
-      var QRRSBlock={getRSBlocks:function(typeNumber,errorCorrectLevel){var rsBlock=[[1,19,7],[1,34,10],[1,55,15],[1,80,20],[1,108,26],[2,68,18],[2,78,20],[2,97,24],[2,116,30]][typeNumber-1];return [ {totalCount:rsBlock[0],dataCount:rsBlock[1]} ]}};
-      function QRBitBuffer(){this.buffer=[];this.length=0}
-      QRBitBuffer.prototype={get:function(i){return ((this.buffer[Math.floor(i/8)] >>> (7 - i % 8)) & 1) == 1}, put:function(num,length){for(var i=0;i<length;i++)this.putBit(((num >>> (length-i-1)) & 1)==1)}, putBit:function(bit){this.buffer[this.length>>3]|=(bit?1:0)<<(7-(this.length%8));this.length++}};
-      function QRCode(typeNumber, errorCorrectLevel){this.typeNumber=typeNumber;this.errorCorrectLevel=errorCorrectLevel;this.modules=null;this.moduleCount=0;this.dataList=[]}
-      QRCode.prototype={
-        addData:function(data){this.dataList.push(new QR8bitByte(data))},
-        make:function(){
-          this.moduleCount=this.typeNumber*4+17;
-          this.modules=new Array(this.moduleCount);
-          for(var row=0;row<this.moduleCount;row++){this.modules[row]=new Array(this.moduleCount);for(var col=0;col<this.moduleCount;col++)this.modules[row][col]=null}
-          this.setupPositionProbePattern(0,0);this.setupPositionProbePattern(this.moduleCount-7,0);this.setupPositionProbePattern(0,this.moduleCount-7);
-          this.setupTimingPattern();this.setupTypeInfo(0);
-          var data=this.createData(this.typeNumber,this.errorCorrectLevel);
-          this.mapData(data,0);
-        },
-        setupPositionProbePattern:function(row,col){for(var r=-1;r<=7;r++){if(row+r<=-1||this.moduleCount<=row+r)continue;for(var c=-1;c<=7;c++){if(col+c<=-1||this.moduleCount<=col+c)continue;if((0<=r&&r<=6&&(c==0||c==6))||(0<=c&&c<=6&&(r==0||r==6))||(2<=r&&r<=4&&2<=c&&c<=4))this.modules[row+r][col+c]=true;else this.modules[row+r][col+c]=false}} },
-        setupTimingPattern:function(){for(var r=8;r<this.moduleCount-8;r++)if(this.modules[r][6]==null)this.modules[r][6]= (r%2==0);for(var c=8;c<this.moduleCount-8;c++)if(this.modules[6][c]==null)this.modules[6][c]=(c%2==0)},
-        setupTypeInfo:function(maskPattern){for(var r=0;r<9;r++)this.modules[r][8]=false;for(var c=0;c<8;c++)this.modules[8][this.moduleCount-c-1]=false},
-        mapData:function(data,maskPattern){
-          var inc=-1,row=this.moduleCount-1,bitIndex=7,byteIndex=0;
-          for(var col=this.moduleCount-1;col>0;col-=2){
-            if(col==6)col--;
-            while(true){
-              for(var c=0;c<2;c++) if(this.modules[row][col-c]==null) this.modules[row][col-c]= ( ( (data[byteIndex] >>> bitIndex) & 1) == 1 );
-              row+=inc;
-              if(row<0||this.moduleCount<=row){row+=inc*-1;inc*=-1;break}
-            }
-          }
-        },
-        createData:function(typeNumber,errorCorrectLevel){
-          var buffer=new QRBitBuffer();
-          for(var i=0;i<this.dataList.length;i++){var data=this.dataList[i];buffer.put(data.mode,4);buffer.put(data.getLength(),8);data.write(buffer)}
-          // pad to fit version (very simplified for demo)
-          var totalDataCount=QRRSBlock.getRSBlocks(typeNumber,errorCorrectLevel)[0].dataCount;
-          while(buffer.length+4<=totalDataCount*8) buffer.put(0,4);
-          while(buffer.length%8!=0) buffer.put(false,1);
-          var dataBytes=new Array(totalDataCount);
-          for(i=0;i<dataBytes.length;i++) dataBytes[i]= (buffer.buffer[i]||0);
-          return dataBytes;
-        }
-      };
-      window.__TinyQR = { QRCode };
-    })();
-    // END tiny QR
-
-    // Demo TOTP-like token (HMAC-SHA1 via Web Crypto)
-    async function hmacSHA1(keyBytes, message){
-      const key = await crypto.subtle.importKey('raw', keyBytes, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']);
-      const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message));
-      return new Uint8Array(sig);
-    }
-    function hex(bytes){return Array.from(bytes).map(b=>b.toString(16).padStart(2,'0')).join('')}
-
-    const secret = new TextEncoder().encode('demo-shared-secret-SA-Student-Pass');
-    const windowSeconds = 300; // 5 minutes
-    const grace = 30; // seconds
-    const ttlEl = document.getElementById('ttl');
-    const ttl2El = document.getElementById('ttl2');
-    const canvas = document.getElementById('qrCanvas');
-    const payloadPre = document.getElementById('payload');
-
-    function currentWindowStart(ts=Date.now()){
-      return Math.floor(ts/1000/windowSeconds)*windowSeconds;
-    }
-    function secondsRemaining(){
-      const now = Math.floor(Date.now()/1000);
-      return windowSeconds - ((now - currentWindowStart(now*1000)) % windowSeconds);
-    }
-    function fmt(s){
-      const m = Math.floor(s/60).toString().padStart(2,'0');
-      const sec = (s%60).toString().padStart(2,'0');
-      return m+':'+sec;
-    }
-
-    async function buildPayload(){
-      const now = Math.floor(Date.now()/1000);
-      const t = currentWindowStart()*1000;
-      const data = {
-        ver: 1,
-        uid: "UNISA-24-102938",
-        name: "Avuyile Mthembu",
-        univ: "UNISA",
-        status: "active",
-        iat: t/1000,
-        exp: t/1000 + windowSeconds
-      };
-      const msg = JSON.stringify(data);
-      const sig = hex(await hmacSHA1(secret, msg));
-      return { data, sig, msg };
-    }
-
-    function drawQR(text){
-      const size = 256;
-      canvas.width = size; canvas.height = size;
-      const qr = new window.__TinyQR.QRCode(4, 1);
-      qr.addData(text);
-      qr.make();
-      const ctx = canvas.getContext('2d');
-      const count = qr.moduleCount;
-      const scale = Math.floor(size / (count + 6));
-      const offset = Math.floor((size - count*scale)/2);
-      ctx.fillStyle = '#fff'; ctx.fillRect(0,0,size,size);
-      ctx.fillStyle = '#000';
-      for (let r=0;r<count;r++){
-        for (let c=0;c<count;c++){
-          if(qr.modules[r][c]){
-            ctx.fillRect(offset + c*scale, offset + r*scale, scale, scale);
-          }
-        }
-      }
-    }
-
-    async function refreshToken(){
-      const { data, sig, msg } = await buildPayload();
-      const payload = btoa(unescape(encodeURIComponent(JSON.stringify({data, sig}))));
-      drawQR(payload);
-      payloadPre.textContent = JSON.stringify({data, sig}, null, 2);
-      updateTTLs();
-      return payload;
-    }
-
-    function updateTTLs(){
-      const rem = secondsRemaining();
-      ttlEl.textContent = fmt(rem);
-      ttl2El.textContent = fmt(rem);
-    }
-
-    async function loop(){
-      await refreshToken();
-      setInterval(updateTTLs, 1000);
-      setInterval(refreshToken, 1000 * 5); // update preview every 5s; real window is 5 min
-    }
-
-    // Verifier simulator
-    async function verifyPayload(encoded){
-      try{
-        const parsed = JSON.parse(decodeURIComponent(escape(atob(encoded))));
-        const { data, sig } = parsed;
-        const msg = JSON.stringify(data);
-        const exp = data.exp|0;
-        const now = Math.floor(Date.now()/1000);
-        if (now > exp + grace) return { ok:false, reason:'Expired' };
-        const calc = hex(await hmacSHA1(secret, msg));
-        if (calc !== sig) return { ok:false, reason:'Signature mismatch' };
-        if (data.status !== 'active') return { ok:false, reason:'Not active' };
-        return { ok:true, reason:'Valid' };
-      }catch(e){
-        return { ok:false, reason:'Invalid format' };
-      }
-    }
-
-    document.getElementById('btnRefresh').addEventListener('click', refreshToken);
-    document.getElementById('btnCopy').addEventListener('click', async ()=>{
-      const payload = await refreshToken();
-      await navigator.clipboard.writeText(payload).catch(()=>{});
-      toast('Payload copied');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navMobile.classList.toggle('active');
+      burger.innerHTML = burger.classList.contains('active') 
+        ? '<span></span><span></span><span></span>'.replace(/span/g, 'span style="transform: rotate(45deg) translate(6px,6px)"') 
+        : '<span></span><span></span><span></span>';
     });
 
-    document.getElementById('btnVerify').addEventListener('click', async ()=>{
-      const input = document.getElementById('verifyInput').value.trim();
-      const status = document.getElementById('verifyStatus');
-      status.textContent = 'Checking…';
-      const res = await verifyPayload(input);
-      if(res.ok){
-        status.textContent = 'VALID';
-        status.style.background = 'rgba(34,197,94,.15)';
-        status.style.borderColor = 'rgba(34,197,94,.35)';
-      }else{
-        status.textContent = 'INVALID: ' + res.reason;
-        status.style.background = 'rgba(239,68,68,.15)';
-        status.style.borderColor = 'rgba(239,68,68,.35)';
-      }
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-mobile a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMobile.classList.remove('active');
+        burger.classList.remove('active');
+      });
     });
 
-    // Contact form demo
-    document.getElementById('contactForm').addEventListener('submit', (e)=>{
-      const fd = new FormData(e.target);
-      console.log('Contact form (demo):', Object.fromEntries(fd.entries()));
-      toast('Message not sent (demo only)');
+    // Form submission (demo)
+    document.getElementById('quote-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you! We\'ll get back to you within 2 hours.');
+      this.reset();
     });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Kick off
-    loop();
   </script>
 </body>
 </html>
