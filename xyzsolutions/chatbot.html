@@ -1,0 +1,19 @@
+<button class="chatbot-toggler" aria-label="Open Chatbot">
+    <i class="fas fa-robot"></i>
+</button>
+
+<div class="chatbot-popup">
+    <div class="chat-header">
+        <h3>Chat with Us</h3>
+        <button class="close-chatbot-btn" aria-label="Close Chat">&times;</button>
+    </div>
+    <div id="messages" class="chat-messages"></div>
+    <div id="typing" class="typing-indicator hidden">
+        <span></span><span></span><span></span>
+    </div>
+    <div id="quickbar" class="quick-replies"></div>
+    <form id="composer" class="chat-composer">
+        <input type="text" id="input" placeholder="Type your message..." autocomplete="off">
+        <button type="submit" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
+    </form>
+</div>
