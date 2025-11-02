@@ -18,7 +18,7 @@ function initializeChatbot() {
     // --- Conversation Tree (Content Model) ---
     const conversationTree = {
         greeting: {
-            text: "Welcome to <b>XYZSolutions</b>! Your partner for professional cleaning in Durban & Johannesburg. How can I assist you today?",
+            text: "😊 Hello and welcome to <b>XYZSolutions & Projects</b>! Your partner for professional cleaning in Durban & Johannesburg. How can I assist you today?",
             options: [
                 { text: "💰 Get a Quote", value: "quote_entry" },
                 { text: "🧼 Explore Services", value: "services" },
