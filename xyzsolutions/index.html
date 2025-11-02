@@ -13,791 +13,19 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <style>
-    :root {
-      --primary: #0077be;
-      --secondary: #00b894;
-      --accent: #ffd700;
-      --dark: #1a1a2e;
-      --light: #f8f9fb;
-      --gray: #555;
-      --white: #ffffff;
-      --radius: 12px;
-      --shadow: 0 8px 25px rgba(0,0,0,0.08);
-      --shadow-hover: 0 20px 40px rgba(0,0,0,0.12);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
-    
-    html { 
-      scroll-behavior: smooth; 
-    }
-    
-    body { 
-      font-family: 'Inter', sans-serif; 
-      color: var(--dark); 
-      background: var(--light); 
-      line-height: 1.7; 
-      overflow-x: hidden; 
-    }
-    
-    a { 
-      text-decoration: none; 
-      color: inherit; 
-    }
-    
-    img { 
-      max-width: 100%; 
-      display: block; 
-    }
-    
-    section { 
-      padding: 6rem 5%; 
-    }
-    
-    .section-title { 
-      text-align: center; 
-      font-size: 2.5rem; 
-      font-weight: 800; 
-      margin-bottom: 1rem; 
-      color: var(--dark); 
-    }
-    
-    .section-subtitle { 
-      text-align: center; 
-      max-width: 750px; 
-      margin: 0 auto 4rem; 
-      color: var(--gray); 
-      font-size: 1.1rem; 
-    }
-    
-    .container { 
-      max-width: 1300px; 
-      margin: 0 auto; 
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1000;
-      padding: 1rem 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    header.hide {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    
-    .logo { 
-      font-size: 1.8rem; 
-      font-weight: 800; 
-      color: var(--primary); 
-    }
-    
-    .logo span { 
-      color: var(--secondary); 
-    }
-    
-    nav { 
-      display: flex; 
-      gap: 2rem; 
-      align-items: center; 
-    }
-    
-    nav a { 
-      font-weight: 600; 
-      font-size: 0.95rem; 
-      color: var(--dark); 
-      transition: var(--transition); 
-      position: relative; 
-    }
-    
-    nav a::after { 
-      content: ''; 
-      position: absolute; 
-      bottom: -6px; 
-      left: 0; 
-      width: 0; 
-      height: 2px; 
-      background: var(--primary); 
-      transition: var(--transition); 
-    }
-    
-    nav a:hover, 
-    nav a.active { 
-      color: var(--primary); 
-    }
-    
-    nav a:hover::after, 
-    nav a.active::after { 
-      width: 100%; 
-    }
-    
-    .cta-nav { 
-      background: var(--primary); 
-      color: white !important; 
-      padding: 0.6rem 1.4rem; 
-      border-radius: 10px; 
-      transition: var(--transition); 
-    }
-    
-    .cta-nav:hover { 
-      background: var(--secondary); 
-      transform: translateY(-2px); 
-      box-shadow: 0 4px 12px rgba(0,119,190,0.3);
-    }
-    
-    .cta-nav::after { 
-      display: none; 
-    }
-    
-    .burger { 
-      display: none; 
-      cursor: pointer; 
-      flex-direction: column;
-      gap: 5px;
-    }
-    
-    .burger span { 
-      display: block; 
-      width: 28px; 
-      height: 3px; 
-      background: var(--primary); 
-      border-radius: 3px; 
-      transition: var(--transition); 
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      text-align: center; 
-      padding: 0 5%;
-      background: linear-gradient(135deg, rgba(0,119,190,0.93), rgba(0,184,148,0.89)), 
-                  url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed;
-      color: white;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(255,215,0,0.1) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    
-    .hero-content { 
-      max-width: 900px; 
-      animation: fadeUp 1s ease-out; 
-      position: relative;
-      z-index: 1;
-    }
-    
-    @keyframes fadeUp { 
-      from { 
-        opacity: 0; 
-        transform: translateY(30px); 
-      } 
-      to { 
-        opacity: 1; 
-        transform: translateY(0); 
-      } 
-    }
-    
-    .hero h1 { 
-      font-size: clamp(2.5rem, 5vw, 3.8rem); 
-      font-weight: 800; 
-      margin-bottom: 1rem; 
-      line-height: 1.2; 
-    }
-    
-    .hero p { 
-      font-size: 1.25rem; 
-      max-width: 750px; 
-      margin: 0 auto 2.5rem; 
-      opacity: 0.95; 
-    }
-    
-    .cta-hero {
-      background: white; 
-      color: var(--primary); 
-      padding: 1.1rem 2.8rem; 
-      font-size: 1.1rem; 
-      font-weight: 700; 
-      border: none;
-      border-radius: 50px; 
-      cursor: pointer; 
-      transition: var(--transition); 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      display: inline-block;
-    }
-    
-    .cta-hero:hover { 
-      transform: translateY(-5px); 
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25); 
-      background: var(--accent);
-    }
-
-    /* ===== SERVICES ===== */
-    .services-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 2rem; 
-    }
-    
-    .service-card {
-      background: white; 
-      border-radius: var(--radius); 
-      box-shadow: var(--shadow); 
-      transition: var(--transition); 
-      text-align: center; 
-      padding: 2.5rem 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transform: scaleX(0);
-      transition: var(--transition);
-    }
-    
-    .service-card:hover {
-      transform: translateY(-12px); 
-      box-shadow: var(--shadow-hover);
-    }
-    
-    .service-card:hover::before {
-      transform: scaleX(1);
-    }
-    
-    .service-card .material-icons-outlined { 
-      font-size: 3.5rem; 
-      color: var(--primary); 
-      margin-bottom: 1rem;
-      transition: var(--transition);
-    }
-    
-    .service-card:hover .material-icons-outlined {
-      color: var(--secondary);
-      transform: scale(1.1);
-    }
-    
-    .service-card h3 { 
-      font-size: 1.3rem; 
-      margin-bottom: 0.8rem; 
-      font-weight: 600; 
-      color: var(--dark); 
-    }
-    
-    .service-card p { 
-      color: var(--gray); 
-      font-size: 0.95rem; 
-    }
-
-    /* ===== PRICING ===== */
-    #pricing { 
-      background: white; 
-    }
-    
-    .pricing-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-      gap: 2rem; 
-      align-items: stretch; 
-    }
-    
-    .pricing-card {
-      background: var(--light); 
-      border: 2px solid #e8e8e8; 
-      border-radius: var(--radius); 
-      padding: 2.5rem 2rem; 
-      display: flex;
-      flex-direction: column; 
-      text-align: center; 
-      transition: var(--transition);
-      position: relative;
-    }
-    
-    .pricing-card.popular {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(0,119,190,0.1);
-    }
-    
-    .pricing-card.popular::before {
-      content: 'POPULAR';
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: var(--dark);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    
-    .pricing-card:hover { 
-      transform: translateY(-10px); 
-      box-shadow: var(--shadow); 
-    }
-    
-    .pricing-card h3 { 
-      font-size: 1.5rem; 
-      font-weight: 700; 
-      margin-bottom: 0.5rem; 
-    }
-    
-    .pricing-card .price { 
-      font-size: 2.5rem; 
-      font-weight: 800; 
-      color: var(--primary); 
-      margin-bottom: 1rem; 
-    }
-    
-    .pricing-card .price span {
-      font-size: 1rem; 
-      font-weight: 500; 
-      color: var(--gray); 
-    }
-    
-    .pricing-card p { 
-      color: var(--gray); 
-      margin-bottom: 1.5rem; 
-    }
-    
-    .pricing-card ul { 
-      list-style: none; 
-      margin: 0 0 2rem; 
-      flex-grow: 1; 
-      text-align: left;
-    }
-    
-    .pricing-card ul li {
-      margin-bottom: 0.8rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-    
-    .pricing-card ul li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--secondary);
-      font-weight: bold;
-    }
-    
-    .cta-price {
-      padding: 0.9rem 1.5rem; 
-      border-radius: 50px; 
-      font-weight: 600;
-      border: 2px solid var(--primary); 
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    
-    .cta-price:hover { 
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,119,190,0.3);
-    }
-    
-    .pricing-card.popular .cta-price { 
-      background: var(--primary); 
-      color: white;
-    }
-    
-    .pricing-card.popular .cta-price:hover {
-      background: var(--secondary);
-      border-color: var(--secondary);
-    }
-    
-    .pricing-card:not(.popular) .cta-price { 
-      background: transparent; 
-      color: var(--primary); 
-    }
-    
-    .pricing-card:not(.popular) .cta-price:hover {
-      background: var(--primary);
-      color: white;
-    }
-    
-    .addons { 
-      text-align: center; 
-      margin-top: 3rem;
-      padding: 2rem;
-      background: var(--light);
-      border-radius: var(--radius);
-    }
-    
-    .addons h4 { 
-      font-size: 1.4rem; 
-      margin-bottom: 1rem; 
-      color: var(--dark);
-    }
-    
-    .addons p { 
-      color: var(--gray); 
-      max-width: 600px; 
-      margin: 0 auto; 
-    }
-
-    /* ===== ABOUT ===== */
-    .about-content { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; 
-      gap: 4rem; 
-      align-items: center; 
-    }
-    
-    .about-text h2 { 
-      font-size: 2.2rem; 
-      margin-bottom: 1.5rem; 
-      line-height: 1.3; 
-    }
-    
-    .about-text p { 
-      margin-bottom: 1rem; 
-      color: var(--gray);
-    }
-    
-    .about-text strong {
-      color: var(--primary);
-    }
-    
-    .about-image img { 
-      border-radius: var(--radius); 
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    
-    .about-image img:hover {
-      transform: scale(1.02);
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* ===== TESTIMONIALS ===== */
-    #testimonials { 
-      background: white; 
-    }
-    
-    .reviews-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 2rem; 
-    }
-    
-    .review { 
-      background: var(--light); 
-      padding: 2rem; 
-      border-radius: var(--radius); 
-      border: 2px solid #e8e8e8;
-      transition: var(--transition);
-      position: relative;
-    }
-    
-    .review:hover {
-      border-color: var(--primary);
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-    
-    .review p { 
-      font-style: italic; 
-      margin-bottom: 1rem; 
-      color: var(--dark); 
-    }
-    
-    .review-author { 
-      font-weight: 600; 
-      font-size: 0.95rem; 
-      color: var(--primary);
-    }
-    
-    .stars { 
-      color: var(--accent); 
-      margin-bottom: 1rem; 
-      font-size: 1.2rem; 
-    }
-
-    /* ===== CONTACT ===== */
-    .contact-grid { 
-      display: grid; 
-      grid-template-columns: 1fr 1.2fr; 
-      gap: 4rem; 
-      align-items: start; 
-    }
-    
-    .contact-info h3 {
-      font-size: 1.8rem; 
-      margin-bottom: 2rem; 
-    }
-    
-    .info-item { 
-      display: flex; 
-      gap: 1.5rem; 
-      margin-bottom: 1.8rem; 
-      align-items: flex-start;
-      transition: var(--transition);
-    }
-    
-    .info-item:hover {
-      transform: translateX(5px);
-    }
-    
-    .info-item i { 
-      color: var(--primary); 
-      font-size: 1.8rem;
-      margin-top: 0.2rem;
-    }
-    
-    .info-item a {
-      color: var(--primary);
-      transition: var(--transition);
-    }
-    
-    .info-item a:hover {
-      color: var(--secondary);
-    }
-    
-    form { 
-      display: grid; 
-      gap: 1.2rem; 
-      background: white; 
-      padding: 2.5rem; 
-      border-radius: var(--radius); 
-      box-shadow: var(--shadow); 
-    }
-    
-    .input-group { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem; 
-    }
-    
-    input, select, textarea { 
-      width: 100%; 
-      padding: 1rem; 
-      border: 2px solid #e8e8e8; 
-      border-radius: 8px; 
-      font-size: 1rem; 
-      font-family: 'Inter', sans-serif;
-      transition: var(--transition); 
-    }
-    
-    input:focus, select:focus, textarea:focus { 
-      outline: none; 
-      border-color: var(--primary); 
-      box-shadow: 0 0 0 3px rgba(0,119,190,0.1);
-    }
-    
-    textarea { 
-      resize: vertical; 
-      min-height: 120px; 
-      grid-column: 1 / -1; 
-    }
-    
-    form button {
-      background: var(--primary); 
-      color: white; 
-      border: none; 
-      padding: 1.1rem; 
-      font-weight: 700; 
-      border-radius: 8px; 
-      cursor: pointer;
-      transition: var(--transition); 
-      font-size: 1.1rem;
-    }
-    
-    form button:hover { 
-      background: var(--secondary); 
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,184,148,0.3);
-    }
-
-    /* ===== FOOTER ===== */
-    footer { 
-      background: #111; 
-      color: #ccc; 
-      padding: 5rem 5% 2rem;
-    }
-    
-    .footer-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-      gap: 2.5rem; 
-      margin-bottom: 3rem; 
-    }
-    
-    .footer-col h4 { 
-      color: white; 
-      margin-bottom: 1.5rem; 
-      font-size: 1.2rem; 
-    }
-    
-    .footer-col a, .footer-col p { 
-      display: block; 
-      margin-bottom: 0.8rem; 
-      transition: var(--transition); 
-      color: #aaa; 
-      font-size: 0.95rem; 
-    }
-    
-    .footer-col a:hover {
-      color: var(--primary); 
-      padding-left: 5px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 0.8rem;
-    }
-    
-    .social-links a { 
-      display: inline-flex; 
-      width: 40px; 
-      height: 40px; 
-      background: #333;
-      color: white; 
-      align-items: center; 
-      justify-content: center; 
-      border-radius: 50%; 
-      transition: var(--transition);
-    }
-    
-    .social-links a:hover { 
-      background: var(--primary); 
-      transform: translateY(-3px); 
-    }
-    
-    .footer-bottom { 
-      text-align: center; 
-      padding-top: 2rem; 
-      border-top: 1px solid #333; 
-      font-size: 0.9rem; 
-      color: #777; 
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 992px) {
-      .about-content, .contact-grid { 
-        grid-template-columns: 1fr; 
-      }
-      
-      .about-image { 
-        margin-top: 2rem; 
-      }
-      
-      nav { 
-        display: none;
-      }
-      
-      .burger {
-        display: flex;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      nav {
-        position: absolute; 
-        top: 100%; 
-        left: 0; 
-        width: 100%; 
-        background: white; 
-        flex-direction: column;
-        align-items: stretch; 
-        padding: 1rem 0; 
-        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-      }
-      
-      nav.active { 
-        display: flex; 
-      }
-      
-      nav a { 
-        padding: 1rem 5%; 
-        text-align: center;
-      }
-      
-      nav a::after {
-        display: none;
-      }
-      
-      .cta-nav { 
-        margin: 1rem 5% 0.5rem; 
-        text-align: center; 
-      }
-      
-      .section-title { 
-        font-size: 2rem; 
-      }
-      
-      section { 
-        padding: 4rem 5%; 
-      }
-      
-      .hero { 
-        min-height: 80vh; 
-      }
-      
-      .hero h1 { 
-        font-size: 2.2rem; 
-      }
-      
-      .hero p { 
-        font-size: 1.1rem; 
-      }
-      
-      .input-group { 
-        grid-template-columns: 1fr; 
-      }
-      
-      .services-grid,
-      .pricing-grid,
-      .reviews-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
   <header>
-    <a href="#home" class="logo">XYZ<span>Solutions</span></a>
+    <a href="index.html" class="logo">XYZ<span>Solutions</span></a>
     <nav>
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#about">About</a>
-      <a href="#testimonials">Reviews</a>
-      <a href="#contact">Contact</a>
-      <a href="#contact" class="cta-nav">Get Quote</a>
+      <a href="index.html#home" class="active">Home</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#about">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="cta-nav">Get Quote</a>
     </nav>
     <div class="burger">
       <span></span>
@@ -806,197 +34,167 @@
     </div>
   </header>
 
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Professional Cleaning for Durban & Johannesburg</h1>
-      <p>Eco-friendly solutions for your home, office, or event. We cover everything from regular maintenance to post-construction cleanups across Gauteng and KZN.</p>
-      <a href="#contact" class="cta-hero">Get Your Free Quote</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Complete Cleaning Solutions</h1>
+        <p>Serving Durban and Johannesburg with tailored cleaning solutions — from everyday upkeep to specialized deep cleans for homes, offices, and large-scale projects.</p>
+        <a href="#contact" class="cta-hero primary-btn">Get Your Free Quote</a>
+        <a href="services.html" class="cta-hero secondary-btn">See Our Services</a>
 
-  <section id="services" class="services">
-    <div class="container">
-      <h2 class="section-title">Our Service Offerings</h2>
-      <p class="section-subtitle">Comprehensive cleaning solutions tailored for every need—from residential homes to large-scale commercial projects.</p>
-      <div class="services-grid">
-        <div class="service-card">
-          <span class="material-icons-outlined">event_repeat</span>
-          <h3>Regular Domestic</h3>
-          <p>Keep your home consistently clean with our weekly or bi-weekly schedules.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">business</span>
-          <h3>Commercial & Office</h3>
-          <p>Professional cleaning for offices and retail spaces to maintain a pristine work environment.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">cleaning_services</span>
-          <h3>End-of-Lease / Deep</h3>
-          <p>Intensive deep cleaning to ensure you get your deposit back or prepare for new tenants.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">holiday_village</span>
-          <h3>Airbnb Clean-ups</h3>
-          <p>Fast and reliable turnovers for short-term rentals, ensuring 5-star reviews for cleanliness.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">celebration</span>
-          <h3>Event Clean-ups</h3>
-          <p>Pre-event preparation and post-event cleanup for parties and corporate functions.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">real_estate_agent</span>
-          <h3>Move-in/out Clean-ups</h3>
-          <p>A fresh start for your new space or a thorough clean after you've moved out.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">construction</span>
-          <h3>Construction Clean-ups</h3>
-          <p>Specialized cleaning to remove dust, debris, and materials after construction or renovations.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">apartment</span>
-          <h3>Complex & Common Area</h3>
-          <p>Maintaining lobbies, hallways, and shared spaces for body corporates.</p>
-        </div>
-        <div class="service-card">
-          <span class="material-icons-outlined">warehouse</span>
-          <h3>Storage & Special Spaces</h3>
-          <p>Organizing and cleaning storage rooms, garages, and other special-purpose spaces.</p>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="pricing" class="pricing">
-    <div class="container">
-      <h2 class="section-title">Clear, Transparent Pricing</h2>
-      <p class="section-subtitle">Choose the plan that fits your needs. No hidden fees, just spotless cleaning.</p>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3>Essential Plan</h3>
-          <div class="price">R95<span>/hr</span></div>
-          <p>(from R95/hr Dbn | R105/hr Jhb)</p>
-          <ul>
-            <li>Recurring (Weekly/Bi-weekly)</li>
-            <li>Ideal for Homes & Small Offices</li>
-            <li>Consistent, Reliable Service</li>
-            <li>Flexible Scheduling</li>
-          </ul>
-          <a href="#contact" class="cta-price">Book Recurring</a>
-        </div>
-        <div class="pricing-card popular">
-          <h3>Classic Comprehensive</h3>
-          <div class="price">From R350</div>
-          <p>(Based on space size & type)</p>
-          <ul>
-            <li>Once-Off / Deep Cleans</li>
-            <li>Move-in / Move-out</li>
-            <li>Airbnb & Guest Turnovers</li>
-            <li>Studio / Apartments (R850 - R3500)</li>
-          </ul>
-          <a href="#contact" class="cta-price">Get Once-Off Quote</a>
-        </div>
-        <div class="pricing-card">
-          <h3>Executive Plan</h3>
-          <div class="price">Custom</div>
-          <p>(Per-project or per-hour rates)</p>
-          <ul>
-            <li>Commercial Contracts (from R8/m²)</li>
-            <li>Post-Construction Cleanup</li>
-            <li>Event Cleanup Specialists</li>
-            <li>Custom Team Rates (R200-R450 p/hr)</li>
-          </ul>
-          <a href="#contact" class="cta-price">Request Custom Quote</a>
-        </div>
-      </div>
-      <div class="addons">
-        <h4>Available Add-ons</h4>
-        <p>Carpet Cleaning • Laundry & Ironing • Changing Linen • Restocking Consumables</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <h2>Why Choose XYZ Solutions?</h2>
-          <p>We are more than just a cleaning company. We are your partners in creating healthier, more productive, and more welcoming spaces. With dedicated teams in both <strong>Durban and Johannesburg</strong>, we offer a competitive advantage through localized expertise and consistent, high-quality service delivery.</p>
-          <p>We use <strong>eco-friendly products</strong> and trained staff to handle everything from the smallest apartment to the largest commercial project, ensuring 100% satisfaction every time.</p>
-          <a href="#contact" class="cta-hero" style="font-size: 1rem; padding: 0.9rem 2.2rem; margin-top: 1rem;">Get in Touch</a>
-        </div>
-        <div class="about-image">
-          <img src="https://plus.unsplash.com/premium_photo-1683141112334-d7d404f6e716?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870" alt="Professional cleaning team at work">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials" class="testimonials">
-    <div class="container">
-      <h2 class="section-title">What Our Clients Say</h2>
-      <p class="section-subtitle">Real feedback from businesses and homeowners we serve.</p>
-      <div class="reviews-grid">
-        <div class="review">
-          <div class="stars">★★★★★</div>
-          <p>"XYZ Solutions transformed our office. Their attention to detail is unmatched. Highly professional and reliable."</p>
-          <div class="review-author">— Tech Firm, Johannesburg</div>
-        </div>
-        <div class="review">
-          <div class="stars">★★★★★</div>
-          <p>"They handle all our Airbnb turnovers in Durban. Fast, efficient, and our guests always comment on the cleanliness."</p>
-          <div class="review-author">— Property Manager, Durban</div>
-        </div>
-        <div class="review">
-          <div class="stars">★★★★★</div>
-          <p>"Used them for a post-construction clean on a major project. They handled the dust and debris perfectly. Will use again."</p>
-          <div class="review-author">— Construction Lead, Gauteng</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>Get Your Free Quote Today</h3>
-          <p style="margin-bottom: 2rem; color: var(--gray);">Tell us about your space. We'll respond promptly with a custom quote.</p>
-          <div class="info-item">
-            <i class="fas fa-phone"></i>
-            <div><strong>Call or WhatsApp</strong><br><a href="tel:001234567">07 123 4567 (Jhb)</a> | <a href="tel:001234568">07 123 4568 (Dbn)</a></div>
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">Our Service Offerings</h2>
+        <p class="section-subtitle">Comprehensive cleaning solutions tailored for every need—from residential homes to large-scale commercial projects.</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="material-icons-outlined">event_repeat</span>
+            <h3>Regular Domestic</h3>
+            <p>Keep your home consistently clean with our weekly or bi-weekly schedules.</p>
           </div>
-          <div class="info-item">
-            <i class="fas fa-envelope"></i>
-            <div><strong>Email Us</strong><br><a href="mailto:quotes@xyzsolutions.co.za">quotes@xyzsolutions.co.za</a></div>
+          <div class="service-card">
+            <span class="material-icons-outlined">business</span>
+            <h3>Commercial & Office</h3>
+            <p>Professional cleaning for offices and retail spaces to maintain a pristine work environment.</p>
           </div>
-          <div class="info-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div><strong>Service Areas</strong><br>Johannesburg, Gauteng & Durban, KZN</div>
+          <div class="service-card">
+            <span class="material-icons-outlined">cleaning_services</span>
+            <h3>End-of-Lease / Deep</h3>
+            <p>Intensive deep cleaning to ensure you get your deposit back or prepare for new tenants.</p>
           </div>
-          <div class="info-item">
-            <i class="fas fa-clock"></i>
-            <div><strong>Business Hours</strong><br>Mon–Fri: 8:00 AM – 5:00 PM<br>Sat: 9:00 AM – 1:00 PM</div>
+          <div class="service-card">
+            <span class="material-icons-outlined">holiday_village</span>
+            <h3>Airbnb Clean-ups</h3>
+            <p>Fast and reliable turnovers for short-term rentals, ensuring 5-star reviews for cleanliness.</p>
+          </div>
+          <div class="service-card">
+            <span class="material-icons-outlined">celebration</span>
+            <h3>Event Clean-ups</h3>
+            <p>Pre-event preparation and post-event cleanup for parties and corporate functions.</p>
+          </div>
+          <div class="service-card">
+            <span class="material-icons-outlined">construction</span>
+            <h3>Construction Clean-ups</h3>
+            <p>Specialized cleaning to remove dust, debris, and materials after construction or renovations.</p>
           </div>
         </div>
-        <form id="quote-form">
-          <div class="input-group">
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="email" name="email" placeholder="Email Address" required />
-          </div>
-          <input type="tel" name="phone" placeholder="Phone Number" required />
-          <select name="service_area" required>
-            <option value="">Select Your Service Area</option>
-            <option value="jhb">Johannesburg / Gauteng</option>
-            <option value="dbn">Durban / KZN</option>
-          </select>
-          <textarea name="message" placeholder="Tell us about your cleaning needs (e.g., office size, frequency, type of service)..." required></textarea>
-          <button type="submit">Send Request →</button>
-        </form>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="services.html" class="cta-hero" style="background-color: var(--primary); color: var(--white);">View All Services</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <h2 class="section-title">Clear, Transparent Pricing</h2>
+        <p class="section-subtitle">Choose the plan that fits your needs. No hidden fees, just spotless cleaning.</p>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Essential Plan</h3>
+            <div class="price">R95<span>/hr</span></div>
+            <p>(from R95/hr Dbn | R105/hr Jhb)</p>
+            <ul>
+              <li>Recurring (Weekly/Bi-weekly)</li>
+              <li>Ideal for Homes & Small Offices</li>
+              <li>Consistent, Reliable Service</li>
+              <li>Flexible Scheduling</li>
+            </ul>
+            <a href="contact.html" class="cta-price">Book Recurring</a>
+          </div>
+          <div class="pricing-card popular">
+            <h3>Classic Comprehensive</h3>
+            <div class="price">From R350</div>
+            <p>(Based on space size & type)</p>
+            <ul>
+              <li>Once-Off / Deep Cleans</li>
+              <li>Move-in / Move-out</li>
+              <li>Airbnb & Guest Turnovers</li>
+              <li>Studio / Apartments (R850 - R3500)</li>
+            </ul>
+            <a href="contact.html" class="cta-price">Get Once-Off Quote</a>
+          </div>
+          <div class="pricing-card">
+            <h3>Executive Plan</h3>
+            <div class="price">Custom</div>
+            <p>(Per-project or per-hour rates)</p>
+            <ul>
+              <li>Commercial Contracts (from R8/m²)</li>
+              <li>Post-Construction Cleanup</li>
+              <li>Event Cleanup Specialists</li>
+              <li>Custom Team Rates (R200-R450 p/hr)</li>
+            </ul>
+            <a href="contact.html" class="cta-price">Request Custom Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>Why Choose XYZ Solutions?</h2>
+            <p>We are more than just a cleaning company. We are your partners in creating healthier, more productive, and more welcoming spaces. With dedicated teams in both <strong>Durban and Johannesburg</strong>, we offer a competitive advantage through localized expertise and consistent, high-quality service delivery.</p>
+            <p>We use <strong>eco-friendly products</strong> and trained staff to handle everything from the smallest apartment to the largest commercial project, ensuring 100% satisfaction every time.</p>
+            <a href="contact.html" class="cta-hero" style="font-size: 1rem; padding: 0.9rem 2.2rem; margin-top: 1rem;">Get in Touch</a>
+          </div>
+          <div class="about-image">
+            <img src="https://plus.unsplash.com/premium_photo-1683141112334-d7d404f6e716?auto=format&fit=crop&q=80&w=870" alt="Professional cleaning team at work">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-subtitle">Real feedback from businesses and homeowners we serve.</p>
+        <div class="reviews-grid">
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"XYZ Solutions transformed our office. Their attention to detail is unmatched. Highly professional and reliable."</p>
+            <div class="review-author">— Tech Firm, Johannesburg</div>
+          </div>
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"They handle all our Airbnb turnovers in Durban. Fast, efficient, and our guests always comment on the cleanliness."</p>
+            <div class="review-author">— Property Manager, Durban</div>
+          </div>
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Used them for a post-construction clean on a major project. They handled the dust and debris perfectly. Will use again."</p>
+            <div class="review-author">— Construction Lead, Gauteng</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Get Your Free Quote</h2>
+        <p class="section-subtitle">Tell us about your space. We'll respond promptly with a custom quote.</p>
+        <div class="contact-grid" style="gap: 2rem; grid-template-columns: 1fr;">
+          <form id="quote-form" action="#">
+            <div class="input-group">
+              <input type="text" name="name" placeholder="Your Name" required />
+              <input type="email" name="email" placeholder="Email Address" required />
+            </div>
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+            <select name="service_area" required>
+              <option value="">Select Your Service Area</option>
+              <option value="jhb">Johannesburg / Gauteng</option>
+              <option value="dbn">Durban / KZN</option>
+            </select>
+            <textarea name="message" placeholder="Tell us about your cleaning needs..." required></textarea>
+            <button type="submit">Send Request <i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container footer-grid">
@@ -1006,16 +204,16 @@
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
-        <a href="#services">Our Services</a>
-        <a href="#pricing">Pricing Plans</a>
-        <a href="#about">About Us</a>
-        <a href="#testimonials">Client Reviews</a>
-        <a href="#contact">Get a Quote</a>
+        <a href="services.html">Our Services</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="index.html#about">About Us</a>
+        <a href="#">Company Policy</a>
+        <a href="#">FAQs</a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <p><strong>Jhb:</strong> <a href="tel:001234567">07 123 4567</a></p>
-        <p><strong>Dbn:</strong> <a href="tel:001234568">07 123 4568</a></p>
+        <p><strong>Jhb:</strong> <a href="tel:071234567">07 123 4567</a></p>
+        <p><strong>Dbn:</strong> <a href="tel:071234568">07 123 4568</a></p>
         <p><a href="mailto:quotes@xyzsolutions.co.za">quotes@xyzsolutions.co.za</a></p>
       </div>
       <div class="footer-col">
@@ -1029,74 +227,12 @@
     </div>
     <div class="footer-bottom">
       © 2025 XYZ Solutions & Projects (Pty) Ltd. All Rights Reserved.
-      <p>Powered by vylex nexys</p>
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const burger = document.querySelector('.burger');
-      const nav = document.querySelector('header nav');
-      const header = document.querySelector('header');
-      const hero = document.querySelector('.hero');
-
-      // Set hero padding to match header height
-      function setHeroPadding() {
-        const headerHeight = header.offsetHeight;
-        hero.style.paddingTop = headerHeight + 'px';
-      }
-      setHeroPadding();
-      window.addEventListener('resize', setHeroPadding);
-
-      // Burger menu toggle
-      burger.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
-
-      // Close mobile menu on link click
-      document.querySelectorAll('header nav a').forEach(link => {
-        link.addEventListener('click', () => {
-          if (nav.classList.contains('active')) {
-            nav.classList.remove('active');
-          }
-        });
-      });
-
-      // Scroll behavior: hide/show header + active nav
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('header nav a:not(.cta-nav)');
-      let lastScrollY = window.pageYOffset;
-
-      window.addEventListener('scroll', () => {
-        const currentScrollY = window.pageYOffset;
-
-        // Hide header on scroll down, show on scroll up
-        if (currentScrollY <= 80) {
-          header.classList.remove('hide');
-        } else if (currentScrollY > lastScrollY) {
-          header.classList.add('hide');
-        } else {
-          header.classList.remove('hide');
-        }
-        lastScrollY = currentScrollY;
-
-        // Active section highlighting
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          if (pageYOffset >= sectionTop - header.offsetHeight - 20) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').substring(1) === current) {
-            link.classList.add('active');
-          }
-        });
-      });
-    });
-  </script>
+  <div id="chatbot-container"></div>
+  
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
 </body>
 </html>
