@@ -213,14 +213,28 @@ header.hide {
 /* -------------------------------------------------------------------
    3.2 Navigation & Logo
 ------------------------------------------------------------------- */
+
 .logo {
+    display: flex;               /* Aligns items horizontally */
+    align-items: center;         /* Vertically centers image and text */
+    gap: 0.6rem;                 /* Space between image and text */
+}
+
+.logo img {
+    height: 40px;                /* Adjust logo height as needed */
+    width: auto;
+}
+
+.logo-text {
     font-size: 1.8rem;
     font-weight: 800;
     color: var(--primary);
+    text-transform: uppercase;   /* Optional: gives a clean, bold look */
+    letter-spacing: 0.5px;       /* Optional: improves readability */
 }
 
-.logo span {
-    color: var(--secondary);
+.logo-text span {
+    color: var(--secondary);     /* Highlights "Solutions" or similar word */
 }
 
 nav {
