@@ -1,6 +1,209 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="styles/main.css">
+<style>
+/* -------------------------------------------------------------------
+   5.2 Popup Container
+------------------------------------------------------------------- */
+.chatbot-popup {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    bottom: 110px;
+    right: 35px;
+    width: 420px;
+    max-width: 90vw;
+    height: 75vh;
+    max-height: 650px;
+    z-index: 999;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transform-origin: bottom right;
+    animation: popIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chatbot-popup.show {
+    display: flex;
+}
+
+/* -------------------------------------------------------------------
+   5.3 Chat Header
+------------------------------------------------------------------- */
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chat-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.close-chatbot-btn {
+    background: none;
+    border: none;
+    color: var(--dark);
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.close-chatbot-btn:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* -------------------------------------------------------------------
+   5.4 Messages Area
+------------------------------------------------------------------- */
+.chat-messages {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.message {
+    display: flex;
+    max-width: 85%;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: messageFadeIn 0.5s ease forwards;
+}
+
+@keyframes messageFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Message content wrapper */
+.message-content {
+    width: 100%;
+}
+
+.message p {
+    padding: 0.8rem 1.2rem;
+    border-radius: 18px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    box-shadow: var(--shadow);
+    margin: 0 0 0.5rem 0;
+}
+
+.message p a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.message.user {
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.message.user p {
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.message.bot p {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--dark);
+    border-bottom-left-radius: 5px;
+}
+
+/* Message details (bullet points) */
+.message-details {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+}
+
+.message.user .message-details {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.message-details p {
+    padding: 0.3rem 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Chatbot message images container */
+.message-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Individual images */
+.service-image {
+    width: 90px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.service-image:hover {
+    transform: scale(1.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Adjust for single image to be larger */
+.message-images:has(.service-image:only-child) .service-image {
+    width: 120px;
+    height: 90px;
+}
+
+@media (max-width: 768px) {
+    /* Chatbot */
+    .chatbot-toggler {
+        bottom: 20px;
+        right: 20px;
+    }
+    .chatbot-popup {
+        width: 90vw;
+        height: 75vh;
+        right: 5vw;
+        bottom: 90px;
+    }
+
+    .service-image {
+        width: 75px;
+        height: 60px;
+    }
+
+    .message-images:has(.service-image:only-child) .service-image {
+        width: 100px;
+        height: 75px;
+    }
+}
+</style>
 </head>
 <button class="chatbot-toggler" aria-label="Open Chatbot">
     <i class="fas fa-robot"></i>
