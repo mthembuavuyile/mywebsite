@@ -1,0 +1,8 @@
+.contact-header {
+  background-image: url('../images/contact-background.jpeg');
+}
+
+.contact-header::before {
+  /* Unique gradient for contact */
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(85, 85, 85, 0.8));
+}
