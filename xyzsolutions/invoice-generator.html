@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Invoice Generator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --primary: #6a5acd;
+  --light: #f8f9fa;
+  --dark: #333;
+  --border: #e0e0e0;
+  --shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  color: var(--dark);
+}
+.container { display: flex; width: 100%; height: 100%; }
+.sidebar {
+  width: 380px;
+  background: white;
+  padding: 2rem;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar h1 {
+  margin: 0 0 1.5rem;
+  color: var(--primary);
+  font-size: 1.6rem;
+}
+.form-group { margin-bottom: 1.2rem; }
+label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.95rem; }
+input, textarea, select, input[type="color"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+input[type="color"] { padding: 0.25rem; height: 48px; }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+.currency-select { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.currency-select label { font-weight: normal; display: flex; align-items: center; gap: 0.3rem; }
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+.items-table th { text-align: left; padding: 0.5rem 0; font-size: 0.9rem; color: #555; }
+.items-table td { padding: 0.4rem 0; }
+.items-table input { width: 100%; padding: 0.5rem; font-size: 0.95rem; }
+.remove-item {
+  background: #ff5c5c;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background 0.2s;
+  display: block;
+  text-align: center;
+}
+.btn:hover { background: #5a4bc1; }
+.btn-secondary { background: #6c757d; }
+.preview {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  background: #eaeef3;
+}
+.invoice-preview {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  font-size: 1rem;
+  position: relative;
+}
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.company-info h2 { margin: 0 0 0.5rem; color: var(--primary); font-size: 1.5rem; }
+.company-info p { margin: 0.2rem 0; color: #555; font-size: 0.95rem; }
+.invoice-title { text-align: right; }
+.invoice-title h2 { margin: 0 0 0.5rem; font-size: 2rem; color: var(--primary); }
+.invoice-meta { font-size: 0.95rem; color: #444; }
+.bill-to-section { display: flex; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.bill-to { flex: 1; min-width: 250px; }
+.bill-to h3 { margin: 0 0 0.5rem; color: var(--primary); font-size: 1.1rem; }
+.bill-to p { margin: 0.2rem 0; color: #444; }
+.items-table-preview {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.items-table-preview th {
+  background: #f8f9fa;
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+}
+.items-table-preview td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.total-row {
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  color: var(--primary);
+}
+
+/* Mobile UI buttons initially hidden */
+#preview-btn-mobile, .mobile-controls {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body { overflow: auto; }
+  .container { flex-direction: column; height: auto; }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    height: auto;
+  }
+  .preview {
+    display: none; /* Hide preview by default on mobile */
+    padding: 1rem;
+  }
+  .invoice-preview {
+    width: 100%;
+    min-height: auto;
+    padding: 1.5rem;
+  }
+
+  /* When preview is active on mobile */
+  body.mobile-preview-active .sidebar {
+    display: none;
+  }
+  body.mobile-preview-active .preview {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Show/Hide buttons for mobile */
+  #generate-pdf-desktop { display: none; }
+  #preview-btn-mobile { display: block; }
+  .mobile-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h1>Invoice Generator</h1>
+
+    <div class="form-group">
+        <label for="accent-color">Accent Color</label>
+        <input type="color" id="accent-color" value="#6a5acd">
+    </div>
+
+    <div class="form-group">
+      <label>Currency</label>
+      <div class="currency-select">
+        <label><input type="radio" name="currency" value="$">$ USD</label>
+        <label><input type="radio" name="currency" value="R" checked>R ZAR</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="company-name">Company Name</label>
+      <input type="text" id="company-name" value="Vylex Nexys">
+    </div>
+
+    <div class="form-group">
+      <label for="company-address">Company Address</label>
+      <textarea id="company-address" rows="3">Gauteng, 2000
+South Africa</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="client-name">Client Name</label>
+      <input type="text" id="client-name" value="Avuyile Mthembu">
+    </div>
+
+    <div class="form-group">
+      <label for="client-address">Client Address</label>
+      <textarea id="client-address" rows="3">456 Client Avenue
+Durban, KZN, 4001
+South Africa</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="invoice-number">Invoice Number</label>
+      <input type="text" id="invoice-number" value="INV-2025-001">
+    </div>
+
+    <div class="form-group">
+      <label>Line Items</label>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th style="width: 100px;">Amount</th>
+            <th style="width: 40px;"></th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+      </table>
+      <button class="btn btn-secondary" id="add-item">+ Add Item</button>
+    </div>
+
+    <button class="btn" id="generate-pdf-desktop">Generate PDF</button>
+    <button class="btn" id="preview-btn-mobile">Preview Invoice</button>
+  </aside>
+
+  <!-- Preview -->
+  <main class="preview">
+    <div class="mobile-controls">
+        <button class="btn btn-secondary" id="back-to-editor">← Back to Editor</button>
+        <button class="btn" id="generate-pdf-mobile">Generate PDF</button>
+    </div>
+    <div class="invoice-preview" id="invoice-preview">
+      <div class="invoice-header">
+        <div class="company-info">
+          <h2 id="preview-company-name">Vylex Nexys</h2>
+          <p id="preview-company-address">Gauteng, 2000<br>South Africa</p>
+        </div>
+        <div class="invoice-title">
+          <h2>INVOICE</h2>
+          <div class="invoice-meta">
+            <p><strong>Invoice #:</strong> <span id="preview-invoice-number">INV-2025-001</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bill-to-section">
+        <div class="bill-to">
+          <h3>Bill To:</h3>
+          <p id="preview-client-name">Avuyile Mthembu</p>
+          <p id="preview-client-address">456 Client Avenue<br>Durban, KZN, 4001<br>South Africa</p>
+        </div>
+      </div>
+
+      <table class="items-table-preview">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th style="text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="preview-items-body"></tbody>
+      </table>
+
+      <div class="total-row">
+        Total: <span id="currency-symbol">R</span><span id="preview-total">0.00</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Form Elements
+  const companyName = document.getElementById('company-name');
+  const companyAddress = document.getElementById('company-address');
+  const clientName = document.getElementById('client-name');
+  const clientAddress = document.getElementById('client-address');
+  const invoiceNumber = document.getElementById('invoice-number');
+  const itemsBody = document.getElementById('items-body');
+  const addItemBtn = document.getElementById('add-item');
+  const currencyRadios = document.querySelectorAll('input[name="currency"]');
+  const accentColorPicker = document.getElementById('accent-color');
+
+  // Buttons
+  const generatePdfDesktopBtn = document.getElementById('generate-pdf-desktop');
+  const generatePdfMobileBtn = document.getElementById('generate-pdf-mobile');
+  const previewBtnMobile = document.getElementById('preview-btn-mobile');
+  const backToEditorBtn = document.getElementById('back-to-editor');
+
+  // Preview Elements
+  const previewCompanyName = document.getElementById('preview-company-name');
+  const previewCompanyAddress = document.getElementById('preview-company-address');
+  const previewClientName = document.getElementById('preview-client-name');
+  const previewClientAddress = document.getElementById('preview-client-address');
+  const previewInvoiceNumber = document.getElementById('preview-invoice-number');
+  const previewItemsBody = document.getElementById('preview-items-body');
+  const previewTotal = document.getElementById('preview-total');
+  const currencySymbolEl = document.getElementById('currency-symbol');
+
+  let currentCurrency = 'R';
+
+  const updatePreview = () => {
+    previewCompanyName.textContent = companyName.value;
+    previewCompanyAddress.innerHTML = companyAddress.value.replace(/\n/g, '<br>');
+    previewClientName.textContent = clientName.value;
+    previewClientAddress.innerHTML = clientAddress.value.replace(/\n/g, '<br>');
+    previewInvoiceNumber.textContent = invoiceNumber.value;
+
+    let total = 0;
+    previewItemsBody.innerHTML = '';
+
+    const rows = itemsBody.querySelectorAll('tr');
+    rows.forEach(row => {
+      const desc = row.querySelector('.item-desc').value;
+      const amount = parseFloat(row.querySelector('.item-amount').value) || 0;
+      total += amount;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${desc || '—'}</td><td style="text-align:right;">${currentCurrency}${amount.toFixed(2)}</td>`;
+      previewItemsBody.appendChild(tr);
+    });
+
+    previewTotal.textContent = total.toFixed(2);
+    currencySymbolEl.textContent = currentCurrency;
+  };
+
+  const addItem = (desc = '', amount = '') => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input type="text" class="item-desc" placeholder="Service or product" value="${desc}"></td>
+      <td><input type="number" class="item-amount" placeholder="0.00" step="0.01" value="${amount}"></td>
+      <td><button class="remove-item" title="Remove">X</button></td>
+    `;
+    itemsBody.appendChild(row);
+    row.querySelectorAll('input').forEach(input => input.addEventListener('input', updatePreview));
+    row.querySelector('.remove-item').addEventListener('click', () => { row.remove(); updatePreview(); });
+  };
+  
+  const generatePdf = () => {
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById('invoice-preview');
+    html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.save(`invoice-${invoiceNumber.value || 'draft'}.pdf`);
+    });
+  };
+
+  // Event Listeners
+  [companyName, companyAddress, clientName, clientAddress, invoiceNumber].forEach(el => el.addEventListener('input', updatePreview));
+  addItemBtn.addEventListener('click', () => addItem());
+  
+  generatePdfDesktopBtn.addEventListener('click', generatePdf);
+  generatePdfMobileBtn.addEventListener('click', generatePdf);
+
+  currencyRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      currentCurrency = radio.value;
+      updatePreview();
+    });
+  });
+  
+  accentColorPicker.addEventListener('input', (e) => {
+    document.documentElement.style.setProperty('--primary', e.target.value);
+  });
+
+  // Mobile UI Listeners
+  previewBtnMobile.addEventListener('click', () => {
+    document.body.classList.add('mobile-preview-active');
+    window.scrollTo(0, 0);
+  });
+
+  backToEditorBtn.addEventListener('click', () => {
+    document.body.classList.remove('mobile-preview-active');
+  });
+
+  // Initial setup
+  addItem('Mobile App Development (Android)', 6500);
+  addItem('Database Maintenance & Backup', 1250);
+  updatePreview();
+});
+</script>
+
+</body>
+</html>
