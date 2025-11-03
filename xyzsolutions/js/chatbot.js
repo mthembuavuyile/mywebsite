@@ -1,4 +1,30 @@
 function initializeChatbot() {
+    // --- Icon Mapping (DRY approach using Font Awesome) ---
+    const icons = {
+        quote: 'fa-solid fa-file-invoice-dollar',
+        services: 'fa-solid fa-broom',
+        pricing: 'fa-solid fa-tags',
+        contact: 'fa-solid fa-phone',
+        home: 'fa-solid fa-house',
+        business: 'fa-solid fa-building',
+        specialized: 'fa-solid fa-sparkles',
+        back: 'fa-solid fa-arrow-left',
+        recurring: 'fa-solid fa-rotate',
+        onceoff: 'fa-solid fa-star',
+        commercial: 'fa-solid fa-briefcase',
+        form: 'fa-solid fa-file-lines',
+        phone_jhb: 'fa-solid fa-phone',
+        phone_dbn: 'fa-solid fa-phone',
+        whatsapp: 'fa-brands fa-whatsapp',
+        email: 'fa-solid fa-envelope',
+        construction: 'fa-solid fa-hammer',
+        event: 'fa-solid fa-champagne-glasses',
+        airbnb: 'fa-solid fa-key',
+        moveout: 'fa-solid fa-truck-moving',
+        compare: 'fa-solid fa-chart-bar',
+        custom: 'fa-solid fa-pen-to-square',
+    };
+
     // --- Element Selection ---
     const elements = {
         toggler: document.querySelector('.chatbot-toggler'),
@@ -17,7 +43,7 @@ function initializeChatbot() {
         return;
     }
 
-    // --- Image Mapping (Fixed with absolute/root paths) ---
+    // --- Image Mapping ---
     const serviceImages = {
         regular_domestic: 'images/regular-domestic.jpeg',
         commercial_office: 'images/commercial-office.jpeg',
@@ -30,24 +56,27 @@ function initializeChatbot() {
         specialized: 'images/storage-specialized.jpeg',
     };
 
+    // Helper to create icon HTML
+    const icon = (key) => `<i class="${icons[key] || icons.services}"></i>`;
+
     // --- Conversation Tree ---
     const conversationTree = {
         greeting: {
-            text: "😊 Hello and welcome to <b>XYZSolutions & Projects</b>! Your partner for professional cleaning in Durban & Johannesburg. How can I assist you today?",
+            text: "👋 Hello and welcome to <b>XYZSolutions & Projects</b>! Your partner for professional cleaning in Durban & Johannesburg. How can I assist you today?",
             options: [
-                { text: "💰 Get a Quote", value: "quote_entry" },
-                { text: "🧼 Explore Services", value: "services" },
-                { text: "💵 View Pricing", value: "pricing" },
-                { text: "📞 Contact & Hours", value: "contact" },
+                { text: `${icon('quote')} Get a Quote`, value: "quote_entry" },
+                { text: `${icon('services')} Explore Services`, value: "services" },
+                { text: `${icon('pricing')} View Pricing`, value: "pricing" },
+                { text: `${icon('contact')} Contact & Hours`, value: "contact" },
             ],
         },
         services: {
             text: "We offer a complete range of cleaning solutions.<br>What type of service are you looking for?",
             options: [
-                { text: "🏠 Home Cleaning", value: "services_home" },
-                { text: "🏢 Business Cleaning", value: "services_business" },
-                { text: "✨ Specialized Projects", value: "services_specialized" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('home')} Home Cleaning`, value: "services_home" },
+                { text: `${icon('business')} Business Cleaning`, value: "services_business" },
+                { text: `${icon('specialized')} Specialized Projects`, value: "services_specialized" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         services_home: {
@@ -59,9 +88,9 @@ function initializeChatbot() {
                 "• <b>Move-in / Move-out:</b> Fresh start for new beginnings"
             ],
             options: [
-                { text: "💰 Get a Home Quote", value: "quote_home" },
-                { text: "💵 View Home Pricing", value: "pricing_essential" },
-                { text: "⬅️ Back to Services", value: "services" },
+                { text: `${icon('quote')} Get a Home Quote`, value: "quote_home" },
+                { text: `${icon('pricing')} View Home Pricing`, value: "pricing_essential" },
+                { text: `${icon('back')} Back to Services`, value: "services" },
             ],
         },
         services_business: {
@@ -73,9 +102,9 @@ function initializeChatbot() {
                 "• <b>Customized Schedules:</b> Work around your business hours"
             ],
             options: [
-                { text: "💰 Get a Business Quote", value: "quote_business" },
-                { text: "💵 View Commercial Pricing", value: "pricing_executive" },
-                { text: "⬅️ Back to Services", value: "services" },
+                { text: `${icon('quote')} Get a Business Quote`, value: "quote_business" },
+                { text: `${icon('pricing')} View Commercial Pricing`, value: "pricing_executive" },
+                { text: `${icon('back')} Back to Services`, value: "services" },
             ],
         },
         services_specialized: {
@@ -87,17 +116,17 @@ function initializeChatbot() {
                 "• <b>Airbnb & Holiday Rentals:</b> Quick turnarounds for guests"
             ],
             options: [
-                { text: "💰 Quote for Special Project", value: "quote_specialized" },
-                { text: "⬅️ Back to Services", value: "services" },
+                { text: `${icon('quote')} Quote for Special Project`, value: "quote_specialized" },
+                { text: `${icon('back')} Back to Services`, value: "services" },
             ],
         },
         pricing: {
-            text: "💵 <b>Transparent Pricing Options:</b><br>Choose the plan that fits your needs:",
+            text: `${icon('pricing')} <b>Transparent Pricing Options:</b><br>Choose the plan that fits your needs:`,
             options: [
-                { text: "🔄 Recurring (Essential)", value: "pricing_essential" },
-                { text: "⭐ Once-Off (Classic)", value: "pricing_classic" },
-                { text: "🏢 Commercial (Executive)", value: "pricing_executive" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('recurring')} Recurring (Essential)`, value: "pricing_essential" },
+                { text: `${icon('onceoff')} Once-Off (Classic)`, value: "pricing_classic" },
+                { text: `${icon('commercial')} Commercial (Executive)`, value: "pricing_executive" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         pricing_essential: {
@@ -111,13 +140,13 @@ function initializeChatbot() {
                 "✅ Flexible rescheduling options"
             ],
             options: [
-                { text: "📝 Book Recurring Service", value: "quote_home" },
-                { text: "📊 Compare Other Plans", value: "pricing" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('form')} Book Recurring Service`, value: "quote_home" },
+                { text: `${icon('compare')} Compare Other Plans`, value: "pricing" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         pricing_classic: {
-            text: "<b>⭐ Classic Once-Off:</b>",
+            text: `<b>${icon('onceoff')} Classic Once-Off:</b>`,
             images: [serviceImages.end_of_lease, serviceImages.airbnb],
             details: [
                 "🏠 Deep cleans, move-ins/outs, Airbnb turnovers",
@@ -129,13 +158,13 @@ function initializeChatbot() {
                 "⏱️ Pricing varies by size, condition & location"
             ],
             options: [
-                { text: "💰 Get Exact Quote", value: "quote_deepclean" },
-                { text: "📊 Compare Other Plans", value: "pricing" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('quote')} Get Exact Quote`, value: "quote_deepclean" },
+                { text: `${icon('compare')} Compare Other Plans`, value: "pricing" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         pricing_executive: {
-            text: "<b>🏢 Executive Plan - Commercial & Specialized:</b>",
+            text: `<b>${icon('commercial')} Executive Plan - Commercial & Specialized:</b>`,
             images: [serviceImages.commercial_office, serviceImages.construction],
             details: [
                 "🏢 <b>Commercial Spaces:</b> R8/m²",
@@ -145,65 +174,65 @@ function initializeChatbot() {
                 "🤝 Dedicated account manager"
             ],
             options: [
-                { text: "📝 Request Custom Quote", value: "quote_business" },
-                { text: "📊 Compare Other Plans", value: "pricing" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('custom')} Request Custom Quote`, value: "quote_business" },
+                { text: `${icon('compare')} Compare Other Plans`, value: "pricing" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         quote_entry: {
-            text: "💰 <b>Let's get you a quote!</b><br>What type of cleaning do you need?",
+            text: `${icon('quote')} <b>Let's get you a quote!</b><br>What type of cleaning do you need?`,
             options: [
-                { text: "🏠 Home / Apartment", value: "quote_home" },
-                { text: "🏢 Office / Commercial", value: "quote_business" },
-                { text: "🏗️ Post-Construction", value: "quote_specialized" },
-                { text: "🎉 Event / Airbnb", value: "quote_specialized" },
-                { text: "⬅️ Back", value: "greeting" },
+                { text: `${icon('home')} Home / Apartment`, value: "quote_home" },
+                { text: `${icon('business')} Office / Commercial`, value: "quote_business" },
+                { text: `${icon('construction')} Post-Construction`, value: "quote_specialized" },
+                { text: `${icon('event')} Event / Airbnb`, value: "quote_specialized" },
+                { text: `${icon('back')} Back`, value: "greeting" },
             ],
         },
         quote_home: {
-            text: "🏠 <b>Home Cleaning Quote:</b><br>Fill our quick form or call us for a personalized quote.",
+            text: `${icon('home')} <b>Home Cleaning Quote:</b><br>Fill our quick form or call us for a personalized quote.`,
             images: [serviceImages.regular_domestic],
             options: [
-                { text: "📝 Fill Quote Form", value: "redirectToContact" },
-                { text: "📞 Call Johannesburg", value: "call_jhb" },
-                { text: "📞 Call Durban", value: "call_dbn" },
-                { text: "💬 WhatsApp Us", value: "whatsapp" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('form')} Fill Quote Form`, value: "redirectToContact" },
+                { text: `${icon('phone_jhb')} Call Johannesburg`, value: "call_jhb" },
+                { text: `${icon('phone_dbn')} Call Durban`, value: "call_dbn" },
+                { text: `${icon('whatsapp')} WhatsApp Us`, value: "whatsapp" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         quote_business: {
-            text: "🏢 <b>Commercial Cleaning Quote:</b><br>Let's discuss your business needs. Fill the form or call us directly.",
+            text: `${icon('business')} <b>Commercial Cleaning Quote:</b><br>Let's discuss your business needs. Fill the form or call us directly.`,
             images: [serviceImages.commercial_office],
             options: [
-                { text: "📝 Fill Quote Form", value: "redirectToContact" },
-                { text: "📞 Call Johannesburg", value: "call_jhb" },
-                { text: "📞 Call Durban", value: "call_dbn" },
-                { text: "💬 WhatsApp Us", value: "whatsapp" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('form')} Fill Quote Form`, value: "redirectToContact" },
+                { text: `${icon('phone_jhb')} Call Johannesburg`, value: "call_jhb" },
+                { text: `${icon('phone_dbn')} Call Durban`, value: "call_dbn" },
+                { text: `${icon('whatsapp')} WhatsApp Us`, value: "whatsapp" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         quote_specialized: {
-            text: "✨ <b>Specialized Project Quote:</b><br>These projects need assessment. Let's connect!",
+            text: `${icon('specialized')} <b>Specialized Project Quote:</b><br>These projects need assessment. Let's connect!`,
             images: [serviceImages.construction, serviceImages.event],
             options: [
-                { text: "📝 Fill Quote Form", value: "redirectToContact" },
-                { text: "📞 Call Johannesburg", value: "call_jhb" },
-                { text: "📞 Call Durban", value: "call_dbn" },
-                { text: "💬 WhatsApp Us", value: "whatsapp" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('form')} Fill Quote Form`, value: "redirectToContact" },
+                { text: `${icon('phone_jhb')} Call Johannesburg`, value: "call_jhb" },
+                { text: `${icon('phone_dbn')} Call Durban`, value: "call_dbn" },
+                { text: `${icon('whatsapp')} WhatsApp Us`, value: "whatsapp" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         quote_deepclean: {
             text: "🧽 <b>Deep Clean / End-of-Lease:</b><br>Pricing depends on size and condition. Use our form for accurate pricing.",
             images: [serviceImages.end_of_lease],
             options: [
-                { text: "📝 Fill Quote Form", value: "redirectToContact" },
-                { text: "📞 Call for Estimate", value: "contact" },
-                { text: "⬅️ Back to Pricing", value: "pricing" },
+                { text: `${icon('form')} Fill Quote Form`, value: "redirectToContact" },
+                { text: `${icon('contact')} Call for Estimate`, value: "contact" },
+                { text: `${icon('back')} Back to Pricing`, value: "pricing" },
             ],
         },
         contact: {
-            text: "📞 <b>Contact XYZSolutions & Projects:</b>",
+            text: `${icon('contact')} <b>Contact XYZSolutions & Projects:</b>`,
             details: [
                 "📍 <b>Johannesburg:</b> 07 123 4567",
                 "📍 <b>Durban:</b> 07 123 4568",
@@ -211,21 +240,21 @@ function initializeChatbot() {
                 "🕐 <b>Hours:</b> Mon-Fri 8am-5pm, Sat 9am-1pm"
             ],
             options: [
-                { text: "📞 Call Jhb", value: "call_jhb" },
-                { text: "📞 Call Dbn", value: "call_dbn" },
-                { text: "💬 WhatsApp", value: "whatsapp" },
-                { text: "📝 Get Quote", value: "quote_entry" },
-                { text: "⬅️ Main Menu", value: "greeting" },
+                { text: `${icon('phone_jhb')} Call Jhb`, value: "call_jhb" },
+                { text: `${icon('phone_dbn')} Call Dbn`, value: "call_dbn" },
+                { text: `${icon('whatsapp')} WhatsApp`, value: "whatsapp" },
+                { text: `${icon('form')} Get Quote`, value: "quote_entry" },
+                { text: `${icon('back')} Main Menu`, value: "greeting" },
             ],
         },
         whatsapp: {
-            action: () => redirectTo('https://wa.me/27712345678', "💬 Opening WhatsApp...")
+            action: () => redirectTo('https://wa.me/27648784287', `${icon('whatsapp')} Opening WhatsApp...`)
         },
         call_jhb: {
-            action: () => callNumber('071234567', '📞 Calling our Johannesburg team...')
+            action: () => callNumber('071234567', `${icon('phone_jhb')} Calling our Johannesburg team...`)
         },
         call_dbn: {
-            action: () => callNumber('071234568', '📞 Calling our Durban team...')
+            action: () => callNumber('071234568', `${icon('phone_dbn')} Calling our Durban team...`)
         },
         redirectToContact: {
             action: () => redirectTo('contact.html', "✅ Redirecting you to the contact & quote page...")
@@ -233,10 +262,10 @@ function initializeChatbot() {
         default: {
             text: "🤔 I'm not sure I understood that. Let me show you what I can help with:",
             options: [
-                { text: "🧼 Explore Services", value: "services" },
-                { text: "💰 Get a Quote", value: "quote_entry" },
-                { text: "💵 View Pricing", value: "pricing" },
-                { text: "📞 Contact Us", value: "contact" },
+                { text: `${icon('services')} Explore Services`, value: "services" },
+                { text: `${icon('quote')} Get a Quote`, value: "quote_entry" },
+                { text: `${icon('pricing')} View Pricing`, value: "pricing" },
+                { text: `${icon('contact')} Contact Us`, value: "contact" },
             ],
         },
     };
@@ -259,12 +288,10 @@ function initializeChatbot() {
         const contentWrapper = document.createElement('div');
         contentWrapper.className = 'message-content';
         
-        // Add main text
         const textPara = document.createElement('p');
         textPara.innerHTML = text;
         contentWrapper.appendChild(textPara);
         
-        // Add details if provided
         if (details && details.length > 0) {
             const detailsDiv = document.createElement('div');
             detailsDiv.className = 'message-details';
@@ -276,7 +303,6 @@ function initializeChatbot() {
             contentWrapper.appendChild(detailsDiv);
         }
         
-        // Add images if provided (after text and details)
         if (images && images.length > 0) {
             const imagesDiv = document.createElement('div');
             imagesDiv.className = 'message-images';
@@ -295,7 +321,6 @@ function initializeChatbot() {
         msg.appendChild(contentWrapper);
         elements.messagesContainer.appendChild(msg);
         
-        // Smooth scroll to bottom
         setTimeout(() => {
             elements.messagesContainer.scrollTo({
                 top: elements.messagesContainer.scrollHeight,
