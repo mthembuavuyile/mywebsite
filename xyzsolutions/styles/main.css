@@ -1,50 +1,3 @@
-/* ===================================================================
-   main.css
-   TABLE OF CONTENTS
-   ===================================================================
-
-   1.0 SETTINGS
-       -- 1.1 Root Variables
-       -- 1.2 Global Resets & Typography
-
-   2.0 REUSABLE COMPONENTS
-       -- 2.1 Section Headings
-       -- 2.2 CTA Buttons
-
-   3.0 SITE HEADER
-       -- 3.1 Header Layout
-       -- 3.2 Navigation & Logo
-       -- 3.3 Mobile Navigation (Burger)
-
-   4.0 SHARED & HOMEPAGE SECTIONS
-       -- 4.1 Base Page Headers & Home Hero
-       -- 4.3 Pricing
-       -- 4.4 About
-       -- 4.5 Testimonials
-
-   5.0 CHATBOT
-       -- 5.1 Toggler Button
-       -- 5.2 Popup Container (Glassmorphism)
-       -- 5.3 Chat Header
-       -- 5.4 Messages Area
-       -- 5.5 Quick Replies & Composer
-       -- 5.6 Typing Indicator
-
-   6.0 FOOTER
-       -- 6.1 Footer Layout
-       -- 6.2 Footer Bottom & Socials
-
-   7.0 RESPONSIVE STYLES
-       -- 7.1 Tablet (max-width: 992px)
-       -- 7.2 Mobile (max-width: 768px)
-
-=================================================================== */
-
-
-/* ===================================================================
-   1.0 SETTINGS
-=================================================================== */
-
 /* -------------------------------------------------------------------
    1.1 Root Variables
 ------------------------------------------------------------------- */
@@ -176,10 +129,14 @@ main {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
-/*cta about*//* Default button for desktop/laptop */
+
+/*cta about*/
+/* Default button for desktop/laptop */
 .cta-hero.full-width-yellow {
-    display: inline-block;  /* inline-block keeps it naturally sized */
-    background: var(--accent); /* yellow */
+    display: inline-block;
+    /* inline-block keeps it naturally sized */
+    background: var(--accent);
+    /* yellow */
     color: var(--dark);
     text-align: center;
     font-size: 1rem;
@@ -191,7 +148,8 @@ main {
 }
 
 .cta-hero.full-width-yellow:hover {
-    background: var(--secondary); /* green hover */
+    background: var(--secondary);
+    /* green hover */
     color: var(--white);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 119, 190, 0.3);
@@ -210,69 +168,119 @@ main {
    3.0 SITE HEADER
 =================================================================== */
 header {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 70px;
-  z-index: 1000;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1rem 2%;
-  background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-  transition: transform .3s ease, opacity .3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2%;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    transition: transform .3s ease, opacity .3s ease;
 }
-header.hide { transform: translateY(-100%); opacity: 0; }
+
+header.hide {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
 .logo {
-  display: flex; align-items: center; gap: .6rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
 }
-.logo img { height: 40px; }
+
+.logo img {
+    height: 40px;
+}
+
 .logo-text {
-  font-size: 1.8rem; font-weight: 800;
-  color: var(--primary);
-  text-transform: uppercase; letter-spacing: .5px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: .5px;
 }
-.logo-text span { color: var(--secondary); }
-nav { display: flex; gap: 2rem; align-items: center; }
+
+.logo-text span {
+    color: var(--secondary);
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
 nav a {
-  position: relative;
-  font-weight: 600;
-  font-size: .95rem;
-  color: var(--dark);
-  padding: .5rem 0;
-  transition: var(--transition);
+    position: relative;
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--dark);
+    padding: .5rem 0;
+    transition: var(--transition);
 }
+
 nav a::after {
-  content:"";
-  position: absolute; bottom:-6px; left:0;
-  width:0; height:3px;
-  background: var(--primary);
-  border-radius:3px;
-  transition: var(--transition);
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: var(--transition);
 }
-nav a:hover, nav a.active { color: var(--primary); }
-nav a:hover::after, nav a.active::after { width:100%; }
+
+nav a:hover,
+nav a.active {
+    color: var(--primary);
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
 .cta-nav {
-  padding: .6rem 1.4rem;
-  background: var(--primary);
-  color: white !important;
-  border-radius: 10px;
-  transition: var(--transition);
+    padding: .6rem 1.4rem;
+    background: var(--primary);
+    color: white !important;
+    border-radius: 10px;
+    transition: var(--transition);
 }
+
 .cta-nav:hover {
-  background: var(--secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,119,190,.3);
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 119, 190, .3);
 }
-.cta-nav::after { display: none!important; }
+
+.cta-nav::after {
+    display: none !important;
+}
+
 .burger {
-  display: none; flex-direction: column; gap: 5px; cursor: pointer;
-  padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
 }
+
 .burger span {
-  display:block; width:28px; height:3px;
-  background: var(--primary);
-  border-radius:3px;
-  transition: var(--transition);
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: var(--transition);
 }
 
 
@@ -286,78 +294,83 @@ nav a:hover::after, nav a.active::after { width:100%; }
 
 /* Base class for all page headers */
 .page-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 50vh; /* Default height for inner pages */
-  padding: 0 5%;
-  text-align: center;
-  color: white;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Creates parallax-like effect */
-  overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    /* Default height for inner pages */
+    padding: 0 5%;
+    text-align: center;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Creates parallax-like effect */
+    overflow: hidden;
 }
 
 /* Common overlay for all headers */
 .page-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.7), rgba(0, 119, 190, 0.8)); /* Default gradient */
-  opacity: 0.9;
-  z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.7), rgba(0, 119, 190, 0.8));
+    /* Default gradient */
+    opacity: 0.9;
+    z-index: 1;
 }
 
 /* Common content container */
 .header-content {
-  position: relative;
-  max-width: 900px;
-  z-index: 2;
-  animation: fadeUp 1s ease-out;
+    position: relative;
+    max-width: 900px;
+    z-index: 2;
+    animation: fadeUp 1s ease-out;
 }
 
 /* Common typography for all headers */
 .page-header h1 {
-  font-size: clamp(2.8rem, 5.5vw, 3.8rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+    font-size: clamp(2.8rem, 5.5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
 
 .page-header p {
-  font-size: 1.25rem;
-  max-width: 750px;
-  margin: 0 auto 2rem;
-  opacity: 0.95;
+    font-size: 1.25rem;
+    max-width: 750px;
+    margin: 0 auto 2rem;
+    opacity: 0.95;
 }
 
 /* --- Home Page Hero --- */
 .hero {
-  min-height: calc(100vh - 70px); /* Taller for the homepage */
-  background-image: url('../images/xyzsol.jpeg');
+    min-height: calc(100vh - 70px);
+    /* Taller for the homepage */
+    background-image: url('../images/xyzsol.jpeg');
 }
 
 .hero::before {
-  /* Unique gradient for the hero */
-  background: linear-gradient(135deg, rgba(0, 119, 190, 0.8), rgba(0, 184, 148, 0.85));
+    /* Unique gradient for the hero */
+    background: linear-gradient(135deg, rgba(0, 119, 190, 0.8), rgba(0, 184, 148, 0.85));
 }
 
 
 /* Shared animation */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* -------------------------------------------------------------------
@@ -436,7 +449,8 @@ nav a:hover::after, nav a.active::after { width:100%; }
 .pricing-card ul {
     list-style: none;
     margin: 0 0 2rem;
-    flex-grow: 1; /* Pushes button to bottom */
+    flex-grow: 1;
+    /* Pushes button to bottom */
     text-align: left;
 }
 
@@ -836,14 +850,23 @@ nav a:hover::after, nav a.active::after { width:100%; }
     animation: bounce 1.4s infinite;
 }
 
-.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
 
 @keyframes bounce {
-    0%, 80%, 100% {
+
+    0%,
+    80%,
+    100% {
         transform: scale(0.5);
         opacity: 0.5;
     }
+
     40% {
         transform: scale(1);
         opacity: 1;
@@ -937,6 +960,7 @@ footer {
    7.1 Tablet (max-width: 992px)
 ------------------------------------------------------------------- */
 @media (max-width: 992px) {
+
     /* Layout Grids */
     .about-content,
     .contact-grid,
@@ -997,16 +1021,40 @@ footer {
    7.2 Mobile (max-width: 768px)
 ------------------------------------------------------------------- */
 @media (max-width: 768px) {
+
     /* Header & Section Padding */
-    header { height: 60px; }
-    main { padding-top: 60px; }
-    section { padding: 4rem 5%; }
+    header {
+        height: 60px;
+    }
+
+    main {
+        padding-top: 60px;
+    }
+
+    section {
+        padding: 4rem 5%;
+    }
 
     /* Typography */
-    .section-title { font-size: 2rem; }
-    .page-header h1 { font-size: 2.5rem; }
-    .page-header p { font-size: 1.15rem; }
-    .hero { min-height: calc(100vh - 60px); }
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .page-header p {
+        font-size: 1.15rem;
+    }
+
+    .hero {
+        min-height: 70vh;
+        padding: 2rem 1.5rem;
+        /* smaller padding for mobile */
+
+    }
+
 
     /* Reusable Components */
     .cta-hero.primary-btn,
@@ -1015,7 +1063,8 @@ footer {
         width: 100%;
         margin: 0.8rem 0;
     }
-     .cta-hero.secondary-btn {
+
+    .cta-hero.secondary-btn {
         margin-left: 0;
     }
 
@@ -1162,18 +1211,23 @@ form button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
 }
+
 @media (max-width: 768px) {
     .contact-grid {
-        grid-template-columns: 1fr; /* Force single column */
-        gap: 2rem; /* Reduce spacing on mobile */
+        grid-template-columns: 1fr;
+        /* Force single column */
+        gap: 2rem;
+        /* Reduce spacing on mobile */
     }
 
     form {
-        padding: 1.5rem 1rem; /* Ensure it fits screen */
+        padding: 1.5rem 1rem;
+        /* Ensure it fits screen */
     }
 
     .contact-info {
-        margin-bottom: 2rem; /* Space below info section */
+        margin-bottom: 2rem;
+        /* Space below info section */
     }
 }
 
