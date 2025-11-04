@@ -6,3 +6,47 @@
   /* Unique gradient for contact */
   background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(85, 85, 85, 0.8));
 }
+
+.contact-page,
+#contact {
+    background: var(--light);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.8rem;
+    transition: var(--transition);
+}
+
+.info-item:hover {
+    transform: translateX(5px);
+}
+
+.info-item i {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-top: 0.2rem;
+}
+
+.info-item a {
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.info-item a:hover {
+    color: var(--secondary);
+}

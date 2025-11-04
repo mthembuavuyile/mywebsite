@@ -234,8 +234,8 @@ function initializeChatbot() {
         contact: {
             text: `${icon('contact')} <b>Contact XYZSolutions & Projects:</b>`,
             details: [
-                "📍 <b>Johannesburg:</b> 07 123 4567",
-                "📍 <b>Durban:</b> 07 123 4568",
+                "📍 <b>Johannesburg:</b> 068 029 7313",
+                "📍 <b>Durban:</b> 062 297 6614",
                 "📧 <b>Email:</b> quotes@xyzsolutions.co.za",
                 "🕐 <b>Hours:</b> Mon-Fri 8am-5pm, Sat 9am-1pm"
             ],
@@ -248,13 +248,13 @@ function initializeChatbot() {
             ],
         },
         whatsapp: {
-            action: () => redirectTo('https://wa.me/27648784287', `${icon('whatsapp')} Opening WhatsApp...`)
+            action: () => redirectTo('https://wa.me/27622976614', `${icon('whatsapp')} Opening WhatsApp...`)
         },
         call_jhb: {
-            action: () => callNumber('071234567', `${icon('phone_jhb')} Calling our Johannesburg team...`)
+            action: () => callNumber('0680297313', `${icon('phone_jhb')} Calling our Johannesburg team...`)
         },
         call_dbn: {
-            action: () => callNumber('071234568', `${icon('phone_dbn')} Calling our Durban team...`)
+            action: () => callNumber('0622976614', `${icon('phone_dbn')} Calling our Durban team...`)
         },
         redirectToContact: {
             action: () => redirectTo('contact.html', "✅ Redirecting you to the contact & quote page...")
