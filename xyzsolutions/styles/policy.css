@@ -1,0 +1,78 @@
+/* ===================================================================
+   POLICY PAGE STYLES
+   - For Privacy Policy, Company Policy, etc.
+   - Leverages variables and base styles from main.css
+=================================================================== */
+
+.policy-content {
+    background: var(--white);
+    padding: 4rem 5%;
+}
+
+.policy-content .container {
+    max-width: 900px; /* Optimal width for readability */
+    margin: 0 auto;
+}
+
+.policy-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e8e8e8;
+}
+
+.policy-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.policy-content h2:first-of-type {
+    margin-top: 0;
+}
+
+.policy-content p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.policy-content ul {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-content ul li {
+    position: relative;
+    margin-bottom: 0.8rem;
+    color: var(--gray);
+    line-height: 1.7;
+}
+
+.policy-content ul li::before {
+    content: '•';
+    position: absolute;
+    left: -1.5rem;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.policy-content a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+.policy-content a:hover {
+    color: var(--secondary);
+    text-decoration: none;
+}
