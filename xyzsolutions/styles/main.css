@@ -482,17 +482,26 @@ header.hide {
 .logo img {
     height: 40px;
 }
-
 .logo-text {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: .5px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary);
+  letter-spacing: 0.5px;
 }
 
 .logo-text span {
-    color: var(--secondary);
+  color: var(--secondary);
+}
+
+.logo-text small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+  margin-top: 0; /* remove gap */
+  line-height: 1; /* tighten spacing vertically */
+  text-transform: uppercase;
 }
 
 nav {
