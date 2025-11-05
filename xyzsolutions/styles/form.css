@@ -1,12 +1,12 @@
 /* ===================================================================
-   FORM ENHANCEMENTS & VALIDATION
+   UNIFIED FORM STYLES
 =================================================================== */
 
 form {
     display: grid;
     gap: 1.2rem;
     padding: 2.5rem;
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
@@ -21,7 +21,7 @@ form {
 /* --- Floating Label Input Container --- */
 .input-container {
     position: relative;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .input-container input,
@@ -37,6 +37,7 @@ form {
     background-color: #f9f9f9;
 }
 
+/* --- Floating Label Behavior --- */
 .input-container label {
     position: absolute;
     top: 1rem;
@@ -45,22 +46,23 @@ form {
     color: var(--gray);
     pointer-events: none;
     transition: all 0.2s ease;
-}
-
-/* Floating label behavior for inputs and textareas */
-.input-container input:focus + label,
-.input-container textarea:focus + label,
-.input-container input:not(:placeholder-shown) + label,
-.input-container textarea:not(:placeholder-shown) + label {
-    top: 0.3rem;
-    left: 0.8rem;
-    font-size: 0.75rem;
-    color: var(--primary);
-    background: #f9f9f9;
+    background: #f9f9f9; /* Match input background */
     padding: 0 0.2rem;
 }
 
-/* Select dropdown styling */
+/* This selector targets the label when the input/textarea is focused OR has content */
+.input-container input:focus + label,
+.input-container textarea:focus + label,
+.input-container input:not(:placeholder-shown) + label,
+.input-container textarea:not(:placeholder-shown) + label,
+.input-container select.has-value + label {
+    top: -0.5rem; /* Move label above the border */
+    left: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+/* --- Select Dropdown Specifics --- */
 .input-container select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
@@ -68,17 +70,13 @@ form {
     background-position: right 1rem center;
     background-size: 1em;
     padding-right: 2.5rem;
+    cursor: pointer;
 }
 
-/* Hide label for selects (since they don't support floating labels well) */
+/* Special label handling for select before a value is chosen */
 .input-container select + label {
-    display: none;
-}
-
-/* Textarea specific sizing */
-.input-container textarea {
-    resize: vertical;
-    min-height: 120px;
+    top: 1rem;
+    left: 1rem;
 }
 
 /* --- Focus & Validation States --- */
@@ -100,22 +98,20 @@ form {
 .input-container input.valid,
 .input-container textarea.valid,
 .input-container select.valid {
-    border-color: var(--secondary);
+    border-color: #28a745;
 }
 
-/* --- Dynamic Field Groups --- */
+/* --- Checkbox / Radio Groups --- */
 .form-options-group {
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 1rem 1.5rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.5rem;
     transition: all 0.3s ease;
 }
 
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
 
 .options-label {
     font-weight: 600;
@@ -128,7 +124,7 @@ form {
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .radio-group label,
@@ -137,21 +133,19 @@ form {
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-    position: relative;
-    pointer-events: auto;
 }
 
-/* --- Submit Button --- */
+/* --- Submit Button & Result Message --- */
 form button[type="submit"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     padding: 1.1rem;
     font-size: 1.1rem;
     font-weight: 700;
     background: var(--primary);
-    color: white;
+    color: var(--white);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -160,14 +154,13 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
     background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 184, 148, 0.2);
 }
 
-/* --- Submission Status Message --- */
 #form-result {
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
     border-radius: 8px;
     text-align: center;
     font-weight: 500;
@@ -177,55 +170,27 @@ form button[type="submit"]:hover {
 #form-result.success {
     background-color: #d4edda;
     color: #155724;
-    display: block;
 }
 
 #form-result.error {
     background-color: #f8d7da;
     color: #721c24;
-    display: block;
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
-    form {
-        padding: 1.5rem;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-}
-
-
-/* --- POPI Act Compliance Styling --- */
+/* --- Privacy & Consent Section --- */
 .privacy-notice {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--gray);
     text-align: center;
-    margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    padding: 0.5rem;
     line-height: 1.5;
 }
 
-.privacy-notice a {
-    color: var(--primary);
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-.privacy-notice a:hover {
-    color: var(--secondary);
-}
-
 .consent-group {
-    background-color: transparent;
     border: none;
     padding: 0;
-    margin-bottom: 1.2rem;
+    background: transparent;
+    margin-bottom: 0;
 }
 
 .consent-label {
@@ -236,507 +201,13 @@ form button[type="submit"]:hover {
     color: var(--gray);
     cursor: pointer;
     line-height: 1.6;
-    pointer-events: auto; /* Ensure the label is clickable */
-}
-
-.consent-label input[type="checkbox"] {
-    margin-top: 4px;
-    flex-shrink: 0;
-    width: 1.1em;
-    height: 1.1em;
-    accent-color: var(--primary); /* Modern way to color the checkbox */
-}/* ===================================================================
-   FORM ENHANCEMENTS & VALIDATION
-=================================================================== */
-
-form {
-    display: grid;
-    gap: 1.2rem;
-    padding: 2.5rem;
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-
-/* --- Form Grid & Layout --- */
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-}
-
-/* --- Floating Label Input Container --- */
-.input-container {
-    position: relative;
-    margin-bottom: 1.2rem;
-}
-
-.input-container input,
-.input-container textarea,
-.input-container select {
-    width: 100%;
-    padding: 1.2rem 1rem 0.8rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    background-color: #f9f9f9;
-}
-
-.input-container label {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 1rem;
-    color: var(--gray);
-    pointer-events: none;
-    transition: all 0.2s ease;
-}
-
-/* Floating label behavior for inputs and textareas */
-.input-container input:focus + label,
-.input-container textarea:focus + label,
-.input-container input:not(:placeholder-shown) + label,
-.input-container textarea:not(:placeholder-shown) + label {
-    top: 0.3rem;
-    left: 0.8rem;
-    font-size: 0.75rem;
-    color: var(--primary);
-    background: #f9f9f9;
-    padding: 0 0.2rem;
-}
-
-/* Select dropdown styling */
-.input-container select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-    padding-right: 2.5rem;
-}
-
-/* Hide label for selects (since they don't support floating labels well) */
-.input-container select + label {
-    display: none;
-}
-
-/* Textarea specific sizing */
-.input-container textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* --- Focus & Validation States --- */
-.input-container input:focus,
-.input-container textarea:focus,
-.input-container select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.1);
-}
-
-.input-container input.invalid,
-.input-container textarea.invalid,
-.input-container select.invalid {
-    border-color: #e74c3c;
-    background-color: #fff6f6;
-}
-
-.input-container input.valid,
-.input-container textarea.valid,
-.input-container select.valid {
-    border-color: var(--secondary);
-}
-
-/* --- Dynamic Field Groups --- */
-.form-options-group {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.hidden {
-    display: none;
-}
-
-.options-label {
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-    display: block;
-    color: var(--dark);
-}
-
-.radio-group,
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.radio-group label,
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    position: relative;
-    pointer-events: auto;
-}
-
-/* --- Submit Button --- */
-form button[type="submit"] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1.1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-form button[type="submit"]:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
-}
-
-/* --- Submission Status Message --- */
-#form-result {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
-    display: none;
-}
-
-#form-result.success {
-    background-color: #d4edda;
-    color: #155724;
-    display: block;
-}
-
-#form-result.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    display: block;
 }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-    form {
-        padding: 1.5rem;
-    }
-    
+    form { padding: 1.5rem; }
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;
     }
-}
-
-
-/* --- POPI Act Compliance Styling --- */
-.privacy-notice {
-    font-size: 0.8rem;
-    color: var(--gray);
-    text-align: center;
-    margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    line-height: 1.5;
-}
-
-.privacy-notice a {
-    color: var(--primary);
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-.privacy-notice a:hover {
-    color: var(--secondary);
-}
-
-.consent-group {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin-bottom: 1.2rem;
-}
-
-.consent-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    color: var(--gray);
-    cursor: pointer;
-    line-height: 1.6;
-    pointer-events: auto; /* Ensure the label is clickable */
-}
-
-.consent-label input[type="checkbox"] {
-    margin-top: 4px;
-    flex-shrink: 0;
-    width: 1.1em;
-    height: 1.1em;
-    accent-color: var(--primary); /* Modern way to color the checkbox */
-}/* ===================================================================
-   FORM ENHANCEMENTS & VALIDATION
-=================================================================== */
-
-form {
-    display: grid;
-    gap: 1.2rem;
-    padding: 2.5rem;
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-
-/* --- Form Grid & Layout --- */
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-}
-
-/* --- Floating Label Input Container --- */
-.input-container {
-    position: relative;
-    margin-bottom: 1.2rem;
-}
-
-.input-container input,
-.input-container textarea,
-.input-container select {
-    width: 100%;
-    padding: 1.2rem 1rem 0.8rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    background-color: #f9f9f9;
-}
-
-.input-container label {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 1rem;
-    color: var(--gray);
-    pointer-events: none;
-    transition: all 0.2s ease;
-}
-
-/* Floating label behavior for inputs and textareas */
-.input-container input:focus + label,
-.input-container textarea:focus + label,
-.input-container input:not(:placeholder-shown) + label,
-.input-container textarea:not(:placeholder-shown) + label {
-    top: 0.3rem;
-    left: 0.8rem;
-    font-size: 0.75rem;
-    color: var(--primary);
-    background: #f9f9f9;
-    padding: 0 0.2rem;
-}
-
-/* Select dropdown styling */
-.input-container select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-    padding-right: 2.5rem;
-}
-
-/* Hide label for selects (since they don't support floating labels well) */
-.input-container select + label {
-    display: none;
-}
-
-/* Textarea specific sizing */
-.input-container textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* --- Focus & Validation States --- */
-.input-container input:focus,
-.input-container textarea:focus,
-.input-container select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.1);
-}
-
-.input-container input.invalid,
-.input-container textarea.invalid,
-.input-container select.invalid {
-    border-color: #e74c3c;
-    background-color: #fff6f6;
-}
-
-.input-container input.valid,
-.input-container textarea.valid,
-.input-container select.valid {
-    border-color: var(--secondary);
-}
-
-/* --- Dynamic Field Groups --- */
-.form-options-group {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.hidden {
-    display: none;
-}
-
-.options-label {
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-    display: block;
-    color: var(--dark);
-}
-
-.radio-group,
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.radio-group label,
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    position: relative;
-    pointer-events: auto;
-}
-
-/* --- Submit Button --- */
-form button[type="submit"] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1.1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-form button[type="submit"]:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
-}
-
-/* --- Submission Status Message --- */
-#form-result {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
-    display: none;
-}
-
-#form-result.success {
-    background-color: #d4edda;
-    color: #155724;
-    display: block;
-}
-
-#form-result.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    display: block;
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
-    form {
-        padding: 1.5rem;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-}
-
-
-/* --- POPI Act Compliance Styling --- */
-.privacy-notice {
-    font-size: 0.8rem;
-    color: var(--gray);
-    text-align: center;
-    margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    line-height: 1.5;
-}
-
-.privacy-notice a {
-    color: var(--primary);
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-.privacy-notice a:hover {
-    color: var(--secondary);
-}
-
-.consent-group {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin-bottom: 1.2rem;
-}
-
-.consent-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    color: var(--gray);
-    cursor: pointer;
-    line-height: 1.6;
-    pointer-events: auto; /* Ensure the label is clickable */
-}
-
-.consent-label input[type="checkbox"] {
-    margin-top: 4px;
-    flex-shrink: 0;
-    width: 1.1em;
-    height: 1.1em;
-    accent-color: var(--primary); /* Modern way to color the checkbox */
 }

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('quote-form');
     if (!form) return;
 
@@ -6,105 +6,127 @@ document.addEventListener('DOMContentLoaded', function () {
     const frequencyOptions = document.getElementById('frequency-options');
     const additionalServices = document.getElementById('additional-services');
     const resultDiv = document.getElementById('form-result');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const selects = form.querySelectorAll('select');
 
     const fieldsToValidate = ['name', 'email', 'phone', 'service_area', 'service_type', 'message'];
 
-    // --- DYNAMIC FIELD VISIBILITY ---
-    serviceType.addEventListener('change', () => {
-        const selectedService = serviceType.value;
-        const showFrequency = ['regular_domestic', 'commercial_office', 'complex_common'].includes(selectedService);
-        const showExtras = ['regular_domestic', 'deep_clean', 'move_in_out', 'airbnb'].includes(selectedService);
+    // Helper to validate a single field
+    const validateField = (field) => {
+        let isValid = true;
+        field.classList.remove('valid', 'invalid');
 
-        frequencyOptions.classList.toggle('hidden', !showFrequency);
-        additionalServices.classList.toggle('hidden', !showExtras);
-    });
+        // Check for required fields (including select dropdowns)
+        if (field.hasAttribute('required') && !field.value.trim()) {
+            isValid = false;
+        }
 
-    // --- REAL-TIME VALIDATION ---
+        // Check for valid email format
+        if (isValid && field.type === 'email' && field.value.trim()) {
+            isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
+        }
+
+        // Check for valid phone format (simple check)
+        if (isValid && field.type === 'tel' && field.value.trim()) {
+            isValid = /^\+?(\d[\s-]?){8,14}\d$/.test(field.value);
+        }
+        
+        // Apply class only if the field has been touched or has a value
+        if (field.value.trim() || field.classList.contains('touched')) {
+            field.classList.add(isValid ? 'valid' : 'invalid');
+        }
+
+        return isValid;
+    };
+
+    // Event listener for real-time validation
     fieldsToValidate.forEach(fieldName => {
-        const input = document.getElementById(fieldName);
-        if (input) {
-            input.addEventListener('input', () => {
-                validateField(input);
+        const field = document.getElementById(fieldName);
+        if (field) {
+            const eventType = field.tagName === 'SELECT' ? 'change' : 'input';
+            field.addEventListener(eventType, () => {
+                field.classList.add('touched'); // Mark as touched on interaction
+                validateField(field);
             });
         }
     });
 
-    function validateField(input) {
-        let isValid = true;
-        input.classList.remove('valid', 'invalid');
+    // Event listener for dynamic field visibility based on service type
+    if (serviceType) {
+        serviceType.addEventListener('change', () => {
+            const selected = serviceType.value;
+            const showFrequency = ['regular_domestic', 'commercial_office', 'complex_common'].includes(selected);
+            const showExtras = ['regular_domestic', 'deep_clean', 'move_in_out', 'airbnb'].includes(selected);
 
-        if (input.required && input.value.trim() === '') {
-            isValid = false;
-        } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-            isValid = false;
-        } else if (input.type === 'tel' && !/^\d{10,}$/.test(input.value.replace(/\s/g, ''))) {
-            isValid = false;
-        }
-
-        if(input.value.trim() !== '') {
-            input.classList.add(isValid ? 'valid' : 'invalid');
-        }
-        return isValid;
+            if (frequencyOptions) frequencyOptions.classList.toggle('hidden', !showFrequency);
+            if (additionalServices) additionalServices.classList.toggle('hidden', !showExtras);
+        });
     }
 
-    // --- FORM SUBMISSION HANDLING ---
-    form.addEventListener('submit', async function (e) {
+    // Add 'has-value' class to selects for floating label styling
+    selects.forEach(select => {
+        select.addEventListener('change', () => {
+            select.classList.toggle('has-value', !!select.value);
+        });
+    });
+
+    // Form submission handler
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Validate all fields before submitting
         let isFormValid = true;
         fieldsToValidate.forEach(fieldName => {
-            const input = document.getElementById(fieldName);
-            if (input && !validateField(input)) {
-                isFormValid = false;
+            const field = document.getElementById(fieldName);
+            if (field) {
+                field.classList.add('touched'); // Mark all as touched to show errors
+                if (!validateField(field)) {
+                    isFormValid = false;
+                }
             }
         });
-        
+
         if (!isFormValid) {
             resultDiv.className = 'error';
-            resultDiv.innerHTML = 'Please correct the errors before submitting.';
+            resultDiv.textContent = 'Please fill out all required fields correctly.';
+            resultDiv.style.display = 'block';
             return;
         }
 
+        // --- Handle Submission ---
         const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-
-        resultDiv.className = '';
-        resultDiv.innerHTML = 'Sending, please wait...';
-        resultDiv.style.display = 'block';
+        const originalBtnText = submitBtn.innerHTML;
+        
+        resultDiv.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
 
         try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
             });
+            const data = await response.json();
 
-            const result = await response.json();
-
-            if (result.success) {
+            if (data.success) {
                 resultDiv.className = 'success';
-                resultDiv.innerHTML = "Thank you! Your quote request has been sent successfully.";
+                resultDiv.textContent = data.message || "Success! Your quote request has been sent.";
                 form.reset();
-                // Clear validation classes
-                fieldsToValidate.forEach(fieldName => {
-                   document.getElementById(fieldName)?.classList.remove('valid', 'invalid');
-                });
-                // Hide dynamic sections
-                frequencyOptions.classList.add('hidden');
-                additionalServices.classList.add('hidden');
+                // Clear all validation and helper classes
+                form.querySelectorAll('.valid, .invalid, .has-value, .touched').forEach(el => el.classList.remove('valid', 'invalid', 'has-value', 'touched'));
+                if (frequencyOptions) frequencyOptions.classList.add('hidden');
+                if (additionalServices) additionalServices.classList.add('hidden');
             } else {
-                console.error('Submission error:', result);
                 resultDiv.className = 'error';
-                resultDiv.innerHTML = result.message || 'An error occurred. Please try again.';
+                resultDiv.textContent = data.message || "An error occurred. Please try again.";
             }
         } catch (error) {
-            console.error('Fetch error:', error);
             resultDiv.className = 'error';
-            resultDiv.innerHTML = 'An unexpected error occurred. Please check your connection and try again.';
+            resultDiv.textContent = "A network error occurred. Please check your connection.";
+        } finally {
+            resultDiv.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
         }
     });
 });
