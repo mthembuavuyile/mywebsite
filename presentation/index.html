@@ -1,1 +1,559 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Student Pass Presentation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            --primary-dark: #003366;
+            --primary-medium: #00509e;
+            --primary-light: #007bff;
+            --text-dark: #333;
+            --background-light: #f4f7f6;
+            --white: #ffffff;
+            --shadow-light: rgba(0,0,0,0.07);
+            --shadow-medium: rgba(0,0,0,0.1);
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            background-color: var(--background-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: var(--primary-light);
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 40px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-title {
+            font-size: 4em;
+            color: var(--white);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .slide-subtitle {
+            font-size: 1.8em;
+            color: var(--white);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .slide h1 {
+            font-size: 3.2em;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .slide h2 {
+            font-size: 1.8em;
+            color: var(--primary-medium);
+            border-bottom: 2px solid var(--primary-medium);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.2em;
+            line-height: 1.7;
+            color: var(--text-dark);
+            max-width: 800px;
+        }
+
+        .slide ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .slide li {
+            padding-left: 2.5em;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .slide li::before {
+            content: '\f00c';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--primary-light);
+            font-size: 1.2em;
+        }
+        
+        .icon {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            color: var(--primary-medium);
+        }
+
+        .small-icon {
+            font-size: 2em;
+            margin-right: 15px;
+            color: var(--primary-light);
+            vertical-align: middle;
+            width: 35px;
+            text-align: center;
+        }
+
+        .navigation-arrow {
+            position: fixed;
+            bottom: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-medium);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px var(--shadow-medium);
+            transition: all 0.3s ease;
+        }
+
+        .navigation-arrow:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        
+        .navigation-arrow i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        #prev-slide {
+            left: 30px;
+            display: none; /* Hidden on first slide */
+        }
+        
+        #next-slide {
+            right: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .grid-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px var(--shadow-light);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px var(--shadow-medium);
+        }
+        
+        .grid-item h3 {
+            display: flex;
+            align-items: center;
+            color: var(--primary-medium);
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.4em;
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .team-member {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px var(--shadow-light);
+            width: 100%;
+            max-width: 450px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px var(--shadow-medium);
+        }
+
+        .team-member h3 {
+            color: var(--primary-medium);
+            font-weight: 600;
+            font-size: 1.5em;
+        }
+
+        .budget-table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 6px 15px var(--shadow-light);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .budget-table th, .budget-table td {
+            border: 1px solid #ddd;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .budget-table th {
+            background-color: var(--primary-medium);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .budget-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .budget-table .total {
+            font-weight: 700;
+            background-color: #e9ecef;
+            color: var(--primary-dark);
+        }
+        
+        .prototype-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 30px;
+            background-color: var(--primary-light);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+        
+        .prototype-link:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress-bar"></div>
+
+<div class="slides-container" id="slides-container">
+
+    <div class="slide active" style="background: linear-gradient(135deg, #003366, #00509e);">
+        <h1 class="slide-title" style="color: #ffffff;">SA Student Pass</h1>
+        <p class="slide-subtitle" style="color: #ffffff;">A Digital Identity System for South African Universities</p>
+        <p style="color: #e0e0e0;">Prepared by: Avuyile Mthembu & Anele Immanuel Tembe</p>
+    </div>
+
+    <div class="slide">
+        <h1>The Problem: The Failing Physical Card</h1>
+        <i class="fa-solid fa-circle-exclamation icon"></i>
+        <ul>
+            <li><b>Insecure:</b> Easily lost, stolen, or duplicated, posing significant security risks.</li>
+            <li><b>Inconvenient:</b> Forgetting a card means no access to libraries, exams, or transport.</li>
+            <li><b>Costly & Wasteful:</b> Millions spent on plastic cards that harm the environment.</li>
+            <li><b>Fragmented:</b> Dozens of different card designs lead to errors and fraud.</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h1>The Solution: SA Student Pass</h1>
+        <i class="fa-solid fa-mobile-screen-button icon"></i>
+        <p style="max-width: 700px;">A secure, digital-first student identity system. We replace physical cards with a single, dynamic QR code pass on a smartphone, universally recognized, forgery-proof, and it works offline.</p>
+    </div>
+    
+    <div class="slide">
+        <h1>Core Features & Technology</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h3><i class="fa-solid fa-wallet small-icon"></i>Digital Pass</h3>
+                <p>Stored in Apple or Google Wallet, displaying student info and enrollment status.</p>
+            </div>
+            <div class="grid-item">
+                <h3><i class="fa-solid fa-qrcode small-icon"></i>Dynamic QR Code</h3>
+                <p>Refreshes every 5 minutes, making screenshots and forgeries useless.</p>
+            </div>
+            <div class="grid-item">
+                <h3><i class="fa-solid fa-user-lock small-icon"></i>Account-Based Identity</h3>
+                <p>Linked to the university email for instant recovery and deactivation on a new device.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>Key Differentiators</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h2><i class="fa-solid fa-shield-halved small-icon"></i>Advanced Security</h2>
+                <ul>
+                    <li><b>Dynamic Tokens:</b> Time-bound QR codes prevent "replay attacks".</li>
+                    <li><b>Signed Payloads:</b> Each QR code proves enrollment.</li>
+                    <li><b>Instant Revocation:</b> Secure a lost phone via account login.</li>
+                    <li><b>POPIA Compliance:</b> Minimal data usage and universities retain control.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2><i class="fa-solid fa-unlink small-icon"></i>True Offline Functionality</h2>
+                <ul>
+                    <li><b>On-Device Generation:</b> QR codes are generated without needing internet.</li>
+                    <li><b>Verification Cache:</b> Scanners can validate passes without a live connection.</li>
+                    <li><b>Reliable Access:</b> Ensures the system works for all students, everywhere.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>The Value Proposition</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h3><i class="fa-solid fa-user-graduate small-icon"></i>For Students</h3>
+                <p>Instant access from their phone, no replacement fees, and offline reliability.</p>
+            </div>
+            <div class="grid-item">
+                <h3><i class="fa-solid fa-building-columns small-icon"></i>For Universities</h3>
+                <p>Zero card production costs, fraud-proof verification, and reduced admin load.</p>
+            </div>
+            <div class="grid-item">
+                <h3><i class="fa-solid fa-handshake-angle small-icon"></i>For Service Providers</h3>
+                <p>A single, universal standard for validation, eliminating fraud and manual inspection.</p>
+            </div>
+             <div class="grid-item">
+                <h3><i class="fa-solid fa-leaf small-icon"></i>For the Environment</h3>
+                <p>Eliminates plastic waste from PVC cards, contributing to a greener campus.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>Implementation Plan (UNISA Pilot)</h1>
+        <ol style="text-align: left; max-width: 600px; font-size: 1.1em; list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 20px;"><b>Phase 1 (2 Months):</b> Planning & Stakeholder Consultations</li>
+            <li style="margin-bottom: 20px;"><b>Phase 2 (5 Months):</b> Core Development & Backend Integration</li>
+            <li style="margin-bottom: 20px;"><b>Phase 3 (2 Months):</b> Security Testing & Student Pilot Program</li>
+            <li style="margin-bottom: 20px;"><b>Phase 4 (3 Months):</b> Phased Rollout, Training & Monitoring</li>
+            <li style="margin-bottom: 20px;"><b>Phase 5 (Ongoing):</b> Maintenance, Support & Expansion</li>
+        </ol>
+    </div>
+
+    <div class="slide">
+        <h1>The Budget (The Ask)</h1>
+        <p>A <b>R1 million</b> budget for the full design, build, integration, launch, and first-year operations for the UNISA pilot.</p>
+        <table class="budget-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Item</th>
+                    <th>Estimated Cost (ZAR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="4"><b>Development & Implementation</b></td>
+                    <td>Software Development</td>
+                    <td>R 550,000</td>
+                </tr>
+                <tr>
+                    <td>Infrastructure (Year 1)</td>
+                    <td>R 130,000</td>
+                </tr>
+                 <tr>
+                    <td>Implementation & Pilot</td>
+                    <td>R 120,000</td>
+                </tr>
+                <tr>
+                    <td>Contingency (10%)</td>
+                    <td>R 92,000</td>
+                </tr>
+                 <tr class="total">
+                    <td colspan="2"><b>Subtotal</b></td>
+                    <td><b>R 892,000</b></td>
+                </tr>
+                 <tr>
+                    <td><b>Annual Operations</b></td>
+                    <td>Support, Maintenance, Audits</td>
+                    <td>R 120,000</td>
+                </tr>
+                <tr class="total">
+                    <td colspan="2"><b>GRAND TOTAL (Year 1)</b></td>
+                    <td><b>R 1,012,000</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="slide">
+        <h1>Sustainability & Future Growth</h1>
+         <div class="grid-container">
+            <div class="grid-item">
+                <h3>Financial Model</h3>
+                <p>Universities redirect savings from physical card budgets. Additional revenue from service provider partnerships.</p>
+            </div>
+            <div class="grid-item">
+                <h3>Scalability</h3>
+                <p>Cloud-native, modular design built to rapidly onboard all 26+ South African universities.</p>
+            </div>
+             <div class="grid-item">
+                <h3>Future Expansion</h3>
+                <p>Foundation for integrations like NSFAS verification, public transport, access control, and exam verification.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h1>The Team</h1>
+        <div class="team-container">
+            <div class="team-member">
+                <h3>Avuyile Mthembu</h3>
+                <p><b>Full-Stack Developer & Systems Architect</b></p>
+                <p>Expert in secure, scalable, POPIA-compliant systems, and optimizing for low-connectivity environments.</p>
+            </div>
+            <div class="team-member">
+                <h3>Anele Immanuel Tembe</h3>
+                <p><b>Product Strategy & Business Operations</b></p>
+                <p>Experienced in digital transformation, regulatory compliance, and stakeholder management.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide">
+        <h1>Thank You</h1>
+        <p>We are ready to build the future of student identity in South Africa.</p>
+        <a href="prototype.html" class="prototype-link">
+            <i class="fa-solid fa-flask"></i> View Project Prototype
+        </a>
+    </div>
+
+</div>
+
+<div class="navigation-arrow" id="prev-slide">
+    <i class="fa-solid fa-arrow-left"></i>
+</div>
+<div class="navigation-arrow" id="next-slide">
+    <i class="fa-solid fa-arrow-right"></i>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slidesContainer = document.getElementById('slides-container');
+        const slides = document.querySelectorAll('.slide');
+        const nextButton = document.getElementById('next-slide');
+        const prevButton = document.getElementById('prev-slide');
+        const progressBar = document.getElementById('progress-bar');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+
+        function updateSlide(newIndex) {
+            // Remove active class from current slide
+            slides[currentSlide].classList.remove('active');
+
+            // Update current slide index
+            currentSlide = newIndex;
+            
+            // Add active class to new slide
+            slides[currentSlide].classList.add('active');
+
+            // Move the container
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update progress bar
+            progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+
+            // Update navigation buttons visibility
+            prevButton.style.display = currentSlide === 0 ? 'none' : 'flex';
+            nextButton.style.display = currentSlide === totalSlides - 1 ? 'none' : 'flex';
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                updateSlide(currentSlide + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                updateSlide(currentSlide - 1);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'ArrowRight' || e.key === ' ') && currentSlide < totalSlides - 1) {
+                e.preventDefault(); // Prevent space from scrolling page
+                updateSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                updateSlide(currentSlide - 1);
+            }
+        });
+
+        // Initialize first slide
+        updateSlide(0);
+    });
+</script>
+
+</body>
+</html>
