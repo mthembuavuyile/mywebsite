@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Find answers to common questions about XYZSolutions' cleaning services, pricing, scheduling, and more. Get all the information you need."/>
+  <title>XYZSolutions | Frequently Asked Questions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Reference to main stylesheet for header, footer, and base styles -->
+  <link rel="stylesheet" href="styles/main.css">
+
+  <!-- Embedded CSS for FAQ Page -->
+  <style>
+    /* -------------------------------------------------------------------
+       FAQ Page Specific Styles
+    ------------------------------------------------------------------- */
+    .faq-header {
+      min-height: 45vh;
+      background-image: url('https://media.istockphoto.com/id/2210501953/photo/faq-frequently-asked-questions-concept-three-wooden-faq-tiles-and-a-magnifying-glass-with-a.webp?a=1&b=1&s=612x612&w=0&k=20&c=D8Pd0HRXJwCjGl8sGhEieEmu_XJ3VD7r_Aq4JIpqDMY=');
+    }
+    
+    .faq-header::before {
+       background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(85, 85, 85, 0.8));
+    }
+
+    .faq-section {
+      padding-top: 5rem;
+      padding-bottom: 6rem;
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-group h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 2rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1.2rem 0;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .faq-question:hover {
+        color: var(--primary);
+    }
+
+    .faq-question .icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    
+    .faq-question.active .icon {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), padding 0.5s ease;
+      color: var(--gray);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    
+    .faq-answer p {
+        padding: 0 0 1.5rem 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <img src="images/logo.jpg" alt="XYZ Solutions Logo">
+      <div class="logo-text">
+        XYZ<span>Solutions</span>
+        <small>&amp; Projects</small>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html#home">Home</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#about">About</a>
+      <a href="contact.html" class="cta-nav">Contact</a>
+    </nav>
+    <div class="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header faq-header">
+      <div class="header-content">
+        <h1>Frequently Asked Questions</h1>
+        <p>Your questions, answered. Find information about our services, pricing, and processes below.</p>
+      </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+      <div class="faq-container">
+
+        <!-- Services and Pricing Group -->
+        <div class="faq-group">
+            <h3>Services & Pricing</h3>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What services do you offer?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>We offer a comprehensive range of cleaning solutions including residential, commercial, and specialized services. Our offerings include regular domestic cleaning, deep cleaning, end-of-lease cleaning, office cleaning, Airbnb turnovers, as well as post-event and post-construction clean-ups.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How much do you charge?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Our rates vary depending on the type of service, the size of the space, and the frequency of cleaning. We offer hourly rates for recurring services and custom quotes for once-off, deep, and specialized cleanings. Please contact us for a detailed and transparent quote tailored to your specific needs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scheduling and Availability Group -->
+        <div class="faq-group" style="margin-top: 4rem;">
+            <h3>Scheduling & Availability</h3>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I schedule a cleaning appointment?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>You can easily schedule an appointment by filling out the quote form on our website's contact page. Alternatively, feel free to call or text us at our Durban or Johannesburg numbers listed on the site.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What are your hours of operation?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Our cleaning teams are available Monday to Saturday, from 8:00 AM to 5:00 PM. We can sometimes accommodate special requests for services outside these hours, including Sundays for large projects.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Process and Quality Group -->
+        <div class="faq-group" style="margin-top: 4rem;">
+            <h3>Cleaning Process & Quality</h3>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What cleaning products do you use?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>We are committed to the health of your space and the environment. We primarily use high-quality, eco-friendly, and non-toxic cleaning products that are effective and safe for families, pets, and employees.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do you ensure quality?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Quality is at the core of our service. All our staff members undergo rigorous training and work under the guidance of experienced supervisors. We also perform regular quality checks and encourage client feedback to ensure we consistently meet and exceed high standards.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insurance and Special Requests -->
+        <div class="faq-group" style="margin-top: 4rem;">
+            <h3>Safety & Special Requests</h3>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Are you insured and bonded?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, absolutely. XYZSolutions is fully insured and bonded. We carry comprehensive liability insurance to protect our clients, their property, and our staff, giving you complete peace of mind.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I request special cleaning services?
+                    <span class="icon fas fa-plus"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, we are happy to accommodate special requests. Whether you need inside-the-oven cleaning, window washing, or focusing on a specific area, just let us know when you book your service, and we will tailor the cleaning to your needs.</p>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>XYZSolutions</h4>
+        <p>Premium, eco-friendly cleaning services for homes and businesses in Durban and Johannesburg.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="services.html">Our Services</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="index.html#about">About Us</a>
+        <a href="#">Vacancies</a>
+        <a href="policy.html">Company Policy</a>
+        <a href="faq.html">FAQs</a>
+      </div>
+      <div class="footer-col">
+  <h4>Contact</h4>
+  <p><strong>Jhb:</strong> <a href="tel:+27680297313">+27 68 029 7313</a></p>
+  <p><strong>Dbn:</strong> <a href="tel:+27622976614">+27 62 297 6614</a></p>
+  <p><a href="mailto:quotes@xyzsolutions.co.za">quotes@xyzsolutions.co.za</a></p>
+</div>
+
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 XYZ Solutions & Projects (Pty) Ltd. All Rights Reserved.
+    </div>
+  </footer>
+
+  <div id="chatbot-container"></div>
+  
+  <!-- Reference to main JavaScript files -->
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+  
+  <!-- Embedded JavaScript for FAQ Accordion -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const faqItems = document.querySelectorAll('.faq-question');
+
+      faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const currentlyActive = document.querySelector('.faq-question.active');
+          
+          // If there is an active item and it's not the one we just clicked, close it.
+          if (currentlyActive && currentlyActive !== item) {
+              currentlyActive.classList.remove('active');
+              currentlyActive.nextElementSibling.style.maxHeight = 0;
+              currentlyActive.querySelector('.icon').classList.replace('fa-minus', 'fa-plus');
+          }
+
+          // Toggle the clicked item
+          item.classList.toggle('active');
+          const answer = item.nextElementSibling;
+          const icon = item.querySelector('.icon');
+
+          if (item.classList.contains('active')) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            icon.classList.replace('fa-plus', 'fa-minus');
+          } else {
+            answer.style.maxHeight = 0;
+            icon.classList.replace('fa-minus', 'fa-plus');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
