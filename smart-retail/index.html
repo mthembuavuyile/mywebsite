@@ -1,17 +1,308 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <tittle>
-      Smart Retail System
-    </tittle>
-  </head>
-  <body>
-    <hero>
-      <h1>SMART RETAIL SYSTEM</h1>
-    </hero>
-    <section>
-      <p>Cooming Soon</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Retail System | Project Showcase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #3498db;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+            --grey-color: #666;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            color: var(--dark-color);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        /* Header & Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            color: #fff;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+             color: var(--primary-color);
+             border-color: var(--primary-color);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--grey-color);
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            background: var(--light-color);
+        }
+
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tech-icon {
+            background: #fff;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: var(--box-shadow);
+            font-weight: 600;
+        }
+
+        /* Validation Section */
+        .validation-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .validation-content h3 {
+             color: var(--primary-color);
+             border-bottom: 2px solid #eee;
+             padding-bottom: 10px;
+             margin-top: 20px;
+             margin-bottom: 15px;
+        }
+        
+        .validation-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .validation-content li {
+            background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232ecc71" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>') no-repeat left center;
+            padding-left: 35px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* User Manual Section */
+        .user-manual {
+             background: var(--light-color);
+        }
+        
+        .manual-box {
+            background: #e9f2ff;
+            padding: 30px;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Smart Retail System</h1>
+            <p>A comprehensive, database-driven web application for modern e-commerce management.</p>
+            <div class="cta-buttons">
+                <a href="https://smart-retail.42web.io/products.php" target="_blank" class="btn btn-primary">Browse Products</a>
+                <a href="https://smart-retail.42web.io/login.php" target="_blank" class="btn">Customer Login</a>
+                <a href="https://smart-retail.42web.io/admin/" target="_blank" class="btn">Admin Login</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Core Features</h2>
+                <p>Built from the ground up, this system provides a full suite of features for both customers and administrators.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Online Storefront</h3>
+                    <p>A public-facing interface where customers can browse products, view details, and add items to their shopping cart.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Secure Authentication</h3>
+                    <p>Robust customer registration and login system using password hashing (PASSWORD_DEFAULT) to ensure data security.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Dynamic Shopping Cart</h3>
+                    <p>A session-based shopping cart that allows users to manage their selections before proceeding to checkout.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Admin Dashboard</h3>
+                    <p>A secure backend portal for store managers to get a quick overview of recent orders and low-stock alerts.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Inventory Management</h3>
+                    <p>Administrators can track and update stock levels in real-time. The system automatically flags items running low.</p>
+                </div>
+                 <div class="feature-card">
+                    <h3>Order Processing</h3>
+                    <p>Admins can view all customer orders, update their status (e.g., Pending, Shipped, Completed), and manage the fulfillment workflow.</p>
+                </div>
+            </div>
+        </div>
     </section>
-    <footer>By Avuyile Mthembu</footer>
-  </body>
+
+    <section id="tech-stack" class="section tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technology Stack</h2>
+                <p>This application was implemented using industry-standard, maintainable, and secure coding practices.</p>
+            </div>
+            <div class="tech-icons">
+                <div class="tech-icon">PHP</div>
+                <div class="tech-icon">MySQL</div>
+                <div class="tech-icon">JavaScript</div>
+                <div class="tech-icon">HTML5</div>
+                <div class="tech-icon">CSS3</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="validation" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Validation and Testing</h2>
+                <p>The system's functionality was rigorously validated through a scenario-based practical approach to ensure reliability and bug-free operation.</p>
+            </div>
+            <div class="validation-content">
+                <h3>Real-World Use Case Scenarios Tested:</h3>
+                <ul>
+                    <li><strong>New Customer Registration:</strong> A user successfully creates an account with unique email validation and secure password hashing.</li>
+                    <li><strong>Product Discovery & Selection:</strong> A customer browses the product listings, views a detailed product page, and adds an item to the cart.</li>
+                    <li><strong>Shopping Cart Management:</strong> A customer adds multiple items, updates quantities, and removes an item from the cart.</li>
+                    <li><strong>Order Processing:</strong> A logged-in customer proceeds to checkout, which validates stock levels before successfully placing an order.</li>
+                     <li><strong>Stock Deduction:</strong> On successful order placement, inventory levels for the purchased products are automatically deducted.</li>
+                    <li><strong>Payment Simulation:</strong> The system correctly simulates a payment transaction, recording its status in the database.</li>
+                    <li><strong>Admin Order Management:</strong> A store manager logs in, views the new order, and updates its status from 'Pending' to 'Shipped'.</li>
+                    <li><strong>Admin Reporting:</strong> The system correctly generates sales and low-inventory reports based on a set date range.</li>
+                </ul>
+                <p style="margin-top: 20px;">Comprehensive testing was performed at each stage to identify and resolve bugs, ensuring the system meets the needs of both customers and store managers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="documentation" class="section user-manual">
+        <div class="container">
+            <div class="section-header">
+                <h2>User Manual & Documentation</h2>
+                <p>Clear and detailed documentation is key to usability and maintainability.</p>
+            </div>
+            <div class="manual-box">
+                <p>A detailed user manual has been prepared, providing step-by-step instructions for both customers and administrators. The manual includes annotated screenshots to clarify all functionalities, from customer registration to generating admin reports.</p>
+                <a href="#" class="btn btn-primary" style="margin-top:15px;">View Documentation (Coming Soon)</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>By Avuyile Mthembu</p>
+        </div>
+    </footer>
+
+</body>
 </html>
