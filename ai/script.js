@@ -19,7 +19,7 @@
       },
       {
         vendor: "Google Gemini",
-        url: "https://gemini.google.com/app",
+        url: "https://gemini.google.com/",
         categories: ["LLM","Image","Audio"],
         models: [
           { name: "Gemini 2.5 Pro", desc: "Massive context multimodal reasoning." },
