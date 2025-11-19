@@ -197,11 +197,29 @@
     const searchInput = document.getElementById('search');
 
     /* --- Helper: Get Unique Categories --- */
-    function getCategories() {
-      const unique = new Set();
-      tools.forEach(t => t.categories.forEach(c => unique.add(c)));
-      return ['All', ...Array.from(unique).sort()];
-    }
+    /* --- Helper: Get Unique Categories --- */
+function getCategories() {
+    // 1. Define the order you want to see first (Left to Right)
+    const preferredOrder = ["LLM", "Image", "Research", "Video", "Code", "Audio"];
+
+    // 2. Get all actual categories from the data
+    const unique = new Set();
+    tools.forEach(t => t.categories.forEach(c => unique.add(c)));
+    const allFoundCategories = Array.from(unique);
+
+    // 3. Filter: Get items from preferred list ONLY if they actually exist in data
+    const primary = preferredOrder.filter(c => allFoundCategories.includes(c));
+
+    // 4. Filter: Get the remaining items that are NOT in the preferred list
+    const secondary = allFoundCategories
+        .filter(c => !preferredOrder.includes(c))
+        .sort(); // Keep the rest tidy and alphabetical
+
+    // 5. Combine: All + Priority + Others
+    return ['All', ...primary, ...secondary];
+}
+
+    
 
     /* --- Render: Categories --- */
     function renderCategories() {
@@ -326,3 +344,20 @@
       renderCategories();
       renderGrid();
     });
+
+    let lastY = 0;
+const controls = document.querySelector('.controls-wrapper');
+
+window.addEventListener('scroll', () => {
+  const currentY = window.scrollY;
+
+  if (currentY > lastY) {
+    // scrolling down → hide
+    controls.style.transform = "translateY(-120%)";
+  } else {
+    // scrolling up → show
+    controls.style.transform = "translateY(0)";
+  }
+
+  lastY = currentY;
+});
