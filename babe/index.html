@@ -13,6 +13,7 @@
     <div class="background-mesh"></div>
     <div class="background-dimmer"></div>
 
+    <!-- Lock Screen Overlay -->
     <div id="overlay">
         <div class="notification-stack">
             <div class="notif-header">
@@ -27,6 +28,7 @@
         </div>
     </div>
 
+    <!-- Main Card -->
     <div class="container" id="main-content">
         <div class="ios-card">
             <div class="header-text">Get Well Soon</div>
@@ -45,6 +47,7 @@
         </div>
     </div>
 
+    <!-- Music Player -->
     <div id="music-pill">
         <div class="music-info">
             <span class="music-title">Lofi Healing Vibes</span>
@@ -73,65 +76,73 @@
         const typewriterSpan = document.getElementById('typewriter');
         const storyImg = document.getElementById('story-img');
 
-        // --- CUSTOMIZATION ---
+        // --- CONTENT ---
+        // Ensure these images exist in your folder!
         const photos = [
+            "images/babe.jpg",
             "images/babe1.jpg",
-            "images/babe2.jpg", 
-            "images/babe3.jpg"
+            "images/babe2.jpg"
         ];
 
         const messages = [
-            "Hey love, I know you're not feeling 100%... 😔",
-            "I wish I could teleport there to hug you. 🫂",
-            "Just remember to rest and drink water. 💧",
-            "You are strong, beautiful, and loved. ❤️",
-            "Can't wait to see your healthy smile again!"
+    "Ngiyakuthanda sthandwa sami... ❤️",
+    "I don’t like seeing you sick, but you’ll be okay soon. 🤍",
+    "Please recharge, my beautiful princess. 🌸",
+    "The world feels brighter when you're smiling. ✨",
+    "Get well soon, Ngelosi yami. 🤗"
+];
+
+
+        const icons = ['❤️', '🌸', '✨', '💊', '💝', '🧸'];
+        
+        // ZULU WORDS & CLAN NAMES
+        const words = [
+            "Ngiyakuthanda", 
+            "Ngelosi Yami", 
+            "S'thandwa Sami", 
+            "Mdunge", 
+            "Chiliza", 
+            "Mdzakudza"
         ];
 
-        const icons = ['❤️', '🩹', '🌸', '✨', '💊', '🧸', '💝'];
-
-        // --- STATE & LOGIC ---
+        // --- STATE ---
         let photoIndex = 0;
         let messageIndex = 0;
         let charIndex = 0;
         let isMusicPlaying = false;
 
-        // Initialization
+        // Init
         storyImg.style.opacity = 1;
 
         startBtn.addEventListener('click', () => {
-            // 1. Play Audio
             audio.volume = 0.5;
             audio.play().then(() => {
                 isMusicPlaying = true;
                 updateMusicUI();
-            }).catch(e => console.log("Audio autoplay blocked", e));
+            }).catch(e => console.log("Autoplay blocked", e));
 
-            // 2. Hide Overlay
             overlay.classList.add('hidden');
             
-            // 3. Show Main Content
             setTimeout(() => {
                 mainContent.style.opacity = '1';
                 musicPill.style.opacity = '1';
                 
-                // Start loops
+                // Start the loops
                 startFloatingElements();
                 startPhotoSlideshow();
                 typeMessage();
             }, 600);
         });
 
-        // Typing Effect
+        // Typing Logic
         function typeMessage() {
             if (messageIndex >= messages.length) messageIndex = 0;
-            
             const currentText = messages[messageIndex];
             
             if (charIndex < currentText.length) {
                 typewriterSpan.textContent += currentText.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeMessage, 45);
+                setTimeout(typeMessage, 50);
             } else {
                 setTimeout(eraseMessage, 2500);
             }
@@ -141,14 +152,14 @@
             if (charIndex > 0) {
                 typewriterSpan.textContent = messages[messageIndex].substring(0, charIndex - 1);
                 charIndex--;
-                setTimeout(eraseMessage, 20);
+                setTimeout(eraseMessage, 25);
             } else {
                 messageIndex++;
                 setTimeout(typeMessage, 500);
             }
         }
 
-        // Photo Slideshow
+        // Slideshow Logic
         function startPhotoSlideshow() {
             setInterval(() => {
                 photoIndex = (photoIndex + 1) % photos.length;
@@ -160,25 +171,29 @@
             }, 5000);
         }
 
-        // Floating Hearts/Icons (UPDATED LOGIC)
+        // Floating Logic (Words + Icons)
         function startFloatingElements() {
             setInterval(() => {
                 const el = document.createElement('div');
-                el.classList.add('floating-element');
-                el.innerText = icons[Math.floor(Math.random() * icons.length)];
+                const isWord = Math.random() > 0.6; // 40% chance of being a word
+
+                if (isWord) {
+                    el.classList.add('floating-element', 'floating-word');
+                    el.innerText = words[Math.floor(Math.random() * words.length)];
+                    el.style.fontSize = (Math.random() * 10 + 20) + 'px'; // 20px to 30px
+                } else {
+                    el.classList.add('floating-element');
+                    el.innerText = icons[Math.floor(Math.random() * icons.length)];
+                    el.style.fontSize = (Math.random() * 20 + 30) + 'px'; // 30px to 50px
+                }
                 
-                // Random positioning logic
-                const startLeft = Math.random() * 90 + 5; // 5% to 95% width
-                el.style.left = startLeft + 'vw';
-                
-                // INCREASED SIZE: 30px to 60px (Previously 20-40)
-                el.style.fontSize = (Math.random() * 30 + 30) + 'px';
-                
-                el.style.animationDuration = (Math.random() * 5 + 6) + 's';
+                // Position logic
+                el.style.left = (Math.random() * 90 + 5) + 'vw';
+                el.style.animationDuration = (Math.random() * 5 + 8) + 's'; // Slow float
                 
                 document.body.appendChild(el);
-                setTimeout(() => el.remove(), 11000);
-            }, 1000); // Slightly faster generation
+                setTimeout(() => el.remove(), 13000);
+            }, 800);
         }
 
         // Music Controls
@@ -203,11 +218,10 @@
             }
         }
 
-        // Touch Interaction (Burst of hearts on tap)
+        // Tap Burst Effect
         document.addEventListener('touchstart', (e) => {
             if(overlay.classList.contains('hidden')) {
-                const touch = e.touches[0];
-                createBurst(touch.clientX, touch.clientY);
+                createBurst(e.touches[0].clientX, e.touches[0].clientY);
             }
         });
 
@@ -219,10 +233,7 @@
                 el.style.left = x + 'px';
                 el.style.top = y + 'px';
                 el.style.animation = "floatUp 2s ease-out forwards";
-                el.style.fontSize = "34px"; // Larger burst size
-                
-                // Remove text shadow for burst specifically if desired, but keeping it looks consistent
-                
+                el.style.fontSize = "30px";
                 document.body.appendChild(el);
                 setTimeout(() => el.remove(), 2000);
             }
