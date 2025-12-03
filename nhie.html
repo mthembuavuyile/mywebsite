@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Never Have I Ever ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff7eb3;
+            --secondary: #ff758c;
+            --accent: #6b52a1;
+            --text: #4a4a4a;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text);
+        }
+
+        /* Floating Hearts Background Animation */
+        .bg-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            filter: blur(50px);
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .shape-1 { background: #ffc3a0; width: 300px; height: 300px; top: -50px; left: -50px; border-radius: 50%; }
+        .shape-2 { background: #ffafbd; width: 400px; height: 400px; bottom: -100px; right: -50px; border-radius: 50%; animation-delay: 2s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(20px) scale(1.1); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Vibe Selector */
+        .vibe-selector {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .vibe-btn {
+            background: rgba(255,255,255,0.4);
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .vibe-btn.active, .vibe-btn:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* The Card */
+        .card-container {
+            perspective: 1000px;
+            height: 350px;
+            position: relative;
+        }
+
+        .card {
+            background: var(--card-bg);
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card-category {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .card-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Controls */
+        .controls {
+            margin-top: 30px;
+        }
+
+        .next-btn {
+            background: white;
+            color: var(--secondary);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .next-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Animations */
+        .fade-out {
+            transform: translateX(-100px) rotate(-10deg);
+            opacity: 0;
+        }
+        
+        .fade-in {
+            animation: comeIn 0.5s forwards;
+        }
+
+        @keyframes comeIn {
+            from { transform: translateX(100px) rotate(10deg); opacity: 0; }
+            to { transform: translateX(0) rotate(0); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <div class="container">
+        <h1>Never Have I Ever</h1>
+
+        <!-- Vibe Selectors -->
+        <div class="vibe-selector">
+            <button class="vibe-btn active" onclick="setCategory('All')">Mix ✨</button>
+            <button class="vibe-btn" onclick="setCategory('Cute')">Cute 🌸</button>
+            <button class="vibe-btn" onclick="setCategory('Romantic')">Sweet ❤️</button>
+            <button class="vibe-btn" onclick="setCategory('Funny')">Funny 😂</button>
+            <button class="vibe-btn" onclick="setCategory('Deep')">Deep 🌊</button>
+            <button class="vibe-btn" onclick="setCategory('Chill')">Chill ☕</button>
+        </div>
+
+        <!-- Question Card -->
+        <div class="card-container">
+            <div class="card" id="gameCard">
+                <div class="card-category" id="catLabel">LET'S START</div>
+                <div class="card-text" id="qText">Press the button below to start playing!</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="next-btn" onclick="nextQuestion()">
+                Next Card ➜
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // The Data
+        const questions = [
+            // Cute
+            { t: "Never have I ever laughed so hard I couldn’t breathe.", c: "Cute" },
+            { t: "Never have I ever stayed up all night texting someone.", c: "Cute" },
+            { t: "Never have I ever tried to impress someone and failed.", c: "Cute" },
+            { t: "Never have I ever had a crush on someone who didn’t know.", c: "Cute" },
+            { t: "Never have I ever sent a message and instantly regretted it.", c: "Cute" },
+            { t: "Never have I ever pretended to know something I didn’t.", c: "Cute" },
+            { t: "Never have I ever fallen asleep on a call.", c: "Cute" },
+            { t: "Never have I ever tripped in public.", c: "Cute" },
+            { t: "Never have I ever made someone a playlist.", c: "Cute" },
+            // Romantic
+            { t: "Never have I ever written someone a heartfelt message.", c: "Romantic" },
+            { t: "Never have I ever planned a surprise for someone I cared about.", c: "Romantic" },
+            { t: "Never have I ever smiled at my phone because of someone.", c: "Romantic" },
+            { t: "Never have I ever kept something small because it reminded me of someone.", c: "Romantic" },
+            { t: "Never have I ever imagined a future moment with someone.", c: "Romantic" },
+            { t: "Never have I ever felt nervous before seeing someone I liked.", c: "Romantic" },
+            { t: "Never have I ever stayed up just to talk to someone special.", c: "Romantic" },
+            { t: "Never have I ever thought about someone all day without realizing it.", c: "Romantic" },
+            // Funny
+            { t: "Never have I ever mistaken a stranger for someone I know.", c: "Funny" },
+            { t: "Never have I ever tried to take a cute selfie and failed.", c: "Funny" },
+            { t: "Never have I ever talked to my food before eating it.", c: "Funny" },
+            { t: "Never have I ever danced alone in my room like nobody was watching.", c: "Funny" },
+            { t: "Never have I ever laughed at a joke I didn’t understand.", c: "Funny" },
+            { t: "Never have I ever forgotten why I walked into a room.", c: "Funny" },
+            // Deep
+            { t: "Never have I ever been scared to lose someone important.", c: "Deep" },
+            { t: "Never have I ever taken a risk for someone I cared about.", c: "Deep" },
+            { t: "Never have I ever changed in a good way because of someone.", c: "Deep" },
+            { t: "Never have I ever forgiven someone even without an apology.", c: "Deep" },
+            { t: "Never have I ever wished I could relive a moment again.", c: "Deep" },
+            { t: "Never have I ever learned something important from a past relationship.", c: "Deep" },
+            // Chill
+            { t: "Never have I ever watched a movie just to talk about it with someone.", c: "Chill" },
+            { t: "Never have I ever forgotten a friend’s birthday.", c: "Chill" },
+            { t: "Never have I ever taken a picture of something random because it looked cool.", c: "Chill" },
+            { t: "Never have I ever gotten lost somewhere.", c: "Chill" },
+            { t: "Never have I ever stayed in bed the whole day.", c: "Chill" }
+        ];
+
+        let currentCategory = 'All';
+        let card = document.getElementById('gameCard');
+        let text = document.getElementById('qText');
+        let catLabel = document.getElementById('catLabel');
+        let buttons = document.querySelectorAll('.vibe-btn');
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            
+            // Update button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('Mix'))) {
+                    btn.classList.add('active');
+                }
+            });
+
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            // Filter questions
+            let pool = currentCategory === 'All' 
+                ? questions 
+                : questions.filter(q => q.c === currentCategory);
+
+            // Random selection
+            let randomQ = pool[Math.floor(Math.random() * pool.length)];
+
+            // Animation
+            card.classList.add('fade-out');
+
+            setTimeout(() => {
+                text.innerText = randomQ.t;
+                catLabel.innerText = randomQ.c + " VIBE";
+                
+                // Color coding labels
+                if(randomQ.c === 'Romantic') catLabel.style.color = '#ff4d6d';
+                else if(randomQ.c === 'Funny') catLabel.style.color = '#ffb703';
+                else if(randomQ.c === 'Deep') catLabel.style.color = '#3f37c9';
+                else if(randomQ.c === 'Cute') catLabel.style.color = '#ff758c';
+                else catLabel.style.color = '#4a4a4a';
+
+                card.classList.remove('fade-out');
+                card.classList.add('fade-in');
+                
+                // Remove fade-in class after animation so it can run again
+                setTimeout(() => {
+                    card.classList.remove('fade-in');
+                }, 500);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
