@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphelele Food | Nguni Traditional Restaurant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary: #A0522D; /* Sienna/Terracotta */
+            --secondary: #DAA520; /* Goldenrod */
+            --dark: #2C2C2C;
+            --light: #F4F1EA; /* Creamy off-white */
+            --white: #FFFFFF;
+            --gray: #777777;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--dark);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--secondary); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about { padding: 80px 0; }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        .about-text p { margin-bottom: 20px; color: var(--gray); }
+
+        .about-img img {
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- SPECIALS BANNER --- */
+        .specials-banner {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .specials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .special-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .special-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+        .special-card h3 { color: var(--secondary); margin-bottom: 10px; }
+        .special-price { font-size: 1.5rem; font-weight: 700; margin-top: 15px; display: block; }
+
+        /* --- MENU SECTION --- */
+        .menu-section { padding: 80px 0; background-color: var(--white); }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header span { color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .menu-category { display: none; animation: fadeIn 0.5s ease; }
+        .menu-category.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .item-info h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .item-info p { font-size: 0.85rem; color: var(--gray); font-style: italic; }
+        .item-price { font-weight: 700; color: var(--primary); font-size: 1.1rem; white-space: nowrap; margin-left: 15px; }
+
+        /* --- EVENTS & GALLERY --- */
+        .events {
+            padding: 80px 0;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .events p { max-width: 700px; margin: 0 auto 30px; }
+
+        /* --- LOCATIONS & CONTACT --- */
+        .locations { padding: 80px 0; background-color: var(--dark); color: var(--white); }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .location-card {
+            background: #3a3a3a;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .location-card i { font-size: 2rem; color: var(--secondary); margin-bottom: 20px; }
+        .location-card h3 { margin-bottom: 15px; color: var(--white); }
+        .location-card p { margin-bottom: 10px; color: #ccc; }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a1a1a;
+            color: #888;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .social-icons { margin-bottom: 20px; }
+        .social-icons a { font-size: 1.2rem; margin: 0 10px; color: var(--white); }
+        .social-icons a:hover { color: var(--secondary); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .navbar { height: 70px; }
+            .menu-toggle { display: block; color: var(--dark); }
+            
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                display: none;
+            }
+            
+            .nav-links.active { display: flex; }
+            
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-img { order: -1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Sphelele <span>Food</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#specials">Specials</a></li>
+                <li><a href="#locations">Find Us</a></li>
+                <li><a href="tel:+27672229319" class="btn btn-primary">Book Now</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Welcome to Sphelele Food</h1>
+            <p>100% Proudly South African. Inspired by the beautiful and colourful Nguni culture. A taste of home in every bite.</p>
+            <div style="margin-top: 30px;">
+                <a href="#menu" class="btn btn-primary">View Menu</a>
+                <a href="#locations" class="btn btn-secondary" style="margin-left: 10px;">Visit Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="about">
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Sphelele Food is a restaurant born in Durban, inspired by the vibrant Nguni culture. We draw our culinary inspiration from the Zulu, Xhosa, Swati, and Ndebele traditions, with touches of Sotho and Tswana flavors.</p>
+                <p>We are dedicated to serving only authentic South African traditional food. Whether you are craving Ulusu, Hardbody Chicken, or Steamed Bread, we prepare it with the respect and love it deserves.</p>
+                <p><strong>Opening Hours:</strong> Monday to Sunday, 11:00am - 10:00pm</p>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1574484284008-86d4750c61ad?auto=format&fit=crop&q=80" alt="Traditional African Food">
+            </div>
+        </div>
+    </section>
+
+    <!-- Specials Banner -->
+    <section id="specials" class="specials-banner">
+        <div class="container">
+            <h2>Weekly Specials</h2>
+            <div class="specials-grid">
+                <div class="special-card">
+                    <i class="fas fa-burger fa-2x" style="color:var(--secondary); margin-bottom:15px;"></i>
+                    <h3>Burger + Chips</h3>
+                    <p>Classic beef or chicken burger with crispy fries.</p>
+                    <span class="special-price">R 93.50</span>
+                </div>
+                <div class="special-card">
+                    <i class="fas fa-drumstick-bite fa-2x" style="color:var(--secondary); margin-bottom:15px;"></i>
+                    <h3>Sausage + Wings</h3>
+                    <p>Combo served with Gravy or Chakalaka.</p>
+                    <span class="special-price">R 132.00</span>
+                </div>
+                <div class="special-card">
+                    <i class="fas fa-glass-cheers fa-2x" style="color:var(--secondary); margin-bottom:15px;"></i>
+                    <h3>Several Colours Buffet</h3>
+                    <p>Every Sunday. The ultimate feast.</p>
+                    <span class="special-price">R 275.00</span>
+                </div>
+                <div class="special-card">
+                    <i class="fas fa-utensils fa-2x" style="color:var(--secondary); margin-bottom:15px;"></i>
+                    <h3>Mon-Thu Buffet</h3>
+                    <p>All you can eat mid-week treat.</p>
+                    <span class="special-price">R 220.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-header">
+                <span>Authentic Flavors</span>
+                <h2>Our Menu</h2>
+            </div>
+
+            <div class="menu-tabs">
+                <button class="tab-btn active" onclick="showMenu('traditional')">Traditional</button>
+                <button class="tab-btn" onclick="showMenu('grills')">Grills</button>
+                <button class="tab-btn" onclick="showMenu('platters')">Platters</button>
+                <button class="tab-btn" onclick="showMenu('drinks')">Beverages</button>
+            </div>
+
+            <!-- Traditional Menu -->
+            <div id="traditional" class="menu-category active">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Beef Stew + Veg</h4>
+                        <p>Served with your choice of spinach</p>
+                    </div>
+                    <div class="item-price">R 139.20</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Ulusu / Usu (Tripe)</h4>
+                        <p>Traditional tripe with vegetables & starch</p>
+                    </div>
+                    <div class="item-price">R 94.10</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Inyama Yenhloko</h4>
+                        <p>Head meat with vegetables & starch</p>
+                    </div>
+                    <div class="item-price">R 105.00</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Inkukhu Yesizulu / Umleqwa</h4>
+                        <p>Hardbody chicken with vegetables & starch</p>
+                    </div>
+                    <div class="item-price">R 86.60</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Starch Options</h4>
+                        <p>Rice, Pap, Uphuthu, Samp with Beans, White Samp, Steamed Bread</p>
+                    </div>
+                    <div class="item-price">-</div>
+                </div>
+            </div>
+
+            <!-- Grills Menu -->
+            <div id="grills" class="menu-category">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Lamb Chops + Vegetables</h4>
+                        <p>Grilled to perfection</p>
+                    </div>
+                    <div class="item-price">R 172.10</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>T-Bone Steak (350g)</h4>
+                        <p>Served with vegetables</p>
+                    </div>
+                    <div class="item-price">R 138.50</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Pork Ribs (400g)</h4>
+                        <p>Sticky basted ribs with vegetables</p>
+                    </div>
+                    <div class="item-price">R 138.50</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>6 x Wings</h4>
+                        <p>Dipped in our special Sphelele sauce</p>
+                    </div>
+                    <div class="item-price">R 105.00</div>
+                </div>
+            </div>
+
+            <!-- Platters Menu -->
+            <div id="platters" class="menu-category">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Traditional Platter</h4>
+                        <p>Inkukhu, Inhloko, Usu, Isifuba, 2x Starch</p>
+                    </div>
+                    <div class="item-price">R 404.30</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Mini Platter</h4>
+                        <p>200g Ribs, 2x Sausages, 4x Wings, Salad</p>
+                    </div>
+                    <div class="item-price">R 231.00</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Meat Platter</h4>
+                        <p>4x Sausages, 4x Lamb Chops, 4x Pork Chops, Ribs, Salad</p>
+                    </div>
+                    <div class="item-price">R 519.80</div>
+                </div>
+            </div>
+
+            <!-- Drinks Menu -->
+            <div id="drinks" class="menu-category">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Cappuccino / Latte</h4>
+                    </div>
+                    <div class="item-price">R 28.80</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Milkshakes</h4>
+                        <p>Chocolate Bar, Salted Caramel, Strawberry</p>
+                    </div>
+                    <div class="item-price">R 57.80</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Tisers (Apple/Grapetiser)</h4>
+                    </div>
+                    <div class="item-price">R 33.40</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bookings/Events -->
+    <section class="events">
+        <div class="container">
+            <h2 style="margin-bottom: 20px;">Event Bookings</h2>
+            <p>Our restaurant is available to host your special events. From baby showers and birthday lunches to Christmas lunches and farewell parties.</p>
+            <a href="mailto:bookings@sphelelefood.co.za" class="btn btn-primary">Email Us</a>
+            <a href="tel:+27672229319" class="btn btn-primary" style="margin-left:10px;">Call Now</a>
+        </div>
+    </section>
+
+    <!-- Locations -->
+    <section id="locations" class="locations">
+        <div class="container">
+            <h2 style="text-align: center;">Visit Us</h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Glenwood</h3>
+                    <p>63 Helen Joseph Road</p>
+                    <p>Glenwood, Durban</p>
+                    <p style="margin-top:15px; color:var(--secondary);">067 222 9319</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Westown Square</h3>
+                    <p>Shop 48 Westown Square</p>
+                    <p>Shongweni, Outer West Durban</p>
+                    <p style="margin-top:15px; color:var(--secondary);">067 222 9319</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 Sphelele Food. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Menu Tab Logic
+        function showMenu(categoryName) {
+            // Hide all categories
+            const categories = document.getElementsByClassName('menu-category');
+            for (let i = 0; i < categories.length; i++) {
+                categories[i].classList.remove('active');
+                categories[i].style.display = "none"; 
+            }
+
+            // Remove active style from buttons
+            const tabs = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+
+            // Show selected category
+            const selected = document.getElementById(categoryName);
+            selected.style.display = "grid";
+            // slight delay to allow display block to apply before opacity transition
+            setTimeout(() => {
+                selected.classList.add('active');
+            }, 10);
+
+            // Add active class to clicked button
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
