@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avuyile Mthembu - Academic Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avuyile Mthembu - Academic Portfolio - Graduate</title>
+    <meta name="description" content="Avuyile Mthembu - Boston city campus dip systems development completed" />
+
     <style>
-        /* CSS FIX: Corrected Google Fonts URL (removed extra 'com') */
+        /* BASE + TOKENS (deduplicated & merged) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         :root {
@@ -32,11 +34,16 @@
             --gray-800: #1f2937;
             --gray-900: #111827;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            --gradient-success: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             --gradient-warning: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
             --gradient-bg: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
@@ -58,10 +65,10 @@
             color: var(--gray-800);
             background: var(--gradient-bg);
             min-height: 100vh;
-            overflow-x: hidden; /* Prevents horizontal scroll on the whole page */
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* NAVIGATION (merged styles; same appearance) */
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -91,7 +98,7 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            text-decoration: none; /* Improvement: Make logo a link */
+            text-decoration: none;
         }
 
         .nav-links {
@@ -128,15 +135,15 @@
         }
 
         .hamburger-menu {
-            display: none; /* Hidden by default, shown in media query */
+            display: none;
             cursor: pointer;
             background: none;
             border: none;
             padding: 0.5rem;
-            z-index: 101; /* Ensure it's above the nav menu */
+            z-index: 101;
         }
 
-        /* Hero Section */
+        /* HERO (merged; keeps gradient, grid pattern, avatar, badge) */
         .hero {
             background: var(--gradient-primary);
             color: var(--white);
@@ -149,10 +156,7 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.3;
         }
@@ -163,6 +167,71 @@
             max-width: 800px;
             margin: 0 auto;
             animation: fadeInUp 1s ease-out;
+        }
+
+        .status-badge {
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-picture {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-image: url('https://avuyilemthembu.co.za/assets/images/avuyile2.jpg');
+            background-position: center;
+            background-size: cover;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-xl);
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+
+        .updated-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .current-date {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         @keyframes fadeInUp {
@@ -177,50 +246,6 @@
             }
         }
 
-        .profile-picture {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background-image: url('https://avuyilemthembu.co.za/assets/images/avuyile2.jpg');
-            background-position: center;
-            background-size: cover;
-            border: 4px solid var(--white);
-            box-shadow: var(--shadow-xl);
-            margin: 0 auto 2rem;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero .subtitle {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        /* Dates Display */
-        .current-date {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 1.5rem;
-            border-radius: 2rem;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeIn 1s ease-out 0.5s both;
-        }
-
-        .updated-date {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -231,11 +256,11 @@
             }
         }
 
-        /* Main Content */
+        /* MAIN CONTAINER (merged) */
         .container {
             max-width: 1200px;
             margin: -4rem auto 0;
-            padding: 0 2rem;
+            padding: 0 2rem 4rem;
             position: relative;
             z-index: 10;
         }
@@ -265,11 +290,12 @@
             border-radius: 2px;
         }
 
-        /* Stats Grid */
+        /* STATS GRID (merged) */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
@@ -284,11 +310,6 @@
             overflow: hidden;
         }
 
-        .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-
         .stat-card::before {
             content: '';
             position: absolute;
@@ -297,6 +318,17 @@
             right: 0;
             height: 4px;
             background: var(--gradient-primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-card.success .stat-number {
+            color: var(--accent);
+            background: none;
+            -webkit-text-fill-color: initial;
         }
 
         .stat-card.warning::before {
@@ -333,14 +365,14 @@
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray-600);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-weight: 500;
         }
 
-        /* Cards */
+        /* CARD (merged) */
         .card {
             background: var(--white);
             border-radius: 1.5rem;
@@ -348,6 +380,7 @@
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
         }
 
         .card:hover {
@@ -372,7 +405,23 @@
             margin: 0;
         }
 
-        /* Progress Bar */
+        /* SIMPLE PROGRESS BAR (from first style block) */
+        .progress-container {
+            background: var(--gray-200);
+            height: 1.5rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: var(--gradient-success);
+            height: 100%;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        /* ADVANCED PROGRESS (kept because referenced in JS; not used in HTML but preserved) */
         .progress-bar-container {
             width: 100%;
             height: 1.5rem;
@@ -396,7 +445,35 @@
             color: var(--gray-600);
         }
 
-        /* Countdown Timer */
+        /* COUNTDOWN (both versions unified) */
+        .countdown-container {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .count-box {
+            margin: 0.5rem;
+        }
+
+        .count-num {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .count-lbl {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
         .countdown-timer {
             display: flex;
             justify-content: center;
@@ -421,10 +498,224 @@
             text-transform: uppercase;
         }
 
-        /* Table Styles (Desktop) */
-        .table-wrapper {
-            overflow-x: auto; /* Fallback for very complex tables, but stacking is primary */
+        /* MODULE LIST + MARKS (merged & kept) */
+        .semester {
+            margin-bottom: 1.5rem;
         }
+
+        .semester-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 2rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .module {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--gray-300);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .module:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .module.distinction {
+            border-left-color: var(--accent);
+        }
+
+        .module.pass {
+            border-left-color: var(--primary);
+        }
+
+        .module.fail {
+            border-left-color: var(--danger);
+        }
+
+        .module-info .module-name {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .module-info .module-code {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .module-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .module-credits {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            background: var(--gray-100);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+        }
+
+        .module-mark {
+            font-size: 1.125rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            min-width: 4rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .mark-distinction {
+            background: var(--accent);
+        }
+
+        .mark-pass {
+            background: var(--primary);
+        }
+
+        .mark-pending {
+            background: var(--warning);
+        }
+
+        .mark-fail {
+            background: var(--danger);
+        }
+
+        /* DETAILED MODULES + BREAKDOWN (merged) */
+        .module-detailed {
+            border: 1px solid var(--gray-200);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+            background: var(--white);
+        }
+
+        .module-header {
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--gray-50);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .module-header:hover {
+            background: var(--gray-100);
+        }
+
+        .module-title {
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .module-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .module-content.expanded {
+            max-height: 500px;
+        }
+
+        .module-detailed-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--white);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .module-detailed-header:hover {
+            background: var(--gray-50);
+        }
+
+        .module-title-detailed {
+            font-weight: 600;
+            color: var(--gray-900);
+            flex-grow: 1;
+        }
+
+        .toggle-details {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .toggle-indicator {
+            transition: transform 0.4s ease;
+        }
+
+        .expanded .toggle-indicator {
+            transform: rotate(180deg);
+        }
+
+        .breakdown-content {
+            padding: 0 1.5rem 1.5rem;
+            background: var(--white);
+        }
+
+        .placeholder {
+            color: var(--gray-500);
+            font-style: italic;
+        }
+
+        .calculation-note {
+            padding: 1rem 1.5rem;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            font-size: 0.9rem;
+            margin: 0 -1.5rem -1.5rem;
+        }
+
+        .calculation-note code {
+            background: var(--gray-200);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--gray-900);
+        }
+
+        .calc-note {
+            padding: 1rem 1.25rem;
+            background: #fffbeb;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .status-note {
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: 1rem;
+            border-left: 4px solid var(--warning);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+        }
+
+        /* TABLES (merged; includes mobile stacking) */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -455,7 +746,7 @@
             font-weight: 700;
         }
 
-        /* Academic Records */
+        /* COLLAPSIBLE GENERIC */
         .collapsible-content {
             max-height: 0;
             overflow: hidden;
@@ -464,7 +755,6 @@
 
         .collapsible-content.expanded {
             max-height: 3000px;
-            /* Large enough for content */
         }
 
         .toggle-btn {
@@ -482,10 +772,8 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
-        /* ... (rest of existing styles for modules, etc.) ... */
-        .semester{margin-bottom:1.5rem}.semester-title{font-size:1.25rem;font-weight:600;color:var(--primary);margin:2rem 0 1.5rem;padding-bottom:.5rem;border-bottom:2px solid var(--primary-light)}.module{background:var(--white);border-radius:1rem;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;border-left:5px solid var(--gray-300);transition:all .3s ease;box-shadow:var(--shadow-sm)}.module:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}.module.distinction{border-left-color:var(--accent)}.module.pass{border-left-color:var(--primary)}.module.fail{border-left-color:var(--danger)}.module-info .module-name{font-weight:600;color:var(--gray-900)}.module-info .module-code{font-size:.875rem;color:var(--gray-600)}.module-details{display:flex;align-items:center;gap:1rem}.module-credits{font-size:.875rem;color:var(--gray-600);background:var(--gray-100);padding:.25rem .75rem;border-radius:.5rem}.module-mark{font-size:1.125rem;font-weight:700;padding:.5rem 1rem;border-radius:.5rem;min-width:4rem;text-align:center;color:var(--white)}.mark-distinction{background:var(--accent)}.mark-pass{background:var(--primary)}.mark-fail{background:var(--danger)}.module-detailed{border:1px solid var(--gray-200);border-radius:1rem;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:1.5rem}.module-detailed-header{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;padding:1.5rem;background:var(--white);cursor:pointer;transition:background .3s ease}.module-detailed-header:hover{background:var(--gray-50)}.module-title-detailed{font-weight:600;color:var(--gray-900);flex-grow:1}.toggle-details{display:flex;align-items:center;gap:.5rem;color:var(--primary);font-weight:600}.toggle-indicator{transition:transform .4s ease}.expanded .toggle-indicator{transform:rotate(180deg)}.breakdown-content{padding:0 1.5rem 1.5rem;background:var(--white)}.placeholder{color:var(--gray-500);font-style:italic}.calculation-note{padding:1rem 1.5rem;background:var(--gray-50);border-top:1px solid var(--gray-200);font-size:.9rem;margin:0 -1.5rem -1.5rem}.calculation-note code{background:var(--gray-200);padding:.2em .4em;border-radius:4px;color:var(--gray-900)}.status-note{padding:1.5rem;background:var(--gray-50);border-radius:1rem;border-left:4px solid var(--warning);margin-bottom:2rem;font-size:.95rem;color:var(--gray-700)}
 
-        /* Footer */
+        /* FOOTER */
         .footer {
             background: var(--gray-900);
             color: var(--white);
@@ -494,7 +782,7 @@
             text-align: center;
         }
 
-        /* Responsive Design */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero {
                 padding: 4rem 1rem 6rem;
@@ -505,13 +793,13 @@
             }
 
             .container {
-                padding: 0 1rem;
+                padding: 0 1rem 2rem;
                 margin-top: -3rem;
             }
 
-            /* --- MOBILE NAVIGATION --- */
+            /* MOBILE NAV */
             .hamburger-menu {
-                display: block; /* Show hamburger on mobile */
+                display: block;
             }
 
             .nav-links {
@@ -534,14 +822,14 @@
             .nav-links.active {
                 transform: translateX(0);
             }
-            
+
             .nav-links a {
                 font-size: 1.2rem;
             }
-            
-            /* --- RESPONSIVE TABLES (STACKING) --- */
+
+            /* MOBILE TABLE STACKING */
             .data-table thead {
-                display: none; /* Hide the table header on mobile */
+                display: none;
             }
 
             .data-table tr {
@@ -551,9 +839,9 @@
                 margin-bottom: 1rem;
                 box-shadow: var(--shadow-sm);
             }
-            
+
             .data-table tfoot tr {
-                display: flex; /* Special handling for footer */
+                display: flex;
                 justify-content: space-between;
                 align-items: center;
                 padding: 0.5rem 1rem;
@@ -572,7 +860,6 @@
                 border-bottom: none;
             }
 
-            /* Add labels using ::before pseudo-element */
             .data-table td::before {
                 content: attr(data-label);
                 font-weight: 600;
@@ -580,8 +867,6 @@
                 text-align: left;
                 padding-right: 1rem;
             }
-            /* --- End Responsive Tables --- */
-
 
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -611,6 +896,16 @@
             .card {
                 padding: 1.5rem;
             }
+
+            .module-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .module-mark {
+                align-self: flex-start;
+            }
         }
     </style>
 </head>
@@ -618,16 +913,16 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <!-- Improvement: Logo is now a link to the top -->
             <a href="#" class="logo">AVUYILE M.</a>
             <ul class="nav-links" id="nav-menu">
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#current">Current Semester</a></li>
                 <li><a href="#records">Records</a></li>
             </ul>
-            <!-- Improvement: Using a <button> for accessibility -->
-            <button class="hamburger-menu" id="hamburger-btn" aria-label="Open navigation menu" aria-controls="nav-menu" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button class="hamburger-menu" id="hamburger-btn" aria-label="Open navigation menu" aria-controls="nav-menu"
+                aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -638,57 +933,69 @@
 
     <header class="hero">
         <div class="hero-content">
-            <div class="current-date" id="currentDate"></div>
-            <div class="profile-picture" aria-label="Profile picture of Avuyile Mthembu"></div>
+            <div class="status-badge">DIPLOMA COMPLETED</div>
+            <div class="profile-picture"></div>
             <h1>Avuyile Mthembu</h1>
-            <p class="subtitle">Higher Diploma in Systems Development &bull; Final Year</p>
-            <!-- Improvement: Clearer text for the hardcoded date -->
-            <div class="updated-date">Portfolio snapshot as of: August 27, 2025</div>
+            <p class="subtitle">Higher Diploma in Systems Development<br />Graduate Class of 2026</p>
+            <div class="updated-date">Results Snapshot: Friday, December 5, 2025</div>
         </div>
     </header>
 
-    <main class="container">
-        <section id="overview" class="section">
+    <!-- MAIN 1: Overview & basic stats -->
+    <main class="container" id="overview">
+        <section>
             <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">263</span>
-                    <div class="stat-label">Credits Completed</div>
-                </div>
-                <div class="stat-card accent">
-                    <span class="stat-number" id="progress-percent-stat">72%</span>
-                    <div class="stat-label">Program Complete</div>
+                <div class="stat-card success">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Coursework Complete</div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number">364</span>
-                    <div class="stat-label">Total Credits</div>
+                    <div class="stat-label">Total Credits Achieved</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3.8</span>
+                    <div class="stat-label">Projected GPA</div>
                 </div>
             </div>
 
-            <div class="card" style="margin-top: 3rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 class="card-title" style="border: none; margin: 0; padding: 0;">Academic Progress</h3>
-                    <div class="stat-number accent" style="font-size: 2rem; margin:0;" id="progress-percent-bar">72%
-                    </div>
+            <div class="card">
+                <h3>Overall Program Progress</h3>
+                <div class="progress-container">
+                    <div class="progress-fill" style="width: 100%"></div>
                 </div>
-                <div class="progress-bar-container">
-                    <div class="progress-bar-fill" id="progressBar"></div>
-                </div>
-                <div class="progress-details">
-                    <span>263 of 364 credits completed</span>
-                    <span>101 credits remaining</span>
-                </div>
+                <p style="text-align: center; color: var(--gray-600);">
+                    All modules completed. Awaiting graduation ceremony.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- MAIN 2: Countdown, current semester & records -->
+    <main class="container">
+        <!-- Countdown -->
+        <section>
+            <h2 class="section-title">Next Milestone: Graduation</h2>
+            <div class="countdown-container" id="graduation-timer">
+                <!-- JS fills -->
             </div>
         </section>
 
-        <section id="current" class="section">
-            <h2 class="section-title">Current Semester (Final)</h2>
-            <div class="card" style="background: var(--gradient-warning); color: var(--white); padding: 2.5rem;">
-                <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 1.5rem;">Countdown to Final Exams</h3>
-                <div class="countdown-timer" id="countdown">
-                    <!-- JS will populate this -->
-                </div>
+        <!-- Previous Academic History summary -->
+        <section>
+            <h2 class="section-title" style="font-size: 1.5rem; border-bottom: 2px solid var(--gray-200);">
+                Previous Academic History
+            </h2>
+            <div class="card">
+                <p>
+                    <strong>Year 1 &amp; 2:</strong> All credits passed. <br />
+                    <em>Note: HBMN201 (Year 2) was repeated in Final Semester and passed (see above).</em>
+                </p>
             </div>
+        </section>
 
+        <!-- CURRENT SEMESTER OVERVIEW -->
+        <section id="current" class="section">
             <div class="stats-grid" style="margin-top: 3rem;">
                 <div class="stat-card">
                     <span class="stat-number">60</span>
@@ -704,13 +1011,208 @@
                 </div>
             </div>
 
+            <!-- Latest Results -->
+            <section>
+                <h2 class="section-title">Final Semester Results (Dec 5 Release)</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--gray-600);">
+                    <em>Note: Calculated totals use the weighting: FA1 (40%), SA1 (50%), SA2 (10%). Some marks are
+                        pending upload (?) but placeholders are included.</em>
+                </p>
+
+                <!-- HSYD300 -->
+                <div class="module-detailed">
+                    <div class="module-header" onclick="toggleDetails('hsyd300')">
+                        <div class="module-title">HSYD300-1: Systems Development 3</div>
+                        <div class="module-mark mark-pass">72.3%*</div>
+                    </div>
+                    <div id="hsyd300" class="module-content">
+                        <table class="breakdown-table data-table">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Result</th>
+                                    <th>Weight</th>
+                                    <th>Contribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Assessment">FA1 Project (Sep 5)</td>
+                                    <td data-label="Result">82 / 100</td>
+                                    <td data-label="Weight">40%</td>
+                                    <td data-label="Contribution">32.8%</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA1 Project (Nov 7)</td>
+                                    <td data-label="Result">79 / 100</td>
+                                    <td data-label="Weight">50%</td>
+                                    <td data-label="Contribution">39.5%</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA2 Exam (Nov 14)</td>
+                                    <td data-label="Result">Pending (?)</td>
+                                    <td data-label="Weight">10%</td>
+                                    <td data-label="Contribution">0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="calc-note">
+                            <strong>Current Status:</strong> Pass. <br />
+                            Calculation: 32.8 (FA1) + 39.5 (SA1) =
+                            <strong>72.3%</strong> (Excluding pending SA2).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HBMN201 (Repeat) -->
+                <div class="module-detailed">
+                    <div class="module-header" onclick="toggleDetails('hbmn201')">
+                        <div>
+                            <div class="module-title">HBMN201-1: Business Ethics (Repeat)</div>
+                            <span style="font-size: 0.8rem; color: var(--accent);">
+                                Pending but already passed
+                            </span>
+                        </div>
+                        <div class="module-mark mark-distinction">79.0%*</div>
+                    </div>
+                    <div id="hbmn201" class="module-content">
+                        <table class="breakdown-table data-table">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Result</th>
+                                    <th>Weight</th>
+                                    <th>Contribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Assessment">FA1 (Sep 5)</td>
+                                    <td data-label="Result">90 / 100</td>
+                                    <td data-label="Weight">40%</td>
+                                    <td data-label="Contribution">36.0%</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA1 (Nov 3)</td>
+                                    <td data-label="Result">86 / 100</td>
+                                    <td data-label="Weight">50%</td>
+                                    <td data-label="Contribution">43.0%</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA2 (Nov 14)</td>
+                                    <td data-label="Result">Pending (?)</td>
+                                    <td data-label="Weight">10%</td>
+                                    <td data-label="Contribution">0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="calc-note">
+                            <strong>Current Status:</strong> Distinction Range. <br />
+                            Calculation: 36.0 (FA1) + 43.0 (SA1) =
+                            <strong>79.0%</strong>. Awaiting SA2 to confirm final distinction.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HPXS302 -->
+                <div class="module-detailed">
+                    <div class="module-header" onclick="toggleDetails('hpxs302')">
+                        <div class="module-title">HPXS302-1: Praxis S3B (Cyber Law)</div>
+                        <div class="module-mark mark-pending">Pending</div>
+                    </div>
+                    <div id="hpxs302" class="module-content">
+                        <table class="breakdown-table data-table">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Result</th>
+                                    <th>Weight</th>
+                                    <th>Contribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Assessment">FA1 (Oct 10)</td>
+                                    <td data-label="Result">Not available (?)</td>
+                                    <td data-label="Weight">40%</td>
+                                    <td data-label="Contribution">?</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA1 Project (Nov 14)</td>
+                                    <td data-label="Result">76 / 100</td>
+                                    <td data-label="Weight">50%</td>
+                                    <td data-label="Contribution">38.0%</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA2 (Nov 14)</td>
+                                    <td data-label="Result">19 / 20 (95%)</td>
+                                    <td data-label="Weight">10%</td>
+                                    <td data-label="Contribution">9.5%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="calc-note">
+                            <strong>Current Status:</strong> Incomplete Data. <br />
+                            Known Contribution: 38.0 + 9.5 =
+                            <strong>47.5%</strong> + FA1 Mark.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HSFT300 -->
+                <div class="module-detailed">
+                    <div class="module-header" onclick="toggleDetails('hsft300')">
+                        <div class="module-title">HSFT300-1: Software Testing 3</div>
+                        <div class="module-mark mark-pending">Pending</div>
+                    </div>
+                    <div id="hsft300" class="module-content">
+                        <table class="breakdown-table data-table">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Result</th>
+                                    <th>Weight</th>
+                                    <th>Contribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Assessment">FA1 (Sep 5)</td>
+                                    <td data-label="Result">Not available (?)</td>
+                                    <td data-label="Weight">40%</td>
+                                    <td data-label="Contribution">?</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA1 (Nov 14)</td>
+                                    <td data-label="Result">Not available (?)</td>
+                                    <td data-label="Weight">50%</td>
+                                    <td data-label="Contribution">?</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Assessment">SA2 (Nov 14)</td>
+                                    <td data-label="Result">18 / 20 (90%)</td>
+                                    <td data-label="Weight">10%</td>
+                                    <td data-label="Contribution">9.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="calc-note">
+                            Waiting for FA1 and SA1 marks to calculate final grade.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assessment weights table -->
             <div class="card" style="margin-top: 3rem;">
                 <div class="card-header">
-                    <h3 class="card-title">Key Dates & Assessment Weights (Current Semester)</h3>
+                    <h3 class="card-title">Key Dates &amp; Assessment Weights (Current Semester)</h3>
                 </div>
-                <p>The following dates apply to the <strong>July-Dec 2025</strong> semester. The assessment structure is
-                    consistent across most modules:</p>
-                <!-- Improvement: Added data-label attributes for mobile view -->
+                <p>
+                    The following dates apply to the
+                    <strong>July-Dec 2025</strong> semester. The assessment structure is
+                    consistent across most modules:
+                </p>
                 <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
@@ -742,6 +1244,7 @@
             </div>
         </section>
 
+        <!-- RECORDS -->
         <section id="records" class="section">
             <h2 class="section-title">Academic Records</h2>
             <div class="status-note">
@@ -750,14 +1253,14 @@
                 the resolution of outstanding school fees.
             </div>
 
-            <!-- Year 3 (Current) -->
+            <!-- Year 3 -->
             <div class="card" style="margin-bottom: 2rem;">
                 <div class="card-header">
                     <h3 class="card-title">Year 3 (2025)</h3>
                 </div>
 
                 <div class="semester">
-                    <div class="semester-title">Semester 6: July - December 2025 (Current)</div>
+                    <div class="semester-title">Semester 6: July - December 2025 (Final)</div>
                     <div class="table-wrapper">
                         <table class="data-table">
                             <thead>
@@ -773,31 +1276,39 @@
                                     <td data-label="Module">Systems Development 3</td>
                                     <td data-label="Code">HSYD300-1</td>
                                     <td data-label="Credits">30</td>
-                                    <td data-label="Notes">Main programming module, design patterns, practical systems</td>
+                                    <td data-label="Notes">
+                                        Main programming module, design patterns, practical systems
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td data-label="Module">Software Testing 3</td>
                                     <td data-label="Code">HSFT300-1</td>
                                     <td data-label="Credits">15</td>
-                                    <td data-label="Notes">Test planning, automation, debugging, quality assurance</td>
+                                    <td data-label="Notes">
+                                        Test planning, automation, debugging, quality assurance
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td data-label="Module">Praxis S3B – Cyber Law & Project Dev.</td>
+                                    <td data-label="Module">Praxis S3B – Cyber Law &amp; Project Dev.</td>
                                     <td data-label="Code">HPXS302-1</td>
                                     <td data-label="Credits">15</td>
-                                    <td data-label="Notes">Legal principles in cyber law, project execution</td>
+                                    <td data-label="Notes">
+                                        Legal principles in cyber law, project execution
+                                    </td>
                                 </tr>
                                 <tr style="background: rgba(245, 158, 11, 0.1);">
                                     <td data-label="Module">Business Ethics (Repeat)</td>
                                     <td data-label="Code">HBMN201-1</td>
                                     <td data-label="Credits">16</td>
-                                    <td data-label="Notes">Repeat from Year 2 due to a missed final exam</td>
+                                    <td data-label="Notes">
+                                        Repeat from Year 2 due to a missed final exam
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="2"><strong>Total Final Semester Credits</strong></td>
-                                    <td style="text-align:center;"><strong>76</strong></td>
+                                    <td style="text-align: center;"><strong>76</strong></td>
                                     <td></td>
                                 </tr>
                             </tfoot>
@@ -806,18 +1317,427 @@
                 </div>
 
                 <div class="semester">
-                    <div class="semester-title">Semester 5: January - June 2025 (Completed)</div>
-                    <!-- Detailed Breakdowns for Year 3, Semester 5 -->
-                    <!-- ... (Existing HTML for detailed modules is fine, no table stacking needed here as they are already structured) -->
-                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#sad3-content"><span class="module-title-detailed">Systems Analysis and Design 3 (20 Credits)</span><span class="module-mark mark-distinction">94%</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="sad3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">85/100</td><td data-label="Weight">40%</td><td data-label="Contribution">34%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td data-label="Mark">70/70</td><td data-label="Weight">50%</td><td data-label="Contribution">50%</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td data-label="Mark">20/20</td><td data-label="Weight">10%</td><td data-label="Contribution">10%</td></tr></tbody></table><div class="calculation-note">Final Mark: <code>34 + 50 + 10 = 94%</code></div></div></div>
-                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#wfm3-content"><span class="module-title-detailed">Workflow Management 3 (20 Credits)</span><span class="module-mark mark-fail">20.4%*</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="wfm3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">51/100</td><td data-label="Weight">40%</td><td data-label="Contribution">20.4%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td class="placeholder">TBA</td><td data-label="Weight">50%</td><td class="placeholder">TBA</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td class="placeholder">TBA</td><td data-label="Weight">10%</td><td class="placeholder">TBA</td></tr></tbody></table><div class="calculation-note">*Current Mark is based on FA1 only.</div></div></div>
-                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#sdpm3-content"><span class="module-title-detailed">Systems Dev Project Management 3 (15 Credits)</span><span class="module-mark mark-pass">50%*</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="sdpm3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">100/100</td><td data-label="Weight">40%</td><td data-label="Contribution">40%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td class="placeholder">TBA</td><td data-label="Weight">50%</td><td class="placeholder">TBA</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td data-label="Mark">20/20</td><td data-label="Weight">10%</td><td data-label="Contribution">10%</td></tr></tbody></table><div class="calculation-note">*Current Mark is based on FA1 & SA2.</div></div></div>
-                    <div class="module-detailed"><div class="module-detailed-header js-toggle-trigger" data-target="#pxs3-content"><span class="module-title-detailed">Praxis S3A (Ethical Hacking) (5 Credits)</span><span class="module-mark mark-fail">38.3%*</span><span class="toggle-details"><span class="toggle-indicator">▼</span><span class="toggle-text">Details</span></span></div><div id="pxs3-content" class="collapsible-content breakdown-content"><table class="data-table"><thead><tr><th>Assessment</th><th>Mark</th><th>Weight</th><th>Contribution</th></tr></thead><tbody><tr><td data-label="Assessment">Formative Assessment 1 (FA1)</td><td data-label="Mark">72/100</td><td data-label="Weight">40%</td><td data-label="Contribution">28.8%</td></tr><tr><td data-label="Assessment">Summative Assessment 1 (SA1)</td><td class="placeholder">TBA</td><td data-label="Weight">50%</td><td class="placeholder">TBA</td></tr><tr><td data-label="Assessment">Summative Assessment 2 (SA2)</td><td data-label="Mark">19/20</td><td data-label="Weight">10%</td><td data-label="Contribution">9.5%</td></tr></tbody></table><div class="calculation-note">*Current Mark is based on FA1 & SA2.</div></div></div>
+                    <div class="semester-title">
+                        Semester 5: January - June 2025 (Completed)
+                    </div>
+
+                    <!-- Systems Analysis and Design 3 -->
+                    <div class="module-detailed">
+                        <div class="module-detailed-header js-toggle-trigger" data-target="#sad3-content">
+                            <span class="module-title-detailed">
+                                Systems Analysis and Design 3 (20 Credits)
+                            </span>
+                            <span class="module-mark mark-distinction">94%</span>
+                            <span class="toggle-details">
+                                <span class="toggle-indicator">▼</span>
+                                <span class="toggle-text">Details</span>
+                            </span>
+                        </div>
+                        <div id="sad3-content" class="collapsible-content breakdown-content">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Assessment</th>
+                                        <th>Mark</th>
+                                        <th>Weight</th>
+                                        <th>Contribution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Formative Assessment 1 (FA1)
+                                        </td>
+                                        <td data-label="Mark">85/100</td>
+                                        <td data-label="Weight">40%</td>
+                                        <td data-label="Contribution">34%</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 1 (SA1)
+                                        </td>
+                                        <td data-label="Mark">70/70</td>
+                                        <td data-label="Weight">50%</td>
+                                        <td data-label="Contribution">50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 2 (SA2)
+                                        </td>
+                                        <td data-label="Mark">20/20</td>
+                                        <td data-label="Weight">10%</td>
+                                        <td data-label="Contribution">10%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="calculation-note">
+                                Final Mark:
+                                <code>34 + 50 + 10 = 94%</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workflow Management 3 -->
+                    <div class="module-detailed">
+                        <div class="module-detailed-header js-toggle-trigger" data-target="#wfm3-content">
+                            <span class="module-title-detailed">
+                                Workflow Management 3 (20 Credits)
+                            </span>
+                            <span class="module-mark mark-fail">20.4%*</span>
+                            <span class="toggle-details">
+                                <span class="toggle-indicator">▼</span>
+                                <span class="toggle-text">Details</span>
+                            </span>
+                        </div>
+                        <div id="wfm3-content" class="collapsible-content breakdown-content">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Assessment</th>
+                                        <th>Mark</th>
+                                        <th>Weight</th>
+                                        <th>Contribution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Formative Assessment 1 (FA1)
+                                        </td>
+                                        <td data-label="Mark">51/100</td>
+                                        <td data-label="Weight">40%</td>
+                                        <td data-label="Contribution">20.4%</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 1 (SA1)
+                                        </td>
+                                        <td class="placeholder">TBA</td>
+                                        <td data-label="Weight">50%</td>
+                                        <td class="placeholder">TBA</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 2 (SA2)
+                                        </td>
+                                        <td class="placeholder">TBA</td>
+                                        <td data-label="Weight">10%</td>
+                                        <td class="placeholder">TBA</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="calculation-note">
+                                *Current Mark is based on FA1 only.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Systems Dev Project Management 3 -->
+                    <div class="module-detailed">
+                        <div class="module-detailed-header js-toggle-trigger" data-target="#sdpm3-content">
+                            <span class="module-title-detailed">
+                                Systems Dev Project Management 3 (15 Credits)
+                            </span>
+                            <span class="module-mark mark-pass">50%*</span>
+                            <span class="toggle-details">
+                                <span class="toggle-indicator">▼</span>
+                                <span class="toggle-text">Details</span>
+                            </span>
+                        </div>
+                        <div id="sdpm3-content" class="collapsible-content breakdown-content">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Assessment</th>
+                                        <th>Mark</th>
+                                        <th>Weight</th>
+                                        <th>Contribution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Formative Assessment 1 (FA1)
+                                        </td>
+                                        <td data-label="Mark">100/100</td>
+                                        <td data-label="Weight">40%</td>
+                                        <td data-label="Contribution">40%</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 1 (SA1)
+                                        </td>
+                                        <td class="placeholder">TBA</td>
+                                        <td data-label="Weight">50%</td>
+                                        <td class="placeholder">TBA</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 2 (SA2)
+                                        </td>
+                                        <td data-label="Mark">20/20</td>
+                                        <td data-label="Weight">10%</td>
+                                        <td data-label="Contribution">10%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="calculation-note">
+                                *Current Mark is based on FA1 &amp; SA2.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Praxis S3A -->
+                    <div class="module-detailed">
+                        <div class="module-detailed-header js-toggle-trigger" data-target="#pxs3-content">
+                            <span class="module-title-detailed">
+                                Praxis S3A (Ethical Hacking) (5 Credits)
+                            </span>
+                            <span class="module-mark mark-fail">38.3%*</span>
+                            <span class="toggle-details">
+                                <span class="toggle-indicator">▼</span>
+                                <span class="toggle-text">Details</span>
+                            </span>
+                        </div>
+                        <div id="pxs3-content" class="collapsible-content breakdown-content">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Assessment</th>
+                                        <th>Mark</th>
+                                        <th>Weight</th>
+                                        <th>Contribution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Formative Assessment 1 (FA1)
+                                        </td>
+                                        <td data-label="Mark">72/100</td>
+                                        <td data-label="Weight">40%</td>
+                                        <td data-label="Contribution">28.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 1 (SA1)
+                                        </td>
+                                        <td class="placeholder">TBA</td>
+                                        <td data-label="Weight">50%</td>
+                                        <td class="placeholder">TBA</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Assessment">
+                                            Summative Assessment 2 (SA2)
+                                        </td>
+                                        <td data-label="Mark">19/20</td>
+                                        <td data-label="Weight">10%</td>
+                                        <td data-label="Contribution">9.5%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="calculation-note">
+                                *Current Mark is based on FA1 &amp; SA2.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- ... (Existing content for Year 2 and Year 1 is fine) ... -->
-             <div class="card" style="margin-bottom: 2rem;"><div class="card-header"><h3 class="card-title">Year 2 (2024) &bull; 110/126 Credits Achieved</h3><button class="toggle-btn js-toggle-trigger" data-target="#year2-content">Show</button></div><div id="year2-content" class="collapsible-content"><div class="semester"><div class="semester-title">July - December 2024</div><div class="module distinction"><div class="module-info"><div class="module-name">Systems Development 2A</div><div class="module-code">HSYD201-1</div></div><div class="module-details"><div class="module-credits">40 Cr</div><div class="module-mark mark-distinction">84%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Systems Development 2B (Security+)</div><div class="module-code">HSYD202-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">92%</div></div></div></div><div class="semester"><div class="semester-title">January - June 2024</div><div class="module distinction"><div class="module-info"><div class="module-name">Database Programming 2</div><div class="module-code">HDBP200-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">84%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Praxis S2</div><div class="module-code">HPXS200-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">86%</div></div></div><div class="module fail"><div class="module-info"><div class="module-name">Business Ethics</div><div class="module-code">HBMN201-1 &bull; <em>Missed final exam</em></div></div><div class="module-details"><div class="module-credits">16 Cr</div><div class="module-mark mark-fail">41%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Android App Development</div><div class="module-code">HASD200-1</div></div><div class="module-details"><div class="module-credits">10 Cr</div><div class="module-mark mark-distinction">87%</div></div></div></div></div></div><div class="card"><div class="card-header"><h3 class="card-title">Year 1 (2023) &bull; 118 Credits Achieved</h3><button class="toggle-btn js-toggle-trigger" data-target="#year1-content">Show</button></div><div id="year1-content" class="collapsible-content"><div class="semester"><div class="semester-title">July - December 2023</div><div class="module distinction"><div class="module-info"><div class="module-name">Praxis 1</div><div class="module-code">HPX100-1</div></div><div class="module-details"><div class="module-credits">20 Cr</div><div class="module-mark mark-distinction">95%</div></div></div><div class="module distinction"><div class="module-info"><div class="module-name">Computer Literacy Advanced</div><div class="module-code">HCLT108-1</div></div><div class="module-details"><div class="module-credits">10 Cr</div><div class="module-mark mark-distinction">77%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Technical Systems and Support (A+)</div><div class="module-code">HTSS100-1</div></div><div class="module-details"><div class="module-credits">24 Cr</div><div class="module-mark mark-pass">56%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Introduction to Business Management</div><div class="module-code">HBMN102-1</div></div><div class="module-details"><div class="module-credits">10 Cr</div><div class="module-mark mark-pass">68%</div></div></div></div><div class="semester"><div class="semester-title">January - June 2023</div><div class="module distinction"><div class="module-info"><div class="module-name">Systems Development 1 (Java)</div><div class="module-code">HSYD100-1</div></div><div class="module-details"><div class="module-credits">12 Cr</div><div class="module-mark mark-distinction">75%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Academic Literacy</div><div class="module-code">HALP100-1</div></div><div class="module-details"><div class="module-credits">14 Cr</div><div class="module-mark mark-pass">62%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">Computer Literacy Introduction</div><div class="module-code">HCLT101-1</div></div><div class="module-details"><div class="module-credits">16 Cr</div><div class="module-mark mark-pass">58%</div></div></div><div class="module pass"><div class="module-info"><div class="module-name">IT Systems Management 1</div><div class="module-code">HISM100-1</div></div><div class="module-details"><div class="module-credits">12 Cr</div><div class="module-mark mark-pass">66%</div></div></div></div></div></div>
+            <!-- Year 2 -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Year 2 (2024) &bull; 110/126 Credits Achieved
+                    </h3>
+                    <button class="toggle-btn js-toggle-trigger" data-target="#year2-content">
+                        Show
+                    </button>
+                </div>
+                <div id="year2-content" class="collapsible-content">
+                    <div class="semester">
+                        <div class="semester-title">July - December 2024</div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">Systems Development 2A</div>
+                                <div class="module-code">HSYD201-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">40 Cr</div>
+                                <div class="module-mark mark-distinction">84%</div>
+                            </div>
+                        </div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">
+                                    Systems Development 2B (Security+)
+                                </div>
+                                <div class="module-code">HSYD202-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">20 Cr</div>
+                                <div class="module-mark mark-distinction">92%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="semester">
+                        <div class="semester-title">January - June 2024</div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">Database Programming 2</div>
+                                <div class="module-code">HDBP200-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">20 Cr</div>
+                                <div class="module-mark mark-distinction">84%</div>
+                            </div>
+                        </div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">Praxis S2</div>
+                                <div class="module-code">HPXS200-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">20 Cr</div>
+                                <div class="module-mark mark-distinction">86%</div>
+                            </div>
+                        </div>
+                        <div class="module fail">
+                            <div class="module-info">
+                                <div class="module-name">Business Ethics</div>
+                                <div class="module-code">
+                                    HBMN201-1 &bull;
+                                    <em>Missed final exam</em>
+                                </div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">16 Cr</div>
+                                <div class="module-mark mark-fail">41%</div>
+                            </div>
+                        </div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">Android App Development</div>
+                                <div class="module-code">HASD200-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">10 Cr</div>
+                                <div class="module-mark mark-distinction">87%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year 1 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Year 1 (2023) &bull; 118 Credits Achieved
+                    </h3>
+                    <button class="toggle-btn js-toggle-trigger" data-target="#year1-content">
+                        Show
+                    </button>
+                </div>
+                <div id="year1-content" class="collapsible-content">
+                    <div class="semester">
+                        <div class="semester-title">July - December 2023</div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">Praxis 1</div>
+                                <div class="module-code">HPX100-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">20 Cr</div>
+                                <div class="module-mark mark-distinction">95%</div>
+                            </div>
+                        </div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">
+                                    Computer Literacy Advanced
+                                </div>
+                                <div class="module-code">HCLT108-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">10 Cr</div>
+                                <div class="module-mark mark-distinction">77%</div>
+                            </div>
+                        </div>
+                        <div class="module pass">
+                            <div class="module-info">
+                                <div class="module-name">
+                                    Technical Systems and Support (A+)
+                                </div>
+                                <div class="module-code">HTSS100-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">24 Cr</div>
+                                <div class="module-mark mark-pass">56%</div>
+                            </div>
+                        </div>
+                        <div class="module pass">
+                            <div class="module-info">
+                                <div class="module-name">
+                                    Introduction to Business Management
+                                </div>
+                                <div class="module-code">HBMN102-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">10 Cr</div>
+                                <div class="module-mark mark-pass">68%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="semester">
+                        <div class="semester-title">January - June 2023</div>
+                        <div class="module distinction">
+                            <div class="module-info">
+                                <div class="module-name">
+                                    Systems Development 1 (Java)
+                                </div>
+                                <div class="module-code">HSYD100-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">12 Cr</div>
+                                <div class="module-mark mark-distinction">75%</div>
+                            </div>
+                        </div>
+                        <div class="module pass">
+                            <div class="module-info">
+                                <div class="module-name">Academic Literacy</div>
+                                <div class="module-code">HALP100-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">14 Cr</div>
+                                <div class="module-mark mark-pass">62%</div>
+                            </div>
+                        </div>
+                        <div class="module pass">
+                            <div class="module-info">
+                                <div class="module-name">
+                                    Computer Literacy Introduction
+                                </div>
+                                <div class="module-code">HCLT101-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">16 Cr</div>
+                                <div class="module-mark mark-pass">58%</div>
+                            </div>
+                        </div>
+                        <div class="module pass">
+                            <div class="module-info">
+                                <div class="module-name">IT Systems Management 1</div>
+                                <div class="module-code">HISM100-1</div>
+                            </div>
+                            <div class="module-details">
+                                <div class="module-credits">12 Cr</div>
+                                <div class="module-mark mark-pass">66%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -827,15 +1747,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- DYNAMIC CURRENT DATE ---
-            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            // Dynamic current date (if element exists)
+            const options = {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
             const today = new Date();
             const currentDateEl = document.getElementById('currentDate');
-            if(currentDateEl) {
+            if (currentDateEl) {
                 currentDateEl.textContent = today.toLocaleDateString('en-GB', options);
             }
 
-            // --- MOBILE NAVIGATION MENU ---
+            // Mobile navigation
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const navMenu = document.getElementById('nav-menu');
 
@@ -845,7 +1770,6 @@
                     hamburgerBtn.setAttribute('aria-expanded', isExpanded);
                 });
 
-                // Close menu when a link is clicked (good for single-page sites)
                 navMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         navMenu.classList.remove('active');
@@ -854,7 +1778,7 @@
                 });
             }
 
-            // --- PROGRESS BAR ANIMATION ---
+            // Progress bar (advanced, kept though not used in markup)
             const progressBar = document.getElementById('progressBar');
             if (progressBar) {
                 setTimeout(() => {
@@ -863,7 +1787,7 @@
                 }, 300);
             }
 
-            // --- UNIFIED COLLAPSIBLE SECTION TOGGLE ---
+            // Unified collapsible sections
             document.querySelectorAll('.js-toggle-trigger').forEach(trigger => {
                 trigger.addEventListener('click', function () {
                     const targetId = this.dataset.target;
@@ -877,12 +1801,14 @@
                         this.textContent = isExpanded ? 'Hide' : 'Show';
                     } else {
                         const textElement = this.querySelector('.toggle-text');
-                        if (textElement) textElement.textContent = isExpanded ? 'Hide' : 'Details';
+                        if (textElement) {
+                            textElement.textContent = isExpanded ? 'Hide' : 'Details';
+                        }
                     }
                 });
             });
 
-            // --- COUNTDOWN TIMER ---
+            // Exam countdown (kept logic; element optional)
             const countdownElement = document.getElementById('countdown');
             if (countdownElement) {
                 const examDate = new Date('November 14, 2025 09:00:00').getTime();
@@ -910,6 +1836,46 @@
                 }, 1000);
             }
         });
+
+        // Simple toggle for module headers (current semester)
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.classList.toggle('expanded');
+        }
+
+        // Graduation countdown (Next Milestone: Graduation)
+        const gradDate = new Date('June 1, 2026 09:00:00').getTime();
+        const timerEl = document.getElementById('graduation-timer');
+
+        if (timerEl) {
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = gradDate - now;
+
+                const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                if (dist > 0) {
+                    timerEl.innerHTML = `
+                        <div class="count-box"><span class="count-num">${d}</span><span class="count-lbl">Days</span></div>
+                        <div class="count-box"><span class="count-num">${h}</span><span class="count-lbl">Hours</span></div>
+                        <div class="count-box"><span class="count-num">June</span><span class="count-lbl">Month</span></div>
+                        <div class="count-box"><span class="count-num">2026</span><span class="count-lbl">Year</span></div>
+                    `;
+                } else {
+                    timerEl.innerHTML = "<h3>Graduation Day has arrived!</h3>";
+                }
+            }, 1000);
+        }
+
+        // Animate simple progress bar on load
+        window.onload = function () {
+            setTimeout(() => {
+                const pf = document.querySelector('.progress-fill');
+                if (pf) pf.style.width = '100%';
+            }, 500);
+        };
     </script>
 </body>
 
