@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Nosipho ❤️</title>
+    <style>
+        /* --- CSS STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Removes blue tap box on mobile */
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 75, 75, 0.15);
+            width: 90%; /* Fits mobile width */
+            max-width: 380px;
+            backdrop-filter: blur(5px);
+            border: 2px solid #fff;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #ff4b4b;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            margin-top: 0;
+            line-height: 1.2;
+        }
+
+        p {
+            color: #7a7a7a;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* GIF Styling */
+        .gif-container img {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
+            max-height: 220px; 
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* Buttons & Grid */
+        .buttons {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically for mobile */
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            min-height: 120px; /* Space for buttons so layout doesn't jump */
+        }
+
+        .grid-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 14px 20px; /* Larger touch target */
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            width: 100%; /* Full width on mobile */
+        }
+
+        .btn-primary {
+            background-color: #ff4b4b;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 75, 75, 0.4);
+            animation: pulse 2s infinite; /* Heartbeat animation */
+            z-index: 10; /* Ensure Yes is always above No */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 75, 75, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 75, 75, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 75, 75, 0); }
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            color: #555;
+            border: 2px solid #eee;
+            font-size: 0.95rem;
+            padding: 10px;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.95);
+        }
+
+        .btn-selected {
+            background-color: #ff4b4b;
+            color: white;
+            border-color: #ff4b4b;
+        }
+
+        /* Moving No Button */
+        .moving-btn {
+            background-color: #e0e0e0;
+            color: #555;
+            position: relative; /* Starts relative, becomes absolute when moved */
+            z-index: 5;
+            transition: all 0.1s; /* Fast movement */
+            font-size: 0.9rem;
+            padding: 10px;
+            max-width: 150px; /* Smaller than Yes button */
+        }
+
+        /* Inputs */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #eee;
+            margin-top: 5px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ff4b4b;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: fall linear forwards;
+            z-index: 100;
+            pointer-events: none; /* Let touches pass through */
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        /* Step Visibility */
+        .step {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="popSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+    <audio id="yaySound" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
+
+    <div class="container">
+        
+        <div id="step0" class="step active">
+            <div class="gif-container">
+                <img src="https://media4.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZnNlcXNuZjNjbzl6aG5xNTQ2NHFweGpraGc2cGE5cTd6M285NGtxeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2qSmBcOHmcdmEWqqP5/200.webp" alt="Panda rolling">
+            </div>
+            <h1>Do you love me?</h1>
+            <p>Nosipho, my favorite person? 🥺</p>
+            <div class="buttons">
+                <button class="btn-primary" onclick="loveConfirmed()">Yes, I do! ❤️</button>
+                
+                <button id="noBtn1" class="moving-btn" 
+                        onmouseover="moveButton('noBtn1')" 
+                        ontouchstart="moveButton('noBtn1')" 
+                        onclick="moveButton('noBtn1')">No</button>
+            </div>
+        </div>
+
+        <div id="step0_5" class="step">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0ZnZ5eXl4bnl5eXl4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/26FLdmIp6wJr91JAI/giphy.gif" alt="Happy reaction">
+            </div>
+            <h1>I know right,<br>I love you too! ❤️</h1>
+            <p>Hehe, I knew it! Now I have a question...</p>
+            <button class="btn-primary" onclick="nextStep(1)">Ask me! ➜</button>
+        </div>
+
+        <div id="step1" class="step">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajN4eG82bnl5aGZ4eXE4bmN4c3l5bTlrN3V4cnZ5eXl4bnl5eXl4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute bear">
+            </div>
+            <h1>Will you go on a date with me?</h1>
+            <p>I promise it'll be fun! 🌹</p>
+            <div class="buttons">
+                <button class="btn-primary" onclick="nextStep(2)">Yes, absolutely!</button>
+                
+                <button id="noBtn2" class="moving-btn" 
+                        onmouseover="moveButton('noBtn2')" 
+                        ontouchstart="moveButton('noBtn2')" 
+                        onclick="moveButton('noBtn2')">No</button>
+            </div>
+        </div>
+
+        <div id="step2" class="step">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemVrbm9zZmxnMTdod3A2cjF1dXYwYjBudXd6Y3oxdm5renI2YXduOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Qs1ff4J11YUpJDmX3w/giphy.gif" alt="Travel bear">
+            </div>
+            <h1>Where should we go?</h1>
+            <div class="grid-options">
+                <button class="btn-secondary" onclick="selectOption('location', 'Umhlanga')">Umhlanga</button>
+                <button class="btn-secondary" onclick="selectOption('location', 'Florida Rd')">Florida Rd</button>
+                <button class="btn-secondary" onclick="selectOption('location', 'Suncoast')">Suncoast</button>
+                <button class="btn-secondary" onclick="selectOption('location', 'Durban Central')">Durban Central</button>
+                <button class="btn-secondary" onclick="selectOption('location', 'Musgrave')">Musgrave</button>
+                <button class="btn-secondary" onclick="selectOption('location', 'Morningside')">Morningside</button>
+            </div>
+            <input type="text" id="customLocation" placeholder="Or somewhere else? (Type name)">
+            <br><br>
+            <button class="btn-primary" onclick="validateLocation()">Next ➜</button>
+        </div>
+
+        <div id="step3" class="step">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0ZnZ5eXl4bnl5eXl4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/13CoXDiaCcCoyk/giphy.gif" alt="Eating bear">
+            </div>
+            <h1>What are we eating?</h1>
+            <div class="grid-options" id="foodOptions">
+                <button class="btn-secondary" onclick="toggleSelection(this, 'food')">Chicken 🍗</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'food')">Burger 🍔</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'food')">Pizza 🍕</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'food')">Pasta 🍝</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'food')">Seafood 🍤</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'food')">Steak 🥩</button>
+            </div>
+            <button class="btn-primary" onclick="nextStep(4)">Next ➜</button>
+        </div>
+
+        <div id="step4" class="step">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0ZnZ5eXl4bnl5eXl4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/JIX9t2j0ZTN9S/giphy.gif" alt="Activity bear">
+            </div>
+            <h1>What are we doing?</h1>
+            <div class="grid-options" id="activityOptions">
+                <button class="btn-secondary" onclick="toggleSelection(this, 'activity')">Go to Beach 🏖️</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'activity')">Movies 🍿</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'activity')">Get Ice Cream 🍦</button>
+                <button class="btn-secondary" onclick="toggleSelection(this, 'activity')">Iced Coffee 🧋</button>
+            </div>
+            <button class="btn-primary" onclick="finishSteps()">Finish! ❤️</button>
+        </div>
+
+        <div id="step5" class="step">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGgyNHlyaHRwdWczbHNxZ2JvczY0a3pvODljeW90azQ1NXlneW4wMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KmxmoHUGPDjfQXqGgv/giphy.gif" alt="Kiss">
+            </div>
+            <h1>YAY! It's a date! ❤️</h1>
+            <p>Send me the plan on WhatsApp, Nosipho!</p>
+            <button id="whatsappBtn" class="btn-primary" onclick="sendToWhatsapp()">Send Message 💬</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Store selections
+        let dateData = {
+            location: '',
+            food: [],
+            activities: []
+        };
+
+        const popSound = document.getElementById('popSound');
+        const yaySound = document.getElementById('yaySound');
+
+        function playSound() {
+            popSound.currentTime = 0;
+            // Interaction is required for audio to play on most mobile browsers
+            popSound.play().catch(e => console.log("Audio play failed (interaction needed)"));
+        }
+
+        // --- Step 0 Logic ---
+        function loveConfirmed() {
+            playSound();
+            createConfetti();
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step0_5').classList.add('active');
+        }
+
+        // --- Move Button Logic (For both No buttons) ---
+        function moveButton(btnId) {
+            const noBtn = document.getElementById(btnId);
+            
+            // Get window dimensions
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+            // Calculate random positions
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            // Set to fixed position so it moves relative to screen
+            noBtn.style.position = 'fixed'; 
+            noBtn.style.left = `${Math.max(10, x)}px`;
+            noBtn.style.top = `${Math.max(10, y)}px`;
+            
+            playSound();
+        }
+
+        // --- Navigation ---
+        function nextStep(stepNumber) {
+            playSound();
+            
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            
+            // Show current step
+            const nextStepEl = document.getElementById(`step${stepNumber}`);
+            nextStepEl.classList.add('active');
+
+            if(stepNumber === 2) createConfetti();
+        }
+
+        // --- Selection Logic (Single) ---
+        function selectOption(type, value) {
+            playSound();
+            if(type === 'location') {
+                dateData.location = value;
+                // Visual feedback
+                let btns = document.querySelectorAll('#step2 .btn-secondary');
+                btns.forEach(btn => btn.classList.remove('btn-selected'));
+                event.target.classList.add('btn-selected');
+                document.getElementById('customLocation').value = ''; 
+            }
+        }
+
+        function validateLocation() {
+            const customLoc = document.getElementById('customLocation').value;
+            if(customLoc.trim() !== "") {
+                dateData.location = customLoc;
+            }
+            if(dateData.location === '') {
+                alert("Please pick a place, Nosipho! 🥺");
+                return;
+            }
+            nextStep(3);
+        }
+
+        // --- Selection Logic (Multi) ---
+        function toggleSelection(btn, type) {
+            playSound();
+            btn.classList.toggle('btn-selected');
+            const value = btn.innerText;
+
+            if(type === 'food') {
+                if(dateData.food.includes(value)) {
+                    dateData.food = dateData.food.filter(item => item !== value);
+                } else {
+                    dateData.food.push(value);
+                }
+            } else if (type === 'activity') {
+                if(dateData.activities.includes(value)) {
+                    dateData.activities = dateData.activities.filter(item => item !== value);
+                } else {
+                    dateData.activities.push(value);
+                }
+            }
+        }
+
+        // --- Final Step ---
+        function finishSteps() {
+            nextStep(5);
+            yaySound.play().catch(e => console.log("Audio issue"));
+            createConfetti();
+            createConfetti(); 
+        }
+
+        function sendToWhatsapp() {
+            const phoneNumber = "27648784287";
+            
+            let message = `Hey! Nosipho here. I said YES to the date! ❤️\n\n`;
+            message += `📍 Location: ${dateData.location}\n`;
+            message += `🍔 Food: ${dateData.food.join(', ') || 'Surprise me'}\n`;
+            message += `🎢 Activity: ${dateData.activities.join(', ') || 'Just chilling'}\n\n`;
+            message += `I love you too! 😘`;
+
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // --- Visual Effects ---
+        function createConfetti() {
+            const colors = ['#ff4b4b', '#ffb14b', '#4bff6e', '#4bb1ff', '#e04bff'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
