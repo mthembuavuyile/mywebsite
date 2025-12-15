@@ -1,470 +1,145 @@
-
 <!DOCTYPE html>
 <html lang="en-ZA">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Everyday essentials, quietly genius. Bulk and retail household goods delivered to your door.">
-    <title>Essentials Market | Stock Your Home</title>
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Essentials Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="js/app.js"></script>
 </head>
+
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Accessibility Skip Link -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="header" role="banner">
+    <div class="container header-bar">
+      
+      <!-- 1. MOVED BURGER BUTTON HERE (Left side) -->
+      <button
+        id="menu-btn"
+        class="icon-btn mobile-only"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="burger" aria-hidden="true"></span>
+      </button>
 
-    <!-- Mobile Menu Checkbox Hack -->
-    <input type="checkbox" id="mobile-menu-toggle" class="menu-checkbox" hidden>
+      <!-- 2. LOGO (Left side, next to burger) -->
+      <a href="#" class="logo" aria-label="Essentials Market home">
+        Essentials<span>.</span>
+      </a>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container flex-between">
-            <span class="top-bar__text">Free delivery on orders over R500</span>
-            <div class="top-bar__links">
-                <a href="#">My Account</a>
-                <a href="#">Track Order</a>
-            </div>
-        </div>
+      <!-- 3. DESKTOP NAV (Centered/Rightish on desktop) -->
+      <nav class="desktop-nav" aria-label="Primary">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <!-- 4. CART ACTION (Pushed to far right via CSS) -->
+      <div class="header-actions">
+        <button id="cart-btn" class="icon-btn" type="button" aria-label="Open cart">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span id="cart-count" class="badge" aria-label="Cart items">0</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Main Header -->
-    <header class="header">
-        <div class="container header__grid">
-            
-            <!-- Mobile Menu Button -->
-            <label for="mobile-menu-toggle" class="header__menu-btn" aria-label="Open Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </label>
-
-            <!-- Logo -->
-            <a href="/" class="header__logo">
-                <span class="logo-mark">E</span>ssentials<span class="text-accent">.</span>
-            </a>
-
-            <!-- Search -->
-            <form class="header__search" role="search">
-                <input type="search" placeholder="Search dish soap, noodles, brooms..." aria-label="Search products">
-                <button type="submit" aria-label="Submit search">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </button>
-            </form>
-
-            <!-- Cart Trigger (CSS Target) -->
-            <div class="header__actions">
-                <div class="region-select">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    <span>JHB Central</span>
-                </div>
-                <a href="#cart-drawer" class="cart-btn" aria-label="View Cart">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    <span class="cart-badge">3</span>
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Navigation (Collapsed on Mobile) -->
-    <nav class="main-nav">
-        <div class="container">
-            <ul class="nav-list">
-                <li><a href="#" class="active">All Departments</a></li>
-                <li><a href="#">Kitchenware</a></li>
-                <li><a href="#">Cleaning</a></li>
-                <li><a href="#">Small Appliances</a></li>
-                <li><a href="#">Baby & Hygiene</a></li>
-                <li><a href="#">Office Supplies</a></li>
-                <li><a href="#">Bulk Food</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main id="main-content">
-        
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero__layout">
-                <div class="hero__content">
-                    <span class="badge badge--accent">Wholesale & Retail</span>
-                    <h1 class="hero__title">Everyday essentials, <br>quietly genius.</h1>
-                    <p class="hero__subtitle">Stock your home, empower your neighbourhood. Quality goods at honest prices.</p>
-                    <div class="hero__cta-group">
-                        <a href="#shop" class="btn btn--primary">Shop Essentials</a>
-                        <a href="#bulk" class="btn btn--outline">Bulk Orders</a>
-                    </div>
-                </div>
-                <div class="hero__visual">
-                    <!-- Placeholder illustrative SVG/Image -->
-                    <div class="hero__placeholder-img" role="img" aria-label="Illustration of cleaning supplies and boxes">
-                        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="100" cy="100" r="80" fill="#E6FFFA"/>
-                            <rect x="60" y="80" width="80" height="60" rx="4" fill="#0E7A5F"/>
-                            <path d="M50 140h100" stroke="#F7B733" stroke-width="8" stroke-linecap="round"/>
-                            <circle cx="130" cy="70" r="20" fill="#F7B733"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Category Strip -->
-        <section class="category-strip">
-            <div class="container">
-                <div class="category-scroll">
-                    <a href="#" class="cat-card">
-                        <div class="cat-card__icon">🍳</div>
-                        <span>Kitchen</span>
-                    </a>
-                    <a href="#" class="cat-card">
-                        <div class="cat-card__icon">🧹</div>
-                        <span>Cleaning</span>
-                    </a>
-                    <a href="#" class="cat-card">
-                        <div class="cat-card__icon">🔌</div>
-                        <span>Hardware</span>
-                    </a>
-                    <a href="#" class="cat-card">
-                        <div class="cat-card__icon">👶</div>
-                        <span>Baby</span>
-                    </a>
-                    <a href="#" class="cat-card">
-                        <div class="cat-card__icon">🍜</div>
-                        <span>Pantry</span>
-                    </a>
-                    <a href="#" class="cat-card">
-                        <div class="cat-card__icon">📎</div>
-                        <span>Office</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Shop Layout -->
-        <section id="shop" class="shop-section container">
-            
-            <!-- Sidebar Filters (CSS only toggle on mobile) -->
-            <aside class="shop-sidebar">
-                <div class="filter-group">
-                    <h3 class="filter-title">Categories</h3>
-                    <ul class="filter-list">
-                        <li><label><input type="checkbox" checked> All Products</label></li>
-                        <li><label><input type="checkbox"> Cleaning (Tier A)</label></li>
-                        <li><label><input type="checkbox"> Kitchenware</label></li>
-                        <li><label><input type="checkbox"> Bulk Food</label></li>
-                    </ul>
-                </div>
-                
-                <!-- Using Details/Summary for accordion effect without JS -->
-                <details class="filter-accordion" open>
-                    <summary>Pack Size</summary>
-                    <ul class="filter-list">
-                        <li><label><input type="checkbox"> Single Unit</label></li>
-                        <li><label><input type="checkbox"> Multi-pack</label></li>
-                        <li><label><input type="checkbox"> Case (Bulk)</label></li>
-                    </ul>
-                </details>
-
-                <details class="filter-accordion">
-                    <summary>Price Range</summary>
-                    <div class="price-inputs">
-                        <input type="number" placeholder="Min">
-                        <input type="number" placeholder="Max">
-                    </div>
-                </details>
-            </aside>
-
-            <!-- Product Grid -->
-            <div class="product-grid-wrapper">
-                <div class="sort-bar flex-between">
-                    <h2>Featured Staples</h2>
-                    <select class="sort-select" aria-label="Sort products">
-                        <option>Most Popular</option>
-                        <option>Price: Low to High</option>
-                        <option>Bulk Savings</option>
-                    </select>
-                </div>
-
-                <div class="product-grid">
-                    
-                    <!-- SKU 1: Tier A - Dishwashing Liquid -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <span class="tag tag--hot">Hot Seller</span>
-                            <img src="data:image/jpeg;base64,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" alt="750ml Lemon Dishwashing Liquid" loading="lazy">
-                            <div class="product-card__overlay">
-                                <button class="btn-icon" aria-label="Quick view">👁</button>
-                            </div>
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Cleaning</span>
-                            <h3 class="product-card__title"><a href="#">Sunlight Lemon Liquid (750ml)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>24.99
-                                <small class="unit-price">R0.03 / ml</small>
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 2: Tier A - Multipurpose Cleaner -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <img src="data:image/jpeg;base64,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" alt="Handy Andy Cream Cleaner" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Cleaning</span>
-                            <h3 class="product-card__title"><a href="#">Cream Cleaner Ammonia (750ml)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>29.50
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 3: Tier A - Instant Noodles (Bulk) -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <span class="tag tag--bulk">Bulk Save</span>
-                            <img src="https://placehold.co/300x300/eef2f6/F7B733?text=Noodles+Box" alt="Box of Instant Noodles" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Pantry</span>
-                            <h3 class="product-card__title"><a href="#">Chicken Noodles (Box of 24)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>115.00
-                                <small class="unit-price">R4.79 / unit</small>
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 4: Tier A - Brooms -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <img src="https://placehold.co/300x300/eef2f6/333?text=Broom" alt="Heavy Duty Broom" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Household</span>
-                            <h3 class="product-card__title"><a href="#">Heavy Duty Yard Broom</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>85.00
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 5: Tier A - Microfiber Cloths -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                             <img src="https://placehold.co/300x300/eef2f6/0E7A5F?text=Cloths" alt="Pack of Microfiber Cloths" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Cleaning</span>
-                            <h3 class="product-card__title"><a href="#">Microfiber Cloths (Pack of 5)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>45.00
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 6: Tier A/B - Paper Cups -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <span class="tag tag--bulk">Office</span>
-                            <img src="https://placehold.co/300x300/eef2f6/888?text=Cups" alt="Disposable Coffee Cups" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Office / B2B</span>
-                            <h3 class="product-card__title"><a href="#">Paper Coffee Cups (50 Pack)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>65.00
-                                <small class="unit-price">R1.30 / cup</small>
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 7: Tier B - Kettle -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <img src="https://placehold.co/300x300/eef2f6/333?text=Kettle" alt="Electric Kettle" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Appliances</span>
-                            <h3 class="product-card__title"><a href="#">Cordless Electric Kettle (1.7L)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>229.00
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 8: Tier B - Pots -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <img src="https://placehold.co/300x300/eef2f6/555?text=Pot" alt="Stainless Steel Pot" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Kitchenware</span>
-                            <h3 class="product-card__title"><a href="#">Stainless Steel Pot (Medium)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>189.00
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 9: Tier C - Diapers -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <img src="https://placehold.co/300x300/eef2f6/F7B733?text=Diapers" alt="Baby Diapers" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Baby</span>
-                            <h3 class="product-card__title"><a href="#">Dry Comfort Diapers (Size 3)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>160.00
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                    <!-- SKU 10: Tier C - Extension Cord -->
-                    <article class="product-card">
-                        <div class="product-card__image">
-                            <img src="https://placehold.co/300x300/eef2f6/333?text=Cord" alt="Extension Cord" loading="lazy">
-                        </div>
-                        <div class="product-card__info">
-                            <span class="product-card__cat">Hardware</span>
-                            <h3 class="product-card__title"><a href="#">Extension Cord (5m)</a></h3>
-                            <div class="product-card__price">
-                                <span class="curr">R</span>79.00
-                            </div>
-                            <button class="btn btn--sm btn--primary btn--full">Add to Cart</button>
-                        </div>
-                    </article>
-
-                </div>
-                
-                <!-- Pagination Mockup -->
-                <div class="pagination">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <span>...</span>
-                    <a href="#">Next &rarr;</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trust Strip -->
-        <section class="trust-strip">
-            <div class="container text-center">
-                <h4>Trusted by 500+ Spaza Shops and Households</h4>
-                <div class="trust-grid">
-                    <div class="trust-item">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span>Secure Checkout</span>
-                    </div>
-                    <div class="trust-item">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                        <span>Fast Local Delivery</span>
-                    </div>
-                    <div class="trust-item">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                        <span>Quality Guarantee</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__col">
-                    <strong class="footer__logo">Essentials.</strong>
-                    <p>Empowering local businesses and homes with everyday goods.</p>
-                    <div class="social-icons">
-                        <!-- Social placeholders -->
-                        <a href="#" aria-label="Facebook">FB</a>
-                        <a href="#" aria-label="Instagram">IG</a>
-                    </div>
-                </div>
-                <div class="footer__col">
-                    <h5>Shop</h5>
-                    <ul class="footer__links">
-                        <li><a href="#">Kitchenware</a></li>
-                        <li><a href="#">Cleaning</a></li>
-                        <li><a href="#">Wholesale / Bulk</a></li>
-                    </ul>
-                </div>
-                <div class="footer__col">
-                    <h5>Help</h5>
-                    <ul class="footer__links">
-                        <li><a href="#">Delivery Areas</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer__col">
-                    <h5>Legal</h5>
-                    <ul class="footer__links">
-                        <li><a href="#">Privacy (POPIA)</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p>&copy; 2024 Essentials Market. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- CSS-Only Slide-over Cart (Hidden until targeted) -->
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="cart-drawer__backdrop">
-            <a href="#main-content" class="backdrop-link" aria-label="Close cart"></a>
-        </div>
-        <div class="cart-drawer__panel">
-            <div class="cart-header flex-between">
-                <h3>Your Cart (3)</h3>
-                <a href="#" class="close-btn" aria-label="Close cart">&times;</a>
-            </div>
-            <div class="cart-items">
-                <!-- Sample Cart Item -->
-                <div class="cart-item">
-                    <img src="https://placehold.co/60x60/eef2f6/0E7A5F?text=Soap" alt="Product">
-                    <div>
-                        <h4>Sunlight Lemon Liquid</h4>
-                        <p>1 x R24.99</p>
-                    </div>
-                </div>
-                <!-- Sample Cart Item -->
-                <div class="cart-item">
-                    <img src="https://placehold.co/60x60/eef2f6/F7B733?text=Noodles" alt="Product">
-                    <div>
-                        <h4>Chicken Noodles (Box)</h4>
-                        <p>2 x R115.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cart-footer">
-                <div class="flex-between cart-total">
-                    <span>Total</span>
-                    <span>R254.99</span>
-                </div>
-                <button class="btn btn--primary btn--full">Checkout</button>
-            </div>
-        </div>
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="mobile-menu" hidden>
+      <nav class="mobile-nav-links" aria-label="Mobile">
+        <a href="#shop">Shop Products</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Support</a>
+        <a href="#login" class="secondary-link">Sign In</a>
+      </nav>
     </div>
+  </header>
 
+  <section class="hero">
+    <div class="container">
+      <h1>Daily Essentials.</h1>
+      <p>Order via WhatsApp. Delivered to your door.</p>
+    </div>
+  </section>
+
+  <main id="main" class="container">
+    <section id="shop" aria-label="Shop">
+      <div class="controls">
+        <h2>All Products</h2>
+        <select id="sort-select" aria-label="Sort products">
+          <option value="default">Sort by...</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+      </div>
+
+      <div id="product-grid" class="product-grid" aria-live="polite">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <section id="about" class="sr-section" aria-label="About">
+      <h2>About</h2>
+      <p>Fresh groceries delivered to your doorstep with simple WhatsApp ordering.</p>
+    </section>
+
+    <section id="contact" class="sr-section" aria-label="Contact">
+      <h2>Contact</h2>
+      <p>Need help? Use the menu links or WhatsApp checkout to reach us.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo footer-logo">Essentials<span>.</span></a>
+        <p>Fresh groceries delivered to your doorstep with simple WhatsApp ordering.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">Fruit &amp; Veg</a>
+        <a href="#">Dairy</a>
+        <a href="#">Bakery</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Delivery Zones</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2024 Essentials Market. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="cart-modal hidden" role="dialog" aria-modal="true" aria-label="Cart">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button id="close-cart" class="close-btn" type="button" aria-label="Close cart">&times;</button>
+      </div>
+      <div id="cart-items" class="cart-items">
+        <p class="empty-msg">Your cart is empty.</p>
+      </div>
+      <div class="cart-footer">
+        <div class="total-row">
+          <span>Total:</span>
+          <span id="cart-total">R 0.00</span>
+        </div>
+        <button id="checkout-btn" class="btn btn-whatsapp" type="button">Order on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">Item added to cart</div>
 </body>
 </html>
