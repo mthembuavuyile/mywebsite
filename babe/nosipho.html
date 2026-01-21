@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nosipho Mdunge</title>
+  <meta name="description" content="Nosipho Mdunge - Personal Website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --white: #ffffff;
+      --baby-blue: #e3f2fd;
+      --blue: #90caf9;
+      --pink: #ff7aa2;
+      --pink-soft: #ffe4e9;
+      --text: #1a1a1a;
+      --text-muted: #666666;
+      --border: #e0e0e0;
+      --glass: rgba(255, 255, 255, 0.7);
+      --shadow: 0 8px 24px rgba(0,0,0,0.1);
+      --radius: 16px;
+      --max: 1200px;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html { scroll-behavior: smooth; }
+    html, body { height: 100%; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--baby-blue) 0%, var(--white) 50%, var(--pink-soft) 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Header & Navigation */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    
+    .nav-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .nav-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-menu a:hover {
+      color: var(--pink);
+    }
+    
+    /* Burger Menu */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .burger span {
+      width: 25px;
+      height: 3px;
+      background: var(--text);
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+    
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+    
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    /* Main Content */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    .section {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--blue), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .name-meaning {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .name-meaning strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .location {
+      font-size: 1.05rem;
+      color: var(--pink);
+      font-weight: 600;
+      margin-top: 1.5rem;
+    }
+    
+    /* About Section */
+    .about h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      border-left: 6px solid var(--pink);
+      padding-left: 1rem;
+    }
+    
+    .about p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .qualities {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .quality-card {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    
+    .quality-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    
+    .quality-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    .quality-card p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    
+    /* Favorites */
+    .favorites-section {
+      margin-top: 2.5rem;
+    }
+    
+    .favorites-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      border-left: 6px solid var(--blue);
+      padding-left: 1rem;
+    }
+    
+    .favorites {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    
+    .favorite {
+      background: var(--white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.3s;
+    }
+    
+    .favorite:hover {
+      transform: scale(1.08);
+    }
+    
+    /* Gallery */
+    .gallery h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      border-left: 6px solid var(--blue);
+      padding-left: 1rem;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.5s;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Tablet */
+    @media (min-width: 600px) {
+      .container {
+        padding: 2.5rem 2rem;
+      }
+      
+      .section {
+        padding: 2.5rem 2rem;
+      }
+      
+      .hero {
+        padding: 3rem 2rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .qualities {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .burger {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: none;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .nav-menu a {
+        padding: 1rem 2rem;
+        display: block;
+      }
+    }
+    
+    /* Desktop */
+    @media (min-width: 900px) {
+      .container {
+        padding: 3rem 2rem;
+      }
+      
+      .section {
+        padding: 3rem 2.5rem;
+      }
+      
+      .hero {
+        padding: 3.5rem 2.5rem;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .qualities {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .burger {
+        display: none;
+      }
+      
+      .nav-menu {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+      }
+      
+      .nav-menu a {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo">Nosipho Mdunge</div>
+      <button class="burger" aria-label="Toggle menu" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section hero" id="home">
+      <h1>Nosipho Mdunge</h1>
+      <p class="name-meaning">
+        <strong>Nosipho</strong> — <em>"A gift"</em> — a precious present, a blessing
+      </p>
+      <p class="location">
+        📍 Permanent Resident of Avuyile Mthembu's Heart ♥
+      </p>
+    </section>
+
+    <section class="section about" id="about">
+      <h2>About Nosipho</h2>
+      <p>
+        A rare beauty. She's the kind of woman who makes you believe in magic. Beautiful inside and out, she carries herself with a grace that's entirely her own. Her smile lights up every room, her spirit inspires everyone around her, and her heart is as genuine as they come. Simply extraordinary.
+      </p>
+      
+      <div class="qualities">
+        <div class="quality-card">
+          <h3>Her Spirit</h3>
+          <p>Soft, confident, and naturally beautiful inside and out</p>
+        </div>
+        <div class="quality-card">
+          <h3>What She Loves</h3>
+          <p>Music, peaceful moments, meaningful conversations, and creating beautiful memories</p>
+        </div>
+        <div class="quality-card">
+          <h3>What I Cherish</h3>
+          <p>Her heart—the way she cares, supports, and loves with such genuine intention</p>
+        </div>
+        <div class="quality-card">
+          <h3>What I See</h3>
+          <p>My future</p>
+        </div>
+      </div>
+
+      <div class="favorites-section">
+        <h2>Her Favorites</h2>
+        <div class="favorites">
+          <div class="favorite">☕ Iced Coffee</div>
+          <div class="favorite">🥤 Coca-Cola</div>
+          <div class="favorite">🎶 Music</div>
+          <div class="favorite">🤍 Quality Moments</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery" id="gallery">
+      <h2>Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/babe.jpg" alt="Nosipho Mdunge">
+        </div>
+        <div class="gallery-item">
+          <img src="images/babe1.jpg" alt="Nosipho Mdunge">
+        </div>
+        <div class="gallery-item">
+          <img src="images/babe2.jpg" alt="Nosipho Mdunge">
+        </div>
+        <div class="gallery-item">
+          <img src="images/babe3.jpg" alt="Nosipho Mdunge">
+        </div>
+        <div class="gallery-item">
+          <img src="images/babe4.jpeg" alt="Nosipho Mdunge">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Nosipho Mdunge × Avuyile Mthembu</p>
+  </footer>
+
+  <script>
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Burger menu toggle
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('navMenu');
+    
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when clicking a link
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!burger.contains(e.target) && !navMenu.contains(e.target)) {
+        burger.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
