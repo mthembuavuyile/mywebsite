@@ -1,0 +1,299 @@
+/* --- iOS System Reset & Variables --- */
+        :root {
+            --ios-bg-1: #FF9A9E;
+            --ios-bg-2: #FECFEF;
+            --ios-bg-3: #a18cd1;
+            --ios-glass: rgba(255, 255, 255, 0.75); /* Increased opacity for better contrast */
+            --ios-glass-border: rgba(255, 255, 255, 0.5);
+            --ios-text: #1c1c1e;
+            --ios-subtext: #8e8e93;
+            --ios-blue: #007AFF;
+            --ios-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.18);
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* No scrolling needed */
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            color: var(--ios-text);
+            background: #000;
+        }
+
+        /* --- Animated Mesh Gradient Background --- */
+        .background-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(at 0% 0%, var(--ios-bg-1) 0px, transparent 50%),
+                        radial-gradient(at 100% 0%, var(--ios-bg-2) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, var(--ios-bg-3) 0px, transparent 50%),
+                        radial-gradient(at 0% 100%, #fbc2eb 0px, transparent 50%);
+            background-size: 150% 150%;
+            filter: blur(40px);
+            z-index: -2;
+            animation: meshMove 15s ease infinite alternate;
+        }
+
+        .background-dimmer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.05); 
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes meshMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* --- Overlay (Lock Screen Style) --- */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            transition: opacity 0.8s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.8s;
+            padding: 20px;
+        }
+
+        .notification-stack {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 24px;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: var(--ios-subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notif-icon {
+            width: 20px; height: 20px;
+            background: linear-gradient(135deg, #FF9A9E, #FECFEF);
+            border-radius: 6px;
+        }
+
+        #start-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+        }
+
+        #start-btn:active { transform: scale(0.96); }
+
+        /* --- Main Layout --- */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed from center to allow top padding */
+            height: 100%;
+            padding-top: calc(var(--safe-top) + 60px); 
+            padding-bottom: calc(var(--safe-bottom) + 80px);
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- The Main Widget Card --- */
+        .ios-card {
+            background: var(--ios-glass);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            width: 88%;
+            max-width: 400px;
+            border-radius: 36px;
+            border: 1px solid var(--ios-glass-border);
+            padding: 24px;
+            box-shadow: var(--ios-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            margin-bottom: 24px;
+            position: relative;
+            background: #f2f2f7;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        .header-text {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ff4b4b, #d57eeb);
+
+            background-clip: text; /* IDE stops complaining */
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Message Bubble */
+        .message-bubble {
+            background: rgba(255,255,255,0.7);
+            padding: 16px;
+            border-radius: 18px;
+            width: 100%;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .story-text {
+            font-size: 17px;
+            line-height: 1.4;
+            color: #222;
+            font-weight: 500;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #007AFF;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        /* --- SIGNATURE IMPROVEMENT --- */
+        .signature {
+            font-size: 15px;
+            color: #333; /* Darker grey/black */
+            font-weight: 700; /* Bolder */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto;
+            /* White glow to make it readable on any background */
+            text-shadow: 0px 0px 15px rgba(255,255,255,1), 
+                         0px 0px 5px rgba(255,255,255,0.8);
+        }
+
+        /* --- Floating Elements --- */
+        .floating-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1; 
+            animation: floatUp linear forwards;
+            /* White glow for visibility */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 
+                         0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: translate3d(0,0,0);
+        }
+
+        /* Specific style for Zulu words */
+        .floating-word {
+            font-family: 'Brush Script MT', 'Cursive', sans-serif; /* Elegant font */
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            white-space: nowrap;
+        }
+
+        /* --- Music Player Pill --- */
+        #music-pill {
+            position: fixed;
+            bottom: calc(var(--safe-bottom) + 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 360px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 20px;
+            color: white;
+            z-index: 100;
+            opacity: 0;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        #music-pill:active { transform: translateX(-50%) scale(0.95); }
+
+        .music-info { display: flex; flex-direction: column; justify-content: center; }
+        .music-title { font-size: 14px; font-weight: 600; }
+        .music-status { font-size: 12px; color: #aaa; margin-top: 2px;}
+
+        .visualizer { display: flex; align-items: flex-end; height: 15px; gap: 3px; }
+        .bar { width: 3px; background: #007AFF; border-radius: 3px; animation: equalize 1s infinite ease-in-out; }
+        .bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 100%; animation-delay: 0.1s; }
+        .bar:nth-child(3) { height: 40%; animation-delay: 0.2s; }
+        .bar:nth-child(4) { height: 80%; animation-delay: 0.3s; }
+
+        @keyframes equalize { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
+    

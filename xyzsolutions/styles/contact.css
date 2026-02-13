@@ -1,0 +1,100 @@
+/* === Contact Page Styles === */
+
+.contact-header {
+  background-image: url('../images/contact-background.jpeg');
+  /* NOTE: Assumes .contact-header has 'position: relative' 
+     for the ::before overlay to work */
+}
+
+.contact-header::before {
+  /* Unique gradient for contact (from Snippet 2) */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(85, 85, 85, 0.8));
+}
+
+.contact-page {
+  /* Kept padding from Snippet 1 for overall page spacing */
+  padding: 4rem 0;
+}
+
+.contact-page,
+#contact {
+  background: var(--light);
+}
+
+.contact-grid {
+  display: grid;
+  /* Using the 1fr 1.2fr ratio from Snippet 2 */
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* --- Contact Info Column --- */
+
+.contact-info {
+  /* Kept padding from Snippet 1 to push info from the edge */
+  padding-left: 2.5rem;
+}
+
+.contact-info h3 {
+  font-size: 1.8rem;
+  /* Using larger margin from Snippet 2 */
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.8rem;
+  /* Added transition and hover from Snippet 2 */
+  transition: var(--transition);
+}
+
+.info-item:hover {
+  transform: translateX(5px);
+}
+
+.info-item i {
+  /* Using larger font-size from Snippet 2 */
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-top: 0.2rem;
+  
+  /* CRITICAL: Kept width/align from Snippet 1 */
+  /* This ensures icons of different shapes (e.g., 'phone' vs 'envelope')
+     don't cause the text next to them to misalign. */
+  width: 35px; /* Slightly increased from 30px to better fit the 1.8rem icon */
+  text-align: center;
+}
+
+.info-item a {
+  color: var(--primary);
+  /* Kept font-weight from Snippet 1 for better emphasis */
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.info-item a:hover {
+  color: var(--secondary);
+  /* Kept underline from Snippet 1 for clearer affordance */
+  text-decoration: underline;
+}
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 992px) {
+  /* Kept the entire responsive block from Snippet 1 */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-info {
+    margin-bottom: 2rem;
+    /* Resets the padding on mobile to look centered */
+    padding-left: 0;
+  }
+}
