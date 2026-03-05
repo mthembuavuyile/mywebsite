@@ -1,404 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandanezwe Incubation Hub</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-:root {
-    --primary: #c7a17a;
-    --dark: #1f2933;
-    --light: #f9fafb;
-    --text: #4b5563;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--light);
-    color: var(--text);
-    line-height: 1.6;
-}
-
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    color: var(--dark);
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* NAVBAR */
-.navbar {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    background: white;
-    padding: 15px 0;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    z-index: 1000;
-}
-
-.nav-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 1px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--dark);
-    font-weight: 500;
-    transition: 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-}
-
-/* HAMBURGER ICON */
-.hamburger {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 5px;
-    z-index: 1001; /* Keeps it above the menu */
-}
-
-.bar {
-    width: 25px;
-    height: 3px;
-    background-color: var(--dark);
-    transition: all 0.3s ease;
-}
-
-/* HERO */
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-    url('https://images.unsplash.com/photo-1529156069898-49953eb1b5ae?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding-top: 80px;
-}
-
-.hero-content {
-    max-width: 700px;
-    margin: auto;
-}
-
-.hero h1 {
-    font-size: 48px;
-    color: white;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 28px;
-    background: var(--primary);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #a87f5a;
-}
-
-/* SECTIONS */
-section {
-    padding: 100px 0;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.section-text {
-    text-align: center;
-    max-width: 800px;
-    margin: auto;
-    font-size: 17px;
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    gap: 40px;
-}
-
-.grid-2 {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.grid-4 {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-/* SERVICES */
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h3 {
-    margin-bottom: 15px;
-    color: var(--primary);
-}
-
-/* IMPACT */
-.impact {
-    background: var(--dark);
-    color: white;
-    text-align: center;
-}
-
-.impact h2 {
-    color: white;
-}
-
-.partners {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.partner-box {
-    width: 120px;
-    height: 50px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 6px;
-}
-
-/* FOOTER */
-footer {
-    background: #111827;
-    color: #d1d5db;
-    padding: 60px 0;
-}
-
-footer h3 {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.footer-grid {
-    display: grid;
-    gap: 40px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-footer a {
-    color: #d1d5db;
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: var(--primary);
-}
-
-/* MOBILE */
-@media(max-width: 768px){
-    .hero h1 {
-        font-size: 32px;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
-
-    /* Show hamburger icon */
-    .hamburger {
-        display: flex;
-    }
-
-    /* Hide standard nav, set up slide-out menu */
-    .nav-links {
-        position: absolute;
-        top: 60px; /* Slides in just under the navbar */
-        left: -100%;
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: 0.3s ease-in-out;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        padding: 20px 0;
-    }
-
-    /* Class added via JS when menu is open */
-    .nav-links.active {
-        left: 0;
-    }
-
-    .nav-links a {
-        display: block;
-        padding: 15px 0;
-    }
-
-    /* Animate Hamburger to an X */
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandanezwe Incubation Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <script src="js/script.js" defer></script>
 </head>
-<body>
+<body class="home-page">
 
-<nav class="navbar">
-    <div class="container nav-flex">
-        <div class="logo">Sandanezwe Incubation Hub</div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#impact">Impact</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </div>
-</nav>
+    <div id="nav-placeholder"></div>
 
-<header class="hero">
-    <div class="hero-content">
-        <h1>Building Networks Out of Poverty</h1>
-        <p>Empowering youth in rural communities through skills development, incubation, and sustainable growth.</p>
-        <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
-    <a href="about.html" class="btn">Learn More</a>
-    <a href="contact.html" class="btn">Contact Us</a>
-</div>
-    </div>
-</header>
-
-<section id="about">
-    <div class="container">
-        <h2 class="section-title">About Us</h2>
-        <p class="section-text">
-            Sandanezwe Incubation Hub is a collaborative youth-driven initiative focused on building inclusive economic systems in rural communities. We co-create pathways that bridge education, skills, and entrepreneurship.
-        </p>
-    </div>
-</section>
-
-<section id="services">
-    <div class="container">
-        <h2 class="section-title">Our Services</h2>
-        <div class="grid grid-4">
-            <div class="card">
-                <h3>Skills Development</h3>
-                <p>Leadership training, soft skills, peer networks, and technical foundations for growth.</p>
-            </div>
-            <div class="card">
-                <h3>Community Development</h3>
-                <p>Strengthening rural ecosystems through collaboration, identity restoration, and opportunity access.</p>
-            </div>
-            <div class="card">
-                <h3>Youth Empowerment</h3>
-                <p>Equipping youth with practical tools that connect learning to real-world application.</p>
-            </div>
-            <div class="card">
-                <h3>SMME / NPO Support</h3>
-                <p>Coaching, systems building, and sustainable scaling for startups and local enterprises.</p>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Building Networks Out of Poverty</h1>
+            <p>Empowering youth in rural communities through skills development, incubation, and sustainable growth.</p>
+            <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+                <a href="about.html" class="btn">Learn More</a>
+                <a href="contact.html" class="btn btn-outline">Contact Us</a>
             </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<section id="impact" class="impact">
-    <div class="container">
-        <h2 class="section-title">Our Impact Partners</h2>
-        <p>Working together to build sustainable futures.</p>
-        <div class="partners">
-            <div class="partner-box"></div>
-            <div class="partner-box"></div>
-            <div class="partner-box"></div>
-            <div class="partner-box"></div>
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-text">
+                Sandanezwe Incubation Hub is a collaborative youth-driven initiative focused on building inclusive economic systems in rural communities. We co-create pathways that bridge education, skills, and entrepreneurship.
+            </p>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer id="contact">
-    <div class="container footer-grid">
-        <div>
-            <h3>Contact</h3>
-            <p>Sandanezwe, KwaZulu-Natal, South Africa</p>
-            <p>071 234 5678</p>
-            <p>info@sinchub.co.za</p>
+    <section id="services" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="grid grid-4">
+                <div class="card">
+                    <h3><i class="fas fa-users-cog"></i> Skills Development</h3>
+                    <p>Upskilling, increasing employability, real-life work experience, and crucial trade exposure.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-user-graduate"></i> Youth Development</h3>
+                    <p>Facilitating job placement, dynamic learnership opportunities, and practical internships.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> SMME Support</h3>
+                    <p>Enterprise establishment, strategic partnerships, and training on growth and upscaling.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-hands-helping"></i> Community Dev</h3>
+                    <p>Strengthening rural ecosystems through collaboration, identity restoration, and opportunity access.</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <h3>Follow Us</h3>
-            <p><a href="#">Facebook</a></p>
+    </section>
+
+    <section id="impact" class="impact">
+        <div class="container">
+            <h2 class="section-title">Our Impact Partners</h2>
+            <p class="section-text">Working together to build sustainable futures.</p>
+            <div class="partners">
+                <div class="partner-box"></div>
+                <div class="partner-box"></div>
+                <div class="partner-box"></div>
+                <div class="partner-box"></div>
+            </div>
         </div>
-    </div>
-</footer>
+    </section>
 
-<script>
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-
-    // Toggle menu on click
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navLinks.classList.toggle("active");
-    });
-
-    // Close menu when a link is clicked
-    document.querySelectorAll(".nav-links a").forEach(n => n.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navLinks.classList.remove("active");
-    }));
-</script>
+    <div id="footer-placeholder"></div>
 
 </body>
 </html>

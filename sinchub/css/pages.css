@@ -1,0 +1,93 @@
+body.home-page {
+    padding-top: 0; 
+}
+
+body.internal-page {
+    padding-top: 85px; /* Offset for fixed nav */
+}
+
+/* HERO (Home Page) */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(31, 41, 51, 0.75), rgba(31, 41, 51, 0.75)),
+    url('https://images.unsplash.com/photo-1529156069898-49953eb1b5ae?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding-top: 80px;
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: auto;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #f3f4f6;
+}
+
+/* IMPACT SECTION */
+.impact {
+    background: var(--dark);
+    color: white;
+}
+
+.impact h2, .impact p {
+    color: white;
+}
+
+.partners {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.partner-box {
+    width: 120px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+}
+
+/* CONTACT PAGE */
+.contact-wrapper {
+    padding: 100px 0;
+}
+
+.contact-card {
+    background: white;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    border-top: 4px solid var(--secondary);
+}
+
+.contact-info-item {
+    margin-bottom: 25px;
+}
+
+.contact-info-item h3 {
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+@media(max-width: 768px){
+    .hero h1 { font-size: 32px; }
+    .section-title { font-size: 28px; }
+    .contact-card { padding: 30px 20px; }
+}

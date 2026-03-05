@@ -1,109 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us | Sandanezwe Incubation Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="script.js" defer></script>
-
-<style>
-    :root { --primary: #c7a17a; --dark: #1f2933; --light: #f9fafb; --text: #4b5563; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--text); line-height: 1.6; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--dark); }
-    .container { width: 90%; max-width: 1200px; margin: auto; }
-    
-    /* NAVBAR */
-    .navbar { position: fixed; width: 100%; top: 0; background: white; padding: 15px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); z-index: 1000; }
-    .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-weight: 700; font-size: 18px; letter-spacing: 1px; color: var(--dark); text-decoration: none;}
-    .nav-links { display: flex; gap: 30px; }
-    .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s ease; }
-    .nav-links a:hover, .nav-links a.current { color: var(--primary); }
-    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
-    .bar { width: 25px; height: 3px; background-color: var(--dark); transition: all 0.3s ease; }
-
-    /* CONTACT SECTION */
-    .contact-wrapper { padding: 100px 0; }
-    .contact-card { background: white; padding: 50px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; max-width: 600px; margin: auto; }
-    .contact-info-item { margin-bottom: 20px; }
-    .contact-info-item h3 { color: var(--primary); margin-bottom: 5px; }
-    
-    /* FOOTER */
-    footer { background: #111827; color: #d1d5db; padding: 60px 0; margin-top: auto;}
-    footer h3 { color: white; margin-bottom: 20px; }
-    .footer-grid { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    footer a { color: #d1d5db; text-decoration: none; }
-    footer a:hover { color: var(--primary); }
-
-    /* MOBILE */
-    @media(max-width: 768px){
-        .hamburger { display: flex; }
-        .nav-links { position: absolute; top: 60px; left: -100%; flex-direction: column; background-color: white; width: 100%; text-align: center; transition: 0.3s ease-in-out; box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 20px 0; }
-        .nav-links.active { left: 0; }
-        .nav-links a { display: block; padding: 15px 0; }
-        .hamburger.active .bar:nth-child(2) { opacity: 0; }
-        .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-        .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Sandanezwe Incubation Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <script src="js/script.js" defer></script>
 </head>
-<body>
+<body class="internal-page">
 
-<nav class="navbar">
-    <div class="container nav-flex">
-        <a href="index.html" class="logo">Sandanezwe Incubation Hub</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About & Services</a>
-            <a href="contact.html" class="current">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </div>
-</nav>
+    <div id="nav-placeholder"></div>
 
-<section class="contact-wrapper">
-    <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-card">
-            <div class="contact-info-item">
-                <h3>Location</h3>
-                <p>Sandanezwe, KwaZulu-Natal, South Africa</p>
-            </div>
-            <div class="contact-info-item">
-                <h3>Phone</h3>
-                <p>071 234 5678</p>
-            </div>
-            <div class="contact-info-item">
-                <h3>Email</h3>
-                <p>info@sinchub.co.za</p>
-            </div>
-            <div class="contact-info-item">
-                <h3>Social</h3>
-                <p><a href="#" style="color: var(--primary); text-decoration: none;">Follow us on Facebook</a></p>
+    <section class="contact-wrapper bg-light">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-card">
+                <div class="contact-info-item">
+                    <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <p>Sandanezwe, KwaZulu-Natal, South Africa</p>
+                </div>
+                <div class="contact-info-item">
+                    <h3><i class="fas fa-phone-alt"></i> Phone</h3>
+                    <p>071 234 5678</p>
+                </div>
+                <div class="contact-info-item">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>info@sinchub.co.za</p>
+                </div>
+                <div class="contact-info-item" style="margin-top: 30px;">
+                    <a href="#" class="btn"><i class="fab fa-facebook-f"></i> Message us on Facebook</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <div class="container footer-grid">
-        <div>
-            <h3>Sandanezwe</h3>
-            <p>Building inclusive economic systems.</p>
-        </div>
-        <div>
-            <h3>Quick Links</h3>
-            <p><a href="index.html">Home</a></p>
-            <p><a href="about.html">Services</a></p>
-        </div>
-    </div>
-</footer>
+    <div id="footer-placeholder"></div>
 
 </body>
 </html>
