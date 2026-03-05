@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Get Well Soon ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-mesh"></div>
+    <div class="background-dimmer"></div>
+
+    <!-- Lock Screen Overlay -->
+    <div id="overlay">
+        <div class="notification-stack">
+            <div class="notif-header">
+                <div style="display:flex; align-items:center; gap:6px;">
+                    <div class="notif-icon"></div>
+                    <span>Messages • Now</span>
+                </div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 20px;">Avuyile Mthembu</h2>
+            <p style="margin: 0; color: #333; font-size: 15px;">Sent you a Get Well Soon card...</p>
+            <button id="start-btn">View Card</button>
+        </div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="container" id="main-content">
+        <div class="ios-card">
+            <div class="header-text">Get Well Soon</div>
+            
+            <div class="image-container">
+                <img id="story-img" src="images/babe.jpg" alt="Memory">
+            </div>
+
+            <div class="message-bubble">
+                <div class="story-text">
+                    <span id="typewriter"></span><span class="cursor"></span>
+                </div>
+            </div>
+
+            <span class="signature">With Love, Avuyile</span>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div id="music-pill">
+        <div class="music-info">
+            <span class="music-title">Lofi Healing Vibes</span>
+            <span class="music-status" id="music-status">Tap to Pause</span>
+        </div>
+        <div class="visualizer" id="visualizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const overlay = document.getElementById('overlay');
+        const mainContent = document.getElementById('main-content');
+        const audio = document.getElementById('bg-music');
+        const musicPill = document.getElementById('music-pill');
+        const musicStatus = document.getElementById('music-status');
+        const visualizer = document.getElementById('visualizer');
+        const typewriterSpan = document.getElementById('typewriter');
+        const storyImg = document.getElementById('story-img');
+
+        // --- CONTENT ---
+        // Ensure these images exist in your folder!
+        const photos = [
+            "images/babe.jpg",
+            "images/babe1.jpg",
+            "images/babe2.jpg"
+        ];
+
+        const messages = [
+    "Ngiyakuthanda sthandwa sami... ❤️",
+    "I don’t like seeing you sick, but you’ll be okay soon. 🤍",
+    "Please recharge, my beautiful princess. 🌸",
+    "The world feels brighter when you're smiling. ✨",
+    "Get well soon, Ngelosi yami. 🤗"
+];
+
+
+        const icons = ['❤️', '🌸', '✨', '💊', '💝', '🧸'];
+        
+        // ZULU WORDS & CLAN NAMES
+        const words = [
+            "Ngiyakuthanda", 
+            "Ngelosi Yami", 
+            "S'thandwa Sami", 
+            "Mdunge", 
+            "Chiliza", 
+            "Mdzakudza"
+        ];
+
+        // --- STATE ---
+        let photoIndex = 0;
+        let messageIndex = 0;
+        let charIndex = 0;
+        let isMusicPlaying = false;
+
+        // Init
+        storyImg.style.opacity = 1;
+
+        startBtn.addEventListener('click', () => {
+            audio.volume = 0.5;
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                updateMusicUI();
+            }).catch(e => console.log("Autoplay blocked", e));
+
+            overlay.classList.add('hidden');
+            
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                musicPill.style.opacity = '1';
+                
+                // Start the loops
+                startFloatingElements();
+                startPhotoSlideshow();
+                typeMessage();
+            }, 600);
+        });
+
+        // Typing Logic
+        function typeMessage() {
+            if (messageIndex >= messages.length) messageIndex = 0;
+            const currentText = messages[messageIndex];
+            
+            if (charIndex < currentText.length) {
+                typewriterSpan.textContent += currentText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeMessage, 50);
+            } else {
+                setTimeout(eraseMessage, 2500);
+            }
+        }
+
+        function eraseMessage() {
+            if (charIndex > 0) {
+                typewriterSpan.textContent = messages[messageIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(eraseMessage, 25);
+            } else {
+                messageIndex++;
+                setTimeout(typeMessage, 500);
+            }
+        }
+
+        // Slideshow Logic
+        function startPhotoSlideshow() {
+            setInterval(() => {
+                photoIndex = (photoIndex + 1) % photos.length;
+                storyImg.style.opacity = 0;
+                setTimeout(() => {
+                    storyImg.src = photos[photoIndex];
+                    storyImg.onload = () => { storyImg.style.opacity = 1; };
+                }, 500);
+            }, 5000);
+        }
+
+        // Floating Logic (Words + Icons)
+        function startFloatingElements() {
+            setInterval(() => {
+                const el = document.createElement('div');
+                const isWord = Math.random() > 0.6; // 40% chance of being a word
+
+                if (isWord) {
+                    el.classList.add('floating-element', 'floating-word');
+                    el.innerText = words[Math.floor(Math.random() * words.length)];
+                    el.style.fontSize = (Math.random() * 10 + 20) + 'px'; // 20px to 30px
+                } else {
+                    el.classList.add('floating-element');
+                    el.innerText = icons[Math.floor(Math.random() * icons.length)];
+                    el.style.fontSize = (Math.random() * 20 + 30) + 'px'; // 30px to 50px
+                }
+                
+                // Position logic
+                el.style.left = (Math.random() * 90 + 5) + 'vw';
+                el.style.animationDuration = (Math.random() * 5 + 8) + 's'; // Slow float
+                
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 13000);
+            }, 800);
+        }
+
+        // Music Controls
+        musicPill.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                audio.pause();
+                isMusicPlaying = false;
+            } else {
+                audio.play();
+                isMusicPlaying = true;
+            }
+            updateMusicUI();
+        });
+
+        function updateMusicUI() {
+            if (isMusicPlaying) {
+                musicStatus.innerText = "Playing";
+                visualizer.style.opacity = 1;
+            } else {
+                musicStatus.innerText = "Paused";
+                visualizer.style.opacity = 0.3;
+            }
+        }
+
+        // Tap Burst Effect
+        document.addEventListener('touchstart', (e) => {
+            if(overlay.classList.contains('hidden')) {
+                createBurst(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        function createBurst(x, y) {
+            for(let i=0; i<3; i++) {
+                const el = document.createElement('div');
+                el.classList.add('floating-element');
+                el.innerText = "❤️";
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                el.style.animation = "floatUp 2s ease-out forwards";
+                el.style.fontSize = "30px";
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>

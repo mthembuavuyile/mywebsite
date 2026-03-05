@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>For My Angel - Nosipho ❤️</title>
+
+    <meta name="description" content="A private digital love letter filled with memories, moments, and the future still waiting to be written. Built just for Nosipho ❤️">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="For My Angel — Nosipho ❤️">
+    <meta property="og:description" content="A timeline of us. Every click is another reminder that this story is only beginning.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --primary-dark: #c9184a;
+            --bg-dark: #0f0c29;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-light: #ececec;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #000;
+            color: var(--text-light);
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- LAYER MANAGEMENT --- */
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* --- BACKGROUND (3D) --- */
+        #world {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at center, #2b1055 0%, #000 100%);
+        }
+
+        /* --- SCENE 1: NOTIFICATION --- */
+        #scene-notification {
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .notif-card {
+            background: rgba(255, 255, 255, 0.95);
+            width: 90%;
+            max-width: 380px;
+            border-radius: 20px;
+            padding: 20px;
+            color: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .notif-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .notif-content h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .notif-content p {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .notif-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        
+        .notif-btn:active { background: var(--primary-dark); }
+
+        /* --- SCENE 2: GIFT BOX --- */
+        #scene-gift {
+            z-index: 90;
+            perspective: 1000px;
+        }
+
+        .instruction {
+            position: absolute;
+            bottom: 15%;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        .cube-container {
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: visible;
+        }
+
+        .face-front  { transform: rotateY(0deg) translateZ(75px); }
+        .face-back   { transform: rotateY(180deg) translateZ(75px); }
+        .face-right  { transform: rotateY(90deg) translateZ(75px); }
+        .face-left   { transform: rotateY(-90deg) translateZ(75px); }
+        .face-top    { transform: rotateX(90deg) translateZ(75px); background: #ff8fa3; }
+        .face-bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+        .ribbon-v { position: absolute; width: 30px; height: 100%; background: #fff; left: 60px; }
+        .ribbon-h { position: absolute; width: 100%; height: 30px; background: #fff; top: 60px; }
+
+        /* --- SCENE 3: DASHBOARD --- */
+        #scene-dashboard { z-index: 80; }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            text-shadow: 0 0 20px var(--primary);
+            margin-bottom: 5px;
+            background: -webkit-linear-gradient(#fff, #ffccd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .menu-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 30px 10px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-card:active { transform: scale(0.95); background: rgba(255, 77, 109, 0.3); }
+        .menu-icon { font-size: 2.2rem; margin-bottom: 10px; color: var(--primary); }
+        .menu-text { font-weight: bold; font-size: 1.1rem; }
+
+        /* --- SCENE 4: CALENDAR --- */
+        #scene-calendar {
+            z-index: 85;
+            display: block;
+            padding-top: 80px;
+            overflow-y: auto; 
+            /* Smooth scrolling for the whole page if needed */
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .cal-container {
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto 30px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 25px;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .cal-header i { padding: 10px; cursor: pointer; color: var(--primary); }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .cal-day-name {
+            color: var(--primary-dark);
+            font-weight: 800;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .has-event {
+            background: rgba(255, 77, 109, 0.15);
+            color: var(--primary-dark);
+            border: 1px solid var(--primary);
+            cursor: pointer;
+            font-weight: 800;
+        }
+        
+        .has-event:active { transform: scale(0.9); background: var(--primary); color: #fff; }
+
+        .has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 5px;
+            height: 5px;
+            background: currentColor;
+            border-radius: 50%;
+        }
+
+        /* Event Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .modal.active { opacity: 1; pointer-events: auto; }
+
+        .modal-card {
+            background: #fff;
+            width: 85%;
+            max-width: 380px;
+            padding: 30px 25px;
+            border-radius: 25px;
+            text-align: center;
+            color: #333;
+            transform: scale(0.8);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal.active .modal-card { transform: scale(1); }
+
+        /* Scrollable content inside modal */
+        .modal-body {
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+
+        /* --- SCENE 5: GALLERY --- */
+        #scene-gallery { z-index: 85; }
+
+        .gallery-card {
+            width: 85%;
+            max-width: 360px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(25px);
+            border-radius: 30px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .polaroid {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .type-text {
+            min-height: 70px;
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .next-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .next-btn:active { transform: scale(0.95); }
+
+        .future-note {
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto 100px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 22px;
+            padding: 25px 20px;
+            backdrop-filter: blur(15px);
+            text-align: center;
+        }
+
+        .note-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .note-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(-20deg) rotateY(45deg); }
+            50% { transform: translateY(-20px) rotateX(-20deg) rotateY(45deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="bg-music" loop>
+        <!-- Ensure this file exists in assets/audio/ -->
+        <source src="assets/audio/wena-sithandwa-sami.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 3D Background -->
+    <canvas id="world"></canvas>
+
+    <!-- SCENE 1: Notification -->
+    <div id="scene-notification" class="layer">
+        <div class="notif-card">
+            <div class="notif-header">
+                <div><i class="fab fa-whatsapp" style="color:#25D366; margin-right:5px;"></i> MESSAGES</div>
+                <div>now</div>
+            </div>
+            <div class="notif-content">
+                <h3>Avuyile Mthembu</h3>
+                <p>Sent you a surprise box... 🎁</p>
+            </div>
+            <button class="notif-btn" id="btn-open-notif">View Message</button>
+        </div>
+    </div>
+
+    <!-- SCENE 2: Gift Box -->
+    <div id="scene-gift" class="layer hidden">
+        <div class="cube-container" id="gift-box">
+            <div class="cube-face face-front"><div class="ribbon-v"></div></div>
+            <div class="cube-face face-back"><div class="ribbon-v"></div></div>
+            <div class="cube-face face-right"></div>
+            <div class="cube-face face-left"></div>
+            <div class="cube-face face-top">
+                <div class="ribbon-h"></div>
+                <div class="ribbon-v"></div>
+            </div>
+            <div class="cube-face face-bottom"></div>
+        </div>
+        <div class="instruction">Tap the box to Open</div>
+    </div>
+
+    <!-- SCENE 3: Dashboard -->
+    <div id="scene-dashboard" class="layer hidden">
+        <div class="main-title">Ngelosi Yami</div>
+        <div class="subtitle">My Angel, My World.</div>
+
+        <div class="menu-grid">
+            <div class="menu-card" onclick="navTo('calendar')">
+                <div class="menu-icon"><i class="far fa-calendar-alt"></i></div>
+                <div class="menu-text">Our Timeline</div>
+            </div>
+            <div class="menu-card" onclick="navTo('gallery')">
+                <div class="menu-icon"><i class="fas fa-heart"></i></div>
+                <div class="menu-text">My Heart</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCENE 4: Calendar -->
+    <div id="scene-calendar" class="layer hidden">
+        <button class="back-btn" onclick="navTo('dashboard')">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2 style="font-family:'Great Vibes'; font-size: 3rem; text-shadow: 0 0 10px var(--primary);">The Timeline</h2>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-top:-5px;">Since Nov 19, 2025</p>
+        </div>
+
+        <div class="cal-container">
+            <div class="cal-header">
+                <i class="fas fa-chevron-left" onclick="changeMonth(-1)"></i>
+                <span id="cal-month-year" style="font-weight: 800; font-size: 1.2rem;">November 2025</span>
+                <i class="fas fa-chevron-right" onclick="changeMonth(1)"></i>
+            </div>
+            <div class="cal-grid" id="cal-days-header"></div>
+            <div class="cal-grid" id="cal-days-body" style="margin-top: 10px;"></div>
+        </div>
+
+        <div class="future-note hidden" id="future-note">
+            <div class="note-title" id="future-note-title">More memories are coming…</div>
+            <div class="note-text" id="future-note-text"></div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div class="modal" id="event-modal">
+        <div class="modal-card">
+            <div class="modal-body">
+                <div style="color:var(--primary); font-weight:800; text-transform:uppercase; font-size:0.8rem; margin-bottom:5px;" id="modal-date">Date</div>
+                <h2 style="font-family:'Great Vibes'; font-size:2.5rem; margin-bottom:15px; line-height:1.2;" id="modal-title">Title</h2>
+                <!-- Added innerHTML support and better line height -->
+                <p style="font-size:1rem; line-height:1.6; color:#555; text-align: left;" id="modal-desc">Description</p>
+            </div>
+            <button onclick="closeModal()" style="margin-top:auto; background:var(--primary); color:white; border:none; padding:12px 30px; border-radius:20px; font-weight:bold; cursor:pointer;">Close</button>
+        </div>
+    </div>
+
+    <!-- SCENE 5: Gallery -->
+    <div id="scene-gallery" class="layer hidden">
+        <button class="back-btn" onclick="navTo('dashboard')">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <div class="gallery-card">
+            <img src="" id="gallery-img" class="polaroid" alt="Us">
+            <div class="type-text" id="gallery-text"></div>
+            <button class="next-btn" onclick="nextSlide()">Next Memory</button>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA OBJECTS (Optimized with HTML for formatting) ---
+        
+        const events = {
+            "2025-11-18": { 
+                title: "The Beginning", 
+                desc: "I got your number for the first time. I was so excited to finally be able to contact you." 
+            },
+            "2025-11-19": { 
+                title: "Movie Check", 
+                desc: "We checked out trailers and picked a movie to watch at Pavilion Numetro." 
+            },
+            "2025-11-20": {
+                title: "Getting Closer", 
+                desc: "We chatted more on WhatsApp while I was at the shop, and you asked me to bring you a Coke.<br><br>Later, I handed it to you in your room—seeing you up close left me in awe as I walked back to mine.<br><br>After that, we talked about the movie for the next day."
+            },
+            "2025-11-21": { 
+                title: "First Date", 
+                desc: "Going with you to watch a movie at Pavilion’s Nu Metro felt magical. I was nervous, but that’s when I knew it was meant to be. I had to win your heart." 
+            },
+            "2025-11-22": { 
+                title: "The Stroll", 
+                desc: "A simple walk to Southway Mall. Drinks, KFC, and just us getting closer." 
+            },
+            "2025-11-23": { 
+                title: "First Kiss", 
+                desc: "Suncoast was filled with arcade games, doughnuts, coffee, and laughter. Then came our first kiss—it felt unreal. All I wanted was to hold your hand on the Bolt ride home.<br><br>Later that evening, we talked about spending some private, close moments together; 🤭 the anticipation made everything feel even more special. We chatted until late." 
+            },
+            "2025-11-24": { 
+                title: "00:05 AM", 
+                desc: "In the early midnight hours, you came to my room. An intimate milestone where I realized how deeply I’d fallen for you.<br><br><strong>Evening:</strong> We went to the park to talk. You opened your heart, and together we bridged the gaps in our communication, strengthening the bond between us." 
+            },
+            "2025-11-25": { 
+                title: "Choosing Us", 
+                desc: "I walked you to town for Umlazi. Later, we chose each other again." 
+            },
+            "2025-12-11": { 
+                title: "Your 20th", 
+                desc: "Celebrating your 20th birthday. Even from afar, I wanted it to be special." 
+            },
+            "2026-01-01": { 
+                title: "New Year", 
+                desc: "Distance didn't matter. We kept choosing each other." 
+            }
+        };
+
+        const slides = [
+            { img: "images/babe.jpg", text: "To my beautiful Queen, my Angel… this is a piece of my heart, written just for you. ❤️" },
+            { img: "images/babe1.jpg", text: "Every moment with you feels like magic. I miss you deeply. You are my clarity, MaMdunge." },
+            { img: "images/babe2.jpg", text: "S’thandwa sami, when you smile, everything else fades away 🥰🤭." },
+            { img: "images/babe3.jpg", text: "I love you! Beyond words, beyond code, beyond infinity itself." },
+            { img: "images/babe4.jpeg", text: "You are my favorite notification, my always, my forever… MaChiliza wami. 🌸" }
+        ];
+
+        // --- CORE NAVIGATION ---
+        const audio = document.getElementById('bg-music');
+        let currentMonth = 10; // November (0-indexed)
+        let currentYear = 2025; 
+        let slideIndex = 0;
+
+        // 1. Open Notification
+        document.getElementById('btn-open-notif').addEventListener('click', () => {
+            // Attempt audio play (requires user interaction)
+            audio.volume = 0.5;
+            audio.play().catch(e => console.log("Audio autoplay prevented"));
+
+            gsap.to('#scene-notification', {
+                opacity: 0, 
+                duration: 0.5, 
+                onComplete: () => {
+                    document.getElementById('scene-notification').classList.add('hidden');
+                    document.getElementById('scene-gift').classList.remove('hidden');
+                    gsap.fromTo('#scene-gift', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" });
+                }
+            });
+        });
+
+        // 2. Open Gift Box
+        document.getElementById('gift-box').addEventListener('click', () => {
+            const tl = gsap.timeline();
+            
+            // Spin and explode effect
+            tl.to('.cube-container', { 
+                rotationY: 720, 
+                rotationX: 360, 
+                scale: 0.1, 
+                duration: 1.2, 
+                ease: "back.in(2)" 
+            })
+            .to('#scene-gift', {
+                opacity: 0, 
+                duration: 0.4, 
+                onComplete: () => {
+                    document.getElementById('scene-gift').classList.add('hidden');
+                    navTo('dashboard');
+                }
+            });
+            
+            createFlowerBurst(window.innerWidth/2, window.innerHeight/2);
+        });
+
+        // 3. Navigation System
+        function navTo(sceneName) {
+            // Hide all overlay layers
+            document.querySelectorAll('.layer').forEach(el => {
+                if(el.id !== 'world') { // Don't hide the background
+                    el.classList.add('hidden');
+                    el.style.opacity = 0;
+                }
+            });
+
+            const target = document.getElementById(`scene-${sceneName}`);
+            target.classList.remove('hidden');
+            
+            // Fade in animation
+            gsap.fromTo(target, 
+                { opacity: 0, translateY: 20 }, 
+                { opacity: 1, translateY: 0, duration: 0.6, ease: "power2.out" }
+            );
+
+            if (sceneName === 'calendar') renderCalendar();
+            if (sceneName === 'gallery') loadSlide(0);
+        }
+
+        // --- CALENDAR LOGIC ---
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        function renderCalendar() {
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const grid = document.getElementById('cal-days-body');
+            document.getElementById('cal-month-year').innerText = `${monthNames[currentMonth]} ${currentYear}`;
+
+            grid.innerHTML = "";
+
+            // Headers (S M T W T F S)
+            const daysHeader = document.getElementById('cal-days-header');
+            if (daysHeader.innerHTML.trim() === "") {
+                ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(d => {
+                    const el = document.createElement('div');
+                    el.className = 'cal-day-name';
+                    el.innerText = d;
+                    daysHeader.appendChild(el);
+                });
+            }
+
+            // Empty slots for previous month
+            for (let i = 0; i < firstDay; i++) {
+                grid.appendChild(document.createElement('div'));
+            }
+
+            // Days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'cal-day';
+                dayEl.innerText = i;
+
+                // Format: YYYY-MM-DD
+                const dateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+
+                if (events[dateKey]) {
+                    dayEl.classList.add('has-event');
+                    // Use closure to capture dateKey
+                    dayEl.onclick = () => openModal(dateKey);
+                }
+
+                grid.appendChild(dayEl);
+            }
+            updateFutureNote();
+        }
+
+        function changeMonth(dir) {
+            // GSAP slide effect for calendar body
+            gsap.to('#cal-days-body', { opacity:0, x: -10 * dir, duration: 0.2, onComplete: () => {
+                currentMonth += dir;
+                if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+                if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+                renderCalendar();
+                gsap.fromTo('#cal-days-body', { opacity: 0, x: 10 * dir }, { opacity: 1, x: 0, duration: 0.2 });
+            }});
+        }
+
+        function openModal(dateKey) {
+            const ev = events[dateKey];
+            const dateObj = new Date(dateKey);
+            
+            document.getElementById('modal-date').innerText = dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('modal-title').innerText = ev.title;
+            // IMPORTANT: innerHTML allows <strong> and <br> to render
+            document.getElementById('modal-desc').innerHTML = ev.desc; 
+            
+            document.getElementById('event-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('event-modal').classList.remove('active');
+        }
+
+        // --- GALLERY LOGIC ---
+        function loadSlide(idx) {
+            const img = document.getElementById('gallery-img');
+            const txt = document.getElementById('gallery-text');
+
+            gsap.to([img, txt], {
+                opacity: 0, duration: 0.3, onComplete: () => {
+                    img.src = slides[idx].img;
+                    txt.innerText = slides[idx].text;
+                    gsap.to([img, txt], { opacity: 1, duration: 0.5 });
+                }
+            });
+        }
+
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            
+            // Shake effect for interaction feedback
+            gsap.fromTo('.gallery-card', { x: -3 }, { x: 3, duration: 0.05, repeat: 3, yoyo: true, clearProps: "x" });
+            
+            loadSlide(slideIndex);
+            createFlowerBurst(window.innerWidth/2, window.innerHeight/2);
+        }
+
+        function createFlowerBurst(x, y) {
+            const emojis = ['❤️', '🌸', '✨', '💕', '🌹'];
+            for (let i = 0; i < 15; i++) {
+                const el = document.createElement('div');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.position = 'fixed';
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                el.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                el.style.pointerEvents = 'none';
+                el.style.zIndex = '1000';
+                document.body.appendChild(el);
+
+                const angle = Math.random() * Math.PI * 2;
+                const dist = Math.random() * 150 + 50;
+                const destX = x + Math.cos(angle) * dist;
+                const destY = y + Math.sin(angle) * dist;
+
+                gsap.to(el, { 
+                    x: destX - x, 
+                    y: destY - y, 
+                    opacity: 0, 
+                    rotation: Math.random() * 180,
+                    duration: 1.5 + Math.random(), 
+                    ease: "power2.out",
+                    onComplete: () => el.remove() 
+                });
+            }
+        }
+
+        function monthHasEvents(year, monthIndex) {
+            const monthStr = String(monthIndex + 1).padStart(2, '0');
+            const prefix = `${year}-${monthStr}-`;
+            return Object.keys(events).some(k => k.startsWith(prefix));
+        }
+
+        function updateFutureNote() {
+            const noteWrap = document.getElementById('future-note');
+            const noteTitle = document.getElementById('future-note-title');
+            const noteText = document.getElementById('future-note-text');
+            
+            if (monthHasEvents(currentYear, currentMonth)) {
+                noteWrap.classList.add('hidden');
+                return;
+            }
+
+            const monthLabel = `${monthNames[currentMonth]} ${currentYear}`;
+            noteTitle.innerText = `${monthLabel} is still waiting for us…`;
+            noteText.innerText = `There are no memories saved here yet, not because we’re missing something, but because the next chapters are still ahead of us.\n\nI can’t wait to turn these blank dates into real moments: a day together, a kiss, a laugh, a “we made it” kind of memory.\n\nUntil then… I’m still choosing you, today, tomorrow, and every day after that. ❤️`;
+            
+            noteWrap.classList.remove('hidden');
+            gsap.fromTo(noteWrap, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: 0.2 });
+        }
+
+
+        // --- 3D BACKGROUND (Heart Particles) ---
+        function initThreeJS() {
+            const canvas = document.getElementById('world');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const geometry = new THREE.BufferGeometry();
+            const count = 1800; // Increased particle count slightly
+            const pos = new Float32Array(count * 3);
+
+            for (let i = 0; i < count; i++) {
+                const t = Math.random() * Math.PI * 2;
+                // Heart formula
+                let x = 16 * Math.pow(Math.sin(t), 3);
+                let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+                let z = (Math.random() - 0.5) * 6; // Depth
+
+                x *= 0.28; y *= 0.28; // Scale
+
+                // Add random scattering
+                x += (Math.random() - 0.5) * 0.5;
+                y += (Math.random() - 0.5) * 0.5;
+
+                pos[i * 3] = x;
+                pos[i * 3 + 1] = y;
+                pos[i * 3 + 2] = z;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            const material = new THREE.PointsMaterial({ 
+                size: 0.06, 
+                color: 0xff4d6d, 
+                transparent: true, 
+                opacity: 0.8, 
+                blending: THREE.AdditiveBlending 
+            });
+            const mesh = new THREE.Points(geometry, material);
+            scene.add(mesh);
+
+            camera.position.z = 13;
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Gentle rotation + mouse influence
+                mesh.rotation.y += 0.002;
+                mesh.rotation.x += (mouseY - mesh.rotation.x) * 0.05;
+                mesh.rotation.y += (mouseX - mesh.rotation.y) * 0.05;
+
+                // Heartbeat effect
+                const time = Date.now() * 0.0012;
+                const scale = 1 + Math.sin(time * 3) * 0.08; 
+                mesh.scale.set(scale, scale, scale);
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        initThreeJS();
+
+    </script>
+</body>
+</html>

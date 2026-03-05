@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphelele Food | Order & Catering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+   RESTAURANT WEBSITE - ORGANIZED STYLESHEET
+   ============================================ */
+
+/* -------------------- CSS VARIABLES -------------------- */
+:root {
+    /* Color Palette */
+    --primary: #A0522D;        /* Sienna/Terracotta */
+    --secondary: #DAA520;      /* Goldenrod */
+    --dark: #1a1a1a;
+    --light: #F4F1EA;
+    --white: #FFFFFF;
+    --gray: #777777;
+    --success: #28a745;
+    
+    /* Effects */
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --transition: all 0.3s ease;
+}
+
+/* -------------------- GLOBAL RESET & BASE -------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+    padding-bottom: 80px; /* Space for floating cart */
+}
+
+/* -------------------- TYPOGRAPHY -------------------- */
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--dark);
+    line-height: 1.2;
+}
+
+/* -------------------- GLOBAL ELEMENTS -------------------- */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+/* -------------------- LAYOUT UTILITIES -------------------- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* -------------------- BUTTON COMPONENTS -------------------- */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--primary);
+}
+
+.add-btn {
+    background: var(--dark);
+    color: var(--white);
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+}
+
+.add-btn:hover {
+    background: var(--secondary);
+    color: var(--dark);
+}
+
+.add-btn:active {
+    transform: scale(0.95);
+}
+
+.view-order-btn {
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* -------------------- HEADER & NAVIGATION -------------------- */
+header {
+    background-color: var(--white);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.logo span {
+    color: var(--secondary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+/* -------------------- HERO SECTION -------------------- */
+.hero {
+    height: 85vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+    margin-top: 80px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: var(--secondary);
+    margin-bottom: 20px;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* -------------------- SECTION TITLES -------------------- */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+}
+
+/* -------------------- SERVICES SECTION -------------------- */
+.services-section {
+    padding: 80px 0;
+    background: var(--white);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: var(--light);
+    padding: 40px 25px;
+    text-align: center;
+    border-radius: 15px;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.service-card:hover {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+/* -------------------- MENU SECTION -------------------- */
+.menu-section {
+    padding: 80px 0;
+    background-color: #fafafa;
+}
+
+.menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: var(--white);
+    border: 1px solid #ddd;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--dark);
+    transition: var(--transition);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.menu-category {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    animation: fadeIn 0.4s ease;
+}
+
+.menu-category.active {
+    display: grid;
+}
+
+/* -------------------- ORDER CARD -------------------- */
+.order-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #eee;
+    transition: var(--transition);
+}
+
+.order-card:hover {
+    box-shadow: var(--shadow);
+    border-color: #eee;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-header h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.order-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+}
+
+.price-tag {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+/* -------------------- ABOUT SECTION -------------------- */
+.about {
+    padding: 80px 0;
+    background: var(--white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-text h2 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+.about-img img {
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* -------------------- BOOKING BANNER -------------------- */
+.booking-banner {
+    background: var(--primary);
+    color: var(--white);
+    padding: 80px 0;
+    text-align: center;
+    background-image: linear-gradient(rgba(160, 82, 45, 0.9), rgba(160, 82, 45, 0.9)), 
+                      url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.booking-banner h2 {
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.booking-banner p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.95;
+    font-size: 1.1rem;
+}
+
+/* -------------------- FLOATING CART -------------------- */
+.floating-cart {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    width: 90%;
+    max-width: 450px;
+    background: var(--dark);
+    color: var(--white);
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2000;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.floating-cart.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+}
+
+.cart-info {
+    font-size: 1.1rem;
+}
+
+.cart-info span {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.pulse-anim {
+    animation: pulse 0.3s ease;
+}
+
+/* -------------------- FOOTER -------------------- */
+footer {
+    background: #1a1a1a;
+    color: #ccc;
+    padding: 70px 0 30px;
+    font-size: 0.95rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 2px;
+    background: var(--primary);
+}
+
+.footer-col a {
+    display: block;
+    margin-bottom: 12px;
+    color: #bbb;
+    transition: 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--secondary);
+    padding-left: 5px;
+}
+
+.footer-col p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    color: var(--white);
+    margin-bottom: 0;
+}
+
+.social-links a:hover {
+    background: var(--primary);
+    padding-left: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* -------------------- ANIMATIONS -------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.05);
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* -------------------- TABLET & BELOW (900px) -------------------- */
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .about-text {
+        order: 2;
+    }
+    
+    .about-img {
+        order: 1;
+    }
+    
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+}
+
+/* -------------------- MOBILE (768px) -------------------- */
+@media (max-width: 768px) {
+    .navbar {
+        height: 70px;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 30px 0;
+        gap: 25px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        clip-path: circle(0px at 90% -10%);
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .nav-links.active {
+        clip-path: circle(1000px at 90% -10%);
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2rem;
+    }
+    
+    .booking-banner {
+        padding: 50px 20px;
+    }
+}
+
+/* -------------------- SMALL MOBILE (400px) -------------------- */
+@media (max-width: 400px) {
+    .hero-btns .btn {
+        padding: 12px 15px;
+        font-size: 0.8rem;
+        flex: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="floating-cart" id="floatingCart">
+        <div class="cart-info">
+            <span id="cartCount">0 Items</span>
+            <span style="opacity: 0.6; font-weight:300">|</span>
+            <span id="cartTotal">R 0.00</span>
+        </div>
+        <button class="view-order-btn" onclick="checkout()">View Order <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
+    </div>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Sphelele <span>Food</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="nav-link-item">Home</a></li>
+                <li><a href="#services" class="nav-link-item">Our Services</a></li>
+                <li><a href="#order-menu" class="nav-link-item">Order Online</a></li>
+                <li><a href="#about" class="nav-link-item">About Us</a></li>
+                <li><a href="#booking" class="nav-link-item">Book Event</a></li>
+                <li><a href="#booking" class="btn btn-primary" style="padding: 8px 25px;">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Authentic Nguni Cuisine <br>& Catering Services</h1>
+            <p style="margin-bottom: 30px; font-size: 1.1rem; opacity: 0.9;">From fast food to full event management. We bring the taste of home to you.</p>
+            <a href="#order-menu" class="btn btn-primary">Order Food</a>
+            <a href="#services" class="btn btn-secondary" style="margin-left: 10px;">Our Services</a>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <span>What We Do</span>
+                <h2>Our Services</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-utensils"></i></div>
+                    <h3>Event Catering</h3>
+                    <p>We cook for weddings, funerals, and corporate events. Full buffet and traditional menu options available.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-truck-moving"></i></div>
+                    <h3>Mobile Kitchen</h3>
+                    <p>Our fully equipped mobile kitchen comes to you. Fresh food cooked on-site for markets and outdoor events.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-hamburger"></i></div>
+                    <h3>Fast Food & Takeaway</h3>
+                    <p>Craving something quick? Grab our famous burgers, wings, and chips. Hot, fresh, and ready to go.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-motorcycle"></i></div>
+                    <h3>Food Deliveries</h3>
+                    <p>Don't want to leave the house? We deliver our full menu straight to your door. Fast and reliable.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-glass-cheers"></i></div>
+                    <h3>Book for Parties</h3>
+                    <p>Reserve our venue or hire us for private parties. We handle the food so you can enjoy the celebration.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-bowl-food"></i></div>
+                    <h3>Starters & Platters</h3>
+                    <p>Delicious appetizers and meat platters perfect for sharing while waiting for the main course.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order-menu" class="menu-section">
+        <div class="container">
+            <div class="section-title">
+                <span>Eat With Us</span>
+                <h2>Order Online</h2>
+            </div>
+
+            <div class="menu-tabs">
+                <button class="tab-btn active" onclick="showMenu('fastfood', this)">Fast Food</button>
+                <button class="tab-btn" onclick="showMenu('starters', this)">Starters</button>
+                <button class="tab-btn" onclick="showMenu('traditional', this)">Traditional Meals</button>
+                <button class="tab-btn" onclick="showMenu('grills', this)">Grills & Platters</button>
+            </div>
+
+            <div id="fastfood" class="menu-category active">
+                <div class="order-card">
+                    <div class="order-header"><h4>Burger & Chips</h4></div>
+                    <div class="order-desc">Classic beef or chicken burger with crispy fries.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 93.50</span>
+                        <button class="add-btn" onclick="addToCart(93.50)">Add +</button>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div class="order-header"><h4>Sausage & Wings Combo</h4></div>
+                    <div class="order-desc">Served with Gravy or Chakalaka and starch.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 132.00</span>
+                        <button class="add-btn" onclick="addToCart(132.00)">Add +</button>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div class="order-header"><h4>6 x Wings</h4></div>
+                    <div class="order-desc">Dipped in our special Sphelele BBQ sauce.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 105.00</span>
+                        <button class="add-btn" onclick="addToCart(105.00)">Add +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="starters" class="menu-category">
+                <div class="order-card">
+                    <div class="order-header"><h4>Chicken Livers</h4></div>
+                    <div class="order-desc">Spicy creamy livers served with a roll.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 65.00</span>
+                        <button class="add-btn" onclick="addToCart(65.00)">Add +</button>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div class="order-header"><h4>Mini Wings (4pc)</h4></div>
+                    <div class="order-desc">A small tasting portion of our famous wings.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 55.00</span>
+                        <button class="add-btn" onclick="addToCart(55.00)">Add +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="traditional" class="menu-category">
+                <div class="order-card">
+                    <div class="order-header"><h4>Beef Stew + Veg</h4></div>
+                    <div class="order-desc">Tender beef stew served with spinach & choice of starch.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 139.20</span>
+                        <button class="add-btn" onclick="addToCart(139.20)">Add +</button>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div class="order-header"><h4>Ulusu (Tripe)</h4></div>
+                    <div class="order-desc">Traditional cleaned tripe slow cooked to perfection.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 94.10</span>
+                        <button class="add-btn" onclick="addToCart(94.10)">Add +</button>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div class="order-header"><h4>Hardbody Chicken</h4></div>
+                    <div class="order-desc">Umleqwa prepared the traditional Zulu way.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 86.60</span>
+                        <button class="add-btn" onclick="addToCart(86.60)">Add +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="grills" class="menu-category">
+                <div class="order-card">
+                    <div class="order-header"><h4>T-Bone Steak (350g)</h4></div>
+                    <div class="order-desc">Flame grilled with secret spices and veggies.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 138.50</span>
+                        <button class="add-btn" onclick="addToCart(138.50)">Add +</button>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div class="order-header"><h4>Meat Platter (Large)</h4></div>
+                    <div class="order-desc">Sausages, Lamb Chops, Pork Chops, Ribs & Salad.</div>
+                    <div class="order-footer">
+                        <span class="price-tag">R 519.80</span>
+                        <button class="add-btn" onclick="addToCart(519.80)">Add +</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container about-grid">
+            <div class="about-text">
+                <div class="section-title" style="text-align: left; margin-bottom: 20px;">
+                    <span>Who We Are</span>
+                    <h2>Our Story</h2>
+                </div>
+                <p>Sphelele Food is a restaurant born in Durban, inspired by the vibrant Nguni culture. We draw our culinary inspiration from the Zulu, Xhosa, Swati, and Ndebele traditions, with touches of Sotho and Tswana flavors.</p>
+                <p>We are dedicated to serving only authentic South African traditional food. Whether you are craving Ulusu, Hardbody Chicken, or Steamed Bread, we prepare it with the respect and love it deserves.</p>
+                <div style="margin-top: 20px; border-left: 4px solid var(--primary); padding-left: 15px;">
+                    <p style="margin-bottom:0; color: var(--dark); font-weight: 600;">Opening Hours:</p>
+                    <p style="margin-bottom:0;">Monday to Sunday, 11:00am - 10:00pm</p>
+                </div>
+            </div>
+            <div class="about-img">
+                <img src="https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?w=600&auto=format&fit=crop&q=80" alt="Traditional African Food Platter">
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking-banner">
+        <div class="container">
+            <h2>Book Us For Your Event</h2>
+            <p>Planning a wedding, party, or corporate function? Let Sphelele Food handle the catering. We offer customized menus and professional service.</p>
+            <a href="mailto:bookings@sphelelefood.co.za" class="btn btn-secondary">Get a Quote</a>
+            <a href="tel:+27641849630" class="btn btn-secondary" style="margin-left:10px;">Call to Book</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Sphelele Food</h4>
+                <p>Authentic Nguni cuisine, fast food, and full catering services for events, parties, and corporate functions.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#services">Our Services</a>
+                <a href="#order-menu">Order Online</a>
+                <a href="#booking">Book Event</a>
+                <a href="#about">About Us</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p><strong>Phone:</strong> <a href="tel:+27641849630" style="display:inline; margin:0;">+27 64 184 9630</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@sphelelefood.co.za" style="display:inline; margin:0;">info@sphelelefood.co.za</a></p>
+                <p><strong>Address:</strong> Durban, KZN</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 Sphelele Food. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Mobile Menu Logic ---
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-link-item');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Toggle Icon
+            const icon = menuToggle.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when a link is clicked
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // --- 2. Menu Tabs Logic ---
+        function showMenu(categoryName, btnElement) {
+            // Hide all categories
+            const categories = document.getElementsByClassName('menu-category');
+            for (let i = 0; i < categories.length; i++) {
+                categories[i].classList.remove('active');
+                categories[i].style.display = "none";
+            }
+
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+
+            // Show selected category
+            const selected = document.getElementById(categoryName);
+            selected.style.display = "grid";
+            setTimeout(() => {
+                selected.classList.add('active');
+            }, 10);
+
+            // Set active tab
+            btnElement.classList.add('active');
+        }
+
+        // --- 3. Cart Logic ---
+        let cartTotal = 0;
+        let cartItems = 0;
+        const cartFloat = document.getElementById('floatingCart');
+
+        function addToCart(price) {
+            cartTotal += price;
+            cartItems += 1;
+            
+            // Update UI
+            document.getElementById('cartTotal').innerText = 'R ' + cartTotal.toFixed(2);
+            document.getElementById('cartCount').innerText = cartItems + ' Items';
+            
+            // Show cart if hidden
+            if(cartItems === 1) {
+                cartFloat.classList.add('visible');
+            }
+
+            // Add pulse animation
+            cartFloat.classList.add('pulse-anim');
+            setTimeout(() => {
+                cartFloat.classList.remove('pulse-anim');
+            }, 300);
+            
+            // Vibration (Mobile)
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        function checkout() {
+            alert("Proceeding to WhatsApp checkout with " + cartItems + " items totaling R" + cartTotal.toFixed(2));
+        }
+    </script>
+</body>
+</html>
