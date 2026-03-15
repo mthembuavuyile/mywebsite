@@ -1,304 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | Avuyile Mthembu</title>
-    <meta name="description" content="Page not found - 404 error on Avuyile Mthembu's website. Return to the homepage or contact for support.">
-    <style>
-        /* CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Avuyile Mthembu</title>
+  <meta name="description" content="Page not found - Return to Avuyile Mthembu's homepage.">
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
 
-        /* Root Variables */
-        :root {
-            --color-primary: #2d3436;
-            --color-secondary: #0984e3;
-            --color-accent: #00cec9;
-            --color-text: #dfe6e9;
-            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --transition-standard: all 0.3s ease;
-        }
+  <style>
+    /* ── Page-level reset so site-header sticks work ── */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--color-bg-page);
+      overflow-x: hidden;
+    }
 
-        /* Body Styles */
-        body {
-            background-color: var(--color-primary);
-            color: var(--color-text);
-            font-family: var(--font-primary);
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    /* ── 404 MAIN STAGE ── */
+    .error-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* Navigation Styles */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(45, 52, 54, 0.95);
-            padding: 1rem 0;
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 1rem; /* Added padding */
-        }
+    /* Subtle grid background */
+    .error-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-        .logo {
-            color: var(--color-text);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+    /* Radial fade over the grid */
+    .error-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, var(--color-bg-page) 100%);
+      pointer-events: none;
+    }
 
+    /* ── CARD ── */
+    .error-card {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 640px;
+      width: 100%;
+      animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
 
-        /* Burger Menu Styles */
-        .burger-menu {
-            display: none; /* Hidden by default on larger screens */
-            cursor: pointer;
-            padding: 0.5rem;
-        }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        .burger-line {
-            width: 25px;
-            height: 3px;
-            background-color: var(--color-text);
-            margin: 5px 0;
-            transition: var(--transition-standard);
-        }
+    /* ── GIANT 404 ── */
+    .glitch-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.25rem;
+    }
 
-        .burger-menu.active .burger-line:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 7px);
-        }
+    .error-number {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(6rem, 20vw, 10rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--color-brand);
+      line-height: 1;
+      display: block;
+      position: relative;
+    }
 
-        .burger-menu.active .burger-line:nth-child(2) {
-            opacity: 0;
-        }
+    /* Glitch layers */
+    .error-number::before,
+    .error-number::after {
+      content: '404';
+      position: absolute;
+      inset: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+    }
+    .error-number::before {
+      color: var(--color-accent);
+      clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+      animation: glitch-a 3.5s infinite steps(1);
+    }
+    .error-number::after {
+      color: #ef4444;
+      clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+      animation: glitch-b 3.5s infinite steps(1);
+    }
 
-        .burger-menu.active .burger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
+    @keyframes glitch-a {
+      0%,  90%, 100% { transform: translate(0); opacity: 0; }
+      91%            { transform: translate(-4px, 2px); opacity: 1; }
+      93%            { transform: translate(4px, -2px); opacity: 1; }
+      95%            { transform: translate(-2px, 1px); opacity: 1; }
+      97%            { transform: translate(0); opacity: 0; }
+    }
+    @keyframes glitch-b {
+      0%,  85%, 100% { transform: translate(0); opacity: 0; }
+      86%            { transform: translate(3px, -1px); opacity: 1; }
+      88%            { transform: translate(-3px, 2px); opacity: 1; }
+      90%            { transform: translate(1px, 0); opacity: 1; }
+      92%            { transform: translate(0); opacity: 0; }
+    }
 
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-        }
+    /* ── STATUS BADGE ── */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      padding: 0.3rem 1rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
 
-        nav a {
-            color: var(--color-text);
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: var(--transition-standard);
-        }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: pulse-red 1.5s ease-in-out infinite;
+    }
 
-        nav a:hover {
-            color: var(--color-accent);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+    @keyframes pulse-red {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+      50%       { box-shadow: 0 0 0 5px rgba(239,68,68,0); }
+    }
 
-        nav a.active {
-            color: var(--color-accent);
-            border-bottom: 2px solid var(--color-accent);
-        }
+    /* ── HEADLINE & BODY ── */
+    .error-headline {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--color-brand);
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.7s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(45, 52, 54, 0.98);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-standard);
-        }
+    .error-body {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      animation: fadeUp 0.7s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
 
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
+    /* ── CODE SNIPPET ── */
+    .error-code-block {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      margin-bottom: 2.5rem;
+      color: var(--color-text-muted);
+      animation: fadeUp 0.7s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
 
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
+    .error-code-block .kw  { color: var(--color-accent); }
+    .error-code-block .str { color: #16a34a; }
+    .error-code-block .num { color: #d97706; }
+    .error-code-block .cmt { color: var(--color-border); font-style: italic; }
 
-        .mobile-menu li {
-            margin: 1rem 0;
-        }
+    /* ── ACTIONS ── */
+    .error-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
 
-        .mobile-menu a {
-            color: var(--color-text);
-            text-decoration: none;
-            font-size: 2rem;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            transition: var(--transition-standard);
-            display: inline-block; /* Ensures padding is respected */
-        }
+    /* Floating decorative dots */
+    .deco-dot {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco-dot-1 {
+      width: 320px; height: 320px;
+      background: var(--color-accent);
+      top: -80px; right: -80px;
+      filter: blur(80px);
+    }
+    .deco-dot-2 {
+      width: 220px; height: 220px;
+      background: #ef4444;
+      bottom: -60px; left: -60px;
+      filter: blur(60px);
+    }
 
-        .mobile-menu a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--color-accent);
-        }
+    @media (max-width: 480px) {
+      .error-actions { flex-direction: column; align-items: center; }
+      .error-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
 
-
-
-        h1 {
-            font-size: 6rem;
-            color: var(--color-accent);
-            margin-bottom: 10px;
-        }
-
-        .ascii-art {
-            font-family: monospace;
-            color: var(--color-secondary);
-            margin: 20px 0;
-            white-space: pre;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--color-secondary);
-            color: var(--color-text);
-            font-size: 1rem;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: var(--transition-standard);
-        }
-
-        .btn:hover {
-            background-color: var(--color-accent);
-        }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            padding: 1rem;
-            width: 100%;
-            background-color: rgba(45, 52, 54, 0.95);
-        }
-
-        /* Media Queries */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none; /* Hide the standard menu */
-            }
-
-            .burger-menu {
-                display: block; /* Show the burger menu */
-            }
-
-            h1 {
-                font-size: 4rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <script src="/components/components.js" defer></script>
 </head>
 <body>
-    <nav>
-        <a href="/" class="logo">M R A</a>
-        <ul class="desktop-menu">
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="blog/">Blog</a></li>
 
-        </ul>
+  <site-header></site-header>
 
-        <div class="burger-menu">
-            <div class="burger-line"></div>
-            <div class="burger-line"></div>
-            <div class="burger-line"></div>
-        </div>
-    </nav>
+  <main class="error-stage">
+    <!-- Decorative glows -->
+    <div class="deco-dot deco-dot-1" aria-hidden="true"></div>
+    <div class="deco-dot deco-dot-2" aria-hidden="true"></div>
 
-    <div class="mobile-menu">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/experimental/">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="blog/">Blog</a></li>
-        </ul>
+    <div class="error-card">
+
+      <div class="glitch-wrap">
+        <span class="error-number" aria-label="404">404</span>
+      </div>
+
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        HTTP/1.1 404 Not Found
+      </div>
+
+      <h1 class="error-headline">Page not found</h1>
+
+      <p class="error-body">
+        The route you requested doesn't exist on this server. It may have been moved, deleted,
+        or never deployed in the first place.
+      </p>
+
+      <div class="error-code-block" aria-hidden="true">
+        <span class="cmt">// Last request trace</span><br>
+        <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">"<span id="errorPath">window.location.pathname</span>"</span>);<br>
+        <span class="cmt">// → status:</span> <span class="num">404</span>, message: <span class="str">"Not Found"</span><br>
+        <span class="cmt">// → suggested action: navigate home ↓</span>
+      </div>
+
+      <div class="error-actions">
+        <a href="/index.html" class="btn btn-primary">
+          <i class="fas fa-house"></i> Back to Home
+        </a>
+        <a href="/contact.html" class="btn btn-outline">
+          <i class="fas fa-envelope"></i> Report Issue
+        </a>
+      </div>
+
     </div>
-    
-    <div class="container">
-        <h1>404</h1>
-        <div class="ascii-art">
-   _____          
-  / ____|         
- | |  __  ___     
- | | |_ |/ _ \    
- | |__| | (_) |   
-  \_____|\___/    
-        </div>
-        <h2>Oops! Page Not Found</h2>
-        <p>The page you're looking for seems to have gone on an unexpected adventure. Don't worry, even the best developers encounter <span class="error-code">404</span> errors sometimes!</p>
-        <p>- Avuyile Mthembu, Developer & Programmer -</p>
-        <a href="/" class="btn" aria-label="Return to Homepage">Return to Homepage</a>
-    </div>
-    
-    <footer class="footer">
-        © 2024 Avuyile Mthembu - Vylex Nexys. All Rights Reserved.
-    </footer>
+  </main>
 
-    <script>
-        const burgerMenu = document.querySelector('.burger-menu');
-        const mobileMenu = document.querySelector('.mobile-menu');
+  <site-footer></site-footer>
 
-        burgerMenu.addEventListener('click', () => {
-            burgerMenu.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
+  <script>
+    // Inject the actual path into the code block
+    const pathEl = document.getElementById('errorPath');
+    if (pathEl) pathEl.textContent = window.location.pathname;
+  </script>
 
-        // Close mobile menu when a link is clicked
-        const mobileLinks = document.querySelectorAll('.mobile-menu a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                burgerMenu.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>
