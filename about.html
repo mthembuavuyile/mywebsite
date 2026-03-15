@@ -1,175 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="pE05B0HdOXMSwz3LmavEaEMql4M3Tn4sA6s-0Ba67a8" />
-    <title>Avuyile's World</title>
-     <!-- SEO Meta Tags -->
-     <meta name="description" content="Learn more about Avuyile Mthembu, a South African software developer and tech enthusiast with expertise in blockchain, AI, and mobile development." />
-     <meta name="keywords" content="Avuyile Mthembu, South African developer, tech enthusiast, blockchain, AI, mobile development, software engineer" />
-     <meta name="author" content="Avuyile Mthembu" />
-     <link rel="canonical" href="https://avuyilemthembu.co.za/about" />
- 
-     <!-- Open Graph for social media -->
-     <meta property="og:title" content="About Avuyile Mthembu - South African Software Developer & Innovator" />
-     <meta property="og:description" content="Explore Avuyile Mthembu's journey as a software developer and tech enthusiast. Discover his work in blockchain, mobile development, and problem-solving." />
-     <meta property="og:image" content="https://mthembuavuyile.github.io/mywebsite/assets/images/avuyile1.jpg" />
-     <meta property="og:url" content="https://avuyilemthembu.co.za/about" />
-     <meta property="og:site_name" content="Avuyile Mthembu - Official Website" />
-     <meta property="og:type" content="website" />
- 
-     <!-- Twitter Cards -->
-     <meta name="twitter:card" content="summary_large_image" />
-     <meta name="twitter:creator" content="@MthembuAvuyile" />
-     <meta name="twitter:title" content="About Avuyile Mthembu - South African Software Developer & Innovator" />
-     <meta name="twitter:description" content="Explore Avuyile Mthembu's journey as a software developer and tech enthusiast." />
-     <meta name="twitter:image" content="https://mthembuavuyile.github.io/mywebsite/assets/images/avuyile1.jpg" />
-     <link rel="stylesheet" href="styles/about.css"> 
-    </head>
-    
-    <body>
-    <header class="header">
-        <nav class="nav-container">
-            <a href="#" class="logo">Avuyile's World</a>
-            <div class="nav-links">
-                <a href="#about">About Me</a>
-                <a href="#journey">My Journey</a>
-                <a href="#fun-facts">Fun Facts</a>
-                <a href="index.html">Home Page</a>
-            </div>
-            <div class="burger">
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-            </div>
-        </nav>
-    </header>
 
-    <section class="hero">
-        <img src="assets/images/avuyile2.jpg" alt="Avuyile Mthembu" class="profile-img">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="About Avuyile Mthembu - From small-town dreamer in Donnybrook to digital innovator. Discover my journey, education, and the many faces behind the code.">
+  <meta name="keywords"
+    content="Avuyile Mthembu, About Avuyile, Vylex Founder, Web Developer, Boston City Campus, Thornhill Christian College, Software Engineer">
+  <meta name="author" content="Avuyile Mthembu">
+
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://avuyilemthembu.co.za/about.html">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <title>About Avuyile Mthembu - My Journey & Story</title>
+
+  <style>
+    :root {
+      --color-brand: #0f172a;
+      --color-brand-light: #1e293b;
+      --color-accent: #2563eb;
+      --color-accent-hover: #1d4ed8;
+      --color-text-main: #334155;
+      --color-text-muted: #64748b;
+      --color-bg-page: #ffffff;
+      --color-bg-alt: #f8fafc;
+      --color-border: #e2e8f0;
+
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+
+      --layout-max-width: 1100px;
+      --header-height: 72px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text-main);
+      background-color: var(--color-bg-page);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--layout-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--color-brand);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--color-accent-hover);
+    }
+
+    /* Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-brand);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-main);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-brand);
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-alt {
+      background-color: var(--color-bg-alt);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 8rem 0 6rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      display: block;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Cards Grid (Used for Journey & Fun Facts) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .content-card {
+      background: var(--color-bg-page);
+      border: 1px solid var(--color-border);
+      padding: 2rem;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-card .date-badge {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .content-card p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      flex-grow: 1;
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-nav {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: 100%;
+      height: calc(100vh - var(--header-height));
+      background-color: var(--color-bg-page);
+      padding: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 999;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-links a {
+      font-size: 1.25rem;
+      color: var(--color-brand);
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">MRA ⚡</a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about" style="color: var(--color-accent);">About</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
         <h1>Hey, I'm Avuyile! 👋</h1>
         <p>From Small-Town Dreamer to Digital Innovator</p>
-        <a href="#about" class="cta-button">Get to Know Me</a>
+      </div>
     </section>
 
     <!-- Introduction Section -->
-    <section id="about" class="intro py-10">
-        <h2 class="text-3xl font-bold text-center mb-6">Introduction</h2>
-        <p class="text-center px-4 max-w-2xl mx-auto">
-        In the boundless realm of technology, where the craft meets the cutting edge, stands Avuyile Mthembu—a resolute innovator with a vision as refined as his skill. Each project becomes a testament to his mastery, where every algorithm, every interface, and every line of code speaks to purpose and precision. With a rare blend of ambition and insight, Avuyile sculpts digital experiences that go beyond functionality, transforming them into seamless bridges between vision and reality.</p>
-        <p>Driven by an ethos of integrity and excellence, Avuyile's journey in technology is marked by a continuous pursuit to not merely meet expectations, but to elevate them. His work is the convergence of rigorous technical prowess and a commitment to transformative impact. Avuyile is not just a developer; he is a craftsman, an architect of possibility, and a catalyst for change.</p>
-        <p>With every innovation, he reshapes the narrative of what technology can achieve, setting a standard that embodies dedication, clarity, and a vision for the future. At the heart of his journey lies a mission: to turn challenges into pathways and ideas into legacies, and to inspire a world where technology is a force of true transformation.</p>
-    </section>
-    
-    <h2>The Many Faces of Avuyile</h2>
-    <section class="faces">
-        <div class="face-card">
-            <h3>The Jokester</h3>
-            <p>Known for my witty comebacks and ability to make people laugh, even with my introverted nature.</p>
+    <section id="about" class="section section-alt">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image">
+            <!-- Ensure your image is located at this path -->
+            <img src="assets/images/avuyile2.jpg" alt="Avuyile Mthembu" loading="lazy">
+          </div>
+          <div class="about-content">
+            <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Get to Know Me</h2>
+            <p>Avuyile Mthembu is a 20-year-old software developer. He enjoys building practical software that works and
+              is easy to use. He focuses on writing clean code and finishing projects thoroughly, from start to finish.
+            </p>
+
+            <p>He has experience across the full development stack and pays attention to detail, making sure his work is
+              reliable and maintainable. Avuyile likes learning new tools and improving how software is built.</p>
+
+            <p>His goal is simple: create useful software that solves real problems and is done right.</p>
+          </div>
         </div>
-        <div class="face-card">
-            <h3>The Brainiac</h3>
-            <p>A curious mind always ready to tackle complex problems and push the boundaries of technology.</p>
-        </div>
-        <div class="face-card">
-            <h3>The Style Icon</h3>
-            <p>Impeccable hygiene and a sharp sense of style that turns heads wherever I go.</p>
-        </div>
+      </div>
     </section>
 
-    <h2 id="journey">My Quirky Journey</h2>
-    <section class="journey">
-        <div class="journey-card">
-            <h3>Village Roots 🌱</h3>
-            <p>Born and raised in Sandanezwe, Donnybrook. Learned problem-solving by figuring out how to catch the fastest chicken!</p>
+    <!-- Quirky Journey / Education Timeline -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Quirky Journey</h2>
+          <p class="section-subtitle">Tracing the roots of my educational and personal growth.</p>
         </div>
-        <div class="journey-card">
-            <h3>School Days 📚</h3>
-            <p>From Khethokuhle Primary to Thornhill Christian College. Known as the quiet troublemaker with a heart of gold.</p>
+
+        <div class="cards-grid">
+          <div class="content-card">
+            <h3>🌱 Village Roots</h3>
+            <div class="date-badge">Sandanezwe, Donnybrook</div>
+            <p>Born and raised in the heart of Sandanezwe. I learned my earliest problem-solving skills by figuring out
+              how to catch the fastest chicken!</p>
+          </div>
+
+          <div class="content-card">
+            <h3>📚 School Days</h3>
+            <div class="date-badge">2010 - 2017</div>
+            <p><strong>Khethokuhle Primary School:</strong> Where it all started. I was known around the classroom as
+              the quiet troublemaker with a heart of gold.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🎓 High School</h3>
+            <div class="date-badge">2018 - 2022</div>
+            <p><strong>Thornhill Christian College:</strong> Cultivating my curiosity, laying down the academic
+              framework, and preparing my mind for greater complexities.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>💻 Tech Awakening</h3>
+            <div class="date-badge">2023 - 2025</div>
+            <p><strong>Boston City Campus:</strong> Pursuing a Diploma in Systems Development. Discovered the magic of
+              coding and never looked back. Now successfully turning caffeine into code!</p>
+          </div>
         </div>
-        <div class="journey-card">
-            <h3>Tech Awakening 💻</h3>
-            <p>Discovered the magic of coding and never looked back. Now turning caffeine into code at Boston City Campus!</p>
-        </div>
+      </div>
     </section>
 
-    <h2 id="fun-facts">Fun Facts About Avuyile</h2>
-    <section class="fun-facts">
-    <div class="fact-card">
-        <h3>🤔 The Thoughtful Influencer</h3>
-        <p>I choose my words carefully, making each statement count and leaving a lasting impression.</p>
-    </div>        
-    <div class="fact-card">
-        <h3>🧼 Precision in Presentation</h3>
-        <p>I believe in maintaining a clean and polished appearance, bringing a sense of order and readiness to everything I do.</p>
-    </div>        
-    <div class="fact-card">
-        <h3>🚀 Tech Enthusiast</h3>
-        <p>I dream in code and wake up with solutions. My pillow is probably stuffed with binary!</p>
-    </div>
-    <div class="fact-card">
-        <h3>🌍 Global Thinker</h3>
-        <p>Passionate about using blockchain and AI to make the world a better place, one line of code at a time.</p>
-    </div>
-    <div class="fact-card">
-        <h3>💡 Innovation-Driven</h3>
-        <p>From creating tools for digital privacy to tracking real-world locations, I'm always exploring ways to improve lives with tech solutions.</p>
-    </div>
-    <div class="fact-card">
-        <h3>📚 Lifelong Learner</h3>
-        <p>Whether it's studying systems development or delving into philosophy, I'm committed to growing and mastering every skill I take on.</p>
-    </div>
+    <!-- The Many Faces & Fun Facts -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">The Faces & Fun Facts</h2>
+          <p class="section-subtitle">Avuyile's World inside and outside of the IDE.</p>
+        </div>
+
+        <div class="cards-grid">
+
+          <div class="content-card">
+            <h3>🎭 The Jokester</h3>
+            <p>Known for my witty comebacks and ability to make people laugh, even with my inherently introverted
+              nature.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🧠 The Brainiac</h3>
+            <p>Possessing a curious mind that is always ready to tackle complex problems and push the boundaries of
+              modern technology.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>👔 The Style Icon</h3>
+            <p>I believe in impeccable hygiene and maintaining a sharp sense of style that naturally turns heads
+              wherever I go.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🤔 Thoughtful Influencer</h3>
+            <p>I choose my words carefully, making each statement count and leaving a lasting, positive impression on
+              those I speak with.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🧼 Precision in Presentation</h3>
+            <p>I believe in maintaining a clean, polished appearance, bringing a sense of order, structure, and
+              readiness to everything I do.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🚀 Tech Enthusiast</h3>
+            <p>I dream in code and wake up with actionable solutions. My pillow is probably stuffed entirely with binary
+              code!</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🌍 Global Thinker</h3>
+            <p>Deeply passionate about utilizing blockchain infrastructure and Artificial Intelligence to make the world
+              a genuinely better place.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>💡 Innovation-Driven</h3>
+            <p>From creating intuitive tools for digital privacy to tracking real-world locations, I am always exploring
+              ways to improve lives with tech.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>📚 Lifelong Learner</h3>
+            <p>Whether studying complex systems development or delving deep into philosophy, I am entirely committed to
+              growing and mastering every skill I take on.</p>
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const burger = document.querySelector('.burger');
-            const navLinks = document.querySelector('.nav-links');
-            const links = document.querySelectorAll('.nav-links a');
-    
-            // Toggle navigation menu
-            burger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                burger.classList.toggle('active');
-            });
-    
-            // Close menu when clicking a link
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    burger.classList.remove('active');
-                });
-            });
-    
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                const isClickInside = navLinks.contains(e.target) || burger.contains(e.target);
-                
-                if (!isClickInside && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    burger.classList.remove('active');
-                }
-            });
-    
-            // Close menu on window resize (if wider than mobile breakpoint)
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    navLinks.classList.remove('active');
-                    burger.classList.remove('active');
-                }
-            });
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="currentYear"></span> Avuyile Mthembu. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic Year for Footer
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      // Mobile Menu Logic
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileLinks = mobileNav.querySelectorAll('a');
+      const icon = mobileBtn.querySelector('i');
+
+      function toggleMenu() {
+        mobileNav.classList.toggle('active');
+        if (mobileNav.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+          document.body.style.overflow = 'hidden';
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+          document.body.style.overflow = '';
+        }
+      }
+
+      mobileBtn.addEventListener('click', toggleMenu);
+
+      // Close menu when a link is clicked
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (mobileNav.classList.contains('active')) {
+            toggleMenu();
+          }
         });
-    </script>       
-    <footer>
-        <p>© 2025 Avuyile Mthembu - Village Kid, Code Wizard, Future Tech Mogul</p>
-        <nav class="footer-nav">
-            <a href="index.html">Home</a>
-            <a href="contact.html">Contact</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="skills.html">Skills</a>
-            <a href="blog/index.html">Blog</a>
-        </nav>
-    </footer>
+      });
+    });
+  </script>
 </body>
+
 </html>

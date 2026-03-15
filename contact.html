@@ -1,136 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contact Avuyile Mthembu | Get in Touch</title>
-    
-        <!-- Meta Description -->
-        <meta name="description" content="Get in touch with Avuyile Mthembu. Contact via email, phone, or social media. Let's collaborate on exciting projects!">
-    
-        <!-- Keywords (Google doesn't use these anymore, but other search engines might) -->
-        <meta name="keywords" content="Contact Avuyile Mthembu, Web Developer, South Africa, Freelance Developer, Hire Web Developer, Collaboration">
-    
-        <!-- Open Graph Meta Tags for Social Media -->
-        <meta property="og:title" content="Contact Avuyile Mthembu | Get in Touch">
-        <meta property="og:description" content="Reach out to Avuyile Mthembu for collaborations, projects, or inquiries.">
-        <meta property="og:image" content="https://avuyilemthembu.co.za/images/contact-banner.jpg">
-        <meta property="og:url" content="https://avuyilemthembu.co.za/contact">
-        <meta property="og:type" content="website">
-    
-        <!-- Twitter Card for better visibility on Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Contact Avuyile Mthembu | Get in Touch">
-        <meta name="twitter:description" content="Connect with Avuyile Mthembu for projects and inquiries.">
-        <meta name="twitter:image" content="https://avuyilemthembu.co.za/images/contact-banner.jpg">
-    
-        <!-- Canonical URL to avoid duplicate content issues -->
-        <link rel="canonical" href="https://avuyilemthembu.co.za/contact">
-    
-        <!-- Stylesheets -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-        <link rel="stylesheet" href="styles/header.css">
-        <link rel="stylesheet" href="styles/footer.css">
-        <link rel="stylesheet" href="styles/contact.css">
-    
-        <!-- Favicon -->
-        <link rel="icon" href="https://avuyilemthembu.co.za/favicon.ico" type="image/x-icon">
-    </head>
-    
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with Avuyile Mthembu. Contact via email, phone, or social media. Let's collaborate on exciting projects!">
+  <meta name="keywords" content="Contact Avuyile Mthembu, Web Developer, South Africa, Freelance Developer, Hire Web Developer, Collaboration">
+  <meta name="author" content="Avuyile Mthembu">
+
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://avuyilemthembu.co.za/contact">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <title>Contact Avuyile Mthembu | Get in Touch</title>
+
+  <meta property="og:title" content="Contact Avuyile Mthembu | Get in Touch">
+  <meta property="og:description" content="Reach out to Avuyile Mthembu for collaborations, projects, or inquiries.">
+  <meta property="og:image" content="https://avuyilemthembu.co.za/images/contact-banner.jpg">
+  <meta property="og:url" content="https://avuyilemthembu.co.za/contact">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Avuyile Mthembu | Get in Touch">
+  <meta name="twitter:description" content="Connect with Avuyile Mthembu for projects and inquiries.">
+  <meta name="twitter:image" content="https://avuyilemthembu.co.za/images/contact-banner.jpg">
+
+  <style>
+    /* Base Theme Variables from Index */
+    :root {
+      --color-brand: #0f172a;
+      --color-brand-light: #1e293b;
+      --color-accent: #2563eb;
+      --color-accent-hover: #1d4ed8;
+      --color-text-main: #334155;
+      --color-text-muted: #64748b;
+      --color-bg-page: #ffffff;
+      --color-bg-alt: #f8fafc;
+      --color-border: #e2e8f0;
+
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+
+      --layout-max-width: 1100px;
+      --header-height: 72px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text-main);
+      background-color: var(--color-bg-page);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: var(--layout-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--color-brand);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--color-accent-hover);
+    }
+
+    /* Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-brand);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-main);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-brand);
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-nav {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: 100%;
+      height: calc(100vh - var(--header-height));
+      background-color: var(--color-bg-page);
+      padding: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 999;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-links a {
+      font-size: 1.25rem;
+      color: var(--color-brand);
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background-color 0.2s, border-color 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: #ffffff;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-accent-hover);
+      color: #ffffff;
+    }
+
+    /* Sections */
+    main {
+      flex: 1;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Contact Page Specific Styles */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .info-item i {
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      margin-top: 0.25rem;
+    }
+
+    .info-item h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-item p {
+      color: var(--color-text-muted);
+      margin-bottom: 0;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .social-icons a {
+      color: var(--color-text-muted);
+      font-size: 1.5rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .contact-form-wrapper {
+      background: var(--color-bg-page);
+      border: 1px solid var(--color-border);
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--color-brand);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--color-text-main);
+      background-color: var(--color-bg-alt);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      background-color: var(--color-bg-page);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      background-color: var(--color-bg-page);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .contact-form-wrapper {
+        padding: 1.5rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+    }
+  </style>
+</head>
+
 <body>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">AM</a>
-            <button class="nav-menu-button" id="menuToggle" aria-label="Toggle Navigation">☰</button>
-             <div class="nav-links" id="navLinks">
-                <a href="about.html" class="nav-link">About</a>
-                <a href="skills.html" class="nav-link">Skills</a>
-                <a href="portfolio.html" class="nav-link">Projects</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">MRA ⚡</a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title">Get in Touch</h1>
+          <p class="section-subtitle">Let's create something amazing together</p>
         </div>
-    </nav>
 
-    <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <div class="contact-header">
-                <h1>Get in Touch</h1>
-                <p>Let's create something amazing together</p>
-            </div>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Phone</h3>
-                            <p>064 878 4287</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>mthembuavuyile@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>South Africa</p>
-                        </div>
-                    </div>
+        <div class="contact-grid">
+          
+          <div class="contact-info">
+            <div class="contact-info-list">
+              <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <h3>Phone</h3>
+                  <p>064 878 4287</p>
                 </div>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <h3>Email</h3>
+                  <p>mthembuavuyile@gmail.com</p>
+                  <p>info@avuyilemthembu.co.za</p>
 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                </div>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <h3>Location</h3>
+                  <p>South Africa</p>
+                </div>
+              </div>
             </div>
 
-            <div class="social-links">
-                <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://twitter.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-tiktok"></i>
-                </a>
+            <div class="social-icons">
+              <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://twitter.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://web.facebook.com/people/Avuyile-Mthembu/100070277396863/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a href="https://www.tiktok.com/@mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
+              </a>
             </div>
+          </div>
+
+          <div class="contact-form-wrapper">
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" class="form-control" required placeholder="How can we work together?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+          </div>
+
         </div>
+      </div>
     </section>
+  </main>
 
-    <footer class="footer">
-        <div class="container">
-            <nav class="footer__links">
-                <a href="contact.html" class="footer__link">Contact</a>
-                <a href="about.html" class="footer__link">About</a>
-                <a href="portfolio.html" class="footer__link">Portfolio</a>
-                <a href="blog/index.html" class="footer__link">Blog</a>
-                <a href="https://vylexnexys.co.za" class="footer__link">Company</a>
-            </nav>
-            <p class="footer__copyright">© 2025 Avuyile Mthembu. All rights reserved.</p>
-        </div>
-    </footer>
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="currentYear"></span> Avuyile Mthembu. All rights reserved.</p>
+    </div>
+  </footer>
 
-    <script src="scripts/main.js"></script>
-    <script src="scripts/form.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/form.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic Year for Footer
+      const yearSpan = document.getElementById('currentYear');
+      if(yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // Mobile Menu Logic
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileLinks = mobileNav.querySelectorAll('a');
+      const icon = mobileBtn.querySelector('i');
+
+      function toggleMenu() {
+        mobileNav.classList.toggle('active');
+        if (mobileNav.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+          document.body.style.overflow = 'hidden';
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if(mobileBtn) {
+        mobileBtn.addEventListener('click', toggleMenu);
+      }
+
+      // Close menu when a link is clicked
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (mobileNav.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
