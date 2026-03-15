@@ -26,212 +26,9 @@
   <meta name="twitter:description" content="Connect with Avuyile Mthembu for projects and inquiries.">
   <meta name="twitter:image" content="https://avuyilemthembu.co.za/images/contact-banner.jpg">
 
+  <link rel="stylesheet" href="css/global.css">
+
   <style>
-    /* Base Theme Variables from Index */
-    :root {
-      --color-brand: #0f172a;
-      --color-brand-light: #1e293b;
-      --color-accent: #2563eb;
-      --color-accent-hover: #1d4ed8;
-      --color-text-main: #334155;
-      --color-text-muted: #64748b;
-      --color-bg-page: #ffffff;
-      --color-bg-alt: #f8fafc;
-      --color-border: #e2e8f0;
-
-      --font-sans: 'Inter', system-ui, sans-serif;
-      --font-mono: 'Fira Code', monospace;
-
-      --layout-max-width: 1100px;
-      --header-height: 72px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      color: var(--color-text-main);
-      background-color: var(--color-bg-page);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: var(--layout-max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4 {
-      color: var(--color-brand);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    p {
-      margin-bottom: 1rem;
-    }
-
-    a {
-      color: var(--color-accent);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    a:hover {
-      color: var(--color-accent-hover);
-    }
-
-    /* Navigation */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--color-border);
-      height: var(--header-height);
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-
-    .brand-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--color-brand);
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--color-text-main);
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--color-accent);
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--color-brand);
-    }
-
-    /* Mobile Menu Overlay */
-    .mobile-nav {
-      position: fixed;
-      top: var(--header-height);
-      left: 0;
-      width: 100%;
-      height: calc(100vh - var(--header-height));
-      background-color: var(--color-bg-page);
-      padding: 2rem;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 999;
-      border-top: 1px solid var(--color-border);
-    }
-
-    .mobile-nav.active {
-      transform: translateX(0);
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .mobile-nav-links a {
-      font-size: 1.25rem;
-      color: var(--color-brand);
-      font-weight: 600;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: background-color 0.2s, border-color 0.2s;
-      cursor: pointer;
-      border: 1px solid transparent;
-      font-family: inherit;
-    }
-
-    .btn-primary {
-      background-color: var(--color-accent);
-      color: #ffffff;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--color-accent-hover);
-      color: #ffffff;
-    }
-
-    /* Sections */
-    main {
-      flex: 1;
-    }
-
-    .section {
-      padding: 5rem 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      max-width: 600px;
-      margin-inline: auto;
-    }
-
-    .section-title {
-      font-size: 2.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      color: var(--color-text-muted);
-      font-size: 1.1rem;
-    }
 
     /* Contact Page Specific Styles */
     .contact-grid {
@@ -365,41 +162,15 @@
       }
     }
   </style>
+  <script src="/components/components.js" defer></script>
+
 </head>
 
 <body>
 
-  <header class="site-header">
-    <div class="container nav-container">
-      <a href="index.html" class="brand-logo">MRA ⚡</a>
+    <site-header></site-header>
 
-      <nav aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#skills">Skills</a></li>
-          <li><a href="index.html#projects">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
-          <li><a href="blog/index.html">Blog</a></li>
-        </ul>
-      </nav>
 
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <nav class="mobile-nav" id="mobileNav">
-    <ul class="mobile-nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#skills">Skills</a></li>
-      <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
-      <li><a href="blog/index.html">Blog</a></li>
-    </ul>
-  </nav>
 
   <main>
     <section class="section" id="contact">
@@ -477,56 +248,11 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="currentYear"></span> Avuyile Mthembu. All rights reserved.</p>
-    </div>
-  </footer>
+  <site-footer></site-footer>
 
   <script src="scripts/main.js"></script>
   <script src="scripts/form.js"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Dynamic Year for Footer
-      const yearSpan = document.getElementById('currentYear');
-      if(yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-
-      // Mobile Menu Logic
-      const mobileBtn = document.getElementById('mobileMenuBtn');
-      const mobileNav = document.getElementById('mobileNav');
-      const mobileLinks = mobileNav.querySelectorAll('a');
-      const icon = mobileBtn.querySelector('i');
-
-      function toggleMenu() {
-        mobileNav.classList.toggle('active');
-        if (mobileNav.classList.contains('active')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
-          document.body.style.overflow = 'hidden';
-        } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-          document.body.style.overflow = '';
-        }
-      }
-
-      if(mobileBtn) {
-        mobileBtn.addEventListener('click', toggleMenu);
-      }
-
-      // Close menu when a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (mobileNav.classList.contains('active')) {
-            toggleMenu();
-          }
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>

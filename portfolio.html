@@ -16,419 +16,222 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
 
   <title>Portfolio | Avuyile Mthembu - Apps, Games & Tools</title>
 
   <style>
-    :root {
-      --color-brand: #0f172a;
-      --color-brand-light: #1e293b;
-      --color-accent: #2563eb;
-      --color-accent-hover: #1d4ed8;
-      --color-text-main: #334155;
-      --color-text-muted: #64748b;
-      --color-bg-page: #ffffff;
-      --color-bg-alt: #f8fafc;
-      --color-border: #e2e8f0;
+/* ===============================
+   portfolio.html — Page Styles
+================================== */
 
-      --font-sans: 'Inter', system-ui, sans-serif;
-      --font-mono: 'Fira Code', monospace;
+/* ── Hero ─────────────────────── */
+.hero {
+  padding: 6rem 0 5rem;
+  background: linear-gradient(135deg, var(--color-brand) 0%, #1e3a6e 100%);
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
-      --layout-max-width: 1100px;
-      --header-height: 72px;
-    }
+/* Subtle grid overlay for depth */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.hero .container { position: relative; z-index: 1; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+.hero h1 {
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
 
-    body {
-      font-family: var(--font-sans);
-      color: var(--color-text-main);
-      background-color: var(--color-bg-page);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+.hero p {
+  color: rgba(255,255,255,.75);
+  font-size: 1.15rem;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
 
-    .container {
-      max-width: var(--layout-max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+/* Tech tag pills */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
 
-    /* Typography */
-    h1,
-    h2,
-    h3,
-    h4 {
-      color: var(--color-brand);
-      font-weight: 700;
-      line-height: 1.2;
-    }
+.tag {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  background-color: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.9);
+  border: 1px solid rgba(255,255,255,.18);
+  letter-spacing: 0.03em;
+  transition: background-color 0.2s, border-color 0.2s;
+}
 
-    p {
-      margin-bottom: 1rem;
-    }
+.tag:hover {
+  background-color: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.35);
+}
 
-    a {
-      color: var(--color-accent);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+/* ── Project Cards Grid ───────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
 
-    a:hover {
-      color: var(--color-accent-hover);
-    }
+.project-card {
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
 
-    /* Navigation */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--color-border);
-      height: var(--header-height);
-      display: flex;
-      align-items: center;
-    }
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, .1);
+  border-color: var(--color-accent);
+}
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
+.card-icon {
+  font-size: 1.75rem;
+  color: var(--color-accent);
+  margin-bottom: 0.25rem;
+}
 
-    .brand-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--color-brand);
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
+.project-card h3 {
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+.project-card p {
+  color: var(--color-text-muted);
+  font-size: 0.93rem;
+  line-height: 1.65;
+  flex: 1;               /* push link to bottom */
+  margin-bottom: 0;
+}
 
-    .nav-links a {
-      color: var(--color-text-main);
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-top: 0.5rem;
+  transition: gap 0.2s ease;
+}
 
-    .nav-links a:hover {
-      color: var(--color-accent);
-    }
+.project-link:hover {
+  gap: 0.65rem;
+  color: var(--color-accent-hover);
+}
 
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--color-brand);
-    }
+/* ── Contact Section ──────────── */
+.contact-wrapper {
+  text-align: center;
+  max-width: 620px;
+}
 
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: background-color 0.2s, border-color 0.2s;
-      cursor: pointer;
-      border: 1px solid transparent;
-    }
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.75rem 0 2rem;
+}
 
-    .btn-primary {
-      background-color: var(--color-accent);
-      color: #ffffff;
-    }
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-brand);
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
 
-    .btn-primary:hover {
-      background-color: var(--color-accent-hover);
-      color: #ffffff;
-    }
+.contact-links a:hover {
+  border-color: var(--color-accent);
+  background-color: #eff6ff;
+  color: var(--color-accent);
+}
 
-    .btn-outline {
-      background-color: transparent;
-      border-color: var(--color-border);
-      color: var(--color-brand);
-    }
+/* Social icon row */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
 
-    .btn-outline:hover {
-      border-color: var(--color-brand);
-      background-color: var(--color-bg-alt);
-    }
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
 
-    /* Sections */
-    .section {
-      padding: 5rem 0;
-    }
+.social-icons a:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background-color: #eff6ff;
+  transform: translateY(-2px);
+}
 
-    .section-alt {
-      background-color: var(--color-bg-alt);
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-    }
+/* ── Responsive ───────────────── */
+@media (max-width: 768px) {
+  .hero { padding: 4rem 0 3.5rem; }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      max-width: 750px;
-      margin-inline: auto;
-    }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .section-title {
-      font-size: 2.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      color: var(--color-text-muted);
-      font-size: 1.1rem;
-    }
-
-    /* Hero */
-    .hero {
-      padding: 8rem 0 6rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--color-text-muted);
-      max-width: 800px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .tech-tags {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      padding: 0.4rem 1rem;
-      background-color: var(--color-bg-alt);
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      color: var(--color-text-main);
-    }
-
-    /* Projects / Directories Grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      background-color: var(--color-bg-page);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    }
-
-    .project-card i.card-icon {
-      font-size: 2rem;
-      color: var(--color-accent);
-      margin-bottom: 1rem;
-    }
-
-    .project-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-card p {
-      color: var(--color-text-muted);
-      font-size: 0.95rem;
-      flex-grow: 1;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-card .project-link {
-      font-weight: 600;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      align-self: flex-start;
-      padding: 0.5rem 1rem;
-      background-color: var(--color-bg-alt);
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-
-    .project-card .project-link:hover {
-      background-color: var(--color-accent);
-      color: white;
-      border-color: var(--color-accent);
-    }
-
-    /* Contact */
-    .contact-wrapper {
-      text-align: center;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-
-    .contact-links a {
-      font-size: 1.1rem;
-      color: var(--color-brand);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .social-icons a {
-      color: var(--color-text-muted);
-      font-size: 1.5rem;
-    }
-
-    .social-icons a:hover {
-      color: var(--color-brand);
-    }
-
-    /* Footer */
-    .site-footer {
-      text-align: center;
-      padding: 2rem 0;
-      border-top: 1px solid var(--color-border);
-      color: var(--color-text-muted);
-      font-size: 0.9rem;
-    }
-
-    /* Mobile Menu Overlay */
-    .mobile-nav {
-      position: fixed;
-      top: var(--header-height);
-      left: 0;
-      width: 100%;
-      height: calc(100vh - var(--header-height));
-      background-color: var(--color-bg-page);
-      padding: 2rem;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 999;
-      border-top: 1px solid var(--color-border);
-    }
-
-    .mobile-nav.active {
-      transform: translateX(0);
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .mobile-nav-links a {
-      font-size: 1.25rem;
-      color: var(--color-brand);
-      font-weight: 600;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .section {
-        padding: 3rem 0;
-      }
-    }
+  .contact-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
   </style>
+
+    <script src="/components/components.js" defer></script>
+
 </head>
 
 <body>
 
-  <header class="site-header">
-    <div class="container nav-container">
-      <a href="index.html" class="brand-logo">MRA ⚡</a>
+  <site-header></site-header>
 
-      <nav aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#directories">Directories</a></li>
-          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <nav class="mobile-nav" id="mobileNav">
-    <ul class="mobile-nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#directories">Directories</a></li>
-      <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
 
   <main>
 
@@ -556,48 +359,8 @@
 
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="currentYear"></span> Avuyile Mthembu. All rights reserved.</p>
-    </div>
-  </footer>
+    <site-footer></site-footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Dynamic Year for Footer
-      document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-      // Mobile Menu Logic
-      const mobileBtn = document.getElementById('mobileMenuBtn');
-      const mobileNav = document.getElementById('mobileNav');
-      const mobileLinks = mobileNav.querySelectorAll('a');
-      const icon = mobileBtn.querySelector('i');
-
-      function toggleMenu() {
-        mobileNav.classList.toggle('active');
-        if (mobileNav.classList.contains('active')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
-          document.body.style.overflow = 'hidden';
-        } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-          document.body.style.overflow = '';
-        }
-      }
-
-      mobileBtn.addEventListener('click', toggleMenu);
-
-      // Close menu when a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (mobileNav.classList.contains('active')) {
-            toggleMenu();
-          }
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>
