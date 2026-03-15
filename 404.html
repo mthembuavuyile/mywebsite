@@ -150,7 +150,7 @@
 
     @keyframes pulse-red {
       0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
-      50%       { box-shadow: 0 0 0 5px rgba(239,68,68,0); }
+      50%        { box-shadow: 0 0 0 5px rgba(239,68,68,0); }
     }
 
     /* ── HEADLINE & BODY ── */
@@ -234,7 +234,6 @@
   <site-header></site-header>
 
   <main class="error-stage">
-    <!-- Decorative glows -->
     <div class="deco-dot deco-dot-1" aria-hidden="true"></div>
     <div class="deco-dot deco-dot-2" aria-hidden="true"></div>
 
@@ -249,26 +248,25 @@
         HTTP/1.1 404 Not Found
       </div>
 
-      <h1 class="error-headline">Page not found</h1>
+      <h1 class="error-headline">Console.error("Route Not Found")</h1>
 
       <p class="error-body">
-        The route you requested doesn't exist on this server. It may have been moved, deleted,
-        or never deployed in the first place.
+        The endpoint you requested doesn't exist in Avuyile's directory. It may have been refactored, deleted, or simply hasn't been pushed to production yet.
       </p>
 
       <div class="error-code-block" aria-hidden="true">
         <span class="cmt">// Last request trace</span><br>
-        <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">"<span id="errorPath">window.location.pathname</span>"</span>);<br>
+        <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">"<span id="errorPath">/...</span>"</span>);<br>
         <span class="cmt">// → status:</span> <span class="num">404</span>, message: <span class="str">"Not Found"</span><br>
         <span class="cmt">// → suggested action: navigate home ↓</span>
       </div>
 
       <div class="error-actions">
         <a href="/index.html" class="btn btn-primary">
-          <i class="fas fa-house"></i> Back to Home
+          <i class="fas fa-house"></i> Return to Main Branch
         </a>
         <a href="/contact.html" class="btn btn-outline">
-          <i class="fas fa-envelope"></i> Report Issue
+          <i class="fas fa-envelope"></i> Open an Issue
         </a>
       </div>
 
@@ -278,9 +276,14 @@
   <site-footer></site-footer>
 
   <script>
-    // Inject the actual path into the code block
-    const pathEl = document.getElementById('errorPath');
-    if (pathEl) pathEl.textContent = window.location.pathname;
+    // Inject the actual path into the code block once the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      const pathEl = document.getElementById('errorPath');
+      if (pathEl) {
+        // Fallback to '/' just in case pathname is empty
+        pathEl.textContent = window.location.pathname || '/';
+      }
+    });
   </script>
 
 </body>
