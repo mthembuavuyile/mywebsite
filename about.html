@@ -158,6 +158,126 @@
       width: fit-content;
     }
 
+    /* ===============================
+       Timeline Styles (Education & Journey)
+    ================================== */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* The vertical line */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: #e2e8f0;
+      /* Light gray line, change to var(--color-brand) if you want it bolder */
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+      border-radius: 4px;
+    }
+
+    /* Container for each timeline item */
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    /* The dots on the timeline */
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: var(--color-bg-page);
+      border: 4px solid var(--color-brand);
+      top: 24px;
+      border-radius: 50%;
+      z-index: 1;
+      transition: background-color 0.3s ease;
+    }
+
+    .timeline-item:hover::after {
+      background-color: var(--color-brand);
+    }
+
+    /* Left and Right positioning */
+    .timeline-item.left {
+      left: 0;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+    }
+
+    /* Fix dot position for right side */
+    .timeline-item.right::after {
+      left: -10px;
+    }
+
+    /* Timeline Content Box (reusing some of your card styles for consistency) */
+    .timeline-content {
+      background: var(--color-bg-page);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .timeline-item:hover .timeline-content {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, .09);
+      border-color: var(--color-accent);
+    }
+
+    .timeline-content h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-brand);
+    }
+
+    .timeline-content p {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    /* ── Responsive Timeline (Mobile) ── */
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 20px;
+        /* Move line to the left */
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 15px;
+      }
+
+      .timeline-item.right {
+        left: 0;
+      }
+
+      /* Adjust dot positioning for mobile */
+      .timeline-item.left::after,
+      .timeline-item.right::after {
+        left: 10px;
+      }
+    }
+
     /* ── Responsive ───────────────── */
     @media (max-width: 768px) {
       .hero {
@@ -193,7 +313,6 @@
 
   <main>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="container">
         <h1>Hey, I'm Avuyile! 👋</h1>
@@ -201,7 +320,6 @@
       </div>
     </section>
 
-    <!-- Introduction Section -->
     <section id="about" class="section section-alt">
       <div class="container">
         <div class="about-grid">
@@ -223,7 +341,6 @@
       </div>
     </section>
 
-    <!-- Quirky Journey / Education Timeline -->
     <section class="section">
       <div class="container">
         <div class="section-header">
@@ -231,39 +348,62 @@
           <p class="section-subtitle">Tracing the roots of my educational and personal growth.</p>
         </div>
 
-        <div class="cards-grid">
-          <div class="content-card">
-            <h3>🌱 Village Roots</h3>
-            <div class="date-badge">Sandanezwe, Donnybrook</div>
-            <p>Born and raised in the heart of Sandanezwe. I learned my earliest problem-solving skills by figuring out
-              how to catch the fastest chicken!</p>
+        <div class="timeline">
+
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <h3>🌱 Village Roots</h3>
+              <div class="date-badge">Sandanezwe, KwaZulu-Natal</div>
+              <p>
+                Raised in Sandanezwe, a rural area between Ixopo and Donnybrook/Bulwer, I spent my early years in a
+                close-knit community where resourcefulness and curiosity were part of everyday life. Until 2017, this
+                environment shaped my mindset, teaching me how to solve problems creatively and adapt with limited
+                resources.
+              </p>
+            </div>
           </div>
 
-          <div class="content-card">
-            <h3>📚 School Days</h3>
-            <div class="date-badge">2010 - 2017</div>
-            <p><strong>Khethokuhle Primary School:</strong> Where it all started. I was known around the classroom as
-              the quiet troublemaker with a heart of gold.</p>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <h3>📚 Primary Education</h3>
+              <div class="date-badge">2010 - 2017</div>
+              <p>
+                <strong>Khethokuhle Primary School:</strong> Built foundational academic skills and early
+                problem-solving abilities, establishing a strong base for continued learning while growing up in a rural
+                schooling environment.
+              </p>
+            </div>
           </div>
 
-          <div class="content-card">
-            <h3>🎓 High School</h3>
-            <div class="date-badge">2018 - 2022</div>
-            <p><strong>Thornhill Christian College:</strong> Cultivating my curiosity, laying down the academic
-              framework, and preparing my mind for greater complexities.</p>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <h3>🎓 Secondary Education</h3>
+              <div class="date-badge">2018 - 2022</div>
+              <p>
+                <strong>Thornhill Christian College (Pietermaritzburg):</strong> Transitioned from a rural upbringing to
+                a more urban academic environment, fostering discipline, independence, and critical thinking. I pursued
+                a science and technology stream, focusing on Physical Sciences, Mathematics, Life Sciences, Agricultural
+                Sciences, and Computer Applications Technology.
+              </p>
+            </div>
           </div>
 
-          <div class="content-card">
-            <h3>💻 Tech Awakening</h3>
-            <div class="date-badge">2023 - 2025</div>
-            <p><strong>Boston City Campus:</strong> Pursuing a Diploma in Systems Development. Discovered the magic of
-              coding and never looked back. Now successfully turning caffeine into code!</p>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <h3>💻 Tertiary Education</h3>
+              <div class="date-badge">2023 - 2025</div>
+              <p>
+                <strong>Boston City Campus (Durban):</strong> Diploma in Systems Development, specialising in software
+                development with exposure to building practical applications. This phase strengthened my technical
+                proficiency and reinforced my passion for creating real-world software solutions.
+              </p>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- The Many Faces & Fun Facts -->
     <section class="section section-alt">
       <div class="container">
         <div class="section-header">
@@ -317,14 +457,24 @@
 
           <div class="content-card">
             <h3>💡 Innovation-Driven</h3>
-            <p>From creating intuitive tools for digital privacy to tracking real-world locations, I am always exploring
-              ways to improve lives with tech.</p>
+            <p>
+              I design and build practical digital solutions that solve real problems — from productivity tools and
+              educational platforms to scalable web applications, all channelled through
+              <a href="https://vylex.co.za" target="_blank" rel="noopener noreferrer">Vylex Technologies</a>.
+            </p>
           </div>
 
           <div class="content-card">
             <h3>📚 Lifelong Learner</h3>
             <p>Whether studying complex systems development or delving deep into philosophy, I am entirely committed to
               growing and mastering every skill I take on.</p>
+          </div>
+
+          <div class="content-card">
+            <h3>🔐 Core Tech Interests</h3>
+            <p>Particularly interested in cybersecurity (ethical hacking and penetration testing), artificial
+              intelligence, blockchain technologies, cryptocurrencies, and decentralized, permissionless peer-to-peer
+              systems within open-source ecosystems.</p>
           </div>
 
         </div>
