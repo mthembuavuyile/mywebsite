@@ -1,106 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Girlfriend</title>
-
+    <title>For My Girlfriend ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0b0914;
+            --text-main: #fcfcfc;
+            --text-muted: #a09db0;
+            --accent: #ff4d80;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            --card-glow: rgba(255, 77, 128, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
-            background: #fafafa;
-            color: #111;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            position: relative;
+        }
+
+        /* Animated Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 20s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 77, 128, 0.2);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(111, 66, 193, 0.2);
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(235, 87, 87, 0.15);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 25s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            width: 90%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
             align-items: center;
         }
 
-        .container {
-            max-width: 700px;
-            width: 90%;
+        .header {
             text-align: center;
+            margin-bottom: 70px;
+            animation: fadeInDown 1.2s ease-out;
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #ffb3c6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 30px rgba(255, 77, 128, 0.3);
+            letter-spacing: -0.5px;
         }
 
-        p {
-            color: #666;
-            margin-bottom: 40px;
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
+        /* Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
         }
 
+        /* Glassmorphism Cards */
         .card {
             text-decoration: none;
-            background: white;
-            border: 1px solid #eee;
-            padding: 20px;
-            border-radius: 10px;
-            transition: all .2s ease;
-            color: #111;
-            font-weight: 500;
+            color: var(--text-main);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Staggered Animation for Cards */
+        .card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.2s forwards; }
+        .card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.4s forwards; }
+        .card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.6s forwards; }
+        .card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.8s forwards; }
+        .card:nth-child(5) { animation: fadeInUp 0.8s ease-out 1.0s forwards; }
+        .card:nth-child(6) { animation: fadeInUp 0.8s ease-out 1.2s forwards; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: 0.5s;
         }
 
         .card:hover {
-            border-color: #ccc;
-            transform: translateY(-3px);
+            transform: translateY(-10px) scale(1.03);
+            background: var(--glass-hover);
+            border-color: rgba(255, 77, 128, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--card-glow);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+            .card { padding: 30px 20px; }
+        }
+        
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(160, 157, 176, 0.6);
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+            opacity: 0;
+        }
+        
+        .heart {
+            color: var(--accent);
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
     </style>
-
 </head>
-
 <body>
 
+    <!-- Background Effects -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="particles"></canvas>
+
     <div class="container">
-
-        <h1>For My Girlfriend ❤️</h1>
-        <p>A small collection of web projects I made for you.</p>
-
-        <div class="grid">
-
-            <a class="card" href="her-ai.html">
-                Angel AI
-            </a>
-
-             <a class="card" href="ai.html">
-                AI Chat v2
-            </a>
-
-            <a class="card" href="get-well-soon.html">
-                Get Well Soon
-            </a>
-
-            <a class="card" href="my-heart.html">
-                My Heart
-            </a>
-
-            <a class="card" href="nosipho.html">
-                Nosipho
-            </a>
-
-            <a class="card" href="slider.html">
-                Slider
-            </a>
-
+        <div class="header">
+            <h1>For My Girlfriend</h1>
+            <p class="subtitle">A special universe of small web projects I crafted just for you, filled with love and magic.</p>
         </div>
 
+        <div class="grid">
+            <a href="her-ai.html" class="card">
+                <div class="card-icon">✨</div>
+                <h2>Angel AI</h2>
+                <p>Your personal chat companion</p>
+            </a>
+
+            <a href="ai.html" class="card">
+                <div class="card-icon">🤖</div>
+                <h2>AI Chat v2</h2>
+                <p>An upgraded intelligence</p>
+            </a>
+
+            <a href="get-well-soon.html" class="card">
+                <div class="card-icon">🩹</div>
+                <h2>Get Well Soon</h2>
+                <p>A little something to cheer you up</p>
+            </a>
+
+            <a href="my-heart.html" class="card">
+                <div class="card-icon">💖</div>
+                <h2>My Heart</h2>
+                <p>A pure expression of love</p>
+            </a>
+
+            <a href="nosipho.html" class="card">
+                <div class="card-icon">🌹</div>
+                <h2>Nosipho</h2>
+                <p>A dedicated page for my love</p>
+            </a>
+
+            <a href="slider.html" class="card">
+                <div class="card-icon">📸</div>
+                <h2>Our Memories</h2>
+                <p>A beautiful slider of moments</p>
+            </a>
+        </div>
+        
+        <div class="footer">
+            Made with <span class="heart">❤️</span> just for you
+        </div>
     </div>
 
-</body>
+    <!-- Particle System Script -->
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        
+        // Resize canvas
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
 
+        // Particles
+        const particlesArray = [];
+        const colors = ['rgba(255, 77, 128, 0.4)', 'rgba(255, 255, 255, 0.2)', 'rgba(255, 179, 198, 0.3)'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5 - 0.2; // slight upward drift
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                // Wrap around
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 80; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
+</body>
 </html>

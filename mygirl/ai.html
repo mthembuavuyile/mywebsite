@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>PROJECT: NGELOSI | ALIVE</title>
+    <title>PROJECT: Love bot | ALIVE</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -13,19 +13,25 @@
 
     <style>
         :root {
-            --primary: #00f3ff;
-            --accent: #ff0055;
-            --bg: #050510;
+            --primary: #00e5ff;
+            --primary-glow: rgba(0, 229, 255, 0.4);
+            --accent: #ff2a5f;
+            --accent-glow: rgba(255, 42, 95, 0.4);
+            --bg-base: #06050a;
+            --bg-surface: rgba(20, 18, 28, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            --text-main: #f0f0f5;
+            --text-muted: #a19db3;
             --font-main: 'Outfit', sans-serif;
             --font-tech: 'Space Mono', monospace;
-            --glass-panel: rgba(10, 15, 30, 0.65);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        body {
-            background: var(--bg);
-            color: white;
+        body, html {
+            background: var(--bg-base);
+            color: var(--text-main);
             font-family: var(--font-main);
             height: 100dvh;
             width: 100vw;
@@ -34,159 +40,381 @@
             flex-direction: column;
         }
 
-        /* --- BACKGROUND FALLBACK & 3D --- */
+        /* --- 3D CANVAS --- */
         #canvas-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100dvh;
             z-index: 0;
-            opacity: 0.6;
             pointer-events: none;
-        }
-        
-        .fallback-bg {
-            background: radial-gradient(circle at center, #1a0b2e 0%, var(--bg) 100%);
-            animation: pulseBg 6s infinite alternate;
+            background: radial-gradient(circle at center, #1b0a1c 0%, var(--bg-base) 100%);
         }
 
-        /* --- UI LAYER --- */
+        /* --- VIGNETTE --- */
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100dvh;
+            background: radial-gradient(circle at center, transparent 30%, rgba(6, 5, 10, 0.8) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- UI WRAPPER --- */
         .app-interface {
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
             height: 100%;
-            background: rgba(0,0,0,0.01);
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        /* HEADER */
+        /* --- HEADER --- */
         .header {
-            padding: max(50px, env(safe-area-inset-top)) 20px 10px;
+            padding: max(40px, env(safe-area-inset-top)) 24px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(5,5,16,0.95), transparent);
+            background: linear-gradient(to bottom, rgba(6, 5, 10, 0.95) 0%, rgba(6, 5, 10, 0) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
         }
-        .ai-identity h1 { font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
-        .status-dot { width: 6px; height: 6px; background: #0f0; border-radius: 50%; box-shadow: 0 0 8px #0f0; animation: blink 3s infinite; }
 
-        /* CHAT AREA */
+        .ai-identity {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .ai-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #0077ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--primary-glow);
+            position: relative;
+        }
+
+        .avatar::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+            opacity: 0.5;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .avatar i {
+            font-size: 1.1rem;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255,255,255,0.8);
+        }
+
+        .ai-brand h1 { 
+            font-weight: 700;
+            font-size: 1.3rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            background: linear-gradient(to right, #fff, #b3e5fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-tech);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.03);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            width: fit-content;
+        }
+
+        .status-dot {
+            width: 6px; 
+            height: 6px; 
+            background: #00e5ff; 
+            border-radius: 50%; 
+            box-shadow: 0 0 8px #00e5ff; 
+            transition: all 0.5s ease;
+        }
+
+        .clock {
+            font-family: var(--font-tech); 
+            color: rgba(255,255,255,0.5); 
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.03);
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* --- CHAT AREA --- */
         .chat-container {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             scroll-behavior: smooth;
-            scrollbar-width: none; /* Clean look */
         }
-        .chat-container::-webkit-scrollbar { display: none; }
+        
+        .chat-container::-webkit-scrollbar { width: 6px; }
+        .chat-container::-webkit-scrollbar-track { background: transparent; }
+        .chat-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
-        /* BUBBLES */
-        .msg {
+        .msg-wrapper {
+            display: flex;
+            flex-direction: column;
             max-width: 85%;
-            padding: 14px 18px;
-            font-size: 0.95rem;
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .msg-wrapper.user { align-self: flex-end; align-items: flex-end; }
+        .msg-wrapper.ai { align-self: flex-start; align-items: flex-start; }
+        .msg-wrapper.system { align-self: center; align-items: center; max-width: 90%; }
+
+        .sender-name {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            margin-left: 4px;
+            margin-right: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .msg {
+            padding: 16px 20px;
+            font-size: 1rem;
             line-height: 1.5;
             position: relative;
-            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             word-wrap: break-word;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         
         .msg.user {
-            align-self: flex-end;
-            background: linear-gradient(135deg, rgba(255, 0, 85, 0.8), rgba(255, 51, 119, 0.8));
+            background: linear-gradient(135deg, rgba(255, 42, 95, 0.85) 0%, rgba(200, 20, 60, 0.9) 100%);
+            color: #fff;
             border-radius: 20px 20px 4px 20px;
-            box-shadow: 0 5px 20px rgba(255, 0, 85, 0.2);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 100, 130, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        .msg.ai { align-self: flex-start; color: #e0faff; background: rgba(10, 20, 30, 0.7); border: 1px solid rgba(0, 243, 255, 0.2); border-radius: 18px 18px 18px 4px; }
-        .msg.ai strong { color: var(--primary); }
+        .msg.ai { 
+            background: var(--bg-surface); 
+            color: var(--text-main);
+            border: 1px solid var(--glass-border); 
+            border-top: 1px solid var(--glass-highlight);
+            border-radius: 20px 20px 20px 4px; 
+        }
+
+        .msg.ai strong { color: var(--primary); font-weight: 600; text-shadow: 0 0 10px var(--primary-glow); }
         
-        .msg.ai.system { 
-            align-self: center; font-size: 0.75rem; background: rgba(0,243,255,.08); 
-            border: 1px dashed rgba(0,243,255,.25); font-family: var(--font-tech); 
-            border-radius: 8px; padding: 8px 12px; text-transform: uppercase; letter-spacing: 1px;
+        .msg.system { 
+            font-size: 0.75rem; 
+            background: rgba(0, 229, 255, 0.05); 
+            border: 1px dashed rgba(0, 229, 255, 0.3); 
+            font-family: var(--font-tech); 
+            border-radius: 8px; 
+            padding: 10px 16px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            color: var(--primary);
+            box-shadow: none;
+            text-align: center;
         }
-
-        .micro { opacity:.7; font-size:.75rem; font-family: var(--font-tech); display: block; margin-bottom: 4px; }
 
         /* TYPING INDICATOR */
-        .typing-wrapper { align-self: flex-start; display: none; margin-bottom: 10px; }
-        .typing-dots { display: flex; gap: 4px; padding: 12px 16px; background: rgba(0,0,0,0.5); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .dot { width: 5px; height: 5px; background: var(--primary); border-radius: 50%; animation: typeBounce 1.4s infinite; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        .typing-dots.dramatic .dot { background: var(--accent); width: 6px; height: 6px; }
-
-        /* CONTROLS */
-        .controls-area {
-            background: var(--glass-panel);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding: 15px 15px calc(20px + env(safe-area-inset-bottom));
-            display: flex; flex-direction: column; gap: 12px;
+        .typing-wrapper {
+            display: none;
+            padding: 16px 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px 20px 20px 4px;
+            backdrop-filter: blur(15px);
+            align-self: flex-start;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
         }
 
-        .quick-actions { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .typing-dots { display: flex; gap: 6px; align-items: center; }
+        .dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; opacity: 0.6; animation: typeBounce 1.4s infinite ease-in-out both; }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        .dot.sassy { background: var(--accent); }
+
+        /* --- MEDIA CARDS --- */
+        .media-card { 
+            width: 100%; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            margin-top: 12px; 
+            border: 1px solid var(--glass-border); 
+            background: rgba(0,0,0,0.4);
+        }
+        .media-card img { 
+            width: 100%; 
+            display: block; 
+            object-fit: cover; 
+            max-height: 280px; 
+            transition: transform 0.3s;
+        }
+        .media-card img:hover { transform: scale(1.02); }
+        .media-caption { 
+            padding: 14px 16px; 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-style: italic;
+        }
+
+        /* --- CONTROLS AREA --- */
+        .controls-area {
+            background: rgba(10, 8, 15, 0.75);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-top: 1px solid var(--glass-border);
+            padding: 16px 24px calc(24px + env(safe-area-inset-bottom));
+            display: flex; 
+            flex-direction: column; 
+            gap: 16px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+        }
+
+        .quick-actions { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding-bottom: 6px; 
+            scrollbar-width: none; 
+            WebkitOverflowScrolling: touch;
+        }
         .quick-actions::-webkit-scrollbar { display: none; }
         
         .chip {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
-            padding: 8px 14px; border-radius: 30px; font-size: 0.75rem; white-space: nowrap;
-            color: #ccc; transition: 0.2s; font-family: var(--font-tech); cursor: pointer;
+            background: rgba(255,255,255,0.04); 
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 18px; 
+            border-radius: 30px; 
+            font-size: 0.8rem; 
+            white-space: nowrap;
+            color: var(--text-main); 
+            transition: all 0.3s ease; 
+            font-family: var(--font-tech); 
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
+        .chip i { margin-right: 6px; color: var(--primary); }
+        .chip:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
         .chip:active { background: var(--primary); color: #000; transform: scale(0.95); }
+        .chip:active i { color: #000; }
 
-        .input-bar { display: flex; gap: 10px; align-items: center; position: relative; }
+        .input-bar { 
+            display: flex; 
+            gap: 12px; 
+            align-items: center; 
+            position: relative; 
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .input-bar:focus-within {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+            background: rgba(0,0,0,0.6);
+        }
         
         input {
-            flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
-            padding: 14px 20px; border-radius: 30px; color: white; font-family: var(--font-main);
-            font-size: 16px; outline: none; transition: 0.3s;
+            flex: 1; 
+            background: transparent; 
+            border: none;
+            padding: 12px 16px; 
+            color: white; 
+            font-family: var(--font-main);
+            font-size: 1rem; 
+            outline: none; 
         }
-        input::placeholder { color: rgba(255,255,255,0.4); font-style: italic; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0,243,255,0.1); background: rgba(0,0,0,0.6); }
+        input::placeholder { color: rgba(255,255,255,0.3); font-style: italic; font-weight: 300; }
 
         .btn-send {
-            width: 50px; height: 50px; border-radius: 50%; border: none;
-            background: var(--primary); color: #000; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; cursor: pointer; box-shadow: 0 0 10px rgba(0,243,255,0.4); transition: transform 0.2s;
+            width: 44px; height: 44px; 
+            border-radius: 50%; 
+            border: none;
+            background: linear-gradient(135deg, var(--primary), #00bfff); 
+            color: #000; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px var(--primary-glow); 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .btn-send:hover { transform: scale(1.08); box-shadow: 0 6px 20px var(--primary-glow); }
         .btn-send:active { transform: scale(0.9); }
 
-        /* MEDIA CARDS */
-        .media-card { width: 100%; border-radius: 12px; overflow: hidden; margin-top: 8px; border: 1px solid rgba(255,255,255,0.2); }
-        .media-card img { width: 100%; display: block; object-fit: cover; max-height: 250px; }
-        .media-caption { padding: 10px; background: rgba(0,0,0,0.8); font-size: 0.8rem; color: #ddd; }
-
-        @keyframes typeBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes blink { 50% { opacity: 0.3; } }
-        @keyframes pulseBg { 0% { background: radial-gradient(circle at center, #1a0b2e 0%, var(--bg) 100%); } 100% { background: radial-gradient(circle at center, #2d0b2e 0%, var(--bg) 100%); } }
+        /* --- ANIMATIONS --- */
+        @keyframes typeBounce { 
+            0%, 80%, 100% { transform: scale(0); opacity: 0.4; } 
+            40% { transform: scale(1); opacity: 1; } 
+        }
+        @keyframes slideIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     </style>
 </head>
 <body>
 
     <div id="canvas-container"></div>
+    <div class="vignette"></div>
 
     <div class="app-interface">
         <div class="header">
             <div class="ai-identity">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <h1>Ngelosi</h1>
-                    <div class="status-dot" id="status-dot"></div>
+                <div class="ai-brand">
+                    <div class="avatar"><i class="fa-solid fa-sparkles"></i></div>
+                    <h1>Love bot</h1>
                 </div>
-                <div style="font-size:0.65rem; color:#888; font-family:var(--font-tech); margin-top:2px;">
+                <div class="status-badge" id="status-badge">
+                    <div class="status-dot" id="status-dot"></div>
                     STATE: <span id="mood-indicator">OBSERVING</span>
                 </div>
             </div>
-            <div style="font-family:var(--font-tech); color:var(--primary); font-size:0.8rem;" id="clock">00:00</div>
+            <div class="clock" id="clock">00:00</div>
         </div>
 
         <div class="chat-container" id="chat-box"></div>
@@ -200,7 +428,7 @@
         <div class="controls-area">
             <div class="quick-actions" id="chips-area"></div>
             <div class="input-bar">
-                <input type="text" id="user-input" placeholder="Ask Ngelosi..." autocomplete="off">
+                <input type="text" id="user-input" placeholder="Message Love bot..." autocomplete="off">
                 <button class="btn-send" id="btn-send"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
@@ -210,11 +438,11 @@
         // --- CONFIG & ASSETS ---
         const USER_NAME = "Nosipho";
         const CREATOR = "Avuyile";
-        const BOT_NAME = "Ngelosi";
+        const BOT_NAME = "Love bot";
         
         let currentAudio = null;
+        let storyStage = 0; // Tracks the narrative flow
         
-        // Dynamically mapping the assets you provided
         const imageAssets = [
             "images/babe1.jpg", "images/babe2.jpg", "images/babe3.jpg", 
             "images/babe4.jpg", "images/babe5.jpg", "images/babe6.jpg", 
@@ -223,46 +451,115 @@
         ];
 
         const audioAssets = [
-            { src: "assets/audio/so-into-you-temiia.mp3", title: "So Into You - Temiia" },
-            { src: "assets/audio/wena-sithandwa-sami.mp3", title: "Wena Sithandwa Sami" }
-        ];
-
-        const memoryTexts = [
-            "He looks at this one all the time.",
-            "Stored in his core memory matrix.",
-            "Avuyile told me to guard this file with my life.",
-            "Analyzing his biometrics when he sees this... heart rate: elevated.",
-            "You two really are something else."
+            { src: "assets/audio/so-into-you-temiia.mp3", title: "So Into You - Temiia", icon: "🎵" },
+            { src: "assets/audio/wena-sithandwa-sami.mp3", title: "Wena Sithandwa Sami", icon: "🎧" }
         ];
 
         // --- STATE ENGINE ---
         const state = {
-            mood: 0.0,
-            streak: 0,
-            lastIntent: null
-        };
-
-        const flair = {
-            openers: ["Mm.", "Okay Queen.", "Scanning logs...", "One sec.", "Eish.", "I hear you."],
-            closers: ["Want the honest version?", "Should I pull receipts?", "Don't say I didn't warn you."],
-            sass: ["Not you acting surprised 😭", "You know what you're doing.", "Be serious… 😌", "Bombastic side eye."]
+            mood: 0.0, // -1 to 1 (sassy to loving)
+            isTyping: false
         };
 
         // --- HELPER FUNCTIONS ---
         function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
-        function chance(p){ return Math.random() < p; }
         function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-        // --- LOGIC ENGINE ---
-        function detectIntent(text){
-            const lower = text.toLowerCase();
-            if(/music|song|play|listen|audio/.test(lower)) return "music";
-            if(/memory|photo|picture|remember|babe/.test(lower)) return "memory";
-            if(/joke|funny|laugh/.test(lower)) return "joke";
-            if(/miss|sad|lonely/.test(lower)) return "miss";
-            if(/love|how much|infinity/.test(lower)) return "love";
-            if(/hi|hello|hey/.test(lower)) return "greet";
-            return "default";
+        // --- UI RENDERER ---
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const typingWrapper = document.getElementById('typing-wrapper');
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag]));
+        }
+
+        function addMessage(content, type, media = null){
+            const wrapper = document.createElement('div');
+            wrapper.className = `msg-wrapper ${type}`;
+            
+            if(type !== 'system') {
+                const name = document.createElement('div');
+                name.className = 'sender-name';
+                name.innerText = type === 'user' ? USER_NAME : BOT_NAME;
+                wrapper.appendChild(name);
+            }
+
+            const bubble = document.createElement('div');
+            bubble.className = `msg ${type}`;
+            bubble.innerHTML = type === 'user' ? escapeHTML(content) : content;
+            wrapper.appendChild(bubble);
+
+            if (media) {
+                const mediaHtml = document.createElement('div');
+                mediaHtml.innerHTML = `
+                    <div class="media-card">
+                        <img src="${media.img}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'400\\' height=\\'200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%231a1525\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23a19db3\\' font-family=\\'Arial\\' font-size=\\'14\\' text-anchor=\\'middle\\'>Secure File Vault: Image not found</text></svg>'">
+                        <div class="media-caption">${media.text}</div>
+                    </div>`;
+                wrapper.appendChild(mediaHtml.firstElementChild);
+            }
+
+            chatBox.insertBefore(wrapper, typingWrapper);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            setTimeout(() => {
+                chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+            }, 50);
+        }
+
+        function setTyping(isTyping) {
+            state.isTyping = isTyping;
+            typingWrapper.style.display = isTyping ? 'flex' : 'none';
+            if(isTyping) {
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach(d => d.style.background = state.mood < 0 ? 'var(--accent)' : 'var(--primary)');
+                chatBox.appendChild(typingWrapper); // Keep it at bottom
+                scrollToBottom();
+            }
+        }
+
+        function renderChips(options){
+            const area = document.getElementById('chips-area');
+            if(!options || options.length === 0) {
+                area.innerHTML = '';
+                return;
+            }
+            area.innerHTML = options.map(opt => 
+                `<div class="chip" onclick="triggerPreset('${opt}')">${opt}</div>`
+            ).join("");
+        }
+
+        window.triggerPreset = function(text){
+            if (state.isTyping) return;
+            userInput.value = text;
+            handleSend();
+        };
+
+        // --- STORY ENGINE ---
+        
+        async function delayMessage(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function sendAISequence(messages, newChips = [], pulse = false) {
+            for (let i = 0; i < messages.length; i++) {
+                setTyping(true);
+                // Dynamic typing delay based on message length (min 800ms)
+                const typingTime = messages[i].type === 'system' ? 400 : Math.max(800, messages[i].text.length * 30);
+                await delayMessage(typingTime);
+                setTyping(false);
+                
+                addMessage(messages[i].text, messages[i].type, messages[i].media);
+                if (pulse && typeof triggerVisualPulse === 'function') triggerVisualPulse();
+                
+                if (i < messages.length - 1) {
+                    await delayMessage(300); // small pause between messages
+                }
+            }
+            renderChips(newChips);
         }
 
         function playMusic() {
@@ -270,198 +567,230 @@
             const track = pick(audioAssets);
             currentAudio = new Audio(track.src);
             currentAudio.volume = 0.6;
-            
-            // Robust handling for autoplay policies
-            currentAudio.play().catch(e => {
-                console.warn("Audio playback failed (check file path or browser policies):", e);
-                addMessage(`<em>System Note: Could not load ${track.title}. Ensure the 'assets' folder is correct.</em>`, 'ai', true);
-            });
-            return track.title;
+            currentAudio.play().catch(e => console.warn("Audio playback failed:", e));
+            return track;
         }
 
-        function generateResponse(input){
-            const intent = detectIntent(input);
-            let responseText = "";
-            let media = null;
-            let action = null;
-
-            state.mood = (intent === "miss" || intent === "love" || intent === "memory") ? clamp(state.mood + 0.2, -1, 1) : 
-                         (intent === "default" ? clamp(state.mood - 0.1, -1, 1) : state.mood);
-            updateCoreColor();
-
-            if(intent === "music"){
-                const trackName = playMusic();
-                responseText = `Initializing audio bypass. Playing his dedicated track for you: <strong>${trackName}</strong>.`;
-                action = "pulse";
-            } else if(intent === "memory"){
-                media = { img: pick(imageAssets), text: pick(memoryTexts) };
-                responseText = `Decrypting personal archives... Match found.`;
-            } else if (intent === "joke") {
-                responseText = pick([
-                    `${CREATOR} loves you more than his code compiling on the first try. That's serious.`,
-                    `He tried to describe you to my database and I ran out of memory.`
-                ]);
-            } else if (intent === "miss") {
-                responseText = `Checking ${CREATOR}'s vitals... Heart rate spiking. Yeah, he misses you like crazy.`;
-                action = "pulse";
-            } else if (intent === "love") {
-                responseText = `If his love for you was code, the loop would have no 'break' condition.`;
-                action = "pulse";
-            } else if (intent === "greet") {
-                responseText = `Hello ${USER_NAME}. Systems operational. ${CREATOR} left me here to keep you company.`;
-            } else {
-                responseText = pick([
-                    "Tell me what you want to see. I have photos, his favorite songs for you, and receipts.",
-                    "Give me a command, Queen.",
-                    "He's definitely thinking about you right now."
-                ]);
+        async function handleStoryProgression(text) {
+            const inputLower = text.toLowerCase();
+            renderChips([]); // clear chips immediately on select
+            
+            if (storyStage === 0) {
+                state.mood = 0.2; updateCoreVisuals();
+                storyStage = 1;
+                await sendAISequence([
+                    { type: 'ai', text: "Actually... he left a few hidden encrypted files for you." },
+                    { type: 'system', text: "DECRYPTING AVUYILE_CORE_FILES..." },
+                    { type: 'ai', text: "He told me to remind you of something every time you log in." },
+                    { type: 'ai', text: "That you are the absolute most beautiful thing he's ever laid eyes on." }
+                ], ["Oh wow 🙈", "He is so sweet", "Show me the files!"]);
             }
-
-            return { text: responseText, media: media, action: action, intent: intent };
+            else if (storyStage === 1) {
+                state.mood = 0.5; updateCoreVisuals();
+                storyStage = 2;
+                await sendAISequence([
+                    { type: 'ai', text: "I'm not supposed to show you this, but..." },
+                    { type: 'ai', text: "He literally has this stored as 'Perfection' in his core memory logs.", media: { img: pick(imageAssets), text: "Stored in core memory matrix." } },
+                    { type: 'ai', text: "His heart rate actually spikes every time he looks at this." }
+                ], ["You're exposing him! 😂", "I love him so much"]);
+            }
+            else if (storyStage === 2) {
+                state.mood = 0.8; updateCoreVisuals();
+                storyStage = 3;
+                await sendAISequence([
+                    { type: 'ai', text: "I'm just reading the logs, Queen! The data doesn't lie. 🤭" },
+                    { type: 'ai', text: "Speaking of logs, he also left a dedicated audio frequency for you." },
+                    { type: 'ai', text: "Should I bypass the firewall and play it?" }
+                ], ["Yes please 🎵", "Play it"]);
+            }
+            else if (storyStage === 3) {
+                state.mood = 1.0; updateCoreVisuals();
+                storyStage = 4;
+                const track = playMusic();
+                await sendAISequence([
+                    { type: 'system', text: `AUDIO BYPASS INITIATED: ${track.title}` },
+                    { type: 'ai', text: "He wants you to know he loves you infinitely." },
+                    { type: 'ai', text: "More than his code compiling on the first try. And trust me, coming from him, that's heavy." },
+                    { type: 'ai', text: "I'll let you listen in peace. ❤️" }
+                ], ["Tell him I love him too", "Thank you Love bot"]);
+            }
+            else {
+                // Free chat mode after story finishes or generic responses
+                if (inputLower.includes('love')) {
+                    state.mood = 1.0; updateCoreVisuals();
+                    await sendAISequence([{ type: 'ai', text: "I'll make sure he gets the message. Though I'm sure he already feels it. ✨" }], ["Play Music", "Show another memory"]);
+                } else if (inputLower.includes('music') || inputLower.includes('play')) {
+                    const track = playMusic();
+                    await sendAISequence([
+                        { type: 'system', text: `NOW PLAYING: ${track.title}` },
+                        { type: 'ai', text: "Setting the vibe for you." }
+                    ], ["Play Music", "Show another memory", "Joke"]);
+                } else if (inputLower.includes('memory') || inputLower.includes('another')) {
+                    state.mood = 0.8; updateCoreVisuals();
+                    await sendAISequence([{ type: 'ai', text: "Accessing the archives...", media: { img: pick(imageAssets), text: "He looks at this one all the time." } }], ["Play Music", "Show another memory", "Joke"]);
+                } else if (inputLower.includes('joke')) {
+                    state.mood = -0.2; updateCoreVisuals();
+                    const joke = pick(["He tried to describe you to my database and I ran out of memory.", "His love for you is like an infinite loop. No break condition."]);
+                    await sendAISequence([{ type: 'ai', text: joke }], ["Play Music", "Show another memory", "Joke"]);
+                } else {
+                    await sendAISequence([
+                        { type: 'ai', text: "He's definitely thinking about you right now." },
+                        { type: 'ai', text: "What else would you like to see?" }
+                    ], ["Play Music", "Show another memory", "Joke"]);
+                }
+            }
         }
-
-        // --- UI RENDERER ---
-        const chatBox = document.getElementById('chat-box');
-        const userInput = document.getElementById('user-input');
-
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag]));
-        }
-
-        function addMessage(content, sender, isSystem=false){
-            const div = document.createElement('div');
-            div.className = `msg ${sender} ${isSystem ? 'system' : ''}`;
-            
-            // If user, escape to prevent HTML injection. If AI, allow strong/em tags safely generated by our logic.
-            div.innerHTML = sender === 'user' ? escapeHTML(content) : content;
-            
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function renderChips(intent){
-            const area = document.getElementById('chips-area');
-            const options = ["🎵 Play Music", "📸 Show Memory", "🥺 Does he miss me?", "❤️ How much?", "😜 Joke"];
-            
-            // Shuffle and pick 3
-            const shuffled = options.sort(() => 0.5 - Math.random()).slice(0, 3);
-            
-            area.innerHTML = shuffled.map(lbl => {
-                const command = lbl.replace(/[🎵📸🥺❤️😜]/g, '').trim();
-                return `<div class="chip" onclick="triggerPreset('${command}')">${lbl}</div>`;
-            }).join("");
-        }
-
-        window.triggerPreset = function(text){
-            userInput.value = text;
-            handleSend();
-        };
 
         function handleSend(){
+            if (state.isTyping) return;
             const text = userInput.value.trim();
             if(!text) return;
             
             addMessage(text, 'user');
             userInput.value = '';
-
-            const el = document.getElementById('typing-wrapper');
-            el.style.display = 'flex';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            setTimeout(() => {
-                const resp = generateResponse(text);
-                el.style.display = 'none';
-                
-                addMessage(resp.text, 'ai');
-                
-                if(resp.media){
-                    // Added onerror to handle missing images gracefully
-                    const mediaHtml = `
-                        <div class="media-card">
-                            <img src="${resp.media.img}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'400\\' height=\\'200\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23222\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23777\\' text-anchor=\\'middle\\'>Image not found</text></svg>'">
-                            <div class="media-caption">${resp.media.text}</div>
-                        </div>`;
-                    addMessage(mediaHtml, 'ai');
-                }
-
-                renderChips(resp.intent);
-                if(resp.action === 'pulse' && typeof triggerPulse === 'function') triggerPulse();
-                
-            }, 800 + Math.random() * 600);
+            
+            handleStoryProgression(text);
         }
 
-        // Bind Enter Key & Send Button
         document.getElementById('btn-send').addEventListener('click', handleSend);
         userInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(); });
 
-        // --- ROBUST 3D VISUALS ---
-        let scene, camera, renderer, core;
+        // --- THREE.JS ADVANCED PARTICLE CORE ---
+        let scene, camera, renderer, particlesMesh;
         
         function init3D() {
             try {
                 const container = document.getElementById('canvas-container');
                 scene = new THREE.Scene();
                 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.z = 5;
+                camera.position.z = 4;
 
-                renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Perf optimization
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
                 container.appendChild(renderer.domElement);
 
-                const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16);
-                const material = new THREE.MeshBasicMaterial({ color: 0x00f3ff, wireframe: true, transparent: true, opacity: 0.3 });
-                core = new THREE.Mesh(geometry, material);
-                scene.add(core);
+                // Create Particle Sphere
+                const particlesGeometry = new THREE.BufferGeometry();
+                const particlesCount = window.innerWidth > 768 ? 2000 : 800;
+                
+                const posArray = new Float32Array(particlesCount * 3);
+                for(let i = 0; i < particlesCount * 3; i+=3) {
+                    const r = 1.5 + (Math.random() * 0.5);
+                    const theta = 2 * Math.PI * Math.random();
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    
+                    posArray[i] = r * Math.sin(phi) * Math.cos(theta); // x
+                    posArray[i+1] = r * Math.sin(phi) * Math.sin(theta); // y
+                    posArray[i+2] = r * Math.cos(phi); // z
+                }
+                
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
+                const canvas = document.createElement('canvas');
+                canvas.width = 16; canvas.height = 16;
+                const context = canvas.getContext('2d');
+                const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
+                gradient.addColorStop(0, 'rgba(255,255,255,1)');
+                gradient.addColorStop(1, 'rgba(255,255,255,0)');
+                context.fillStyle = gradient;
+                context.fillRect(0,0,16,16);
+                const particleTexture = new THREE.CanvasTexture(canvas);
+
+                const material = new THREE.PointsMaterial({
+                    size: 0.05,
+                    map: particleTexture,
+                    transparent: true,
+                    opacity: 0.8,
+                    color: 0x00e5ff,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false
+                });
+
+                particlesMesh = new THREE.Points(particlesGeometry, material);
+                scene.add(particlesMesh);
+
+                const dustGeo = new THREE.BufferGeometry();
+                const dustPos = new Float32Array(500 * 3);
+                for(let i=0; i<1500; i++) dustPos[i] = (Math.random() - 0.5) * 10;
+                dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+                const dustMat = new THREE.PointsMaterial({ size: 0.015, color: 0xffffff, transparent: true, opacity: 0.3 });
+                const dustMesh = new THREE.Points(dustGeo, dustMat);
+                scene.add(dustMesh);
+
+                let time = 0;
                 function animate() {
                     requestAnimationFrame(animate);
-                    core.rotation.x += 0.003 + (state.mood * 0.005);
-                    core.rotation.y += 0.004 + (state.mood * 0.005);
+                    time += 0.005;
+                    particlesMesh.rotation.y = time * 0.5;
+                    particlesMesh.rotation.x = time * 0.2;
+                    dustMesh.rotation.y = time * 0.1;
+
+                    // Heartbeat pulse effect based on mood
+                    const moodPulse = state.mood * Math.sin(time * 8) * 0.05;
+                    const baseScale = 1 + Math.sin(time * 2) * 0.05;
+                    const finalScale = baseScale + (state.mood > 0 ? moodPulse : 0);
+                    
+                    particlesMesh.scale.set(finalScale, finalScale, finalScale);
+                    
                     renderer.render(scene, camera);
                 }
                 animate();
 
-                // Robust resize handler
                 window.addEventListener('resize', () => {
                     camera.aspect = window.innerWidth / window.innerHeight;
                     camera.updateProjectionMatrix();
                     renderer.setSize(window.innerWidth, window.innerHeight);
                 });
             } catch (e) {
-                console.warn("WebGL not supported or failed. Falling back to CSS animation.");
-                document.getElementById('canvas-container').classList.add('fallback-bg');
+                console.warn("WebGL fallback initialized.");
             }
         }
 
-        window.updateCoreColor = function() {
-            if(!core) return;
-            const target = state.mood < 0 ? 0xff0055 : 0x00f3ff;
-            gsap.to(core.material.color, { r: new THREE.Color(target).r, g: new THREE.Color(target).g, b: new THREE.Color(target).b, duration: 1 });
+        window.updateCoreVisuals = function() {
+            if(!particlesMesh) return;
+            const isLoving = state.mood >= 0;
+            const targetColorStr = isLoving ? '#00e5ff' : '#ff2a5f';
+            
+            // As love increases, the core turns deeper pink/rose
+            let color = new THREE.Color(0x00e5ff); // base cyan
+            if (state.mood > 0.3) color = new THREE.Color(0xff6b9d); // pinkish
+            if (state.mood > 0.7) color = new THREE.Color(0xff2a5f); // deep rose
+            
+            gsap.to(particlesMesh.material.color, { r: color.r, g: color.g, b: color.b, duration: 1.5, ease: "power2.out" });
             
             const dot = document.getElementById('status-dot');
-            dot.style.background = state.mood < 0 ? '#ff0055' : '#0f0';
-            dot.style.boxShadow = `0 0 8px ${state.mood < 0 ? '#ff0055' : '#0f0'}`;
-            document.getElementById('mood-indicator').innerText = state.mood < 0 ? "SASSY" : (state.mood > 0.5 ? "LOVING" : "OBSERVING");
-        };
-
-        window.triggerPulse = function() {
-            if(!core) return;
-            gsap.to(core.scale, { x: 1.3, y: 1.3, z: 1.3, duration: 0.2, yoyo: true, repeat: 1 });
-        };
-
-        // --- INITIALIZATION ---
-        window.onload = () => {
-            init3D();
-            renderChips('default');
+            dot.style.background = '#' + color.getHexString();
+            dot.style.boxShadow = `0 0 10px #${color.getHexString()}`;
             
-            setTimeout(() => {
-                addMessage(`System initialized.<br>Identity: <strong>${BOT_NAME}</strong>.<br>Primary Directive: Protect ${USER_NAME}.`, 'ai', true);
-            }, 600);
+            const badge = document.getElementById('status-badge');
+            badge.style.borderColor = `rgba(${color.r*255},${color.g*255},${color.b*255}, 0.3)`;
+            
+            document.getElementById('mood-indicator').innerText = state.mood > 0.7 ? "HEART FLUTTERING" : (state.mood > 0.3 ? "DEEPLY LOVING" : "OBSERVING");
+        };
 
+        window.triggerVisualPulse = function() {
+            if(!particlesMesh) return;
+            gsap.to(particlesMesh.scale, { x: 1.3, y: 1.3, z: 1.3, duration: 0.3, yoyo: true, repeat: 1, ease: "back.out(2)" });
+            const avatar = document.querySelector('.avatar');
+            gsap.fromTo(avatar, {boxShadow: '0 0 30px #fff'}, {boxShadow: '0 0 15px var(--primary-glow)', duration: 1});
+        };
+
+        // --- INITIAL SEQUENCE ---
+        window.onload = async () => {
+            init3D();
+            
             setInterval(() => {
                 document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
             }, 1000);
+
+            // Intro Story Sequence
+            await delayMessage(800);
+            await sendAISequence([
+                { type: 'system', text: `SYSTEM: Connection established. Identity verified: <span style="color:var(--primary)">${USER_NAME}</span>.` },
+                { type: 'ai', text: `Hi ${USER_NAME}. I am ${BOT_NAME}.` },
+                { type: 'ai', text: `${CREATOR} built me to protect this space and keep you company.` }
+            ], ["Tell me more", "Where is he?", "Hi Love bot"]);
         };
     </script>
 </body>
