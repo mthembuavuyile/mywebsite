@@ -2,37 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>A Letter for Nosipho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100vh;
-      padding: 24px 16px 48px;
       background: #cfc9ba;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      font-family: sans-serif;
     }
 
+    /* ── Envelope scene ── */
+    #scene {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+      gap: 24px;
+    }
+
+    .env-wrap {
+      width: min(300px, 88vw);
+      cursor: pointer;
+      position: relative;
+      filter: drop-shadow(0 6px 22px rgba(0,0,0,0.22));
+      transition: transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .env-wrap:hover  { transform: scale(1.03); }
+    .env-wrap:active { transform: scale(0.97); }
+
+    .envelope-svg { width: 100%; display: block; }
+
+    .tap-hint {
+      font-size: 14px;
+      color: #6b6050;
+      text-align: center;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ── Letter scene ── */
+    #letterScene {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 12px 60px;
+      width: 100%;
+    }
+
+    .print-btn {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #555;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-end;
+      margin-right: 4px;
+      transition: background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .print-btn:hover  { background: #f4f4f4; }
+    .print-btn:active { background: #e8e8e8; }
+
+    /* ── Paper ── */
     .paper {
       width: 100%;
-      max-width: 600px;
+      max-width: 480px;
       background: #faf8f2;
       border-radius: 2px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.10);
       position: relative;
       overflow: hidden;
-      padding: 36px 28px 48px 72px;
+      padding: 32px 22px 48px 64px;
     }
 
     .margin-line {
       position: absolute;
-      top: 0; bottom: 0;
-      left: 60px;
+      top: 0; bottom: 0; left: 54px;
       width: 1.5px;
       background: #ffb3b3;
       z-index: 1;
@@ -64,29 +128,110 @@
     }
 
     .salutation {
-      font-size: 22px;
+      font-size: 23px;
       font-weight: 600;
       display: block;
     }
 
-    @media (max-width: 420px) {
-      .paper {
-        padding: 28px 18px 40px 56px;
-      }
-      .margin-line { left: 46px; }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .slide-up { animation: slideUp 0.55s ease forwards; }
+
+    /* ── Print styles ── */
+    @media print {
+      body { background: #fff; }
+      #scene { display: none !important; }
+      #letterScene { display: flex !important; padding: 0; }
+      .print-btn { display: none; }
+      .paper { box-shadow: none; max-width: 100%; }
+    }
+
+    @media (max-width: 400px) {
+      .paper { padding: 28px 16px 44px 54px; }
+      .margin-line { left: 44px; }
       .letter-body { font-size: 18px; }
-      .salutation { font-size: 20px; }
+      .salutation  { font-size: 21px; }
     }
   </style>
 </head>
 <body>
-  <div class="paper">
-    <div class="lines"></div>
-    <div class="margin-line"></div>
-    <div class="letter-body"><span class="salutation">S'thandwa sami,</span>
+
+  <!-- ══ ENVELOPE SCENE ══ -->
+  <div id="scene">
+    <div class="env-wrap" onclick="openEnvelope()" role="button" aria-label="Open letter">
+      <svg class="envelope-svg" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="envBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#f5e6c8"/>
+            <stop offset="100%" stop-color="#e8d0a0"/>
+          </linearGradient>
+          <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#e8c97a"/>
+            <stop offset="100%" stop-color="#d4a84b"/>
+          </linearGradient>
+        </defs>
+
+        <!-- envelope body -->
+        <rect x="4" y="4" width="272" height="172" rx="6"
+              fill="url(#envBody)" stroke="#c4a45a" stroke-width="1.2"/>
+
+        <!-- side & bottom fold shading -->
+        <polygon points="4,4 140,96 4,176"   fill="#e0c88a" opacity="0.5"/>
+        <polygon points="276,4 140,96 276,176" fill="#e0c88a" opacity="0.5"/>
+        <polygon points="4,176 140,96 276,176" fill="#dfc07a" stroke="#c4a45a" stroke-width="0.8"/>
+
+        <!-- flap -->
+        <polygon id="envFlap" points="4,4 140,88 276,4"
+                 fill="url(#flapGrad)" stroke="#c4a45a" stroke-width="1.2"/>
+
+        <!-- wax seal -->
+        <circle cx="140" cy="130" r="18" fill="#c0392b" opacity="0.92"/>
+        <circle cx="140" cy="130" r="14" fill="#e74c3c"/>
+        <path d="M140,137 C136,133 130,128 130,123 C130,119 134,116 137,118
+                 C138.5,119 140,121 140,121 C140,121 141.5,119 143,118
+                 C146,116 150,119 150,123 C150,128 144,133 140,137 Z"
+              fill="#c0392b"/>
+
+        <!-- postmark -->
+        <circle cx="220" cy="32" r="14" fill="none" stroke="#c4a45a" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="220" cy="32" r="10" fill="none" stroke="#c4a45a" stroke-width="0.5" opacity="0.5"/>
+
+        <!-- stamp -->
+        <rect x="230" y="18" width="36" height="28" rx="2"
+              fill="#fff" stroke="#c4a45a" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <text x="248" y="37" text-anchor="middle" font-size="16" fill="#e74c3c">♡</text>
+
+        <!-- address line -->
+        <text x="60" y="118" font-family="Georgia, serif" font-size="11"
+              fill="#8b6914" opacity="0.75" font-style="italic">To: Nosipho</text>
+        <line x1="54" y1="122" x2="186" y2="122"
+              stroke="#c4a45a" stroke-width="0.6" opacity="0.5"/>
+      </svg>
+    </div>
+    <p class="tap-hint">tap to open ♡</p>
+  </div>
+
+  <!-- ══ LETTER SCENE ══ -->
+  <div id="letterScene">
+    <button class="print-btn" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 6 2 18 2 18 9"/>
+        <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+        <rect x="6" y="14" width="12" height="8"/>
+      </svg>
+      Print
+    </button>
+
+    <div class="paper slide-up">
+      <div class="lines"></div>
+      <div class="margin-line"></div>
+      <div class="letter-body"><span class="salutation">S'thandwa sami,</span>
 
 Sela lenhliziyo yami,
-Mnikaz wes'mile ebuswen' bami,
+Mnikaz wes&#39;mile ebuswen&#39; bami,
 Remote control yenjabulo yami,
 
 <strong>Nosipho,</strong>
@@ -95,24 +240,26 @@ You are truly a gift,
 The greatest gift life has ever given me.
 
 Kimi ufana nembali 💐
-Enhle, eqhakaza ubusika nehlopho,
+Enhle, eqhakaza 🪻 ubusika nehlopho 🌞
 Nginesifiso sokuyithatha ngiyoyitshala
-emagcekeni ako mvelase,
+emagcekeni akwa Mvelase,
 Ngiyinakekele, ngiyichelele 💦
-Mihla namalanga.
+mihla namalanga.
 
-Oxygen yam, intomb'enhle
-ethandwa yile nhliziyo yami,
+Oxygen yam, intomb&#39;enhle
+ethandwa yile nhliziyo yami 🤗
+Ngiyasizonda lesi s'buku, ozibuka kuso, 
+ngoba asikutsheli umuhle kangakanani.
 
 Ive been looking for a pen,
-ngifuna ukukubhalela izulu
-love letter engabhori —
-but my heart couldn't wait,
-so I'm writing it here for you instead.
+ngifuna ukukubhalela leZulu
+love letter
+but my heart couldn&#39;t wait,
+so I&#39;m writing it here for you instead.🌐
 
 A love letter, not inkondlo.
 Cha ngeke ngize ngiqale —
-phela wena siqu nje uyinkondlo yothando.
+phela wena siqu nje uyinkondlo yothando🪶.
 
 Engifuna ukukusho nje ukuthi
 wena uyinkondlo emnandi —
@@ -173,7 +320,7 @@ Uyihlo nonyoko bazala ingelosi —
 sekusele nje ungivezele
 lezimpiko ozifihlile.
 
-S'thandwa sami ngiyakuthanda,
+S&#39;thandwa sami ngiyakuthanda,
 angizenzisi,
 kodwa kusuka ngaphakathi kimi.
 
@@ -181,6 +328,30 @@ Ngaso sonke isikhathi
 uwakhumbule la mazwi ami —
 
 <strong>Ngiyakuthanda.</strong></div>
+    </div>
   </div>
+
+  <script>
+    function openEnvelope() {
+      const scene   = document.getElementById('scene');
+      const letter  = document.getElementById('letterScene');
+      const flap    = document.getElementById('envFlap');
+
+      flap.style.transformOrigin = '140px 4px';
+      flap.style.transition = 'transform 0.55s ease';
+      flap.style.transform  = 'scaleY(-1)';
+
+      setTimeout(() => {
+        scene.style.transition = 'opacity 0.4s';
+        scene.style.opacity    = '0';
+      }, 450);
+
+      setTimeout(() => {
+        scene.style.display  = 'none';
+        letter.style.display = 'flex';
+      }, 860);
+    }
+  </script>
+
 </body>
 </html>
