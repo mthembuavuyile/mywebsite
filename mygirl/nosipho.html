@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -8,7 +9,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -25,11 +28,17 @@
       --radius: 24px;
       --max: 1200px;
     }
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    html { scroll-behavior: smooth; }
-    
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Outfit', sans-serif;
       background: linear-gradient(135deg, #ffe4e9 0%, #fff0f5 50%, #fde2e4 100%);
@@ -53,27 +62,45 @@
 
     .petal {
       position: absolute;
-      background: linear-gradient(135deg, rgba(255,117,140,0.6), rgba(255,77,109,0.3));
+      background: linear-gradient(135deg, rgba(255, 117, 140, 0.6), rgba(255, 77, 109, 0.3));
       border-radius: 15px 0 15px 0;
-      box-shadow: 0 0 10px rgba(255,77,109,0.1);
+      box-shadow: 0 0 10px rgba(255, 77, 109, 0.1);
       animation: fall linear infinite;
     }
 
     @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg) scale(0.5); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg) scale(1.5); opacity: 0; }
+      0% {
+        transform: translateY(-10vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg) scale(1.5);
+        opacity: 0;
+      }
     }
-    
-    h1, h2, h3, .logo {
+
+    h1,
+    h2,
+    h3,
+    .logo {
       font-family: 'Playfair Display', serif;
     }
-    
+
     /* Header */
     .header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -81,7 +108,7 @@
       z-index: 1000;
       transition: all 0.3s ease;
     }
-    
+
     .nav-container {
       max-width: var(--max);
       margin: 0 auto;
@@ -90,7 +117,7 @@
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .logo {
       font-size: 1.8rem;
       font-weight: 700;
@@ -100,13 +127,13 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    
+
     .nav-menu {
       display: flex;
       gap: 2.5rem;
       list-style: none;
     }
-    
+
     .nav-menu a {
       color: var(--text-dark);
       text-decoration: none;
@@ -126,23 +153,26 @@
       background: var(--rose);
       transition: width 0.3s ease;
     }
-    
+
     .nav-menu a:hover::after {
       width: 100%;
     }
+
     .nav-menu a:hover {
       color: var(--rose);
     }
-    
-    .burger { display: none; }
-    
+
+    .burger {
+      display: none;
+    }
+
     /* Utilities */
     .container {
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 1.5rem;
     }
-    
+
     .glass-panel {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
@@ -158,11 +188,12 @@
       transform: translateY(30px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
+
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     /* Hero Section */
     .hero {
       min-height: 100vh;
@@ -174,7 +205,7 @@
       padding-top: 80px;
       position: relative;
     }
-    
+
     .hero-content {
       padding: 5rem 3rem;
       max-width: 850px;
@@ -183,10 +214,17 @@
     }
 
     @keyframes heroicFadeIn {
-      from { opacity: 0; transform: scale(0.95) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
-    
+
     .hero h1 {
       font-size: 4.5rem;
       font-weight: 700;
@@ -194,7 +232,7 @@
       margin-bottom: 1.5rem;
       color: var(--text-dark);
     }
-    
+
     .hero h1 span {
       display: block;
       font-style: italic;
@@ -202,19 +240,19 @@
       font-weight: 400;
       margin-top: 0.5rem;
     }
-    
+
     .name-meaning {
       font-size: 1.35rem;
       color: var(--text-muted);
       margin-bottom: 2.5rem;
       line-height: 1.6;
     }
-    
+
     .name-meaning strong {
       color: var(--rose);
       font-weight: 600;
     }
-    
+
     .location-badge {
       display: inline-flex;
       align-items: center;
@@ -229,6 +267,7 @@
       border: 1px solid rgba(255, 255, 255, 0.9);
       transition: transform 0.3s, box-shadow 0.3s;
     }
+
     .location-badge:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(255, 77, 109, 0.25);
@@ -247,7 +286,9 @@
       line-height: 1.8;
       position: relative;
     }
-    .love-quote::before, .love-quote::after {
+
+    .love-quote::before,
+    .love-quote::after {
       content: '"';
       font-size: 5rem;
       color: var(--blush);
@@ -255,9 +296,17 @@
       opacity: 0.4;
       font-family: serif;
     }
-    .love-quote::before { top: -10px; left: 10px; }
-    .love-quote::after { bottom: -40px; right: 20px; }
-    
+
+    .love-quote::before {
+      top: -10px;
+      left: 10px;
+    }
+
+    .love-quote::after {
+      bottom: -40px;
+      right: 20px;
+    }
+
     /* About Section */
     .about-grid {
       display: grid;
@@ -266,13 +315,13 @@
       align-items: center;
       padding: 6rem 0;
     }
-    
+
     .about-text h2 {
       font-size: 3.2rem;
       margin-bottom: 1.5rem;
       color: var(--text-dark);
     }
-    
+
     .about-text h2 span {
       color: var(--rose);
       font-style: italic;
@@ -284,13 +333,13 @@
       margin-bottom: 1.8rem;
       line-height: 1.8;
     }
-    
+
     .qualities {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.8rem;
     }
-    
+
     .quality-card {
       padding: 2.2rem;
       transition: all 0.4s ease;
@@ -299,42 +348,42 @@
       flex-direction: column;
       justify-content: center;
     }
-    
+
     .quality-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 15px 35px rgba(255, 77, 109, 0.15);
       background: rgba(255, 255, 255, 0.85);
     }
-    
+
     .quality-icon {
       font-size: 2.5rem;
       margin-bottom: 1rem;
     }
-    
+
     .quality-card h3 {
       font-size: 1.4rem;
       margin-bottom: 0.6rem;
       color: var(--text-dark);
     }
-    
+
     .quality-card p {
       font-size: 1.05rem;
       color: var(--text-muted);
       margin: 0;
     }
-    
+
     /* Favorites */
     .favorites-section {
       padding: 6rem 0;
       text-align: center;
     }
-    
+
     .favorites-section h2 {
       font-size: 2.8rem;
       margin-bottom: 3.5rem;
       color: var(--text-dark);
     }
-    
+
     .favorites-container {
       display: flex;
       flex-wrap: wrap;
@@ -343,7 +392,7 @@
       max-width: 900px;
       margin: 0 auto;
     }
-    
+
     .favorite-pill {
       background: rgba(255, 255, 255, 0.85);
       padding: 1.2rem 2.5rem;
@@ -353,78 +402,79 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
       border: 1px solid var(--white);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: default;
     }
-    
+
     .favorite-pill:hover {
       transform: scale(1.08);
       box-shadow: 0 12px 30px rgba(255, 77, 109, 0.2);
       color: var(--rose);
       border-color: var(--blush);
     }
-    
+
     /* Gallery */
     .gallery-section {
       padding: 6rem 0;
     }
-    
+
     .gallery-header {
       text-align: center;
       margin-bottom: 4rem;
     }
-    
+
     .gallery-header h2 {
       font-size: 3.2rem;
       margin-bottom: 1rem;
       color: var(--text-dark);
     }
+
     .gallery-header p {
       color: var(--text-muted);
       font-size: 1.2rem;
     }
-    
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2.5rem;
     }
-    
+
     .gallery-item {
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
       aspect-ratio: 4/5;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       cursor: pointer;
     }
-    
+
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.6s ease;
     }
-    
+
     .gallery-item::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(255,77,109,0.5), transparent);
+      background: linear-gradient(to top, rgba(255, 77, 109, 0.5), transparent);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-    
+
     .gallery-item:hover img {
       transform: scale(1.08);
     }
-    
+
     .gallery-item:hover::after {
       opacity: 1;
     }
-    
+
     /* Footer */
     .footer {
       text-align: center;
@@ -434,11 +484,12 @@
       background: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(10px);
     }
-    
+
     .footer p {
       color: var(--text-muted);
       font-size: 1.1rem;
     }
+
     .footer .hearts {
       color: var(--rose);
       animation: pulse 1.5s infinite;
@@ -447,22 +498,38 @@
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
+
+      100% {
+        transform: scale(1);
+      }
     }
-    
+
     /* Responsive */
     @media (max-width: 990px) {
-      .about-grid { grid-template-columns: 1fr; gap: 4rem; }
-      .hero h1 { font-size: 3.8rem; }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .hero h1 {
+        font-size: 3.8rem;
+      }
     }
-    
+
     @media (max-width: 768px) {
       .nav-menu {
         position: fixed;
-        top: 0; right: -100%;
-        width: 100%; height: 100vh;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
         background: rgba(255, 255, 255, 0.98);
         flex-direction: column;
         justify-content: center;
@@ -470,9 +537,15 @@
         transition: 0.4s ease;
         z-index: 1000;
       }
-      .nav-menu.active { right: 0; }
-      .nav-menu a { font-size: 1.5rem; }
-      
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu a {
+        font-size: 1.5rem;
+      }
+
       .burger {
         display: flex;
         flex-direction: column;
@@ -480,23 +553,53 @@
         z-index: 1001;
         cursor: pointer;
       }
+
       .burger span {
-        width: 30px; height: 3px;
+        width: 30px;
+        height: 3px;
         background: var(--text-dark);
         transition: 0.3s;
         border-radius: 3px;
       }
-      .burger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); background: var(--rose); }
-      .burger.active span:nth-child(2) { opacity: 0; }
-      .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); background: var(--rose); }
-      
-      .hero { padding-top: 100px; }
-      .hero-content { padding: 3rem 1.5rem; }
-      .hero h1 { font-size: 2.8rem; }
-      
-      .qualities { grid-template-columns: 1fr; }
-      .love-quote { font-size: 1.3rem; padding: 2rem 1.5rem; }
-      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+      .burger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+        background: var(--rose);
+      }
+
+      .burger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+        background: var(--rose);
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+
+      .hero-content {
+        padding: 3rem 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .qualities {
+        grid-template-columns: 1fr;
+      }
+
+      .love-quote {
+        font-size: 1.3rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      }
     }
   </style>
 </head>
@@ -536,7 +639,8 @@
 
     <div class="container">
       <div class="love-quote glass-panel fade-in" style="margin-top: 2rem;">
-        "You are the flowers in my life. The single most beautiful soul I have ever known. These pages are for you, to remind you of how extraordinary you are, today and forever."
+        "You are the flowers in my life. The single most beautiful soul I have ever known. These pages are for you, to
+        remind you of how extraordinary you are, today and forever."
       </div>
     </div>
 
@@ -545,13 +649,15 @@
       <div class="about-text fade-in">
         <h2>Her <span>Beautiful Heart</span></h2>
         <p>
-          A rare beauty. She's the kind of woman who makes you believe in magic. Beautiful inside and out, she carries herself with a grace that is entirely her own.
+          A rare beauty. She's the kind of woman who makes you believe in magic. Beautiful inside and out, she carries
+          herself with a grace that is entirely her own.
         </p>
         <p>
-          Her smile lights up every room, her spirit inspires everyone around her, and her heart is as genuine as they come. Simply extraordinary. She is the woman I will marry.
+          Her smile lights up every room, her spirit inspires everyone around her, and her heart is as genuine as they
+          come. Simply extraordinary. She is the woman I will marry.
         </p>
       </div>
-      
+
       <div class="qualities fade-in">
         <div class="quality-card glass-panel">
           <div class="quality-icon">✨</div>
@@ -583,6 +689,7 @@
         <div class="favorite-pill"><span>☕</span> Iced Coffee</div>
         <div class="favorite-pill"><span>🥤</span> Coca-Cola</div>
         <div class="favorite-pill"><span>🍨</span> Ice-Cream</div>
+        <div class="favorite-pill"><span>🧇</span> Waffle</div>
         <div class="favorite-pill"><span>🎶</span> Beautiful Music</div>
         <div class="favorite-pill"><span>🤍</span> Quality Moments</div>
         <div class="favorite-pill"><span>🌹</span> Romance</div>
@@ -597,11 +704,16 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item fade-in"><img src="images/babe1.jpg" alt="Nosipho" loading="lazy"></div>
-        <div class="gallery-item fade-in" style="transition-delay: 0.1s;"><img src="images/babe1.jpeg" alt="Nosipho" loading="lazy"></div>
-        <div class="gallery-item fade-in" style="transition-delay: 0.2s;"><img src="images/babe2.jpg" alt="Nosipho" loading="lazy"></div>
-        <div class="gallery-item fade-in" style="transition-delay: 0.3s;"><img src="images/babe3.jpg" alt="Nosipho" loading="lazy"></div>
-        <div class="gallery-item fade-in" style="transition-delay: 0.4s;"><img src="images/babe4.jpg" alt="Nosipho" loading="lazy"></div>
-        <div class="gallery-item fade-in" style="transition-delay: 0.5s;"><img src="images/babe5.jpg" alt="Nosipho" loading="lazy"></div>
+        <div class="gallery-item fade-in" style="transition-delay: 0.1s;"><img src="images/babe1.jpeg" alt="Nosipho"
+            loading="lazy"></div>
+        <div class="gallery-item fade-in" style="transition-delay: 0.2s;"><img src="images/babe2.jpg" alt="Nosipho"
+            loading="lazy"></div>
+        <div class="gallery-item fade-in" style="transition-delay: 0.3s;"><img src="images/babe3.jpg" alt="Nosipho"
+            loading="lazy"></div>
+        <div class="gallery-item fade-in" style="transition-delay: 0.4s;"><img src="images/babe4.jpg" alt="Nosipho"
+            loading="lazy"></div>
+        <div class="gallery-item fade-in" style="transition-delay: 0.5s;"><img src="images/babe5.jpg" alt="Nosipho"
+            loading="lazy"></div>
       </div>
     </section>
   </main>
@@ -614,31 +726,31 @@
   <script>
     // Set Year
     document.getElementById('year').textContent = new Date().getFullYear();
-    
+
     // Burger Menu Logic
     const burger = document.getElementById('burger');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    
+
     burger.addEventListener('click', () => {
       burger.classList.toggle('active');
       navMenu.classList.toggle('active');
     });
-    
+
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('active');
         navMenu.classList.remove('active');
       });
     });
-    
+
     // Scroll Animation (Intersection Observer)
     const observerOptions = {
       root: null,
       rootMargin: '0px',
       threshold: 0.15
     };
-    
+
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -647,7 +759,7 @@
         }
       });
     }, observerOptions);
-    
+
     document.querySelectorAll('.fade-in').forEach(el => {
       observer.observe(el);
     });
@@ -659,21 +771,22 @@
     for (let i = 0; i < petalCount; i++) {
       const petal = document.createElement('div');
       petal.classList.add('petal');
-      
+
       // Randomize properties
       const size = Math.random() * 12 + 10; // 10px to 22px
       const left = Math.random() * 100; // 0% to 100%
       const duration = Math.random() * 12 + 8; // 8s to 20s
       const delay = Math.random() * 20; // 0s to 20s
-      
+
       petal.style.width = `${size}px`;
       petal.style.height = `${size}px`;
       petal.style.left = `${left}%`;
       petal.style.animationDuration = `${duration}s`;
       petal.style.animationDelay = `${delay}s`;
-      
+
       petalsContainer.appendChild(petal);
     }
   </script>
 </body>
+
 </html>
