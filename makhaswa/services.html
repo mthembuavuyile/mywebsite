@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#121c2c",
+                        "surface-tint": "#455f88",
+                        "primary": "#002045",
+                        "on-tertiary-container": "#dd8d00",
+                        "primary-fixed-dim": "#adc7f7",
+                        "tertiary": "#311c00",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d5e0f7",
+                        "surface-container-high": "#dee8ff",
+                        "on-primary-container": "#86a0cd",
+                        "outline": "#74777f",
+                        "secondary-fixed-dim": "#bcc7dd",
+                        "inverse-primary": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#d9e3f9",
+                        "on-secondary-container": "#586377",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-dim": "#d0daf0",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "secondary": "#545f72",
+                        "on-surface": "#121c2c",
+                        "on-tertiary-fixed": "#2a1700",
+                        "tertiary-container": "#4e2f00",
+                        "on-primary-fixed": "#001b3c",
+                        "on-secondary-fixed": "#111c2c",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#273141",
+                        "surface-container": "#e7eeff",
+                        "tertiary-fixed": "#ffddb8",
+                        "inverse-on-surface": "#ebf1ff",
+                        "secondary-fixed": "#d8e3fa",
+                        "background": "#f9f9ff",
+                        "on-surface-variant": "#43474e",
+                        "primary-fixed": "#d6e3ff",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "surface-variant": "#d9e3f9",
+                        "primary-container": "#1a365d",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .spec-grid-row:nth-child(even) {
+            background-color: #f0f3ff;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body selection:bg-tertiary-fixed-dim selection:text-tertiary">
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-950/70 backdrop-blur-xl shadow-xl shadow-blue-900/5 flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+        <div class="text-xl font-black tracking-tighter text-blue-950 dark:text-white font-headline">MAKHASWA HOLDINGS
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+            <a class="font-['Manrope'] tracking-tight font-bold uppercase text-xs text-slate-400 hover:text-white transition-colors"
+                href="#">About</a>
+            <a class="font-['Manrope'] tracking-tight font-bold uppercase text-xs text-blue-900 dark:text-blue-400 border-b-2 border-orange-400 pb-1"
+                href="#">Services</a>
+            <a class="font-['Manrope'] tracking-tight font-bold uppercase text-xs text-slate-400 hover:text-white transition-colors"
+                href="#">Contact</a>
+        </div>
+        <button
+            class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all active:opacity-80 active:scale-[0.99]">
+            Inquire
+        </button>
+    </nav>
+    <main class="pt-24 pb-20">
+        <!-- Hero Section -->
+        <header class="relative h-[614px] flex items-center overflow-hidden mb-24">
+            <div class="absolute inset-0 z-0">
+                <img class="w-full h-full object-cover"
+                    data-alt="wide shot of a massive construction site with yellow excavators and heavy machinery at sunset with industrial dust and lens flare"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpJgMuilTb-BveuGe0HObyD_zUSIrWh1sOPmKlxrB-eKWCgHtY7psb7JmO4aVwnS8nwPC7M-YAzyJsUWR07h5a7-v1bkywy9Ynq84ZYqXrlgYzsaxtKGJ34ykbL9tlJ7YbefTcqNlM7MAix2oWAaBi6UiLlOuw0rpavesMeXhvepT-AFnDdJmyKcAHMQCtykw67sVCk2AYNTk7nOzZIUdW_LdFSqKFXBMpxCMuVMvMR8rxd1gCnHIfKNn03MvqGtDdfcAn9RkfJ4" />
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-80"></div>
+            </div>
+            <div class="relative z-10 px-8 md:px-16 max-w-5xl">
+                <p class="font-label text-tertiary-fixed-dim uppercase tracking-[0.3em] text-sm mb-4">Engineering
+                    Precision</p>
+                <h1
+                    class="font-headline text-5xl md:text-7xl text-white font-extrabold tracking-tighter leading-none mb-6">
+                    INDUSTRIAL <br />EXCELLENCE.
+                </h1>
+                <p class="text-on-primary-container max-w-xl text-lg font-light leading-relaxed">
+                    Delivering high-stakes infrastructure and earthworks with the architectural monolith of reliability
+                    and structural integrity.
+                </p>
+            </div>
+        </header>
+        <!-- Service Section 1: Earthworks -->
+        <section class="px-8 md:px-16 mb-32">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                <div class="md:col-span-4">
+                    <span class="text-tertiary font-bold tracking-widest text-xs uppercase block mb-4">Sector 01</span>
+                    <h2 class="font-headline text-4xl font-bold tracking-tight text-primary">EARTHWORKS</h2>
+                    <div class="w-12 h-1 bg-tertiary-fixed-dim mt-4"></div>
+                </div>
+                <div class="md:col-span-8 flex items-end">
+                    <p class="text-on-surface-variant max-w-2xl font-light italic">
+                        The foundation of every great structure begins beneath the surface. Our heavy-duty clearing and
+                        mass excavation services prepare the canvas for industrial permanence.
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+                <!-- Site Clearance -->
+                <div class="bg-surface-container-low p-10 hover:bg-surface-container-high transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-6" data-icon="forest">forest</span>
+                    <h3 class="font-headline text-xl font-bold mb-4 text-primary">Site Clearance</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed mb-8">Professional removal of vegetation,
+                        debris, and existing obstacles to ensure a pristine engineering environment.</p>
+                    <div class="h-48 overflow-hidden">
+                        <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                            data-alt="industrial bulldozer clearing a site with piles of debris and raw earth under a bright midday sun"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHnkG6un82a48x1B3vJhoLSyKVeJypSs-yL-w6hNo0bQ-A6YCBtf53ss8iU4DK0uNiaRx1UgNhZSl06mV1Ma3QhoFfxSZ3jCavIE9GhGvJ-mt00JtiNsPrbkiRuSMKOFy1LP_EKEh7suNVtiGKGraMG859gNED1oh5oC7Ly_8U1P-uYDvui4r1wbe_12YXFvJC4fgCT1dchzhPg0gP8YCySV1FKn1HMG8zREQiMpoeIW4y3bNYvqJc8qniobxm0guBklvjuCgkPlI" />
+                    </div>
+                </div>
+                <!-- Mass Earthworks -->
+                <div class="bg-surface-container-low p-10 hover:bg-surface-container-high transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-6"
+                        data-icon="foundation">foundation</span>
+                    <h3 class="font-headline text-xl font-bold mb-4 text-primary">Mass Earthworks</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed mb-8">Large-scale excavation, hauling, and
+                        compaction of soil and rock to meet precise topographical requirements.</p>
+                    <div class="h-48 overflow-hidden">
+                        <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                            data-alt="aerial view of tiered earthworks on a massive scale with tire tracks in the red clay soil"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ_vsP2zKPfM07NMOrTa1Wp3VZ5JdN2RPkYRb41jzyXX111ejWlAgthpTX6wwwzYilpgOstvEEJd76lsZOU_yLaaGXKtXP8LlIKRgr0UMMUWeW73TBsADJnKOyPzDzh5txJA9JhHDNpgoiSPU8VuGUrzLNhqVzFWQNrjwfDModFB_yuluW-gfUZb6r1ArUA5Ljm_REeqHbs1TuatWsa4JL6R-Rsi2S6KdBrxSL5aW9oTOtsM0-IrmqLn7n-adHvG4igbvhXQeDkY" />
+                    </div>
+                </div>
+                <!-- Demolition -->
+                <div class="bg-surface-container-low p-10 hover:bg-surface-container-high transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-primary mb-6"
+                        data-icon="architecture">architecture</span>
+                    <h3 class="font-headline text-xl font-bold mb-4 text-primary">Demolition</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed mb-8">Controlled dismantling of structures
+                        with a primary focus on safety standards and environmental reclamation.</p>
+                    <div class="h-48 overflow-hidden">
+                        <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                            data-alt="heavy hydraulic shear cutting through steel beams of a decommissioned industrial factory"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu3nvTeKHdr8Hi-76MO4EYELub4qhbdXNa-w-cevU_5K_MWm7RR0_ls1BZj_WmiCvswaAufhyvAeE5EEBw-S6qpEk1DdFCXLTKoiKIkgxlFjZcDj1jC89I_JoIL-IVGwirPknXNTCfX4FkwT9nYhOP7tR80XuE0K9wXDyMiUzKW_V6-kgI-PgTs4EdjZlTj6c47CEQliIqcT4ub5Ftu6C5kYyYDk0KTzk_6mzTRKsHQ2Pxf4rxcC2ibDpAvE7-wLZpzxTSmmeD-qY" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Service Section 2: Civil Works - Bento Grid -->
+        <section class="bg-surface-container-low py-24 px-8 md:px-16">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
+                    <div class="max-w-xl">
+                        <span class="text-tertiary font-bold tracking-widest text-xs uppercase block mb-4">Sector
+                            02</span>
+                        <h2 class="font-headline text-4xl font-bold tracking-tight text-primary">CIVIL WORKS</h2>
+                        <p class="mt-6 text-on-surface-variant leading-relaxed">
+                            Underground infrastructure is the nervous system of urban development. We engineer pipelines
+                            and drainage systems designed to last centuries.
+                        </p>
+                    </div>
+                    <div class="bg-primary p-8 text-white max-w-sm">
+                        <h4 class="font-headline font-bold mb-2">Safety Standards</h4>
+                        <p class="text-xs opacity-80 uppercase tracking-wider mb-4">ISO 9001 Certified</p>
+                        <p class="text-sm font-light leading-relaxed">Rigorous compliance with municipal and national
+                            safety frameworks in every civil deployment.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
+                    <div
+                        class="md:col-span-2 md:row-span-2 bg-white p-10 flex flex-col justify-between shadow-xl shadow-blue-900/5">
+                        <div>
+                            <span class="material-symbols-outlined text-tertiary-fixed-dim text-5xl mb-6"
+                                data-icon="water_damage">water_damage</span>
+                            <h3 class="font-headline text-2xl font-bold text-primary mb-4">Stormwater Drainage</h3>
+                            <p class="text-on-surface-variant leading-relaxed">Comprehensive runoff management systems
+                                including culverts, catch basins, and sophisticated water diversion channels.</p>
+                        </div>
+                        <div class="mt-12">
+                            <img class="w-full h-64 object-cover filter saturate-50"
+                                data-alt="large concrete drainage pipes being installed in a deep trench with blue sky reflection in puddles"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuFOmOLALXuAjxoaL9GhBFa7UguezCmy12sUypwNHfLkHL0cA6Cr4dxnXqQmO2O85ZXuof5Y-JakPfP1-mCaa3k4ZJko1RqVfjQ-_8JeRKCpswYiwra7c4Wyz69dT2KZZ-yLK4RS38NG804T5XdpKnA9BBvwxqSi25WOj0a9-8yl2xtbO7YjwHvCuGvL1j8mtEU8nUTPzQmQAjuW5OJcvGN5RGpG-Rk1DTGKaRMpDSZoYwBqBMu0RkgQ9OmEs3pPXXcY1v0Ms5XCk" />
+                        </div>
+                    </div>
+                    <div class="bg-primary-container p-8 text-white">
+                        <h3 class="font-headline text-lg font-bold mb-4">Sewer &amp; Pipelines</h3>
+                        <p class="text-sm opacity-80">Precision installation of high-capacity sewer lines and industrial
+                            water transport networks.</p>
+                    </div>
+                    <div class="bg-surface-container-highest p-8">
+                        <h3 class="font-headline text-lg font-bold text-primary mb-4">Stone Pitching</h3>
+                        <p class="text-sm text-on-surface-variant">Erosion control and embankment stabilization using
+                            heavy architectural stonework.</p>
+                    </div>
+                    <div class="md:col-span-2 bg-white p-8 flex items-center gap-8 shadow-xl shadow-blue-900/5">
+                        <span class="material-symbols-outlined text-4xl text-tertiary" data-icon="fence">fence</span>
+                        <div>
+                            <h3 class="font-headline text-lg font-bold text-primary">Guardrails &amp; Safety Barriers
+                            </h3>
+                            <p class="text-sm text-on-surface-variant">Industrial grade highway safety installations
+                                designed to absorb impact and protect infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Service Section 3: Road Construction - Spec Grid Pattern -->
+        <section class="px-8 md:px-16 py-32">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-16 items-center">
+                    <div class="w-full md:w-1/2">
+                        <img class="w-full aspect-[4/5] object-cover"
+                            data-alt="macro detail of fresh black asphalt texture with steam rising and white lane paint being applied"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBESgixMWGRSyhqbMRYa1316lMkIgZ_JLm1Zgp7cyuSJUidt0RNKEM4wTOgIqQWiDTXd0vP32srfKPIOwV_rEfjMXGimg5aUkneoJKoTdONppCdZk-geBLYly0mCfiDmNSeuF1k-NWZ94ZqdyQT62AoOkr8cxhI6JatNe-shostKtjT-WDW1zdc6llj0jWwyX9Rg-jKTw7_d8W814YF-V09Vxqs-0LDFMaiazJtWyktUlfOCHVjebgXrmwtc8lt-Mkf7U7Oi21yLFQ" />
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-tertiary font-bold tracking-widest text-xs uppercase block mb-4">Sector
+                            03</span>
+                        <h2 class="font-headline text-5xl font-bold tracking-tight text-primary leading-none mb-12">ROAD
+                            <br />CONSTRUCTION
+                        </h2>
+                        <div class="space-y-1">
+                            <!-- Spec Table -->
+                            <div class="flex justify-between items-center py-4 px-4 bg-surface-container-low">
+                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Kerbing and
+                                    Paving</span>
+                                <span class="material-symbols-outlined text-xl text-primary"
+                                    data-icon="check_circle">check_circle</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 px-4">
+                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Concrete
+                                    Stabilizing</span>
+                                <span class="material-symbols-outlined text-xl text-primary"
+                                    data-icon="check_circle">check_circle</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 px-4 bg-surface-container-low">
+                                <span
+                                    class="font-label text-[10px] uppercase tracking-widest font-bold">Layerworks</span>
+                                <span class="material-symbols-outlined text-xl text-primary"
+                                    data-icon="check_circle">check_circle</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 px-4">
+                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Asphalt
+                                    Surfacing</span>
+                                <span class="material-symbols-outlined text-xl text-primary"
+                                    data-icon="check_circle">check_circle</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 px-4 bg-surface-container-low">
+                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Surveying &amp;
+                                    Road Profiling</span>
+                                <span class="material-symbols-outlined text-xl text-primary"
+                                    data-icon="check_circle">check_circle</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 px-4">
+                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Retaining
+                                    Walls</span>
+                                <span class="material-symbols-outlined text-xl text-primary"
+                                    data-icon="check_circle">check_circle</span>
+                            </div>
+                        </div>
+                        <p class="mt-12 text-on-surface-variant font-light italic leading-relaxed">
+                            From municipal maintenance to national highway developments, our paving and rehabilitation
+                            teams ensure the arteries of commerce remain flawless.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Service Section 4: General Buildings -->
+        <section class="bg-primary py-32 px-8 md:px-16 text-white overflow-hidden">
+            <div class="max-w-7xl mx-auto relative">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-24">
+                    <div>
+                        <span
+                            class="text-tertiary-fixed-dim font-bold tracking-widest text-xs uppercase block mb-4">Sector
+                            04</span>
+                        <h2 class="font-headline text-5xl font-bold tracking-tight mb-8">GENERAL BUILDINGS</h2>
+                        <p class="text-on-primary-container text-lg leading-relaxed mb-12">
+                            Vertical engineering that combines structural strength with functional design. We build
+                            residential havens and industrial hubs that stand the test of time.
+                        </p>
+                        <div class="space-y-8">
+                            <div class="border-l-4 border-tertiary-fixed-dim pl-6 py-2">
+                                <h4 class="font-headline text-xl font-bold mb-2">Residential Developments</h4>
+                                <p class="text-sm opacity-70">Luxury estates and modern apartment complexes with
+                                    turn-key project management.</p>
+                            </div>
+                            <div class="border-l-4 border-tertiary-fixed-dim pl-6 py-2">
+                                <h4 class="font-headline text-xl font-bold mb-2">Commercial &amp; Industrial</h4>
+                                <p class="text-sm opacity-70">Warehouses, office parks, and retail centers built for
+                                    operational efficiency.</p>
+                            </div>
+                            <div class="border-l-4 border-tertiary-fixed-dim pl-6 py-2">
+                                <h4 class="font-headline text-xl font-bold mb-2">Housing Developments</h4>
+                                <p class="text-sm opacity-70">Sustainable low and middle-income housing solutions that
+                                    prioritize community integrity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative h-[600px]">
+                        <img class="absolute inset-0 w-full h-full object-cover shadow-2xl"
+                            data-alt="modern glass and concrete industrial office building with sharp architectural angles against a clear sky"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtKGzBk1e_HgpH39H1swJix7g9Pz-pEMJN1dWHsoMkZb8l0ducsM1kOK1eoOnR9JoLJ-ELhfTZst5ipYgSHf8jyl-_G_3A9pZN9CXCNDpI0QFvCFS72r32Ub6sps7rdn97Z6r0KGLr5ixFuwIHxCAw1RVSb1g5treDM7JWvBiUZtIHaeeGKcxSmz-b0w6hmhT1PjknTkhiSomk5pk4sF5gXOa9g3ZzQ3yt9ap9fyn84XOPfiWAs6WAmE2hBsY4k0ixfQb_Q0hl7qU" />
+                        <div
+                            class="absolute -bottom-8 -left-8 bg-tertiary-fixed-dim text-primary p-10 font-black text-4xl font-headline tracking-tighter">
+                            URBAN <br />EVOLUTION
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="py-32 px-8 text-center bg-surface">
+            <h2 class="font-headline text-4xl font-bold text-primary mb-6">READY TO SCALE YOUR PROJECT?</h2>
+            <p class="text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed">
+                Connect with our lead engineers for a detailed consultation and technical spec review of your upcoming
+                industrial or civil requirements.
+            </p>
+            <button
+                class="bg-primary text-white px-12 py-5 font-bold uppercase tracking-[0.2em] text-sm hover:translate-x-1 transition-transform inline-flex items-center gap-4">
+                Consult With Our Team
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+            </button>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-blue-950 dark:bg-black w-full py-12 px-8 border-t border-white/10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            <div>
+                <div class="text-lg font-bold tracking-widest text-white uppercase font-headline mb-6">MAKHASWA HOLDINGS
+                </div>
+                <p class="font-['Inter'] text-sm leading-relaxed text-slate-400">© 2024 MAKHASWA HOLDINGS. Built for
+                    Industrial Excellence.</p>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <span class="text-orange-300 font-bold text-xs uppercase tracking-widest mb-2">Internal Links</span>
+                <a class="text-slate-400 hover:text-white transition-colors hover:underline decoration-orange-400 underline-offset-4 text-sm"
+                    href="#">Services Overview</a>
+                <a class="text-slate-400 hover:text-white transition-colors hover:underline decoration-orange-400 underline-offset-4 text-sm"
+                    href="#">Safety Standards</a>
+                <a class="text-slate-400 hover:text-white transition-colors hover:underline decoration-orange-400 underline-offset-4 text-sm"
+                    href="#">Accreditations</a>
+                <a class="text-slate-400 hover:text-white transition-colors hover:underline decoration-orange-400 underline-offset-4 text-sm"
+                    href="#">Industrial Projects</a>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <span class="text-orange-300 font-bold text-xs uppercase tracking-widest mb-2">Legal</span>
+                <a class="text-slate-400 hover:text-white transition-colors hover:underline decoration-orange-400 underline-offset-4 text-sm"
+                    href="#">Privacy Policy</a>
+                <a class="text-slate-400 hover:text-white transition-colors hover:underline decoration-orange-400 underline-offset-4 text-sm"
+                    href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
