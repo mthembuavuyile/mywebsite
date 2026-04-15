@@ -1,450 +1,339 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
-
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Makhaswa Holdings | Our Services</title>
-    <link href="style.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Work+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .spec-grid-row:nth-child(even) {
-            background-color: #f0f3ff;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 </head>
+<body>
 
-<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
-    <!-- Nav -->
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-surface-variant shadow-sm">
-        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center h-20">
-            <a class="flex flex-col text-primary hover:opacity-80 transition-opacity z-50 relative" href="index.html">
-                <span class="text-2xl font-black tracking-tighter leading-none">MAKHASWA</span>
-                <span class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-secondary">Holdings</span>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/transparent-logo.png" alt="Makhaswa Holdings Logo" />
+                <div class="logo-text">
+                    <span class="title">MAKHASWA</span>
+                    <span class="subtitle">Holdings</span>
+                </div>
             </a>
-
-            <div class="hidden md:flex items-center space-x-10">
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="index.html">Home</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="index.html#about">About Us</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-primary border-b-2 border-primary pb-1"
-                    href="services.html">Services</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="index.html#projects">Projects</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="index.html#impact">Impact</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="index.html#contact">Contact</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About Us</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#impact">Impact</a>
+                <a href="index.html#contact">Contact</a>
             </div>
-
-            <a href="index.html#contact"
-                class="hidden md:inline-flex bg-primary hover:bg-primary-fixed-dim hover:text-primary text-on-primary px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-widest transition-all duration-300">
-                Get a Quote
-            </a>
-
-            <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none z-50 relative">
-                <span class="material-symbols-outlined text-3xl" id="menu-icon">menu</span>
+            <div class="nav-actions">
+                <a href="index.html#contact" class="btn btn-primary">Get a Quote</a>
+            </div>
+            <button id="mobile-menu-btn" class="mobile-toggle">
+                <span class="material-symbols-outlined icon" id="menu-icon">menu</span>
             </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu"
-            class="fixed inset-0 bg-white z-40 hidden flex-col pt-24 px-8 pb-8 h-screen overflow-y-auto w-full">
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="index.html" onclick="toggleMenu()">Home</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="index.html#about" onclick="toggleMenu()">About Us</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-primary border-b border-primary py-5"
-                href="services.html" onclick="toggleMenu()">Services</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="index.html#projects" onclick="toggleMenu()">Projects</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="index.html#impact" onclick="toggleMenu()">Impact</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="index.html#contact" onclick="toggleMenu()">Contact</a>
-            <a href="index.html#contact"
-                class="mt-8 bg-primary text-center hover:bg-primary-fixed-dim hover:text-primary text-white px-6 py-4 rounded-lg text-lg font-bold uppercase tracking-widest transition-all duration-300"
-                onclick="toggleMenu()">
-                Get a Quote
-            </a>
         </div>
     </nav>
 
-        <!-- Hero Section -->
-        <header class="relative h-[614px] flex items-center overflow-hidden mb-24">
-            <div class="absolute inset-0 z-0">
-                <img class="w-full h-full object-cover"
-                    data-alt="wide shot of a massive construction site with yellow excavators and heavy machinery at sunset with industrial dust and lens flare"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpJgMuilTb-BveuGe0HObyD_zUSIrWh1sOPmKlxrB-eKWCgHtY7psb7JmO4aVwnS8nwPC7M-YAzyJsUWR07h5a7-v1bkywy9Ynq84ZYqXrlgYzsaxtKGJ34ykbL9tlJ7YbefTcqNlM7MAix2oWAaBi6UiLlOuw0rpavesMeXhvepT-AFnDdJmyKcAHMQCtykw67sVCk2AYNTk7nOzZIUdW_LdFSqKFXBMpxCMuVMvMR8rxd1gCnHIfKNn03MvqGtDdfcAn9RkfJ4" />
-                <div class="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-80"></div>
+    <div id="mobile-menu" class="mobile-menu hidden">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About Us</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#impact">Impact</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html#contact" class="btn btn-primary">Get a Quote</a>
+    </div>
+
+    <main>
+        <header class="hero hero-services">
+            <div class="hero-bg">
+                <img alt="wide shot of a massive construction site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpJgMuilTb-BveuGe0HObyD_zUSIrWh1sOPmKlxrB-eKWCgHtY7psb7JmO4aVwnS8nwPC7M-YAzyJsUWR07h5a7-v1bkywy9Ynq84ZYqXrlgYzsaxtKGJ34ykbL9tlJ7YbefTcqNlM7MAix2oWAaBi6UiLlOuw0rpavesMeXhvepT-AFnDdJmyKcAHMQCtykw67sVCk2AYNTk7nOzZIUdW_LdFSqKFXBMpxCMuVMvMR8rxd1gCnHIfKNn03MvqGtDdfcAn9RkfJ4" />
+                <div class="hero-overlay"></div>
             </div>
-            <div class="relative z-10 px-8 md:px-16 max-w-5xl">
-                <p class="font-label text-primary-fixed-dim uppercase tracking-[0.3em] text-sm mb-4">Engineering
-                    Precision</p>
-                <h1
-                    class="font-headline text-5xl md:text-7xl text-white font-extrabold tracking-tighter leading-none mb-6">
-                    INDUSTRIAL <br />EXCELLENCE.
-                </h1>
-                <p class="text-on-primary-container max-w-xl text-lg font-light leading-relaxed">
-                    Delivering high-stakes infrastructure and earthworks with the architectural monolith of reliability
-                    and structural integrity.
-                </p>
+            <div class="container hero-content">
+                <span class="section-label">Engineering Precision</span>
+                <h1 class="hero-title">INDUSTRIAL <br>EXCELLENCE.</h1>
+                <p class="hero-desc">Delivering high-stakes infrastructure and earthworks with the architectural monolith of reliability and structural integrity.</p>
             </div>
         </header>
-        <!-- Service Section 1: Earthworks -->
-        <section class="px-8 md:px-16 mb-32">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
-                <div class="md:col-span-4">
-                    <span class="text-primary font-bold tracking-widest text-xs uppercase block mb-4">Sector 01</span>
-                    <h2 class="font-headline text-4xl font-bold tracking-tight text-primary">EARTHWORKS</h2>
-                    <div class="w-12 h-1 bg-primary-fixed-dim mt-4"></div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header grid grid-2">
+                    <div class="header-content">
+                        <span class="section-label">Sector 01</span>
+                        <h2 class="section-title">EARTHWORKS</h2>
+                        <div class="title-divider"></div>
+                    </div>
+                    <div class="header-desc">
+                        <p class="text-muted font-light italic">
+                            The foundation of every great structure begins beneath the surface. Our heavy-duty clearing and mass excavation services prepare the canvas for industrial permanence.
+                        </p>
+                    </div>
                 </div>
-                <div class="md:col-span-8 flex items-end">
-                    <p class="text-on-surface-variant max-w-2xl font-light italic">
-                        The foundation of every great structure begins beneath the surface. Our heavy-duty clearing and
-                        mass excavation services prepare the canvas for industrial permanence.
+
+                <div class="grid grid-3 card-group">
+                    <div class="service-card">
+                        <div class="card-content">
+                            <span class="material-symbols-outlined icon">forest</span>
+                            <h3>Site Clearance</h3>
+                            <p class="text-muted">Professional removal of vegetation, debris, and existing obstacles to ensure a pristine engineering environment.</p>
+                        </div>
+                        <div class="card-image">
+                            <img alt="industrial bulldozer clearing a site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHnkG6un82a48x1B3vJhoLSyKVeJypSs-yL-w6hNo0bQ-A6YCBtf53ss8iU4DK0uNiaRx1UgNhZSl06mV1Ma3QhoFfxSZ3jCavIE9GhGvJ-mt00JtiNsPrbkiRuSMKOFy1LP_EKEh7suNVtiGKGraMG859gNED1oh5oC7Ly_8U1P-uYDvui4r1wbe_12YXFvJC4fgCT1dchzhPg0gP8YCySV1FKn1HMG8zREQiMpoeIW4y3bNYvqJc8qniobxm0guBklvjuCgkPlI" />
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="card-content">
+                            <span class="material-symbols-outlined icon">foundation</span>
+                            <h3>Mass Earthworks</h3>
+                            <p class="text-muted">Large-scale excavation, hauling, and compaction of soil and rock to meet precise topographical requirements.</p>
+                        </div>
+                        <div class="card-image">
+                            <img alt="aerial view of tiered earthworks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ_vsP2zKPfM07NMOrTa1Wp3VZ5JdN2RPkYRb41jzyXX111ejWlAgthpTX6wwwzYilpgOstvEEJd76lsZOU_yLaaGXKtXP8LlIKRgr0UMMUWeW73TBsADJnKOyPzDzh5txJA9JhHDNpgoiSPU8VuGUrzLNhqVzFWQNrjwfDModFB_yuluW-gfUZb6r1ArUA5Ljm_REeqHbs1TuatWsa4JL6R-Rsi2S6KdBrxSL5aW9oTOtsM0-IrmqLn7n-adHvG4igbvhXQeDkY" />
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="card-content">
+                            <span class="material-symbols-outlined icon">architecture</span>
+                            <h3>Demolition</h3>
+                            <p class="text-muted">Controlled dismantling of structures with a primary focus on safety standards and environmental reclamation.</p>
+                        </div>
+                        <div class="card-image">
+                            <img alt="heavy hydraulic shear cutting through steel beams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu3nvTeKHdr8Hi-76MO4EYELub4qhbdXNa-w-cevU_5K_MWm7RR0_ls1BZj_WmiCvswaAufhyvAeE5EEBw-S6qpEk1DdFCXLTKoiKIkgxlFjZcDj1jC89I_JoIL-IVGwirPknXNTCfX4FkwT9nYhOP7tR80XuE0K9wXDyMiUzKW_V6-kgI-PgTs4EdjZlTj6c47CEQliIqcT4ub5Ftu6C5kYyYDk0KTzk_6mzTRKsHQ2Pxf4rxcC2ibDpAvE7-wLZpzxTSmmeD-qY" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-light">
+            <div class="container">
+                <div class="section-header grid grid-2">
+                    <div class="header-content">
+                        <span class="section-label">Sector 02</span>
+                        <h2 class="section-title">CIVIL WORKS</h2>
+                        <p class="text-muted mt-2">
+                            Underground infrastructure is the nervous system of urban development. We engineer pipelines and drainage systems designed to last centuries.
+                        </p>
+                    </div>
+                    <div class="highlight-box bg-primary text-white">
+                        <h4>Safety Standards</h4>
+                        <p class="badge">ISO 9001 Certified</p>
+                        <p>Rigorous compliance with municipal and national safety frameworks in every civil deployment.</p>
+                    </div>
+                </div>
+
+                <div class="bento-grid">
+                    <div class="bento-item bento-large bg-white">
+                        <div class="bento-content">
+                            <span class="material-symbols-outlined icon-large">water_damage</span>
+                            <h3>Stormwater Drainage</h3>
+                            <p class="text-muted">Comprehensive runoff management systems including culverts, catch basins, and sophisticated water diversion channels.</p>
+                        </div>
+                        <div class="bento-image">
+                            <img alt="large concrete drainage pipes being installed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuFOmOLALXuAjxoaL9GhBFa7UguezCmy12sUypwNHfLkHL0cA6Cr4dxnXqQmO2O85ZXuof5Y-JakPfP1-mCaa3k4ZJko1RqVfjQ-_8JeRKCpswYiwra7c4Wyz69dT2KZZ-yLK4RS38NG804T5XdpKnA9BBvwxqSi25WOj0a9-8yl2xtbO7YjwHvCuGvL1j8mtEU8nUTPzQmQAjuW5OJcvGN5RGpG-Rk1DTGKaRMpDSZoYwBqBMu0RkgQ9OmEs3pPXXcY1v0Ms5XCk" />
+                        </div>
+                    </div>
+                    <div class="bento-item bg-primary-light text-white">
+                        <h3>Sewer & Pipelines</h3>
+                        <p class="opacity-80">Precision installation of high-capacity sewer lines and industrial water transport networks.</p>
+                    </div>
+                    <div class="bento-item bg-surface">
+                        <h3 class="text-primary">Stone Pitching</h3>
+                        <p class="text-muted">Erosion control and embankment stabilization using heavy architectural stonework.</p>
+                    </div>
+                    <div class="bento-item bento-wide bg-white flex-row">
+                        <span class="material-symbols-outlined icon-large text-primary">fence</span>
+                        <div>
+                            <h3 class="text-primary">Guardrails & Safety Barriers</h3>
+                            <p class="text-muted">Industrial grade highway safety installations designed to absorb impact and protect infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section pt-large pb-large">
+            <div class="container grid grid-2 gap-large align-center">
+                <div class="image-showcase">
+                    <img alt="macro detail of fresh black asphalt texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBESgixMWGRSyhqbMRYa1316lMkIgZ_JLm1Zgp7cyuSJUidt0RNKEM4wTOgIqQWiDTXd0vP32srfKPIOwV_rEfjMXGimg5aUkneoJKoTdONppCdZk-geBLYly0mCfiDmNSeuF1k-NWZ94ZqdyQT62AoOkr8cxhI6JatNe-shostKtjT-WDW1zdc6llj0jWwyX9Rg-jKTw7_d8W814YF-V09Vxqs-0LDFMaiazJtWyktUlfOCHVjebgXrmwtc8lt-Mkf7U7Oi21yLFQ" />
+                </div>
+                <div class="content-showcase">
+                    <span class="section-label">Sector 03</span>
+                    <h2 class="section-title mb-3">ROAD <br />CONSTRUCTION</h2>
+                    
+                    <div class="spec-list">
+                        <div class="spec-item bg-light">
+                            <span class="spec-name">Kerbing and Paving</span>
+                            <span class="material-symbols-outlined icon-check">check_circle</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Concrete Stabilizing</span>
+                            <span class="material-symbols-outlined icon-check">check_circle</span>
+                        </div>
+                        <div class="spec-item bg-light">
+                            <span class="spec-name">Layerworks</span>
+                            <span class="material-symbols-outlined icon-check">check_circle</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Asphalt Surfacing</span>
+                            <span class="material-symbols-outlined icon-check">check_circle</span>
+                        </div>
+                        <div class="spec-item bg-light">
+                            <span class="spec-name">Surveying & Road Profiling</span>
+                            <span class="material-symbols-outlined icon-check">check_circle</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Retaining Walls</span>
+                            <span class="material-symbols-outlined icon-check">check_circle</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-muted italic mt-3">
+                        From municipal maintenance to national highway developments, our paving and rehabilitation teams ensure the arteries of commerce remain flawless.
                     </p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
-                <!-- Site Clearance -->
-                <div class="bg-surface-container-low p-10 hover:bg-surface-container-high transition-all group">
-                    <span class="material-symbols-outlined text-4xl text-primary mb-6" data-icon="forest">forest</span>
-                    <h3 class="font-headline text-xl font-bold mb-4 text-primary">Site Clearance</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed mb-8">Professional removal of vegetation,
-                        debris, and existing obstacles to ensure a pristine engineering environment.</p>
-                    <div class="h-48 overflow-hidden">
-                        <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                            data-alt="industrial bulldozer clearing a site with piles of debris and raw earth under a bright midday sun"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHnkG6un82a48x1B3vJhoLSyKVeJypSs-yL-w6hNo0bQ-A6YCBtf53ss8iU4DK0uNiaRx1UgNhZSl06mV1Ma3QhoFfxSZ3jCavIE9GhGvJ-mt00JtiNsPrbkiRuSMKOFy1LP_EKEh7suNVtiGKGraMG859gNED1oh5oC7Ly_8U1P-uYDvui4r1wbe_12YXFvJC4fgCT1dchzhPg0gP8YCySV1FKn1HMG8zREQiMpoeIW4y3bNYvqJc8qniobxm0guBklvjuCgkPlI" />
+        </section>
+
+        <section class="section bg-primary text-white overflow-hidden">
+            <div class="container grid grid-2 gap-large relative">
+                <div class="content-showcase relative-z">
+                    <span class="section-label label-light">Sector 04</span>
+                    <h2 class="section-title mb-2">GENERAL BUILDINGS</h2>
+                    <p class="text-light mb-4">
+                        Vertical engineering that combines structural strength with functional design. We build residential havens and industrial hubs that stand the test of time.
+                    </p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <h4>Residential Developments</h4>
+                            <p class="opacity-70">Luxury estates and modern apartment complexes with turn-key project management.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Commercial & Industrial</h4>
+                            <p class="opacity-70">Warehouses, office parks, and retail centers built for operational efficiency.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Housing Developments</h4>
+                            <p class="opacity-70">Sustainable low and middle-income housing solutions that prioritize community integrity.</p>
+                        </div>
                     </div>
                 </div>
-                <!-- Mass Earthworks -->
-                <div class="bg-surface-container-low p-10 hover:bg-surface-container-high transition-all group">
-                    <span class="material-symbols-outlined text-4xl text-primary mb-6"
-                        data-icon="foundation">foundation</span>
-                    <h3 class="font-headline text-xl font-bold mb-4 text-primary">Mass Earthworks</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed mb-8">Large-scale excavation, hauling, and
-                        compaction of soil and rock to meet precise topographical requirements.</p>
-                    <div class="h-48 overflow-hidden">
-                        <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                            data-alt="aerial view of tiered earthworks on a massive scale with tire tracks in the red clay soil"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ_vsP2zKPfM07NMOrTa1Wp3VZ5JdN2RPkYRb41jzyXX111ejWlAgthpTX6wwwzYilpgOstvEEJd76lsZOU_yLaaGXKtXP8LlIKRgr0UMMUWeW73TBsADJnKOyPzDzh5txJA9JhHDNpgoiSPU8VuGUrzLNhqVzFWQNrjwfDModFB_yuluW-gfUZb6r1ArUA5Ljm_REeqHbs1TuatWsa4JL6R-Rsi2S6KdBrxSL5aW9oTOtsM0-IrmqLn7n-adHvG4igbvhXQeDkY" />
-                    </div>
-                </div>
-                <!-- Demolition -->
-                <div class="bg-surface-container-low p-10 hover:bg-surface-container-high transition-all group">
-                    <span class="material-symbols-outlined text-4xl text-primary mb-6"
-                        data-icon="architecture">architecture</span>
-                    <h3 class="font-headline text-xl font-bold mb-4 text-primary">Demolition</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed mb-8">Controlled dismantling of structures
-                        with a primary focus on safety standards and environmental reclamation.</p>
-                    <div class="h-48 overflow-hidden">
-                        <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                            data-alt="heavy hydraulic shear cutting through steel beams of a decommissioned industrial factory"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu3nvTeKHdr8Hi-76MO4EYELub4qhbdXNa-w-cevU_5K_MWm7RR0_ls1BZj_WmiCvswaAufhyvAeE5EEBw-S6qpEk1DdFCXLTKoiKIkgxlFjZcDj1jC89I_JoIL-IVGwirPknXNTCfX4FkwT9nYhOP7tR80XuE0K9wXDyMiUzKW_V6-kgI-PgTs4EdjZlTj6c47CEQliIqcT4ub5Ftu6C5kYyYDk0KTzk_6mzTRKsHQ2Pxf4rxcC2ibDpAvE7-wLZpzxTSmmeD-qY" />
+                <div class="image-showcase relative relative-z">
+                    <img class="img-tall shadow-xl" alt="modern glass and concrete industrial office building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtKGzBk1e_HgpH39H1swJix7g9Pz-pEMJN1dWHsoMkZb8l0ducsM1kOK1eoOnR9JoLJ-ELhfTZst5ipYgSHf8jyl-_G_3A9pZN9CXCNDpI0QFvCFS72r32Ub6sps7rdn97Z6r0KGLr5ixFuwIHxCAw1RVSb1g5treDM7JWvBiUZtIHaeeGKcxSmz-b0w6hmhT1PjknTkhiSomk5pk4sF5gXOa9g3ZzQ3yt9ap9fyn84XOPfiWAs6WAmE2hBsY4k0ixfQb_Q0hl7qU" />
+                    <div class="floating-badge">
+                        URBAN <br />EVOLUTION
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Service Section 2: Civil Works - Bento Grid -->
-        <section class="bg-surface-container-low py-24 px-8 md:px-16">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
-                    <div class="max-w-xl">
-                        <span class="text-primary font-bold tracking-widest text-xs uppercase block mb-4">Sector
-                            02</span>
-                        <h2 class="font-headline text-4xl font-bold tracking-tight text-primary">CIVIL WORKS</h2>
-                        <p class="mt-6 text-on-surface-variant leading-relaxed">
-                            Underground infrastructure is the nervous system of urban development. We engineer pipelines
-                            and drainage systems designed to last centuries.
-                        </p>
-                    </div>
-                    <div class="bg-primary p-8 text-white max-w-sm">
-                        <h4 class="font-headline font-bold mb-2">Safety Standards</h4>
-                        <p class="text-xs opacity-80 uppercase tracking-wider mb-4">ISO 9001 Certified</p>
-                        <p class="text-sm font-light leading-relaxed">Rigorous compliance with municipal and national
-                            safety frameworks in every civil deployment.</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
-                    <div
-                        class="md:col-span-2 md:row-span-2 bg-white p-10 flex flex-col justify-between shadow-xl shadow-blue-900/5">
-                        <div>
-                            <span class="material-symbols-outlined text-primary-fixed-dim text-5xl mb-6"
-                                data-icon="water_damage">water_damage</span>
-                            <h3 class="font-headline text-2xl font-bold text-primary mb-4">Stormwater Drainage</h3>
-                            <p class="text-on-surface-variant leading-relaxed">Comprehensive runoff management systems
-                                including culverts, catch basins, and sophisticated water diversion channels.</p>
-                        </div>
-                        <div class="mt-12">
-                            <img class="w-full h-64 object-cover filter saturate-50"
-                                data-alt="large concrete drainage pipes being installed in a deep trench with blue sky reflection in puddles"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuFOmOLALXuAjxoaL9GhBFa7UguezCmy12sUypwNHfLkHL0cA6Cr4dxnXqQmO2O85ZXuof5Y-JakPfP1-mCaa3k4ZJko1RqVfjQ-_8JeRKCpswYiwra7c4Wyz69dT2KZZ-yLK4RS38NG804T5XdpKnA9BBvwxqSi25WOj0a9-8yl2xtbO7YjwHvCuGvL1j8mtEU8nUTPzQmQAjuW5OJcvGN5RGpG-Rk1DTGKaRMpDSZoYwBqBMu0RkgQ9OmEs3pPXXcY1v0Ms5XCk" />
-                        </div>
-                    </div>
-                    <div class="bg-primary-container p-8 text-white">
-                        <h3 class="font-headline text-lg font-bold mb-4">Sewer &amp; Pipelines</h3>
-                        <p class="text-sm opacity-80">Precision installation of high-capacity sewer lines and industrial
-                            water transport networks.</p>
-                    </div>
-                    <div class="bg-surface-container-highest p-8">
-                        <h3 class="font-headline text-lg font-bold text-primary mb-4">Stone Pitching</h3>
-                        <p class="text-sm text-on-surface-variant">Erosion control and embankment stabilization using
-                            heavy architectural stonework.</p>
-                    </div>
-                    <div class="md:col-span-2 bg-white p-8 flex items-center gap-8 shadow-xl shadow-blue-900/5">
-                        <span class="material-symbols-outlined text-4xl text-primary" data-icon="fence">fence</span>
-                        <div>
-                            <h3 class="font-headline text-lg font-bold text-primary">Guardrails &amp; Safety Barriers
-                            </h3>
-                            <p class="text-sm text-on-surface-variant">Industrial grade highway safety installations
-                                designed to absorb impact and protect infrastructure.</p>
-                        </div>
-                    </div>
-                </div>
+
+        <section class="section text-center bg-surface pt-large pb-large">
+            <div class="container">
+                <h2 class="section-title mb-2">READY TO SCALE YOUR PROJECT?</h2>
+                <p class="text-muted max-w-md mx-auto mb-4">
+                    Connect with our lead engineers for a detailed consultation and technical spec review of your upcoming industrial or civil requirements.
+                </p>
+                <a href="index.html#contact" class="btn btn-primary btn-large inline-flex">
+                    Consult With Our Team
+                    <span class="material-symbols-outlined ml-1">arrow_forward</span>
+                </a>
             </div>
-        </section>
-        <!-- Service Section 3: Road Construction - Spec Grid Pattern -->
-        <section class="px-8 md:px-16 py-32">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row gap-16 items-center">
-                    <div class="w-full md:w-1/2">
-                        <img class="w-full aspect-[4/5] object-cover"
-                            data-alt="macro detail of fresh black asphalt texture with steam rising and white lane paint being applied"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBESgixMWGRSyhqbMRYa1316lMkIgZ_JLm1Zgp7cyuSJUidt0RNKEM4wTOgIqQWiDTXd0vP32srfKPIOwV_rEfjMXGimg5aUkneoJKoTdONppCdZk-geBLYly0mCfiDmNSeuF1k-NWZ94ZqdyQT62AoOkr8cxhI6JatNe-shostKtjT-WDW1zdc6llj0jWwyX9Rg-jKTw7_d8W814YF-V09Vxqs-0LDFMaiazJtWyktUlfOCHVjebgXrmwtc8lt-Mkf7U7Oi21yLFQ" />
-                    </div>
-                    <div class="w-full md:w-1/2">
-                        <span class="text-primary font-bold tracking-widest text-xs uppercase block mb-4">Sector
-                            03</span>
-                        <h2 class="font-headline text-5xl font-bold tracking-tight text-primary leading-none mb-12">ROAD
-                            <br />CONSTRUCTION
-                        </h2>
-                        <div class="space-y-1">
-                            <!-- Spec Table -->
-                            <div class="flex justify-between items-center py-4 px-4 bg-surface-container-low">
-                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Kerbing and
-                                    Paving</span>
-                                <span class="material-symbols-outlined text-xl text-primary"
-                                    data-icon="check_circle">check_circle</span>
-                            </div>
-                            <div class="flex justify-between items-center py-4 px-4">
-                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Concrete
-                                    Stabilizing</span>
-                                <span class="material-symbols-outlined text-xl text-primary"
-                                    data-icon="check_circle">check_circle</span>
-                            </div>
-                            <div class="flex justify-between items-center py-4 px-4 bg-surface-container-low">
-                                <span
-                                    class="font-label text-[10px] uppercase tracking-widest font-bold">Layerworks</span>
-                                <span class="material-symbols-outlined text-xl text-primary"
-                                    data-icon="check_circle">check_circle</span>
-                            </div>
-                            <div class="flex justify-between items-center py-4 px-4">
-                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Asphalt
-                                    Surfacing</span>
-                                <span class="material-symbols-outlined text-xl text-primary"
-                                    data-icon="check_circle">check_circle</span>
-                            </div>
-                            <div class="flex justify-between items-center py-4 px-4 bg-surface-container-low">
-                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Surveying &amp;
-                                    Road Profiling</span>
-                                <span class="material-symbols-outlined text-xl text-primary"
-                                    data-icon="check_circle">check_circle</span>
-                            </div>
-                            <div class="flex justify-between items-center py-4 px-4">
-                                <span class="font-label text-[10px] uppercase tracking-widest font-bold">Retaining
-                                    Walls</span>
-                                <span class="material-symbols-outlined text-xl text-primary"
-                                    data-icon="check_circle">check_circle</span>
-                            </div>
-                        </div>
-                        <p class="mt-12 text-on-surface-variant font-light italic leading-relaxed">
-                            From municipal maintenance to national highway developments, our paving and rehabilitation
-                            teams ensure the arteries of commerce remain flawless.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Service Section 4: General Buildings -->
-        <section class="bg-primary py-32 px-8 md:px-16 text-white overflow-hidden">
-            <div class="max-w-7xl mx-auto relative">
-                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-24">
-                    <div>
-                        <span
-                            class="text-primary-fixed-dim font-bold tracking-widest text-xs uppercase block mb-4">Sector
-                            04</span>
-                        <h2 class="font-headline text-5xl font-bold tracking-tight mb-8">GENERAL BUILDINGS</h2>
-                        <p class="text-on-primary-container text-lg leading-relaxed mb-12">
-                            Vertical engineering that combines structural strength with functional design. We build
-                            residential havens and industrial hubs that stand the test of time.
-                        </p>
-                        <div class="space-y-8">
-                            <div class="border-l-4 border-primary-fixed-dim pl-6 py-2">
-                                <h4 class="font-headline text-xl font-bold mb-2">Residential Developments</h4>
-                                <p class="text-sm opacity-70">Luxury estates and modern apartment complexes with
-                                    turn-key project management.</p>
-                            </div>
-                            <div class="border-l-4 border-primary-fixed-dim pl-6 py-2">
-                                <h4 class="font-headline text-xl font-bold mb-2">Commercial &amp; Industrial</h4>
-                                <p class="text-sm opacity-70">Warehouses, office parks, and retail centers built for
-                                    operational efficiency.</p>
-                            </div>
-                            <div class="border-l-4 border-primary-fixed-dim pl-6 py-2">
-                                <h4 class="font-headline text-xl font-bold mb-2">Housing Developments</h4>
-                                <p class="text-sm opacity-70">Sustainable low and middle-income housing solutions that
-                                    prioritize community integrity.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative h-[600px]">
-                        <img class="absolute inset-0 w-full h-full object-cover shadow-2xl"
-                            data-alt="modern glass and concrete industrial office building with sharp architectural angles against a clear sky"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtKGzBk1e_HgpH39H1swJix7g9Pz-pEMJN1dWHsoMkZb8l0ducsM1kOK1eoOnR9JoLJ-ELhfTZst5ipYgSHf8jyl-_G_3A9pZN9CXCNDpI0QFvCFS72r32Ub6sps7rdn97Z6r0KGLr5ixFuwIHxCAw1RVSb1g5treDM7JWvBiUZtIHaeeGKcxSmz-b0w6hmhT1PjknTkhiSomk5pk4sF5gXOa9g3ZzQ3yt9ap9fyn84XOPfiWAs6WAmE2hBsY4k0ixfQb_Q0hl7qU" />
-                        <div
-                            class="absolute -bottom-8 -left-8 bg-primary-fixed-dim text-primary p-10 font-black text-4xl font-headline tracking-tighter">
-                            URBAN <br />EVOLUTION
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- CTA Section -->
-        <section class="py-32 px-8 text-center bg-surface">
-            <h2 class="font-headline text-4xl font-bold text-primary mb-6">READY TO SCALE YOUR PROJECT?</h2>
-            <p class="text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed">
-                Connect with our lead engineers for a detailed consultation and technical spec review of your upcoming
-                industrial or civil requirements.
-            </p>
-            <button
-                class="bg-primary text-white px-12 py-5 font-bold uppercase tracking-[0.2em] text-sm hover:translate-x-1 transition-transform inline-flex items-center gap-4">
-                Consult With Our Team
-                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-            </button>
         </section>
     </main>
-    <!-- Footer -->
-    <footer class="w-full bg-slate-900 text-white border-t-4 border-primary-fixed-dim">
-        <div class="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div class="space-y-6 md:col-span-1">
-                <a class="flex flex-col text-white hover:opacity-80 transition-opacity mb-4" href="index.html">
-                    <span class="text-2xl font-black tracking-tighter leading-none">MAKHASWA</span>
-                    <span
-                        class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-primary-fixed-dim">Holdings</span>
+
+    <footer class="footer">
+        <div class="container grid grid-4 footer-top">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-footer">
+                    <span class="title">MAKHASWA</span>
+                    <span class="subtitle">Holdings</span>
                 </a>
-                <p class="font-['Work_Sans'] text-sm leading-relaxed text-slate-400">
-                    A private civil engineering and construction company committed to excellence, efficiency, and
-                    building lasting infrastructure solutions across South Africa.
+                <p class="footer-desc">
+                    A private civil engineering and construction company committed to excellence, efficiency, and building lasting infrastructure solutions across South Africa.
                 </p>
-                <div class="flex space-x-4">
-                    <a href="https://www.makhaswaholdings.co.za" target="_blank"
-                        class="material-symbols-outlined text-slate-500 hover:text-primary-fixed-dim transition-colors">language</a>
-                    <span
-                        class="material-symbols-outlined text-slate-500 hover:text-primary-fixed-dim transition-colors cursor-pointer">location_on</span>
+                <div class="social-links">
+                    <a href="https://www.makhaswaholdings.co.za" target="_blank" class="material-symbols-outlined">language</a>
+                    <span class="material-symbols-outlined">location_on</span>
                 </div>
             </div>
 
-            <div>
-                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
-                <ul class="space-y-3">
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="index.html">Home</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="index.html#about">About Us</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Our Services</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="index.html#projects">Projects</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="index.html#impact">Community Impact</a></li>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#impact">Community Impact</a></li>
                 </ul>
             </div>
 
-            <div>
-                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Expertise</h4>
-                <ul class="space-y-3">
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Earthworks &amp; Clearance</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Civil Infrastructure</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Road Construction</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">General Buildings</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Roof Repair &amp; Renovation</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Concrete Stabilizing</a></li>
+            <div class="footer-links">
+                <h4>Expertise</h4>
+                <ul>
+                    <li><a href="services.html">Earthworks & Clearance</a></li>
+                    <li><a href="services.html">Civil Infrastructure</a></li>
+                    <li><a href="services.html">Road Construction</a></li>
+                    <li><a href="services.html">General Buildings</a></li>
+                    <li><a href="services.html">Roof Repair & Renovation</a></li>
+                    <li><a href="services.html">Concrete Stabilizing</a></li>
                 </ul>
             </div>
 
-            <div>
-                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Get In Touch</h4>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">call</span>
-                        <a href="tel:+27813598003"
-                            class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors">+27 81
-                            359 8003</a>
+            <div class="footer-contact">
+                <h4>Get In Touch</h4>
+                <ul>
+                    <li>
+                        <span class="material-symbols-outlined">call</span>
+                        <a href="tel:+27813598003">+27 81 359 8003</a>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">mail</span>
-                        <a href="mailto:info@makhaswaholdings.co.za"
-                            class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors break-all">info@makhaswaholdings.co.za</a>
+                    <li>
+                        <span class="material-symbols-outlined">mail</span>
+                        <a href="mailto:info@makhaswaholdings.co.za">info@makhaswaholdings.co.za</a>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">language</span>
-                        <a href="https://www.makhaswaholdings.co.za" target="_blank"
-                            class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors">www.makhaswaholdings.co.za</a>
+                    <li>
+                        <span class="material-symbols-outlined">language</span>
+                        <a href="https://www.makhaswaholdings.co.za" target="_blank">www.makhaswaholdings.co.za</a>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">location_on</span>
-                        <span class="font-['Work_Sans'] text-sm text-slate-400 leading-relaxed">
+                    <li>
+                        <span class="material-symbols-outlined">location_on</span>
+                        <address>
                             690 Rubenstein Drive<br />
                             Moreleta Park, Pretoria<br />
                             Gauteng 0181, ZA
-                        </span>
+                        </address>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div
-            class="max-w-7xl mx-auto px-8 py-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="font-['Work_Sans'] text-sm text-slate-500">© 2025 Makhaswa Holdings (Pty) Ltd. All rights
-                reserved.</p>
-            <div class="flex gap-6 font-['Work_Sans'] text-sm text-slate-500">
+        <div class="container footer-bottom">
+            <p>© 2025 Makhaswa Holdings (Pty) Ltd. All rights reserved.</p>
+            <div class="footer-legal">
                 <span>REG: K2023/648268/07</span>
                 <span>B-BBEE Level 1 Contributor</span>
             </div>
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
+
     <script>
-        function toggleMenu() {
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
             if (menu.classList.contains('hidden')) {
                 menu.classList.remove('hidden');
-                menu.classList.add('flex');
                 icon.innerText = 'close';
             } else {
                 menu.classList.add('hidden');
-                menu.classList.remove('flex');
                 icon.innerText = 'menu';
             }
-        }
-        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
+        });
     </script>
 </body>
 </html>

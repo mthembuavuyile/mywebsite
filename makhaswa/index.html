@@ -1,669 +1,632 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Makhaswa Holdings | Live Beyond Measures</title>
-    <link href="style.css" rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Work+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&family=Work+Sans:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
-
-
+    <link href="css/style.css" rel="stylesheet" />
 </head>
 
-<body class="bg-surface text-on-surface">
+<body>
 
-    <!-- Nav -->
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-surface-variant shadow-sm">
-        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center h-20">
-            <a class="flex flex-col text-primary hover:opacity-80 transition-opacity z-50 relative" href="#">
-                <span class="text-2xl font-black tracking-tighter leading-none">MAKHASWA</span>
-                <span class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-secondary">Holdings</span>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/transparent-logo.png" alt="Makhaswa Holdings Logo" />
+                <div class="logo-text">
+                    <span class="title">MAKHASWA</span>
+                    <span class="subtitle">Holdings</span>
+                </div>
             </a>
 
-            <div class="hidden md:flex items-center space-x-10">
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-primary border-b-2 border-primary pb-1"
-                    href="#">Home</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="#about">About Us</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="#services">Services</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="#projects">Projects</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="#impact">Impact</a>
-                <a class="font-['Manrope'] font-bold tracking-tight text-sm uppercase text-on-surface-variant hover:text-primary transition-colors"
-                    href="#contact">Contact</a>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#impact">Impact</a>
+                <a href="#contact">Contact</a>
             </div>
 
-            <a href="#contact"
-                class="hidden md:inline-flex bg-primary hover:bg-primary-fixed-dim hover:text-primary text-on-primary px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-widest transition-all duration-300">
-                Get a Quote
-            </a>
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary">Get a Quote</a>
+            </div>
 
-            <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none z-50 relative">
-                <span class="material-symbols-outlined text-3xl" id="menu-icon">menu</span>
+            <button id="mobile-menu-btn" class="mobile-toggle">
+                <span class="material-symbols-outlined icon" id="menu-icon">menu</span>
             </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu"
-            class="fixed inset-0 bg-white z-40 hidden flex-col pt-24 px-8 pb-8 h-screen overflow-y-auto w-full">
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-primary border-b border-surface-variant py-5"
-                href="#" onclick="toggleMenu()">Home</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="#about" onclick="toggleMenu()">About Us</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="#services" onclick="toggleMenu()">Services</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="#projects" onclick="toggleMenu()">Projects</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="#impact" onclick="toggleMenu()">Impact</a>
-            <a class="font-['Manrope'] font-bold text-xl uppercase text-on-surface-variant hover:text-primary py-5 border-b border-surface-variant transition-colors"
-                href="#contact" onclick="toggleMenu()">Contact</a>
-            <a href="#contact"
-                class="mt-8 bg-primary text-center hover:bg-primary-fixed-dim hover:text-primary text-white px-6 py-4 rounded-lg text-lg font-bold uppercase tracking-widest transition-all duration-300"
-                onclick="toggleMenu()">
-                Get a Quote
-            </a>
         </div>
     </nav>
 
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="#">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#impact">Impact</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-primary" style="margin-top: 2rem;">Get a Quote</a>
+    </div>
+
     <main>
-
-        <!-- Hero -->
-        <section class="relative h-screen min-h-[750px] flex items-center overflow-hidden pt-20">
-            <div class="absolute inset-0 z-0 mt-20">
-                <img alt="Construction site workers paving a road at sunset" class="w-full h-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eEJ5owh-xeh20aePoKQcpEVpFFYousViJfXfp_IixnEM3nbWJL7ceeooenNiWZaCG5F47skR9aZSp6KT3BFd_xmDAXEfonD0XZjioctz5yGfpAFeZs4SDItW6a7TjkY9kyWg3z0qrnlbKe1gyAUsBHuzWNN9N-o2UQyMOIV28QgQineXxw6iBwwMcmPA19w7uINbAEM39iZnTCBJSO7XIRr1TXtXEDi8FI-wsrH_EJ88n0o21vCBny2T4XwcFv3Kn5ovWlEhG80" />
-                <div class="absolute inset-0 bg-primary/70 mix-blend-multiply"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+        <header class="hero">
+            <div class="hero-bg">
+                <img alt="Construction site workers paving a road at sunset"
+                    src="https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=" />
+                <div class="hero-overlay"></div>
             </div>
-
-            <div class="relative z-10 max-w-7xl mx-auto px-8 w-full mt-10">
-                <div class="max-w-3xl">
+            <div class="container hero-content">
+                <span class="section-label" style="color: var(--color-primary-dim)">
                     <span
-                        class="label-md uppercase tracking-[0.2em] text-primary-fixed mb-6 block font-medium flex items-center gap-2">
-                        <span class="w-8 h-0.5 bg-primary-fixed"></span> Engineering the Future
-                    </span>
-                    <h1
-                        class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tighter mb-8">
-                        Precision In <br /> <span class="text-primary-fixed-dim">Infrastructure.</span>
-                    </h1>
-                    <p class="text-lg md:text-xl text-slate-200 font-light mb-10 max-w-2xl leading-relaxed">
-                        We specialize in delivering high-quality, reliable services across civil engineering and
-                        construction — from mass earthworks and road construction to general building infrastructure
-                        across South Africa.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#services"
-                            class="bg-primary-container hover:bg-on-primary-container text-white px-8 py-4 rounded-lg font-bold tracking-tight transition-all duration-300 shadow-xl inline-flex items-center gap-2">
-                            Explore Our Expertise
-                        </a>
-                        <a href="#about"
-                            class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-lg font-bold tracking-tight transition-all inline-flex items-center gap-2">
-                            View Company Profile
-                        </a>
-                    </div>
+                        style="display:inline-block; width: 2rem; height: 2px; background: var(--color-primary-dim); vertical-align: middle; margin-right: 8px;"></span>
+                    Engineering the Future
+                </span>
+                <h1 class="hero-title">Precision In <br /> <span
+                        style="color: var(--color-primary-dim)">Infrastructure.</span></h1>
+                <p class="hero-desc">
+                    We specialize in delivering high-quality, reliable services across civil engineering and
+                    construction — from mass earthworks and road construction to general building infrastructure across
+                    South Africa.
+                </p>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="#services" class="btn btn-primary">Explore Our Expertise</a>
+                    <a href="#about" class="btn btn-outline">View Company Profile</a>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <!-- About -->
-        <section id="about" class="bg-surface py-24 md:py-32 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-8 flex flex-col lg:flex-row items-center gap-16">
-                <div class="w-full lg:w-1/2 relative">
-                    <div class="absolute -top-8 -left-8 w-64 h-64 bg-surface-variant rounded-full opacity-50 blur-3xl">
-                    </div>
+        <section id="about" class="section">
+            <div class="container grid grid-2" style="align-items: center; gap: 4rem;">
+                <div class="about-image-wrapper" style="position: relative;">
                     <img alt="Professional engineer reviewing blueprints on a construction site"
-                        class="relative z-10 w-full aspect-[4/5] object-cover rounded-lg shadow-2xl"
-                        src="images/Black_male_engineer_makhaswa.jpeg" />
-                    <div
-                        class="absolute -bottom-8 -right-8 bg-white p-6 rounded-lg shadow-xl z-20 hidden md:block border-l-4 border-primary">
-                        <div class="flex items-center gap-4">
-                            <span class="material-symbols-outlined text-4xl text-primary">engineering</span>
-                            <div>
-                                <p class="font-bold text-primary leading-tight">Trusted Partner</p>
-                                <p class="text-sm text-on-surface-variant">in Tshwane</p>
-                            </div>
+                        src="images/Black_male_engineer_makhaswa.jpeg"
+                        style="width: 100%; border-radius: 8px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);" />
+                    <div class="floating-badge"
+                        style="position: absolute; bottom: -2rem; right: -2rem; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-left: 4px solid var(--color-primary); display: flex; align-items: center; gap: 1rem;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary);">engineering</span>
+                        <div>
+                            <p style="font-weight: bold; color: var(--color-primary); margin: 0;">Trusted Partner</p>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">in Tshwane</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full lg:w-1/2">
-                    <label class="text-primary font-bold tracking-[0.3em] text-xs uppercase mb-4 block">About Our
-                        Company</label>
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-6 leading-tight">Built
-                        to Last.<br />Engineered to Perform.</h2>
+                <div class="about-content">
+                    <span class="section-label">About Our Company</span>
+                    <h2 class="section-title">Built to Last.<br />Engineered to Perform.</h2>
 
-                    <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed mb-8">
-                        <p>Founded in 2017, Makhaswa Holdings is a premier civil engineering and construction company
-                            based in the City of Tshwane, Gauteng. We are committed to delivering high-quality projects
-                            on time, within budget, and to the strictest safety standards.</p>
+                    <div style="font-size: 1.125rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">
+                        <p style="margin-bottom: 1rem;">Founded in 2017, Makhaswa Holdings is a premier civil
+                            engineering and construction company based in the City of Tshwane, Gauteng. We are committed
+                            to delivering high-quality projects on time, within budget, and to the strictest safety
+                            standards.</p>
                         <p>Our dedicated team serves both private and public sector clients across South Africa. We
                             don't just move earth; we lay the foundations for economic growth by combining modern
                             engineering techniques with a robust, skilled workforce.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-sm font-bold">check</span>
-                            </div>
-                            <span class="font-semibold text-primary">Public &amp; Private Sectors</span>
+                    <div class="grid grid-2" style="gap: 1rem; margin-bottom: 2.5rem;">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary); background: rgba(5, 27, 56, 0.1); border-radius: 50%; padding: 4px; font-size: 1rem;">check</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">Public & Private Sectors</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-sm font-bold">check</span>
-                            </div>
-                            <span class="font-semibold text-primary">Safety First Approach</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary); background: rgba(5, 27, 56, 0.1); border-radius: 50%; padding: 4px; font-size: 1rem;">check</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">Safety First Approach</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-sm font-bold">check</span>
-                            </div>
-                            <span class="font-semibold text-primary">On-Time Delivery</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary); background: rgba(5, 27, 56, 0.1); border-radius: 50%; padding: 4px; font-size: 1rem;">check</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">On-Time Delivery</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined text-sm font-bold">check</span>
-                            </div>
-                            <span class="font-semibold text-primary">Sustainable Practices</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary); background: rgba(5, 27, 56, 0.1); border-radius: 50%; padding: 4px; font-size: 1rem;">check</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">Sustainable Practices</span>
                         </div>
                     </div>
 
                     <a href="#contact"
-                        class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors border-b-2 border-primary pb-1">
-                        Speak with our experts <span class="material-symbols-outlined text-lg">arrow_right_alt</span>
+                        style="color: var(--color-primary); font-weight: bold; border-bottom: 2px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                        Speak with our experts <span class="material-symbols-outlined">arrow_right_alt</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Services -->
-        <section id="services" class="bg-surface-container-lowest py-24 md:py-32 border-t border-surface-variant">
-            <div class="max-w-7xl mx-auto px-8">
-                <div class="mb-20">
-                    <label class="text-primary font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Our Core
-                        Expertise</label>
-                    <h2 class="text-4xl md:text-5xl font-black text-primary tracking-tighter mb-4">Heavy Civil
-                        Specialists</h2>
-                    <div class="w-24 h-1.5 bg-primary"></div>
-                    <p class="text-on-surface-variant text-lg mt-6 max-w-2xl">From virgin site clearance to fully
-                        completed roads and structures — we deliver every phase with absolute precision and
-                        professionalism.</p>
+        <section id="services" class="section section-light" style="border-top: 1px solid #e2e8f0;">
+            <div class="container">
+                <div style="margin-bottom: 4rem;">
+                    <span class="section-label">Our Core Expertise</span>
+                    <h2 class="section-title" style="margin-bottom: 1rem;">Heavy Civil Specialists</h2>
+                    <div style="width: 6rem; height: 6px; background: var(--color-primary); margin-bottom: 1.5rem;">
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 1.125rem; max-width: 42rem;">From virgin site
+                        clearance to fully completed roads and structures — we deliver every phase with absolute
+                        precision and professionalism.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 px-0.5">
-                    <div
-                        class="group p-10 bg-surface-container-low hover:bg-white transition-all duration-300 relative overflow-hidden">
-                        <div
-                            class="w-16 h-1 bg-primary transition-all duration-300 group-hover:w-full absolute top-0 left-0">
-                        </div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-6 block">agriculture</span>
-                        <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wide">Earthworks</h3>
-                        <ul class="space-y-3 text-on-surface-variant">
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Site Clearance</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Mass Earthworks</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Structural Demolition</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Bulk Excavations</span></li>
+                <div class="grid grid-3" style="gap: 1px; background: #e2e8f0; border: 1px solid #e2e8f0;">
+                    <div class="service-card" style="background: white; padding: 2.5rem; position: relative;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;">agriculture</span>
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem;">
+                            Earthworks</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Site Clearance</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Mass Earthworks</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Structural Demolition</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Bulk Excavations</li>
                         </ul>
                     </div>
-
-                    <div
-                        class="group p-10 bg-surface-container hover:bg-white transition-all duration-300 relative overflow-hidden">
-                        <div
-                            class="w-16 h-1 bg-primary transition-all duration-300 group-hover:w-full absolute top-0 left-0">
-                        </div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-6 block">architecture</span>
-                        <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wide">Civil Works</h3>
-                        <ul class="space-y-3 text-on-surface-variant">
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Stormwater Drainage</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Sewer &amp; Pipelines</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Stone Pitching</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Gabions &amp; Retaining</span>
-                            </li>
+                    <div class="service-card" style="background: #f8fafc; padding: 2.5rem; position: relative;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;">architecture</span>
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem;">
+                            Civil Works</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Stormwater Drainage</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Sewer & Pipelines</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Stone Pitching</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Gabions & Retaining</li>
                         </ul>
                     </div>
-
-                    <div
-                        class="group p-10 bg-surface-container-low hover:bg-white transition-all duration-300 relative overflow-hidden">
-                        <div
-                            class="w-16 h-1 bg-primary transition-all duration-300 group-hover:w-full absolute top-0 left-0">
-                        </div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-6 block">edit_road</span>
-                        <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wide">Road Construction</h3>
-                        <ul class="space-y-3 text-on-surface-variant">
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Layerworks &amp;
-                                    Stabilizing</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Asphalt Surfacing</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Kerbing &amp; Paving</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Road Maintenance</span></li>
+                    <div class="service-card" style="background: white; padding: 2.5rem; position: relative;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;">edit_road</span>
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem;">
+                            Road Construction</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Layerworks & Stabilizing</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Asphalt Surfacing</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Kerbing & Paving</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Road Maintenance</li>
                         </ul>
                     </div>
-
-                    <div
-                        class="group p-10 bg-surface-container hover:bg-white transition-all duration-300 relative overflow-hidden">
-                        <div
-                            class="w-16 h-1 bg-primary transition-all duration-300 group-hover:w-full absolute top-0 left-0">
-                        </div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-6 block">domain</span>
-                        <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wide">General Buildings</h3>
-                        <ul class="space-y-3 text-on-surface-variant">
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Residential Developments</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Commercial &amp;
-                                    Industrial</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Housing Projects</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Roof Repairs &amp; New
-                                    Roofing</span></li>
+                    <div class="service-card" style="background: #f8fafc; padding: 2.5rem; position: relative;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;">domain</span>
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem;">
+                            General Buildings</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Residential Developments</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Commercial & Industrial</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Housing Projects</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Roof Repairs & New Roofing</li>
                         </ul>
                     </div>
-
-                    <div
-                        class="group p-10 bg-surface-container-low hover:bg-white transition-all duration-300 relative overflow-hidden">
-                        <div
-                            class="w-16 h-1 bg-primary transition-all duration-300 group-hover:w-full absolute top-0 left-0">
-                        </div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-6 block">roofing</span>
-                        <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wide">Roof Repair &amp;
-                            Renovation</h3>
-                        <ul class="space-y-3 text-on-surface-variant">
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Structural Analysis</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Commercial Restoration</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Heritage &amp; Industrial</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>High-Performance
-                                    Materials</span></li>
+                    <div class="service-card" style="background: white; padding: 2.5rem; position: relative;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;">roofing</span>
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem;">
+                            Roof Repair & Renovation</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Structural Analysis</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Commercial Restoration</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Heritage & Industrial</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                High-Performance Materials</li>
                         </ul>
                     </div>
-
-                    <div
-                        class="group p-10 bg-surface-container hover:bg-white transition-all duration-300 relative overflow-hidden">
-                        <div
-                            class="w-16 h-1 bg-primary transition-all duration-300 group-hover:w-full absolute top-0 left-0">
-                        </div>
-                        <span class="material-symbols-outlined text-4xl text-primary mb-6 block">foundation</span>
-                        <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wide">Concrete Stabilizing
-                        </h3>
-                        <ul class="space-y-3 text-on-surface-variant">
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Soil Stabilization</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Chemical Treatment</span></li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Heavy Load Foundations</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="text-primary-fixed-dim mt-0.5">→</span><span>Ground Reinforcement</span></li>
+                    <div class="service-card" style="background: #f8fafc; padding: 2.5rem; position: relative;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;">foundation</span>
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem;">
+                            Concrete Stabilizing</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Soil Stabilization</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Chemical Treatment</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Heavy Load Foundations</li>
+                            <li style="margin-bottom: 0.75rem;"><span style="color: var(--color-primary-dim);">→</span>
+                                Ground Reinforcement</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Gallery -->
-        <section id="projects" class="bg-surface py-24 md:py-32 border-t border-surface-variant">
-            <div class="max-w-7xl mx-auto px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <section id="projects" class="section" style="border-top: 1px solid #e2e8f0;">
+            <div class="container">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; margin-bottom: 4rem;">
                     <div>
-                        <label class="text-primary font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Our
-                            Portfolio</label>
-                        <h2 class="text-4xl md:text-5xl font-black text-primary tracking-tighter mb-4">Featured Projects
-                            Gallery</h2>
-                        <p class="text-on-surface-variant text-lg max-w-md">A glimpse into our sites and heavy machinery
-                            operating across South Africa.</p>
+                        <span class="section-label">Our Portfolio</span>
+                        <h2 class="section-title">Featured Projects Gallery</h2>
+                        <p style="color: var(--text-muted); font-size: 1.125rem; max-width: 28rem;">A glimpse into our
+                            sites and heavy machinery operating across South Africa.</p>
                     </div>
                     <a href="#contact"
-                        class="text-primary font-bold border-b-2 border-primary pb-1 flex items-center gap-2 hover:gap-4 transition-all whitespace-nowrap">
+                        style="color: var(--color-primary); font-weight: bold; border-bottom: 2px solid var(--color-primary); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
                         Inquire about a project <span class="material-symbols-outlined">trending_flat</span>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="group relative overflow-hidden rounded-xl aspect-[4/3] bg-surface-variant">
+                <div class="grid grid-3" style="gap: 1.5rem;">
+                    <div class="project-card"
+                        style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80"
-                            alt="Structural Foundations"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            alt="Structural Foundations" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="project-overlay"
+                            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,27,56,0.9), rgba(5,27,56,0.4), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
                             <span
-                                class="text-primary-fixed-dim font-bold text-xs uppercase tracking-widest mb-1">Commercial</span>
-                            <h3 class="text-white text-xl font-bold">Structural Foundations</h3>
+                                style="color: var(--color-primary-dim); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Commercial</span>
+                            <h3 style="color: white; font-size: 1.25rem; font-weight: bold; margin: 0;">Structural
+                                Foundations</h3>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-xl aspect-[4/3] bg-surface-variant">
+                    <div class="project-card"
+                        style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqMU0kk6arem6Sdd5PFRUv9CbZaeCC8fbkdiNQWzGgA3D_bv4w_nfaxHg_l5zY6PTj-nIMoRXkEDzKkvEukXpGWoQBiMNVmDuiVWZ3SPGoyubYX2HsPe6QWi9p11WeFfWk34E8Uf5r9-KLBfggmFtcBsKYCxdvLkV6cgnHE-RUAzDUJ1Ca1tCrA59jP4_x4c3K-2TogIytW6LvUXeczSdeYHf56VX98zMVfvd1NeA0pyyP55hhxUpgqkECNizdQ5xYrkDMEgxnrL0"
-                            alt="Bulk Site Clearances"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            alt="Bulk Site Clearances" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="project-overlay"
+                            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,27,56,0.9), rgba(5,27,56,0.4), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
                             <span
-                                class="text-primary-fixed-dim font-bold text-xs uppercase tracking-widest mb-1">Earthworks</span>
-                            <h3 class="text-white text-xl font-bold">Bulk Site Clearances</h3>
+                                style="color: var(--color-primary-dim); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Earthworks</span>
+                            <h3 style="color: white; font-size: 1.25rem; font-weight: bold; margin: 0;">Bulk Site
+                                Clearances</h3>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-xl aspect-[4/3] bg-surface-variant">
+                    <div class="project-card"
+                        style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-R80HwRdna-0GcsffKsZMl4owhMVa61QkVrWEgiFNuKMoucNiY4vON8S_zdfisiVTCDtp2hb6w90C9DjybFaHDCRt4cvkAvhDyzn60zZNmCLxqbtU3DTr0WCPfpPL9XbsTTGDUK80T-k8XEWTd9BsmPKDZzFlJ1XpiMsq22Gb_NdqAdYwTgtpoDX8-oaDLvb4Fi3nyNvAib6ApcAOdtzDpDAwFuIweMWi62bsRtTDsi9GXMjTNPX2X2L5woEzazHdCyhbPbKs0DA"
-                            alt="Highway Resurfacing"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <span class="text-primary-fixed-dim font-bold text-xs uppercase tracking-widest mb-1">Civil
+                            alt="Highway Resurfacing" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="project-overlay"
+                            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,27,56,0.9), rgba(5,27,56,0.4), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
+                            <span
+                                style="color: var(--color-primary-dim); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Civil
                                 Works</span>
-                            <h3 class="text-white text-xl font-bold">Highway Resurfacing</h3>
+                            <h3 style="color: white; font-size: 1.25rem; font-weight: bold; margin: 0;">Highway
+                                Resurfacing</h3>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-xl aspect-[4/3] bg-surface-variant">
+                    <div class="project-card"
+                        style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZXLUAoAD6jYFoLtNht3PqfzyAsKy1XyZvLhojF2Yk2z-sGnEIbbY3SzCVek7NARgHVrw3Nxkb3oInMKkuODHor2-sUfkNjTliO_fijok0Pn392g0zn3a_PB08Gv6gUv1WmuMe-Y7ci7_G-c2lHbqZLwNdiSZL59jHnQnQqoRPav9sYT7Vgari_Bt3y8BfYt9X4uxHiqQKOLUFQcHP3CgBOVxPkv8rIa6A5MEvQolI0JS3jM1Z8n1I2aXB7gZSzwQt3e_GvXeicxs"
-                            alt="Harbor District Link"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            alt="Road Network Link" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="project-overlay"
+                            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,27,56,0.9), rgba(5,27,56,0.4), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
                             <span
-                                class="text-primary-fixed-dim font-bold text-xs uppercase tracking-widest mb-1">Roadworks</span>
-                            <h3 class="text-white text-xl font-bold">Road Network Link</h3>
+                                style="color: var(--color-primary-dim); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Roadworks</span>
+                            <h3 style="color: white; font-size: 1.25rem; font-weight: bold; margin: 0;">Road Network
+                                Link</h3>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-xl aspect-[4/3] bg-surface-variant">
+                    <div class="project-card"
+                        style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&q=80"
-                            alt="Housing Development"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            alt="Housing Development" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="project-overlay"
+                            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,27,56,0.9), rgba(5,27,56,0.4), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
                             <span
-                                class="text-primary-fixed-dim font-bold text-xs uppercase tracking-widest mb-1">General
+                                style="color: var(--color-primary-dim); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">General
                                 Buildings</span>
-                            <h3 class="text-white text-xl font-bold">Housing Development</h3>
+                            <h3 style="color: white; font-size: 1.25rem; font-weight: bold; margin: 0;">Housing
+                                Development</h3>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-xl aspect-[4/3] bg-surface-variant">
+                    <div class="project-card"
+                        style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyqPUXM1KQ8Ky9LNECmPXKXsHGUSi3569fxvX5SrZOYfYWzzeFb23isPtICRYF6uZ1wuXv-oQQdh9UKGumDg5HVNod5i0ro_t_Zjb2VytLBYfr0sF23rRAgddY2Zl6vUHk6DvBZ3VZTUKeA2EOtvix_xHRlZEpQ0kjp9Or7Igx9secoM_ster5dpTL1_sbm5ZypvbIT2aBiYg3EQaofcK_17Sov2YjyDedM-7lJnTM-1haYMqassYkZUz4WPc10sXxay3brlCwc9M"
-                            alt="Logistics Hub Alpha"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            alt="Logistics Hub Alpha" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="project-overlay"
+                            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,27,56,0.9), rgba(5,27,56,0.4), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
                             <span
-                                class="text-primary-fixed-dim font-bold text-xs uppercase tracking-widest mb-1">Stabilizing</span>
-                            <h3 class="text-white text-xl font-bold">Logistics Hub Alpha</h3>
+                                style="color: var(--color-primary-dim); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Stabilizing</span>
+                            <h3 style="color: white; font-size: 1.25rem; font-weight: bold; margin: 0;">Logistics Hub
+                                Alpha</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Impact -->
-        <section id="impact" class="bg-surface-container py-24 border-t border-surface-variant">
-            <div class="max-w-7xl mx-auto px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                    <div class="max-w-2xl">
-                        <label class="text-primary font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Community
-                            Impact</label>
-                        <h2 class="text-4xl font-black text-primary tracking-tighter mb-4">Shaping Our Environment</h2>
-                        <p class="text-on-surface-variant text-lg">From the vibrant streets of our townships to growing
-                            urban centers, civil engineering shapes our everyday lives. A well-developed infrastructure
-                            means better opportunities, safer streets, and a brighter future for South Africa.</p>
-                    </div>
+        <section id="impact" class="section" style="background: #f1f5f9; border-top: 1px solid #e2e8f0;">
+            <div class="container">
+                <div style="margin-bottom: 4rem; max-width: 42rem;">
+                    <span class="section-label">Community Impact</span>
+                    <h2 class="section-title">Shaping Our Environment</h2>
+                    <p style="color: var(--text-muted); font-size: 1.125rem;">From the vibrant streets of our townships
+                        to growing urban centers, civil engineering shapes our everyday lives. A well-developed
+                        infrastructure means better opportunities, safer streets, and a brighter future for South
+                        Africa.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex gap-6 p-8 bg-surface-container-low rounded-lg">
-                        <span class="material-symbols-outlined text-4xl text-primary">home_work</span>
+                <div class="grid grid-2" style="gap: 1.5rem;">
+                    <div style="display: flex; gap: 1.5rem; padding: 2rem; background: #e2e8f0; border-radius: 8px;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary);">home_work</span>
                         <div>
-                            <h4 class="text-xl font-bold text-primary mb-2">Better Housing</h4>
-                            <p class="text-on-surface-variant">Designing and constructing strong, affordable homes for
-                                families across the nation.</p>
+                            <h4
+                                style="color: var(--color-primary); font-size: 1.25rem; font-weight: bold; margin: 0 0 0.5rem 0;">
+                                Better Housing</h4>
+                            <p style="color: var(--text-muted); margin: 0;">Designing and constructing strong,
+                                affordable homes for families across the nation.</p>
                         </div>
                     </div>
-                    <div class="flex gap-6 p-8 bg-surface-container-low rounded-lg">
-                        <span class="material-symbols-outlined text-4xl text-primary">add_road</span>
+                    <div style="display: flex; gap: 1.5rem; padding: 2rem; background: #e2e8f0; border-radius: 8px;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary);">add_road</span>
                         <div>
-                            <h4 class="text-xl font-bold text-primary mb-2">Safer Roads</h4>
-                            <p class="text-on-surface-variant">Fixing potholes, improving transport routes, and building
-                                resilient quality road networks.</p>
+                            <h4
+                                style="color: var(--color-primary); font-size: 1.25rem; font-weight: bold; margin: 0 0 0.5rem 0;">
+                                Safer Roads</h4>
+                            <p style="color: var(--text-muted); margin: 0;">Fixing potholes, improving transport routes,
+                                and building resilient quality road networks.</p>
                         </div>
                     </div>
-                    <div class="flex gap-6 p-8 bg-surface-container-low rounded-lg">
-                        <span class="material-symbols-outlined text-4xl text-primary">water_drop</span>
+                    <div style="display: flex; gap: 1.5rem; padding: 2rem; background: #e2e8f0; border-radius: 8px;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary);">water_drop</span>
                         <div>
-                            <h4 class="text-xl font-bold text-primary mb-2">Reliable Utilities</h4>
-                            <p class="text-on-surface-variant">Ensuring communities have sustainable access to essential
-                                stormwater and sewer services.</p>
+                            <h4
+                                style="color: var(--color-primary); font-size: 1.25rem; font-weight: bold; margin: 0 0 0.5rem 0;">
+                                Reliable Utilities</h4>
+                            <p style="color: var(--text-muted); margin: 0;">Ensuring communities have sustainable access
+                                to essential stormwater and sewer services.</p>
                         </div>
                     </div>
-                    <div class="flex gap-6 p-8 bg-surface-container-low rounded-lg">
-                        <span class="material-symbols-outlined text-4xl text-primary">eco</span>
+                    <div style="display: flex; gap: 1.5rem; padding: 2rem; background: #e2e8f0; border-radius: 8px;">
+                        <span class="material-symbols-outlined icon"
+                            style="font-size: 2.5rem; color: var(--color-primary);">eco</span>
                         <div>
-                            <h4 class="text-xl font-bold text-primary mb-2">Sustainable Growth</h4>
-                            <p class="text-on-surface-variant">Implementing eco-friendly materials and smart
-                                site-designs for responsible development.</p>
+                            <h4
+                                style="color: var(--color-primary); font-size: 1.25rem; font-weight: bold; margin: 0 0 0.5rem 0;">
+                                Sustainable Growth</h4>
+                            <p style="color: var(--text-muted); margin: 0;">Implementing eco-friendly materials and
+                                smart site-designs for responsible development.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact -->
-        <section id="contact" class="bg-primary py-24">
-            <div class="max-w-3xl mx-auto px-8 text-center">
-                <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter mb-6 leading-tight">
-                    Ready to break ground?
-                </h2>
-                <p class="text-primary-fixed-dim text-xl mb-10 font-light max-w-2xl mx-auto">
-                    Get in touch with our engineering team for a fast and accurate project estimate.
-                </p>
+        <section id="contact" class="section section-primary text-center"
+            style="background: var(--color-primary); padding: 6rem 0;">
+            <div class="container" style="max-width: 48rem;">
+                <h2 class="section-title" style="color: white; font-size: 3.75rem; margin-bottom: 1.5rem;">Ready to
+                    break ground?</h2>
+                <p
+                    style="color: var(--color-primary-dim); font-size: 1.25rem; margin-bottom: 2.5rem; font-weight: 300;">
+                    Get in touch with our engineering team for a fast and accurate project estimate.</p>
 
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-                    <a href="mailto:info@makhaswaholdings.co.za"
-                        class="bg-white text-primary px-8 py-4 rounded-lg font-bold hover:bg-slate-100 transition shadow inline-flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-xl">mail</span> Email Us
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
+                    <a href="mailto:info@makhaswaholdings.co.za" class="btn"
+                        style="background: white; color: var(--color-primary); display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 8px; font-weight: bold; text-decoration: none;">
+                        <span class="material-symbols-outlined">mail</span> Email Us
                     </a>
-                    <a href="tel:+27813598003"
-                        class="border-2 border-white/40 text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition inline-flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-xl">call</span> +27 81 359 8003
+                    <a href="tel:+27813598003" class="btn"
+                        style="border: 2px solid rgba(255,255,255,0.4); color: white; display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 8px; font-weight: bold; text-decoration: none; background: transparent;">
+                        <span class="material-symbols-outlined">call</span> +27 81 359 8003
                     </a>
                 </div>
 
-                <div class="bg-white rounded-xl p-8 text-left shadow-lg">
-                    <h3 class="text-xl font-bold text-primary mb-6 font-['Manrope']">Send Us a Message</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="flex flex-col">
-                            <label for="name" class="text-sm font-semibold text-slate-700 mb-2">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required
-                                class="px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-on-surface" />
+                <div
+                    style="background: white; border-radius: 12px; padding: 2rem; text-align: left; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
+                    <form class="form-card">
+                        <h3
+                            style="color: var(--color-primary); font-size: 1.25rem; font-weight: bold; margin-bottom: 1.5rem;">
+                            Send Us a Message</h3>
+                        <div class="grid grid-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div class="form-group" style="display: flex; flex-direction: column;">
+                                <label
+                                    style="font-size: 0.875rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Full
+                                    Name</label>
+                                <input type="text" placeholder="John Doe" required
+                                    style="padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box;" />
+                            </div>
+                            <div class="form-group" style="display: flex; flex-direction: column;">
+                                <label
+                                    style="font-size: 0.875rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Email
+                                    Address</label>
+                                <input type="email" placeholder="john@example.com" required
+                                    style="padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box;" />
+                            </div>
+                            <div class="form-group" style="display: flex; flex-direction: column;">
+                                <label
+                                    style="font-size: 0.875rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Phone
+                                    Number</label>
+                                <input type="tel" placeholder="+27 81 000 0000"
+                                    style="padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box;" />
+                            </div>
+                            <div class="form-group" style="display: flex; flex-direction: column;">
+                                <label
+                                    style="font-size: 0.875rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Service
+                                    Required</label>
+                                <select
+                                    style="padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box; background: white;">
+                                    <option value="">Select a service...</option>
+                                    <option value="earthworks">Earthworks</option>
+                                    <option value="civil">Civil Works</option>
+                                    <option value="roads">Road Construction</option>
+                                    <option value="buildings">General Buildings</option>
+                                    <option value="roofing">Roof Repair & Renovation</option>
+                                    <option value="stabilizing">Concrete Stabilizing</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="flex flex-col">
-                            <label for="email" class="text-sm font-semibold text-slate-700 mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required
-                                class="px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-on-surface" />
+                        <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 1.5rem;">
+                            <label
+                                style="font-size: 0.875rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Message</label>
+                            <textarea rows="5" placeholder="Tell us about your project..." required
+                                style="padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid #e2e8f0; width: 100%; box-sizing: border-box; resize: vertical;"></textarea>
                         </div>
-                        <div class="flex flex-col">
-                            <label for="phone" class="text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+27 81 000 0000"
-                                class="px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-on-surface" />
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="service" class="text-sm font-semibold text-slate-700 mb-2">Service
-                                Required</label>
-                            <select id="service" name="service"
-                                class="px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-on-surface bg-white">
-                                <option value="">Select a service...</option>
-                                <option value="earthworks">Earthworks</option>
-                                <option value="civil">Civil Works</option>
-                                <option value="roads">Road Construction</option>
-                                <option value="buildings">General Buildings</option>
-                                <option value="roofing">Roof Repair &amp; Renovation</option>
-                                <option value="stabilizing">Concrete Stabilizing</option>
-                            </select>
-                        </div>
-                        <div class="flex flex-col md:col-span-2">
-                            <label for="message" class="text-sm font-semibold text-slate-700 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..."
-                                required
-                                class="px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none text-on-surface"></textarea>
-                        </div>
-                        <div class="md:col-span-2">
-                            <button type="submit"
-                                class="w-full bg-primary text-white font-bold py-4 rounded-lg hover:opacity-90 transition active:scale-[0.98]">
-                                Send Message
-                            </button>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; padding: 1rem; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; background: var(--color-primary); color: white;">Send
+                            Message</button>
+                    </form>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full bg-slate-900 text-white border-t-4 border-primary-fixed-dim">
-        <div class="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div class="space-y-6 md:col-span-1">
-                <a class="flex flex-col text-white hover:opacity-80 transition-opacity mb-4" href="#">
-                    <span class="text-2xl font-black tracking-tighter leading-none">MAKHASWA</span>
-                    <span
-                        class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-primary-fixed-dim">Holdings</span>
-                </a>
-                <p class="font-['Work_Sans'] text-sm leading-relaxed text-slate-400">
-                    A private civil engineering and construction company committed to excellence, efficiency, and
-                    building lasting infrastructure solutions across South Africa.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="https://www.makhaswaholdings.co.za" target="_blank"
-                        class="material-symbols-outlined text-slate-500 hover:text-primary-fixed-dim transition-colors">language</a>
-                    <span
-                        class="material-symbols-outlined text-slate-500 hover:text-primary-fixed-dim transition-colors cursor-pointer">location_on</span>
+    <footer class="footer" style="background: #0f172a; color: white; border-top: 4px solid var(--color-primary-dim);">
+        <div class="container" style="padding: 4rem 2rem;">
+            <div class="grid grid-4" style="gap: 3rem;">
+                <div>
+                    <a href="#"
+                        style="text-decoration: none; color: white; display: inline-flex; flex-direction: column; margin-bottom: 1rem;">
+                        <span
+                            style="font-size: 1.5rem; font-weight: 900; letter-spacing: -0.05em; line-height: 1;">MAKHASWA</span>
+                        <span
+                            style="font-size: 0.65rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary-dim);">Holdings</span>
+                    </a>
+                    <p
+                        style="font-size: 0.875rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1.5rem; font-family: 'Work Sans', sans-serif;">
+                        A private civil engineering and construction company committed to excellence, efficiency, and
+                        building lasting infrastructure solutions across South Africa.
+                    </p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="https://www.makhaswaholdings.co.za" target="_blank" class="material-symbols-outlined"
+                            style="color: #64748b; text-decoration: none;">language</a>
+                        <span class="material-symbols-outlined"
+                            style="color: #64748b; cursor: pointer;">location_on</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4
+                        style="font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
+                        Quick Links</h4>
+                    <ul
+                        style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="#"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Home</a>
+                        </li>
+                        <li><a href="#about"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">About
+                                Us</a></li>
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Our
+                                Services</a></li>
+                        <li><a href="#projects"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Projects</a>
+                        </li>
+                        <li><a href="#impact"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Community
+                                Impact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4
+                        style="font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
+                        Expertise</h4>
+                    <ul
+                        style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Earthworks
+                                & Clearance</a></li>
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Civil
+                                Infrastructure</a></li>
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Road
+                                Construction</a></li>
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">General
+                                Buildings</a></li>
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Roof
+                                Repair & Renovation</a></li>
+                        <li><a href="#services"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Concrete
+                                Stabilizing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4
+                        style="font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
+                        Get In Touch</h4>
+                    <ul
+                        style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary-dim); font-size: 1.25rem;">call</span>
+                            <a href="tel:+27813598003"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">+27
+                                81 359 8003</a>
+                        </li>
+                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary-dim); font-size: 1.25rem;">mail</span>
+                            <a href="mailto:info@makhaswaholdings.co.za"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; word-break: break-all; font-family: 'Work Sans', sans-serif;">info@makhaswaholdings.co.za</a>
+                        </li>
+                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary-dim); font-size: 1.25rem;">language</span>
+                            <a href="https://www.makhaswaholdings.co.za" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">www.makhaswaholdings.co.za</a>
+                        </li>
+                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                            <span class="material-symbols-outlined"
+                                style="color: var(--color-primary-dim); font-size: 1.25rem;">location_on</span>
+                            <span
+                                style="color: #94a3b8; font-size: 0.875rem; line-height: 1.6; font-family: 'Work Sans', sans-serif;">
+                                690 Rubenstein Drive<br />
+                                Moreleta Park, Pretoria<br />
+                                Gauteng 0181, ZA
+                            </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <div>
-                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
-                <ul class="space-y-3">
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#">Home</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#about">About Us</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="services.html">Our Services</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#projects">Projects</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#impact">Community Impact</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Expertise</h4>
-                <ul class="space-y-3">
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#services">Earthworks &amp; Clearance</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#services">Civil Infrastructure</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#services">Road Construction</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#services">General Buildings</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#services">Roof Repair &amp; Renovation</a></li>
-                    <li><a class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors"
-                            href="#services">Concrete Stabilizing</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Get In Touch</h4>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">call</span>
-                        <a href="tel:+27813598003"
-                            class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors">+27 81
-                            359 8003</a>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">mail</span>
-                        <a href="mailto:info@makhaswaholdings.co.za"
-                            class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors break-all">info@makhaswaholdings.co.za</a>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">language</span>
-                        <a href="https://www.makhaswaholdings.co.za" target="_blank"
-                            class="font-['Work_Sans'] text-sm text-slate-400 hover:text-white transition-colors">www.makhaswaholdings.co.za</a>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-primary-fixed-dim text-xl">location_on</span>
-                        <span class="font-['Work_Sans'] text-sm text-slate-400 leading-relaxed">
-                            690 Rubenstein Drive<br />
-                            Moreleta Park, Pretoria<br />
-                            Gauteng 0181, ZA
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div
-            class="max-w-7xl mx-auto px-8 py-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="font-['Work_Sans'] text-sm text-slate-500">© 2026 Makhaswa Holdings (Pty) Ltd. All rights
-                reserved.</p>
-            <div class="flex gap-6 font-['Work_Sans'] text-sm text-slate-500">
-                <span>REG: K2023/648268/07</span>
-                <span>B-BBEE Level 1 Contributor</span>
+            <div
+                style="border-top: 1px solid #1e293b; margin-top: 3rem; padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; color: #64748b; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">
+                <p style="margin: 0;">© 2026 Makhaswa Holdings (Pty) Ltd. All rights reserved.</p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <span>REG: K2023/648268/07</span>
+                    <span>B-BBEE Level 1 Contributor</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
-                icon.innerText = 'close';
-            } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
-                icon.innerText = 'menu';
-            }
-        }
-        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
-    </script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
