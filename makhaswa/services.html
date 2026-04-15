@@ -1,339 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Makhaswa Holdings | Our Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makhaswa Holdings (Pty) Ltd | Our Services</title>
+    <meta name="description"
+        content="Makhaswa Holdings delivers earthworks, civil works, road construction, general building, project management, plumbing, and paving services across Gauteng and South Africa.">
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="images/transparent-logo.png" alt="Makhaswa Holdings Logo" />
-                <div class="logo-text">
-                    <span class="title">MAKHASWA</span>
-                    <span class="subtitle">Holdings</span>
-                </div>
-            </a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="index.html#about">About Us</a>
-                <a href="services.html" class="active">Services</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="index.html#impact">Impact</a>
-                <a href="index.html#contact">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <a href="index.html#contact" class="btn btn-primary">Get a Quote</a>
-            </div>
-            <button id="mobile-menu-btn" class="mobile-toggle">
-                <span class="material-symbols-outlined icon" id="menu-icon">menu</span>
-            </button>
-        </div>
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="images/transparent-logo.png" alt="Makhaswa Holdings Logo">
+            <div class="logo-text">Makhaswa<small>Holdings (Pty) Ltd</small></div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav id="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Burger Button -->
+        <button class="burger" id="burger-btn" aria-label="Toggle menu" aria-expanded="false">
+            <i data-lucide="menu" width="26" height="26"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="contact.html">Contact</a>
     </nav>
 
-    <div id="mobile-menu" class="mobile-menu hidden">
-        <a href="index.html">Home</a>
-        <a href="index.html#about">About Us</a>
-        <a href="services.html" class="active">Services</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="index.html#impact">Impact</a>
-        <a href="index.html#contact">Contact</a>
-        <a href="index.html#contact" class="btn btn-primary">Get a Quote</a>
+    <!-- =====================================================
+         PAGE HERO
+    ===================================================== -->
+    <div class="page-hero page-hero-services" role="img" aria-label="Makhaswa Holdings construction services">
+        <div class="hero-content">
+            <h1>Our Services</h1>
+            <p>From earthworks to general building — Makhaswa Holdings delivers multi-disciplinary construction and engineering services with proven capability and compliance.</p>
+        </div>
+    </div>
+    <div class="hero-banner">
+        CIDB Grade 8 CE PE &bull; NHBRC Registered &bull; Level 1 B-BBEE
     </div>
 
-    <main>
-        <header class="hero hero-services">
-            <div class="hero-bg">
-                <img alt="wide shot of a massive construction site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpJgMuilTb-BveuGe0HObyD_zUSIrWh1sOPmKlxrB-eKWCgHtY7psb7JmO4aVwnS8nwPC7M-YAzyJsUWR07h5a7-v1bkywy9Ynq84ZYqXrlgYzsaxtKGJ34ykbL9tlJ7YbefTcqNlM7MAix2oWAaBi6UiLlOuw0rpavesMeXhvepT-AFnDdJmyKcAHMQCtykw67sVCk2AYNTk7nOzZIUdW_LdFSqKFXBMpxCMuVMvMR8rxd1gCnHIfKNn03MvqGtDdfcAn9RkfJ4" />
-                <div class="hero-overlay"></div>
-            </div>
-            <div class="container hero-content">
-                <span class="section-label">Engineering Precision</span>
-                <h1 class="hero-title">INDUSTRIAL <br>EXCELLENCE.</h1>
-                <p class="hero-desc">Delivering high-stakes infrastructure and earthworks with the architectural monolith of reliability and structural integrity.</p>
-            </div>
-        </header>
+    <!-- =====================================================
+         CORE SERVICES
+    ===================================================== -->
+    <div class="section-banner">Core Services — Five disciplines that define our capability and delivery.</div>
 
-        <section class="section">
-            <div class="container">
-                <div class="section-header grid grid-2">
-                    <div class="header-content">
-                        <span class="section-label">Sector 01</span>
-                        <h2 class="section-title">EARTHWORKS</h2>
-                        <div class="title-divider"></div>
-                    </div>
-                    <div class="header-desc">
-                        <p class="text-muted font-light italic">
-                            The foundation of every great structure begins beneath the surface. Our heavy-duty clearing and mass excavation services prepare the canvas for industrial permanence.
-                        </p>
-                    </div>
-                </div>
+    <div class="container">
+        <h2 class="section-title text-center">Core Services</h2>
+        <p class="section-subtitle" style="text-align:center; margin: -16px auto 40px;">The service mix below comes directly from our areas of active CIDB-graded capability and operational experience.</p>
 
-                <div class="grid grid-3 card-group">
-                    <div class="service-card">
-                        <div class="card-content">
-                            <span class="material-symbols-outlined icon">forest</span>
-                            <h3>Site Clearance</h3>
-                            <p class="text-muted">Professional removal of vegetation, debris, and existing obstacles to ensure a pristine engineering environment.</p>
-                        </div>
-                        <div class="card-image">
-                            <img alt="industrial bulldozer clearing a site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHnkG6un82a48x1B3vJhoLSyKVeJypSs-yL-w6hNo0bQ-A6YCBtf53ss8iU4DK0uNiaRx1UgNhZSl06mV1Ma3QhoFfxSZ3jCavIE9GhGvJ-mt00JtiNsPrbkiRuSMKOFy1LP_EKEh7suNVtiGKGraMG859gNED1oh5oC7Ly_8U1P-uYDvui4r1wbe_12YXFvJC4fgCT1dchzhPg0gP8YCySV1FKn1HMG8zREQiMpoeIW4y3bNYvqJc8qniobxm0guBklvjuCgkPlI" />
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="card-content">
-                            <span class="material-symbols-outlined icon">foundation</span>
-                            <h3>Mass Earthworks</h3>
-                            <p class="text-muted">Large-scale excavation, hauling, and compaction of soil and rock to meet precise topographical requirements.</p>
-                        </div>
-                        <div class="card-image">
-                            <img alt="aerial view of tiered earthworks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ_vsP2zKPfM07NMOrTa1Wp3VZ5JdN2RPkYRb41jzyXX111ejWlAgthpTX6wwwzYilpgOstvEEJd76lsZOU_yLaaGXKtXP8LlIKRgr0UMMUWeW73TBsADJnKOyPzDzh5txJA9JhHDNpgoiSPU8VuGUrzLNhqVzFWQNrjwfDModFB_yuluW-gfUZb6r1ArUA5Ljm_REeqHbs1TuatWsa4JL6R-Rsi2S6KdBrxSL5aW9oTOtsM0-IrmqLn7n-adHvG4igbvhXQeDkY" />
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="card-content">
-                            <span class="material-symbols-outlined icon">architecture</span>
-                            <h3>Demolition</h3>
-                            <p class="text-muted">Controlled dismantling of structures with a primary focus on safety standards and environmental reclamation.</p>
-                        </div>
-                        <div class="card-image">
-                            <img alt="heavy hydraulic shear cutting through steel beams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu3nvTeKHdr8Hi-76MO4EYELub4qhbdXNa-w-cevU_5K_MWm7RR0_ls1BZj_WmiCvswaAufhyvAeE5EEBw-S6qpEk1DdFCXLTKoiKIkgxlFjZcDj1jC89I_JoIL-IVGwirPknXNTCfX4FkwT9nYhOP7tR80XuE0K9wXDyMiUzKW_V6-kgI-PgTs4EdjZlTj6c47CEQliIqcT4ub5Ftu6C5kYyYDk0KTzk_6mzTRKsHQ2Pxf4rxcC2ibDpAvE7-wLZpzxTSmmeD-qY" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section bg-light">
-            <div class="container">
-                <div class="section-header grid grid-2">
-                    <div class="header-content">
-                        <span class="section-label">Sector 02</span>
-                        <h2 class="section-title">CIVIL WORKS</h2>
-                        <p class="text-muted mt-2">
-                            Underground infrastructure is the nervous system of urban development. We engineer pipelines and drainage systems designed to last centuries.
-                        </p>
-                    </div>
-                    <div class="highlight-box bg-primary text-white">
-                        <h4>Safety Standards</h4>
-                        <p class="badge">ISO 9001 Certified</p>
-                        <p>Rigorous compliance with municipal and national safety frameworks in every civil deployment.</p>
-                    </div>
-                </div>
-
-                <div class="bento-grid">
-                    <div class="bento-item bento-large bg-white">
-                        <div class="bento-content">
-                            <span class="material-symbols-outlined icon-large">water_damage</span>
-                            <h3>Stormwater Drainage</h3>
-                            <p class="text-muted">Comprehensive runoff management systems including culverts, catch basins, and sophisticated water diversion channels.</p>
-                        </div>
-                        <div class="bento-image">
-                            <img alt="large concrete drainage pipes being installed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuFOmOLALXuAjxoaL9GhBFa7UguezCmy12sUypwNHfLkHL0cA6Cr4dxnXqQmO2O85ZXuof5Y-JakPfP1-mCaa3k4ZJko1RqVfjQ-_8JeRKCpswYiwra7c4Wyz69dT2KZZ-yLK4RS38NG804T5XdpKnA9BBvwxqSi25WOj0a9-8yl2xtbO7YjwHvCuGvL1j8mtEU8nUTPzQmQAjuW5OJcvGN5RGpG-Rk1DTGKaRMpDSZoYwBqBMu0RkgQ9OmEs3pPXXcY1v0Ms5XCk" />
-                        </div>
-                    </div>
-                    <div class="bento-item bg-primary-light text-white">
-                        <h3>Sewer & Pipelines</h3>
-                        <p class="opacity-80">Precision installation of high-capacity sewer lines and industrial water transport networks.</p>
-                    </div>
-                    <div class="bento-item bg-surface">
-                        <h3 class="text-primary">Stone Pitching</h3>
-                        <p class="text-muted">Erosion control and embankment stabilization using heavy architectural stonework.</p>
-                    </div>
-                    <div class="bento-item bento-wide bg-white flex-row">
-                        <span class="material-symbols-outlined icon-large text-primary">fence</span>
-                        <div>
-                            <h3 class="text-primary">Guardrails & Safety Barriers</h3>
-                            <p class="text-muted">Industrial grade highway safety installations designed to absorb impact and protect infrastructure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section pt-large pb-large">
-            <div class="container grid grid-2 gap-large align-center">
-                <div class="image-showcase">
-                    <img alt="macro detail of fresh black asphalt texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBESgixMWGRSyhqbMRYa1316lMkIgZ_JLm1Zgp7cyuSJUidt0RNKEM4wTOgIqQWiDTXd0vP32srfKPIOwV_rEfjMXGimg5aUkneoJKoTdONppCdZk-geBLYly0mCfiDmNSeuF1k-NWZ94ZqdyQT62AoOkr8cxhI6JatNe-shostKtjT-WDW1zdc6llj0jWwyX9Rg-jKTw7_d8W814YF-V09Vxqs-0LDFMaiazJtWyktUlfOCHVjebgXrmwtc8lt-Mkf7U7Oi21yLFQ" />
-                </div>
-                <div class="content-showcase">
-                    <span class="section-label">Sector 03</span>
-                    <h2 class="section-title mb-3">ROAD <br />CONSTRUCTION</h2>
-                    
-                    <div class="spec-list">
-                        <div class="spec-item bg-light">
-                            <span class="spec-name">Kerbing and Paving</span>
-                            <span class="material-symbols-outlined icon-check">check_circle</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-name">Concrete Stabilizing</span>
-                            <span class="material-symbols-outlined icon-check">check_circle</span>
-                        </div>
-                        <div class="spec-item bg-light">
-                            <span class="spec-name">Layerworks</span>
-                            <span class="material-symbols-outlined icon-check">check_circle</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-name">Asphalt Surfacing</span>
-                            <span class="material-symbols-outlined icon-check">check_circle</span>
-                        </div>
-                        <div class="spec-item bg-light">
-                            <span class="spec-name">Surveying & Road Profiling</span>
-                            <span class="material-symbols-outlined icon-check">check_circle</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-name">Retaining Walls</span>
-                            <span class="material-symbols-outlined icon-check">check_circle</span>
-                        </div>
-                    </div>
-                    
-                    <p class="text-muted italic mt-3">
-                        From municipal maintenance to national highway developments, our paving and rehabilitation teams ensure the arteries of commerce remain flawless.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section bg-primary text-white overflow-hidden">
-            <div class="container grid grid-2 gap-large relative">
-                <div class="content-showcase relative-z">
-                    <span class="section-label label-light">Sector 04</span>
-                    <h2 class="section-title mb-2">GENERAL BUILDINGS</h2>
-                    <p class="text-light mb-4">
-                        Vertical engineering that combines structural strength with functional design. We build residential havens and industrial hubs that stand the test of time.
-                    </p>
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <h4>Residential Developments</h4>
-                            <p class="opacity-70">Luxury estates and modern apartment complexes with turn-key project management.</p>
-                        </div>
-                        <div class="feature-item">
-                            <h4>Commercial & Industrial</h4>
-                            <p class="opacity-70">Warehouses, office parks, and retail centers built for operational efficiency.</p>
-                        </div>
-                        <div class="feature-item">
-                            <h4>Housing Developments</h4>
-                            <p class="opacity-70">Sustainable low and middle-income housing solutions that prioritize community integrity.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="image-showcase relative relative-z">
-                    <img class="img-tall shadow-xl" alt="modern glass and concrete industrial office building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtKGzBk1e_HgpH39H1swJix7g9Pz-pEMJN1dWHsoMkZb8l0ducsM1kOK1eoOnR9JoLJ-ELhfTZst5ipYgSHf8jyl-_G_3A9pZN9CXCNDpI0QFvCFS72r32Ub6sps7rdn97Z6r0KGLr5ixFuwIHxCAw1RVSb1g5treDM7JWvBiUZtIHaeeGKcxSmz-b0w6hmhT1PjknTkhiSomk5pk4sF5gXOa9g3ZzQ3yt9ap9fyn84XOPfiWAs6WAmE2hBsY4k0ixfQb_Q0hl7qU" />
-                    <div class="floating-badge">
-                        URBAN <br />EVOLUTION
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section text-center bg-surface pt-large pb-large">
-            <div class="container">
-                <h2 class="section-title mb-2">READY TO SCALE YOUR PROJECT?</h2>
-                <p class="text-muted max-w-md mx-auto mb-4">
-                    Connect with our lead engineers for a detailed consultation and technical spec review of your upcoming industrial or civil requirements.
-                </p>
-                <a href="index.html#contact" class="btn btn-primary btn-large inline-flex">
-                    Consult With Our Team
-                    <span class="material-symbols-outlined ml-1">arrow_forward</span>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container grid grid-4 footer-top">
-            <div class="footer-brand">
-                <a href="index.html" class="logo-footer">
-                    <span class="title">MAKHASWA</span>
-                    <span class="subtitle">Holdings</span>
-                </a>
-                <p class="footer-desc">
-                    A private civil engineering and construction company committed to excellence, efficiency, and building lasting infrastructure solutions across South Africa.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.makhaswaholdings.co.za" target="_blank" class="material-symbols-outlined">language</a>
-                    <span class="material-symbols-outlined">location_on</span>
+        <div class="service-detail-grid">
+            <!-- Earthworks -->
+            <div class="service-detail-card">
+                <img src="images/SiteClearance&MassEarthworks.jpeg" alt="Site clearance and mass earthworks project">
+                <div class="service-detail-body">
+                    <span class="service-badge">Sector 01</span>
+                    <h3>Earthworks</h3>
+                    <p>Site clearance, mass earthworks, and demolition services that prepare projects for safe, efficient execution from the ground up.</p>
+                    <ul>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Site clearance</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Mass earthworks</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Controlled demolition</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="services.html">Our Services</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li><a href="index.html#impact">Community Impact</a></li>
-                </ul>
+            <!-- Civil Works -->
+            <div class="service-detail-card">
+                <img src="images/Sewer&StormwaterPipelines.jpeg" alt="Sewer and stormwater pipeline installation">
+                <div class="service-detail-body">
+                    <span class="service-badge">Sector 02</span>
+                    <h3>Civil Works</h3>
+                    <p>Stormwater drainage, sewer pipelines, stone pitching, gabions, Reno mattresses, and guardrail work for durable municipal and infrastructure systems.</p>
+                    <ul>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Stormwater drainage systems</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Sewer and stormwater pipelines</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Stone pitching</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Gabions and Reno mattresses</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Guardrails</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="footer-links">
-                <h4>Expertise</h4>
-                <ul>
-                    <li><a href="services.html">Earthworks & Clearance</a></li>
-                    <li><a href="services.html">Civil Infrastructure</a></li>
-                    <li><a href="services.html">Road Construction</a></li>
-                    <li><a href="services.html">General Buildings</a></li>
-                    <li><a href="services.html">Roof Repair & Renovation</a></li>
-                    <li><a href="services.html">Concrete Stabilizing</a></li>
-                </ul>
+            <!-- Road Construction -->
+            <div class="service-detail-card">
+                <img src="images/concrete-foundation.jpeg" alt="Road construction and concrete works">
+                <div class="service-detail-body">
+                    <span class="service-badge">Sector 03</span>
+                    <h3>Road Construction</h3>
+                    <p>Kerbing, paving, concrete stabilization, layer works, maintenance, rehabilitation, asphalt surfacing, surveying, profiling, and retaining walls.</p>
+                    <ul>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Kerbing and paving</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Concrete stabilization</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Layer works</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Road maintenance and rehabilitation</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Asphalt surfacing (overlay &amp; inlay)</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Surveying and road profile setup</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Retaining walls</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="footer-contact">
-                <h4>Get In Touch</h4>
-                <ul>
-                    <li>
-                        <span class="material-symbols-outlined">call</span>
-                        <a href="tel:+27813598003">+27 81 359 8003</a>
-                    </li>
-                    <li>
-                        <span class="material-symbols-outlined">mail</span>
-                        <a href="mailto:info@makhaswaholdings.co.za">info@makhaswaholdings.co.za</a>
-                    </li>
-                    <li>
-                        <span class="material-symbols-outlined">language</span>
-                        <a href="https://www.makhaswaholdings.co.za" target="_blank">www.makhaswaholdings.co.za</a>
-                    </li>
-                    <li>
-                        <span class="material-symbols-outlined">location_on</span>
-                        <address>
-                            690 Rubenstein Drive<br />
-                            Moreleta Park, Pretoria<br />
-                            Gauteng 0181, ZA
-                        </address>
-                    </li>
+            <!-- General Building -->
+            <div class="service-detail-card">
+                <img src="images/warehouse-induustrial.jpeg" alt="Commercial and industrial building project">
+                <div class="service-detail-body">
+                    <span class="service-badge">Sector 04</span>
+                    <h3>General Building</h3>
+                    <p>Residential, commercial, industrial, and housing developments supported by project coordination and compliant delivery.</p>
+                    <ul>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Residential developments</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Commercial and industrial buildings</li>
+                        <li><i data-lucide="check-circle-2" width="16" height="16"></i> Low- and middle-income housing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         PROJECT MANAGEMENT
+    ===================================================== -->
+    <div class="section-banner">Project Management — Full lifecycle coordination from concept to completion.</div>
+
+    <div class="container">
+        <div class="about-split">
+            <img src="images/An_eye-level_photo_202604152315.jpeg" alt="Makhaswa project management team"
+                class="about-img">
+            <div class="about-text">
+                <h2 class="section-title" style="text-align:left;">Project Management</h2>
+                <p>Makhaswa Holdings provides full project lifecycle management including site preparation, coordination, engineering planning, and execution. Our disciplined approach ensures every project is delivered safely, on time, and within budget.</p>
+                <p>From initial feasibility through to handover, our project management team coordinates all trades, manages budgets, and ensures quality workmanship at every stage.</p>
+                <ul class="services-list" style="margin-top: 16px;">
+                    <li><i data-lucide="check-circle-2" width="16" height="16"></i> Full project lifecycle management</li>
+                    <li><i data-lucide="check-circle-2" width="16" height="16"></i> Site preparation and coordination</li>
+                    <li><i data-lucide="check-circle-2" width="16" height="16"></i> Engineering planning and execution</li>
                 </ul>
             </div>
         </div>
+    </div>
 
-        <div class="container footer-bottom">
-            <p>© 2025 Makhaswa Holdings (Pty) Ltd. All rights reserved.</p>
-            <div class="footer-legal">
+    <!-- =====================================================
+         ADDITIONAL SERVICES
+    ===================================================== -->
+    <div class="section-banner">Additional Services — Plumbing and paving solutions.</div>
+
+    <section class="services-section">
+        <div class="container">
+            <div class="services-split">
+                <div>
+                    <h3>Plumbing Services</h3>
+                    <ul class="services-list">
+                        <li><i data-lucide="wrench" width="16" height="16"></i> Residential &amp; commercial plumbing</li>
+                        <li><i data-lucide="wrench" width="16" height="16"></i> Emergency repairs</li>
+                        <li><i data-lucide="wrench" width="16" height="16"></i> Drain cleaning</li>
+                        <li><i data-lucide="wrench" width="16" height="16"></i> Pipe installation and leak detection</li>
+                        <li><i data-lucide="wrench" width="16" height="16"></i> Water heater services</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Paving Solutions</h3>
+                    <p class="showcase-intro">Custom-designed durable surfaces for driveways, walkways, patios, and commercial paving projects. Our paving team delivers high-quality installations that are built to last.</p>
+                    <div class="services-grid">
+                        <img src="images/concrete-foundation.jpeg" alt="Paving foundation work">
+                        <img src="images/concrete-panels.jpeg" alt="Concrete paving panels">
+                        <img src="images/building.jpeg" alt="Construction paving">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         PLANT & EQUIPMENT
+    ===================================================== -->
+    <div class="section-banner">Plant &amp; Equipment</div>
+
+    <div class="container">
+        <div class="plant-section">
+            <img src="images/A_dynamic,_wide-angle_202604152314.jpeg" alt="Makhaswa plant and equipment fleet">
+            <div class="plant-text">
+                <h3>Plant &amp; Equipment</h3>
+                <p>Makhaswa Holdings maintains a fleet of construction plant and machinery. This internal capability reduces reliance on third-party hires, ensuring project timelines are strictly adhered to.</p>
+                <p>Our fleet includes excavators, TLBs, rollers, dump trucks, and specialized earth-moving equipment — all serviced and maintained to ensure operational readiness.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         SAFETY
+    ===================================================== -->
+    <div class="safety-banner">
+        <h3><i data-lucide="hard-hat" width="24" height="24" style="vertical-align: middle; margin-right: 8px;"></i> Health &amp; Safety</h3>
+        <p>Health and Safety is non-negotiable at Makhaswa. We adhere to the Occupational Health and Safety Act (OHSA) and maintain robust safety management systems to protect our employees, sub-contractors, clients, and the public on every site.</p>
+    </div>
+
+    <!-- =====================================================
+         CTA BANNER
+    ===================================================== -->
+    <div class="section-banner">Ready to Start Your Next Project?</div>
+
+    <div class="container" style="text-align: center;">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle" style="margin: -16px auto 28px; text-align: center;">Connect with our team for a detailed consultation on your upcoming civil, building, or infrastructure requirements.</p>
+        <a href="index.html#contact" class="btn-view-all">Contact Makhaswa Holdings</a>
+    </div>
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="images/transparent-logo.png" alt="Makhaswa Logo">
+                    <div class="footer-logo-text">Makhaswa<small>Holdings (Pty) Ltd</small></div>
+                </div>
+                <p class="footer-desc">A dynamic civil engineering and construction company committed to excellence, efficiency, and building lasting infrastructure solutions across South Africa.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="index.html">Home</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="about.html">About Us</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="services.html">Our Services</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="index.html#projects">Projects</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Capabilities</h4>
+                <ul>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Earthworks</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Civil Works</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Road Construction</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>General Building</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Project Management</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Head Office</h4>
+                <ul>
+                    <li><i data-lucide="map-pin" width="14" height="14" class="footer-icon"></i> 690 Rubenstein Drive, Moreleta Park</li>
+                    <li><i data-lucide="map-pin" width="14" height="14" class="footer-icon" style="opacity:0"></i> Pretoria, Gauteng 0181</li>
+                    <li><i data-lucide="phone" width="14" height="14" class="footer-icon"></i> +27 81 359 8003</li>
+                    <li><i data-lucide="mail" width="14" height="14" class="footer-icon"></i> info@makhaswaholdings.co.za</li>
+                </ul>
+                <iframe class="footer-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.3!2d28.3097!3d-25.8194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956015a99f7b63%3A0x6e3f7b8a0c28d7a5!2sMoreleta%20Park%2C%20Pretoria!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Makhaswa Holdings Head Office Location">
+                </iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Makhaswa Holdings (Pty) Ltd. All Rights Reserved.</p>
+            <div class="footer-bottom-reg">
                 <span>REG: K2023/648268/07</span>
                 <span>B-BBEE Level 1 Contributor</span>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-
-    <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                icon.innerText = 'close';
-            } else {
-                menu.classList.add('hidden');
-                icon.innerText = 'menu';
-            }
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
 </body>
+
 </html>

@@ -2,276 +2,356 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Makhaswa Holdings | About Us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makhaswa Holdings (Pty) Ltd | About Us</title>
     <meta name="description"
-        content="Makhaswa Holdings is a fully compliant and active, CIDB-registered enterprise (CRS Number: 10153817). Delivering large-scale infrastructure projects across South Africa, our extensive gradings reflect our capacity and technical expertise to execute complex operations across multiple disciplines." />
+        content="Makhaswa Holdings is a fully compliant, CIDB-registered civil engineering and construction company based in Pretoria. Founded in 2017, delivering large-scale infrastructure projects across South Africa.">
+
+    <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&family=Work+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 
-    <!-- Navbar (Same as index.html with 'active' class moved to About Us) -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="https://via.placeholder.com/150x50?text=Logo" alt="Makhaswa Holdings Logo" />
-                <div class="logo-text">
-                    <span class="title">MAKHASWA</span>
-                    <span class="subtitle">Holdings</span>
-                </div>
-            </a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="about.html" class="active">About Us</a>
-                <a href="services.html">Services</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="index.html#contact">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <a href="index.html#contact" class="btn btn-primary">Get a Quote</a>
-            </div>
-            <button id="mobile-menu-btn" class="mobile-toggle"><span class="material-symbols-outlined icon"
-                    id="menu-icon">menu</span></button>
-        </div>
-    </nav>
-    <div id="mobile-menu" class="mobile-menu">
-        <a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a>
-    </div>
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="images/transparent-logo.png" alt="Makhaswa Holdings Logo">
+            <div class="logo-text">Makhaswa<small>Holdings (Pty) Ltd</small></div>
+        </a>
 
-    <!-- About Hero -->
-    <header class="hero hero-sm">
-        <div class="hero-bg">
-            <img alt="Engineers planning"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eEJ5owh-xeh20aePoKQcpEVpFFYousViJfXfp_IixnEM3nbWJL7ceeooenNiWZaCG5F47skR9aZSp6KT3BFd_xmDAXEfonD0XZjioctz5yGfpAFeZs4SDItW6a7TjkY9kyWg3z0qrnlbKe1gyAUsBHuzWNN9N-o2UQyMOIV28QgQineXxw6iBwwMcmPA19w7uINbAEM39iZnTCBJSO7XIRr1TXtXEDi8FI-wsrH_EJ88n0o21vCBny2T4XwcFv3Kn5ovWlEhG80" />
-            <div class="hero-overlay" style="background: rgba(0, 51, 102, 0.85);"></div>
-        </div>
-        <div class="container hero-content">
-            <span class="section-label" style="color: var(--color-primary-dim)">Who We Are</span>
-            <h1 class="hero-title">ABOUT US</h1>
-        </div>
+        <!-- Desktop Navigation -->
+        <nav id="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Burger Button -->
+        <button class="burger" id="burger-btn" aria-label="Toggle menu" aria-expanded="false">
+            <i data-lucide="menu" width="26" height="26"></i>
+        </button>
     </header>
 
-    <!-- Company Intro -->
-    <section class="section">
-        <div class="container grid grid-2 items-center">
-            <div>
-                <h2 class="section-title text-primary">Trusted High-Level Contractor</h2>
-                <p class="text-xl text-muted" style="margin-bottom: 1.5rem;">
-                    Makhaswa Holdings is a fully compliant and active, CIDB-registered enterprise
-                    (<span class="font-bold text-primary">CRS Number: 10153817</span>).
-                </p>
-                <p class="text-lg text-muted">
-                    Delivering large-scale infrastructure projects across South Africa, our extensive gradings reflect
-                    our capacity and technical expertise to execute complex operations across multiple disciplines.
-                </p>
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- =====================================================
+         PAGE HERO
+    ===================================================== -->
+    <div class="page-hero page-hero-about" role="img" aria-label="About Makhaswa Holdings">
+        <div class="hero-content">
+            <h1>About Makhaswa Holdings</h1>
+            <p>"Live Beyond Measures" — A dynamic civil engineering and construction company committed to excellence, community development, and lasting infrastructure.</p>
+        </div>
+    </div>
+    <div class="hero-banner">
+        Founded 2017 &bull; Pretoria, Gauteng &bull; Level 1 B-BBEE
+    </div>
+
+    <!-- =====================================================
+         COMPANY OVERVIEW
+    ===================================================== -->
+    <div class="section-banner">Company Overview — Who we are, what we stand for, and how we deliver.</div>
+
+    <div class="container">
+        <div class="about-split">
+            <img src="images/Black_male_engineer_makhaswa.jpeg" alt="Makhaswa Holdings Engineer on Site"
+                class="about-img">
+            <div class="about-text">
+                <h2 class="section-title" style="text-align:left;">Who We Are</h2>
+                <p>Makhaswa Holdings (Pty) Ltd is a dynamic civil engineering and construction company based in Pretoria, Gauteng. Founded in 2017, the company has established itself as a reliable partner in delivering large-scale infrastructure and building projects across both public and private sectors.</p>
+                <p>With a strong focus on quality, efficiency, and reliability, Makhaswa Holdings consistently delivers projects on time and within budget while contributing to sustainable community development.</p>
+                <p><em>"We don't just construct buildings — we create lasting legacies. From concept to completion, we bring your vision to life with precision, passion, and excellence."</em></p>
             </div>
-            <div class="grid grid-2 gap-4">
-                <div class="stat-card text-center flex flex-col items-center justify-center">
-                    <span class="material-symbols-outlined icon text-primary"
-                        style="font-size: 3rem;">architecture</span>
-                    <h3 class="font-bold text-primary mt-4">Engineering Expertise</h3>
-                </div>
-                <div class="stat-card text-center flex flex-col items-center justify-center"
-                    style="transform: translateY(2rem);">
-                    <span class="material-symbols-outlined icon text-primary" style="font-size: 3rem;">gavel</span>
-                    <h3 class="font-bold text-primary mt-4">Fully Compliant</h3>
-                </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         VISION & MISSION
+    ===================================================== -->
+    <div class="section-banner">Our Vision and Commitment</div>
+
+    <div class="container">
+        <div class="vision-content">
+            <h2 class="section-title">Our Vision</h2>
+            <p>At Makhaswa Holdings, we aim to build long-lasting infrastructure that supports economic growth and uplifts communities. We strive to be a leading indigenous construction and infrastructure development company, recognized for our unwavering commitment to quality, safety, and community empowerment.</p>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         OUR VALUES
+    ===================================================== -->
+    <div class="section-banner">The Values That Guide Us</div>
+
+    <div class="container">
+        <h2 class="section-title text-center">Our Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <h4><i data-lucide="shield-check" width="18" height="18"></i> Integrity</h4>
+                <p>We operate with absolute transparency and ethical standards in all our business dealings.</p>
+            </div>
+            <div class="value-card">
+                <h4><i data-lucide="trophy" width="18" height="18"></i> Excellence</h4>
+                <p>We are dedicated to delivering superior quality workmanship on time and within budget.</p>
+            </div>
+            <div class="value-card">
+                <h4><i data-lucide="heart-handshake" width="18" height="18"></i> Sustainability</h4>
+                <p>Commitment to environmental responsibility and construction practices that support lasting community growth.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         OUR JOURNEY
+    ===================================================== -->
+    <section class="journey-section">
+        <h2 class="section-title">Our Journey</h2>
+        <p class="journey-intro">
+            Established in 2017, Makhaswa Holdings is a private company that has grown into a reliable, multi-disciplined construction firm based in Moreleta Park, Pretoria.
+        </p>
+
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="year">2017</div>
+                <div class="tl-content">Makhaswa Holdings founded. Entry into residential and small-scale civil works in Gauteng.</div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="year">2019</div>
+                <div class="tl-content">Awarded first major government infrastructure contract. Expanded plant &amp; equipment fleet.</div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="year">2022</div>
+                <div class="tl-content">Achieved Level 1 B-BBEE status with 135% procurement recognition.</div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="year">2024</div>
+                <div class="tl-content">Secured trusted partner status with the City of Tshwane. CIDB Grade 8 CE PE achieved.</div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="year">Present</div>
+                <div class="tl-content">Operating across civil, building, mechanical, electrical, and specialist works with active CIDB status.</div>
             </div>
         </div>
     </section>
 
-    <!-- CIDB Gradings -->
-    <section class="section section-light">
+    <!-- =====================================================
+         LEADERSHIP & MANAGEMENT
+    ===================================================== -->
+    <div class="section-banner">Leadership &amp; Management</div>
+
+    <div class="container">
+        <h2 class="section-title text-center">Our Leadership</h2>
+        <div class="leadership-grid">
+            <div class="leader-card">
+                <h4>Lucas Maluleke</h4>
+                <p class="role">Founder &amp; Managing Director</p>
+            </div>
+            <div class="leader-card">
+                <h4>Solomon Mashishi</h4>
+                <p class="role">Management</p>
+            </div>
+            <div class="leader-card">
+                <h4>Tshepo Ramodisa</h4>
+                <p class="role">Management</p>
+            </div>
+            <div class="leader-card">
+                <h4>Phuti Augustine Mosomane</h4>
+                <p class="role">Key Personnel</p>
+            </div>
+            <div class="leader-card">
+                <h4>Malahlela Junior Tepanyekga</h4>
+                <p class="role">Key Personnel</p>
+            </div>
+        </div>
+
+        <div class="staff-note">
+            <h4><i data-lucide="users" width="18" height="18" style="vertical-align: middle; margin-right: 6px;"></i> Our Staff</h4>
+            <p>Makhaswa Holdings employs 51–200 dedicated professionals, ranging from engineers and project managers to skilled artisans. We foster a culture of continuous learning, mutual respect, and absolute safety across all project sites.</p>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         CIDB GRADINGS & COMPLIANCE
+    ===================================================== -->
+    <div class="section-banner">CIDB Gradings &amp; Compliance</div>
+
+    <section class="bbee-section">
         <div class="container">
-            <div class="text-center" style="margin-bottom: 4rem;">
-                <span class="section-label">Accreditations</span>
-                <h2 class="section-title">CIDB Gradings</h2>
-                <p class="text-muted text-lg max-w-600 mx-auto">Our verified Construction Industry Development Board
-                    (CIDB) gradings demonstrating our execution capacity for large-scale national projects.</p>
-            </div>
+            <h2 class="section-title text-center">CIDB Accreditation</h2>
+            <p class="section-subtitle" style="text-align:center; margin: -16px auto 12px;">CIDB CRS Number: 10153817 — Status: Active. A CIDB-certified contractor with high-level grading across civil, mechanical, electrical, and building works.</p>
 
-            <div class="grid grid-3">
-                <div class="stat-card">
-                    <div class="stat-badge">8</div>
-                    <h3 class="text-2xl font-bold text-primary">Grade 8</h3>
-                    <p class="text-muted font-bold" style="margin-bottom: 1.5rem;">Civil & Mechanical</p>
-                    <ul style="margin-bottom: 2rem;">
-                        <li class="flex gap-2"><span class="material-symbols-outlined"
-                                style="color: green;">check_circle</span> 8CE PE</li>
-                        <li class="flex gap-2"><span class="material-symbols-outlined"
-                                style="color: green;">check_circle</span> 8ME PE</li>
-                    </ul>
-                    <div style="border-top: 1px solid #eee; padding-top: 1rem;">
-                        <p class="text-sm font-bold text-muted uppercase">Project Capacity</p>
-                        <p class="text-xl text-primary">Up to <strong>~R200 million</strong></p>
-                    </div>
+            <div class="compliance-grid">
+                <div class="compliance-card">
+                    <div class="grade-badge">8</div>
+                    <h4>Grade 8</h4>
+                    <p class="grade-codes">8CE PE — Civil Engineering<br>8ME PE — Mechanical Engineering</p>
+                    <p class="capacity">Up to ~R200 million</p>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-badge">7</div>
-                    <h3 class="text-2xl font-bold text-primary">Grade 7</h3>
-                    <p class="text-muted font-bold" style="margin-bottom: 1.5rem;">Electrical & Specialist</p>
-                    <ul style="margin-bottom: 2rem;">
-                        <li class="flex gap-2"><span class="material-symbols-outlined"
-                                style="color: green;">check_circle</span> 7EB PE</li>
-                        <li class="flex gap-2"><span class="material-symbols-outlined"
-                                style="color: green;">check_circle</span> 7SB PE</li>
-                    </ul>
-                    <div style="border-top: 1px solid #eee; padding-top: 1rem;">
-                        <p class="text-sm font-bold text-muted uppercase">Project Capacity</p>
-                        <p class="text-xl text-primary">Up to <strong>~R130 million</strong></p>
-                    </div>
+                <div class="compliance-card">
+                    <div class="grade-badge">7</div>
+                    <h4>Grade 7</h4>
+                    <p class="grade-codes">7EB PE — Electrical Engineering<br>7SB PE — Specialist Building Works</p>
+                    <p class="capacity">Up to ~R130 million</p>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-badge">6</div>
-                    <h3 class="text-2xl font-bold text-primary">Grade 6</h3>
-                    <p class="text-muted font-bold" style="margin-bottom: 1.5rem;">General Building</p>
-                    <ul style="margin-bottom: 2rem;">
-                        <li class="flex gap-2"><span class="material-symbols-outlined"
-                                style="color: green;">check_circle</span> 6GB PE</li>
-                    </ul>
-                    <div style="border-top: 1px solid #eee; padding-top: 1rem;">
-                        <p class="text-sm font-bold text-muted uppercase">Project Capacity</p>
-                        <p class="text-xl text-primary">Up to <strong>~R40 million</strong></p>
-                    </div>
+                <div class="compliance-card">
+                    <div class="grade-badge">6</div>
+                    <h4>Grade 6</h4>
+                    <p class="grade-codes">6GB PE — General Building</p>
+                    <p class="capacity">Up to ~R40 million</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer" style="background: #0f172a; color: white; border-top: 4px solid var(--color-primary-dim);">
-        <div class="container" style="padding: 4rem 2rem;">
-            <div class="grid grid-4" style="gap: 3rem;">
-                <div>
-                    <a href="#"
-                        style="text-decoration: none; color: white; display: inline-flex; flex-direction: column; margin-bottom: 1rem;">
-                        <span
-                            style="font-size: 1.5rem; font-weight: 900; letter-spacing: -0.05em; line-height: 1;">MAKHASWA</span>
-                        <span
-                            style="font-size: 0.65rem; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary-dim);">Holdings</span>
-                    </a>
-                    <p
-                        style="font-size: 0.875rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1.5rem; font-family: 'Work Sans', sans-serif;">
-                        A private civil engineering and construction company committed to excellence, efficiency, and
-                        building lasting infrastructure solutions across South Africa.
-                    </p>
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="https://www.makhaswaholdings.co.za" target="_blank" class="material-symbols-outlined"
-                            style="color: #64748b; text-decoration: none;">language</a>
-                        <span class="material-symbols-outlined"
-                            style="color: #64748b; cursor: pointer;">location_on</span>
-                    </div>
-                </div>
+    <!-- =====================================================
+         NHBRC & B-BBEE
+    ===================================================== -->
+    <div class="section-banner">Registrations &amp; Transformation</div>
 
-                <div>
-                    <h4
-                        style="font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
-                        Quick Links</h4>
-                    <ul
-                        style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="#"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Home</a>
-                        </li>
-                        <li><a href="#about"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">About
-                                Us</a></li>
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Our
-                                Services</a></li>
-                        <li><a href="#projects"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Projects</a>
-                        </li>
-                        <li><a href="#impact"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Community
-                                Impact</a></li>
-                    </ul>
-                </div>
+    <div class="container">
+        <h2 class="section-title text-center">Registrations &amp; B-BBEE</h2>
+        <div class="bbee-grid">
+            <div class="bbee-card">
+                <div class="bbee-value">Level 1</div>
+                <div class="bbee-label">B-BBEE Contributor</div>
+            </div>
+            <div class="bbee-card">
+                <div class="bbee-value">135%</div>
+                <div class="bbee-label">Procurement Recognition</div>
+            </div>
+            <div class="bbee-card">
+                <div class="bbee-value">NHBRC</div>
+                <div class="bbee-label">Reg: 4000006217<br>Provisional Grade 5</div>
+            </div>
+            <div class="bbee-card">
+                <div class="bbee-value">K2023</div>
+                <div class="bbee-label">Company Reg:<br>/648268/07</div>
+            </div>
+        </div>
+        <p class="section-subtitle" style="text-align:center; margin: 28px auto 0; font-size: 13px;">Registered home builder operating under the Housing Consumers Protection Measures Act, 1998. Operates as a compliant and NHBRC-registered construction company focused on building safe, quality homes.</p>
+    </div>
 
-                <div>
-                    <h4
-                        style="font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
-                        Expertise</h4>
-                    <ul
-                        style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Earthworks
-                                & Clearance</a></li>
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Civil
-                                Infrastructure</a></li>
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Road
-                                Construction</a></li>
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">General
-                                Buildings</a></li>
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Roof
-                                Repair & Renovation</a></li>
-                        <li><a href="#services"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">Concrete
-                                Stabilizing</a></li>
-                    </ul>
-                </div>
+    <!-- =====================================================
+         COMMUNITY IMPACT
+    ===================================================== -->
+    <div class="section-banner">Community Impact</div>
 
-                <div>
-                    <h4
-                        style="font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
-                        Get In Touch</h4>
-                    <ul
-                        style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
-                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                            <span class="material-symbols-outlined"
-                                style="color: var(--color-primary-dim); font-size: 1.25rem;">call</span>
-                            <a href="tel:+27813598003"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">+27
-                                81 359 8003</a>
-                        </li>
-                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                            <span class="material-symbols-outlined"
-                                style="color: var(--color-primary-dim); font-size: 1.25rem;">mail</span>
-                            <a href="mailto:info@makhaswaholdings.co.za"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; word-break: break-all; font-family: 'Work Sans', sans-serif;">info@makhaswaholdings.co.za</a>
-                        </li>
-                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                            <span class="material-symbols-outlined"
-                                style="color: var(--color-primary-dim); font-size: 1.25rem;">language</span>
-                            <a href="https://www.makhaswaholdings.co.za" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">www.makhaswaholdings.co.za</a>
-                        </li>
-                        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                            <span class="material-symbols-outlined"
-                                style="color: var(--color-primary-dim); font-size: 1.25rem;">location_on</span>
-                            <span
-                                style="color: #94a3b8; font-size: 0.875rem; line-height: 1.6; font-family: 'Work Sans', sans-serif;">
-                                690 Rubenstein Drive<br />
-                                Moreleta Park, Pretoria<br />
-                                Gauteng 0181, ZA
-                            </span>
-                        </li>
-                    </ul>
+    <div class="container">
+        <h2 class="section-title text-center">Building Communities</h2>
+        <p class="section-subtitle" style="text-align:center; margin: -16px auto 32px;">Makhaswa Holdings plays a vital role in shaping and improving communities through infrastructure development.</p>
+        <div class="csi-split">
+            <div class="csi-card">
+                <h4><i data-lucide="home" width="18" height="18"></i> Better Housing</h4>
+                <p>Affordable, durable residential solutions including low- and middle-income housing developments.</p>
+            </div>
+            <div class="csi-card">
+                <h4><i data-lucide="road" width="18" height="18"></i> Safer Roads &amp; Transport</h4>
+                <p>Enhanced mobility through road construction, maintenance, rehabilitation and surfacing.</p>
+            </div>
+            <div class="csi-card">
+                <h4><i data-lucide="droplets" width="18" height="18"></i> Reliable Services</h4>
+                <p>Efficient drainage, sanitation, and utilities through stormwater systems and sewer pipelines.</p>
+            </div>
+            <div class="csi-card">
+                <h4><i data-lucide="leaf" width="18" height="18"></i> Sustainable Growth</h4>
+                <p>Environmentally responsible construction practices that support long-term community development.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         WHY CHOOSE US
+    ===================================================== -->
+    <div class="safety-banner">
+        <h3><i data-lucide="award" width="24" height="24" style="vertical-align: middle; margin-right: 8px;"></i> Why Choose Makhaswa Holdings</h3>
+        <p>Proven industry experience &bull; Skilled and reliable workforce &bull; Strong project management capability &bull; Cost-effective solutions &bull; On-time project delivery &bull; High-quality workmanship &bull; Commitment to sustainability &bull; Trusted by public and private sector clients.</p>
+    </div>
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="images/transparent-logo.png" alt="Makhaswa Logo">
+                    <div class="footer-logo-text">Makhaswa<small>Holdings (Pty) Ltd</small></div>
                 </div>
+                <p class="footer-desc">A dynamic civil engineering and construction company committed to excellence, efficiency, and building lasting infrastructure solutions across South Africa.</p>
             </div>
 
-            <div
-                style="border-top: 1px solid #1e293b; margin-top: 3rem; padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; color: #64748b; font-size: 0.875rem; font-family: 'Work Sans', sans-serif;">
-                <p style="margin: 0;">© 2026 Makhaswa Holdings (Pty) Ltd. All rights reserved.</p>
-                <div style="display: flex; gap: 1.5rem;">
-                    <span>REG: K2023/648268/07</span>
-                    <span>B-BBEE Level 1 Contributor</span>
-                </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="index.html">Home</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="about.html">About Us</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="services.html">Our Services</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="index.html#projects">Projects</a></li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Capabilities</h4>
+                <ul>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Earthworks</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Civil Works</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Road Construction</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>General Building</li>
+                    <li><i data-lucide="chevron-right" width="14" height="14" class="footer-icon"></i>Project Management</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Head Office</h4>
+                <ul>
+                    <li><i data-lucide="map-pin" width="14" height="14" class="footer-icon"></i> 690 Rubenstein Drive, Moreleta Park</li>
+                    <li><i data-lucide="map-pin" width="14" height="14" class="footer-icon" style="opacity:0"></i> Pretoria, Gauteng 0181</li>
+                    <li><i data-lucide="phone" width="14" height="14" class="footer-icon"></i> +27 81 359 8003</li>
+                    <li><i data-lucide="mail" width="14" height="14" class="footer-icon"></i> info@makhaswaholdings.co.za</li>
+                </ul>
+                <iframe class="footer-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.3!2d28.3097!3d-25.8194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956015a99f7b63%3A0x6e3f7b8a0c28d7a5!2sMoreleta%20Park%2C%20Pretoria!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Makhaswa Holdings Head Office Location">
+                </iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Makhaswa Holdings (Pty) Ltd. All Rights Reserved.</p>
+            <div class="footer-bottom-reg">
+                <span>REG: K2023/648268/07</span>
+                <span>B-BBEE Level 1 Contributor</span>
             </div>
         </div>
     </footer>
-    <script src="js/main.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
 </body>
 
 </html>
