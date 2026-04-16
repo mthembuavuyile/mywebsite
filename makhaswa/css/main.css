@@ -352,7 +352,7 @@ nav a.active::after {
 }
 
 .page-hero-about {
-    background-image: url('../images/Black_male_engineer_makhaswa.jpeg');
+    background-image: url('../images/workers.jpeg');
 }
 
 .page-hero-services {
@@ -1508,6 +1508,120 @@ footer {
 }
 
 /* =====================================================
+   FAQ SECTION
+   ===================================================== */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition);
+}
+
+.faq-item:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    cursor: pointer;
+    background: var(--off-white);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--primary);
+    transition: background var(--transition);
+}
+
+.faq-question:hover {
+    background: #e2e8f0;
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+    color: var(--primary);
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    background: var(--white);
+    padding: 0 24px;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 800px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+}
+
+.faq-answer p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* =====================================================
+   LEGAL PAGES (Terms, Privacy)
+   ===================================================== */
+.legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+}
+
+.legal-content h2 {
+    color: var(--primary);
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.legal-content h3 {
+    color: var(--primary-mid);
+    font-size: 16px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.legal-content p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 16px;
+}
+
+.legal-content ul {
+    margin-bottom: 24px;
+    padding-left: 20px;
+    list-style: disc;
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.legal-content ul li {
+    margin-bottom: 8px;
+}
+
+/* =====================================================
    RESPONSIVE
    ===================================================== */
 @media (max-width: 960px) {
@@ -1529,6 +1643,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+
     /* Header */
     header {
         padding: 0 20px;

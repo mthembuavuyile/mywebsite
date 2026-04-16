@@ -129,4 +129,25 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    // -------------------------------------------------------
+    // FAQ Accordion
+    // -------------------------------------------------------
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const parent = question.parentElement;
+            const wasActive = parent.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Toggle current FAQ
+            if (!wasActive) {
+                parent.classList.add('active');
+            }
+        });
+    });
 });
