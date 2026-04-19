@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sethu Mkhwanazi Attorneys Inc. | Providing Effective Legal Solutions</title>
+  <meta name="description" content="Strategic legal support for businesses and individuals who expect results. Clear, efficient, and results-driven legal solutions across disputes, employment, commercial, and personal legal matters.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --color-background: var(--background);
+      --color-foreground: var(--foreground);
+      --color-card: var(--card);
+      --color-card-foreground: var(--card-foreground);
+      --color-popover: var(--popover);
+      --color-popover-foreground: var(--popover-foreground);
+      --color-primary: var(--primary);
+      --color-primary-foreground: var(--primary-foreground);
+      --color-secondary: var(--secondary);
+      --color-secondary-foreground: var(--secondary-foreground);
+      --color-muted: var(--muted);
+      --color-muted-foreground: var(--muted-foreground);
+      --color-accent: var(--accent);
+      --color-accent-foreground: var(--accent-foreground);
+      --color-destructive: var(--destructive);
+      --color-destructive-foreground: var(--destructive-foreground);
+      --color-border: var(--border);
+      --color-input: var(--input);
+      --color-ring: var(--ring);
+      --color-gold: var(--gold);
+      --color-gold-light: var(--gold-light);
+      --color-gold-dark: var(--gold-dark);
+      --radius-sm: calc(var(--radius) - 2px);
+      --radius-md: var(--radius);
+      --radius-lg: calc(var(--radius) + 2px);
+      --radius-xl: calc(var(--radius) + 4px);
+    }
+
+    :root {
+      --background: oklch(0.99 0 0);
+      --foreground: oklch(0.13 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.13 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.13 0 0);
+      --primary: oklch(0.13 0 0);
+      --primary-foreground: oklch(0.99 0 0);
+      --secondary: oklch(0.96 0 0);
+      --secondary-foreground: oklch(0.13 0 0);
+      --muted: oklch(0.96 0.005 90);
+      --muted-foreground: oklch(0.45 0 0);
+      --accent: oklch(0.72 0.12 85);
+      --accent-foreground: oklch(0.13 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --destructive-foreground: oklch(0.577 0.245 27.325);
+      --border: oklch(0.90 0.005 90);
+      --input: oklch(0.92 0 0);
+      --ring: oklch(0.72 0.12 85);
+      --radius: 0.25rem;
+      --gold: oklch(0.72 0.12 85);
+      --gold-light: oklch(0.82 0.10 85);
+      --gold-dark: oklch(0.58 0.14 85);
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .heading-display {
+      font-family: var(--font-serif);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .text-gold { color: var(--gold); }
+
+    .btn-premium {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .gold-underline {
+      position: relative;
+    }
+
+    .gold-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--gold);
+    }
+
+    .page-transition {
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-foreground bg-background">
+  <div class="min-h-screen page-transition">
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+      <nav class="mx-auto max-w-7xl px-6 md:px-8">
+        <div class="flex h-20 items-center justify-between">
+          <a href="/" class="flex items-center gap-3">
+            <img src="sethu-logo-light.jpeg" alt="Sethu Mkhwanazi Attorneys Inc." class="h-12 w-auto" width="50" height="50">
+            <div class="hidden sm:block">
+              <p class="font-serif text-lg font-semibold tracking-tight text-foreground">Sethu Mkhwanazi</p>
+              <p class="text-xs tracking-wider text-muted-foreground uppercase">Attorneys Inc.</p>
+            </div>
+          </a>
+          <div class="hidden lg:flex lg:items-center lg:gap-10">
+            <a href="/" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">Home</a>
+            <a href="/services" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">Services</a>
+            <a href="/about" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">About</a>
+            <a href="/contact" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">Contact</a>
+          </div>
+          <div class="hidden lg:flex lg:items-center lg:gap-4">
+            <a href="/book-consultation" class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-6 h-10">Book Consultation</a>
+          </div>
+          <button type="button" id="mobile-menu-btn" class="lg:hidden p-2 text-foreground" aria-label="Toggle menu">
+            <i data-lucide="menu" id="menu-icon-open" class="h-6 w-6"></i>
+            <i data-lucide="x" id="menu-icon-close" class="h-6 w-6 hidden"></i>
+          </button>
+        </div>
+      </nav>
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-background border-t border-border">
+        <div class="px-6 py-6 space-y-4">
+          <a href="/" class="block text-base font-medium text-foreground hover:text-accent transition-colors">Home</a>
+          <a href="/services" class="block text-base font-medium text-foreground hover:text-accent transition-colors">Services</a>
+          <a href="/about" class="block text-base font-medium text-foreground hover:text-accent transition-colors">About</a>
+          <a href="/contact" class="block text-base font-medium text-foreground hover:text-accent transition-colors">Contact</a>
+          <div class="pt-4 border-t border-border">
+            <a href="/book-consultation" class="flex items-center justify-center rounded-md w-full bg-accent text-accent-foreground hover:bg-accent/90 h-10 px-4 py-2">Book Consultation</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-muted/30 to-background"></div>
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8 py-24 lg:py-32">
+          <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-8">
+              <div class="w-2 h-2 rounded-full bg-accent"></div>
+              <span class="text-sm font-medium text-foreground/80">Admitted Attorney of the High Court of South Africa</span>
+            </div>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+              Strategic Legal Support for Businesses and Individuals Who <span class="text-accent">Expect Results</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+              Clear, efficient, and results-driven legal solutions across disputes, employment, commercial, and personal legal matters.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="/book-consultation" class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-8 h-12 text-base">
+                Book Consultation <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+              </a>
+              <a href="https://wa.me/27763000443?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20legal%20services." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-foreground/20 hover:bg-foreground/5 font-medium px-8 h-12 text-base shrink-0">
+                <i data-lucide="message-circle" class="mr-2 h-5 w-5"></i> Chat on WhatsApp
+              </a>
+            </div>
+            <div class="mt-16 pt-8 border-t border-border/50">
+              <p class="text-sm text-muted-foreground mb-4">Trusted by individuals and growing businesses</p>
+              <div class="flex items-center justify-center gap-8 text-muted-foreground/60">
+                <div class="flex items-center gap-2">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span class="text-sm">Professional Service</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span class="text-sm">Clear Communication</span>
+                </div>
+                <div class="hidden sm:flex items-center gap-2">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span class="text-sm">Results-Driven</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+      </section>
+
+      <!-- Pathway Section -->
+      <section class="py-24 lg:py-32 bg-background">
+        <div class="mx-auto max-w-7xl px-6 md:px-8">
+          <div class="text-center mb-16">
+            <p class="text-sm font-medium tracking-wider uppercase text-accent mb-4">Start Here</p>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">How Can We Help You?</h2>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Select your path to find the legal support you need.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <a href="/services?focus=business" class="group relative bg-card border border-border rounded-lg p-8 lg:p-10 card-hover block">
+              <div class="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-accent/10 text-accent mb-6 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="building-2" class="h-7 w-7"></i>
+              </div>
+              <h3 class="font-serif text-xl lg:text-2xl font-semibold text-foreground mb-3">For Businesses</h3>
+              <p class="text-muted-foreground leading-relaxed mb-6">Corporate governance, commercial contracts, employment matters, and dispute resolution for growing enterprises.</p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Corporate Law</li>
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Labour Law</li>
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Commercial Contracts</li>
+              </ul>
+              <div class="flex items-center gap-2 text-accent font-medium text-sm">
+                Explore services <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </a>
+            <a href="/services?focus=individual" class="group relative bg-card border border-border rounded-lg p-8 lg:p-10 card-hover block">
+              <div class="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-accent/10 text-accent mb-6 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="users" class="h-7 w-7"></i>
+              </div>
+              <h3 class="font-serif text-xl lg:text-2xl font-semibold text-foreground mb-3">For Individuals</h3>
+              <p class="text-muted-foreground leading-relaxed mb-6">Personal legal matters including estate planning, family law, and protection of your assets and interests.</p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Estate Planning</li>
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Family Law</li>
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Wills & Trusts</li>
+              </ul>
+              <div class="flex items-center gap-2 text-accent font-medium text-sm">
+                Explore services <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </a>
+            <a href="/services/civil-litigation" class="group relative bg-card border border-border rounded-lg p-8 lg:p-10 card-hover block">
+              <div class="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-accent/10 text-accent mb-6 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="scale" class="h-7 w-7"></i>
+              </div>
+              <h3 class="font-serif text-xl lg:text-2xl font-semibold text-foreground mb-3">Legal Disputes</h3>
+              <p class="text-muted-foreground leading-relaxed mb-6">Strategic litigation and dispute resolution when matters cannot be settled through negotiation.</p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Civil Litigation</li>
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Mediation</li>
+                <li class="flex items-center gap-2 text-sm text-muted-foreground"><div class="w-1.5 h-1.5 rounded-full bg-accent"></div>Arbitration</li>
+              </ul>
+              <div class="flex items-center gap-2 text-accent font-medium text-sm">
+                Explore services <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="py-24 lg:py-32 bg-muted/30">
+        <div class="mx-auto max-w-7xl px-6 md:px-8">
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+            <div>
+              <p class="text-sm font-medium tracking-wider uppercase text-accent mb-4">Our Practice Areas</p>
+              <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">Comprehensive Legal Services</h2>
+            </div>
+            <a href="/services" class="inline-flex items-center justify-center rounded-md border border-foreground/20 hover:bg-foreground/5 h-10 px-4 py-2 mt-6 lg:mt-0">
+              View All Services <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="/services/civil-litigation" class="group relative bg-card border border-border rounded-lg p-8 card-hover md:col-span-2 lg:col-span-1 block">
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-5 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="scale" class="h-6 w-6"></i>
+              </div>
+              <h3 class="font-serif text-lg lg:text-xl font-semibold text-foreground mb-3">Civil Litigation & Dispute Resolution</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed mb-4">Strategic representation in civil disputes, from negotiation through to High Court litigation when necessary.</p>
+              <span class="inline-flex items-center gap-1 text-accent font-medium text-sm">
+                Learn more <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+            <a href="/services/estate-planning" class="group relative bg-card border border-border rounded-lg p-8 card-hover block">
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-5 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="file-text" class="h-6 w-6"></i>
+              </div>
+              <h3 class="font-serif text-lg lg:text-xl font-semibold text-foreground mb-3">Estate Planning & Wealth Protection</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed mb-4">Comprehensive estate planning including wills, trusts, and succession planning to protect your legacy.</p>
+              <span class="inline-flex items-center gap-1 text-accent font-medium text-sm">
+                Learn more <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+            <a href="/services/family-law" class="group relative bg-card border border-border rounded-lg p-8 card-hover block">
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-5 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="heart" class="h-6 w-6"></i>
+              </div>
+              <h3 class="font-serif text-lg lg:text-xl font-semibold text-foreground mb-3">Family Law</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed mb-4">Sensitive handling of divorce, maintenance, custody matters, and protection orders with discretion and care.</p>
+              <span class="inline-flex items-center gap-1 text-accent font-medium text-sm">
+                Learn more <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+            <a href="/services/corporate-law" class="group relative bg-card border border-border rounded-lg p-8 card-hover block">
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-5 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="building" class="h-6 w-6"></i>
+              </div>
+              <h3 class="font-serif text-lg lg:text-xl font-semibold text-foreground mb-3">Corporate & Commercial Law</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed mb-4">Business formation, commercial contracts, compliance, and corporate governance for growing enterprises.</p>
+              <span class="inline-flex items-center gap-1 text-accent font-medium text-sm">
+                Learn more <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+            <a href="/services/labour-law" class="group relative bg-card border border-border rounded-lg p-8 card-hover block">
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-5 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <i data-lucide="briefcase" class="h-6 w-6"></i>
+              </div>
+              <h3 class="font-serif text-lg lg:text-xl font-semibold text-foreground mb-3">Labour & Employment Law</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed mb-4">Employment contracts, disciplinary matters, CCMA disputes, and workplace policy compliance.</p>
+              <span class="inline-flex items-center gap-1 text-accent font-medium text-sm">
+                Learn more <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section class="py-24 lg:py-32 bg-background">
+        <div class="mx-auto max-w-7xl px-6 md:px-8">
+          <div class="text-center mb-16">
+            <p class="text-sm font-medium tracking-wider uppercase text-accent mb-4">Why Choose Us</p>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">A Different Approach to Legal Services</h2>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">We combine legal expertise with a commitment to efficiency and clear communication.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent">
+                  <i data-lucide="lightbulb" class="h-6 w-6"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-semibold text-foreground mb-2">Practical Legal Advice</h3>
+                <p class="text-muted-foreground leading-relaxed">We focus on solutions that work in the real world, not just in theory. Every recommendation is tailored to your specific situation.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent">
+                  <i data-lucide="clock" class="h-6 w-6"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-semibold text-foreground mb-2">Efficient Turnaround</h3>
+                <p class="text-muted-foreground leading-relaxed">We understand that time matters. Our processes are designed to deliver results without unnecessary delays.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent">
+                  <i data-lucide="message-square" class="h-6 w-6"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-semibold text-foreground mb-2">Clear Communication</h3>
+                <p class="text-muted-foreground leading-relaxed">No legal jargon. We explain matters in plain language and keep you informed at every stage of your matter.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent">
+                  <i data-lucide="target" class="h-6 w-6"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-semibold text-foreground mb-2">Results-Driven Approach</h3>
+                <p class="text-muted-foreground leading-relaxed">Our focus is on achieving the outcome you need. We measure our success by your results, not billable hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="py-24 lg:py-32 bg-primary text-primary-foreground">
+        <div class="mx-auto max-w-7xl px-6 md:px-8">
+          <div class="text-center mb-16">
+            <p class="text-sm font-medium tracking-wider uppercase text-accent mb-4">How It Works</p>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight mb-6">A Simple, Structured Process</h2>
+            <p class="text-lg text-primary-foreground/70 max-w-2xl mx-auto">We make working with us straightforward and transparent.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-12 relative">
+            <div class="relative">
+              <div class="hidden md:block absolute top-8 left-full w-full h-px bg-primary-foreground/20 -translate-x-1/2"></div>
+              <div class="text-5xl lg:text-6xl font-serif font-semibold text-accent/30 mb-4">01</div>
+              <h3 class="font-serif text-xl lg:text-2xl font-semibold mb-3">Book Consultation</h3>
+              <p class="text-primary-foreground/70 leading-relaxed">Schedule a discovery call to discuss your matter. We'll assess your situation and determine how we can assist.</p>
+            </div>
+            <div class="relative">
+              <div class="hidden md:block absolute top-8 left-full w-full h-px bg-primary-foreground/20 -translate-x-1/2"></div>
+              <div class="text-5xl lg:text-6xl font-serif font-semibold text-accent/30 mb-4">02</div>
+              <h3 class="font-serif text-xl lg:text-2xl font-semibold mb-3">Strategy & Advice</h3>
+              <p class="text-primary-foreground/70 leading-relaxed">We develop a clear strategy tailored to your specific circumstances, explaining your options and recommended approach.</p>
+            </div>
+            <div class="relative">
+              <div class="text-5xl lg:text-6xl font-serif font-semibold text-accent/30 mb-4">03</div>
+              <h3 class="font-serif text-xl lg:text-2xl font-semibold mb-3">Execution & Resolution</h3>
+              <p class="text-primary-foreground/70 leading-relaxed">We execute the agreed strategy efficiently, keeping you informed throughout until your matter is resolved.</p>
+            </div>
+          </div>
+          <div class="text-center">
+            <a href="/book-consultation" class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-8 h-12 text-base">
+              Get Started Today <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="py-24 lg:py-32 bg-muted/30">
+        <div class="mx-auto max-w-7xl px-6 md:px-8">
+          <div class="text-center mb-16">
+            <p class="text-sm font-medium tracking-wider uppercase text-accent mb-4">Client Testimonials</p>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">What Our Clients Say</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="relative bg-card border border-border rounded-lg p-8">
+              <i data-lucide="quote" class="h-8 w-8 text-accent/30 mb-4"></i>
+              <blockquote class="text-foreground leading-relaxed mb-6">&ldquo;The team handled our commercial dispute with exceptional professionalism. Their strategic approach led to a favourable settlement much sooner than expected.&rdquo;</blockquote>
+              <div class="border-t border-border pt-4">
+                <p class="font-medium text-foreground">Business Owner</p>
+                <p class="text-sm text-muted-foreground">SME, Durban</p>
+              </div>
+            </div>
+            <div class="relative bg-card border border-border rounded-lg p-8">
+              <i data-lucide="quote" class="h-8 w-8 text-accent/30 mb-4"></i>
+              <blockquote class="text-foreground leading-relaxed mb-6">&ldquo;Clear communication throughout the entire process. They explained everything in terms I could understand and kept me informed at every step.&rdquo;</blockquote>
+              <div class="border-t border-border pt-4">
+                <p class="font-medium text-foreground">Private Client</p>
+                <p class="text-sm text-muted-foreground">Estate Planning</p>
+              </div>
+            </div>
+            <div class="relative bg-card border border-border rounded-lg p-8">
+              <i data-lucide="quote" class="h-8 w-8 text-accent/30 mb-4"></i>
+              <blockquote class="text-foreground leading-relaxed mb-6">&ldquo;Efficient and effective. They resolved a complex employment matter that had been dragging on for months. Highly recommend their services.&rdquo;</blockquote>
+              <div class="border-t border-border pt-4">
+                <p class="font-medium text-foreground">HR Director</p>
+                <p class="text-sm text-muted-foreground">Manufacturing Company</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="py-24 lg:py-32 bg-background">
+        <div class="mx-auto max-w-7xl px-6 md:px-8">
+          <div class="relative bg-primary rounded-2xl px-8 py-16 lg:px-16 lg:py-20 overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-accent/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            <div class="relative max-w-3xl mx-auto text-center">
+              <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary-foreground mb-6">Ready to Discuss Your Legal Matter?</h2>
+              <p class="text-lg text-primary-foreground/70 mb-10 max-w-2xl mx-auto">Book a consultation to discuss your situation with an experienced attorney. We'll provide clear guidance on your options and the best path forward.</p>
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/book-consultation" class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-8 h-12 text-base">
+                  Book Consultation <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+                </a>
+                <a href="https://wa.me/27763000443?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20legal%20services." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-medium px-8 h-12 text-base">
+                  <i data-lucide="message-circle" class="mr-2 h-5 w-5"></i> WhatsApp Us
+                </a>
+              </div>
+              <p class="mt-8 text-sm text-primary-foreground/50">A 15-minute initial discovery call is available to assess your matter.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-primary-foreground">
+      <div class="mx-auto max-w-7xl px-6 md:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div class="lg:col-span-1">
+            <a href="/" class="flex items-center gap-3 mb-6">
+              <img src="sethu-logo-black.png" alt="Sethu Mkhwanazi Attorneys Inc." width="60" height="60" class="h-14 w-auto">
+            </a>
+            <p class="text-primary-foreground/70 text-sm leading-relaxed mb-6">Providing effective legal solutions for businesses and individuals across South Africa.</p>
+            <p class="text-accent text-sm font-medium italic">Providing Effective Legal Solutions.</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold tracking-wider uppercase mb-6 text-accent">Services</h3>
+            <ul class="space-y-3">
+              <li><a href="/services/civil-litigation" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Civil Litigation</a></li>
+              <li><a href="/services/estate-planning" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Estate Planning</a></li>
+              <li><a href="/services/family-law" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Family Law</a></li>
+              <li><a href="/services/corporate-law" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Corporate Law</a></li>
+              <li><a href="/services/labour-law" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Labour Law</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold tracking-wider uppercase mb-6 text-accent">Company</h3>
+            <ul class="space-y-3">
+              <li><a href="/about" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">About Us</a></li>
+              <li><a href="/services" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Our Services</a></li>
+              <li><a href="/contact" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Contact</a></li>
+              <li><a href="/book-consultation" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Book Consultation</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold tracking-wider uppercase mb-6 text-accent">Contact Us</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <i data-lucide="map-pin" class="h-5 w-5 text-accent flex-shrink-0 mt-0.5"></i>
+                <span class="text-sm text-primary-foreground/70">Regus - Durban Country Club, 101 Isaiah Ntshangase Road, Stamford Hill, Durban 4001</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="phone" class="h-5 w-5 text-accent flex-shrink-0"></i>
+                <a href="tel:0310076324" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">031 007 6324</a>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="mail" class="h-5 w-5 text-accent flex-shrink-0"></i>
+                <a href="mailto:info@sethumkhwanaziattorneys.co.za" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">info@sethumkhwanaziattorneys.co.za</a>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="clock" class="h-5 w-5 text-accent flex-shrink-0 mt-0.5"></i>
+                <div class="text-sm text-primary-foreground/70">
+                  <p>Mon - Fri: 08h00 - 16h30</p>
+                  <p>Weekends: By Appointment Only</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-primary-foreground/10">
+        <div class="mx-auto max-w-7xl px-6 md:px-8 py-6">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-primary-foreground/50">&copy; <span id="current-year"></span> Sethu Mkhwanazi Attorneys Inc. All rights reserved.</p>
+            <div class="flex items-center gap-6">
+              <a href="/privacy" class="text-sm text-primary-foreground/50 hover:text-primary-foreground/70 transition-colors">Privacy Policy</a>
+              <a href="/terms" class="text-sm text-primary-foreground/50 hover:text-primary-foreground/70 transition-colors">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/27763000443?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20legal%20services." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group" aria-label="Chat on WhatsApp">
+      <i data-lucide="message-circle" class="h-7 w-7 text-white"></i>
+      <span class="absolute right-full mr-3 px-3 py-1.5 bg-foreground text-background text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Chat on WhatsApp</span>
+    </a>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Header Scroll Effect
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('bg-background/95', 'backdrop-blur-md', 'border-b', 'border-border', 'shadow-sm');
+        header.classList.remove('bg-transparent');
+      } else {
+        header.classList.remove('bg-background/95', 'backdrop-blur-md', 'border-b', 'border-border', 'shadow-sm');
+        header.classList.add('bg-transparent');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    let isMenuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('hidden');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
