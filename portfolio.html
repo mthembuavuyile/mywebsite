@@ -12,234 +12,329 @@
 
   <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
   <link rel="canonical" href="https://avuyilemthembu.co.za/portfolio">
+  
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
-    rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/global.css">
 
   <title>Portfolio | Avuyile Mthembu - Apps, Games & Tools</title>
 
   <style>
-/* ===============================
-   portfolio.html — Page Styles
-================================== */
+    /* =========================================
+       Base & Fallback Variables
+    ========================================= */
+    :root {
+      --color-brand: #0f172a;
+      --color-brand-light: #1e293b;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #eff6ff;
+      --color-bg-page: #ffffff;
+      --color-bg-alt: #f8fafc;
+      --color-text-main: #334155;
+      --color-text-muted: #64748b;
+      --color-border: #e2e8f0;
+      --font-main: 'Inter', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
 
-/* ── Hero ─────────────────────── */
-.hero {
-  padding: 6rem 0 5rem;
-  background: linear-gradient(135deg, var(--color-brand) 0%, #1e3a6e 100%);
-  color: #ffffff;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
+    body {
+      font-family: var(--font-main);
+      color: var(--color-text-main);
+      background-color: var(--color-bg-page);
+      margin: 0;
+      line-height: 1.6;
+    }
 
-/* Subtle grid overlay for depth */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-brand);
+      margin-top: 0;
+      line-height: 1.2;
+    }
 
-.hero .container { position: relative; z-index: 1; }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.hero h1 {
-  color: #ffffff;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.02em;
-}
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
-.hero p {
-  color: rgba(255,255,255,.75);
-  font-size: 1.15rem;
-  max-width: 640px;
-  margin: 0 auto 2rem;
-}
+    .section {
+      padding: 5rem 0;
+    }
 
-/* Tech tag pills */
-.tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.6rem;
-}
+    .section-alt {
+      background-color: var(--color-bg-alt);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
 
-.tag {
-  display: inline-block;
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  background-color: rgba(255,255,255,.1);
-  color: rgba(255,255,255,.9);
-  border: 1px solid rgba(255,255,255,.18);
-  letter-spacing: 0.03em;
-  transition: background-color 0.2s, border-color 0.2s;
-}
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
 
-.tag:hover {
-  background-color: rgba(255,255,255,.2);
-  border-color: rgba(255,255,255,.35);
-}
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
 
-/* ── Project Cards Grid ───────── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.75rem;
-}
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-.project-card {
-  background: var(--color-bg-page);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 2rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
+    /* =========================================
+       Hero Section
+    ========================================= */
+    .hero {
+      padding: 7rem 0 6rem;
+      background: linear-gradient(135deg, var(--color-brand) 0%, #1e3a6e 100%);
+      color: #ffffff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, .1);
-  border-color: var(--color-accent);
-}
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
 
-.card-icon {
-  font-size: 1.75rem;
-  color: var(--color-accent);
-  margin-bottom: 0.25rem;
-}
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
 
-.project-card h3 {
-  font-size: 1.1rem;
-  line-height: 1.3;
-}
+    .hero h1 {
+      color: #ffffff;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
 
-.project-card p {
-  color: var(--color-text-muted);
-  font-size: 0.93rem;
-  line-height: 1.65;
-  flex: 1;               /* push link to bottom */
-  margin-bottom: 0;
-}
+    .hero p {
+      color: rgba(255, 255, 255, .8);
+      font-size: 1.15rem;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
 
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  margin-top: 0.5rem;
-  transition: gap 0.2s ease;
-}
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
 
-.project-link:hover {
-  gap: 0.65rem;
-  color: var(--color-accent-hover);
-}
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+    }
 
-/* ── Contact Section ──────────── */
-.contact-wrapper {
-  text-align: center;
-  max-width: 620px;
-}
+    .tag:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
 
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.25rem;
-  margin: 1.75rem 0 2rem;
-}
+    /* =========================================
+       Projects Grid & Cards
+    ========================================= */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
 
-.contact-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--color-brand);
-  padding: 0.6rem 1.1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
-}
+    .project-card {
+      background: var(--color-bg-page);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
 
-.contact-links a:hover {
-  border-color: var(--color-accent);
-  background-color: #eff6ff;
-  color: var(--color-accent);
-}
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border-color: var(--color-accent);
+    }
 
-/* Social icon row */
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
+    .card-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background-color: var(--color-accent-light);
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
 
-.social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
-  transition: color 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
-}
+    .project-card:hover .card-icon-wrapper {
+      background-color: var(--color-accent);
+      color: #ffffff;
+    }
 
-.social-icons a:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  background-color: #eff6ff;
-  transform: translateY(-2px);
-}
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin: 0;
+    }
 
-/* ── Responsive ───────────────── */
-@media (max-width: 768px) {
-  .hero { padding: 4rem 0 3.5rem; }
+    .project-card p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      flex-grow: 1;
+      margin: 0;
+    }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+      margin-bottom: -0.5rem;
+    }
 
-  .contact-links {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-top: 1rem;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .project-card:hover .project-link {
+      gap: 0.75rem;
+      color: var(--color-accent-hover);
+    }
+
+    /* =========================================
+       Contact Section
+    ========================================= */
+    .contact-wrapper {
+      text-align: center;
+      max-width: 620px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--color-brand);
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background-color: var(--color-bg-page);
+      transition: all 0.2s ease;
+    }
+
+    .contact-links a:hover {
+      border-color: var(--color-accent);
+      background-color: var(--color-accent-light);
+      color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      background-color: var(--color-bg-page);
+      transition: all 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      color: #ffffff;
+      border-color: var(--color-accent);
+      background-color: var(--color-accent);
+      transform: translateY(-3px);
+    }
+
+    /* =========================================
+       Responsive Design
+    ========================================= */
+    @media (max-width: 768px) {
+      .section { padding: 4rem 0; }
+      .hero { padding: 5rem 0 4rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-links { flex-direction: column; align-items: stretch; }
+    }
   </style>
 
-    <script src="/components/components.js" defer></script>
-
+  <script src="/components/components.js" defer></script>
 </head>
 
 <body>
 
   <site-header></site-header>
 
-
   <main>
-
     <section id="home" class="hero">
       <div class="container">
         <h1>Project Portfolio</h1>
-        <p>A comprehensive showcase of applications I have developed for learning purposes, market production, and
-          freelance business clients using a wide variety of stacks and modern technologies.</p>
+        <p>A comprehensive showcase of applications I have developed for learning purposes, market production, and freelance business clients using a wide variety of stacks and modern technologies.</p>
         <div class="tech-tags">
           <span class="tag">MERN Stack</span>
           <span class="tag">LAMP Stack</span>
@@ -254,88 +349,136 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Diverse Technologies & Solutions</h2>
-          <p class="section-subtitle" style="max-width: 800px;">
-            My development journey spans across multiple disciplines. Whether I'm testing a new framework for personal
-            learning, deploying a scalable web application for market production, or building a bespoke solution for a
-            freelance client, my goal is always to deliver secure, efficient, and user-centric software.
+          <p class="section-subtitle">
+            My development journey spans across multiple disciplines. Whether I'm testing a new framework for personal learning, deploying a scalable web application for market production, or building a bespoke solution for a freelance client, my goal is always to deliver secure, efficient, and user-centric software.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="directories" class="section">
+    <section id="business-portfolio" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Explore My Work</h2>
-          <p class="section-subtitle">Browse through my segmented portfolio directories hosted across the Vylex
-            ecosystem.</p>
+          <h2 class="section-title">Business Web Development</h2>
+          <p class="section-subtitle">
+            Professional websites and robust digital solutions engineered for businesses, non-profits, and corporate clients.
+          </p>
         </div>
 
         <div class="projects-grid">
+          
+          <a href="https://luxuryshuttersandblinds.co.za" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-house-chimney-window"></i></div>
+            <span class="card-badge">Home Improvement</span>
+            <h3>Luxury Shutters & Blinds</h3>
+            <p>Premium online catalog and business landing page for customized home window treatments.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
 
-          <!-- App Portfolio & Freelance -->
-          <div class="project-card">
-            <i class="fas fa-laptop-code card-icon"></i>
-            <h3>Applications & Freelance Work</h3>
-            <p>A curated list of web and mobile applications developed for diverse purposes, ranging from experimental
-              learning projects to robust, market-ready business solutions tailored for freelance clients.</p>
-            <a href="https://vylex.co.za/portfolio/" target="_blank" rel="noopener" class="project-link">
-              View Portfolio <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+          <a href="https://amabongosolutions.co.za" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-recycle"></i></div>
+            <span class="card-badge">Environmental Services</span>
+            <h3>Amabongo Solutions</h3>
+            <p>Digital presence for an eco-friendly recycling and waste management organization.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
 
-          <!-- Web Games -->
-          <div class="project-card">
-            <i class="fas fa-gamepad card-icon"></i>
-            <h3>Web Games Collection</h3>
-            <p>An interactive gallery of browser-based web games. These projects showcase my ability to handle complex
-              logic, state management, and real-time user interactions using modern web technologies.</p>
-            <a href="https://vylex.co.za/games" target="_blank" rel="noopener" class="project-link">
-              Play Games <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+          <a href="https://xyzsolutions.co.za" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-broom"></i></div>
+            <span class="card-badge">Cleaning Services</span>
+            <h3>XYZ Solutions</h3>
+            <p>Service-oriented business website facilitating client bookings and service inquiries.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
 
-          <!-- Educational Platform -->
-          <div class="project-card">
-            <i class="fas fa-graduation-cap card-icon"></i>
-            <h3>Educational Platform</h3>
-            <p>Vylex Nexys is a dedicated educational environment built to enhance learning, career development, and
-              upskilling through interactive content and structured courses.</p>
-            <a href="https://vylexnexys.co.za/" target="_blank" rel="noopener" class="project-link">
-              Visit Vylex Nexys <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+          <a href="https://everydaysupplies.co.za" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-box-open"></i></div>
+            <span class="card-badge">E-Commerce</span>
+            <h3>Everyday Supply Co.</h3>
+            <p>Digital storefront providing essential household goods and daily supply distribution.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
 
-          <!-- Tools Directory -->
-          <div class="project-card">
-            <i class="fas fa-toolbox card-icon"></i>
-            <h3>Tools Gallery & Directory</h3>
-            <p>A comprehensive suite of utility tools designed to improve daily productivity, aid in software
-              development, and provide quick solutions to common technical problems.</p>
-            <a href="https://vylexnexys.co.za/tools/" target="_blank" rel="noopener" class="project-link">
-              Explore Tools <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+          <a href="https://sandanezweexcellence.co.za/" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-hands-holding-child"></i></div>
+            <span class="card-badge">NPO / Non-Profit</span>
+            <h3>Sandanezwe Excellence</h3>
+            <p>Platform for an NPC focused on rural youth development and the embodiment of excellence.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
 
-          <div class="project-card">
-            <i class="fas fa-book-open card-icon"></i>
-            <h3>VYBE CODE: Programming the Future</h3>
-            <p>Master the AI-powered programming era. From core fundamentals to AI collaboration, learn to architect the
-              future with the VYBE CODE mindset: Vision, Yearning, Boldness, and Empathy.</p>
-            <a href="/blog/book/vybecode.html" target="_blank" rel="noopener" class="project-link">
-              Read Book <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+          <a href="https://pathfindersempowerment.co.za/" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-compass"></i></div>
+            <span class="card-badge">Youth Empowerment</span>
+            <h3>Pathfinders Empowerment</h3>
+            <p>Hub for a youth-focused organization delivering entrepreneurship, academic support, and leadership training.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="https://www.sinchub.co.za/" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fa-solid fa-lightbulb"></i></div>
+            <span class="card-badge">Incubation</span>
+            <h3>Sinc Hub</h3>
+            <p>Digital ecosystem for the Sandanezwe Incubation Hub, supporting emerging businesses and ideas.</p>
+            <span class="project-link">Visit Website <i class="fas fa-arrow-right"></i></span>
+          </a>
 
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section section-alt">
+    <section id="directories" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Explore My Work</h2>
+          <p class="section-subtitle">Browse through my segmented portfolio directories hosted across the Vylex ecosystem.</p>
+        </div>
+
+        <div class="projects-grid">
+
+          <a href="https://vylex.co.za/portfolio/" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fas fa-laptop-code"></i></div>
+            <h3>Applications & Freelance Work</h3>
+            <p>A curated list of web and mobile applications developed for diverse purposes, ranging from experimental learning to robust, market-ready solutions.</p>
+            <span class="project-link">View Portfolio <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="https://vylex.co.za/games" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fas fa-gamepad"></i></div>
+            <h3>Web Games Collection</h3>
+            <p>An interactive gallery of browser-based web games showcasing complex logic, state management, and real-time user interactions.</p>
+            <span class="project-link">Play Games <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="https://vylexnexys.co.za/" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Educational Platform</h3>
+            <p>Vylex Nexys is a dedicated educational environment built to enhance learning, career development, and upskilling through interactive content.</p>
+            <span class="project-link">Visit Vylex Nexys <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="https://vylexnexys.co.za/tools/" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fas fa-toolbox"></i></div>
+            <h3>Tools Gallery & Directory</h3>
+            <p>A comprehensive suite of utility tools designed to improve daily productivity, aid in software development, and provide quick technical solutions.</p>
+            <span class="project-link">Explore Tools <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="/blog/book/vybecode.html" target="_blank" rel="noopener noreferrer" class="project-card">
+            <div class="card-icon-wrapper"><i class="fas fa-book-open"></i></div>
+            <h3>VYBE CODE: Programming</h3>
+            <p>Master the AI-powered programming era. Learn to architect the future with the VYBE CODE mindset: Vision, Yearning, Boldness, and Empathy.</p>
+            <span class="project-link">Read Book <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
       <div class="container contact-wrapper">
         <h2 class="section-title">Have a project in mind?</h2>
-        <p class="section-subtitle">If you're interested in my freelance services, hiring me for market production, or
-          collaborating on a custom application, let's get in touch.</p>
+        <p class="section-subtitle">If you're interested in my freelance services, hiring me for market production, or collaborating on a custom application, let's get in touch.</p>
 
         <div class="contact-links">
           <a href="mailto:info@avuyilemthembu.co.za"><i class="fas fa-envelope"></i> info@avuyilemthembu.co.za</a>
@@ -343,24 +486,18 @@
         </div>
 
         <div class="social-icons">
-          <a href="https://github.com/mthembuavuyile" target="_blank" rel="noopener" aria-label="GitHub"><i
-              class="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/mthembuavuyile" target="_blank" rel="noopener" aria-label="LinkedIn"><i
-              class="fab fa-linkedin"></i></a>
-          <a href="https://x.com/MthembuAvuyile" target="_blank" rel="noopener" aria-label="Twitter"><i
-              class="fab fa-twitter"></i></a>
-          <a href="https://medium.com/@mthembuavuyile" target="_blank" rel="noopener" aria-label="Medium"><i
-              class="fab fa-medium"></i></a>
-          <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener" aria-label="Instagram"><i
-              class="fab fa-instagram"></i></a>
+          <a href="https://github.com/mthembuavuyile" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mthembuavuyile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://x.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://medium.com/@mthembuavuyile" target="_blank" rel="noopener noreferrer" aria-label="Medium"><i class="fab fa-medium"></i></a>
+          <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
     </section>
 
   </main>
 
-    <site-footer></site-footer>
+  <site-footer></site-footer>
 
 </body>
-
 </html>
