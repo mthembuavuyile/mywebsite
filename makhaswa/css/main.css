@@ -957,6 +957,14 @@ nav a.active::after {
     margin-bottom: 16px;
 }
 
+.accreditation-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 16px;
+    display: block;
+}
+
 .compliance-card h4 {
     color: var(--primary);
     font-size: 15px;
