@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="SA Hustle Academy — Practical e-commerce and business education built for South Africa. Takealot, AI tools, and real skills that earn in ZAR." />
+    <title>SA Hustle Academy — Sell More. Earn More. In South Africa.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        /* ─── Reset & Base ─── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #fafafa;
+            --gray-100: #f0f0ee;
+            --gray-200: #e0e0dc;
+            --gray-400: #999990;
+            --gray-600: #555550;
+            --red: #c0392b;
+
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+
+            --max: 1080px;
+            --pad: clamp(20px, 5vw, 48px);
+            --section-gap: clamp(56px, 10vw, 100px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── Typography ─── */
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        /* ─── Layout Helpers ─── */
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 var(--pad);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* ─── Buttons ─── */
+        .btn {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 28px;
+            border: 1.5px solid var(--black);
+            color: var(--black);
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+
+        .btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .btn-solid {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .btn-solid:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 12px;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px var(--pad);
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-style: italic;
+            text-decoration: none;
+            color: var(--black);
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        /* Mobile nav */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--black);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            padding: 0 var(--pad) 24px;
+            border-top: 1px solid var(--gray-200);
+            background: var(--white);
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--black);
+            font-size: 18px;
+            font-weight: 500;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-200);
+            transition: color 0.15s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--red);
+        }
+
+        .mobile-menu .btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .mobile-menu.open {
+                display: flex;
+            }
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            padding: clamp(48px, 10vw, 96px) var(--pad);
+            max-width: var(--max);
+            margin: 0 auto;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .hero-eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 9vw, 84px);
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+            max-width: 14ch;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gray-400);
+        }
+
+        .hero-body {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        @media (min-width: 720px) {
+            .hero-body {
+                flex-direction: row;
+                align-items: flex-end;
+                gap: 64px;
+            }
+        }
+
+        .hero-description {
+            font-size: clamp(16px, 2vw, 19px);
+            color: var(--gray-600);
+            line-height: 1.65;
+            max-width: 44ch;
+            flex-shrink: 0;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {}
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 44px);
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-top: 6px;
+            display: block;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        /* ─── TRUST BAR ─── */
+        .trust-bar {
+            background: var(--black);
+            color: var(--white);
+            padding: 18px var(--pad);
+        }
+
+        .trust-bar-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            flex-wrap: wrap;
+        }
+
+        .trust-bar span {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* ─── MANIFESTO ─── */
+        .manifesto {
+            padding: var(--section-gap) var(--pad);
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-100);
+        }
+
+        .manifesto-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 720px) {
+            .manifesto-inner {
+                grid-template-columns: 1fr 2fr;
+                align-items: start;
+                gap: 64px;
+            }
+        }
+
+        .manifesto-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            padding-top: 6px;
+        }
+
+        .manifesto-text {
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3.5vw, 34px);
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+        }
+
+        /* ─── COURSES ─── */
+        .courses {
+            padding: var(--section-gap) var(--pad);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .courses-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 5vw, 48px);
+        }
+
+        .section-meta {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        .course-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .course-item {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--gray-200);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s;
+        }
+
+        @media (min-width: 640px) {
+            .course-item {
+                grid-template-columns: 1fr auto;
+                align-items: center;
+                gap: 32px;
+            }
+        }
+
+        .course-item:hover .course-name {
+            color: var(--red);
+        }
+
+        .course-tag {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .course-name {
+            font-family: var(--font-display);
+            font-size: clamp(20px, 3vw, 28px);
+            transition: color 0.15s;
+            margin-bottom: 8px;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            max-width: 55ch;
+        }
+
+        .course-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .course-price {
+            font-family: var(--font-display);
+            font-size: 26px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* ─── PROOF ─── */
+        .proof {
+            padding: var(--section-gap) var(--pad);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .proof-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .testimonials {
+            display: grid;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 640px) {
+            .testimonials {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .testimonials {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .testimonial {
+            border: 1px solid var(--gray-200);
+            padding: 28px;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 17px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .testimonial-loc {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 2px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ─── JOURNAL ─── */
+        .journal {
+            background: var(--gray-100);
+            padding: var(--section-gap) var(--pad);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .journal-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .articles {
+            display: grid;
+            gap: 0;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+        }
+
+        .article {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--gray-200);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (min-width: 640px) {
+            .article {
+                grid-template-columns: auto 1fr;
+                gap: 32px;
+                align-items: center;
+            }
+        }
+
+        .article-date {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .article-title {
+            font-family: var(--font-display);
+            font-size: clamp(17px, 2.5vw, 22px);
+            transition: color 0.15s;
+        }
+
+        .article:hover .article-title {
+            color: var(--red);
+        }
+
+        /* ─── EMAIL CAPTURE ─── */
+        .email-section {
+            padding: var(--section-gap) var(--pad);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .email-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 720px) {
+            .email-inner {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+        }
+
+        .email-headline {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 4vw, 38px);
+            line-height: 1.2;
+        }
+
+        .email-sub {
+            color: var(--gray-600);
+            margin-top: 12px;
+            font-size: 15px;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .email-form input {
+            font-family: var(--font-body);
+            font-size: 15px;
+            padding: 14px 16px;
+            border: 1.5px solid var(--gray-200);
+            background: var(--white);
+            color: var(--black);
+            outline: none;
+            border-radius: 0;
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+        }
+
+        .email-form input:focus {
+            border-color: var(--black);
+        }
+
+        .email-form input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .email-form .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-note {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: clamp(48px, 8vw, 80px) var(--pad) 32px;
+        }
+
+        .footer-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (min-width: 640px) {
+            .footer-top {
+                grid-template-columns: 1.5fr 1fr 1fr;
+            }
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-style: italic;
+            color: var(--white);
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.65;
+            max-width: 30ch;
+        }
+
+        .footer-col-title {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            transition: color 0.15s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            flex-wrap: wrap;
+            gap: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ─── Scroll animation ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">SA Hustle.</a>
+            <ul class="nav-links">
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#journal">Journal</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="btn btn-sm btn-solid">Member Login</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#courses">Courses</a>
+            <a href="#journal">Journal</a>
+            <a href="#contact">Contact</a>
+            <a href="#" class="btn btn-solid">Member Login</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <p class="hero-eyebrow">South Africa's E-Commerce Academy</p>
+        <h1>
+            Sell more.<br>
+            <em>Earn more.</em><br>
+            In South Africa.
+        </h1>
+        <div class="hero-body">
+            <p class="hero-description">
+                Practical courses on Takealot, AI tools, and digital products — tested in the South African market,
+                priced in ZAR, and taught without fluff.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">1,240</span>
+                    <span class="stat-label">Active Students</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">R18m+</span>
+                    <span class="stat-label">Revenue Generated</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Core Courses</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-actions">
+            <a href="#courses" class="btn btn-solid">Browse Courses</a>
+            <a href="#journal" class="btn">Read Free Guides</a>
+        </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        <div class="trust-bar-inner">
+            <span>✓</span> Pay once, own forever
+            <span>&nbsp;·&nbsp;</span>
+            <span>✓</span> No subscription required
+            <span>&nbsp;·&nbsp;</span>
+            <span>✓</span> Tested in the South African market
+            <span>&nbsp;·&nbsp;</span>
+            <span>✓</span> PayFast accepted
+        </div>
+    </div>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto">
+        <div class="manifesto-inner reveal">
+            <div class="manifesto-label">Our Standard</div>
+            <p class="manifesto-text">
+                We ignore Silicon Valley theory. Every framework is tested in the South African economy first. If a
+                strategy does not earn margin in ZAR, we don't teach it. Straightforward education, zero hype.
+            </p>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <section class="courses" id="courses">
+        <div class="courses-inner">
+            <div class="section-header">
+                <h2 class="section-title">Courses</h2>
+                <span class="section-meta">Updated Q2 2026</span>
+            </div>
+            <div class="course-list">
+
+                <a href="#" class="course-item reveal">
+                    <div class="course-left">
+                        <div class="course-tag">E-Commerce Foundation</div>
+                        <div class="course-name">Takealot Seller Blueprint</div>
+                        <p class="course-desc">The complete guide to sourcing, listing, and scaling a profitable
+                            storefront on South Africa's largest marketplace. Includes our Pricing Matrix and Local
+                            Supplier Index.</p>
+                    </div>
+                    <div class="course-right">
+                        <span class="course-price">R1,997</span>
+                        <span class="btn btn-sm btn-solid">Enrol Now</span>
+                    </div>
+                </a>
+
+                <a href="#" class="course-item reveal">
+                    <div class="course-left">
+                        <div class="course-tag">Technology</div>
+                        <div class="course-name">AI Tools for Your Business</div>
+                        <p class="course-desc">Implement AI to automate customer service, write product descriptions,
+                            and manage inventory — without hiring extra staff. Beginner-friendly.</p>
+                    </div>
+                    <div class="course-right">
+                        <span class="course-price">R997</span>
+                        <span class="btn btn-sm btn-solid">Enrol Now</span>
+                    </div>
+                </a>
+
+                <a href="#" class="course-item reveal">
+                    <div class="course-left">
+                        <div class="course-tag">Sourcing</div>
+                        <div class="course-name">Retail Arbitrage SA</div>
+                        <p class="course-desc">A systematic method for finding underpriced goods in physical retail
+                            stores and reselling them through established online channels for consistent margin.</p>
+                    </div>
+                    <div class="course-right">
+                        <span class="course-price">R1,497</span>
+                        <span class="btn btn-sm btn-solid">Enrol Now</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="proof">
+        <div class="proof-inner">
+            <div class="section-header">
+                <h2 class="section-title">What Students Say</h2>
+                <span class="section-meta">Verified Reviews</span>
+            </div>
+            <div class="testimonials">
+
+                <div class="testimonial reveal">
+                    <p class="testimonial-quote">"I was skeptical after wasting money on other courses. Within 90 days
+                        of applying the Takealot Blueprint, I had my first R50k month."</p>
+                    <div class="testimonial-author">Thabo M.</div>
+                    <div class="testimonial-loc">Johannesburg, GP</div>
+                </div>
+
+                <div class="testimonial reveal">
+                    <p class="testimonial-quote">"The AI tools course paid for itself in the first week. I cut my
+                        customer service time in half and now focus on sourcing instead."</p>
+                    <div class="testimonial-author">Priya N.</div>
+                    <div class="testimonial-loc">Durban, KZN</div>
+                </div>
+
+                <div class="testimonial reveal">
+                    <p class="testimonial-quote">"Finally a course built for South Africa. Real suppliers, real fee
+                        structures, real margins. No theory about Amazon USA."</p>
+                    <div class="testimonial-author">Anele D.</div>
+                    <div class="testimonial-loc">Cape Town, WC</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- JOURNAL -->
+    <section class="journal" id="journal">
+        <div class="journal-inner">
+            <div class="section-header">
+                <h2 class="section-title">Free Guides</h2>
+                <a href="#"
+                    style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--black);text-decoration:none;">All
+                    Articles →</a>
+            </div>
+            <div class="articles">
+
+                <a class="article reveal" href="#">
+                    <div class="article-date">Apr 14, 2026</div>
+                    <div class="article-title">Takealot fulfillment fees changed. Here is the real cost of shipping in
+                        2026.</div>
+                </a>
+
+                <a class="article reveal" href="#">
+                    <div class="article-date">Apr 8, 2026</div>
+                    <div class="article-title">How a Durban wholesaler automated inventory forecasting with simple AI
+                        prompts.</div>
+                </a>
+
+                <a class="article reveal" href="#">
+                    <div class="article-date">Apr 2, 2026</div>
+                    <div class="article-title">Why holding local inventory is now the only path forward for SA
+                        e-commerce sellers.</div>
+                </a>
+
+                <a class="article reveal" href="#">
+                    <div class="article-date">Mar 25, 2026</div>
+                    <div class="article-title">How to calculate your true Takealot profit margin before listing a single
+                        product.</div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EMAIL CAPTURE -->
+    <section class="email-section" id="contact">
+        <div class="email-inner">
+            <div>
+                <h2 class="email-headline reveal">Get the free SA e-commerce starter guide.</h2>
+                <p class="email-sub reveal">5 strategies working right now in the South African market. No spam, no
+                    fluff.</p>
+            </div>
+            <div class="email-form reveal">
+                <input type="text" placeholder="Your name" id="form-name" />
+                <input type="email" placeholder="Your email address" id="form-email" />
+                <button class="btn btn-solid" onclick="handleSignup()">Send Me the Guide</button>
+                <p class="form-note">We respect your privacy. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <span class="footer-logo">SA Hustle.</span>
+                    <p class="footer-tagline">Practical e-commerce and business education built for the South African
+                        market.</p>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Courses</div>
+                    <ul>
+                        <li><a href="#">Takealot Seller Blueprint</a></li>
+                        <li><a href="#">AI Tools for Business</a></li>
+                        <li><a href="#">Retail Arbitrage SA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Company</div>
+                    <ul>
+                        <li><a href="#">Free Guides</a></li>
+                        <li><a href="#">Our Standard</a></li>
+                        <li><a href="https://wa.me/27000000000" target="_blank">WhatsApp Support</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 SA Hustle Academy. All rights reserved.</span>
+                <span>Based in Durban, South Africa.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav
+        const toggle = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        toggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        // Close on link click
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+
+        // Email signup
+        function handleSignup() {
+            const name = document.getElementById('form-name').value.trim();
+            const email = document.getElementById('form-email').value.trim();
+            if (!name || !email) { alert('Please fill in your name and email.'); return; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+            alert('Thanks ' + name + '! Check your inbox shortly.');
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-email').value = '';
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
