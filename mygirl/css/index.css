@@ -109,6 +109,7 @@
             margin-bottom: 20px;
             background: linear-gradient(135deg, #fff 0%, #ffb3c6 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 4px 30px rgba(255, 77, 128, 0.3);
             letter-spacing: -0.5px;
@@ -152,16 +153,8 @@
             opacity: 0;
             transform: translateY(30px);
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
         }
-
-        /* Staggered Animation for Cards */
-        .card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.2s forwards; }
-        .card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.4s forwards; }
-        .card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.6s forwards; }
-        .card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.8s forwards; }
-        .card:nth-child(5) { animation: fadeInUp 0.8s ease-out 1.0s forwards; }
-        .card:nth-child(6) { animation: fadeInUp 0.8s ease-out 1.2s forwards; }
-        .card:nth-child(7) { animation: fadeInUp 0.8s ease-out 1.4s forwards; }
 
         .card::before {
             content: '';
