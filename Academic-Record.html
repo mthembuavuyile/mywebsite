@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,298 +10,608 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <style>
-    :root{
+    :root {
       /* Theme Variables */
       --bg: #0b1220;
-      --panel: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
+      --panel: rgba(255, 255, 255, .06);
+      --border: rgba(255, 255, 255, .12);
+      --text: rgba(255, 255, 255, .92);
+      --muted: rgba(255, 255, 255, .70);
+      --muted2: rgba(255, 255, 255, .55);
 
       --primary: #60a5fa;
       --primary2: #3b82f6;
       --accent: #34d399;
       --danger: #fb7185;
 
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+      --shadow: 0 20px 60px rgba(0, 0, 0, .45);
+      --shadow2: 0 10px 30px rgba(0, 0, 0, .35);
 
       --radius: 18px;
       --radius-sm: 14px;
       --max: 1120px;
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; }
-    
-    body{
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       margin: 0;
       font-family: 'Inter', system-ui, sans-serif;
       background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(96,165,250,.25), transparent 55%),
-        radial-gradient(900px 600px at 85% 20%, rgba(52,211,153,.18), transparent 60%),
+        radial-gradient(1200px 700px at 15% 10%, rgba(96, 165, 250, .25), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(52, 211, 153, .18), transparent 60%),
         var(--bg);
-      background-attachment: fixed; /* Keeps gradient in place on scroll */
+      background-attachment: fixed;
+      /* Keeps gradient in place on scroll */
       color: var(--text);
       line-height: 1.55;
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
     /* --- Navigation --- */
-    .topbar{
-      position: sticky; top: 0; z-index: 100;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      background: rgba(11,18,32,.65);
+      background: rgba(11, 18, 32, .65);
       border-bottom: 1px solid var(--border);
     }
-    .topbar .inner{
-      display: flex; align-items: center; justify-content: space-between;
+
+    .topbar .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       height: 70px;
     }
-    .brand{
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 800; letter-spacing: .5px; font-size: 1.05rem;
-    }
-    .brand .dot{
-      width: 10px; height: 10px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: 0 0 0 4px rgba(96,165,250,.15);
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      font-size: 1.05rem;
     }
 
-    .nav{ display: flex; align-items: center; gap: 8px; }
-    .nav a{
+    .brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 0 4px rgba(96, 165, 250, .15);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav a {
       padding: 8px 16px;
       border-radius: 999px;
-      font-weight: 600; color: var(--muted);
-      font-size: 0.95rem; transition: .2s;
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: .2s;
     }
-    .nav a:hover{ background: rgba(255,255,255,.08); color: #fff; }
 
-    .nav-toggle{
+    .nav a:hover {
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+    }
+
+    .nav-toggle {
       display: none;
-      background: transparent; border: none;
-      color: #fff; font-size: 1.5rem; cursor: pointer; padding: 10px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 10px;
     }
 
     /* --- Hero Section --- */
-    header{ padding: 40px 0 20px; }
-    .hero{
-      display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px;
+    header {
+      padding: 40px 0 20px;
     }
-    .heroCard{
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+    }
+
+    .heroCard {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .03));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 30px;
-      position: relative; overflow: hidden;
-      display: flex; align-items: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
     }
-    .heroMain{ display: flex; gap: 24px; align-items: center; width: 100%; }
-    .avatar{
-      width: 90px; height: 90px; border-radius: 50%;
-      border: 3px solid rgba(255,255,255,.16);
+
+    .heroMain {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, .16);
       /* Placeholder background - replace URL if needed */
-      background: #1e293b; 
+      background: #1e293b;
       background-image: url("https://avuyilemthembu.co.za/assets/images/avuyile2.jpg");
       background-size: cover;
       flex-shrink: 0;
       box-shadow: var(--shadow2);
     }
-    .heroText h1{
-      margin: 0; font-size: clamp(1.5rem, 4vw, 2.4rem);
-      line-height: 1.1; letter-spacing: -1px;
+
+    .heroText h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      line-height: 1.1;
+      letter-spacing: -1px;
     }
-    .sub{ margin: 8px 0 12px; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
-    
-    .badges{ display: flex; flex-wrap: wrap; gap: 8px; }
-    .badge{
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 12px; border-radius: 999px;
-      border: 1px solid var(--border); background: rgba(255,255,255,.05);
-      font-size: 0.85rem; font-weight: 600;
+
+    .sub {
+      margin: 8px 0 12px;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.95rem;
     }
-    .pill{ width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .05);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .pill {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
 
     /* Side Panel */
-    .sideCard{
-      background: rgba(255,255,255,.03);
+    .sideCard {
+      background: rgba(255, 255, 255, .03);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px;
-      display: flex; flex-direction: column; gap: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
-    .kpiGrid{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .kpi{
-      background: rgba(255,255,255,.03); border: 1px solid var(--border);
-      border-radius: 12px; padding: 12px; text-align: center;
+
+    .kpiGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    .kpi .num{
-      font-size: 1.5rem; font-weight: 800;
+
+    .kpi {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .kpi .num {
+      font-size: 1.5rem;
+      font-weight: 800;
       background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .kpi .lbl{ font-size: 0.8rem; font-weight: 600; color: var(--muted2); margin-top: 4px; }
+
+    .kpi .lbl {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted2);
+      margin-top: 4px;
+    }
 
     /* Progress & Countdown */
-    .progressBlock{
-      background: rgba(255,255,255,.03); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px;
+    .progressBlock {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
     }
-    .progressTop{ display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; font-weight: 700; }
-    .bar{
-      height: 8px; background: rgba(255,255,255,.1); border-radius: 10px; overflow: hidden;
+
+    .progressTop {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
     }
-    .bar span{
-      display: block; height: 100%; width: 0%;
+
+    .bar {
+      height: 8px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 0%;
       background: linear-gradient(90deg, var(--accent), var(--primary2));
       transition: width 1.5s ease;
     }
 
-    .countdown{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .cd{
-      background: rgba(255,255,255,.04); border-radius: 10px; padding: 10px 5px;
-      text-align: center; border: 1px solid var(--border);
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
     }
-    .cd .n{ font-weight: 800; font-size: 1.1rem; display: block; }
-    .cd .t{ font-size: 0.7rem; text-transform: uppercase; color: var(--muted2); font-weight: 600; }
+
+    .cd {
+      background: rgba(255, 255, 255, .04);
+      border-radius: 10px;
+      padding: 10px 5px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .cd .n {
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: block;
+    }
+
+    .cd .t {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--muted2);
+      font-weight: 600;
+    }
 
     /* --- Transcript Section --- */
-    main { padding-bottom: 60px; }
-    .sectionHead{
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin: 30px 0 15px; padding-bottom: 10px;
+    main {
+      padding-bottom: 60px;
+    }
+
+    .sectionHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 30px 0 15px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
     }
-    .sectionHead h2{ margin: 0; font-size: 1.4rem; }
-    .sectionHead p{ margin: 0; color: var(--muted2); font-size: 0.9rem; }
 
-    .year{
-      background: rgba(255,255,255,.02); border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden; margin-bottom: 20px;
+    .sectionHead h2 {
+      margin: 0;
+      font-size: 1.4rem;
     }
-    .yearHeader{
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 18px 20px; background: rgba(255,255,255,.03);
+
+    .sectionHead p {
+      margin: 0;
+      color: var(--muted2);
+      font-size: 0.9rem;
     }
-    .yearHeader .y{ font-weight: 800; font-size: 1.1rem; }
-    .yearHeader .desc{ font-size: 0.85rem; color: var(--muted2); }
-    
-    .btn{
-      background: rgba(255,255,255,.08); border: 1px solid var(--border);
-      color: #fff; padding: 8px 16px; border-radius: 10px;
-      cursor: pointer; font-weight: 600; font-size: 0.9rem;
+
+    .year {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .yearHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .yearHeader .y {
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .yearHeader .desc {
+      font-size: 0.85rem;
+      color: var(--muted2);
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
       transition: .2s;
     }
-    .btn:hover{ background: rgba(255,255,255,.15); }
-    .btn.primary{
-      background: rgba(59,130,246,.2); border-color: rgba(59,130,246,.4);
+
+    .btn:hover {
+      background: rgba(255, 255, 255, .15);
+    }
+
+    .btn.primary {
+      background: rgba(59, 130, 246, .2);
+      border-color: rgba(59, 130, 246, .4);
       color: #93c5fd;
     }
 
     /* Collapsible logic */
-    .collapse{
-      max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+    .collapse {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
     }
-    .collapse.open{ max-height: 2000px; transition: max-height 0.6s ease-in; }
 
-    .yearBody{ padding: 20px; display: grid; gap: 20px; }
-    .semester{
-      background: rgba(255,255,255,.03); border: 1px solid var(--border);
-      border-radius: 14px; padding: 15px;
+    .collapse.open {
+      max-height: 2000px;
+      transition: max-height 0.6s ease-in;
     }
-    .semesterTop{
-      display: flex; justify-content: space-between; margin-bottom: 12px;
+
+    .yearBody {
+      padding: 20px;
+      display: grid;
+      gap: 20px;
     }
-    .semesterTop .name{ font-weight: 800; color: #fff; }
-    .semesterTop .meta{ font-size: 0.85rem; color: var(--muted); }
+
+    .semester {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px;
+    }
+
+    .semesterTop {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .semesterTop .name {
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .semesterTop .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
 
     /* Tables */
-    .table{
-      width: 100%; border-collapse: separate; border-spacing: 0;
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
     }
-    .table th{
-      text-align: left; font-size: 0.75rem; text-transform: uppercase;
-      color: var(--muted2); padding: 10px; letter-spacing: 1px;
+
+    .table th {
+      text-align: left;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--muted2);
+      padding: 10px;
+      letter-spacing: 1px;
       border-bottom: 1px solid var(--border);
     }
-    .table td{
-      padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,.05);
+
+    .table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
       vertical-align: middle;
     }
-    .table tr:last-child td{ border-bottom: none; }
 
-    .code{ color: var(--muted); font-size: 0.85rem; font-family: monospace; }
-    .moduleName{ font-weight: 600; font-size: 0.95rem; }
-    
-    .credits{
-      display: inline-block; padding: 4px 10px; border-radius: 20px;
-      background: rgba(255,255,255,.06); font-size: 0.8rem; font-weight: 700; color: var(--muted);
+    .table tr:last-child td {
+      border-bottom: none;
     }
-    
-    .mark{
-      display: inline-block; padding: 6px 12px; border-radius: 20px;
-      font-size: 0.9rem; font-weight: 800;
-    }
-    .mark.dist{ background: rgba(52,211,153,.15); color: #6ee7b7; border: 1px solid rgba(52,211,153,.3); }
-    .mark.pass{ background: rgba(96,165,250,.15); color: #93c5fd; border: 1px solid rgba(96,165,250,.3); }
-    .mark.fail{ background: rgba(251,113,133,.15); color: #fda4af; border: 1px solid rgba(251,113,133,.3); }
 
-    footer{
-      text-align: center; color: var(--muted2); font-size: 0.9rem;
-      padding: 40px 0; border-top: 1px solid var(--border);
+    .code {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: monospace;
+    }
+
+    .moduleName {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .credits {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .06);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .mark {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .mark.dist {
+      background: rgba(52, 211, 153, .15);
+      color: #6ee7b7;
+      border: 1px solid rgba(52, 211, 153, .3);
+    }
+
+    .mark.pass {
+      background: rgba(96, 165, 250, .15);
+      color: #93c5fd;
+      border: 1px solid rgba(96, 165, 250, .3);
+    }
+
+    .mark.fail {
+      background: rgba(251, 113, 133, .15);
+      color: #fda4af;
+      border: 1px solid rgba(251, 113, 133, .3);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted2);
+      font-size: 0.9rem;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
       margin-top: 40px;
     }
 
     /* --- MOBILE STYLES --- */
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-      .heroCard{ padding: 20px; }
-      .heroMain{ flex-direction: column; text-align: center; }
-      .badges{ justify-content: center; }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .heroCard {
+        padding: 20px;
+      }
+
+      .heroMain {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .badges {
+        justify-content: center;
+      }
     }
 
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
+
       /* Mobile Nav */
-      .nav-toggle{ display: block; }
-      .nav{
-        display: none; /* Hidden by default */
-        position: absolute; top: 70px; left: 0; right: 0;
-        background: #111827; border-bottom: 1px solid var(--border);
-        flex-direction: column; padding: 20px; gap: 10px;
-        box-shadow: 0 10px 20px rgba(0,0,0,.5);
+      .nav-toggle {
+        display: block;
       }
-      .nav.active{ display: flex; }
-      .nav a{ width: 100%; text-align: center; background: rgba(255,255,255,.05); }
+
+      .nav {
+        display: none;
+        /* Hidden by default */
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #111827;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+      }
+
+      .nav.active {
+        display: flex;
+      }
+
+      .nav a {
+        width: 100%;
+        text-align: center;
+        background: rgba(255, 255, 255, .05);
+      }
 
       /* Mobile Tables -> Cards */
-      .table thead{ display: none; }
-      .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
-      .table tr{
-        margin-bottom: 12px; background: rgba(255,255,255,.02);
-        border: 1px solid var(--border); border-radius: 12px;
+      .table thead {
+        display: none;
+      }
+
+      .table,
+      .table tbody,
+      .table tr,
+      .table td {
+        display: block;
+        width: 100%;
+      }
+
+      .table tr {
+        margin-bottom: 12px;
+        background: rgba(255, 255, 255, .02);
+        border: 1px solid var(--border);
+        border-radius: 12px;
         padding: 10px;
       }
-      .table td{
-        padding: 6px 0; border: none;
-        display: flex; justify-content: space-between; align-items: center;
+
+      .table td {
+        padding: 6px 0;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         text-align: right;
       }
-      .table td::before{
+
+      .table td::before {
         content: attr(data-label);
-        font-size: 0.75rem; text-transform: uppercase;
-        color: var(--muted2); font-weight: 700; letter-spacing: 1px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--muted2);
+        font-weight: 700;
+        letter-spacing: 1px;
         margin-right: 10px;
       }
-      .moduleName{ text-align: right; }
-      .sectionHead{ flex-direction: column; align-items: flex-start; gap: 6px; }
+
+      .moduleName {
+        text-align: right;
+      }
+
+      .sectionHead {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
     }
   </style>
 </head>
@@ -329,7 +640,7 @@
   <header id="overview">
     <div class="wrap">
       <div class="hero">
-        
+
         <!-- Main Card -->
         <div class="heroCard">
           <div class="heroMain">
@@ -356,6 +667,14 @@
               <div class="num">364</div>
               <div class="lbl">Total Credits</div>
             </div>
+            <div class="kpi">
+              <div class="num">21</div>
+              <div class="lbl">Modules</div>
+            </div>
+            <div class="kpi">
+              <div class="num">22</div>
+              <div class="lbl">Entries</div>
+            </div>
           </div>
 
           <div class="progressBlock">
@@ -368,8 +687,8 @@
 
           <div class="progressBlock">
             <div class="progressTop">
-              <span>Graduation</span>
-              <span style="color:var(--muted)">June 2026</span>
+              <span>Graduation (JHB)</span>
+              <span style="color:var(--muted)">Tuesday, 26 May 2026</span>
             </div>
             <div class="countdown" id="countdown">
               <!-- JS will fill this -->
@@ -417,25 +736,33 @@
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Praxis S3B (Cyber Law & Project)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Praxis S3B (Cyber Law & Project)</div>
+                  </td>
                   <td data-label="Code" class="code">HPXS302-1</td>
                   <td data-label="Credits"><span class="credits">15</span></td>
                   <td data-label="Mark"><span class="mark dist">87%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Business Ethics (Repeat)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Business Ethics (Repeat)</div>
+                  </td>
                   <td data-label="Code" class="code">HBMN201-1</td>
                   <td data-label="Credits"><span class="credits">16</span></td>
                   <td data-label="Mark"><span class="mark dist">86%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Systems Development 3</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Systems Development 3</div>
+                  </td>
                   <td data-label="Code" class="code">HSYD300-1</td>
                   <td data-label="Credits"><span class="credits">30</span></td>
                   <td data-label="Mark"><span class="mark dist">80%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Software Testing 3</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Software Testing 3</div>
+                  </td>
                   <td data-label="Code" class="code">HSFT300-1</td>
                   <td data-label="Credits"><span class="credits">15</span></td>
                   <td data-label="Mark"><span class="mark pass">76%</span></td>
@@ -461,25 +788,33 @@
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Systems Analysis & Design 3</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Systems Analysis & Design 3</div>
+                  </td>
                   <td data-label="Code" class="code">HSAD300-1</td>
                   <td data-label="Credits"><span class="credits">20</span></td>
                   <td data-label="Mark"><span class="mark dist">94%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Systems Dev Project Mgmt 3</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Systems Dev Project Mgmt 3</div>
+                  </td>
                   <td data-label="Code" class="code">HSDP300-1</td>
                   <td data-label="Credits"><span class="credits">15</span></td>
                   <td data-label="Mark"><span class="mark dist">85%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Praxis S3A (Ethical Hacking)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Praxis S3A (Ethical Hacking)</div>
+                  </td>
                   <td data-label="Code" class="code">HPXS301-1</td>
                   <td data-label="Credits"><span class="credits">5</span></td>
                   <td data-label="Mark"><span class="mark pass">78%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Workflow Management 3</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Workflow Management 3</div>
+                  </td>
                   <td data-label="Code" class="code">HWFM300-1</td>
                   <td data-label="Credits"><span class="credits">20</span></td>
                   <td data-label="Mark"><span class="mark pass">72%</span></td>
@@ -518,13 +853,17 @@
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Systems Development 2A</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Systems Development 2A</div>
+                  </td>
                   <td data-label="Code" class="code">HSYD201-1</td>
                   <td data-label="Credits"><span class="credits">40</span></td>
                   <td data-label="Mark"><span class="mark dist">84%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Systems Development 2B (Security+)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Systems Development 2B (Security+)</div>
+                  </td>
                   <td data-label="Code" class="code">HSYD202-1</td>
                   <td data-label="Credits"><span class="credits">20</span></td>
                   <td data-label="Mark"><span class="mark dist">92%</span></td>
@@ -550,25 +889,33 @@
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Database Programming 2</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Database Programming 2</div>
+                  </td>
                   <td data-label="Code" class="code">HDBP200-1</td>
                   <td data-label="Credits"><span class="credits">20</span></td>
                   <td data-label="Mark"><span class="mark dist">84%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Praxis S2 (DB Technologies, SQL & Android Dev)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Praxis S2 (DB Technologies, SQL & Android Dev)</div>
+                  </td>
                   <td data-label="Code" class="code">HPXS200-1</td>
                   <td data-label="Credits"><span class="credits">20</span></td>
                   <td data-label="Mark"><span class="mark dist">86%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Business Ethics</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Business Ethics</div>
+                  </td>
                   <td data-label="Code" class="code">HBMN201-1</td>
                   <td data-label="Credits"><span class="credits">16</span></td>
                   <td data-label="Mark"><span class="mark fail">41%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Android App Development</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Android App Development</div>
+                  </td>
                   <td data-label="Code" class="code">HASD200-1</td>
                   <td data-label="Credits"><span class="credits">10</span></td>
                   <td data-label="Mark"><span class="mark dist">87%</span></td>
@@ -607,25 +954,33 @@
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Praxis 1</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Praxis 1</div>
+                  </td>
                   <td data-label="Code" class="code">HPX100-1</td>
                   <td data-label="Credits"><span class="credits">20</span></td>
                   <td data-label="Mark"><span class="mark dist">95%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Computer Literacy Advanced</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Computer Literacy Advanced</div>
+                  </td>
                   <td data-label="Code" class="code">HCLT108-1</td>
                   <td data-label="Credits"><span class="credits">10</span></td>
                   <td data-label="Mark"><span class="mark dist">77%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Technical Systems & Support (A+)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Technical Systems & Support (A+)</div>
+                  </td>
                   <td data-label="Code" class="code">HTSS100-1</td>
                   <td data-label="Credits"><span class="credits">24</span></td>
                   <td data-label="Mark"><span class="mark pass">56%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Intro to Business Management</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Intro to Business Management</div>
+                  </td>
                   <td data-label="Code" class="code">HBMN102-1</td>
                   <td data-label="Credits"><span class="credits">10</span></td>
                   <td data-label="Mark"><span class="mark pass">68%</span></td>
@@ -651,25 +1006,33 @@
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Systems Development 1 (Java)</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Systems Development 1 (Java)</div>
+                  </td>
                   <td data-label="Code" class="code">HSYD100-1</td>
                   <td data-label="Credits"><span class="credits">12</span></td>
                   <td data-label="Mark"><span class="mark dist">75%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Academic Literacy</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Academic Literacy</div>
+                  </td>
                   <td data-label="Code" class="code">HALP100-1</td>
                   <td data-label="Credits"><span class="credits">14</span></td>
                   <td data-label="Mark"><span class="mark pass">62%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">Computer Literacy Introduction</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">Computer Literacy Introduction</div>
+                  </td>
                   <td data-label="Code" class="code">HCLT101-1</td>
                   <td data-label="Credits"><span class="credits">16</span></td>
                   <td data-label="Mark"><span class="mark pass">58%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module"><div class="moduleName">IT Systems Management 1</div></td>
+                  <td data-label="Module">
+                    <div class="moduleName">IT Systems Management 1</div>
+                  </td>
                   <td data-label="Code" class="code">HISM100-1</td>
                   <td data-label="Credits"><span class="credits">12</span></td>
                   <td data-label="Mark"><span class="mark pass">66%</span></td>
@@ -679,13 +1042,14 @@
           </div>
         </div>
       </section>
-      
+
     </div>
   </main>
 
   <footer>
     <div class="wrap">
-      <p>&copy; 2026 Avuyile Mthembu. Academic Portfolio — Boston City Campus (Durban).</p>
+      <p>&copy; 2026 <a href="https://avuyilemthembu.co.za">Avuyile Mthembu</a>. Academic Portfolio — Boston City Campus
+        (Durban).</p>
     </div>
   </footer>
 
@@ -693,7 +1057,7 @@
     // 1. Mobile Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
     const nav = document.getElementById('mainNav');
-    
+
     menuBtn.addEventListener('click', () => {
       nav.classList.toggle('active');
     });
@@ -709,14 +1073,14 @@
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-toggle');
         const content = document.getElementById(targetId);
-        
-        if(content){
+
+        if (content) {
           content.classList.toggle('open');
           // Update button text
           const isOpen = content.classList.contains('open');
           btn.textContent = isOpen ? 'Hide' : 'Show';
           // Optional: Toggle primary class
-          if(isOpen) btn.classList.add('primary');
+          if (isOpen) btn.classList.add('primary');
           else btn.classList.remove('primary');
         }
       });
@@ -725,12 +1089,12 @@
     // 3. Progress Bar Animation
     setTimeout(() => {
       const bar = document.getElementById('progBar');
-      if(bar) bar.style.width = '100%';
+      if (bar) bar.style.width = '100%';
     }, 500);
 
-    // 4. Graduation Countdown (Target: June 1, 2026)
+    // 4. Graduation Countdown (Target: May 26, 2026)
     const countContainer = document.getElementById('countdown');
-    const targetDate = new Date('June 1, 2026 09:00:00').getTime();
+    const targetDate = new Date('May 26, 2026 09:00:00').getTime();
 
     function updateTimer() {
       const now = new Date().getTime();
@@ -759,4 +1123,5 @@
   </script>
 
 </body>
+
 </html>
