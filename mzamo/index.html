@@ -4,532 +4,273 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mzamo Store</title>
-    <meta name="description" content="Mzamo — Premium phone accessories. Cases, chargers, earbuds & more." />
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            background: #fff;
-            color: #000;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
-
-        /* NAVBAR */
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        header h1 {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: -0.025em;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-right svg {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 14px;
-            color: #6b7280;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #000;
-        }
-
-        #menu-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: none;
-            padding: 0;
-            line-height: 0;
-        }
-
-        /* MOBILE MENU */
-        #mobile-menu {
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            padding: 12px 16px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        #mobile-menu a {
-            font-size: 15px;
-            cursor: pointer;
-            text-decoration: none;
-            color: #000;
-        }
-
-        /* HERO SLIDESHOW */
-        .hero {
-            position: relative;
-            text-align: center;
-            background: #000;
-            color: #fff;
-            overflow: hidden;
-        }
-
-        .hero-slide {
-            display: none;
-        }
-
-        .hero-slide.active {
-            display: block;
-            animation: fadeIn 0.6s ease;
-        }
-
-        /* Slide with background image */
-        .hero-slide-img {
-            position: relative;
-            min-height: 420px;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 40px 16px 48px;
-        }
-
-        .hero-slide-img::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.1) 60%);
-        }
-
-        .hero-slide-img h2,
-        .hero-slide-img p {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Plain text slides */
-        .hero-slide-text {
-            padding: 48px 16px;
-        }
-
-        .hero h2 {
-            font-size: 30px;
-            font-weight: 600;
-        }
-
-        .hero p {
-            margin-top: 8px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .hero-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            padding: 16px 0;
-        }
-
-        .hero-dots span {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .hero-dots span.active {
-            background: #fff;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* SECTIONS */
-        main {
-            padding: 16px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 32px 0 16px;
-            letter-spacing: -0.025em;
-        }
-
-        .section-title:first-child {
-            margin-top: 16px;
-        }
-
-        /* CATEGORIES */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        .cat-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 20px 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-
-        .cat-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .cat-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .cat-card h3 {
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        /* PRODUCT GRID */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .card {
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 12px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            transition: box-shadow 0.2s;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-img {
-            height: 160px;
-            background: #f3f4f6;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            overflow: hidden;
-        }
-
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-
-        .card h3 {
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1.3;
-        }
-
-        .card .meta {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 2px;
-        }
-
-        .card .price {
-            font-size: 15px;
-            font-weight: 600;
-            margin-top: 4px;
-        }
-
-        .card button {
-            margin-top: 8px;
-            width: 100%;
-            font-size: 12px;
-            background: #000;
-            color: #fff;
-            border: none;
-            padding: 6px 0;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .card button:hover {
-            background: #222;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid #e5e7eb;
-            padding: 32px 16px;
-            margin-top: 32px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 32px;
-            margin-bottom: 24px;
-        }
-
-        .footer-col h4 {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #6b7280;
-            margin-bottom: 12px;
-        }
-
-        .footer-col p,
-        .footer-col li {
-            font-size: 13px;
-            color: #6b7280;
-            line-height: 1.8;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col a {
-            color: #6b7280;
-            text-decoration: none;
-        }
-
-        .footer-col a:hover {
-            color: #000;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            font-size: 12px;
-            color: #9ca3af;
-            padding-top: 24px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        /* RESPONSIVE */
-        @media (min-width: 768px) {
-            .grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-
-            #menu-btn {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 767px) {
-            #menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
+    <title>Mzamo Store | Premium Gadgets & Fragrances</title>
+    <meta name="description"
+        content="Mzamo Store - Your one-stop shop for premium fragrances, tech essentials, gaming gear, and lifestyle gadgets. Order via WhatsApp." />
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-
     <header>
         <h1>Mzamo Store</h1>
         <ul class="nav-links">
-            <li><a href="#categories">Categories</a></li>
+            <li><a href="#niches">Niches</a></li>
             <li><a href="#products">Products</a></li>
             <li><a href="contact.html">About</a></li>
             <li><a href="contact.html#contact-form">Contact</a></li>
         </ul>
         <div class="nav-right">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m5-9l2 9" />
-            </svg>
             <button id="menu-btn" aria-label="Toggle menu">
-                <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg id="icon-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display:none">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path id="menu-path" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
     </header>
 
     <nav id="mobile-menu">
-        <a href="#categories">Categories</a>
-        <a href="#products">Products</a>
-        <a href="contact.html">About</a>
-        <a href="contact.html#contact-form">Contact</a>
+        <a href="#niches" onclick="toggleMenu()">Shop Niches</a>
+        <a href="#products" onclick="toggleMenu()">All Products</a>
+        <div style="height: 1px; background: var(--border); margin: 8px 0;"></div>
+        <p
+            style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+            Categories</p>
+        <a href="#products" onclick="filterProducts('Fragrances'); toggleMenu()">Fragrances</a>
+        <a href="#products" onclick="filterProducts('Chargers'); toggleMenu()">Chargers</a>
+        <a href="#products" onclick="filterProducts('Power'); toggleMenu()">Power Banks</a>
+        <a href="#products" onclick="filterProducts('Audio'); toggleMenu()">Audio</a>
+        <a href="#products" onclick="filterProducts('Gaming'); toggleMenu()">Gaming</a>
+        <a href="#products" onclick="filterProducts('Lifestyle'); toggleMenu()">Lifestyle</a>
+        <a href="#products" onclick="filterProducts('Grooming'); toggleMenu()">Grooming</a>
+        <a href="#products" onclick="filterProducts('LED'); toggleMenu()">LED Lights</a>
+        <a href="#products" onclick="filterProducts('Gadgets'); toggleMenu()">Gadgets</a>
+        <a href="#products" onclick="filterProducts('Watches'); toggleMenu()">Watches</a>
+        <div style="height: 1px; background: var(--border); margin: 8px 0;"></div>
+        <a href="contact.html">About Us</a>
     </nav>
 
-    <!-- HERO SLIDESHOW -->
     <section class="hero">
-        <!-- Slide 1: Poster image -->
         <div class="hero-slide active">
-            <div class="hero-slide-img" style="background-image: url('images/poster1.jpeg')">
-                <h2>Premium Phone Accessories</h2>
-                <p>Phones, chargers, cases &amp; more in Black, White &amp; Blue</p>
+            <div class="hero-content" style="background-image: url('images/poster1.jpeg')">
+                <h2>Your One-Stop Gadget Shop</h2>
+                <p>Premium tech, fragrances, and lifestyle essentials delivered to your door.</p>
             </div>
         </div>
-        <!-- Slide 2: Text only -->
         <div class="hero-slide">
-            <div class="hero-slide-text">
-                <h2>Quality You Can Trust</h2>
-                <p>Handpicked accessories built to protect &amp; perform</p>
+            <div class="hero-content">
+                <h2>Gaming & Power</h2>
+                <p>Level up with fast chargers and high-performance gaming gear.</p>
             </div>
         </div>
-        <!-- Slide 3: Text only -->
         <div class="hero-slide">
-            <div class="hero-slide-text">
-                <h2>Bulk Orders Welcome</h2>
-                <p>Competitive rates for wholesale &amp; resellers</p>
+            <div class="hero-content">
+                <h2>Signature Fragrances</h2>
+                <p>Discover scents that define your presence and style.</p>
             </div>
         </div>
-        <div class="hero-dots">
-            <span class="active" data-slide="0"></span>
-            <span data-slide="1"></span>
-            <span data-slide="2"></span>
+        <div class="hero-dots" id="hero-dots">
+            <span class="active" data-index="0"></span>
+            <span data-index="1"></span>
+            <span data-index="2"></span>
         </div>
     </section>
 
-    <main>
-        <!-- CATEGORIES -->
-        <h2 class="section-title" id="categories">Our Categories</h2>
-        <div class="categories-grid">
-            <div class="cat-card">
-                <div class="cat-icon">📱</div>
-                <h3>Phone Cases</h3>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon">⚡</div>
-                <h3>Chargers</h3>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon">🎧</div>
-                <h3>Audio</h3>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon">🔋</div>
-                <h3>Power Banks</h3>
-            </div>
+    <nav class="niche-nav">
+        <div class="container">
+            <a href="#products" class="niche-btn" onclick="filterProducts('Tech')">⚡ Tech & Audio</a>
+            <a href="#products" class="niche-btn" onclick="filterProducts('Fragrances')">🌸 Fragrances</a>
+            <a href="#products" class="niche-btn" onclick="filterProducts('Lifestyle')">⌚ Lifestyle</a>
+            <a href="#products" class="niche-btn" onclick="filterProducts('Gaming')">🕹️ Gaming & Fun</a>
         </div>
+    </nav>
+
+    <main class="container">
+        <!-- 4 CORE NICHES (Visual Entry) -->
+        <section class="niches" id="niches">
+            <div class="section-header">
+                <h2>Shop by Niche</h2>
+            </div>
+            <div class="niches-grid">
+                <a href="#products" class="niche-card" onclick="filterProducts('Tech')">
+                    <span class="niche-icon">⚡</span>
+                    <h3>Tech & Audio</h3>
+                </a>
+                <a href="#products" class="niche-card" onclick="filterProducts('Fragrances')">
+                    <span class="niche-icon">🌸</span>
+                    <h3>Fragrances</h3>
+                </a>
+                <a href="#products" class="niche-card" onclick="filterProducts('Lifestyle')">
+                    <span class="niche-icon">⌚</span>
+                    <h3>Lifestyle & Wear</h3>
+                </a>
+                <a href="#products" class="niche-card" onclick="filterProducts('Gaming')">
+                    <span class="niche-icon">🕹️</span>
+                    <h3>Gaming & Fun</h3>
+                </a>
+            </div>
+        </section>
 
         <!-- PRODUCTS -->
-        <h2 class="section-title" id="products">Featured Products</h2>
-        <div class="grid" id="product-grid"></div>
+        <section class="products-section" id="products">
+            <div class="section-header">
+                <h2 id="product-title">All Products</h2>
+            </div>
+
+            <div class="category-bar" id="category-bar">
+                <div class="cat-pill active" onclick="filterProducts('All')">All</div>
+                <div class="cat-pill" onclick="filterProducts('Fragrances')">Fragrances</div>
+                <div class="cat-pill" onclick="filterProducts('Chargers')">Chargers</div>
+                <div class="cat-pill" onclick="filterProducts('Power')">Power Banks</div>
+                <div class="cat-pill" onclick="filterProducts('Audio')">Audio</div>
+                <div class="cat-pill" onclick="filterProducts('Gaming')">Gaming</div>
+                <div class="cat-pill" onclick="filterProducts('LED')">LED Lights</div>
+                <div class="cat-pill" onclick="filterProducts('Watches')">Watches</div>
+                <div class="cat-pill" onclick="filterProducts('Gadgets')">Gadgets</div>
+                <div class="cat-pill" onclick="filterProducts('Grooming')">Grooming</div>
+            </div>
+
+            <div class="product-grid" id="product-grid">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
     </main>
 
-    <!-- FOOTER -->
+    <a href="https://wa.me/27624905352?text=Hi%20Mzamo%21%20I%27d%20like%20to%20enquire%20about%20your%20products."
+        class="floating-wa" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M12.031 6.172c-2.32 0-4.591.531-6.551 1.541l-4.701-1.54 1.57 4.6c-1.11 1.961-1.691 4.2-1.691 6.49 0 7.03 5.721 12.75 12.75 12.75 2.13 0 4.211-.531 6.071-1.54l4.631 1.52-1.54-4.54c1.12-1.95 1.711-4.18 1.711-6.44 0-7.03-5.721-12.75-12.75-12.75zm6.44 15.69l-.33.19c-1.63.95-3.5 1.46-5.43 1.46-6.1 0-11.07-4.97-11.07-11.07 0-2.12.58-4.19 1.68-5.96l.24-.38-1-2.93 3.01.99.36-.21c1.72-1.01 3.69-1.55 5.72-1.55 6.1 0 11.07 4.97 11.07 11.07 0 2.22-.61 4.39-1.78 6.25l-.26.43 1 2.97-3.02-.99zm-2.43-4.22c-.22-.11-1.32-.65-1.53-.73-.21-.08-.36-.12-.51.11-.15.23-.58.73-.71.88-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.51-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.38.11-.13.15-.22.22-.36.07-.15.04-.28-.02-.4-.06-.12-.51-1.22-.7-1.68-.18-.44-.37-.38-.51-.39-.13-.01-.28-.01-.43-.01-.15 0-.39.06-.59.28-.2.22-.77.75-.77 1.83 0 1.08.79 2.13.9 2.27.11.15 1.55 2.37 3.75 3.32.52.23.93.37 1.25.47.53.17 1.01.15 1.39.09.43-.06 1.32-.54 1.51-1.06.19-.52.19-.97.13-1.06-.06-.09-.21-.15-.43-.26z" />
+        </svg>
+    </a>
+
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Mzamo Store</h4>
-                <p>Your trusted source for premium phone accessories. Quality products, fair prices.</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Mzamo Store</h4>
+                    <p>Premium fragrances, innovative gadgets, and tech essentials. Quality curated for you.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#" onclick="filterProducts('Fragrances')">Fragrances</a></li>
+                        <li><a href="#" onclick="filterProducts('Tech')">Tech & Audio</a></li>
+                        <li><a href="#" onclick="filterProducts('Gaming')">Gaming Gear</a></li>
+                        <li><a href="#" onclick="filterProducts('Lifestyle')">Lifestyle & Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📍 Johannesburg, South Africa</li>
+                        <li>📞 +27 62 490 5352</li>
+                        <li>✉️ info@mzamo.co.za</li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#categories">Categories</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="contact.html">About Us</a></li>
-                    <li><a href="contact.html#contact-form">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <ul>
-                    <li>📍 Johannesburg, South Africa</li>
-                    <li>📞 +27 XX XXX XXXX</li>
-                    <li>✉️ info@mzamo.co.za</li>
-                </ul>
+            <div class="footer-bottom">
+                &copy; 2026 Mzamo Store. All rights reserved.
             </div>
         </div>
-        <div class="footer-bottom">© 2026 Mzamo Store. All rights reserved.</div>
     </footer>
 
     <script>
-        // ─── PRODUCTS ───
+        // ─── DATA (Restored & Expanded) ───
         const products = [
-            { name: "iPhone 15 Case", category: "Cases", price: "R199", emoji: "📱" },
-            { name: "MagSafe Charger", category: "Chargers", price: "R349", image: "images/charger.jpeg" },
-            { name: "USB-C Adapter", category: "Cables", price: "R89", emoji: "🔗" },
-            { name: "Wireless Earbuds", category: "Audio", price: "R499", emoji: "🎧" },
-            { name: "Fast Charger 20W", category: "Chargers", price: "R249", emoji: "⚡" },
-            { name: "Screen Protector", category: "Protection", price: "R79", emoji: "🛡️" },
-            { name: "Power Bank 10000mAh", category: "Power", price: "R399", emoji: "🔋" },
-            { name: "Car Charger", category: "Chargers", price: "R149", emoji: "🚗" },
-            { name: "Lightning Cable", category: "Cables", price: "R69", emoji: "🔗" },
-            { name: "MagSafe Wallet", category: "Accessories", price: "R179", emoji: "👛" },
+            // Fragrances
+            { name: "Luxury Oud Perfume", niche: "Fragrances", category: "Fragrances", price: "R850", emoji: "🌸" },
+            { name: "Signature Women's Scent", niche: "Fragrances", category: "Fragrances", price: "R750", emoji: "✨" },
+            { name: "Designer Perfume Oil", niche: "Fragrances", category: "Fragrances", price: "R350", emoji: "🧴" },
+            // Tech & Audio
+            { name: "MagSafe Charger", niche: "Tech", category: "Chargers", price: "R349", image: "images/charger.jpeg" },
+            { name: "Fast Charger 20W", niche: "Tech", category: "Chargers", price: "R249", emoji: "⚡" },
+            { name: "Car Fast Charger", niche: "Tech", category: "Chargers", price: "R189", emoji: "🚗" },
+            { name: "Power Bank 20000mAh", niche: "Tech", category: "Power", price: "R599", emoji: "🔋" },
+            { name: "Power Bank 10000mAh", niche: "Tech", category: "Power", price: "R399", emoji: "🔋" },
+            { name: "AirPods Pro Gen 2", niche: "Tech", category: "Audio", price: "R1200", emoji: "🎵" },
+            { name: "Wireless Earbuds", niche: "Tech", category: "Audio", price: "R499", emoji: "🎧" },
+            { name: "Wired Bass Earphones", niche: "Tech", category: "Audio", price: "R149", emoji: "🎧" },
+            // Lifestyle & Wear
+            { name: "Smart Watch Ultra", niche: "Lifestyle", category: "Watches", price: "R950", emoji: "⌚" },
+            { name: "Classic Silver Watch", niche: "Lifestyle", category: "Watches", price: "R550", emoji: "⌚" },
+            { name: "Professional Hair Trimmer", niche: "Lifestyle", category: "Grooming", price: "R450", emoji: "✂️" },
+            { name: "LED Strip Lights 5m", niche: "Lifestyle", category: "LED", price: "R299", emoji: "💡" },
+            { name: "Sunset Projection Lamp", niche: "Lifestyle", category: "LED", price: "R249", emoji: "🌅" },
+            // Gaming & Fun
+            { name: "Wireless Gaming Joystick", niche: "Gaming", category: "Gaming", price: "R650", emoji: "🕹️" },
+            { name: "Mechanical Gaming Keyboard", niche: "Gaming", category: "Gaming", price: "R899", emoji: "⌨️" },
+            { name: "Anti-Gravity Humidifier", niche: "Gaming", category: "Gadgets", price: "R499", emoji: "💧" },
+            { name: "Mini Projector Pro", niche: "Gaming", category: "Gadgets", price: "R1500", emoji: "📹" },
+            { name: "Fidget Spinner Pro", niche: "Gaming", category: "Gadgets", price: "R99", emoji: "🎲" },
+            // Cases (Original)
+            { name: "iPhone 15 Case", niche: "Tech", category: "Cases", price: "R199", emoji: "📱" },
+            { name: "Samsung S24 Case", niche: "Tech", category: "Cases", price: "R199", emoji: "📱" }
         ];
 
+        // ─── RENDER ───
         const grid = document.getElementById("product-grid");
-        products.forEach(item => {
-            const card = document.createElement("div");
-            card.className = "card";
-            const imgContent = item.image
-                ? `<img src="${item.image}" alt="${item.name}" />`
-                : item.emoji;
-            card.innerHTML = `
-                <div class="card-img">${imgContent}</div>
-                <h3>${item.name}</h3>
-                <p class="meta">${item.category}</p>
-                <p class="price">${item.price}</p>
-                <button>Enquire</button>
-            `;
-            grid.appendChild(card);
-        });
+        const title = document.getElementById("product-title");
+        const categoryBar = document.getElementById("category-bar");
+
+        function renderProducts(filtered) {
+            grid.innerHTML = "";
+            filtered.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                const img = item.image
+                    ? `<img src="${item.image}" alt="${item.name}">`
+                    : item.emoji;
+
+                const waLink = `https://wa.me/27624905352?text=Hi%20Mzamo%21%20I%27d%20like%20to%20order%20the%20${encodeURIComponent(item.name)}%20(${item.price})`;
+
+                card.innerHTML = `
+                    <div class="product-img">${img}</div>
+                    <div class="product-info">
+                        <div class="product-tag">${item.category}</div>
+                        <h3 class="product-name">${item.name}</h3>
+                        <p class="product-price">${item.price}</p>
+                    </div>
+                    <a href="${waLink}" class="order-btn">
+                        <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-2.32 0-4.591.531-6.551 1.541l-4.701-1.54 1.57 4.6c-1.11 1.961-1.691 4.2-1.691 6.49 0 7.03 5.721 12.75 12.75 12.75 2.13 0 4.211-.531 6.071-1.54l4.631 1.52-1.54-4.54c1.12-1.95 1.711-4.18 1.711-6.44 0-7.03-5.721-12.75-12.75-12.75zm6.44 15.69l-.33.19c-1.63.95-3.5 1.46-5.43 1.46-6.1 0-11.07-4.97-11.07-11.07 0-2.12.58-4.19 1.68-5.96l.24-.38-1-2.93 3.01.99.36-.21c1.72-1.01 3.69-1.55 5.72-1.55 6.1 0 11.07 4.97 11.07 11.07 0 2.22-.61 4.39-1.78 6.25l-.26.43 1 2.97-3.02-.99zm-2.43-4.22c-.22-.11-1.32-.65-1.53-.73-.21-.08-.36-.12-.51.11-.15.23-.58.73-.71.88-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.51-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.38.11-.13.15-.22.22-.36.07-.15.04-.28-.02-.4-.06-.12-.51-1.22-.7-1.68-.18-.44-.37-.38-.51-.39-.13-.01-.28-.01-.43-.01-.15 0-.39.06-.59.28-.2.22-.77.75-.77 1.83 0 1.08.79 2.13.9 2.27.11.15 1.55 2.37 3.75 3.32.52.23.93.37 1.25.47.53.17 1.01.15 1.39.09.43-.06 1.32-.54 1.51-1.06.19-.52.19-.97.13-1.06-.06-.09-.21-.15-.43-.26z"/></svg>
+                        Order
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(filter, el) {
+            // Update active pill
+            if (categoryBar) {
+                const pills = categoryBar.querySelectorAll('.cat-pill');
+                pills.forEach(p => p.classList.remove('active'));
+
+                if (el) {
+                    el.classList.add('active');
+                } else {
+                    // Try to find pill by text
+                    pills.forEach(p => {
+                        if (p.innerText === filter) p.classList.add('active');
+                        else if (filter === 'All' && p.innerText === 'All') p.classList.add('active');
+                    });
+                }
+            }
+
+            if (filter === 'All') {
+                title.innerText = "All Products";
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p =>
+                    p.niche === filter ||
+                    p.category.includes(filter) ||
+                    filter.includes(p.category)
+                );
+                title.innerText = filter + " Store";
+                renderProducts(filtered);
+            }
+        }
+
+        renderProducts(products);
 
         // ─── HERO SLIDESHOW ───
         const slides = document.querySelectorAll(".hero-slide");
@@ -544,22 +285,22 @@
             dots[current].classList.add("active");
         }
 
-        dots.forEach(dot => dot.addEventListener("click", () => goToSlide(+dot.dataset.slide)));
-        setInterval(() => goToSlide((current + 1) % slides.length), 4000);
+        dots.forEach(dot => dot.addEventListener("click", () => goToSlide(+dot.dataset.index)));
+        setInterval(() => goToSlide((current + 1) % slides.length), 5000);
 
         // ─── MOBILE MENU ───
         const menuBtn = document.getElementById("menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
-        const iconMenu = document.getElementById("icon-menu");
-        const iconX = document.getElementById("icon-x");
-        let open = false;
+        const menuPath = document.getElementById("menu-path");
+        let menuOpen = false;
 
-        menuBtn.addEventListener("click", () => {
-            open = !open;
-            mobileMenu.style.display = open ? "flex" : "none";
-            iconMenu.style.display = open ? "none" : "block";
-            iconX.style.display = open ? "block" : "none";
-        });
+        function toggleMenu() {
+            menuOpen = !menuOpen;
+            mobileMenu.style.display = menuOpen ? "flex" : "none";
+            menuPath.setAttribute("d", menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16");
+        }
+
+        menuBtn.addEventListener("click", toggleMenu);
     </script>
 </body>
 
