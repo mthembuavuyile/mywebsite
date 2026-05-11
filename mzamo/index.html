@@ -95,7 +95,6 @@
         .hero {
             position: relative;
             text-align: center;
-            padding: 48px 16px;
             background: #000;
             color: #fff;
             overflow: hidden;
@@ -108,6 +107,37 @@
         .hero-slide.active {
             display: block;
             animation: fadeIn 0.6s ease;
+        }
+
+        /* Slide with background image */
+        .hero-slide-img {
+            position: relative;
+            min-height: 420px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 40px 16px 48px;
+        }
+
+        .hero-slide-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.1) 60%);
+        }
+
+        .hero-slide-img h2,
+        .hero-slide-img p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Plain text slides */
+        .hero-slide-text {
+            padding: 48px 16px;
         }
 
         .hero h2 {
@@ -125,7 +155,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 20px;
+            padding: 16px 0;
         }
 
         .hero-dots span {
@@ -218,7 +248,7 @@
         }
 
         .card-img {
-            height: 96px;
+            height: 160px;
             background: #f3f4f6;
             border-radius: 12px;
             margin-bottom: 8px;
@@ -226,6 +256,14 @@
             align-items: center;
             justify-content: center;
             font-size: 32px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
         }
 
         .card h3 {
@@ -378,17 +416,26 @@
 
     <!-- HERO SLIDESHOW -->
     <section class="hero">
+        <!-- Slide 1: Poster image -->
         <div class="hero-slide active">
-            <h2>Premium Phone Accessories</h2>
-            <p>Phones, chargers, cases &amp; more in Black, White &amp; Blue</p>
+            <div class="hero-slide-img" style="background-image: url('images/poster1.jpeg')">
+                <h2>Premium Phone Accessories</h2>
+                <p>Phones, chargers, cases &amp; more in Black, White &amp; Blue</p>
+            </div>
         </div>
+        <!-- Slide 2: Text only -->
         <div class="hero-slide">
-            <h2>Quality You Can Trust</h2>
-            <p>Handpicked accessories built to protect &amp; perform</p>
+            <div class="hero-slide-text">
+                <h2>Quality You Can Trust</h2>
+                <p>Handpicked accessories built to protect &amp; perform</p>
+            </div>
         </div>
+        <!-- Slide 3: Text only -->
         <div class="hero-slide">
-            <h2>Bulk Orders Welcome</h2>
-            <p>Competitive rates for wholesale &amp; resellers</p>
+            <div class="hero-slide-text">
+                <h2>Bulk Orders Welcome</h2>
+                <p>Competitive rates for wholesale &amp; resellers</p>
+            </div>
         </div>
         <div class="hero-dots">
             <span class="active" data-slide="0"></span>
@@ -456,7 +503,7 @@
         // ─── PRODUCTS ───
         const products = [
             { name: "iPhone 15 Case", category: "Cases", price: "R199", emoji: "📱" },
-            { name: "MagSafe Charger", category: "Chargers", price: "R349", emoji: "🔌" },
+            { name: "MagSafe Charger", category: "Chargers", price: "R349", image: "images/charger.jpeg" },
             { name: "USB-C Adapter", category: "Cables", price: "R89", emoji: "🔗" },
             { name: "Wireless Earbuds", category: "Audio", price: "R499", emoji: "🎧" },
             { name: "Fast Charger 20W", category: "Chargers", price: "R249", emoji: "⚡" },
@@ -471,8 +518,11 @@
         products.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
+            const imgContent = item.image
+                ? `<img src="${item.image}" alt="${item.name}" />`
+                : item.emoji;
             card.innerHTML = `
-                <div class="card-img">${item.emoji}</div>
+                <div class="card-img">${imgContent}</div>
                 <h3>${item.name}</h3>
                 <p class="meta">${item.category}</p>
                 <p class="price">${item.price}</p>
