@@ -502,9 +502,38 @@
             position: absolute;
             left: 0;
         }
+        
+        /* Unified Header Overrides for Book page */
+        .progress-bar {
+            top: var(--header-height, 72px) !important;
+        }
+        .container {
+            margin-top: 0;
+            padding-top: var(--header-height, 72px);
+        }
+        .sidebar {
+            top: var(--header-height, 72px) !important;
+            height: calc(100vh - var(--header-height, 72px)) !important;
+        }
+        site-header .site-header {
+            background-color: #0f172a !important;
+            border-bottom: 1px solid #334155 !important;
+        }
+        site-header .brand-logo, site-header .nav-links a {
+            color: #e2e8f0 !important;
+        }
+        site-header .nav-links a:hover, site-header .brand-logo:hover {
+            color: #3b82f6 !important;
+        }
+        site-header .mobile-menu-btn {
+            color: #e2e8f0 !important;
+        }
     </style>
+    <link rel="stylesheet" href="/css/global.css">
+    <script src="/components/components.js" defer></script>
 </head>
 <body>
+    <site-header></site-header>
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
     </div>
