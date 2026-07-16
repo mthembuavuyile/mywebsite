@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Portfolio of Avuyile Mthembu - Showcasing full-stack applications, interactive micro-SaaS utilities, client websites, and WebGL browser games built using modern web technologies.">
+  <meta name="keywords"
+    content="Portfolio, Avuyile Mthembu, Full-Stack Developer, Web Apps, Web Games, Vylex, Vylex Nexys, Freelance Developer, South Africa SaaS">
+  <meta name="author" content="Avuyile Mthembu">
+
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://avuyilemthembu.co.za/portfolio.html">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/portfolio.css">
+
+  <title>Portfolio | Avuyile Mthembu - Full-Stack Developer & Founder of Vylex</title>
+
+  <script src="/components/components.js" defer></script>
+</head>
+
+<body>
+
+  <site-header></site-header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Project Portfolio</h1>
+        <p>
+          A comprehensive showcase of my systems engineering and product development journey. From robust, multi-tenant SaaS platforms and responsive client business websites to interactive tools, micro-apps, and 3D browser games.
+        </p>
+
+        <div class="tech-tags">
+          <span class="tag">React & Node.js</span>
+          <span class="tag">PHP & MySQL (MVC)</span>
+          <span class="tag">Firebase & Cloud</span>
+          <span class="tag">Android (Java)</span>
+          <span class="tag">Three.js / WebGL</span>
+          <span class="tag">Vibecoding & R&D</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase Section with Category Filters -->
+    <section id="portfolio-showcase" class="section">
+      <div class="container">
+        
+        <div class="filter-container">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="saas">SaaS & Full-Stack</button>
+          <button class="filter-btn" data-filter="utility">Micro-SaaS & Tools</button>
+          <button class="filter-btn" data-filter="client">Client Websites</button>
+          <button class="filter-btn" data-filter="game">Games & Sandbox</button>
+        </div>
+
+        <!-- ═══════════════ SECTION: SAAS & FULL-STACK ═══════════════ -->
+        <div class="portfolio-section" id="section-saas">
+          <div class="portfolio-section-header">
+            <h2><i class="fa-solid fa-layer-group"></i> SaaS & Full-Stack Applications</h2>
+            <p>Complex, database-driven applications with user accounts, dashboards, API integration, and cloud backends.</p>
+          </div>
+          
+          <div class="projects-grid featured-grid">
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-file-shield"></i></div>
+              <span class="card-badge">Regulatory Technology / SaaS</span>
+              <h3>ComplyOS</h3>
+              <p>South African compliance management operating system designed to help businesses automate and track CIPC, SARS, and B-BBEE obligations through a centralized intelligent dashboard.</p>
+              <ul style="color: var(--color-text-muted); font-size: 0.9rem; padding-left: 1.25rem; margin: 0.5rem 0;">
+                <li>Automated compliance tracking and SARS, CIPC regulatory monitoring</li>
+                <li>Smart notifications, compliance roadmaps, and health scoring</li>
+                <li>Secure POPIA-compliant infrastructure with AES-256 encryption</li>
+              </ul>
+              <div style="font-size: 0.85rem; margin-top: auto; color: var(--color-text-muted);">
+                <strong>Tech:</strong> React, Node.js, SaaS Architecture, Secure Cloud
+              </div>
+              <a href="https://comply.vylex.co.za/" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-teal-light"><i class="fa-solid fa-microscope"></i></div>
+              <span class="card-badge">Virtual Laboratory / EdTech</span>
+              <h3>VyLab</h3>
+              <p>Interactive virtual science lab platform for South African STEM learners, featuring CAPS-aligned Physics and Chemistry simulations, AI tutoring, and browser-based experiments for Grades 10–12.</p>
+              <ul style="color: var(--color-text-muted); font-size: 0.9rem; padding-left: 1.25rem; margin: 0.5rem 0;">
+                <li>Interactive physics and chemistry laboratory simulators</li>
+                <li>Grades 10-12 CAPS alignment for local schools</li>
+                <li>AI-powered physical science tutoring support</li>
+              </ul>
+              <div style="font-size: 0.85rem; margin-top: auto; color: var(--color-text-muted);">
+                <strong>Tech:</strong> React, TypeScript, Vite, Tailwind CSS, Gemini AI
+              </div>
+              <a href="https://vylab.vylexnexys.co.za/" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-emerald-light"><i class="fa-solid fa-cart-shopping"></i></div>
+              <span class="card-badge">E-Commerce / Full-Stack</span>
+              <h3>Smart Retail System</h3>
+              <p>A full-stack e-commerce web application featuring a modular customer storefront and an internal administrative dashboard for real-time inventory and sales tracking.</p>
+              <ul style="color: var(--color-text-muted); font-size: 0.9rem; padding-left: 1.25rem; margin: 0.5rem 0;">
+                <li>Session-based shopping cart and secure checkout pipelines</li>
+                <li>Admin inventory control panels, sales reports, and stock alerts</li>
+                <li>Clean, lightweight Model-View-Controller (MVC) architecture</li>
+              </ul>
+              <div style="font-size: 0.85rem; margin-top: auto; color: var(--color-text-muted);">
+                <strong>Tech:</strong> PHP 8, MySQL, Vanilla JavaScript, CSS3
+              </div>
+              <a href="https://github.com/mthembuavuyile/smart-retail" target="_blank" rel="noopener noreferrer" class="project-link">
+                View Repository <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-purple-light"><i class="fa-solid fa-shirt"></i></div>
+              <span class="card-badge">Marketplace / MVC</span>
+              <h3>Durban Fashion Hub</h3>
+              <p>A custom PHP MVC-based platform connecting fashion designers and sellers with local audiences, featuring storefront directory listings and seller profile management panels.</p>
+              <ul style="color: var(--color-text-muted); font-size: 0.9rem; padding-left: 1.25rem; margin: 0.5rem 0;">
+                <li>Centralized store directory map and listing directory</li>
+                <li>Dedicated seller profile, product catalog, and settings management</li>
+                <li>Custom PHP MVC router framework built from scratch</li>
+              </ul>
+              <div style="font-size: 0.85rem; margin-top: auto; color: var(--color-text-muted);">
+                <strong>Tech:</strong> PHP, MySQL, JavaScript, Custom Router
+              </div>
+              <a href="https://github.com/mthembuavuyile/durban-fashion-hub" target="_blank" rel="noopener noreferrer" class="project-link">
+                View Repository <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-mobile-screen"></i></div>
+              <span class="card-badge">Android / Mobile App</span>
+              <h3>FitLife Dietary Planner</h3>
+              <p>A native Android dietary planning application with calorie tracking, SQLite data persistence, progress charts, and macro insights, built to operate entirely offline.</p>
+              <ul style="color: var(--color-text-muted); font-size: 0.9rem; padding-left: 1.25rem; margin: 0.5rem 0;">
+                <li>Offline meal logging, caloric counting, and macro progress bars</li>
+                <li>Pattern-based nutritional feedback engine</li>
+                <li>Structured SQLite OpenHelper CRUD operations</li>
+              </ul>
+              <div style="font-size: 0.85rem; margin-top: auto; color: var(--color-text-muted);">
+                <strong>Tech:</strong> Java, Android SDK, SQLite Database
+              </div>
+              <a href="https://github.com/mthembuavuyile/fitlife-app" target="_blank" rel="noopener noreferrer" class="project-link">
+                View Repository <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════ SECTION: MICRO-SAAS & UTILITIES ═══════════════ -->
+        <div class="portfolio-section" id="section-utility">
+          <div class="portfolio-section-header">
+            <h2><i class="fa-solid fa-toolbox"></i> Interactive Utilities & Micro-SaaS</h2>
+            <p>Single-purpose browser tools, widgets, and utilities targeting administrative tasks, media, and security.</p>
+          </div>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-city"></i></div>
+              <span class="card-badge">Civic Tech · Map App</span>
+              <h3>Civicly</h3>
+              <p>A real-time neighborhood issue tracking app. Log potholes, water leaks, and outages on an interactive map. Features upvoting, local notifications, and resolution queues.</p>
+              <a href="/portfolio/civicly/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-satellite-dish"></i></div>
+              <span class="card-badge">Live AI Data Assistant</span>
+              <h3>Nexora</h3>
+              <p>Natural intent parser assistant fetching live weather, crypto metrics, headlines, and general query completions using modern API workflows.</p>
+              <a href="/portfolio/nexora/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-eye"></i></div>
+              <span class="card-badge">Browser OCR Tool</span>
+              <h3>Image to Text</h3>
+              <p>Convert printed or handwritten image text into editable text strings using browser-optimized client OCR, avoiding high external server costs.</p>
+              <a href="/portfolio/image-to-text/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-check-circle"></i></div>
+              <span class="card-badge">Kanban Task Utility</span>
+              <h3>TaskMaster Pro</h3>
+              <p>A kanban-style client productivity client for arranging tasks, deadlines, tag categories, and local browser-backed data persistence.</p>
+              <a href="/portfolio/task-master/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-amber-light"><i class="fa-solid fa-pen-to-square"></i></div>
+              <span class="card-badge">Rich Notes Organizer</span>
+              <h3>Productivo</h3>
+              <p>Note organization interface supporting rich formatted text inputs, checkbox list items, and folders for structuring day-to-day agendas.</p>
+              <a href="/portfolio/productivo/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-teal-light"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <span class="card-badge">Visual Image Filter Studio</span>
+              <h3>ImageCraft Pro</h3>
+              <p>Comprehensive photo processing sandbox applying dynamic canvas operations, grayscale adjustments, hue shifts, custom cropping, and framing.</p>
+              <a href="/portfolio/image-craft/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-certificate"></i></div>
+              <span class="card-badge">PDF Document Generator</span>
+              <h3>Certificate Generator</h3>
+              <p>Instant batch document processor applying template text parameters over certificates, exporting beautiful high-res outputs for learners.</p>
+              <a href="/portfolio/certificate-generator/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-images"></i></div>
+              <span class="card-badge">Unsplash API Search App</span>
+              <h3>VisualVault</h3>
+              <p>High-resolution image query database connecting to public photography endpoints, rendering interactive download previews and collection sorting.</p>
+              <a href="/portfolio/visual-vault/index.html" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-layer-group"></i></div>
+              <span class="card-badge">Multi-Provider Media Search</span>
+              <h3>Visuals</h3>
+              <p>Multi-provider search panel pulling design graphics, vectors, and reference items from multiple stock endpoints simultaneously.</p>
+              <a href="/portfolio/image-search/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-film"></i></div>
+              <span class="card-badge">OMDb Movie Search Catalog</span>
+              <h3>Movie Explorer</h3>
+              <p>OMDb movie records terminal returning rankings, plots, casts, and posters. Built with smooth responsive pagination layouts.</p>
+              <a href="/portfolio/movie-explorer/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-green-light"><i class="fa-solid fa-chart-line"></i></div>
+              <span class="card-badge">Interactive Budget Tool</span>
+              <h3>VyTrack</h3>
+              <p>Lightweight budget calculator. Balance income, allocate expense streams, and render detailed spending breakdowns via visual graphs.</p>
+              <a href="/portfolio/vytrack/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-purple-light"><i class="fa-solid fa-users-gear"></i></div>
+              <span class="card-badge">Business CRM Dashboard</span>
+              <h3>Vylex CRM</h3>
+              <p>Client relationships logs tracker. Monitor contract dates, deals flow state, invoice histories, and active client notes in a secure layout.</p>
+              <a href="/portfolio/crm/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-orange-light"><i class="fa-brands fa-bitcoin"></i></div>
+              <span class="card-badge">Live Crypto Ticker</span>
+              <h3>SATS</h3>
+              <p>Dynamic live asset price tracker. Returns Bitcoin rates, transaction speeds, chart indicators, and localized portfolio metrics.</p>
+              <a href="/portfolio/crypto/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-teal-light"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <span class="card-badge">Secure Cloud Storage Client</span>
+              <h3>Vylex Drive</h3>
+              <p>Fast browser-based uploader client providing drag-and-drop actions, local encryption, file sorting, and format classifications.</p>
+              <a href="/portfolio/file-upload/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-slate-light"><i class="fa-solid fa-user-secret"></i></div>
+              <span class="card-badge">String Encryption Sandbox</span>
+              <h3>Enigma</h3>
+              <p>Symmetric cipher keys sandbox. Translate string variables using secure hashing standards, Base64 values, and simple client cryptography.</p>
+              <a href="/portfolio/enigma/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-green-light"><i class="fa-solid fa-qrcode"></i></div>
+              <span class="card-badge">Custom QR Generator & Scanner</span>
+              <h3>QR Studio</h3>
+              <p>Custom QR code generator supporting color masks, brand image overlays, download triggers, and real-time scanner parsing.</p>
+              <a href="/portfolio/qr/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-microchip"></i></div>
+              <span class="card-badge">Hardware & Connection Diagnostic</span>
+              <h3>Device Inspector</h3>
+              <p>Returns client hardware metrics, battery status, connection speeds, screen resolutions, and OS information instantly.</p>
+              <a href="/portfolio/device-inspector/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-earth-americas"></i></div>
+              <span class="card-badge">Community Slang Database</span>
+              <h3>Global Dictionary</h3>
+              <p>Community dictionary references system. Look up cultural slang, regional phrases, and modern expressions with definition metrics.</p>
+              <a href="/portfolio/global-dictionary/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-amber-light"><i class="fa-solid fa-book-bible"></i></div>
+              <span class="card-badge">Lightweight Scripture Portal</span>
+              <h3>Bible Hub</h3>
+              <p>Fast text-based scripture browser featuring chapters filter indices, keyword searching, and bookmark capabilities.</p>
+              <a href="/portfolio/bible/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-rose-light"><i class="fa-solid fa-graduation-cap"></i></div>
+              <span class="card-badge">Student Academic Portal Mock</span>
+              <h3>Unilink</h3>
+              <p>Prototypical university registration dashboard displaying course grades, student ID numbers, and financial assistance records.</p>
+              <a href="/portfolio/unilink/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-green-light"><i class="fa-solid fa-seedling"></i></div>
+              <span class="card-badge">AgriTech IoT Simulator</span>
+              <h3>AgriSynth</h3>
+              <p>Agricultural environmental simulator visualizing humidity indicators, heat warnings, and soil moisture levels in a dashboard layout.</p>
+              <a href="/portfolio/AgriSynth/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-briefcase"></i></div>
+              <span class="card-badge">Community Gig Job Board</span>
+              <h3>Kasi Gig</h3>
+              <p>Localized employment connector matching neighborhood service providers and contractors with quick local gig offerings.</p>
+              <a href="/portfolio/kasi-gig/" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-slate-light"><i class="fa-solid fa-location-crosshairs"></i></div>
+              <span class="card-badge">Geolocation Coordinate Inspector</span>
+              <h3>Location Capture</h3>
+              <p>Geolocation inspector returning user latitude, longitude, error metrics, and local mapping references in the browser.</p>
+              <a href="/portfolio/location-capture.html" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ═══════════════ SECTION: CLIENT WEBSITES ═══════════════ -->
+        <div class="portfolio-section" id="section-client">
+          <div class="portfolio-section-header">
+            <h2><i class="fa-solid fa-globe"></i> Client & Corporate Websites</h2>
+            <p>Professional business websites, catalogs, and hubs developed for South African clients and organizations.</p>
+          </div>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-slate-light"><i class="fa-solid fa-helmet-safety"></i></div>
+              <span class="card-badge">Corporate Client Website</span>
+              <h3>Makhaswa Holdings</h3>
+              <p>Corporate landing page and service catalog showcasing civil engineering, construction projects, and build operations across South Africa.</p>
+              <a href="https://makhaswaholdings.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-car"></i></div>
+              <span class="card-badge">Service Provider Portal</span>
+              <h3>AJ Vehicle Registration</h3>
+              <p>Service portal outlining vehicle registrations, document submissions, renewal scheduling, and compliance updates for Gauteng drivers.</p>
+              <a href="https://www.ajvehicleregistration.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-emerald-light"><i class="fa-solid fa-recycle"></i></div>
+              <span class="card-badge">Recycling Business Website</span>
+              <h3>Amabongo Solutions</h3>
+              <p>Public informational site outlining community glass recovery efforts, collection points, recycling bins, and environmental sustainability schedules.</p>
+              <a href="https://amabongosolutions.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-orange-light"><i class="fa-solid fa-house-chimney-window"></i></div>
+              <span class="card-badge">Product Catalog Page</span>
+              <h3>Luxury Shutters & Blinds</h3>
+              <p>Product gallery catalogue for custom wooden shutters, window blinds, and custom installation services with a quote request funnel.</p>
+              <a href="https://luxuryshuttersandblinds.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-broom"></i></div>
+              <span class="card-badge">Cleaning Service Booking Site</span>
+              <h3>XYZ Solutions</h3>
+              <p>Business booking page detailing commercial, deep clean, and domestic sanitization rates with an online booking date picker.</p>
+              <a href="https://xyzsolutions.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-emerald-light"><i class="fa-solid fa-box-open"></i></div>
+              <span class="card-badge">Household Goods Wholesaler Site</span>
+              <h3>Everyday Supply Co.</h3>
+              <p>Product lists and distribution channels mapping for wholesale household cleaners, soaps, and daily hygiene supplies.</p>
+              <a href="https://everydaysupplies.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-teal-light"><i class="fa-solid fa-hands-holding-child"></i></div>
+              <span class="card-badge">Non-Profit Organization Site</span>
+              <h3>Sandanezwe Excellence</h3>
+              <p>NGO program reports displaying local projects, academic support calendars, and youth empowerment donation options.</p>
+              <a href="https://sandanezweexcellence.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-rose-light"><i class="fa-solid fa-compass"></i></div>
+              <span class="card-badge">NGO Community Hub Site</span>
+              <h3>Pathfinders Empowerment</h3>
+              <p>Community training profiles listing entrepreneurship workshops, student leadership groups, and career mentorship schedules.</p>
+              <a href="https://pathfindersempowerment.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-lightbulb"></i></div>
+              <span class="card-badge">Business Incubation Portal Site</span>
+              <h3>Sinc Hub</h3>
+              <p>Sandanezwe Incubation Hub landing page mapping workspace rentals, startup mentor databases, and business registration seminars.</p>
+              <a href="https://www.sinchub.co.za" target="_blank" rel="noopener noreferrer" class="project-link">
+                Visit Website <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════ SECTION: GAMES & SANDBOX ═══════════════ -->
+        <div class="portfolio-section" id="section-game">
+          <div class="portfolio-section-header">
+            <h2><i class="fa-solid fa-gamepad"></i> Web Games & Creative Sandbox</h2>
+            <p>Playable 3D and 2D games, retro arcade clones, and creative WebGL/Three.js experiments developed for learning and exploration.</p>
+          </div>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-orange-light"><i class="fa-solid fa-flag-checkered"></i></div>
+              <span class="card-badge">3D WebGL Highway Racer</span>
+              <h3>Mr Racer Ultimate</h3>
+              <p>Interactive 3D highway racer. Dodge city traffic lanes, earn currency parameters, apply nitro boosts, and check weather cycle changes.</p>
+              <a href="/games/mr-racer-ultimate.html" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-rose-light"><i class="fa-solid fa-biohazard"></i></div>
+              <span class="card-badge">3D Survival FPS Game</span>
+              <h3>Zombie Shooter 3D</h3>
+              <p>First-person shooter demo set in a 3D apocalyptic base. Hunt zombie swarms, gather ammunition crates, and survive in-browser.</p>
+              <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                <a href="/games/zombie-shooter.html" class="project-link" style="margin-top: 0;">V1 <i class="fas fa-play"></i></a>
+                <a href="/games/zombie-shooterv2.html" class="project-link" style="margin-top: 0;">V2 Beta <i class="fas fa-flask"></i></a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-amber-light"><i class="fab fa-bitcoin"></i></div>
+              <span class="card-badge">3D Platform Runner Game</span>
+              <h3>Bitcoin Adventure</h3>
+              <p>Endless 3D running experiment collecting digital bitcoin models, timing jumps, and dodging obstacle barriers inside a colorful layout.</p>
+              <a href="/games/bitcoin-adventure.html" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-rose-light"><i class="fa-solid fa-radiation"></i></div>
+              <span class="card-badge">Tactical Top-Down Shooter Game</span>
+              <h3>Outbreak Protocol</h3>
+              <p>Top-down shooter testing pathfinding agents, player movement grids, and projectile intersections in a virtual factory block.</p>
+              <a href="/games/outbreak-protocol/index.html" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-blue-light"><i class="fa-solid fa-car"></i></div>
+              <span class="card-badge">3D Cyberpunk Driving Game</span>
+              <h3>Neon Racer</h3>
+              <p>Cyberpunk arcade driving project. Steer through infinite neon loops, speed past obstacles, and track your high score metrics.</p>
+              <a href="/games/car-racing.html" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-indigo-light"><i class="fa-solid fa-puzzle-piece"></i></div>
+              <span class="card-badge">Cognitive Card Matching Game</span>
+              <h3>Memory Match</h3>
+              <p>Classic grid-based card matching game testing flip animations, matches checks, and movement limit clocks.</p>
+              <a href="/games/memory-match.html" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-teal-light"><i class="fa-solid fa-circle-question"></i></div>
+              <span class="card-badge">Interactive SA Trivia Quiz</span>
+              <h3>SA Quiz Challenge</h3>
+              <p>South African trivia game compiling historical markers, geographic cards, score boards, and timers.</p>
+              <a href="/games/south-african-quiz/" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-emerald-light"><i class="fa-solid fa-worm"></i></div>
+              <span class="card-badge">Retro Arcade Snake Game</span>
+              <h3>Slither Snake</h3>
+              <p>Classic snake game rebuilt. Consume glowing food dots, lengthen the snake array, and prevent edge collisions.</p>
+              <a href="/games/slither.html" class="project-link">Play Game <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-purple-light"><i class="fa-solid fa-stopwatch"></i></div>
+              <span class="card-badge">Digital Board Game Helper</span>
+              <h3>30 Seconds Timer</h3>
+              <p>Board game helper utility returning randomised quiz prompts, rapid timing sound triggers, and point logs.</p>
+              <a href="/games/30-seconds.html" class="project-link">Launch Utility <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+              <div class="card-icon-wrapper bg-slate-light"><i class="fa-solid fa-cubes"></i></div>
+              <span class="card-badge">Three.js Orbiting Scene Sandbox</span>
+              <h3>3D Portfolio Sandbox</h3>
+              <p>WebGL development template mapping 3D asset loading, custom lightning rigs, shadow cascades, and camera orbits.</p>
+              <a href="/games/3dportfolio.html" class="project-link">Launch Sandbox <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact CTA section -->
+    <section id="contact-cta" class="section section-alt">
+      <div class="container contact-wrapper">
+        <h2 class="section-title">Have a project in mind?</h2>
+        <p class="section-subtitle">If you're interested in my services, client commissions, or collaborating on a custom application, let's get in touch.</p>
+
+        <div class="contact-links">
+          <a href="mailto:info@avuyilemthembu.co.za"><i class="fas fa-envelope"></i> info@avuyilemthembu.co.za</a>
+          <a href="tel:+27648784287"><i class="fas fa-phone"></i> 064 878 4287</a>
+        </div>
+
+        <div class="social-icons">
+          <a href="https://github.com/mthembuavuyile" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mthembuavuyile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://x.com/MthembuAvuyile" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://medium.com/@mthembuavuyile" target="_blank" rel="noopener noreferrer" aria-label="Medium"><i class="fab fa-medium"></i></a>
+          <a href="https://instagram.com/mthembu_avuyile_sa" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <site-footer></site-footer>
+
+  <!-- Interactive filter script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const sections = document.querySelectorAll('.portfolio-section');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Toggle active classes
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const selectedCategory = btn.getAttribute('data-filter');
+
+          sections.forEach(section => {
+            const sectionId = section.getAttribute('id');
+            if (selectedCategory === 'all' || sectionId === `section-${selectedCategory}`) {
+              section.classList.remove('hidden');
+            } else {
+              section.classList.add('hidden');
+            }
+          });
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

@@ -299,6 +299,114 @@ a {
 }
 
 /* =========================================
+       Filter Tabs System
+    ========================================= */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: -1.5rem auto 3.5rem;
+    max-width: 900px;
+    padding: 0 1rem;
+}
+
+.filter-btn {
+    background: var(--color-bg-page);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+    padding: 0.6rem 1.25rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: var(--font-main);
+}
+
+.filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Custom icon badges helper classes to match the dynamic layout */
+.bg-blue-light { background-color: #eff6ff; color: #2563eb; }
+.bg-emerald-light { background-color: #ecfdf5; color: #10b981; }
+.bg-orange-light { background-color: #fff7ed; color: #f97316; }
+.bg-teal-light { background-color: #f0fdfa; color: #0d9488; }
+.bg-purple-light { background-color: #faf5ff; color: #9333ea; }
+.bg-rose-light { background-color: #fff1f2; color: #f43f5e; }
+.bg-indigo-light { background-color: #eef2ff; color: #4f46e5; }
+.bg-amber-light { background-color: #fffbeb; color: #d97706; }
+.bg-slate-light { background-color: #f8fafc; color: #475569; }
+
+/* Filter animation wrapper */
+.project-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+}
+
+/* =========================================
+       Structured Sections System
+    ========================================= */
+.portfolio-section {
+    margin-bottom: 5.5rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-section.hidden {
+    display: none;
+}
+
+.portfolio-section-header {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.portfolio-section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.portfolio-section-header h2 i {
+    color: var(--color-accent);
+}
+
+.portfolio-section-header p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* =========================================
        Responsive Design
     ========================================= */
 @media (max-width: 768px) {
@@ -317,5 +425,15 @@ a {
     .contact-links {
         flex-direction: column;
         align-items: stretch;
+    }
+    
+    .filter-container {
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
     }
 }
