@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nexys Notes Hub - Choose from our collection of powerful note-taking applications with different features like Firebase authentication, local storage, and tagging systems.">
+    <meta name="keywords" content="note-taking, notes, Markdown, productivity, Vylex Nexys, local storage, tags">
+    <meta name="author" content="Vylex Nexys">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Nexys Notes Hub by Vylex Nexys">
+    <meta property="og:description" content="Discover our collection of note-taking applications with different features to suit your productivity needs.">
+    <meta property="og:image" content="URL_TO_IMAGE">
+    <meta property="og:url" content="YOUR_WEBSITE_URL">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nexys Notes Hub by Vylex Nexys">
+    <meta name="twitter:description" content="Choose the perfect note-taking app for your needs from our curated collection.">
+    <meta name="twitter:image" content="URL_TO_IMAGE">
+
+    <title>Nexys Notes Hub by Vylex Nexys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+            --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --bg-gradient: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            --text-primary: #f7fafc;
+            --text-secondary: #e2e8f0;
+            --text-muted: #a0aec0;
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border: #4a5568;
+            --card-bg: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><path d="M0,50 Q250,0 500,50 T1000,50 V100 H0 Z"/></svg>') repeat-x;
+            background-size: 1000px 100px;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1000px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #8b5cf6);
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .app-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .features-list li i {
+            color: var(--accent);
+            margin-right: 0.75rem;
+            width: 16px;
+        }
+
+        .app-link {
+            display: inline-flex;
+            align-items: center;
+            background: var(--accent);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-small);
+        }
+
+        .app-link:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .app-link i {
+            margin-left: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.125rem;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Animations */
+        .app-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .app-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .app-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <div class="container">
+            <div class="header-content">
+                <h1>Nexys Notes Hub</h1>
+                <p>Choose the perfect note-taking experience for your productivity needs</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="apps-grid">
+                <!-- Local Storage Notes App -->
+                <div class="app-card">
+                    <div class="app-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h2 class="app-title">Nexys Notes - Local</h2>
+                    <p class="app-description">
+                        A simple, fast note-taking app that stores everything locally on your device. Perfect for offline use and privacy-focused users.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Offline functionality</li>
+                        <li><i class="fas fa-check"></i> Markdown support</li>
+                        <li><i class="fas fa-check"></i> Dark/Light theme</li>
+                        <li><i class="fas fa-check"></i> Local data storage</li>
+                        <li><i class="fas fa-check"></i> Responsive design</li>
+                    </ul>
+                    <a href="nexysnotes.html" class="app-link">
+                        Launch App
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                
+
+                <!-- Tagged Notes App -->
+                <div class="app-card">
+                    <div class="app-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h2 class="app-title">Tagged Notes</h2>
+                    <p class="app-description">
+                        Advanced note organization with tagging system, search functionality, and powerful categorization features.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Tag-based organization</li>
+                        <li><i class="fas fa-check"></i> Advanced search</li>
+                        <li><i class="fas fa-check"></i> Category filters</li>
+                        <li><i class="fas fa-check"></i> Bulk operations</li>
+                        <li><i class="fas fa-check"></i> Export capabilities</li>
+                    </ul>
+                    <a href="nexitag.html" class="app-link">
+                        Launch App
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <span>© 2025 Nexys Notes Hub</span>
+                <span>•</span>
+                <a href="https://mthembuavuyile.github.io/VylexNexys" class="footer-link">
+                    <i class="fas fa-globe"></i> By Vylex Nexys
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme management
+        const toggleTheme = () => {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Update theme icon
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        };
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark');
+            document.getElementById('theme-icon').className = 'fas fa-sun';
+        }
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add loading states for app links
+        document.querySelectorAll('.app-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    // You can add loading state here
+                    console.log('App link clicked:', this.closest('.app-card').querySelector('.app-title').textContent);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

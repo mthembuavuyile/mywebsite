@@ -1,0 +1,544 @@
+:root {
+    --primary: #ff4d6d;
+    --primary-dark: #c9184a;
+    --bg-dark: #0f0c29;
+    --glass: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-light: #ececec;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #000;
+    color: var(--text-light);
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- LAYER MANAGEMENT --- */
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.8s ease, visibility 0.8s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- BACKGROUND (3D) --- */
+#world {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: radial-gradient(circle at center, #2b1055 0%, #000 100%);
+}
+
+/* --- SCENE 1: NOTIFICATION --- */
+#scene-notification {
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.notif-card {
+    background: rgba(255, 255, 255, 0.95);
+    width: 90%;
+    max-width: 380px;
+    border-radius: 20px;
+    padding: 20px;
+    color: #000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.notif-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.notif-content p {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.notif-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.notif-btn:active {
+    background: var(--primary-dark);
+}
+
+/* --- SCENE 2: GIFT BOX --- */
+#scene-gift {
+    z-index: 90;
+    perspective: 1000px;
+}
+
+.instruction {
+    position: absolute;
+    bottom: 15%;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 12px;
+    animation: pulse 2s infinite;
+}
+
+.cube-container {
+    width: 150px;
+    height: 150px;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.cube-face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: visible;
+}
+
+.face-front {
+    transform: rotateY(0deg) translateZ(75px);
+}
+
+.face-back {
+    transform: rotateY(180deg) translateZ(75px);
+}
+
+.face-right {
+    transform: rotateY(90deg) translateZ(75px);
+}
+
+.face-left {
+    transform: rotateY(-90deg) translateZ(75px);
+}
+
+.face-top {
+    transform: rotateX(90deg) translateZ(75px);
+    background: #ff8fa3;
+}
+
+.face-bottom {
+    transform: rotateX(-90deg) translateZ(75px);
+}
+
+.ribbon-v {
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: #fff;
+    left: 60px;
+}
+
+.ribbon-h {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    top: 60px;
+}
+
+/* --- SCENE 3: DASHBOARD --- */
+#scene-dashboard {
+    z-index: 80;
+}
+
+.main-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.8rem;
+    text-shadow: 0 0 20px var(--primary);
+    margin-bottom: 5px;
+    background: -webkit-linear-gradient(#fff, #ffccd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.menu-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 30px 10px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-card:active {
+    transform: scale(0.95);
+    background: rgba(255, 77, 109, 0.3);
+}
+
+.menu-icon {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.menu-text {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* --- SCENE 4: CALENDAR --- */
+#scene-calendar {
+    z-index: 85;
+    display: block;
+    padding-top: 80px;
+    overflow-y: auto;
+    /* Smooth scrolling for the whole page if needed */
+    -webkit-overflow-scrolling: touch;
+}
+
+.back-btn {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    backdrop-filter: blur(5px);
+}
+
+.music-btn {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+}
+
+.music-btn:active {
+    transform: scale(0.9);
+}
+
+.cal-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 25px;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.cal-header i {
+    padding: 10px;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.cal-day-name {
+    color: var(--primary-dark);
+    font-weight: 800;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    transition: 0.2s;
+}
+
+.has-event {
+    background: rgba(255, 77, 109, 0.15);
+    color: var(--primary-dark);
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.has-event:active {
+    transform: scale(0.9);
+    background: var(--primary);
+    color: #fff;
+}
+
+.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    width: 5px;
+    height: 5px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+/* Event Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: #fff;
+    width: 85%;
+    max-width: 380px;
+    padding: 30px 25px;
+    border-radius: 25px;
+    text-align: center;
+    color: #333;
+    transform: scale(0.8);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal.active .modal-card {
+    transform: scale(1);
+}
+
+/* Scrollable content inside modal */
+.modal-body {
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+/* --- SCENE 5: GALLERY --- */
+#scene-gallery {
+    z-index: 85;
+}
+
+.gallery-card {
+    width: 85%;
+    max-width: 360px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px);
+    border-radius: 30px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.polaroid {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.type-text {
+    min-height: 70px;
+    font-style: italic;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.next-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 5px 20px rgba(255, 77, 109, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.next-btn:active {
+    transform: scale(0.95);
+}
+
+.future-note {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto 100px auto;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 22px;
+    padding: 25px 20px;
+    backdrop-filter: blur(15px);
+    text-align: center;
+}
+
+.note-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.4rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
+    margin-bottom: 15px;
+}
+
+.note-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateX(-20deg) rotateY(45deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotateX(-20deg) rotateY(45deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}

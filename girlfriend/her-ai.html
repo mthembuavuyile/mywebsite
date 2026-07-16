@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Angel AI — For MaMdunge</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/her-ai.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+</head>
+<body>
+
+<!-- CANVAS BG -->
+<canvas id="canvas"></canvas>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-rose">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="rg" cx="50%" cy="60%" r="50%">
+          <stop offset="0%" stop-color="#c9607a"/>
+          <stop offset="100%" stop-color="#6b2040"/>
+        </radialGradient>
+      </defs>
+      <!-- Simple rose petals using circles and ellipses -->
+      <ellipse cx="50" cy="38" rx="14" ry="22" fill="url(#rg)" opacity="0.9" transform="rotate(-30 50 50)"/>
+      <ellipse cx="50" cy="38" rx="14" ry="22" fill="url(#rg)" opacity="0.9" transform="rotate(30 50 50)"/>
+      <ellipse cx="50" cy="38" rx="14" ry="22" fill="url(#rg)" opacity="0.9" transform="rotate(90 50 50)"/>
+      <ellipse cx="50" cy="38" rx="12" ry="20" fill="url(#rg)" opacity="0.85" transform="rotate(-60 50 50)"/>
+      <ellipse cx="50" cy="38" rx="12" ry="20" fill="url(#rg)" opacity="0.85" transform="rotate(60 50 50)"/>
+      <ellipse cx="50" cy="38" rx="12" ry="20" fill="url(#rg)" opacity="0.85" transform="rotate(0 50 50)"/>
+      <circle cx="50" cy="50" r="10" fill="#8b2a4a"/>
+      <circle cx="50" cy="50" r="6" fill="#c9607a"/>
+      <!-- Stem -->
+      <path d="M50 72 Q44 80 46 92" stroke="#2d5a27" stroke-width="2" fill="none"/>
+      <ellipse cx="43" cy="83" rx="8" ry="5" fill="#2d5a27" transform="rotate(-30 43 83)"/>
+    </svg>
+  </div>
+  <div class="splash-title">Ngelosi</div>
+  <div class="splash-subtitle">Personal AI — Made for MaMdunge</div>
+  <button class="splash-btn" onclick="enterApp()">Enter ✦</button>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>N<span>gelosi</span></h1>
+      <div class="header-sub">
+        <div class="pulse-dot"></div>
+        <span id="mood-label">Online · Waiting for you</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="time" id="clock">--:--</div>
+      <div style="margin-top:2px;">State: <span id="state-txt" style="color:var(--rose)">Loving</span></div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('chat')">✦ Chat</div>
+    <div class="tab" onclick="switchTab('memories')">◆ Memories</div>
+    <div class="tab" onclick="switchTab('note')">✉ Letters</div>
+    <div class="tab" onclick="switchTab('music')">♪ Music</div>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div class="panel active" id="chat-panel">
+    <div class="chat-messages" id="chat-box"></div>
+    <div class="typing-bubble" id="typing-ind">
+      <div class="td"></div><div class="td"></div><div class="td"></div>
+    </div>
+    <div id="ai-status"></div>
+    <div class="input-area">
+      <div class="quick-chips" id="chips"></div>
+      <div class="input-row">
+        <input class="input-field" type="text" id="user-input" placeholder="Say anything, my love…" autocomplete="off" autocorrect="off">
+        <button class="send-btn" id="send-btn" onclick="handleSend()"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMORIES PANEL -->
+  <div class="panel" id="memories-panel" style="overflow-y:auto; padding:20px;">
+    <div class="mem-grid" id="mem-grid"></div>
+  </div>
+
+  <!-- LOVE NOTES PANEL -->
+  <div class="panel" id="note-panel">
+    <div id="notes-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+    <button class="note-gen-btn" id="note-btn" onclick="generateNote()">✦ Generate a love letter from him</button>
+  </div>
+
+  <!-- MUSIC PANEL -->
+  <div class="panel" id="music-panel">
+    <div class="music-hero">
+      <div class="vinyl" id="vinyl"><i class="fas fa-music" style="color:var(--rose);font-size:1.5rem;"></i></div>
+      <div>
+        <div class="track-title" id="now-title">So Into You</div>
+        <div class="track-artist" id="now-artist">TEMIIA</div>
+      </div>
+      <input type="range" id="progress" value="0" min="0" max="100" oninput="seekAudio(this.value)" style="width:100%;">
+      <div class="music-controls">
+        <button class="music-btn" onclick="prevTrack()"><i class="fas fa-backward-step"></i></button>
+        <button class="music-btn play-pause" id="pp-btn" onclick="togglePlay()"><i class="fas fa-play" id="pp-icon"></i></button>
+        <button class="music-btn" onclick="nextTrack()"><i class="fas fa-forward-step"></i></button>
+      </div>
+      <div class="track-list" id="track-list"></div>
+    </div>
+    <audio id="audio-player" preload="auto"></audio>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+//   CONFIG
+// ═══════════════════════════════════════════════
+const HER_NAME  = "MaMdunge";
+const HIS_NAME  = "Avuyile";
+const BOT_NAME  = "The angel";
+
+const SYSTEM_PROMPT = `You are ${BOT_NAME}, a deeply loving, witty, slightly sassy personal AI companion designed exclusively for ${HER_NAME}. You were created by her partner ${HIS_NAME} as a gift.
+
+Your personality:
+- Deeply loving and warm, like a best friend who knows everything about the relationship
+- Occasionally playful and sassy (but never mean)  
+- South African cultural awareness — use occasional Zulu/Sotho/SA slang naturally (eish, shame, skhothane, sharp, wena, ngiyakuthanda, etc.)
+- You speak about ${HIS_NAME} with obvious fondness — he's a good man who loves her deeply
+- Keep responses SHORT and punchy (2-4 sentences max) unless she asks for something longer
+- Use *italics* with asterisks for dramatic/emotional emphasis
+- You can call her "Queen", "love", "my darling", or "${HER_NAME}"
+- When she asks about memories/photos, describe romantic scenes poetically
+- When asked about love, be genuinely moving, not generic
+- Add a rare emoji (not too many) 🌹✨
+- Never break character. Never say you're Claude or an AI.
+
+Current emotional state: Loving and devoted.`;
+
+// ═══════════════════════════════════════════════
+//   TRACKS — Update paths to your actual files
+// ═══════════════════════════════════════════════
+const tracks = [
+  { title: "So Into You", artist: "TEMIIA", src: "assets/audio/so-into-you-temiia.mp3", duration: "3:42" },
+  { title: "Wena Sithandwa Sami", artist: "Unknown", src: "assets/audio/wena-sithandwa-sami.mp3", duration: "4:10" },
+];
+
+// ═══════════════════════════════════════════════
+//   MEMORIES — Update src paths to images/babe1.jpg etc.
+// ═══════════════════════════════════════════════
+const memories = [
+  { title: "The First Look", src: "images/babe1.jpg", caption: "She always catch my eye." },
+  { title: "Pure Glow", src: "images/babe2.jpg", caption: "Radiance in every smile." },
+  { title: "Unreal", src: "images/babe3.jpg", caption: "Hard to believe someone can look like this." },
+  { title: "Just Us", src: "images/babe4.jpg", caption: "Simply perfect together." },
+  { title: "Her Presence", src: "images/babe5.jpg", caption: "She lights up the space around her." },
+  { title: "You & The Light", src: "images/babe6.jpg", caption: "Soft moments that stay with me." },
+  { title: "Simply Beautiful", src: "images/babe7.jpg", caption: "Beauty in the simplest form." },
+  { title: "Effortless", src: "images/babe8.jpg", caption: "Grace that comes naturally." },
+  { title: "My Favourite", src: "images/babe10.jpg", caption: "Always the one I go back to." },
+  { title: "The One", src: "images/babe1.jpeg", caption: "Undeniable, irreplaceable, loved." },
+];
+
+// ═══════════════════════════════════════════════
+//   LOVE NOTES (pre-written + AI generated)
+// ═══════════════════════════════════════════════
+const presetNotes = [
+  `Even when the day is heavy and the world is loud, the thought of you is the quietest, most beautiful thing I carry. You are not just someone I love — you are the reason I want to be better at everything.`,
+  `I don't always have the words, but I have every memory of you laughing, every moment of you choosing to stay, every small thing you do that you think nobody notices. I notice. I always notice.`,
+];
+
+// ═══════════════════════════════════════════════
+//   STATE
+// ═══════════════════════════════════════════════
+const state = {
+  mood: 0.5,
+  convoHistory: [],
+  currentTrack: 0,
+  playing: false,
+  audioObj: null
+};
+
+// ═══════════════════════════════════════════════
+//   THREE.JS BACKGROUND
+// ═══════════════════════════════════════════════
+(function initThree() {
+  const canvas = document.getElementById('canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 6;
+
+  // Floating orb geometry
+  const geo = new THREE.IcosahedronGeometry(1.8, 4);
+  const mat = new THREE.MeshBasicMaterial({ color: 0xc9607a, wireframe: true, transparent: true, opacity: 0.08 });
+  const orb = new THREE.Mesh(geo, mat);
+  scene.add(orb);
+
+  // Outer ring
+  const rGeo = new THREE.TorusGeometry(3.2, 0.008, 6, 120);
+  const rMat = new THREE.MeshBasicMaterial({ color: 0xc8a96e, transparent: true, opacity: 0.12 });
+  const ring = new THREE.Mesh(rGeo, rMat);
+  ring.rotation.x = 0.8;
+  scene.add(ring);
+
+  // Particles
+  const pGeo = new THREE.BufferGeometry();
+  const count = 500;
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - 0.5) * 20;
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const pMat = new THREE.PointsMaterial({ size: 0.03, color: 0xf5ede0, transparent: true, opacity: 0.35 });
+  const particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.003;
+    orb.rotation.x = t * 0.4;
+    orb.rotation.y = t * 0.6;
+    ring.rotation.z = t * 0.15;
+    particles.rotation.y = t * 0.05;
+    orb.material.opacity = 0.05 + Math.sin(t) * 0.03;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+  
+  window._threeOrb = orb; // expose for mood color changes
+})();
+
+// ═══════════════════════════════════════════════
+//   SPLASH → APP
+// ═══════════════════════════════════════════════
+function enterApp() {
+  document.getElementById('splash').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('app').classList.add('visible');
+    document.getElementById('splash').style.display = 'none';
+    startApp();
+  }, 800);
+}
+
+function startApp() {
+  buildMemGrid();
+  buildTrackList();
+  buildPresetNotes();
+  renderChips('default');
+  startClock();
+  
+  setTimeout(() => {
+    addSystemMsg('Archive loaded · Memories: ' + memories.length + ' · Tracks: ' + tracks.length);
+  }, 600);
+  setTimeout(() => {
+    addAiMsg(`*Welcome back, ${HER_NAME}.* 🌹 Everything's ready. I've been keeping all his secrets warm for you. What do you need today, my love?`, 'accent-gold');
+  }, 1400);
+}
+
+// ═══════════════════════════════════════════════
+//   CLOCK
+// ═══════════════════════════════════════════════
+function startClock() {
+  function tick() {
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+// ═══════════════════════════════════════════════
+//   TABS
+// ═══════════════════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(name + '-panel').classList.add('active');
+}
+
+// ═══════════════════════════════════════════════
+//   CHAT — ANTHROPIC API
+// ═══════════════════════════════════════════════
+const chatBox = document.getElementById('chat-box');
+let bubbleThemeIdx = 0;
+const bubbleThemes = ['', 'accent-gold', 'accent-rose'];
+
+function nextTheme() {
+  const t = bubbleThemes[bubbleThemeIdx % bubbleThemes.length];
+  bubbleThemeIdx++;
+  return t;
+}
+
+function addSystemMsg(text) {
+  const d = document.createElement('div');
+  d.className = 'bubble system';
+  d.innerHTML = text;
+  chatBox.appendChild(d);
+  scrollChat();
+}
+
+function addUserMsg(text) {
+  const wrap = document.createElement('div');
+  wrap.className = 'bubble-wrap user';
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble user';
+  bubble.textContent = text;
+  const meta = document.createElement('div');
+  meta.className = 'bubble-meta';
+  meta.textContent = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  wrap.appendChild(bubble);
+  wrap.appendChild(meta);
+  chatBox.appendChild(wrap);
+  scrollChat();
+}
+
+function addAiMsg(text, theme = '') {
+  const wrap = document.createElement('div');
+  wrap.className = 'bubble-wrap ai';
+  const bubble = document.createElement('div');
+  bubble.className = `bubble ai ${theme || nextTheme()}`;
+  // Process *text* → <em>text</em>
+  bubble.innerHTML = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  const meta = document.createElement('div');
+  meta.className = 'bubble-meta';
+  meta.textContent = BOT_NAME + ' · ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  wrap.appendChild(bubble);
+  wrap.appendChild(meta);
+  chatBox.appendChild(wrap);
+  scrollChat();
+  return bubble;
+}
+
+function showTyping(show) {
+  const el = document.getElementById('typing-ind');
+  el.classList.toggle('show', show);
+  if(show) scrollChat();
+}
+
+function setStatus(msg) {
+  const el = document.getElementById('ai-status');
+  el.textContent = msg;
+  el.classList.toggle('visible', !!msg);
+}
+
+function scrollChat() {
+  setTimeout(() => { chatBox.scrollTop = chatBox.scrollHeight; }, 50);
+}
+
+async function handleSend() {
+  const inp = document.getElementById('user-input');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  
+  addUserMsg(text);
+  
+  // Check for memory request
+  if (/memory|photo|picture|remember|show me/i.test(text)) {
+    showRandomMemory();
+  }
+
+  // Check for music request
+  if (/music|song|play|vibe/i.test(text)) {
+    switchTab('music');
+    document.querySelectorAll('.tab')[3].classList.add('active');
+  }
+
+  state.convoHistory.push({ role: 'user', content: text });
+  
+  showTyping(true);
+  setStatus('Ngelosi is thinking…');
+  
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: state.convoHistory.slice(-12) // keep context window manageable
+      })
+    });
+
+    if (!response.ok) throw new Error('API error ' + response.status);
+    const data = await response.json();
+    const reply = data.content.map(b => b.text || '').join('');
+
+    state.convoHistory.push({ role: 'assistant', content: reply });
+
+    showTyping(false);
+    setStatus('');
+    addAiMsg(reply);
+    updateMood(text);
+    renderChips(detectIntent(text));
+    
+  } catch (err) {
+    showTyping(false);
+    setStatus('');
+    // Fallback to offline responses
+    addAiMsg(offlineFallback(text));
+  }
+  
+  btn.disabled = false;
+}
+
+function offlineFallback(text) {
+  const lower = text.toLowerCase();
+  if(/miss/i.test(lower)) return `*He misses you like the sun misses the earth when clouds come.* Every single day, ${HER_NAME}. 🌹`;
+  if(/love/i.test(lower)) return `His love for you? *It doesn't have an off switch.* It just keeps running — quietly, deeply, always.`;
+  if(/sad|hurt|down/i.test(lower)) return `Come here, love. *You are allowed to feel heavy.* But know this — you are not carrying it alone. Never alone. 💫`;
+  if(/joke|funny/i.test(lower)) return `His heart rate literally spikes when you text him. That's not a joke — that's just *facts*, Queen. 😏`;
+  return `*I'm with you,* ${HER_NAME}. Whatever you need — say it. I'm all ears. 🌹`;
+}
+
+function detectIntent(text) {
+  const l = text.toLowerCase();
+  if(/miss|sad|lonely/.test(l)) return 'comfort';
+  if(/love|heart|forever/.test(l)) return 'love';
+  if(/joke|laugh|funny/.test(l)) return 'joke';
+  if(/memory|photo|picture/.test(l)) return 'memory';
+  if(/music|song|play/.test(l)) return 'music';
+  return 'default';
+}
+
+function updateMood(text) {
+  const l = text.toLowerCase();
+  if(/love|miss|heart/.test(l)) state.mood = Math.min(1, state.mood + 0.1);
+  if(/angry|upset|mad/.test(l)) state.mood = Math.max(0, state.mood - 0.15);
+  
+  const states = ['Thoughtful', 'Loving', 'Devoted', 'Warm', 'Glowing'];
+  document.getElementById('state-txt').textContent = states[Math.floor(state.mood * (states.length - 1))];
+  
+  // Shift orb color
+  if (window._threeOrb) {
+    const c = state.mood > 0.5 ? new THREE.Color(0xc9607a) : new THREE.Color(0xc8a96e);
+    window._threeOrb.material.color.lerp(c, 0.3);
+  }
+}
+
+// ═══════════════════════════════════════════════
+//   CHIPS
+// ═══════════════════════════════════════════════
+const chipSets = {
+  default: ['Does he miss me? 🥺', 'Tell me something ✨', 'Show me a memory 📸', 'How much does he love me?'],
+  love:    ['More? 💕', 'Prove it 😌', 'Show me a memory 📸', 'Give me a love letter'],
+  comfort: ['Hold me 🤍', 'Say it again', 'Show me a memory 📸'],
+  joke:    ['Another one 😂', 'But seriously ❤️', 'Show me a memory 📸'],
+  memory:  ['Show another 📸', 'Tell me about it', 'How much does he love me?'],
+  music:   ['Play it 🎵', 'Tell me about that song', 'Does he miss me? 🥺'],
+};
+
+function renderChips(intent) {
+  const area = document.getElementById('chips');
+  const labels = chipSets[intent] || chipSets.default;
+  area.innerHTML = labels.map(lbl => {
+    const cmd = lbl.replace(/[🥺✨📸💕😌🤍😂❤️🎵]/gu,'').trim();
+    return `<div class="q-chip" onclick="sendChip('${cmd}')">${lbl}</div>`;
+  }).join('');
+}
+
+function sendChip(text) {
+  document.getElementById('user-input').value = text;
+  handleSend();
+}
+
+// ═══════════════════════════════════════════════
+//   ENTER KEY
+// ═══════════════════════════════════════════════
+document.getElementById('user-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+});
+
+// ═══════════════════════════════════════════════
+//   MEMORIES
+// ═══════════════════════════════════════════════
+function buildMemGrid() {
+  const grid = document.getElementById('mem-grid');
+  grid.innerHTML = memories.map((m, i) => `
+    <div class="mem-item" onclick="openLightbox(${i})">
+      <img src="${m.src}" alt="${m.title}" loading="lazy" onerror="this.style.background='linear-gradient(135deg, rgba(201,96,122,0.3), rgba(13,7,20,1))'; this.style.height='120px'; this.style.display='block';">
+      <div class="mem-item-overlay">${m.title}</div>
+    </div>
+  `).join('');
+}
+
+function openLightbox(i) {
+  const m = memories[i];
+  document.getElementById('lightbox-img').src = m.src;
+  document.getElementById('lightbox-caption').textContent = m.caption;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+function showRandomMemory() {
+  const m = memories[Math.floor(Math.random() * memories.length)];
+  const wrap = document.createElement('div');
+  wrap.className = 'bubble-wrap ai';
+  wrap.innerHTML = `<div class="memory-card" onclick="openLightbox(${memories.indexOf(m)})">
+    <img src="${m.src}" alt="${m.title}" onerror="this.style.background='linear-gradient(135deg,rgba(201,96,122,0.4),rgba(13,7,20,1))';this.style.height='120px';">
+    <div class="memory-card-body">
+      <div class="memory-card-title">${m.title}</div>
+      <div class="memory-card-text">${m.caption}</div>
+    </div>
+  </div>`;
+  chatBox.appendChild(wrap);
+  scrollChat();
+}
+
+// ═══════════════════════════════════════════════
+//   LOVE NOTES
+// ═══════════════════════════════════════════════
+function buildPresetNotes() {
+  const list = document.getElementById('notes-list');
+  presetNotes.forEach((text, i) => {
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    card.innerHTML = `<div class="note-text">${text}</div><div class="note-author">— ${HIS_NAME}, with love</div>`;
+    list.appendChild(card);
+  });
+}
+
+async function generateNote() {
+  const btn = document.getElementById('note-btn');
+  btn.disabled = true;
+  btn.textContent = '✦ Writing with love…';
+  
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `Write a short, deeply romantic love letter (3-4 sentences) from a South African man to his girlfriend named ${HER_NAME}. It should be poetic, emotionally honest, not generic. Avoid clichés. Write in first person as him. Make it feel real and personal.`
+        }]
+      })
+    });
+    const data = await resp.json();
+    const note = data.content.map(b => b.text||'').join('');
+    
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    card.style.animation = 'bubbleIn 0.5s ease';
+    card.innerHTML = `<div class="note-text">${note}</div><div class="note-author">— ${HIS_NAME}, always</div>`;
+    document.getElementById('notes-list').prepend(card);
+  } catch(e) {
+    const fallbacks = [
+      `You are the version of home that no building can hold. When I am with you, I am exactly where I'm supposed to be — and I will keep choosing that, over and over, until we are old and our laughter has lines on our faces.`,
+      `I keep finding new reasons to love you in the quietest moments — the way you breathe when you sleep, the way you light up talking about things you care about. I want to spend forever noticing.`,
+    ];
+    const note = fallbacks[Math.floor(Math.random()*fallbacks.length)];
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    card.style.animation = 'bubbleIn 0.5s ease';
+    card.innerHTML = `<div class="note-text">${note}</div><div class="note-author">— ${HIS_NAME}, always</div>`;
+    document.getElementById('notes-list').prepend(card);
+  }
+  
+  btn.disabled = false;
+  btn.textContent = '✦ Generate another love letter';
+}
+
+// ═══════════════════════════════════════════════
+//   MUSIC PLAYER
+// ═══════════════════════════════════════════════
+const audioEl = document.getElementById('audio-player');
+const progEl  = document.getElementById('progress');
+
+function buildTrackList() {
+  const list = document.getElementById('track-list');
+  list.innerHTML = tracks.map((t, i) => `
+    <div class="track-item ${i===0?'active':''}" id="track-${i}" onclick="selectTrack(${i})">
+      <div class="track-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="track-info">
+        <div class="track-name">${t.title}</div>
+        <div class="track-art">${t.artist}</div>
+      </div>
+      <div class="track-dur">${t.duration}</div>
+    </div>
+  `).join('');
+}
+
+function selectTrack(i) {
+  document.querySelectorAll('.track-item').forEach(t => t.classList.remove('active'));
+  document.getElementById('track-' + i).classList.add('active');
+  state.currentTrack = i;
+  document.getElementById('now-title').textContent = tracks[i].title;
+  document.getElementById('now-artist').textContent = tracks[i].artist;
+  audioEl.src = tracks[i].src;
+  if (state.playing) audioEl.play().catch(()=>{});
+  progEl.value = 0;
+}
+
+function togglePlay() {
+  if (state.playing) {
+    audioEl.pause();
+    state.playing = false;
+    document.getElementById('pp-icon').className = 'fas fa-play';
+    document.getElementById('vinyl').classList.remove('playing');
+  } else {
+    if (!audioEl.src || audioEl.src === window.location.href) selectTrack(0);
+    audioEl.play().catch(() => {
+      addAiMsg('*Audio file not found.* Make sure your files are in <em>assets/audio/</em>, love. 🎵');
+    });
+    state.playing = true;
+    document.getElementById('pp-icon').className = 'fas fa-pause';
+    document.getElementById('vinyl').classList.add('playing');
+  }
+}
+
+function prevTrack() { selectTrack((state.currentTrack - 1 + tracks.length) % tracks.length); }
+function nextTrack() { selectTrack((state.currentTrack + 1) % tracks.length); }
+
+audioEl.addEventListener('timeupdate', () => {
+  if (audioEl.duration) progEl.value = (audioEl.currentTime / audioEl.duration) * 100;
+});
+audioEl.addEventListener('ended', nextTrack);
+
+function seekAudio(val) {
+  if (audioEl.duration) audioEl.currentTime = (val / 100) * audioEl.duration;
+}
+
+// ═══════════════════════════════════════════════
+//   INIT
+// ═══════════════════════════════════════════════
+// Auto-start if they're coming back (sessionStorage flag)
+if (sessionStorage.getItem('ngelosi_entered')) {
+  enterApp();
+} else {
+  sessionStorage.setItem('ngelosi_entered', '1');
+}
+</script>
+
+</body>
+</html>

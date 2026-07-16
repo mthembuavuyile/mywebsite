@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Forever Yours — You & I 💕</title>
+  <meta name="description"
+    content="A romantic universe crafted just for you, Nosipho. Filled with love, surprises, and everything my heart wants to say." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#000000" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/forever-yours.css">
+</head>
+
+<body>
+  <!-- Particle canvas -->
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- Entrance Gate -->
+  <div class="entrance-gate" id="entranceGate">
+    <div class="gate-content">
+      <div class="gate-heart">💝</div>
+      <h1 class="gate-title">For My Heart's Greatest Treasure</h1>
+      <p class="gate-subtitle">A journey of love awaits you, Nosipho</p>
+      <button class="gate-btn" id="enterBtn">
+        <span>Open My Heart</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Site (hidden until gate opens) -->
+  <div class="main-site" id="mainSite">
+
+    <!-- Floating Nav -->
+    <nav class="floating-nav" id="floatingNav">
+      <a href="#hero" class="nav-dot active" data-label="Home"><span></span></a>
+      <a href="#reasons" class="nav-dot" data-label="Reasons"><span></span></a>
+      <a href="#countdown" class="nav-dot" data-label="Countdown"><span></span></a>
+      <a href="#daily-love" class="nav-dot" data-label="Love Note"><span></span></a>
+      <a href="#subjects" class="nav-dot" data-label="You Are"><span></span></a>
+      <a href="#promises" class="nav-dot" data-label="Promises"><span></span></a>
+      <a href="#hug" class="nav-dot" data-label="Hug"><span></span></a>
+      <a href="#timeline" class="nav-dot" data-label="Our Story"><span></span></a>
+      <a href="#poem" class="nav-dot" data-label="Poem"><span></span></a>
+      <a href="#surprises" class="nav-dot" data-label="Surprises"><span></span></a>
+      <a href="#letter" class="nav-dot" data-label="Love Letter"><span></span></a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <div class="hero-badge">November 2025 — Forever</div>
+        <h1 class="hero-title">
+          <span class="line1">Nosipho,</span>
+          <span class="line2">You Are My <em>Everything</em></span>
+        </h1>
+        <p class="hero-sub">My heart's greatest treasure. My gift from God. My forever.</p>
+        <div class="scroll-indicator">
+          <span>Scroll to explore our love</span>
+          <div class="scroll-arrow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REASONS I LOVE YOU -->
+    <section class="section reasons-section" id="reasons">
+      <div class="section-container">
+        <div class="section-label">💕 Endless Reasons</div>
+        <h2 class="section-title">Reasons I <em>Love</em> You</h2>
+        <p class="section-sub">I could fill a million pages, but here are just a few...</p>
+
+        <div class="reasons-carousel-wrapper">
+          <button class="carousel-arrow carousel-prev" id="reasonsPrev" aria-label="Previous reason">‹</button>
+          <div class="reasons-carousel" id="reasonsCarousel">
+            <div class="reason-card active">
+              <div class="reason-number">#1</div>
+              <p>The way your smile lights up every room and makes my heart skip a beat 🌟</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#2</div>
+              <p>How you love with your whole soul — fiercely, gently, and completely 💗</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#3</div>
+              <p>Your laugh — my absolute favorite sound in the entire universe 😂💕</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#4</div>
+              <p>The way you make even the most ordinary moments feel magical ✨</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#5</div>
+              <p>Your strength and kindness — you inspire me to be a better person every day 🌹</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#6</div>
+              <p>How safe and at peace I feel when I'm with you — you are my home 🏡</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#7</div>
+              <p>Your eyes — windows to the most beautiful soul I've ever known 👀💖</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#8</div>
+              <p>The way you understand me without me even saying a word 🤫❤️</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#9</div>
+              <p>Your voice — whether whispering or laughing, it's music to my soul 🎵</p>
+            </div>
+            <div class="reason-card">
+              <div class="reason-number">#10</div>
+              <p>Because you chose to love me — and that's the greatest gift I've ever received 💍</p>
+            </div>
+          </div>
+          <button class="carousel-arrow carousel-next" id="reasonsNext" aria-label="Next reason">›</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="section countdown-section" id="countdown">
+      <div class="section-container">
+        <div class="section-label">⏳ Counting Every Second</div>
+        <h2 class="section-title">Until Our <em>1 Year Anniversary</em></h2>
+        <p class="section-sub">November 2026 — The month that changed everything, one year later</p>
+
+        <div class="countdown-grid">
+          <div class="countdown-card">
+            <div class="countdown-value" id="cd-days">000</div>
+            <div class="countdown-label">Days</div>
+            <div class="countdown-glow"></div>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-card">
+            <div class="countdown-value" id="cd-hours">00</div>
+            <div class="countdown-label">Hours</div>
+            <div class="countdown-glow"></div>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-card">
+            <div class="countdown-value" id="cd-mins">00</div>
+            <div class="countdown-label">Minutes</div>
+            <div class="countdown-glow"></div>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-card">
+            <div class="countdown-value" id="cd-secs">00</div>
+            <div class="countdown-label">Seconds</div>
+            <div class="countdown-glow"></div>
+          </div>
+        </div>
+
+        <div class="countdown-message">
+          <p>I can't wait to see you again 💕</p>
+        </div>
+
+        <div class="milestone-bar">
+          <div class="milestone-fill" id="milestoneFill"></div>
+          <div class="milestone-text"><span id="milestonePercent">0</span>% of our first year together</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DAILY LOVE NOTE -->
+    <section class="section daily-love-section" id="daily-love">
+      <div class="section-container">
+        <div class="section-label">💌 Today's Love Note</div>
+        <h2 class="section-title">A Fresh Whisper From <em>My Heart</em></h2>
+        <p class="section-sub">Every day, a new reason to smile — just for you</p>
+
+        <div class="love-note-card">
+          <div class="love-note-quote-mark">"</div>
+          <p class="love-note-text" id="loveNoteText">Loading today's love note...</p>
+          <div class="love-note-date" id="loveNoteDate"></div>
+          <button class="love-note-btn" id="newNoteBtn">
+            <span>Give me another 💝</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBJECTS — You Are My... -->
+    <section class="section subjects-section" id="subjects">
+      <div class="section-container">
+        <div class="section-label">📚 In Every Subject</div>
+        <h2 class="section-title">You Are My <em>Everything</em></h2>
+        <p class="section-sub">No matter what subject I study, every answer leads back to you</p>
+
+        <div class="subjects-grid">
+          <div class="subject-card reveal-card" data-delay="0">
+            <div class="subject-icon">📜</div>
+            <div class="subject-name">History</div>
+            <div class="subject-line">You are my <strong>Queen</strong></div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="100">
+            <div class="subject-icon">🌍</div>
+            <div class="subject-name">Geography</div>
+            <div class="subject-line">You're my <strong>World</strong></div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="200">
+            <div class="subject-icon">❤️</div>
+            <div class="subject-name">Biology</div>
+            <div class="subject-line">You're my <strong>Heart</strong></div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="300">
+            <div class="subject-icon">🧪</div>
+            <div class="subject-name">Chemistry</div>
+            <div class="subject-line">You're my <strong>Oxygen</strong> — I can't live without you</div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="400">
+            <div class="subject-icon">🧲</div>
+            <div class="subject-name">Physics</div>
+            <div class="subject-line">You're my <strong>Force of Attraction</strong></div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="500">
+            <div class="subject-icon">📊</div>
+            <div class="subject-name">Mathematics</div>
+            <div class="subject-line">You're my <strong>Solution</strong>, my constant — no equation works without you
+            </div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="600">
+            <div class="subject-icon">📖</div>
+            <div class="subject-name">Literature</div>
+            <div class="subject-line">You're my <strong>Favorite Story</strong> I never get tired of</div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="700">
+            <div class="subject-icon">🎨</div>
+            <div class="subject-name">Art</div>
+            <div class="subject-line">You're my <strong>Masterpiece</strong></div>
+            <div class="subject-shine"></div>
+          </div>
+
+          <div class="subject-card reveal-card" data-delay="800">
+            <div class="subject-icon">🎶</div>
+            <div class="subject-name">Music</div>
+            <div class="subject-line">You're my <strong>Favorite Song</strong> on repeat</div>
+            <div class="subject-shine"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMISES -->
+    <section class="section promises-section" id="promises">
+      <div class="section-container">
+        <div class="section-label">🤞 My Promises</div>
+        <h2 class="section-title">Things I <em>Promise</em> You</h2>
+        <p class="section-sub">Written on my heart, sealed with my soul</p>
+
+        <div class="promises-grid">
+          <div class="promise-card reveal-card" data-delay="0">
+            <div class="promise-icon">🛡️</div>
+            <p>I promise to <strong>protect your heart</strong> like it's the most precious thing in the universe —
+              because it is.</p>
+          </div>
+          <div class="promise-card reveal-card" data-delay="100">
+            <div class="promise-icon">🌙</div>
+            <p>I promise to be your <strong>peace</strong> on restless nights and your <strong>strength</strong> on hard
+              days.</p>
+          </div>
+          <div class="promise-card reveal-card" data-delay="200">
+            <div class="promise-icon">🤲🏾</div>
+            <p>I promise to <strong>pray for you</strong> every single day — for your heart, your dreams, and your
+              happiness.</p>
+          </div>
+          <div class="promise-card reveal-card" data-delay="300">
+            <div class="promise-icon">👑</div>
+            <p>I promise to always <strong>treat you like a queen</strong>, to honor you, to cherish every version of
+              you.</p>
+          </div>
+          <div class="promise-card reveal-card" data-delay="400">
+            <div class="promise-icon">🌅</div>
+            <p>I promise that every morning, my first thought will be <strong>you</strong> — and every night, you'll be
+              my last.</p>
+          </div>
+          <div class="promise-card reveal-card" data-delay="500">
+            <div class="promise-icon">💍</div>
+            <p>I promise to <strong>choose you</strong> — again and again, in every lifetime, in every universe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIRTUAL HUG -->
+    <section class="section hug-section" id="hug">
+      <div class="section-container hug-container">
+        <div class="section-label">🫂 When You Miss Me</div>
+        <h2 class="section-title">A Hug From <em>Me To You</em></h2>
+        <p class="section-sub">Close your eyes, press the heart, and feel me there with you</p>
+
+        <div class="hug-interaction">
+          <button class="hug-btn" id="hugBtn">
+            <span class="hug-emoji">🤗</span>
+            <span class="hug-text">Hold for a hug</span>
+          </button>
+          <div class="hug-message" id="hugMessage">
+            <p>I'm wrapping my arms around you right now... You are safe, you are loved, you are mine. 🫂💕</p>
+          </div>
+          <div class="hug-counter">
+            <span>Hugs sent:</span>
+            <strong id="hugCount">0</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section timeline-section" id="timeline">
+      <div class="section-container">
+        <div class="section-label">💫 Our Journey</div>
+        <h2 class="section-title">How Our <em>Story</em> Began</h2>
+
+        <div class="timeline">
+          <div class="timeline-line"></div>
+
+          <div class="timeline-item reveal-card" data-delay="0">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">November 2025</div>
+              <h3>The Day We Met</h3>
+              <p>The universe brought us together. That moment changed my life forever. I didn't know it yet, but I had
+                just met my soulmate.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-card" data-delay="150">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">The First Conversations</div>
+              <h3>Getting To Know You</h3>
+              <p>Every word you spoke, every laugh we shared — I was falling deeper. Your spirit captivated me
+                completely.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-card" data-delay="300">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">Growing Together</div>
+              <h3>Building Something Beautiful</h3>
+              <p>Through every high and every low, our love grew stronger. You became my best friend, my confidant, my
+                home.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-card" data-delay="450">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">November 2026</div>
+              <h3>One Year of Us 🎉</h3>
+              <p>365 days of loving you — and I'd choose you again in every single one. Here's to forever, my queen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POEM -->
+    <section class="section poem-section" id="poem">
+      <div class="section-container">
+        <div class="section-label">🖋️ Words From My Soul</div>
+        <h2 class="section-title">A Poem For <em>You</em></h2>
+
+        <div class="poem-card">
+          <div class="poem-ornament">❦</div>
+          <div class="poem-body">
+            <p class="poem-line reveal-card" data-delay="0">In a world of a billion faces,</p>
+            <p class="poem-line reveal-card" data-delay="100">yours is the one my heart traces.</p>
+            <p class="poem-line reveal-card" data-delay="200">Through distance, through time, through it all,</p>
+            <p class="poem-line reveal-card" data-delay="300">you are the reason I never fall.</p>
+            <br>
+            <p class="poem-line reveal-card" data-delay="400">Your name is written in my every prayer,</p>
+            <p class="poem-line reveal-card" data-delay="500">your love is the oxygen in my air.</p>
+            <p class="poem-line reveal-card" data-delay="600">Nosipho — God's gift, heaven-sent,</p>
+            <p class="poem-line reveal-card" data-delay="700">you are every moment I'm content.</p>
+            <br>
+            <p class="poem-line reveal-card" data-delay="800">So until I hold you close once more,</p>
+            <p class="poem-line reveal-card" data-delay="900">know that you're the one I adore.</p>
+            <p class="poem-line reveal-card" data-delay="1000">Forever yours, forever true —</p>
+            <p class="poem-line reveal-card" data-delay="1100">my whole world begins and ends with <strong>you</strong>.
+            </p>
+          </div>
+          <div class="poem-ornament">❦</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SURPRISES -->
+    <section class="section surprises-section" id="surprises">
+      <div class="section-container">
+        <div class="section-label">🎁 Just For You</div>
+        <h2 class="section-title">Surprise <em>Gifts</em></h2>
+        <p class="section-sub">Tap each box to reveal a surprise message 💝</p>
+
+        <div class="surprises-grid">
+          <div class="surprise-box"
+            data-surprise="You are the most beautiful woman I have ever seen. Inside and out. Never forget that. 🌹">
+            <div class="surprise-front">
+              <div class="surprise-ribbon"></div>
+              <span class="surprise-emoji">🎁</span>
+              <span class="surprise-label">Gift #1</span>
+            </div>
+            <div class="surprise-back">
+              <p></p>
+            </div>
+          </div>
+
+          <div class="surprise-box"
+            data-surprise="I pray for you and us every day. For your happiness, your health, your dreams. You deserve the entire world. 🤲🏾✨">
+            <div class="surprise-front">
+              <div class="surprise-ribbon"></div>
+              <span class="surprise-emoji">💌</span>
+              <span class="surprise-label">Gift #2</span>
+            </div>
+            <div class="surprise-back">
+              <p></p>
+            </div>
+          </div>
+
+          <div class="surprise-box"
+            data-surprise="One day, I'm going to hold your hand and never let go. I'm going to look into your eyes and tell you — you're mine, forever. 💍">
+            <div class="surprise-front">
+              <div class="surprise-ribbon"></div>
+              <span class="surprise-emoji">✨</span>
+              <span class="surprise-label">Gift #3</span>
+            </div>
+            <div class="surprise-back">
+              <p></p>
+            </div>
+          </div>
+
+          <div class="surprise-box"
+            data-surprise="You're not just the love of my life — you're my best friend, my peace, and my purpose. I love you, Nosipho Mdunge. Always. ❤️‍🔥">
+            <div class="surprise-front">
+              <div class="surprise-ribbon"></div>
+              <span class="surprise-emoji">💝</span>
+              <span class="surprise-label">Gift #4</span>
+            </div>
+            <div class="surprise-back">
+              <p></p>
+            </div>
+          </div>
+
+          <div class="surprise-box"
+            data-surprise="When we finally meet again, I'm going to hold you so tight that even time stops. I can't wait for that moment. 🫂💕">
+            <div class="surprise-front">
+              <div class="surprise-ribbon"></div>
+              <span class="surprise-emoji">🌟</span>
+              <span class="surprise-label">Gift #5</span>
+            </div>
+            <div class="surprise-back">
+              <p></p>
+            </div>
+          </div>
+
+          <div class="surprise-box"
+            data-surprise="If I could give you one thing, it would be the ability to see yourself through my eyes. Then you'd know how truly special you are. 🪞💖">
+            <div class="surprise-front">
+              <div class="surprise-ribbon"></div>
+              <span class="surprise-emoji">💫</span>
+              <span class="surprise-label">Gift #6</span>
+            </div>
+            <div class="surprise-back">
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section class="section letter-section" id="letter">
+      <div class="section-container">
+        <div class="letter-card">
+          <div class="letter-seal">💌</div>
+          <h2>My Dearest Nosipho,</h2>
+          <div class="letter-body">
+            <p>From the moment you came into my life in November 2025, everything changed. You brought light into my
+              world, music into my silence, and meaning into my days.</p>
+            <p>Every second without you feels like an eternity, and every moment with you feels like a heartbeat — too
+              beautiful and too fast. I count the days until I can see your smile again, hold your hand, and tell you in
+              person what my heart already knows:</p>
+            <p><strong>You are the greatest gift God has ever given me.</strong></p>
+            <p>This website is my heart, written in code, built with love, designed with you in every pixel. You are my
+              queen, my world, my heart, my oxygen, my force, my solution, my story, my masterpiece, and my favorite
+              song.</p>
+            <p>I can't wait to see you again, my love. Not just in November — but for every November after that, for the
+              rest of our lives.</p>
+          </div>
+          <div class="letter-signature">
+            <p>Forever & Always yours,</p>
+            <p class="signature-name">Avuyile 💍</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-hearts">
+        <span>♥</span><span>♥</span><span>♥</span>
+      </div>
+      <p class="footer-names">Nosipho & Avuyile</p>
+      <p class="footer-tagline">November 2025 — Forever</p>
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Made with love</p>
+      <a href="index.html" class="footer-link">← Back to Main Page</a>
+    </footer>
+  </div>
+
+  <script src="js/forever-yours.js"></script>
+</body>
+
+</html>
