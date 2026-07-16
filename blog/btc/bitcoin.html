@@ -487,33 +487,38 @@
         
         @keyframes fadeInUp {
             to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Unified Header/Footer Overrides */
+        site-header .site-header {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+            border-bottom: 1px solid var(--primary-color) !important;
+        }
+        site-header .brand-logo, site-header .nav-links a {
+            color: #ffffff !important;
+        }
+        site-header .nav-links a:hover, site-header .brand-logo:hover {
+            color: var(--primary-color) !important;
+        }
+        site-header .mobile-menu-btn {
+            color: var(--primary-color) !important;
+        }
+        site-footer .site-footer {
+            background-color: #000000 !important;
+            border-top: 1px solid var(--primary-color) !important;
+            color: #888888 !important;
+        }
+        site-footer .footer-links a, site-footer .footer-socials a {
+            color: #cccccc !important;
+        }
+        site-footer .footer-links a:hover, site-footer .footer-socials a:hover {
+            color: var(--primary-color) !important;
         }
     </style>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/blog.css">
+    <script src="/components/components.js" defer></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <header>
-    <nav>
-        <div class="container">
-            <div class="logo">Avuyile Mthembu ₿</div>
-            <button class="burger-menu" id="burger-menu">
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#what-is-bitcoin">What is Bitcoin</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
-                <li><a href="#get-started">Get Started</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </div>
-    </nav>
-    </header>
+    <site-header></site-header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -864,50 +869,14 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="https://twitter.com/MthembuAvuyile">Twitter</a>
-                <a href="https://www.luno.com/invite/54A3Y2">Join Luno</a>
-                <a href="mailto:info@avuyilemthembu.co.za">Email</a>
-                <a href="https://avuyilemthembu.co.za">Main Site</a>
-                <a href="https://www.vylexnexys.co.za/crypto">Vylex Nexys Crypto</a>
-            </div>
-            <p>&copy; 2025 Avuyile Mthembu. <br> Bitcoin is hope. 🧡</p>
-        </div>
-    </footer>
+    <newsletter-section title="Get Bitcoin Updates" desc="Get South African Bitcoin insights directly to your inbox."></newsletter-section>
+    <site-footer></site-footer>
 
     <!-- Twitter Widget Script -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     
     <!-- JavaScript -->
     <script>
-        // Burger Menu
-        const burgerMenu = document.getElementById('burger-menu');
-        const navLinks = document.getElementById('nav-links');
-
-        burgerMenu.addEventListener('click', () => {
-            burgerMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu when a link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                burgerMenu.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!burgerMenu.contains(e.target) && !navLinks.contains(e.target)) {
-                burgerMenu.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
-
         // Intersection Observer for Animations
         const observerOptions = {
             threshold: 0.1,

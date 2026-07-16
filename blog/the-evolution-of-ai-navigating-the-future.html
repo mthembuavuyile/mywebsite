@@ -12,7 +12,7 @@
   <!-- Open Graph for Facebook & LinkedIn -->
   <meta property="og:title" content="The Evolution of AI: Future of LLMs, Agents & Global Dynamics">
   <meta property="og:description" content="A deep dive into how AI is reshaping development, ethics, and global power. Written by Avuyile Mthembu.">
-  <meta property="og:image" content="https://avuyilemthembu.co.za/assets/ai-evolution-banner.jpg"> <!-- Replace with your banner -->
+  <meta property="og:image" content="https://avuyilemthembu.co.za/assets/ai-evolution-banner.jpg">
   <meta property="og:url" content="https://avuyilemthembu.co.za/blog/the-evolution-of-ai-navigating-the-future.html">
   <meta property="og:type" content="article">
   
@@ -20,243 +20,28 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Evolution of AI: Future of LLMs, Agents & Global Dynamics">
   <meta name="twitter:description" content="LLMs, AI Agents, Global AI Race & Future of Work. A blog post by Avuyile Mthembu.">
-  <meta name="twitter:image" content="https://avuyilemthembu.co.za/assets/ai-evolution-banner.jpg"> <!-- Replace with your banner -->
-  <meta name="twitter:creator" content="@AvuyileMthembu"> <!-- Optional if you have a Twitter handle -->
+  <meta name="twitter:image" content="https://avuyilemthembu.co.za/assets/ai-evolution-banner.jpg">
+  <meta name="twitter:creator" content="@AvuyileMthembu">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://avuyilemthembu.co.za/blog/the-evolution-of-ai-navigating-the-future.html">
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="css/blog-nav.css">
-  <style>
-        .blog-post {
-            max-width: 800px;
-            margin: 7rem auto 4rem;
-            padding: 0 1.5rem;
-        }
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/blog.css">
 
-        .blog-header {
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .blog-title {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: 800;
-            color: var(--color-text);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .blog-meta {
-            color: #6b7280;
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-        }
-
-        .blog-featured-image {
-            width: 100%;
-            height: 400px;
-            background-image: url('https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZXxlbnwwfHwwfHx8MA%3D%3D');
-            background-size: cover;
-            background-position: center;
-            border-radius: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .blog-content {
-            line-height: 1.8;
-            color: #374151;
-        }
-
-        .blog-content h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin: 2.5rem 0 1rem;
-        }
-
-        .blog-content h3 {
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: var(--color-text);
-            margin: 2rem 0 1rem;
-        }
-
-        .blog-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .blog-content ul, .blog-content ol {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .blog-content li {
-            margin-bottom: 0.75rem;
-        }
-
-        .blog-content strong {
-            color: var(--color-text);
-            font-weight: 600;
-        }
-
-        .blog-tags {
-            margin: 3rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .blog-tag {
-            background: #e5e7eb;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
-            color: #4b5563;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .blog-tag:hover {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .author-section {
-    margin: 4rem auto;
-    padding: 2.5rem;
-    background: linear-gradient(to right, #ffffff, #f8f9fa);
-    border-radius: 1.5rem;
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 10px 15px -3px rgba(0, 0, 0, 0.05);
-    max-width: 800px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.author-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 8px 12px -1px rgba(0, 0, 0, 0.1),
-        0 20px 25px -5px rgba(0, 0, 0, 0.05);
-}
-
-.author-content {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-}
-
-.author-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-image: url("../assets/images/avuyile4.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 4px solid #ffffff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.author-avatar:hover {
-    transform: scale(1.05);
-}
-
-.author-info {
-    flex: 1;
-}
-
-.author-info h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #2d3748;
-    letter-spacing: -0.025em;
-}
-
-.author-bio {
-    margin: 0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #4a5568;
-}
-
-.author-info h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.author-bio {
-    color: #6b7280;
-    font-size: 0.95rem;
-}
-
-/* Responsive: Tablet and below */
-@media (max-width: 768px) {
-    .author-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-    }
-
-    .author-section {
-        padding: 1.5rem;
-        margin: 2rem 1rem;
-    }
-
-    .author-avatar {
-        width: 100px;
-        height: 100px;
-    }
-
-    .author-info h3 {
-        font-size: 1.25rem;
-    }
-
-    .author-bio {
-        font-size: 1rem;
-    }
-}
-
-/* Responsive: Mobile */
-@media (max-width: 640px) {
-    .author-section {
-        padding: 1.2rem;
-        margin: 1.5rem;
-    }
-
-    .author-avatar {
-        width: 90px;
-        height: 90px;
-    }
-
-    .author-info h3 {
-        font-size: 1.1rem;
-    }
-
-    .author-bio {
-        font-size: 0.9rem;
-    }
-}
-</style>
+  <!-- Custom Components Script -->
+  <script src="/components/components.js" defer></script>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="" class="nav-logo">Avuyile's Blog</a>
-            <a href="index.html">Home</a>
-        </div>
-    </nav>
+    <site-header></site-header>
 
     <article class="blog-post">
         <header class="blog-header">
             <h1 class="blog-title">The Evolution of AI: Navigating the Future of LLMs, Agents, and Global Dynamics</h1>
             <div class="blog-meta">
-                <span>By Avuyile Mthembu</span>
+                <span>By <span class="author-name">Avuyile Mthembu</span></span>
                 <span>·</span>
                 <span>January 31, 2025</span>
                 <span>·</span>
@@ -264,7 +49,7 @@
             </div>
         </header>
 
-        <div class="blog-featured-image"></div>
+        <div class="blog-featured-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?w=1000&auto=format&fit=crop&q=80');"></div>
 
         <div class="blog-content">
             <p>The AI landscape is evolving at a breakneck pace, reshaping industries, economies, and societal norms. From chatbots that mimic human conversation to autonomous agents that execute complex tasks, AI's capabilities are expanding into uncharted territories. This post explores the current state of AI, its implications for programmers, and the intensifying global race for dominance, offering insights into where this technology might lead us.</p>
@@ -298,7 +83,7 @@
                 <li>AI Literacy: Understanding model strengths/limitations</li>
                 <li>Soft Skills: Collaboration, ethics, and business context</li>
             </ul>
-
+            
             <p>Advice for New Coders:</p>
             <ul>
                 <li>Master fundamentals (algorithms, data structures)</li>
@@ -314,7 +99,7 @@
                 <li>India: Emerges as a talent hub, with startups like Sarvam AI focusing on Indic languages</li>
                 <li>EU: Balances regulation (AI Act) with innovation, prioritizing ethics</li>
             </ul>
-
+            
             <p>Should other countries relax? No. Nations must invest in education, infrastructure, and policies to avoid dependency. Smaller players can niche in AI ethics, regional applications, or hardware.</p>
 
             <h2>6. Future Directions and Ethical Considerations</h2>
@@ -324,7 +109,7 @@
                 <li>Scientific Breakthroughs: AI-driven drug discovery and climate modeling</li>
                 <li>Ethics: Addressing bias, privacy, and job displacement through global cooperation</li>
             </ul>
-
+            
             <p>Risks including autonomous weapons, deepfakes, and inequality necessitate international treaties akin to nuclear agreements.</p>
 
             <h2>7. Conclusion</h2>
@@ -342,15 +127,14 @@
             <a href="#" class="blog-tag">Ethics</a>
         </div>
 
-        <section class="author-section">
-            <div class="author-content">
-                <div class="author-avatar"></div>
-                <div class="author-info">
-                    <h3>Avuyile Mthembu</h3>
-                    <p class="author-bio">Programmer, Developer, AI enthusiast and technology writer passionate about exploring the intersection of artificial intelligence and society. Follow for more insights on AI, ethics, and innovation.</p>
-                </div>
-            </div>
-        </section>
+        <author-section 
+            name="Avuyile Mthembu" 
+            bio="Programmer, Developer, AI enthusiast and technology writer passionate about exploring the intersection of artificial intelligence and society. Follow for more insights on AI, ethics, and innovation.">
+        </author-section>
     </article>
+
+    <newsletter-section></newsletter-section>
+
+    <site-footer></site-footer>
 </body>
 </html>
