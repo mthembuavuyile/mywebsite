@@ -256,62 +256,75 @@
       margin-top: 4px;
     }
 
-    /* Progress & Countdown */
-    .progressBlock {
+    /* Qualification Sidebar Styles */
+    .qualBlock {
       background: rgba(255, 255, 255, .03);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
     }
-
-    .progressTop {
+    
+    .qualTitle {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    
+    .qualList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.82rem;
+    }
+    
+    .qualList li {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
+      color: var(--text);
+      gap: 10px;
+    }
+    
+    .qualList li strong {
+      color: var(--muted);
+      font-weight: 500;
+    }
+    
+    .qualInfo {
+      margin: 4px 0 0;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+      background: rgba(255, 255, 255, 0.01);
+      padding: 8px 10px;
+      border-left: 2px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+    
+    .accreditation-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      color: #34d399;
+      font-size: 0.8rem;
       font-weight: 700;
-    }
-
-    .bar {
-      height: 8px;
-      background: rgba(255, 255, 255, .1);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .bar span {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--primary2));
-      transition: width 1.5s ease;
-    }
-
-    .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .cd {
-      background: rgba(255, 255, 255, .04);
-      border-radius: 10px;
-      padding: 10px 5px;
       text-align: center;
-      border: 1px solid var(--border);
-    }
-
-    .cd .n {
-      font-weight: 800;
-      font-size: 1.1rem;
-      display: block;
-    }
-
-    .cd .t {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: var(--muted2);
-      font-weight: 600;
+      margin-top: 2px;
     }
 
     /* --- Transcript Section --- */
@@ -613,6 +626,213 @@
         gap: 6px;
       }
     }
+
+    /* Graduation Gallery Styles */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      cursor: pointer;
+      box-shadow: var(--shadow2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 18, 32, 0.85) 0%, rgba(11, 18, 32, 0.2) 70%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      color: #fff;
+      text-align: center;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    
+    .gallery-overlay i {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .gallery-overlay span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+    
+    /* Lightbox Modal Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      inset: 0;
+      background: rgba(11, 18, 32, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .lightbox-content {
+      position: relative;
+      max-width: 85vw;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .lightbox img {
+      max-width: 100%;
+      max-height: 75vh;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      object-fit: contain;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+    
+    .lightbox.active img {
+      transform: scale(1);
+    }
+    
+    .lightbox-caption {
+      color: #fff;
+      margin-top: 15px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.5px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      color: var(--muted);
+      font-size: 40px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+    }
+    
+    .lightbox-close:hover {
+      color: #fff;
+      text-shadow: 0 0 10px var(--primary);
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 24px;
+      padding: 16px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: 0.2s;
+      user-select: none;
+      z-index: 2010;
+    }
+    
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+    }
+    
+    .lightbox-prev {
+      left: 40px;
+    }
+    
+    .lightbox-next {
+      right: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .lightbox-prev,
+      .lightbox-next {
+        padding: 12px 16px;
+        font-size: 18px;
+      }
+      .lightbox-prev {
+        left: 15px;
+      }
+      .lightbox-next {
+        right: 15px;
+      }
+      .lightbox-close {
+        top: 15px;
+        right: 20px;
+        font-size: 35px;
+      }
+    }
   </style>
 </head>
 
@@ -677,21 +897,20 @@
             </div>
           </div>
 
-          <div class="progressBlock">
-            <div class="progressTop">
-              <span>Overall Progress</span>
-              <span style="color:var(--accent)">Done</span>
-            </div>
-            <div class="bar"><span id="progBar"></span></div>
-          </div>
-
-          <div class="progressBlock">
-            <div class="progressTop">
-              <span>Graduation (JHB)</span>
-              <span style="color:var(--muted)">Tuesday, 26 May 2026</span>
-            </div>
-            <div class="countdown" id="countdown">
-              <!-- JS will fill this -->
+          <div class="qualBlock">
+            <div class="qualTitle">Qualification Details</div>
+            <ul class="qualList">
+              <li><strong>Qualification:</strong> Diploma in Systems Development</li>
+              <li><strong>Code:</strong> HDIPSD3</li>
+              <li><strong>Designation:</strong> Dip. (Systems Development)</li>
+              <li><strong>SAQA ID:</strong> 91923 | NQF Level 6</li>
+              <li><strong>Min. Credits:</strong> 364</li>
+            </ul>
+            <p class="qualInfo">
+              Eighty percent (80%) of the total credits of this unique qualification are in the disciplines of information technology and development practices, and computer sciences.
+            </p>
+            <div class="accreditation-badge">
+              <i class="fa-solid fa-award"></i> BAC Accredited
             </div>
           </div>
         </aside>
@@ -699,6 +918,45 @@
       </div>
     </div>
   </header>
+
+  <!-- Graduation Gallery Section -->
+  <section id="graduation" class="wrap" style="margin-top: 40px; margin-bottom: 20px;">
+    <div class="sectionHead">
+      <h2>Graduation Day Memories</h2>
+      <p>Boston City Campus Graduation Ceremony — Tuesday, 26 May 2026</p>
+    </div>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox(0)">
+        <img src="assets/images/grad/grad-1.jpg" alt="Avuyile Mthembu Graduation Portrait" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-expand"></i>
+          <span>Graduation Portrait</span>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(1)">
+        <img src="assets/images/grad/grad-2.jpg" alt="Avuyile Mthembu with Graduation Certificate" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-expand"></i>
+          <span>Receiving Certificate</span>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(2)">
+        <img src="assets/images/grad/grad-3.jpg" alt="Avuyile Mthembu at Boston City Campus Graduation" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-expand"></i>
+          <span>Boston Graduation Event</span>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(3)">
+        <img src="assets/images/grad/grad-4.jpg" alt="Avuyile Mthembu Graduation Celebration" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-expand"></i>
+          <span>Graduation Celebration</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Transcript Content -->
   <main id="transcript">
@@ -1053,6 +1311,18 @@
     </div>
   </footer>
 
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <button class="lightbox-prev" onclick="prevImage()" aria-label="Previous image">&#10094;</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Graduation Image">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-next" onclick="nextImage()" aria-label="Next image">&#10095;</button>
+  </div>
+
   <script>
     // 1. Mobile Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
@@ -1086,40 +1356,80 @@
       });
     });
 
-    // 3. Progress Bar Animation
-    setTimeout(() => {
-      const bar = document.getElementById('progBar');
-      if (bar) bar.style.width = '100%';
-    }, 500);
-
-    // 4. Graduation Countdown (Target: May 26, 2026)
-    const countContainer = document.getElementById('countdown');
-    const targetDate = new Date('May 26, 2026 09:00:00').getTime();
-
-    function updateTimer() {
-      const now = new Date().getTime();
-      const dist = targetDate - now;
-
-      if (dist < 0) {
-        countContainer.innerHTML = '<div style="grid-column:span 4; font-weight:700;">Graduated!</div>';
-        return;
+    // 3. Graduation Gallery Lightbox
+    const gradImages = [
+      {
+        src: 'assets/images/grad/grad-1.jpg',
+        caption: 'Avuyile Mthembu Graduation Portrait'
+      },
+      {
+        src: 'assets/images/grad/grad-2.jpg',
+        caption: 'Receiving Systems Development Diploma Certificate'
+      },
+      {
+        src: 'assets/images/grad/grad-3.jpg',
+        caption: 'Celebrating the milestone at Boston City Campus Graduation'
+      },
+      {
+        src: 'assets/images/grad/grad-4.jpg',
+        caption: 'Graduation Celebration Day — Tuesday, 26 May 2026'
       }
+    ];
 
-      const days = Math.floor(dist / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((dist % (1000 * 60)) / 1000);
+    let currentImgIdx = 0;
 
-      countContainer.innerHTML = `
-        <div class="cd"><span class="n">${days}</span><span class="t">Days</span></div>
-        <div class="cd"><span class="n">${hours}</span><span class="t">Hrs</span></div>
-        <div class="cd"><span class="n">${mins}</span><span class="t">Min</span></div>
-        <div class="cd"><span class="n">${secs}</span><span class="t">Sec</span></div>
-      `;
+    window.openLightbox = function(idx) {
+      currentImgIdx = idx;
+      updateLightboxContent();
+      const lightboxEl = document.getElementById('lightbox');
+      if (lightboxEl) {
+        lightboxEl.classList.add('active');
+      }
+      document.body.style.overflow = 'hidden'; // Disable background scroll
     }
 
-    setInterval(updateTimer, 1000);
-    updateTimer(); // Run immediately
+    window.closeLightbox = function() {
+      const lightboxEl = document.getElementById('lightbox');
+      if (lightboxEl) {
+        lightboxEl.classList.remove('active');
+      }
+      document.body.style.overflow = ''; // Re-enable background scroll
+    }
+
+    window.prevImage = function() {
+      currentImgIdx = (currentImgIdx - 1 + gradImages.length) % gradImages.length;
+      updateLightboxContent();
+    }
+
+    window.nextImage = function() {
+      currentImgIdx = (currentImgIdx + 1) % gradImages.length;
+      updateLightboxContent();
+    }
+
+    function updateLightboxContent() {
+      const img = gradImages[currentImgIdx];
+      const lightboxImgEl = document.getElementById('lightboxImg');
+      const lightboxCaptionEl = document.getElementById('lightboxCaption');
+      if (lightboxImgEl) lightboxImgEl.src = img.src;
+      if (lightboxCaptionEl) lightboxCaptionEl.textContent = img.caption;
+    }
+
+    // Close lightbox on click outside the image
+    document.addEventListener('click', (e) => {
+      const lightboxEl = document.getElementById('lightbox');
+      if (lightboxEl && e.target === lightboxEl) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const lightboxEl = document.getElementById('lightbox');
+      if (!lightboxEl || !lightboxEl.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
   </script>
 
 </body>
