@@ -833,6 +833,212 @@
         font-size: 35px;
       }
     }
+
+    /* ==========================================
+       Print Media Styles — Clean Academic Layout
+       ========================================== */
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --panel: #ffffff;
+        --border: #b0b0b0;
+        --text: #000000;
+        --muted: #444444;
+        --muted2: #555555;
+        --primary: #1e3a8a; /* Formal Dark Blue */
+        --primary2: #1e3a8a;
+        --accent: #047857; /* Formal Emerald Green for distinctions */
+        --shadow: none;
+        --shadow2: none;
+      }
+      
+      body {
+        background: #ffffff !important;
+        background-image: none !important;
+        color: #000000 !important;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      /* Hide screen-only interactive and media elements */
+      .topbar, 
+      button, 
+      .btn, 
+      #graduation, 
+      #lightbox,
+      .nav-toggle,
+      .nav {
+        display: none !important;
+      }
+      
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      
+      header {
+        padding: 10px 0 !important;
+      }
+      
+      .hero {
+        display: grid !important;
+        grid-template-columns: 1.2fr 0.8fr !important;
+        gap: 15px !important;
+        margin-bottom: 15px !important;
+      }
+      
+      .heroCard, 
+      .sideCard, 
+      .qualBlock, 
+      .semester, 
+      .year {
+        background: #ffffff !important;
+        border: 1px solid var(--border) !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      
+      .heroCard {
+        padding: 20px !important;
+      }
+      
+      .avatar {
+        border: 2px solid #000000 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      
+      .kpiGrid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 5px !important;
+      }
+      
+      .kpi {
+        background: #ffffff !important;
+        border: 1px solid var(--border) !important;
+        padding: 6px !important;
+      }
+      
+      .kpi .num {
+        font-size: 1.15rem !important;
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: #1e3a8a !important;
+      }
+      
+      .qualBlock {
+        padding: 12px 15px !important;
+      }
+      
+      .qualTitle {
+        color: #1e3a8a !important;
+        border-bottom: 1px solid var(--border) !important;
+        font-size: 0.8rem !important;
+        padding-bottom: 4px !important;
+      }
+      
+      .qualList {
+        gap: 4px !important;
+      }
+      
+      .qualInfo {
+        border-left: 2px solid var(--accent) !important;
+        background: #f9fafb !important;
+        color: #374151 !important;
+        padding: 6px 8px !important;
+        font-size: 0.75rem !important;
+      }
+
+      .accreditation-badge {
+        background: #f0fdf4 !important;
+        border: 1px solid #bbf7d0 !important;
+        color: #166534 !important;
+        padding: 4px 8px !important;
+      }
+      
+      main {
+        padding-bottom: 0 !important;
+      }
+      
+      .sectionHead {
+        margin: 15px 0 8px !important;
+        border-bottom: 1.5px solid #000000 !important;
+        padding-bottom: 4px !important;
+      }
+      
+      .sectionHead h2 {
+        font-size: 1.25rem !important;
+        color: #000000 !important;
+      }
+      
+      /* Force all collapsed years to be fully visible in print */
+      .collapse {
+        max-height: none !important;
+        overflow: visible !important;
+        display: block !important;
+      }
+      
+      .yearBody {
+        padding: 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+      }
+      
+      .semester {
+        padding: 12px !important;
+      }
+      
+      .table th {
+        color: #000000 !important;
+        border-bottom: 1.5px solid #000000 !important;
+        font-weight: 700 !important;
+        padding: 6px !important;
+      }
+      
+      .table td {
+        border-bottom: 1px solid #e5e7eb !important;
+        color: #000000 !important;
+        padding: 8px 6px !important;
+      }
+      
+      .mark {
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      
+      .mark.dist {
+        background: #e8f5e9 !important;
+        color: #1b5e20 !important;
+        border: 1px solid #81c784 !important;
+      }
+      
+      .mark.pass {
+        background: #e3f2fd !important;
+        color: #0d47a1 !important;
+        border: 1px solid #64b5f6 !important;
+      }
+      
+      .mark.fail {
+        background: #ffebee !important;
+        color: #b71c1c !important;
+        border: 1px solid #e57373 !important;
+      }
+      
+      footer {
+        border-top: 1px solid var(--border) !important;
+        margin-top: 15px !important;
+        padding: 10px 0 !important;
+        font-size: 0.75rem !important;
+      }
+    }
   </style>
 </head>
 
@@ -928,31 +1134,31 @@
     
     <div class="gallery-grid">
       <div class="gallery-item" onclick="openLightbox(0)">
-        <img src="assets/images/grad/grad-1.jpg" alt="Avuyile Mthembu Graduation Portrait" loading="lazy">
+        <img src="assets/images/grad/grad-1.jpg" alt="Avuyile Mthembu with a Boston City Campus faculty member" loading="lazy">
         <div class="gallery-overlay">
           <i class="fa-solid fa-expand"></i>
-          <span>Graduation Portrait</span>
+          <span>Faculty Presentation</span>
         </div>
       </div>
       <div class="gallery-item" onclick="openLightbox(1)">
-        <img src="assets/images/grad/grad-2.jpg" alt="Avuyile Mthembu with Graduation Certificate" loading="lazy">
+        <img src="assets/images/grad/grad-2.jpg" alt="The official hooding ceremony on stage at Boston City Campus" loading="lazy">
         <div class="gallery-overlay">
           <i class="fa-solid fa-expand"></i>
-          <span>Receiving Certificate</span>
+          <span>Stage Hooding Ceremony</span>
         </div>
       </div>
       <div class="gallery-item" onclick="openLightbox(2)">
-        <img src="assets/images/grad/grad-3.jpg" alt="Avuyile Mthembu at Boston City Campus Graduation" loading="lazy">
+        <img src="assets/images/grad/grad-3.jpg" alt="Posing at the Boston City Campus graduation photo booth" loading="lazy">
         <div class="gallery-overlay">
           <i class="fa-solid fa-expand"></i>
-          <span>Boston Graduation Event</span>
+          <span>Graduation Photo Booth</span>
         </div>
       </div>
       <div class="gallery-item" onclick="openLightbox(3)">
-        <img src="assets/images/grad/grad-4.jpg" alt="Avuyile Mthembu Graduation Celebration" loading="lazy">
+        <img src="assets/images/grad/grad-4.jpg" alt="Avuyile Mthembu in full graduation regalia — Tuesday, 26 May 2026" loading="lazy">
         <div class="gallery-overlay">
           <i class="fa-solid fa-expand"></i>
-          <span>Graduation Celebration</span>
+          <span>Graduation Regalia Portrait</span>
         </div>
       </div>
     </div>
@@ -1360,19 +1566,19 @@
     const gradImages = [
       {
         src: 'assets/images/grad/grad-1.jpg',
-        caption: 'Avuyile Mthembu Graduation Portrait'
+        caption: 'Avuyile Mthembu with a Boston City Campus faculty member'
       },
       {
         src: 'assets/images/grad/grad-2.jpg',
-        caption: 'Receiving Systems Development Diploma Certificate'
+        caption: 'The official hooding ceremony on stage at Boston City Campus'
       },
       {
         src: 'assets/images/grad/grad-3.jpg',
-        caption: 'Celebrating the milestone at Boston City Campus Graduation'
+        caption: 'Posing at the Boston City Campus graduation photo booth'
       },
       {
         src: 'assets/images/grad/grad-4.jpg',
-        caption: 'Graduation Celebration Day — Tuesday, 26 May 2026'
+        caption: 'Avuyile Mthembu in full graduation regalia — Tuesday, 26 May 2026'
       }
     ];
 
