@@ -646,3 +646,29 @@
     gap: 0.75rem;
   }
 }
+
+/* Code Block Styling */
+.code-block {
+  background: #0f172a;
+  border: 1px solid var(--blog-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  font-family: var(--blog-font-mono);
+  font-size: 0.9rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  color: #e2e8f0;
+}
+
+.code-header {
+  color: var(--blog-primary);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--blog-border);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
