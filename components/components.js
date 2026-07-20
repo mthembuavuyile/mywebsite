@@ -13,6 +13,7 @@ class SiteHeader extends HTMLElement {
               <li><a href="/index.html" data-nav="home">Home</a></li>
               <li><a href="/about.html" data-nav="about">About</a></li>
               <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
+              <li><a href="/games/index.html" data-nav="games">Games</a></li>
               <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
               <li><a href="/contact.html" data-nav="contact">Contact</a></li>
               <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
@@ -29,6 +30,7 @@ class SiteHeader extends HTMLElement {
           <li><a href="/index.html" data-nav="home">Home</a></li>
           <li><a href="/about.html" data-nav="about">About</a></li>
           <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
+          <li><a href="/games/index.html" data-nav="games">Games Arcade</a></li>
           <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
           <li><a href="/contact.html" data-nav="contact">Contact</a></li>
           <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
@@ -40,12 +42,14 @@ class SiteHeader extends HTMLElement {
     const path = window.location.pathname;
     let activeNav = '';
     
-    if (path === '/' || path.endsWith('/index.html') && !path.includes('/blog/')) {
+    if ((path === '/' || path.endsWith('/index.html')) && !path.includes('/blog/') && !path.includes('/games/')) {
       activeNav = 'home';
     } else if (path.includes('/about.html')) {
       activeNav = 'about';
     } else if (path.includes('/portfolio.html')) {
       activeNav = 'portfolio';
+    } else if (path.includes('/games/')) {
+      activeNav = 'games';
     } else if (path.includes('/blog/')) {
       activeNav = 'blog';
     } else if (path.includes('/contact.html')) {
@@ -98,6 +102,7 @@ class SiteFooter extends HTMLElement {
             <a href="/index.html">Home</a> • 
             <a href="/about.html">About</a> • 
             <a href="/portfolio.html">Portfolio</a> • 
+            <a href="/games/index.html">Games Arcade</a> • 
             <a href="/blog/index.html">Blog</a> • 
             <a href="/contact.html">Contact</a>
           </div>

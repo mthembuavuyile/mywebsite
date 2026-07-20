@@ -15,6 +15,12 @@
        <priority>0.8000</priority>
   </url>
   <url>
+       <loc>https://avuyilemthembu.co.za/games/index.html</loc>
+       <lastmod>2026-07-20T14:12:00+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8500</priority>
+  </url>
+  <url>
        <loc>https://avuyilemthembu.co.za/blog/</loc>
        <lastmod>2026-07-20T11:40:52+00:00</lastmod>
        <changefreq>daily</changefreq>

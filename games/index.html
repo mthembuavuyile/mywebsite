@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games Arcade | Avuyile Mthembu</title>
+  <meta name="description" content="Explore and play an interactive collection of 2D and 3D web games built with JavaScript, HTML5 Canvas, and Three.js by Avuyile Mthembu.">
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Site Stylesheets -->
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/games.css">
+</head>
+<body>
+
+  <!-- Site Header Web Component -->
+  <site-header></site-header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="games-hero">
+      <div class="container">
+        <div class="games-badge">
+          <i class="fas fa-gamepad"></i> Interactive Arcade
+        </div>
+        <h1 class="games-hero-title">Playable <span>Web Games</span></h1>
+        <p class="games-hero-subtitle">
+          Discover a collection of 2D/3D browser games, physics simulations, action shooters, and trivia games crafted with HTML5 Canvas, WebGL, and JavaScript.
+        </p>
+
+        <!-- Controls: Search & Category Filter -->
+        <div class="games-controls">
+          <div class="games-search-wrapper">
+            <i class="fas fa-search games-search-icon"></i>
+            <input type="text" id="gameSearchInput" class="games-search-input" placeholder="Search games by title, genre, or tech..." aria-label="Search Games">
+          </div>
+
+          <div class="games-filter-tabs" id="filterTabs">
+            <button class="filter-btn active" data-category="all">All Games</button>
+            <button class="filter-btn" data-category="action">Action & 3D</button>
+            <button class="filter-btn" data-category="racing">Racing</button>
+            <button class="filter-btn" data-category="casual">Casual & Quiz</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Games Grid Section -->
+    <section class="games-section">
+      <div class="container">
+        <div class="games-grid" id="gamesGrid">
+          
+          <!-- Outbreak Protocol -->
+          <article class="game-card" data-category="action" data-keywords="outbreak protocol 3d fps zombie survival shooter three.js webgl">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #450a0a 0%, #0f172a 100%);">
+              <span class="game-badge badge-3d">3D FPS</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-biohazard"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Outbreak Protocol</h2>
+              <p class="game-card-desc">An immersive 3D survival FPS game featuring animated zombie models, weapons, and atmospheric audio.</p>
+              <div class="game-tags">
+                <span class="game-tag">Three.js</span>
+                <span class="game-tag">WebGL</span>
+                <span class="game-tag">3D Audio</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/outbreak-protocol/index.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Zombie Shooter v2 -->
+          <article class="game-card" data-category="action" data-keywords="zombie shooter v2 canvas action survival 2d">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #7f1d1d 0%, #1e1b4b 100%);">
+              <span class="game-badge badge-action">Action</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-crosshairs"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Zombie Shooter v2</h2>
+              <p class="game-card-desc">Enhanced 2D top-down zombie survival game with upgraded weapons, wave scaling, and high-energy combat.</p>
+              <div class="game-tags">
+                <span class="game-tag">HTML5 Canvas</span>
+                <span class="game-tag">ES6 JS</span>
+                <span class="game-tag">Arcade</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/zombie-shooterv2.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Mr Racer Ultimate -->
+          <article class="game-card" data-category="racing" data-keywords="mr racer ultimate racing car speed driving canvas 3d">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #78350f 0%, #0f172a 100%);">
+              <span class="game-badge badge-racing">Racing</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-flag-checkered"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Mr Racer Ultimate</h2>
+              <p class="game-card-desc">High-octane racing challenge with obstacle dodging, high score tracking, and smooth responsive controls.</p>
+              <div class="game-tags">
+                <span class="game-tag">Canvas</span>
+                <span class="game-tag">Physics</span>
+                <span class="game-tag">Racing</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/mr-racer-ultimate.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bitcoin Adventure -->
+          <article class="game-card" data-category="action" data-keywords="bitcoin adventure platformer runner crypto side scroller">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #b45309 0%, #1e1b4b 100%);">
+              <span class="game-badge badge-action">Action</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-coins"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Bitcoin Adventure</h2>
+              <p class="game-card-desc">Fast-paced crypto-themed action platformer game. Collect coins, dodge market crashes, and reach the moon!</p>
+              <div class="game-tags">
+                <span class="game-tag">Platformer</span>
+                <span class="game-tag">HTML5</span>
+                <span class="game-tag">Crypto Theme</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/bitcoin-adventure.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3D Portfolio World -->
+          <article class="game-card" data-category="action" data-keywords="3d portfolio world exploration threejs webgl interactive game">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #4c1d95 0%, #0f172a 100%);">
+              <span class="game-badge badge-3d">3D World</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-cubes"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">3D Interactive World</h2>
+              <p class="game-card-desc">Navigate a 3D environment rendered with Three.js to interactively discover projects and achievements.</p>
+              <div class="game-tags">
+                <span class="game-tag">Three.js</span>
+                <span class="game-tag">3D Graphics</span>
+                <span class="game-tag">Interactive</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/3dportfolio.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Car Racing -->
+          <article class="game-card" data-category="racing" data-keywords="car racing arcade vehicle track driving speed">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);">
+              <span class="game-badge badge-racing">Racing</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-car"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Car Racing</h2>
+              <p class="game-card-desc">Classic 2D track racing game with responsive keyboard controls and obstacle navigation.</p>
+              <div class="game-tags">
+                <span class="game-tag">2D Arcade</span>
+                <span class="game-tag">HTML5 Canvas</span>
+                <span class="game-tag">Racing</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/car-racing.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- South African Quiz -->
+          <article class="game-card" data-category="casual" data-keywords="south african quiz trivia questions history culture local">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #065f46 0%, #0f172a 100%);">
+              <span class="game-badge badge-casual">Quiz</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-question-circle"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">South African Trivia Quiz</h2>
+              <p class="game-card-desc">Test your knowledge of South African history, culture, geography, and pop culture in an engaging quiz game.</p>
+              <div class="game-tags">
+                <span class="game-tag">Trivia</span>
+                <span class="game-tag">UI/UX</span>
+                <span class="game-tag">JavaScript</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/south-african-quiz/index.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Zombie Shooter v1 -->
+          <article class="game-card" data-category="action" data-keywords="zombie shooter classic 2d survival arcade">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #312e81 0%, #0f172a 100%);">
+              <span class="game-badge badge-action">Action</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-skull-crossbones"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Zombie Shooter Classic</h2>
+              <p class="game-card-desc">The original fast-action top-down zombie arcade game that started the survival series.</p>
+              <div class="game-tags">
+                <span class="game-tag">Canvas 2D</span>
+                <span class="game-tag">Retro Arcade</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/zombie-shooter.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 30 Seconds -->
+          <article class="game-card" data-category="casual" data-keywords="30 seconds party timer trivia word guessing game">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #831843 0%, #0f172a 100%);">
+              <span class="game-badge badge-casual">Party Game</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-stopwatch"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">30 Seconds Party Game</h2>
+              <p class="game-card-desc">Digital version of the popular fast-thinking group board game with built-in timers and deck generators.</p>
+              <div class="game-tags">
+                <span class="game-tag">Party Game</span>
+                <span class="game-tag">Timer</span>
+                <span class="game-tag">Interactive</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/30-seconds.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slither Game -->
+          <article class="game-card" data-category="casual" data-keywords="slither snake arcade food grow classic game">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #047857 0%, #0f172a 100%);">
+              <span class="game-badge badge-casual">Arcade</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-ghost"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Slither Snake Game</h2>
+              <p class="game-card-desc">Classic snake arcade gameplay reimagined with smooth movement physics and score progression.</p>
+              <div class="game-tags">
+                <span class="game-tag">Snake Arcade</span>
+                <span class="game-tag">Canvas</span>
+                <span class="game-tag">Physics</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/slither.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Match -->
+          <article class="game-card" data-category="casual" data-keywords="memory match cards puzzle brain training flip match">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #5b21b6 0%, #0f172a 100%);">
+              <span class="game-badge badge-casual">Puzzle</span>
+              <div class="game-card-icon-wrapper">
+                <i class="fas fa-brain"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Memory Match</h2>
+              <p class="game-card-desc">Card-matching memory puzzle game designed to test recall speed with move counters and time tracking.</p>
+              <div class="game-tags">
+                <span class="game-tag">Puzzle</span>
+                <span class="game-tag">Memory</span>
+                <span class="game-tag">DOM JS</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/memory-match.html" class="play-btn" target="_blank" rel="noopener">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Empty State (hidden by default) -->
+          <div class="games-empty" id="gamesEmptyState" style="display: none;">
+            <i class="fas fa-ghost"></i>
+            <h3>No Games Found</h3>
+            <p>Try clearing your search or selecting a different category tab.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer Web Component -->
+  <site-footer></site-footer>
+
+  <!-- Navigation & Page Component Scripts -->
+  <script src="/components/components.js"></script>
+
+  <!-- Client-side Games Search & Filter Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('gameSearchInput');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const gameCards = document.querySelectorAll('.game-card');
+      const emptyState = document.getElementById('gamesEmptyState');
+
+      let currentCategory = 'all';
+      let searchQuery = '';
+
+      function filterGames() {
+        let visibleCount = 0;
+
+        gameCards.forEach(card => {
+          const categoryMatch = (currentCategory === 'all') || (card.getAttribute('data-category') === currentCategory);
+          const keywords = card.getAttribute('data-keywords').toLowerCase();
+          const title = card.querySelector('.game-card-title').textContent.toLowerCase();
+          const desc = card.querySelector('.game-card-desc').textContent.toLowerCase();
+          
+          const searchMatch = !searchQuery || 
+                              keywords.includes(searchQuery) || 
+                              title.includes(searchQuery) || 
+                              desc.includes(searchQuery);
+
+          if (categoryMatch && searchMatch) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (visibleCount === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          emptyState.style.display = 'none';
+        }
+      }
+
+      // Filter Tab Clicks
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-category');
+          filterGames();
+        });
+      });
+
+      // Search Input Listener
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        filterGames();
+      });
+    });
+  </script>
+
+</body>
+</html>
