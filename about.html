@@ -401,6 +401,68 @@
           </div>
 
         </div>
+
+        <div style="margin-top: 3.5rem;">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.6rem; color: var(--color-brand); margin-bottom: 0.5rem;">Graduation Day Highlights</h3>
+            <p style="color: var(--color-text-muted);">Boston City Campus Graduation Ceremony — Tuesday, 26 May 2026</p>
+          </div>
+
+          <div class="grad-gallery-grid">
+            <div class="grad-card" onclick="openAboutGradLightbox(0)" tabIndex="0" role="button" aria-label="View Faculty Presentation photo">
+              <img src="assets/images/grad/grad-1.jpg" alt="Avuyile Mthembu with a Boston City Campus faculty member" loading="lazy">
+              <span class="grad-card-badge"><i class="fas fa-graduation-cap"></i> Faculty</span>
+              <div class="grad-card-overlay">
+                <div class="grad-card-info">
+                  <h4>Faculty Presentation</h4>
+                  <p>Boston City Campus Ceremony</p>
+                  <span class="grad-expand-icon"><i class="fas fa-expand"></i> View Image</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grad-card" onclick="openAboutGradLightbox(1)" tabIndex="0" role="button" aria-label="View Stage Hooding Ceremony photo">
+              <img src="assets/images/grad/grad-2.jpg" alt="The official hooding ceremony on stage at Boston City Campus" loading="lazy">
+              <span class="grad-card-badge"><i class="fas fa-award"></i> Stage Ceremony</span>
+              <div class="grad-card-overlay">
+                <div class="grad-card-info">
+                  <h4>Stage Hooding Ceremony</h4>
+                  <p>Official Academic Hooding</p>
+                  <span class="grad-expand-icon"><i class="fas fa-expand"></i> View Image</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grad-card" onclick="openAboutGradLightbox(2)" tabIndex="0" role="button" aria-label="View Photo Booth Celebration photo">
+              <img src="assets/images/grad/grad-3.jpg" alt="Posing at the Boston City Campus graduation photo booth" loading="lazy">
+              <span class="grad-card-badge"><i class="fas fa-camera"></i> Celebration</span>
+              <div class="grad-card-overlay">
+                <div class="grad-card-info">
+                  <h4>Photo Booth Celebration</h4>
+                  <p>Graduation Photo Station</p>
+                  <span class="grad-expand-icon"><i class="fas fa-expand"></i> View Image</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grad-card" onclick="openAboutGradLightbox(3)" tabIndex="0" role="button" aria-label="View Graduation Regalia Portrait photo">
+              <img src="assets/images/grad/grad-4.jpg" alt="Avuyile Mthembu in full graduation regalia — Tuesday, 26 May 2026" loading="lazy">
+              <span class="grad-card-badge"><i class="fas fa-user-graduate"></i> Regalia Portrait</span>
+              <div class="grad-card-overlay">
+                <div class="grad-card-info">
+                  <h4>Graduation Regalia Portrait</h4>
+                  <p>Tuesday, 26 May 2026</p>
+                  <span class="grad-expand-icon"><i class="fas fa-expand"></i> View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem;">
+            <a href="Academic-Record.html" class="btn btn-primary"><i class="fas fa-scroll"></i> View Full Academic Record & Transcript</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -483,8 +545,74 @@
 
   </main>
 
+  <!-- Graduation Lightbox Modal -->
+  <div id="aboutGradLightbox" class="grad-lightbox" role="dialog" aria-modal="true" aria-label="Graduation image viewer">
+    <div class="grad-lightbox-content">
+      <button class="grad-lightbox-close" onclick="closeAboutGradLightbox()" aria-label="Close image lightbox">&times;</button>
+      <button class="grad-lightbox-nav grad-lightbox-prev" onclick="prevAboutGradImage()" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+      <img id="aboutGradLightboxImg" src="" alt="Graduation image preview">
+      <div id="aboutGradLightboxCaption" class="grad-lightbox-caption"></div>
+      <button class="grad-lightbox-nav grad-lightbox-next" onclick="nextAboutGradImage()" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+
+  <script>
+    const aboutGradImages = [
+      { src: 'assets/images/grad/grad-1.jpg', caption: 'Avuyile Mthembu with a Boston City Campus faculty member' },
+      { src: 'assets/images/grad/grad-2.jpg', caption: 'The official hooding ceremony on stage at Boston City Campus' },
+      { src: 'assets/images/grad/grad-3.jpg', caption: 'Posing at the Boston City Campus graduation photo booth' },
+      { src: 'assets/images/grad/grad-4.jpg', caption: 'Avuyile Mthembu in full graduation regalia — Tuesday, 26 May 2026' }
+    ];
+    let currentAboutGradIdx = 0;
+
+    function openAboutGradLightbox(idx) {
+      currentAboutGradIdx = idx;
+      updateAboutGradLightbox();
+      const lb = document.getElementById('aboutGradLightbox');
+      if (lb) lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAboutGradLightbox() {
+      const lb = document.getElementById('aboutGradLightbox');
+      if (lb) lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function prevAboutGradImage() {
+      currentAboutGradIdx = (currentAboutGradIdx - 1 + aboutGradImages.length) % aboutGradImages.length;
+      updateAboutGradLightbox();
+    }
+
+    function nextAboutGradImage() {
+      currentAboutGradIdx = (currentAboutGradIdx + 1) % aboutGradImages.length;
+      updateAboutGradLightbox();
+    }
+
+    function updateAboutGradLightbox() {
+      const img = aboutGradImages[currentAboutGradIdx];
+      const imgEl = document.getElementById('aboutGradLightboxImg');
+      const capEl = document.getElementById('aboutGradLightboxCaption');
+      if (imgEl) imgEl.src = img.src;
+      if (capEl) capEl.textContent = img.caption;
+    }
+
+    document.addEventListener('click', (e) => {
+      const lb = document.getElementById('aboutGradLightbox');
+      if (lb && e.target === lb) closeAboutGradLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('aboutGradLightbox');
+      if (!lb || !lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeAboutGradLightbox();
+      if (e.key === 'ArrowLeft') prevAboutGradImage();
+      if (e.key === 'ArrowRight') nextAboutGradImage();
+    });
+  </script>
+
   <site-footer></site-footer>
 
 </body>
 
-</html>
+</html>
