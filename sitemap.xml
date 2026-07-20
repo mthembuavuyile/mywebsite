@@ -1,97 +1,221 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-
-<url>
-  <loc>https://avuyilemthembu.co.za/</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/portfolio.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/about.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/pdfs/Avuyile_Mthembu_2026_Resume.pdf</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/book/vybecode.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/the-evolution-of-ai-navigating-the-future.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/the-rise-of-quantum-computing.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/mastering-full-stack-development.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/modern-development-practices-2025.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/future-of-work-in-tech.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/systems-analysis-and-design.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/ai-generated-video-revolution.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/btc/bitcoin.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/btc/the-economics-of-bitcoin.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/btc/fix-the-money.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://avuyilemthembu.co.za/blog/index.html</loc>
-  <lastmod>2026-05-07T10:02:41+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-
-
+  <url>
+       <loc>https://avuyilemthembu.co.za/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/about.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/pdfs/avuyile_mthembu_resume-2026-may.pdf</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/civicly/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/nexora/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/image-to-text/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/task-master/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/image-search/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/movie-explorer/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/crypto/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/file-upload/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/enigma/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/device-inspector/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/unilink/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/AgriSynth/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/kasi-gig/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/location-capture.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/games/zombie-shooterv2.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/games/outbreak-protocol/index.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/games/south-african-quiz/</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/the-architecture-of-agentic-ai.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/the-evolution-of-ai-navigating-the-future.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/the-rise-of-quantum-computing.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/mastering-full-stack-development.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/modern-development-practices-2025.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/future-of-work-in-tech.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/systems-analysis-and-design.html</loc>
+       <lastmod>2025-04-17T08:00:00+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/ai-generated-video-revolution.html</loc>
+       <lastmod>2025-06-17T00:00:00+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/btc/bitcoin.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/btc/the-economics-of-bitcoin.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/blog/btc/fix-the-money.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/vytrack/dashboard.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.5120</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/unilink/dashboard.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.5120</priority>
+  </url>
+  <url>
+       <loc>https://avuyilemthembu.co.za/portfolio/nexora/index.html</loc>
+       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.4096</priority>
+  </url>
 </urlset>
