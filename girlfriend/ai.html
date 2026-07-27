@@ -617,27 +617,46 @@
             }
             else {
                 // Free chat mode after story finishes or generic responses
-                if (inputLower.includes('love')) {
+                if (inputLower.includes('hi') || inputLower.includes('hello') || inputLower.includes('hey')) {
+                    state.mood = 0.5; updateCoreVisuals();
+                    await sendAISequence([
+                        { type: 'ai', text: "Hello Queen! Always a joy when you pop in to say hi. ✨" }
+                    ], ["Show another memory", "Play Music", "Tell me a secret"]);
+                } else if (inputLower.includes('love') || inputLower.includes('miss')) {
                     state.mood = 1.0; updateCoreVisuals();
-                    await sendAISequence([{ type: 'ai', text: "I'll make sure he gets the message. Though I'm sure he already feels it. ✨" }], ["Play Music", "Show another memory"]);
-                } else if (inputLower.includes('music') || inputLower.includes('play')) {
+                    await sendAISequence([
+                        { type: 'ai', text: "I'll make sure he gets the message. Though I'm sure he feels it every single second. ✨" }
+                    ], ["Play Music", "Show another memory", "Tell me a secret"]);
+                } else if (inputLower.includes('secret') || inputLower.includes('metric')) {
+                    state.mood = 0.9; updateCoreVisuals();
+                    const secrets = [
+                        "Secret Log #104: He smiles at his phone every single time your name pops up.",
+                        "Secret Log #208: He re-reads your messages before going to sleep.",
+                        "Secret Log #305: He talks about you to anyone willing to listen."
+                    ];
+                    await sendAISequence([{ type: 'ai', text: pick(secrets) }], ["Show another memory", "Play Music", "Joke"]);
+                } else if (inputLower.includes('music') || inputLower.includes('play') || inputLower.includes('song')) {
                     const track = playMusic();
                     await sendAISequence([
                         { type: 'system', text: `NOW PLAYING: ${track.title}` },
-                        { type: 'ai', text: "Setting the vibe for you." }
-                    ], ["Play Music", "Show another memory", "Joke"]);
-                } else if (inputLower.includes('memory') || inputLower.includes('another')) {
+                        { type: 'ai', text: "Setting the vibe for you. 🎵" }
+                    ], ["Play Music", "Show another memory", "Tell me a secret"]);
+                } else if (inputLower.includes('memory') || inputLower.includes('another') || inputLower.includes('photo')) {
                     state.mood = 0.8; updateCoreVisuals();
-                    await sendAISequence([{ type: 'ai', text: "Accessing the archives...", media: { img: pick(imageAssets), text: "He looks at this one all the time." } }], ["Play Music", "Show another memory", "Joke"]);
+                    await sendAISequence([{ type: 'ai', text: "Accessing the archives...", media: { img: pick(imageAssets), text: "He looks at this one all the time." } }], ["Play Music", "Show another memory", "Tell me a secret"]);
                 } else if (inputLower.includes('joke')) {
                     state.mood = -0.2; updateCoreVisuals();
-                    const joke = pick(["He tried to describe you to my database and I ran out of memory.", "His love for you is like an infinite loop. No break condition."]);
-                    await sendAISequence([{ type: 'ai', text: joke }], ["Play Music", "Show another memory", "Joke"]);
+                    const joke = pick([
+                        "He tried to describe you to my database and I ran out of memory. 💾",
+                        "His love for you is like an infinite loop—no break condition in sight! 🔄",
+                        "My CPU usage spikes every time I process how happy you make him. ⚡"
+                    ]);
+                    await sendAISequence([{ type: 'ai', text: joke }], ["Play Music", "Show another memory", "Tell me a secret"]);
                 } else {
                     await sendAISequence([
                         { type: 'ai', text: "He's definitely thinking about you right now." },
-                        { type: 'ai', text: "What else would you like to see?" }
-                    ], ["Play Music", "Show another memory", "Joke"]);
+                        { type: 'ai', text: "What else would you like to explore?" }
+                    ], ["Show another memory", "Play Music", "Tell me a secret"]);
                 }
             }
         }

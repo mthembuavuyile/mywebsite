@@ -35,6 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navigation Routing
     function navigateTo(targetUrl) {
+        // Pause any local page audio before leaving the page
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (iframeDoc) {
+                const subAudios = iframeDoc.querySelectorAll('audio');
+                subAudios.forEach(a => {
+                    a.pause();
+                    a.currentTime = 0;
+                });
+            }
+        } catch(e) {}
+
         // Show loader, hide iframe
         iframe.classList.remove('loaded');
         loader.style.zIndex = '2'; // Bring loader to front
