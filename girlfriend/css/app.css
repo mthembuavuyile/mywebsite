@@ -207,10 +207,10 @@ body, html {
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--nav-border);
     border-radius: 30px;
-    padding: 6px 14px 6px 18px;
+    padding: 6px 10px 6px 14px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     z-index: 100;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     transition: transform 0.3s ease;
