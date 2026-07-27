@@ -1,150 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Girlfriend ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Nosipho — My Universe</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
 </head>
-
 <body>
 
-    <!-- Background Effects -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <canvas id="particles"></canvas>
+    <!-- App Background -->
+    <div class="app-bg"></div>
+    <div class="app-stars" id="app-stars"></div>
 
-    <div class="container">
-        <div class="header">
-            <h1>For My Girlfriend</h1>
-            <p class="subtitle">A special universe of small web projects I crafted just for you, filled with love and
-                magic.</p>
+    <!-- Main Content Area (Iframe) -->
+    <main class="app-content">
+        <div class="iframe-loader" id="iframe-loader">
+            <div class="spinner"></div>
         </div>
+        <iframe id="app-frame" src="home.html" frameborder="0" allow="autoplay; fullscreen"></iframe>
+    </main>
 
-        <div class="grid">
-            <a href="her-ai.html" class="card">
-                <div class="card-icon">✨</div>
-                <h2>Angel AI</h2>
-                <p>Your personal chat companion</p>
-            </a>
-
-            <a href="ai.html" class="card">
-                <div class="card-icon">🤖</div>
-                <h2>AI Chat v2</h2>
-                <p>An upgraded intelligence</p>
-            </a>
-
-            <a href="get-well-soon.html" class="card">
-                <div class="card-icon">🩹</div>
-                <h2>Get Well Soon</h2>
-                <p>A little something to cheer you up</p>
-            </a>
-
-            <a href="my-heart.html" class="card">
-                <div class="card-icon">💖</div>
-                <h2>My Love</h2>
-                <p>A pure expression of love</p>
-            </a>
-
-            <a href="nosipho.html" class="card">
-                <div class="card-icon">🌹</div>
-                <h2>Nosipho</h2>
-                <p>A dedicated page for my love</p>
-            </a>
-
-            <a href="slider.html" class="card">
-                <div class="card-icon">📸</div>
-                <h2>Our Memories</h2>
-                <p>A beautiful slider of moments</p>
-            </a>
-
-            <a href="love-letter.html" class="card">
-                <div class="card-icon">💌</div>
-                <h2>Love letter</h2>
-                <p>Special words for you.</p>
-            </a>
-
-            <a href="forever-yours.html" class="card">
-                <div class="card-icon">💝</div>
-                <h2>Forever Yours</h2>
-                <p>A journey of love awaits you</p>
-            </a>
+    <!-- Global Music Player -->
+    <div class="global-music-player">
+        <div class="music-info">
+            <i class="fas fa-music music-icon"></i>
+            <span class="music-title">Our Theme</span>
         </div>
-
-        <div class="footer">
-            Made with <span class="heart">❤️</span> just for you
-        </div>
+        <button id="global-play-btn" class="music-btn"><i class="fas fa-play"></i></button>
+        <audio id="global-audio" src="assets/audio/so-into-you-temiia.mp3" loop preload="auto"></audio>
     </div>
 
-    <!-- Particle System Script -->
-    <script>
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
+    <!-- Sidebar (Desktop) / Bottom Nav (Mobile) -->
+    <nav class="app-nav">
+        <a href="home.html" class="nav-item active" data-target="home.html">
+            <i class="fas fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="her-ai.html" class="nav-item" data-target="her-ai.html">
+            <i class="fas fa-sparkles"></i>
+            <span>Angel AI</span>
+        </a>
+        <a href="my-heart.html" class="nav-item" data-target="my-heart.html">
+            <i class="fas fa-calendar-heart"></i>
+            <span>Timeline</span>
+        </a>
+        <a href="slider.html" class="nav-item" data-target="slider.html">
+            <i class="fas fa-images"></i>
+            <span>Memories</span>
+        </a>
+        <div class="nav-item has-menu" id="more-menu-btn">
+            <i class="fas fa-bars"></i>
+            <span>More</span>
+            
+            <div class="more-menu" id="more-menu">
+                <a href="forever-yours.html" class="menu-item" data-target="forever-yours.html">
+                    <i class="fas fa-infinity"></i> Forever Yours
+                </a>
+                <a href="love-letter.html" class="menu-item" data-target="love-letter.html">
+                    <i class="fas fa-envelope-open-heart"></i> Love Letter
+                </a>
+                <a href="nosipho.html" class="menu-item" data-target="nosipho.html">
+                    <i class="fas fa-crown"></i> Her Heart
+                </a>
+                <a href="get-well-soon.html" class="menu-item" data-target="get-well-soon.html">
+                    <i class="fas fa-hand-holding-heart"></i> Get Well
+                </a>
+                <a href="ai.html" class="menu-item" data-target="ai.html">
+                    <i class="fas fa-robot"></i> AI Chat v2
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        // Resize canvas
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        // Particles
-        const particlesArray = [];
-        const colors = ['rgba(255, 77, 128, 0.4)', 'rgba(255, 255, 255, 0.2)', 'rgba(255, 179, 198, 0.3)'];
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5 - 0.2; // slight upward drift
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Wrap around
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            for (let i = 0; i < 80; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-    </script>
+    <script src="js/app.js"></script>
 </body>
-
 </html>

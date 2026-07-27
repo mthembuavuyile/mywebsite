@@ -1,0 +1,315 @@
+/* css/app.css */
+:root {
+    --bg-color: #06050a;
+    --nav-bg: rgba(20, 18, 28, 0.7);
+    --nav-border: rgba(255, 255, 255, 0.08);
+    --primary: #ff4d6d;
+    --primary-glow: rgba(255, 77, 109, 0.4);
+    --text-main: #f0f0f5;
+    --text-muted: #a19db3;
+    --nav-height: 70px;
+    --sidebar-width: 250px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Mobile friendly */
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+/* Background */
+.app-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 50% 50%, #1b0a1c 0%, var(--bg-color) 100%);
+    z-index: -2;
+}
+
+.app-stars {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Main Content (Iframe) */
+.app-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: var(--nav-height);
+    z-index: 1;
+    transition: left 0.3s ease;
+}
+
+#app-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#app-frame.loaded {
+    opacity: 1;
+}
+
+/* Loader */
+.iframe-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1; /* Behind iframe so it hides when iframe has opaque bg */
+    pointer-events: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 77, 109, 0.2);
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Navigation Bar */
+.app-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--nav-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    gap: 4px;
+    flex: 1;
+    height: 100%;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-item i {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-item.active {
+    color: var(--primary);
+}
+
+.nav-item.active i {
+    transform: translateY(-2px) scale(1.1);
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.nav-item:active {
+    transform: scale(0.95);
+}
+
+/* More Menu */
+.has-menu {
+    position: relative;
+}
+
+.more-menu {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 10px;
+    background: rgba(30, 26, 40, 0.95);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--nav-border);
+    border-radius: 16px;
+    padding: 8px 0;
+    min-width: 180px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px) scale(0.95);
+    transform-origin: bottom right;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.has-menu.open .more-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.menu-item i {
+    color: var(--primary);
+    width: 20px;
+    text-align: center;
+}
+
+.menu-item:hover, .menu-item.active {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Global Music Player */
+.global-music-player {
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top));
+    right: 20px;
+    background: rgba(10, 8, 15, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--nav-border);
+    border-radius: 30px;
+    padding: 6px 14px 6px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.global-music-player.hidden {
+    transform: translateY(-100px);
+}
+
+.music-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.music-icon {
+    color: var(--primary);
+}
+
+.global-music-player.playing .music-icon {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+.music-btn {
+    background: var(--primary);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.music-btn:active {
+    transform: scale(0.9);
+}
+
+/* Desktop Sidebar */
+@media (min-width: 768px) {
+    .app-nav {
+        top: 0;
+        bottom: 0;
+        right: auto;
+        width: var(--sidebar-width);
+        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: max(40px, env(safe-area-inset-top));
+        border-top: none;
+        border-right: 1px solid var(--nav-border);
+    }
+    
+    .nav-item {
+        flex: none;
+        width: 100%;
+        height: auto;
+        padding: 20px 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding-left: 40px;
+        font-size: 1rem;
+        gap: 16px;
+    }
+    
+    .nav-item i {
+        margin-bottom: 0;
+        font-size: 1.2rem;
+        width: 24px;
+        text-align: center;
+    }
+
+    .app-content {
+        left: var(--sidebar-width);
+        bottom: 0;
+    }
+
+    .more-menu {
+        bottom: auto;
+        top: 0;
+        left: 100%;
+        right: auto;
+        transform-origin: top left;
+        transform: translateX(-10px) scale(0.95);
+    }
+
+    .has-menu.open .more-menu {
+        transform: translateX(10px) scale(1);
+    }
+}
