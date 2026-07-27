@@ -132,6 +132,7 @@
             letter-spacing: 3px; 
             text-transform: uppercase; 
             background: linear-gradient(to right, #fff, #b3e5fc);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -315,7 +316,7 @@
             overflow-x: auto; 
             padding-bottom: 6px; 
             scrollbar-width: none; 
-            WebkitOverflowScrolling: touch;
+            -webkit-overflow-scrolling: touch;
         }
         .quick-actions::-webkit-scrollbar { display: none; }
         
@@ -406,7 +407,7 @@
         <div class="header">
             <div class="ai-identity">
                 <div class="ai-brand">
-                    <div class="avatar"><i class="fa-solid fa-sparkles"></i></div>
+                    <div class="avatar"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                     <h1>Love bot</h1>
                 </div>
                 <div class="status-badge" id="status-badge">
