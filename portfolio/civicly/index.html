@@ -8,14 +8,17 @@
   <!-- Primary SEO -->
   <title>Civicly — Real-Time Neighborhood Issue Reporting & Map Showcase</title>
   <meta name="title" content="Civicly — Real-Time Neighborhood Issue Reporting & Map Showcase">
-  <meta name="description" content="Explore Civicly, a simple, real-time civic issue reporting app with an interactive neighborhood map. Pin potholes, leaks, and track repairs live.">
-  <meta name="keywords" content="Civicly, civic technology, neighborhood reporting, Leaflet map, OpenStreetMap, Vylex, portfolio, developer">
+  <meta name="description"
+    content="Explore Civicly, a simple, real-time civic issue reporting app with an interactive neighborhood map. Pin potholes, leaks, and track repairs live.">
+  <meta name="keywords"
+    content="Civicly, civic technology, neighborhood reporting, Leaflet map, OpenStreetMap, Vylex, portfolio, developer">
   <meta name="author" content="Vylex">
 
   <!-- Fonts & Icon Libraries -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
   <!-- Leaflet CSS for the Live Demo -->
@@ -28,17 +31,17 @@
       --bg-surface: #0f172a;
       --bg-card: #1e293b;
       --border-color: #334155;
-      
+
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-      
+
       --accent: #3b82f6;
       --accent-hover: #2563eb;
       --accent-success: #10b981;
       --accent-warning: #f59e0b;
       --accent-danger: #ef4444;
-      
+
       --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --radius-sm: 4px;
       --radius-md: 8px;
@@ -64,7 +67,7 @@
       position: absolute;
       inset: 0;
       background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
       background-size: 40px 40px;
       background-position: center top;
       pointer-events: none;
@@ -163,6 +166,7 @@
       margin-bottom: 20px;
       background: linear-gradient(135deg, #ffffff 40%, var(--text-muted));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -290,6 +294,7 @@
     .demo-feed::-webkit-scrollbar {
       width: 4px;
     }
+
     .demo-feed::-webkit-scrollbar-thumb {
       background: var(--border-color);
       border-radius: 2px;
@@ -334,9 +339,20 @@
       letter-spacing: 0.02em;
     }
 
-    .cat-pothole { background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-    .cat-leak { background-color: rgba(59, 130, 246, 0.1); color: #60a5fa; }
-    .cat-outage { background-color: rgba(239, 68, 68, 0.1); color: #f87171; }
+    .cat-pothole {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .cat-leak {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: #60a5fa;
+    }
+
+    .cat-outage {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+    }
 
     .card-badge {
       font-size: 0.7rem;
@@ -346,15 +362,30 @@
       text-transform: capitalize;
     }
 
-    .badge-open { background-color: rgba(239, 68, 68, 0.1); color: var(--accent-danger); border: 1px solid rgba(239, 68, 68, 0.2); }
-    .badge-progress { background-color: rgba(245, 158, 11, 0.1); color: var(--accent-warning); border: 1px solid rgba(245, 158, 11, 0.2); }
-    .badge-resolved { background-color: rgba(16, 185, 129, 0.1); color: var(--accent-success); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .badge-open {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--accent-danger);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .badge-progress {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--accent-warning);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .badge-resolved {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--accent-success);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
 
     .card-desc {
       font-size: 0.85rem;
       color: var(--text-main);
       display: -webkit-box;
       -webkit-line-clamp: 2;
+      line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -431,9 +462,23 @@
       text-align: center;
     }
 
-    .status-btn.active[data-status="open"] { border-color: var(--accent-danger); color: var(--accent-danger); background-color: rgba(239, 68, 68, 0.05); }
-    .status-btn.active[data-status="progress"] { border-color: var(--accent-warning); color: var(--accent-warning); background-color: rgba(245, 158, 11, 0.05); }
-    .status-btn.active[data-status="resolved"] { border-color: var(--accent-success); color: var(--accent-success); background-color: rgba(16, 185, 129, 0.05); }
+    .status-btn.active[data-status="open"] {
+      border-color: var(--accent-danger);
+      color: var(--accent-danger);
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .status-btn.active[data-status="progress"] {
+      border-color: var(--accent-warning);
+      color: var(--accent-warning);
+      background-color: rgba(245, 158, 11, 0.05);
+    }
+
+    .status-btn.active[data-status="resolved"] {
+      border-color: var(--accent-success);
+      color: var(--accent-success);
+      background-color: rgba(16, 185, 129, 0.05);
+    }
 
     /* Right Demo Map */
     .demo-map-wrap {
@@ -486,7 +531,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       border: 2px solid #ffffff;
       transition: all 0.2s ease;
     }
@@ -507,9 +552,17 @@
       transform: rotate(45deg);
     }
 
-    .custom-div-icon.open .custom-pin { background-color: var(--accent-danger); }
-    .custom-div-icon.progress .custom-pin { background-color: var(--accent-warning); }
-    .custom-div-icon.resolved .custom-pin { background-color: var(--accent-success); }
+    .custom-div-icon.open .custom-pin {
+      background-color: var(--accent-danger);
+    }
+
+    .custom-div-icon.progress .custom-pin {
+      background-color: var(--accent-warning);
+    }
+
+    .custom-div-icon.resolved .custom-pin {
+      background-color: var(--accent-success);
+    }
 
     /* Features Section */
     .features-grid {
@@ -623,13 +676,13 @@
         grid-template-columns: 1fr;
         height: auto;
       }
-      
+
       .demo-sidebar {
         height: 300px;
         border-right: none;
         border-bottom: 1px solid var(--border-color);
       }
-      
+
       .demo-map-wrap {
         height: 350px;
       }
@@ -654,23 +707,20 @@
         <span class="brand-name">Civicly</span>
       </a>
       <div class="nav-links">
-        <a href="https://nexys-social.vercel.app/policy.html" class="nav-link" target="_blank" rel="noopener noreferrer">Privacy & Terms</a>
+        <a href="https://nexys-social.vercel.app/policy.html" class="nav-link" target="_blank"
+          rel="noopener noreferrer">Privacy & Terms</a>
         <a href="../" class="nav-link"><i class="fa-solid fa-house" style="margin-right: 4px;"></i> Hub</a>
       </div>
     </nav>
 
     <!-- Hero Section -->
     <header class="hero">
-      <div class="hero-badge">
-        <i class="fa-solid fa-circle-dot" style="font-size: 8px; animation: pulse 1.5s infinite alternate;"></i>
-        <span>Live Web Application Demo</span>
-      </div>
       <h1>Report local issues. Track municipal repairs.</h1>
       <p>
-        Civicly is a clean, real-time civic issue reporting platform built for neighborhoods. 
+        Civicly is a clean, real-time civic issue reporting platform built for neighborhoods.
         Detect coordinates using GPS, choose a category, track local resolutions, and vote on community priorities.
       </p>
-      
+
       <div class="btn-group">
         <a href="https://nexys-social.vercel.app" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
           Launch Live App <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -695,7 +745,7 @@
             <span class="demo-sidebar-title"><i class="fa-solid fa-list-ul"></i> Local Reports</span>
             <span style="font-size: 0.7rem; color: var(--text-dim);">Mockup Environment</span>
           </div>
-          
+
           <div class="demo-feed" id="demo-feed-list">
             <!-- Populated via JS -->
           </div>
@@ -714,28 +764,32 @@
       <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-location-arrow"></i></div>
         <h3>Easy Issue Pinning</h3>
-        <p>Users type a description, pick a category, drop pin coordinates directly on the map, or trigger GPS to auto-detect location instantly.</p>
+        <p>Users type a description, pick a category, drop pin coordinates directly on the map, or trigger GPS to
+          auto-detect location instantly.</p>
       </div>
-      
+
       <!-- Feature 2 -->
       <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-map-location-dot"></i></div>
         <h3>Dark-Themed Map</h3>
-        <p>A high-performance Leaflet mapping viewport displaying pins color-coded by status (Open, In Progress, Resolved) and styled by category.</p>
+        <p>A high-performance Leaflet mapping viewport displaying pins color-coded by status (Open, In Progress,
+          Resolved) and styled by category.</p>
       </div>
 
       <!-- Feature 3 -->
       <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-thumbs-up"></i></div>
         <h3>Upvote Prioritization</h3>
-        <p>Enable collective priority voicing. Neighborhood residents click "Confirm Issue" to upvote, helping city works identify high-impact items.</p>
+        <p>Enable collective priority voicing. Neighborhood residents click "Confirm Issue" to upvote, helping city
+          works identify high-impact items.</p>
       </div>
 
       <!-- Feature 4 -->
       <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-user-shield"></i></div>
         <h3>Creator Status Controls</h3>
-        <p>Simulate workflow resolution. The user who reported the issue holds exclusive status controls to move cards from Open, to In Progress, to Resolved.</p>
+        <p>Simulate workflow resolution. The user who reported the issue holds exclusive status controls to move cards
+          from Open, to In Progress, to Resolved.</p>
       </div>
     </section>
 
@@ -757,7 +811,8 @@
     <footer>
       <p>© 2026 Civicly · Developed under Nexys Social Suite</p>
       <div style="margin-top: 10px;">
-        <a href="https://nexys-social.vercel.app/policy.html" target="_blank" rel="noopener noreferrer">Terms of Service & Privacy Policy</a>
+        <a href="https://nexys-social.vercel.app/policy.html" target="_blank" rel="noopener noreferrer">Terms of Service
+          & Privacy Policy</a>
       </div>
     </footer>
   </div>
@@ -895,7 +950,7 @@
     function renderDemoFeed() {
       const list = document.getElementById('demo-feed-list');
       if (!list) return;
-      
+
       list.innerHTML = '';
 
       demoIssues.forEach(issue => {
@@ -942,20 +997,20 @@
     }
 
     // Interactive Demo controls
-    window.focusOnMap = function(id) {
+    window.focusOnMap = function (id) {
       const issue = demoIssues.find(i => i.id === id);
       const marker = markersMap[id];
       if (issue && marker) {
         map.setView([issue.lat, issue.lon], 16);
         marker.openPopup();
-        
+
         // Highlight card in UI
         document.querySelectorAll('.demo-card').forEach(c => c.classList.remove('active'));
         document.getElementById(`card-${id}`).classList.add('active');
       }
     };
 
-    window.scrollToCard = function(id) {
+    window.scrollToCard = function (id) {
       const card = document.getElementById(`card-${id}`);
       if (card) {
         document.querySelectorAll('.demo-card').forEach(c => c.classList.remove('active'));
@@ -964,7 +1019,7 @@
       }
     };
 
-    window.upvoteDemoIssue = function(id) {
+    window.upvoteDemoIssue = function (id) {
       const issue = demoIssues.find(i => i.id === id);
       if (!issue) return;
 
@@ -987,14 +1042,14 @@
       }
     };
 
-    window.updateDemoStatus = function(id, status) {
+    window.updateDemoStatus = function (id, status) {
       const issue = demoIssues.find(i => i.id === id);
       if (!issue) return;
 
       issue.status = status;
       renderDemoFeed();
       plotDemoMarkers();
-      
+
       const activeMarker = markersMap[id];
       if (activeMarker && map.hasLayer(activeMarker)) {
         setTimeout(() => activeMarker.openPopup(), 100);
