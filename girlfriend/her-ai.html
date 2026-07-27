@@ -122,10 +122,10 @@
 </div>
 
 <!-- LIGHTBOX -->
-<div id="lightbox">
+<div id="lightbox" onclick="if(event.target === this) closeLightbox()">
   <button id="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
-  <img id="lightbox-img" src="" alt="">
-  <div id="lightbox-caption"></div>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <div id="lightbox-caption" onclick="event.stopPropagation()"></div>
 </div>
 
 <script>
@@ -523,6 +523,10 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
 
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
 function showRandomMemory() {
   const m = memories[Math.floor(Math.random() * memories.length)];
   const wrap = document.createElement('div');
@@ -539,7 +543,7 @@ function showRandomMemory() {
 }
 
 // ═══════════════════════════════════════════════
-//   LOVE NOTES
+//   LOVE NOTES (Typewriter & Shuffling Effect)
 // ═══════════════════════════════════════════════
 function buildPresetNotes() {
   const list = document.getElementById('notes-list');
@@ -551,11 +555,32 @@ function buildPresetNotes() {
   });
 }
 
+function typeAndShuffleNote(cardEl, fullText, authorText) {
+  const textEl = cardEl.querySelector('.note-text');
+  const symbols = ['✦', '✨', '💖', '🌸', '🌹', '💕', '◆', '✉'];
+  let charIdx = 0;
+  textEl.innerHTML = '';
+
+  const timer = setInterval(() => {
+    if (charIdx < fullText.length) {
+      charIdx++;
+      const currentSlice = fullText.substring(0, charIdx);
+      const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+      textEl.innerHTML = currentSlice + (charIdx < fullText.length ? `<span style="color:var(--rose); font-style:normal; opacity:0.8; font-size:0.9em;"> ${randomSymbol}</span>` : '');
+      textEl.scrollTop = textEl.scrollHeight;
+    } else {
+      clearInterval(timer);
+      textEl.innerHTML = fullText;
+    }
+  }, 22);
+}
+
 async function generateNote() {
   const btn = document.getElementById('note-btn');
   btn.disabled = true;
   btn.textContent = '✦ Writing with love…';
   
+  let noteText = '';
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -570,26 +595,24 @@ async function generateNote() {
       })
     });
     const data = await resp.json();
-    const note = data.content.map(b => b.text||'').join('');
-    
-    const card = document.createElement('div');
-    card.className = 'note-card';
-    card.style.animation = 'bubbleIn 0.5s ease';
-    card.innerHTML = `<div class="note-text">${note}</div><div class="note-author">— ${HIS_NAME}, always</div>`;
-    document.getElementById('notes-list').prepend(card);
+    noteText = data.content.map(b => b.text||'').join('');
   } catch(e) {
     const fallbacks = [
       `You are the version of home that no building can hold. When I am with you, I am exactly where I'm supposed to be — and I will keep choosing that, over and over, until we are old and our laughter has lines on our faces.`,
       `I keep finding new reasons to love you in the quietest moments — the way you breathe when you sleep, the way you light up talking about things you care about. I want to spend forever noticing.`,
+      `Every single day with you, MaMdunge, feels like a prayer answered. My heart doesn't rest anywhere else except right next to yours.`,
     ];
-    const note = fallbacks[Math.floor(Math.random()*fallbacks.length)];
-    const card = document.createElement('div');
-    card.className = 'note-card';
-    card.style.animation = 'bubbleIn 0.5s ease';
-    card.innerHTML = `<div class="note-text">${note}</div><div class="note-author">— ${HIS_NAME}, always</div>`;
-    document.getElementById('notes-list').prepend(card);
+    noteText = fallbacks[Math.floor(Math.random()*fallbacks.length)];
   }
   
+  const card = document.createElement('div');
+  card.className = 'note-card';
+  card.style.animation = 'bubbleIn 0.5s ease';
+  card.innerHTML = `<div class="note-text"></div><div class="note-author">— ${HIS_NAME}, always</div>`;
+  document.getElementById('notes-list').prepend(card);
+  
+  typeAndShuffleNote(card, noteText, `— ${HIS_NAME}, always`);
+
   btn.disabled = false;
   btn.textContent = '✦ Generate another love letter';
 }

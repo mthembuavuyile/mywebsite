@@ -456,12 +456,28 @@
                 return;
             }
 
+            const today = new Date();
+            const nowYear = today.getFullYear();
+            const nowMonth = today.getMonth();
+
             const monthLabel = `${monthNames[currentMonth]} ${currentYear}`;
-            noteTitle.innerText = `${monthLabel} is still waiting for us…`;
-            noteText.innerText = `There are no memories saved here yet, not because we’re missing something, but because the next chapters are still ahead of us.\n\nI can’t wait to turn these blank dates into real moments: a day together, a kiss, a laugh, a “we made it” kind of memory.\n\nUntil then… I’m still choosing you, today, tomorrow, and every day after that. ❤️`;
+
+            const isPast = (currentYear < nowYear) || (currentYear === nowYear && currentMonth < nowMonth);
+            const isCurrent = (currentYear === nowYear && currentMonth === nowMonth);
+
+            if (isPast) {
+                noteTitle.innerText = `${monthLabel} — Unrecorded Moments`;
+                noteText.innerText = `Even when no specific memory was logged here, every single day of ${monthLabel} brought us closer.\n\nSome moments are felt deep in the heart rather than written down. You are my home in every month that passes. ❤️`;
+            } else if (isCurrent) {
+                noteTitle.innerText = `${monthLabel} is unfolding right now…`;
+                noteText.innerText = `We are living in this chapter together today.\n\nEvery moment with you this month is a memory in the making. I'm so grateful to have you by my side. ❤️`;
+            } else {
+                noteTitle.innerText = `${monthLabel} is waiting for us…`;
+                noteText.innerText = `There are no memories saved here yet, not because we’re missing something, but because the next chapters are still ahead of us.\n\nI can’t wait to turn these blank dates into real moments: a day together, a kiss, a laugh, a “we made it” kind of memory.\n\nUntil then… I’m still choosing you, today, tomorrow, and every day after that. ❤️`;
+            }
 
             noteWrap.classList.remove('hidden');
-            gsap.fromTo(noteWrap, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: 0.2 });
+            gsap.fromTo(noteWrap, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
         }
 
         // --- MUSIC TOGGLE LOGIC ---
