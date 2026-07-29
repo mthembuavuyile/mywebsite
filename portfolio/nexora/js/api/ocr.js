@@ -448,6 +448,21 @@
             $('ocr-modal').classList.add('open');
             if (currentTab === 'camera') startCamera();
         };
+
+        window.openOCRWithFile = function (file) {
+            injectModal();
+            setTimeout(() => {
+                window._ocrOpen?.();
+                const uploadTabBtn = document.querySelector('.ocr-tab[data-tab="upload"]');
+                if (uploadTabBtn) uploadTabBtn.click();
+                if (file && typeof loadFile === 'function') loadFile(file);
+            }, 50);
+        };
+
+        window.openOCRModal = function () {
+            injectModal();
+            setTimeout(() => window._ocrOpen?.(), 50);
+        };
     }
 
     // ── Registry Module ──────────────────────────────────────

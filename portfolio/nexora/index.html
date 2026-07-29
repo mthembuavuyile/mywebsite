@@ -56,6 +56,9 @@
 
   <!-- Quick Category Navigation Bar -->
   <nav class="category-nav-bar" aria-label="Quick Category Access">
+    <button class="cat-pill ocr-pill" onclick="if(window.openOCRModal) window.openOCRModal(); else sendSuggestion('scan text from image');">
+      📷 <span>OCR Scanner</span>
+    </button>
     <button class="cat-pill space-pill" onclick="sendSuggestion('Show me latest space news')">
       🚀 <span>Space News</span>
     </button>
@@ -87,13 +90,19 @@
       <div id="welcome-screen">
         <div class="welcome-orb"><i class="fas fa-satellite-dish"></i></div>
         <h2>How can I help you today?</h2>
-        <p>Ask about live space news, weather forecasts, crypto prices, math problems, word definitions, or generate visual cards.</p>
+        <p>Ask about live space news, weather forecasts, crypto prices, math problems, word definitions, or scan documents with OCR.</p>
         
         <div class="suggestions-grid">
-          <button class="suggestion-card hero-card" onclick="sendSuggestion('Show me latest space news')">
+          <button class="suggestion-card hero-card" onclick="if(window.openOCRModal) window.openOCRModal(); else sendSuggestion('scan text from image');">
+            <span class="sug-icon">📄</span>
+            <div class="sug-title">Text Recognition (OCR)</div>
+            <div class="sug-sub">Scan photos, documents or camera stream</div>
+          </button>
+
+          <button class="suggestion-card" onclick="sendSuggestion('Show me latest space news')">
             <span class="sug-icon">🚀</span>
             <div class="sug-title">Spaceflight Intelligence</div>
-            <div class="sug-sub">Latest SpaceX, NASA, Artemis & Orbit headlines</div>
+            <div class="sug-sub">Latest SpaceX, NASA & Orbit headlines</div>
           </button>
 
           <button class="suggestion-card" onclick="sendSuggestion('Weather in London')">
@@ -128,10 +137,16 @@
     </button>
 
     <div class="input-zone">
+      <!-- Slash Command Palette Autocomplete -->
+      <div id="slash-palette" class="slash-palette hidden" role="listbox" aria-label="Slash commands"></div>
+
       <form id="form" autocomplete="off">
         <div class="input-row">
-          <input type="text" id="input" placeholder="Ask Nexora anything (e.g. 'space news', 'bitcoin', 'weather')…" aria-label="Message input">
+          <input type="text" id="input" placeholder="Type / for tools or ask Nexora anything (e.g. 'space news', 'bitcoin', 'weather')…" aria-label="Message input">
           <div class="input-actions">
+            <button type="button" id="ocr-trigger-btn" aria-label="OCR Scan" title="Scan image text (OCR)">
+              <i class="fas fa-camera"></i>
+            </button>
             <button type="button" id="mic-btn" aria-label="Voice input" title="Voice Search">
               <i class="fas fa-microphone"></i>
             </button>
@@ -141,7 +156,7 @@
           </div>
         </div>
       </form>
-      <div class="footer-note">Nexora Live Data Assistant • <a href="about.html">Architecture & Capabilities</a></div>
+      <div class="footer-note">Nexora Live Data Assistant • Type <code>/</code> for tool palette • Drop or paste images for OCR • <a href="about.html">Architecture</a></div>
     </div>
   </div>
 
@@ -240,6 +255,15 @@
   <script src="js/api/currency.js"></script>
   <script src="js/api/math.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Global Drag & Drop Overlay -->
+  <div id="drop-overlay" class="drop-overlay hidden">
+    <div class="drop-card">
+      <i class="fas fa-cloud-upload-alt fa-3x"></i>
+      <h3>Drop Image Here</h3>
+      <p>Nexora will extract text from your photo automatically with OCR scanner</p>
+    </div>
+  </div>
 
   <!-- 3. Core App Controller Last -->
   <script src="js/app.js"></script>

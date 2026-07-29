@@ -52,6 +52,8 @@
     initVoices();
     initSpeechRec();
     initSpaceHubModal();
+    initOCRButtonsAndDragDrop();
+    initSlashCommandPalette();
     handleScrollVisibility();
     checkUrlParams();
 
@@ -61,6 +63,136 @@
         inputEl.value = text;
         formEl.dispatchEvent(new Event('submit', { cancelable: true }));
     };
+
+    // ── OCR Trigger & Drag-Drop / Paste Integration ──
+    function initOCRButtonsAndDragDrop() {
+        const ocrBtn = document.getElementById('ocr-trigger-btn');
+        if (ocrBtn) {
+            ocrBtn.addEventListener('click', () => {
+                if (window.NexoraAudio) window.NexoraAudio.playClick();
+                if (window.openOCRModal) window.openOCRModal();
+                else processInput('scan text from image');
+            });
+        }
+
+        const dropOverlay = document.getElementById('drop-overlay');
+
+        // Global Drag Over
+        window.addEventListener('dragover', e => {
+            if (e.dataTransfer && e.dataTransfer.types && Array.from(e.dataTransfer.types).includes('Files')) {
+                e.preventDefault();
+                if (dropOverlay) dropOverlay.classList.remove('hidden');
+            }
+        });
+
+        // Global Drag Leave
+        window.addEventListener('dragleave', e => {
+            if (e.clientX <= 0 || e.clientY <= 0 || e.clientX >= window.innerWidth || e.clientY >= window.innerHeight) {
+                if (dropOverlay) dropOverlay.classList.add('hidden');
+            }
+        });
+
+        // Global Drop
+        window.addEventListener('drop', e => {
+            e.preventDefault();
+            if (dropOverlay) dropOverlay.classList.add('hidden');
+
+            const files = e.dataTransfer?.files;
+            if (files && files.length > 0) {
+                const file = files[0];
+                if (file.type.startsWith('image/')) {
+                    if (window.openOCRWithFile) {
+                        window.openOCRWithFile(file);
+                    } else {
+                        processInput('scan text from image');
+                    }
+                }
+            }
+        });
+
+        // Global Paste (Ctrl+V Image Handler)
+        window.addEventListener('paste', e => {
+            const items = e.clipboardData?.items;
+            if (!items) return;
+
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const file = items[i].getAsFile();
+                    if (file) {
+                        e.preventDefault();
+                        if (window.openOCRWithFile) {
+                            window.openOCRWithFile(file);
+                        } else {
+                            processInput('scan text from image');
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
+    // ── Slash Command Palette (/ Tool Launcher) ───────
+    function initSlashCommandPalette() {
+        const slashPalette = document.getElementById('slash-palette');
+        if (!slashPalette) return;
+
+        function updatePalette() {
+            const val = inputEl.value;
+            if (!val.startsWith('/')) {
+                slashPalette.classList.add('hidden');
+                return;
+            }
+
+            const search = val.slice(1).toLowerCase().trim();
+            const modules = (window.NexoraRegistry && window.NexoraRegistry.getAllModules)
+                ? window.NexoraRegistry.getAllModules()
+                : [];
+
+            const filtered = modules.filter(m => 
+                m.slash.toLowerCase().includes(search) || 
+                m.name.toLowerCase().includes(search) ||
+                m.desc.toLowerCase().includes(search)
+            );
+
+            if (!filtered.length) {
+                slashPalette.classList.add('hidden');
+                return;
+            }
+
+            slashPalette.innerHTML = filtered.map(m => `
+                <div class="slash-item" data-example="${escapeHtml(m.example || m.slash)}">
+                    <div class="slash-icon"><i class="${m.icon}"></i></div>
+                    <div class="slash-details">
+                        <span class="slash-title">${escapeHtml(m.name)}</span>
+                        <span class="slash-desc">${escapeHtml(m.desc)}</span>
+                    </div>
+                    <span class="slash-cmd">${escapeHtml(m.slash)}</span>
+                </div>
+            `).join('');
+
+            slashPalette.classList.remove('hidden');
+
+            slashPalette.querySelectorAll('.slash-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.NexoraAudio) window.NexoraAudio.playClick();
+                    const ex = item.getAttribute('data-example');
+                    inputEl.value = ex;
+                    slashPalette.classList.add('hidden');
+                    inputEl.focus();
+                });
+            });
+        }
+
+        inputEl.addEventListener('input', updatePalette);
+        inputEl.addEventListener('focus', () => { if (inputEl.value.startsWith('/')) updatePalette(); });
+        
+        document.addEventListener('click', e => {
+            if (!slashPalette.contains(e.target) && e.target !== inputEl) {
+                slashPalette.classList.add('hidden');
+            }
+        });
+    }
 
     // Check URL parameters for direct deep-linking
     function checkUrlParams() {
@@ -184,18 +316,20 @@
     }
 
     function updateSoundUI() {
-        if (soundIcon) {
-            soundIcon.className = window.NexoraAppState.soundEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
-        }
-        if (soundToggleBtn) {
-            soundToggleBtn.classList.toggle('active', window.NexoraAppState.soundEnabled);
-        }
-        if (soundCheckbox) {
-            soundCheckbox.checked = window.NexoraAppState.soundEnabled;
+        if (!soundIcon) return;
+        if (window.NexoraAppState.soundEnabled) {
+            soundIcon.className = 'fas fa-volume-high';
+            if (soundToggleBtn) soundToggleBtn.setAttribute('title', 'Mute Sound FX');
+        } else {
+            soundIcon.className = 'fas fa-volume-xmark';
+            if (soundToggleBtn) soundToggleBtn.setAttribute('title', 'Enable Sound FX');
         }
     }
 
-    function applyTheme(t) { document.body.setAttribute('data-theme', t); }
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+    }
+
     function openSettings() {
         if (window.NexoraAudio) window.NexoraAudio.playClick();
         settingsPanel.classList.add('open');
@@ -347,10 +481,13 @@
         if (window.NexoraAudio) window.NexoraAudio.playSend();
         appendMessage('user', text);
         inputEl.value = '';
+        const slashPalette = document.getElementById('slash-palette');
+        if (slashPalette) slashPalette.classList.add('hidden');
         processInput(text);
     });
 
     const FRIENDLY_EXAMPLES = {
+        ocr:        'scan text from image',
         spacenews:  'show me space news',
         weather:    'weather in Durban',
         crypto:     'Bitcoin price',
@@ -376,7 +513,7 @@
         try {
             // 1. Greetings
             if (/^(hi|hello|hey|greetings)/i.test(text)) {
-                resp.text = `Hello! I'm Nexora. I pull live spaceflight news, weather, crypto, math calculations and more. How can I help you today?`;
+                resp.text = `Hello! I'm Nexora. I pull live spaceflight news, weather, crypto, math calculations, document text (OCR) and more. How can I help you today?`;
             }
 
             // 2. Help / capabilities
@@ -386,7 +523,7 @@
                 const listItems = modules.length > 0
                     ? modules.map(m => {
                         const example = FRIENDLY_EXAMPLES[m.id] || m.example || m.name;
-                        return `<li><span class="help-example">${escapeHtml(example)}</span></li>`;
+                        return `<li><span class="help-example" onclick="sendSuggestion('${escapeHtml(example)}')">${escapeHtml(example)}</span> — ${escapeHtml(m.desc || m.name)}</li>`;
                     }).join('')
                     : '<li>Basic chat</li>';
 
@@ -394,7 +531,7 @@
 
                 resp.html = `
                     <div class="help-container">
-                        <p style="margin:0 0 8px;font-weight:600;">Here's what I can do:</p>
+                        <p style="margin:0 0 8px;font-weight:600;">Nexora Capabilities & Slash Commands:</p>
                         <ul style="margin:0;padding-left:18px;line-height:1.8;">${listItems}</ul>
                     </div>`;
             }
@@ -403,15 +540,37 @@
             else {
                 const matchedAPI = window.NexoraRegistry ? window.NexoraRegistry.matchIntent(text) : null;
 
-                if (matchedAPI) {
+                if (matchedAPI && matchedAPI.module) {
                     resp = await matchedAPI.module.handle(matchedAPI.match, window.NexoraAppState);
                 } else {
-                    const examples = getFriendlyExamples(3);
-                    const hint = examples.length > 0
-                        ? `Try asking "${examples[0]}", "${examples[1]}" or "${examples[2]}"`
-                        : 'Try asking about space news, weather or crypto';
-
-                    resp.text = `I'm not sure how to process that query. ${hint}. Type "help" to view all capabilities.`;
+                    resp.text = `I couldn't quite match your query. Pick one of Nexora's live tools below:`;
+                    resp.html = `
+                        <div class="rich-widget disambiguation-widget">
+                            <div class="widget-title"><i class="fas fa-compass"></i> Pick a Live Nexora Tool</div>
+                            <p style="margin:4px 0 12px 0;font-size:0.88rem;color:var(--text-muted);">
+                                Couldn't match "<em>${escapeHtml(text)}</em>" to an exact command. Select what you would like to run:
+                            </p>
+                            <div class="dis-chips">
+                                <button class="dis-chip" onclick="if(window.openOCRModal) window.openOCRModal(); else sendSuggestion('scan text from image');">
+                                    <i class="fas fa-font"></i> OCR Scan Image
+                                </button>
+                                <button class="dis-chip" onclick="sendSuggestion('weather in Durban')">
+                                    <i class="fas fa-cloud-sun"></i> Weather Forecast
+                                </button>
+                                <button class="dis-chip" onclick="sendSuggestion('bitcoin price')">
+                                    <i class="fab fa-bitcoin"></i> Crypto Ticker
+                                </button>
+                                <button class="dis-chip" onclick="sendSuggestion('derivative of x^2 + 2x')">
+                                    <i class="fas fa-calculator"></i> Math Solver
+                                </button>
+                                <button class="dis-chip" onclick="sendSuggestion('Show me latest space news')">
+                                    <i class="fas fa-rocket"></i> Space News
+                                </button>
+                                <button class="dis-chip" onclick="sendSuggestion('define serendipity')">
+                                    <i class="fas fa-book"></i> Dictionary
+                                </button>
+                            </div>
+                        </div>`;
                 }
             }
         } catch (err) {
