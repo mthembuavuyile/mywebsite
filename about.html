@@ -328,7 +328,8 @@
           </div>
           <div class="about-content">
             <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Get to Know Me</h2>
-            <p>Avuyile Mthembu is a 21-year-old software developer. He enjoys building practical software that works and
+            <p>Avuyile Mthembu is a <span id="dynamic-age">20</span>-year-old software developer. He enjoys building
+              practical software that works and
               is easy to use. He focuses on writing clean code and finishing projects thoroughly, from start to finish.
             </p>
 
@@ -623,6 +624,24 @@
       if (e.key === 'Escape') closeAboutGradLightbox();
       if (e.key === 'ArrowLeft') prevAboutGradImage();
       if (e.key === 'ArrowRight') nextAboutGradImage();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set your exact birthdate here to calculate age dynamically (YYYY-MM-DD format)
+      const birthDate = new Date('2005-04-20');
+      const today = new Date();
+
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      const ageElement = document.getElementById('dynamic-age');
+      if (ageElement) {
+        ageElement.textContent = age;
+      }
     });
   </script>
 
