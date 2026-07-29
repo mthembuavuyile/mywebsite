@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Space News</title>
+    <style>
+        /* Basic reset and modern font */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        /* Responsive grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Styling for each news card */
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+        }
+
+        .news-summary {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .read-more:hover {
+            background-color: #0056b3;
+        }
+
+        .status-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Live Spaceflight News</h1>
+    
+    <div class="grid-container" id="news-container">
+        <div class="status-message">Fetching the latest news from orbit...</div>
+    </div>
+
+    <script>
+        // Function to fetch and display the news
+        async function fetchNews() {
+            const container = document.getElementById('news-container');
+            
+            try {
+                // Fetching 12 articles from the free v4 endpoint
+                const response = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=12');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Clear the loading message
+                container.innerHTML = '';
+                
+                // Loop through each article and create a card
+                data.results.forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'news-card';
+                    
+                    // Fallback image just in case the API image is broken
+                    const fallbackImg = "https://via.placeholder.com/300x200?text=No+Image+Available";
+                    
+                    card.innerHTML = `
+                        <img class="news-image" src="${article.image_url}" alt="Article Image" onerror="this.src='${fallbackImg}'">
+                        <div class="news-content">
+                            <h2 class="news-title">${article.title}</h2>
+                            <p class="news-summary">${article.summary.substring(0, 120)}...</p>
+                            <a href="${article.url}" target="_blank" class="read-more">Read Full Article</a>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+            } catch (error) {
+                console.error("Error fetching news:", error);
+                container.innerHTML = `<div class="status-message" style="color: red;">Failed to load news. Please try again later.</div>`;
+            }
+        }
+
+        // Run the function when the page loads
+        fetchNews();
+    </script>
+</body>
+</html>
