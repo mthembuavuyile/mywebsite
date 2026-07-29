@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Nexora – Live Data Assistant</title>
-  <meta name="description" content="Nexora fetches live weather, crypto prices, news, dictionary definitions, and more — all from a single chat interface.">
-  <meta name="keywords" content="weather, crypto prices, live news, dictionary, reddit, assistant, data fetcher">
+  <title>Nexora – Space Intelligence & Live Data Assistant</title>
+  <meta name="description" content="Nexora fetches live spaceflight news, weather, crypto prices, word definitions, Reddit headlines, and more — all from an intelligent chat interface.">
+  <meta name="keywords" content="space news, spacex, nasa, weather, crypto prices, live news, dictionary, reddit, assistant, data fetcher">
   <meta name="author" content="Vylex">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Nexora – Live Data Assistant">
-  <meta property="og:description" content="Ask about weather, crypto, news, definitions and more. Nexora pulls live data so you don't have to.">
+  <meta property="og:title" content="Nexora – Space Intelligence & Live Data Assistant">
+  <meta property="og:description" content="Ask about space news, weather, crypto, definitions, math and more. Nexora pulls real-time orbit & web data instantly.">
   <meta property="og:type" content="website">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,69 +21,103 @@
   <link rel="stylesheet" href="css/chat.css">
   <link rel="stylesheet" href="css/widgets.css">
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap"
     rel="stylesheet">
 </head>
 
-<body data-theme="light">
+<body data-theme="dark">
 
   <header class="header">
-    <div class="logo">
+    <div class="logo" onclick="location.reload()" title="Nexora Home">
       <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
-      Nexora AI
+      <span>Nexora</span>
     </div>
+    
+
     <div class="header-actions">
+      <button class="space-hub-btn" id="open-space-modal-btn" title="Space Intelligence Hub">
+        <i class="fas fa-rocket"></i>
+        <span>Space Hub</span>
+      </button>
+
+      <button class="icon-btn" id="sound-toggle-btn" title="Toggle Sound FX" aria-label="Toggle Sound">
+        <i class="fas fa-volume-high" id="sound-icon"></i>
+      </button>
+
       <button class="icon-btn" id="clear-btn" title="New Chat" aria-label="New Chat">
         <i class="fas fa-pen-to-square"></i>
       </button>
+
       <button class="icon-btn" id="settings-btn" title="Settings" aria-label="Settings">
         <i class="fas fa-cog"></i>
       </button>
     </div>
   </header>
 
+  <!-- Quick Category Navigation Bar -->
+  <nav class="category-nav-bar" aria-label="Quick Category Access">
+    <button class="cat-pill space-pill" onclick="sendSuggestion('Show me latest space news')">
+      🚀 <span>Space News</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('Weather in Durban')">
+      🌤️ <span>Weather</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('Bitcoin price right now')">
+      ₿ <span>Crypto</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('Show me reddit news')">
+      📰 <span>Reddit</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('What is the derivative of x^2 + 2x?')">
+      🧮 <span>Math</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('Define serendipity')">
+      📖 <span>Dictionary</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('Show me an image of nebula')">
+      📸 <span>Images</span>
+    </button>
+    <button class="cat-pill" onclick="sendSuggestion('give me some advice')">
+      💡 <span>Advice</span>
+    </button>
+  </nav>
+
   <div class="app-body">
     <div id="chat" role="log" aria-live="polite" aria-label="Chat messages">
       <div id="welcome-screen">
-        <div class="welcome-orb"><i class="fas fa-layer-group"></i></div>
-        <h2>How can I help you?</h2>
-        <p>Ask me about weather, crypto prices, word definitions, Bible verses, Reddit posts, jokes, advice, or show
-          images.</p>
+        <div class="welcome-orb"><i class="fas fa-satellite-dish"></i></div>
+        <h2>How can I help you today?</h2>
+        <p>Ask about live space news, weather forecasts, crypto prices, math problems, word definitions, or generate visual cards.</p>
+        
         <div class="suggestions-grid">
+          <button class="suggestion-card hero-card" onclick="sendSuggestion('Show me latest space news')">
+            <span class="sug-icon">🚀</span>
+            <div class="sug-title">Spaceflight Intelligence</div>
+            <div class="sug-sub">Latest SpaceX, NASA, Artemis & Orbit headlines</div>
+          </button>
+
           <button class="suggestion-card" onclick="sendSuggestion('Weather in London')">
             <span class="sug-icon">🌤️</span>
-            <div class="sug-title">Weather</div>
-            <div class="sug-sub">Check any city</div>
+            <div class="sug-title">Live Weather</div>
+            <div class="sug-sub">Global forecasts</div>
           </button>
 
           <button class="suggestion-card" onclick="sendSuggestion('What is the derivative of x^2 + 2x?')">
             <span class="sug-icon">🧮</span>
             <div class="sug-title">Math Solver</div>
-            <div class="sug-sub">Solve & Derive</div>
-          </button>
-
-          <button class="suggestion-card" onclick="sendSuggestion('Show me the latest news')">
-            <span class="sug-icon">📰</span>
-            <div class="sug-title">News</div>
-            <div class="sug-sub">Top headlines</div>
+            <div class="sug-sub">Equations & calculus</div>
           </button>
 
           <button class="suggestion-card" onclick="sendSuggestion('Bitcoin price right now')">
             <span class="sug-icon">₿</span>
-            <div class="sug-title">Crypto</div>
-            <div class="sug-sub">Live prices</div>
+            <div class="sug-title">Crypto Ticker</div>
+            <div class="sug-sub">Real-time market values</div>
           </button>
 
-          <button class="suggestion-card" onclick="sendSuggestion('Show me an image of a camera')">
+          <button class="suggestion-card" onclick="sendSuggestion('Show me an image of deep space')">
             <span class="sug-icon">📸</span>
-            <div class="sug-title">Images</div>
-            <div class="sug-sub">Generate pictures</div>
-          </button>
-          
-          <button class="suggestion-card" onclick="sendSuggestion('Define serendipity')">
-            <span class="sug-icon">📖</span>
-            <div class="sug-title">Dictionary</div>
-            <div class="sug-sub">Word meanings</div>
+            <div class="sug-title">Visual Search</div>
+            <div class="sug-sub">Generative image fetch</div>
           </button>
         </div>
       </div>
@@ -96,18 +130,39 @@
     <div class="input-zone">
       <form id="form" autocomplete="off">
         <div class="input-row">
-          <input type="text" id="input" placeholder="Message Nexora…" aria-label="Message input">
+          <input type="text" id="input" placeholder="Ask Nexora anything (e.g. 'space news', 'bitcoin', 'weather')…" aria-label="Message input">
           <div class="input-actions">
-            <button type="button" id="mic-btn" aria-label="Voice input">
+            <button type="button" id="mic-btn" aria-label="Voice input" title="Voice Search">
               <i class="fas fa-microphone"></i>
             </button>
-            <button type="submit" id="send-btn" aria-label="Send">
+            <button type="submit" id="send-btn" aria-label="Send" title="Send message">
               <i class="fas fa-arrow-up"></i>
             </button>
           </div>
         </div>
       </form>
-      <div class="footer-note">Nexora can make mistakes <a href="about.html">learn more</a></div>
+      <div class="footer-note">Nexora Live Data Assistant • <a href="about.html">Architecture & Capabilities</a></div>
+    </div>
+  </div>
+
+  <!-- Space News Dedicated Hub Modal -->
+  <div id="space-hub-modal" aria-hidden="true" role="dialog" aria-label="Space Intelligence Hub">
+    <div class="space-modal-card">
+      <div class="space-modal-header">
+        <div class="space-modal-title">
+          <i class="fas fa-rocket"></i>
+          <span>Live Spaceflight Intelligence Hub</span>
+        </div>
+        <button class="icon-btn" id="close-space-modal" aria-label="Close Space Hub">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="space-modal-body" id="space-modal-body">
+        <div style="text-align:center;padding:40px;color:var(--text-muted);">
+          <i class="fas fa-spinner fa-spin fa-2x" style="color:var(--space-cyan);margin-bottom:12px;"></i>
+          <p>Connecting to Spaceflight News API mesh...</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -124,12 +179,16 @@
       <div class="s-section">
         <h3>Appearance</h3>
         <div class="theme-row">
-          <button class="theme-opt active" data-theme="light"><i class="fas fa-sun"></i> Light</button>
-          <button class="theme-opt" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+          <button class="theme-opt active" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+          <button class="theme-opt" data-theme="light"><i class="fas fa-sun"></i> Light</button>
         </div>
       </div>
+
       <div class="s-section">
-        <h3>Voice & Speech</h3>
+        <h3>Audio & Sound FX</h3>
+        <label class="s-check">
+          <input type="checkbox" id="sound-enabled" checked> Enable UI Sound Effects
+        </label>
         <label class="s-check">
           <input type="checkbox" id="tts-enabled"> Read responses aloud
         </label>
@@ -141,6 +200,7 @@
         <label class="s-label">Pitch: <span id="pitch-val">1.0</span></label>
         <input type="range" class="s-range" id="voice-pitch" min="0.5" max="2" step="0.1" value="1.0">
       </div>
+
       <div class="s-section">
         <h3>Preferences</h3>
         <label class="s-label" for="weather-units">Weather Units</label>
@@ -148,7 +208,11 @@
           <option value="metric">Celsius (°C)</option>
           <option value="imperial">Fahrenheit (°F)</option>
         </select>
+        <button class="btn-secondary" id="export-chat-btn">
+          <i class="fas fa-download"></i> Export Chat History
+        </button>
       </div>
+
       <div class="s-section">
         <button class="btn-danger" id="reset-settings">
           <i class="fas fa-trash-alt"></i> Reset All Settings
@@ -158,9 +222,12 @@
   </aside>
 
   <!-- Modular Scripts Architecture -->
+  <!-- 0. Audio Synthesizer -->
+  <script src="js/audio.js"></script>
   <!-- 1. Core Registry First -->
   <script src="js/registry.js"></script>
   <!-- 2. Independent API Modules -->
+  <script src="js/api/spacenews.js"></script>
   <script src="js/api/weather.js"></script>
   <script src="js/api/crypto.js"></script>
   <script src="js/api/dictionary.js"></script>

@@ -1,5 +1,5 @@
 // js/api/math.js
-// Newton Math API module for Nexora AI
+// Newton Math API module for Nexora
 // Supports: arithmetic, algebra, calculus, trigonometry — conversational & direct input
 
 window.NexoraRegistry.register({

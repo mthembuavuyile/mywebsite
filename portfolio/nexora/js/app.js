@@ -13,6 +13,17 @@
     const settingsPanel = document.getElementById('settings-panel');
     const voiceSelect = document.getElementById('voice-select');
 
+    // Space Hub Modal Elements
+    const spaceModal = document.getElementById('space-hub-modal');
+    const spaceModalBody = document.getElementById('space-modal-body');
+    const openSpaceModalBtn = document.getElementById('open-space-modal-btn');
+    const closeSpaceModalBtn = document.getElementById('close-space-modal');
+
+    // Sound Toggle Elements
+    const soundToggleBtn = document.getElementById('sound-toggle-btn');
+    const soundIcon = document.getElementById('sound-icon');
+    const soundCheckbox = document.getElementById('sound-enabled');
+
     // Voice Settings Elements
     const rateSlider = document.getElementById('voice-rate');
     const rateVal = document.getElementById('rate-val');
@@ -21,8 +32,9 @@
 
     // ── Shared Application State ──────────────────────────────
     window.NexoraAppState = {
-        theme: localStorage.getItem('nx_theme') || 'light',
+        theme: localStorage.getItem('nx_theme') || 'dark',
         ttsEnabled: localStorage.getItem('nx_tts') !== 'false',
+        soundEnabled: localStorage.getItem('nx_sound') !== 'false',
         units: localStorage.getItem('nx_units') || 'metric',
         speechRate: parseFloat(localStorage.getItem('nx_rate') || '1.0'),
         speechPitch: parseFloat(localStorage.getItem('nx_pitch') || '1.0')
@@ -32,25 +44,43 @@
     let voices = [];
     let selectedVoice = null;
     let isListening = false;
+    let chatHistory = [];
 
     // ── Init ─────────────────────────────────────────
     applyTheme(window.NexoraAppState.theme);
     initSettings();
     initVoices();
     initSpeechRec();
+    initSpaceHubModal();
     handleScrollVisibility();
+    checkUrlParams();
 
-    // Make global so suggestion buttons in HTML can call it
+    // Global suggestion launcher
     window.sendSuggestion = function (text) {
+        if (window.NexoraAudio) window.NexoraAudio.playClick();
         inputEl.value = text;
         formEl.dispatchEvent(new Event('submit', { cancelable: true }));
     };
+
+    // Check URL parameters for direct deep-linking
+    function checkUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get('mode');
+        const query = params.get('query') || params.get('q');
+
+        if (mode === 'space') {
+            setTimeout(() => window.openSpaceHub(), 300);
+        } else if (query) {
+            setTimeout(() => sendSuggestion(query), 300);
+        }
+    }
 
     // ── Settings ─────────────────────────────────────
     function initSettings() {
         document.querySelectorAll('.theme-opt').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.theme === window.NexoraAppState.theme);
             btn.addEventListener('click', () => {
+                if (window.NexoraAudio) window.NexoraAudio.playClick();
                 window.NexoraAppState.theme = btn.dataset.theme;
                 applyTheme(window.NexoraAppState.theme);
                 localStorage.setItem('nx_theme', window.NexoraAppState.theme);
@@ -64,12 +94,34 @@
         backdrop.addEventListener('click', closeSettings);
 
         document.getElementById('clear-btn').addEventListener('click', () => {
+            if (window.NexoraAudio) window.NexoraAudio.playClick();
             if (confirm('Start a new chat?')) {
                 chatEl.innerHTML = '';
                 chatEl.appendChild(welcomeEl);
                 welcomeEl.classList.remove('hidden');
+                chatHistory = [];
             }
         });
+
+        // Sound Effects Toggle
+        updateSoundUI();
+        if (soundToggleBtn) {
+            soundToggleBtn.addEventListener('click', () => {
+                window.NexoraAppState.soundEnabled = !window.NexoraAppState.soundEnabled;
+                localStorage.setItem('nx_sound', window.NexoraAppState.soundEnabled);
+                updateSoundUI();
+                if (window.NexoraAudio) window.NexoraAudio.playClick();
+            });
+        }
+
+        if (soundCheckbox) {
+            soundCheckbox.checked = window.NexoraAppState.soundEnabled;
+            soundCheckbox.addEventListener('change', e => {
+                window.NexoraAppState.soundEnabled = e.target.checked;
+                localStorage.setItem('nx_sound', window.NexoraAppState.soundEnabled);
+                updateSoundUI();
+            });
+        }
 
         const ttsToggle = document.getElementById('tts-enabled');
         if (ttsToggle) {
@@ -118,6 +170,11 @@
             });
         }
 
+        const exportBtn = document.getElementById('export-chat-btn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', exportChat);
+        }
+
         document.getElementById('reset-settings').addEventListener('click', () => {
             if (confirm('Reset all settings to default?')) {
                 localStorage.clear();
@@ -126,16 +183,67 @@
         });
     }
 
+    function updateSoundUI() {
+        if (soundIcon) {
+            soundIcon.className = window.NexoraAppState.soundEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
+        }
+        if (soundToggleBtn) {
+            soundToggleBtn.classList.toggle('active', window.NexoraAppState.soundEnabled);
+        }
+        if (soundCheckbox) {
+            soundCheckbox.checked = window.NexoraAppState.soundEnabled;
+        }
+    }
+
     function applyTheme(t) { document.body.setAttribute('data-theme', t); }
-    function openSettings() { settingsPanel.classList.add('open'); backdrop.classList.add('show'); }
-    function closeSettings() { settingsPanel.classList.remove('open'); backdrop.classList.remove('show'); }
+    function openSettings() {
+        if (window.NexoraAudio) window.NexoraAudio.playClick();
+        settingsPanel.classList.add('open');
+        backdrop.classList.add('show');
+    }
+    function closeSettings() {
+        settingsPanel.classList.remove('open');
+        backdrop.classList.remove('show');
+    }
+
+    // ── Space Hub Modal Controller ────────────────────
+    function initSpaceHubModal() {
+        if (openSpaceModalBtn) {
+            openSpaceModalBtn.addEventListener('click', () => window.openSpaceHub());
+        }
+        if (closeSpaceModalBtn) {
+            closeSpaceModalBtn.addEventListener('click', closeSpaceHub);
+        }
+    }
+
+    window.openSpaceHub = async function(topic = '') {
+        if (window.NexoraAudio) window.NexoraAudio.playClick();
+        spaceModal.classList.add('open');
+        spaceModal.setAttribute('aria-hidden', 'false');
+
+        spaceModalBody.innerHTML = `
+            <div style="text-align:center;padding:50px 20px;color:var(--space-cyan);">
+                <i class="fas fa-rocket fa-spin fa-2x" style="margin-bottom:14px;"></i>
+                <p style="font-weight:600;">Fetching live spaceflight intelligence stream…</p>
+            </div>`;
+
+        if (window.fetchAndRenderSpaceNews) {
+            const res = await window.fetchAndRenderSpaceNews(topic, 12);
+            spaceModalBody.innerHTML = res.html || `<p>${res.text}</p>`;
+        }
+    };
+
+    function closeSpaceHub() {
+        spaceModal.classList.remove('open');
+        spaceModal.setAttribute('aria-hidden', 'true');
+    }
 
     // ── Chat UI ──────────────────────────────────────
     function hideWelcome() {
         if (!welcomeEl.classList.contains('hidden')) welcomeEl.classList.add('hidden');
     }
 
-    function appendMessage(role, content, isHtml = false) {
+    function appendMessage(role, content, isHtml = false, plainText = '') {
         hideWelcome();
         const wrap = document.createElement('div');
         wrap.className = `message ${role}`;
@@ -147,17 +255,55 @@
             wrap.appendChild(av);
         }
 
+        const bubbleWrap = document.createElement('div');
+        bubbleWrap.className = 'message-bubble-wrapper';
+
         const bubble = document.createElement('div');
         bubble.className = 'message-bubble';
         if (isHtml) bubble.innerHTML = content;
         else bubble.textContent = content;
-        wrap.appendChild(bubble);
+        bubbleWrap.appendChild(bubble);
+
+        // Assistant action toolbar (Copy, Speak)
+        if (role === 'assistant') {
+            const toolbar = document.createElement('div');
+            toolbar.className = 'msg-actions';
+
+            const copyText = plainText || (isHtml ? bubble.innerText : content);
+
+            toolbar.innerHTML = `
+                <button class="msg-btn copy-btn" title="Copy to clipboard">
+                    <i class="far fa-copy"></i> Copy
+                </button>
+                <button class="msg-btn tts-btn" title="Read aloud">
+                    <i class="fas fa-volume-high"></i> Listen
+                </button>
+            `;
+
+            const copyBtn = toolbar.querySelector('.copy-btn');
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(copyText).then(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy', 2000);
+                });
+            });
+
+            const ttsBtn = toolbar.querySelector('.tts-btn');
+            ttsBtn.addEventListener('click', () => speak(copyText));
+
+            bubbleWrap.appendChild(toolbar);
+        }
+
+        wrap.appendChild(bubbleWrap);
 
         const ti = document.getElementById('typing-indicator');
         if (ti) ti.remove();
 
         chatEl.appendChild(wrap);
         scrollToBottom();
+
+        // Save to chat history
+        chatHistory.push({ role, text: plainText || content, timestamp: new Date().toISOString() });
     }
 
     function showTyping() {
@@ -166,8 +312,17 @@
         const wrap = document.createElement('div');
         wrap.id = 'typing-indicator';
         wrap.className = 'message assistant';
-        wrap.innerHTML = `<div class="bot-avatar"><i class="fas fa-robot"></i></div>
-                          <div class="message-bubble"><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+        wrap.innerHTML = `
+            <div class="bot-avatar"><i class="fas fa-robot"></i></div>
+            <div class="message-bubble-wrapper">
+                <div class="message-bubble">
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>`;
         chatEl.appendChild(wrap);
         scrollToBottom();
     }
@@ -189,15 +344,14 @@
         e.preventDefault();
         const text = inputEl.value.trim();
         if (!text) return;
+        if (window.NexoraAudio) window.NexoraAudio.playSend();
         appendMessage('user', text);
         inputEl.value = '';
         processInput(text);
     });
 
-    // ── Natural-language example builder ─────────────
-    // Maps module ids to friendly example phrases shown in error/help messages.
-    // Falls back to the module's own `example` field, then its name.
     const FRIENDLY_EXAMPLES = {
+        spacenews:  'show me space news',
         weather:    'weather in Durban',
         crypto:     'Bitcoin price',
         dictionary: 'define serendipity',
@@ -205,7 +359,7 @@
         reddit:     'show me reddit posts',
         bible:      'a Bible verse',
         advice:     'give me some advice',
-        image:      'show me a photo of a mountain'
+        image:      'show me a photo of space'
     };
 
     function getFriendlyExamples(count = 3) {
@@ -222,7 +376,7 @@
         try {
             // 1. Greetings
             if (/^(hi|hello|hey|greetings)/i.test(text)) {
-                resp.text = `Hello! I'm Nexora, built by Vylex. How can I help you today?`;
+                resp.text = `Hello! I'm Nexora. I pull live spaceflight news, weather, crypto, math calculations and more. How can I help you today?`;
             }
 
             // 2. Help / capabilities
@@ -236,7 +390,7 @@
                     }).join('')
                     : '<li>Basic chat</li>';
 
-                resp.text = `Here's what I can help with: ${getFriendlyExamples(3).join(', ')}, and more.`;
+                resp.text = `Here's what I can help with: ${getFriendlyExamples(4).join(', ')}, and more.`;
 
                 resp.html = `
                     <div class="help-container">
@@ -252,21 +406,22 @@
                 if (matchedAPI) {
                     resp = await matchedAPI.module.handle(matchedAPI.match, window.NexoraAppState);
                 } else {
-                    // Build a friendly, natural-sounding fallback with real examples
                     const examples = getFriendlyExamples(3);
                     const hint = examples.length > 0
-                        ? `Try something like "${examples[0]}" or "${examples[1]}"`
-                        : 'Try asking about the weather or a word definition';
+                        ? `Try asking "${examples[0]}", "${examples[1]}" or "${examples[2]}"`
+                        : 'Try asking about space news, weather or crypto';
 
-                    resp.text = `I'm not sure how to help with that. ${hint}. Type "help" to see everything I can do.`;
+                    resp.text = `I'm not sure how to process that query. ${hint}. Type "help" to view all capabilities.`;
                 }
             }
         } catch (err) {
             console.error(err);
-            resp.text = "Something went wrong on my end — please try again in a moment.";
+            resp.text = "Something went wrong fetching data — please try again in a moment.";
         }
 
-        if (resp.html) appendMessage('assistant', resp.html, true);
+        if (window.NexoraAudio) window.NexoraAudio.playReceive();
+
+        if (resp.html) appendMessage('assistant', resp.html, true, resp.text);
         else appendMessage('assistant', resp.text);
 
         speak(resp.text);
@@ -289,7 +444,6 @@
             });
 
             selectedVoice = voices.find(v => v.lang === 'en-US') || voices[0];
-
             if (voiceSelect && selectedVoice) {
                 voiceSelect.value = voices.indexOf(selectedVoice);
             }
@@ -322,7 +476,8 @@
         rec.onstart = () => {
             isListening = true;
             micBtn.classList.add('listening');
-            inputEl.placeholder = 'Listening…';
+            inputEl.placeholder = 'Listening to your voice…';
+            if (window.NexoraAudio) window.NexoraAudio.playMic();
         };
 
         rec.onresult = e => {
@@ -339,9 +494,25 @@
         micBtn.addEventListener('click', () => isListening ? rec.stop() : rec.start());
     }
 
+    // ── Export Chat ──────────────────────────────────
+    function exportChat() {
+        if (!chatHistory.length) {
+            alert('No chat history to export yet!');
+            return;
+        }
+        const exportData = JSON.stringify(chatHistory, null, 2);
+        const blob = new Blob([exportData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `nexora-chat-export-${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
     // ── Helpers ──────────────────────────────────────
     function escapeHtml(str) {
-        return String(str)
+        return String(str || '')
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')

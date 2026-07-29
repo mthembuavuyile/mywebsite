@@ -67,7 +67,7 @@
             <!-- Status & Result -->
             <div class="ocr-status">
                 <span id="ocr-status-dot" class="ocr-dot"></span>
-                <span id="ocr-status-text">Loading AI model…</span>
+                <span id="ocr-status-text">Loading OCR engine…</span>
             </div>
             <div id="ocr-progress-bar" class="ocr-progress hidden">
                 <div id="ocr-progress-fill" class="ocr-progress-fill"></div>
@@ -260,7 +260,7 @@
         document.head.appendChild(script);
 
         async function initTesseract() {
-            setStatus('Loading AI model…', 'processing');
+            setStatus('Loading OCR engine…', 'processing');
             try {
                 worker = await Tesseract.createWorker('eng', 1, {
                     logger: m => {
@@ -276,7 +276,7 @@
                 $('ocr-recognize-cam-btn').disabled = false;
                 $('ocr-recognize-upload-btn').disabled = false;
             } catch {
-                setStatus('Failed to load AI model', 'error');
+                setStatus('Failed to load OCR engine', 'error');
             }
         }
 
