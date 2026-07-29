@@ -1,0 +1,459 @@
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: none; /* Prevent default touch actions like scroll/zoom */
+            background-color: #000; /* Ensure black background on load */
+        }
+
+        #gameCanvas {
+            display: block;
+            cursor: pointer;
+        }
+
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Increased shadow visibility */
+            user-select: none;
+            display: none; /* Hidden initially */
+            z-index: 6; /* Ensure UI is above overlay */
+        }
+
+        .screen-overlay {
+            position: absolute;
+            inset: 0; /* Replaces top/left/width/height: 0/100% */
+            background: linear-gradient(to bottom right, #111, #000);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-in-out;
+            transition: opacity 0.5s ease-out; /* For smooth hiding */
+        }
+
+        .screen-overlay.hidden { /* Class to fade out overlays */
+             opacity: 0;
+             pointer-events: none; /* Disable interaction when hidden */
+        }
+
+
+        .screen-overlay h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .screen-overlay p {
+            font-size: clamp(1rem, 2.2vw, 1.5rem);
+            margin-bottom: 2rem;
+            max-width: 90%;
+            line-height: 1.7;
+        }
+
+        .branding {
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-style: italic;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.2);
+        }
+
+        button {
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            margin: 8px;
+            cursor: pointer;
+            border-radius: 12px;
+            background-color: #333;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            user-select: none; /* Prevent text selection on buttons */
+        }
+
+        button:hover {
+            transform: scale(1.07);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+        }
+
+        button:active {
+            transform: scale(1.02); /* Add active state feedback */
+        }
+
+        #startButton { background-color: #4CAF50; }
+        #restartButtonGameOver,
+        #restartButtonPause { background-color: #f44336; }
+        #resumeButton { background-color: #2196F3; }
+        #viewToggleButton { background-color: #9c27b0; }
+
+        /* Style adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .screen-overlay p {
+                font-size: 1rem; /* Slightly smaller text */
+            }
+            button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+            #ui { font-size: 18px; } /* Smaller UI text */
+             #minimap {
+                 width: 100px !important; /* Force minimap size */
+                 height: 100px !important;
+             }
+            #startScreen h1 {
+                 font-size: clamp(2.5rem, 8vw, 4rem);
+             }
+             #startButton {
+                 padding: 12px 30px;
+                 font-size: 1.2rem;
+             }
+             /* Hide desktop instructions on mobile */
+             #startScreen #desktop-instructions { display: none; }
+        }
+
+         /* Show mobile instructions only if touch is likely */
+        @media (hover: none) and (pointer: coarse) {
+            #startScreen #mobile-instructions { display: block; }
+            #startScreen #desktop-instructions { display: none; } /* Ensure desktop hidden */
+        }
+        /* Default: show desktop, hide mobile */
+        #startScreen #mobile-instructions { display: none; }
+
+        .instructions-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #f44336;
+            border-radius: 12px;
+            padding: 20px 30px;
+            max-width: 580px;
+            text-align: left;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: #ccd;
+        }
+
+        .instructions-box key {
+            background: rgba(244, 67, 54, 0.15);
+            color: #f44336;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            font-weight: bold;
+        }
+
+
+        #startScreen, #gameOver, #pauseScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Slightly more opaque background */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: white;
+            text-align: center;
+        }
+
+        /* Enhanced Start Screen */
+        #startScreen {
+            background: radial-gradient(circle at center, #300, #000);
+            overflow: hidden; /* Hide overflow from pseudo-elements */
+            position: relative;
+        }
+
+        #startScreen::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Subtle pattern background */
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path fill="rgba(255,0,0,0.02)" d="M0 0L100 100ZM100 0L0 100Z"/></svg>');
+            opacity: 0.5;
+            z-index: -1; /* Behind content */
+            animation: subtlePatternShift 20s linear infinite; /* Slow movement */
+        }
+
+        #startScreen h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            text-transform: uppercase;
+            margin: 0 0 20px;
+            letter-spacing: 4px;
+            text-shadow:
+                0 0 10px rgba(255,0,0,0.8),
+                0 0 20px rgba(255,0,0,0.5),
+                0 0 30px rgba(255,0,0,0.3),
+                0 0 40px rgba(255,0,0,0.1);
+            animation: pulse 4s infinite alternate;
+            position: relative; /* Needed for ::after */
+        }
+
+        #startScreen h1::after {
+            content: 'ZOMBIE SHOOTER';
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.05); /* More subtle blur */
+            z-index: -1;
+            filter: blur(10px);
+            font: inherit; /* Match parent font */
+        }
+
+        #startScreen .branding {
+            font-size: calc(14px + 0.5vw);
+            color: #e0dd2f; /* Brighter yellow */
+            margin: 5px 0 25px;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        #startScreen p.instructions {
+            background-color: rgba(0,0,0,0.5); /* More contrast */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            max-width: min(600px, 90%);
+            border-left: 4px solid #f44336; /* Thicker border */
+            border-right: 4px solid #4CAF50;
+            margin-bottom: 35px;
+            line-height: 1.6; /* Improve readability */
+        }
+
+        #startScreen p.instructions b {
+            color: #ff6666; /* Slightly softer red */
+            text-shadow: 0 0 5px rgba(255,0,0,0.3);
+        }
+
+        #startButton {
+            background: linear-gradient(to bottom, #5cb85c, #449d44);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 40px;
+            border-radius: 50px; /* Fully rounded */
+            box-shadow:
+                0 6px 0 #2d662d,
+                0 6px 10px rgba(0,0,0,0.5);
+            position: relative; /* Needed for ::after */
+            overflow: hidden; /* Hide sheen overflow */
+        }
+
+        #startButton:hover {
+            background: linear-gradient(to bottom, #6cd96c, #49a549); /* Brighter hover */
+            transform: translateY(2px) scale(1.07); /* Combine transforms */
+            box-shadow:
+                0 4px 0 #2d662d,
+                0 4px 6px rgba(0,0,0,0.5);
+        }
+
+        #startButton:active {
+            transform: translateY(6px) scale(1.02); /* Combine active transforms */
+            box-shadow: 0 0 0 #2d662d;
+        }
+
+        #startButton::after { /* Sheen effect */
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+            transform: rotate(45deg);
+            animation: sheen 3s infinite;
+        }
+
+        /* Standard Screen Titles */
+        #gameOver h1, #pauseScreen h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive title size */
+            margin-bottom: 20px;
+        }
+        #gameOver p, #pauseScreen p {
+            font-size: clamp(1rem, 2vw, 1.3rem); /* Responsive text size */
+            margin-bottom: 30px;
+            max-width: 80%;
+        }
+
+        #gameOver { display: none; }
+        #pauseScreen { display: none; }
+
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            display: none; /* Controlled by JS */
+            z-index: 5;
+            transform: translate(-50%, -50%);
+        }
+
+        #crosshair::before, #crosshair::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Subtle shadow for definition */
+        }
+        /* Thinner crosshair lines */
+        #crosshair::before {
+            width: 100%;
+            height: 1.5px;
+            top: 50%; left: 0;
+            transform: translateY(-50%);
+        }
+        #crosshair::after {
+            width: 1.5px;
+            height: 100%;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #touchControls {
+            position: absolute;
+            bottom: 20px; /* Closer to bottom edge */
+            width: 100%;
+            display: none; /* Controlled by JS */
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 5;
+            pointer-events: none; /* Container doesn't block clicks */
+        }
+
+        .joystick, #shootButtonTouch, #viewToggleTouchButton {
+            width: 100px; height: 100px;
+            background-color: rgba(200, 200, 200, 0.25); /* Lighter, less intrusive */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7); /* Dimmer text */
+            font-size: 16px;
+            font-weight: bold;
+            user-select: none;
+            touch-action: none;
+            pointer-events: auto; /* Buttons are interactive */
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+        }
+
+        .joystick-thumb {
+            position: absolute;
+            width: 40px; height: 40px;
+            background-color: rgba(255, 255, 255, 0.4); /* Slightly more opaque thumb */
+            border-radius: 50%;
+            transform: translate(0, 0);
+            transition: transform 0.05s linear; /* Smooth thumb movement */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #shootButtonTouch {
+            width: 80px; height: 80px;
+            background-color: rgba(255, 0, 0, 0.4);
+            transition: background-color 0.1s ease; /* Smooth color change on press */
+        }
+        #shootButtonTouch:active { /* Visual feedback on press */
+            background-color: rgba(255, 0, 0, 0.7);
+        }
+
+        #viewToggleTouchButton {
+            width: 60px; height: 60px;
+            background-color: rgba(156, 39, 176, 0.5);
+            position: absolute;
+            right: 20px;
+            top: 20px; /* Position at top right */
+            z-index: 6; /* Ensure it's above other elements if needed */
+            pointer-events: auto; /* Make sure it's clickable */
+        }
+         #viewToggleTouchButton:active {
+             background-color: rgba(156, 39, 176, 0.8);
+         }
+
+        #levelInfo {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); /* Stronger shadow */
+            display: none; /* Controlled by JS */
+            text-align: center;
+            z-index: 5;
+            line-height: 1.2;
+            background-color: rgba(0,0,0,0.3); /* Slight background for readability */
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        #damageOverlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(255, 0, 0, 0); /* Start transparent */
+            pointer-events: none;
+            z-index: 4; /* Below UI, above game */
+            transition: background-color 0.5s ease-out; /* Control fade out */
+        }
+
+        #minimap {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 150px; /* Default size */
+            height: 150px;
+            background-color: rgba(0, 0, 0, 0.6); /* More opaque */
+            border: 2px solid rgba(255, 255, 255, 0.4); /* Less bright border */
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 5;
+            display: none; /* Controlled by JS */
+            box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Add shadow */
+        }
+        #minimap canvas { /* Ensure canvas fills the div */
+             display: block;
+             width: 100%;
+             height: 100%;
+        }
+
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px rgba(255,0,0,0.8), 0 0 20px rgba(255,0,0,0.5), 0 0 30px rgba(255,0,0,0.3); }
+            100% { text-shadow: 0 0 15px rgba(255,0,0,0.9), 0 0 25px rgba(255,0,0,0.6), 0 0 35px rgba(255,0,0,0.4), 0 0 45px rgba(255,0,0,0.2); }
+        }
+
+        @keyframes sheen {
+            0% { transform: translateX(-150%) rotate(45deg); }
+            50% { transform: translateX(150%) rotate(45deg); } /* Pass through */
+            100% { transform: translateX(150%) rotate(45deg); } /* Stay off screen */
+        }
+
+        @keyframes subtlePatternShift {
+             0% { background-position: 0 0; }
+             100% { background-position: 200px 200px; } /* Adjust distance for speed */
+        }
+
+    

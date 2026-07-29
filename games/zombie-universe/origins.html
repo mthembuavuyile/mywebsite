@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- Primary SEO -->
+    <title>Zombie Shooter 3D - Ultimate Survival Shooter | Vylex</title>
+    <meta name="description" content="Play Zombie Shooter 3D online. Eliminate waves of undead with multiple weapons, ultra graphics, dynamic lighting, and high-octane action on Vylex.">
+    <meta name="keywords" content="zombie shooter game, 3D zombie game, survival shooter, HTML5 game, browser shooting game, Vylex games">
+    <meta name="author" content="Avuyile Mthembu">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://vylex.co.za/games/zombie-shooter.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vylex.co.za/games/zombie-shooter.html">
+    <meta property="og:title" content="Zombie Shooter 3D - Ultimate Survival Shooter | Vylex">
+    <meta property="og:description" content="Survive endless waves of zombies with custom weapons, dynamic lighting, and immersive 3D gameplay. Play free on Vylex.">
+    <meta property="og:image" content="https://vylex.co.za/assets/images/zombie-shooter-preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vylex.co.za/games/zombie-shooter.html">
+    <meta property="twitter:title" content="Zombie Shooter 3D - Play Online | Vylex">
+    <meta property="twitter:description" content="Fight through endless waves of zombies in this fast-paced 3D shooter. Play free on Vylex.">
+    <meta property="twitter:image" content="https://vylex.co.za/assets/images/zombie-shooter-preview.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="css/origins.css">
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen-overlay">
+        <h1 class="screen-title">Zombie Shooter 3D</h1>
+        <div class="screen-sub">Developed by Avuyile Mthembu | Vylex Games</div>
+        
+        <div class="instructions-box">
+            <div style="margin-bottom: 8px;"><b>Desktop Controls:</b></div>
+            <div><key>W</key><key>A</key><key>S</key><key>D</key> or <key>Arrows</key> to Move | <key>Mouse</key> to Aim</div>
+            <div><key>Left Click</key> or <key>Space</key> to Shoot | <key>R</key> to Reload</div>
+            <div><key>1</key> <key>2</key> <key>3</key> <key>4</key> or <key>Wheel</key> to Switch Weapons</div>
+            <div><key>V</key> to Toggle Camera View (1st/3rd Person) | <key>ESC</key> to Pause</div>
+        </div>
+
+        <button id="startBtn" class="btn-primary">START SURVIVAL</button>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pauseScreen" class="screen-overlay" style="display: none;">
+        <h1 class="screen-title" style="font-size: 3rem;">GAME PAUSED</h1>
+        <p class="screen-sub">Take a breather before returning to the horde.</p>
+        <div>
+            <button id="resumeBtn" class="btn-primary" style="padding: 12px 35px; font-size: 1rem;">RESUME</button>
+            <button id="toggleViewBtn" class="btn-secondary">TOGGLE CAMERA (V)</button>
+            <button id="restartPauseBtn" class="btn-secondary">RESTART GAME</button>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen-overlay" style="display: none;">
+        <h1 class="screen-title" style="color: #ff3333;">YOU DIED</h1>
+        <div id="finalStats" class="screen-sub" style="font-size: 1.4rem; color: #fff;"></div>
+        <button id="restartGameOverBtn" class="btn-primary">PLAY AGAIN</button>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div id="hud">
+        <div class="hud-card">
+            <div class="hud-label">Health</div>
+            <div id="healthVal" class="hud-val" style="color: #55ff55;">100 HP</div>
+            <div class="bar-container">
+                <div id="healthBar" class="bar-fill"></div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <div class="hud-label">Score</div>
+                    <div id="scoreVal" class="hud-val">0</div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="hud-label">Wave</div>
+                    <div id="waveVal" class="hud-val" style="color: var(--accent);">1</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <div class="hud-label">Ammo / Weapon</div>
+            <div id="ammoVal" class="hud-val" style="color: #ffcc00;">12 / ∞</div>
+        </div>
+    </div>
+
+    <!-- Weapon Selector -->
+    <div id="weaponSelector">
+        <div class="weapon-btn active" data-weapon="0">
+            <span>Pistol</span>
+            <span class="weapon-key">1</span>
+        </div>
+        <div class="weapon-btn" data-weapon="1">
+            <span>Rifle</span>
+            <span class="weapon-key">2</span>
+        </div>
+        <div class="weapon-btn" data-weapon="2">
+            <span>Shotgun</span>
+            <span class="weapon-key">3</span>
+        </div>
+        <div class="weapon-btn" data-weapon="3">
+            <span>Plasma</span>
+            <span class="weapon-key">4</span>
+        </div>
+    </div>
+
+    <!-- Crosshair & Hit Marker -->
+    <div id="crosshair">
+        <div class="ch-dot"></div>
+        <div class="ch-line ch-top"></div>
+        <div class="ch-line ch-bottom"></div>
+        <div class="ch-line ch-left"></div>
+        <div class="ch-line ch-right"></div>
+    </div>
+    <div id="hitMarker"></div>
+
+    <!-- Screen Flash overlays -->
+    <div id="damageFlash"></div>
+
+    <!-- Minimap Radar -->
+    <div id="minimapContainer">
+        <canvas id="minimapCanvas"></canvas>
+    </div>
+
+    <!-- Wave Notification Banner -->
+    <div id="waveBanner">WAVE 1</div>
+
+    <!-- Touch Controls (Mobile) -->
+    <div id="touchControls">
+        <div id="moveJoystick" class="touch-joystick">
+            <div class="touch-thumb"></div>
+        </div>
+        <div id="shootBtnTouch">FIRE</div>
+    </div>
+    <button id="viewBtnTouch">CAM VIEW</button>
+
+    <!-- Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Three.js Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
+
+    <script src="js/origins.js"></script>
+</body>
+</html>

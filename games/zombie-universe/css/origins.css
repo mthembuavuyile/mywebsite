@@ -1,0 +1,439 @@
+
+        :root {
+            --primary: #ff3333;
+            --primary-glow: rgba(255, 51, 51, 0.6);
+            --accent: #00f0ff;
+            --accent-glow: rgba(0, 240, 255, 0.5);
+            --bg-glass: rgba(15, 18, 28, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #050508;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            touch-action: none;
+        }
+
+        #gameCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: crosshair;
+        }
+
+        /* Glassmorphism HUD */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hud-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: #fff;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            min-width: 200px;
+        }
+
+        .hud-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #88a;
+            margin-bottom: 4px;
+        }
+
+        .hud-val {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Health Bar */
+        .bar-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 6px;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #ff3333, #ff6600);
+            box-shadow: 0 0 12px var(--primary-glow);
+            transition: width 0.25s ease-out, background-color 0.3s;
+        }
+
+        /* Weapon Bar */
+        #weaponSelector {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            gap: 10px;
+            z-index: 10;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            padding: 8px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .weapon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 16px;
+            color: #aaa;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            pointer-events: auto;
+        }
+
+        .weapon-btn.active {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(0, 100, 255, 0.3));
+            border-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .weapon-key {
+            font-size: 10px;
+            color: #667;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .weapon-btn.active .weapon-key {
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        /* Crosshair & Hit Markers */
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 8;
+            display: none;
+        }
+
+        .ch-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 5px rgba(255,255,255,0.8);
+        }
+
+        .ch-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
+        .ch-top { width: 2px; height: 7px; top: 0; left: 11px; }
+        .ch-bottom { width: 2px; height: 7px; bottom: 0; left: 11px; }
+        .ch-left { width: 7px; height: 2px; left: 0; top: 11px; }
+        .ch-right { width: 7px; height: 2px; right: 0; top: 11px; }
+
+        /* Hit Marker Effect */
+        #hitMarker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 28px;
+            height: 28px;
+            transform: translate(-50%, -50%) rotate(45deg);
+            pointer-events: none;
+            z-index: 9;
+            opacity: 0;
+            transition: opacity 0.05s ease-out;
+        }
+
+        #hitMarker::before, #hitMarker::after {
+            content: '';
+            position: absolute;
+            background: #ff3333;
+            box-shadow: 0 0 8px #ff0000;
+        }
+        #hitMarker::before { width: 100%; height: 2px; top: 13px; left: 0; }
+        #hitMarker::after { width: 2px; height: 100%; top: 0; left: 13px; }
+
+        /* Screen Red Damage Flash */
+        #damageFlash {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 40%, rgba(255, 0, 0, 0.6) 100%);
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.15s ease-out;
+        }
+
+        /* Minimap Radar */
+        #minimapContainer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: rgba(5, 10, 20, 0.8);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 15px rgba(0,0,0,0.8);
+            overflow: hidden;
+            display: none;
+            z-index: 10;
+        }
+
+        #minimapCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Screens & Overlays */
+        .screen-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(20, 5, 10, 0.92), rgba(2, 2, 5, 0.98));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+        }
+
+        .screen-title {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin: 0 0 10px 0;
+            background: linear-gradient(180deg, #ffffff 30%, #ff3333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--primary-glow);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        .screen-sub {
+            font-size: 1.1rem;
+            color: #aab;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .instructions-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 20px 30px;
+            max-width: 580px;
+            text-align: left;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: #ccd;
+        }
+
+        .instructions-box key {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff3333, #bb0000);
+            color: #fff;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px var(--primary-glow);
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 51, 51, 0.8);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 28px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Wave Banner */
+        #waveBanner {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            text-shadow: 0 0 25px var(--primary-glow);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 15;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Mobile Touch Controls */
+        #touchControls {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: none;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 12;
+            pointer-events: none;
+        }
+
+        .touch-joystick {
+            width: 110px;
+            height: 110px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            position: relative;
+            pointer-events: auto;
+            touch-action: none;
+        }
+
+        .touch-thumb {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 240, 255, 0.5);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        #shootBtnTouch {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #ff3333, #990000);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
+            pointer-events: auto;
+            box-shadow: 0 0 20px var(--primary-glow);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            touch-action: none;
+        }
+
+        #viewBtnTouch {
+            position: absolute;
+            top: 20px;
+            right: 170px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 12;
+            display: none;
+            pointer-events: auto;
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 20px rgba(255,51,51,0.5); }
+            100% { text-shadow: 0 0 45px rgba(255,51,51,0.9), 0 0 10px rgba(255,255,255,0.8); }
+        }
+
+        @media (max-width: 768px) {
+            #hud { top: 10px; left: 10px; }
+            .hud-card { min-width: 140px; padding: 8px 14px; }
+            .hud-val { font-size: 18px; }
+            #weaponSelector { bottom: 110px; padding: 4px; }
+            .weapon-btn { padding: 6px 10px; font-size: 11px; }
+            #minimapContainer { width: 100px; height: 100px; top: 10px; right: 10px; }
+        }
+    

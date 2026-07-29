@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3D Zombie Shooter - Enhanced - Vylex nexys</title>
+    <meta name="description" content="Survive the waves! An enhanced 3D zombie shooter game by Avuyile Mthembu (Vylex nexys). Move, aim, and shoot your way through hordes of the undead.">
+    <meta name="keywords" content="zombie shooter, 3d game, web game, html5 game, three.js, survival, shooter, Vylex nexys, Avuyile Mthembu, enhanced">
+    <meta name="author" content="Avuyile Mthembu, Vylex nexys">
+    <!-- Open Graph / Social Media Meta Tags (Update URLs) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="[YOUR_GAME_URL_HERE]">
+    <meta property="og:title" content="Zombie Shooter - Enhanced - Vylex nexys">
+    <meta property="og:description" content="Survive the waves! An enhanced 3D zombie shooter game by Avuyile Mthembu (Vylex nexys).">
+    <meta property="og:image" content="[URL_TO_YOUR_GAME_PREVIEW_IMAGE_HERE]">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="[YOUR_GAME_URL_HERE]">
+    <meta property="twitter:title" content="Zombie Shooter - Enhanced - Vylex nexys">
+    <meta property="twitter:description" content="Survive the waves! An enhanced 3D zombie shooter game by Avuyile Mthembu (Vylex nexys).">
+    <meta property="twitter:image" content="[URL_TO_YOUR_GAME_PREVIEW_IMAGE_HERE]">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/escalation.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen-overlay visible">
+        <h1>ZOMBIE SHOOTER</h1>
+        <div class="branding">By Avuyile Mthembu | Vylex nexys</div>
+        <div class="instructions-box" id="desktop-instructions">
+            <div style="margin-bottom: 8px;"><b>Desktop Controls:</b></div>
+            <div><key>W</key><key>A</key><key>S</key><key>D</key> or <key>Arrows</key> to Move | <key>Mouse</key> to Aim</div>
+            <div><key>Left Click</key> or <key>Space</key> to Shoot | <key>V</key> to Toggle Camera View</div>
+            <div><key>ESC</key> to Pause</div>
+        </div>
+        <div class="instructions-box" id="mobile-instructions">
+            <div style="margin-bottom: 8px;"><b>Mobile Controls:</b></div>
+            <div>Use the <b>Left Joystick</b> to move</div>
+            <div>Use the <b>Right Joystick</b> to aim</div>
+            <div>Tap <b>SHOOT</b> to fire | Tap <b>VIEW</b> to toggle camera</div>
+        </div>
+        <button id="startButton">START GAME</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOver" class="screen-overlay" style="display: none;">
+        <h1>GAME OVER</h1>
+        <div id="finalScore" style="color: white; font-size: 24px; margin-bottom: 20px;"></div>
+        <button id="restartButtonGameOver">PLAY AGAIN</button>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pauseScreen" class="screen-overlay" style="display: none;">
+        <h1>PAUSED</h1>
+        <p>Game paused. Take a break!</p>
+        <button id="resumeButton">RESUME</button>
+        <button id="viewToggleButton">TOGGLE VIEW</button>
+        <button id="restartButtonPause">RESTART</button>
+    </div>
+
+    <!-- In-Game UI -->
+    <div id="ui">
+        <div>Score: <span id="score">0</span></div>
+        <div>Level: <span id="level">1</span></div>
+        <div>Health: <span id="health">100</span></div>
+        <div>Zombies: <span id="enemies">0</span></div>
+    </div>
+
+    <!-- Level Transition Info -->
+    <div id="levelInfo"></div>
+
+    <!-- Crosshair -->
+    <div id="crosshair"></div>
+
+    <!-- Damage Effect Overlay -->
+    <div id="damageOverlay"></div>
+
+    <!-- Minimap Container -->
+    <div id="minimap"></div>
+
+    <!-- Touch Controls -->
+    <div id="touchControls" style="display: none;">
+        <!-- Move Joystick (Left) -->
+        <div id="moveJoystick" class="joystick">
+            <div class="joystick-thumb"></div>
+            <span>MOVE</span>
+        </div>
+        <!-- Right Side Controls (Look + Shoot) -->
+        <div style="display: flex; align-items: center; pointer-events: none;">
+             <div id="lookJoystick" class="joystick">
+                <div class="joystick-thumb"></div>
+                <span>LOOK</span>
+            </div>
+            <div id="shootButtonTouch" style="margin-left: 15px;">SHOOT</div>
+        </div>
+    </div>
+    <!-- View Toggle Button (Top Right for Mobile) -->
+    <div id="viewToggleTouchButton" style="display: none;">VIEW</div>
+
+
+    <!-- Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Three.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
+    <!-- GLTFLoader is removed as it's not currently used for models -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script> -->
+
+    <script src="js/escalation.js"></script>
+</body>
+</html>
