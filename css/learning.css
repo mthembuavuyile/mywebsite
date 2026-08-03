@@ -1,0 +1,247 @@
+/* ===============================
+   css/learning.css
+================================== */
+
+.learning-hero {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  background: linear-gradient(to bottom, var(--color-bg-alt), var(--color-bg-page));
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--color-accent), #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  z-index: 1;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-border);
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+/* Dynamic Top Borders on Hover */
+.skill-card:nth-child(1):hover::before { background: #f89820; } /* Java */
+.skill-card:nth-child(2):hover::before { background: #777bb4; } /* PHP/Web */
+.skill-card:nth-child(3):hover::before { background: #00758f; } /* SQL */
+.skill-card:nth-child(4):hover::before { background: #3ddc84; } /* Android */
+.skill-card:nth-child(5):hover::before { background: #64748b; } /* Hardware */
+.skill-card:nth-child(6):hover::before { background: #ef4444; } /* Security */
+
+.skill-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.java-icon { background: linear-gradient(135deg, #f89820, #e76f00); }
+.web-icon { background: linear-gradient(135deg, #777bb4, #4f5b93); }
+.sql-icon { background: linear-gradient(135deg, #00758f, #005f73); }
+.android-icon { background: linear-gradient(135deg, #3ddc84, #2c9e5e); }
+.hardware-icon { background: linear-gradient(135deg, #64748b, #475569); }
+.security-icon { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+
+.skill-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-brand);
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  line-height: 1.5;
+}
+
+.skill-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent);
+  font-weight: bold;
+  font-family: var(--font-mono);
+}
+
+.skill-list li strong {
+  color: var(--color-brand-light);
+  font-weight: 600;
+}
+
+/* Responsive */
+
+/* ===============================
+   Career Roadmaps Styles
+================================== */
+
+.roadmaps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.roadmap-card {
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.roadmap-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.roadmap-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.backend-icon { background: linear-gradient(135deg, #f89820, #e76f00); }
+.frontend-icon { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+.fullstack-icon { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.devops-icon { background: linear-gradient(135deg, #10b981, #059669); }
+
+.roadmap-header h3 {
+  font-size: 1.35rem;
+  margin: 0;
+  color: var(--color-brand);
+}
+
+.roadmap-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.roadmap-path .step {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  transition: all 0.2s;
+}
+
+.roadmap-path .step:hover {
+  background: var(--color-brand);
+  color: #fff;
+  border-color: var(--color-brand);
+}
+
+.roadmap-path .step.split em {
+  font-style: italic;
+  font-weight: normal;
+  color: var(--color-text-muted);
+  margin: 0 4px;
+}
+
+.roadmap-path i.fa-arrow-right {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  .learning-hero {
+    padding: 4rem 0 3rem;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  .roadmap-path {
+    gap: 0.5rem;
+  }
+  .roadmap-path .step {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

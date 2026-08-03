@@ -12,6 +12,7 @@ class SiteHeader extends HTMLElement {
             <ul class="nav-links">
               <li><a href="/index.html" data-nav="home">Home</a></li>
               <li><a href="/about.html" data-nav="about">About</a></li>
+              <li><a href="/learning.html" data-nav="learning">Skills</a></li>
               <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
               <li><a href="/games/index.html" data-nav="games">Games</a></li>
               <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
@@ -29,6 +30,7 @@ class SiteHeader extends HTMLElement {
         <ul class="mobile-nav-links">
           <li><a href="/index.html" data-nav="home">Home</a></li>
           <li><a href="/about.html" data-nav="about">About</a></li>
+          <li><a href="/learning.html" data-nav="learning">Skills</a></li>
           <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
           <li><a href="/games/index.html" data-nav="games">Games Arcade</a></li>
           <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
@@ -46,6 +48,8 @@ class SiteHeader extends HTMLElement {
       activeNav = 'home';
     } else if (path.includes('/about.html')) {
       activeNav = 'about';
+    } else if (path.includes('/learning.html')) {
+      activeNav = 'learning';
     } else if (path.includes('/portfolio.html')) {
       activeNav = 'portfolio';
     } else if (path.includes('/games/')) {
@@ -101,6 +105,7 @@ class SiteFooter extends HTMLElement {
           <div class="footer-links">
             <a href="/index.html">Home</a> • 
             <a href="/about.html">About</a> • 
+            <a href="/learning.html">Skills</a> • 
             <a href="/portfolio.html">Portfolio</a> • 
             <a href="/games/index.html">Games Arcade</a> • 
             <a href="/blog/index.html">Blog</a> • 
