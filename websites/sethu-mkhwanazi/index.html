@@ -143,10 +143,10 @@
   <div class="min-h-screen page-transition">
     <!-- Header -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
-      <nav class="mx-auto max-w-7xl px-6 md:px-8">
-        <div class="flex h-20 items-center justify-between">
-          <a href="/" class="flex items-center gap-3">
-            <img src="images/sethu-logo-light.jpeg" alt="Sethu Mkhwanazi Attorneys Inc." class="h-12 w-auto" width="50"
+      <nav class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+        <div class="flex h-16 sm:h-20 items-center justify-between">
+          <a href="/" class="flex items-center gap-2.5 sm:gap-3">
+            <img src="images/sethu-logo-light.jpeg" alt="Sethu Mkhwanazi Attorneys Inc." class="h-10 sm:h-12 w-auto" width="50"
               height="50">
             <div class="hidden sm:block">
               <p class="font-serif text-lg font-semibold tracking-tight text-foreground">Sethu Mkhwanazi</p>
@@ -196,66 +196,79 @@
 
     <main>
       <!-- Hero Section -->
-      <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <section class="relative min-h-[calc(100vh-5rem)] flex items-center justify-center pt-16 sm:pt-20 pb-6 sm:pb-10 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-muted/30 to-background"></div>
-        <div class="relative mx-auto max-w-7xl px-6 lg:px-8 py-24 lg:py-32">
+        <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-10">
           <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-8">
-              <div class="w-2 h-2 rounded-full bg-accent"></div>
-              <span class="text-sm font-medium text-foreground/80">Admitted Attorney of the High Court of South
-                Africa</span>
+            <!-- Status Pill Badge with Glowing Pulsing Dot -->
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 bg-accent/10 border border-accent/25 rounded-full mb-4 sm:mb-6 shadow-xs max-w-[95%] sm:max-w-none text-left sm:text-center">
+              <span class="relative flex h-2.5 w-2.5 shrink-0 items-center justify-center">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent shadow-[0_0_8px_rgba(212,175,55,0.9)]"></span>
+              </span>
+              <span class="text-xs sm:text-sm font-medium text-foreground/90 tracking-tight leading-snug sm:leading-normal">
+                Admitted Attorney of the High Court of South Africa
+              </span>
             </div>
+
+            <!-- Hero Heading -->
             <h1
-              class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+              class="font-serif text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-tight text-foreground mb-4 sm:mb-6 text-balance leading-tight">
               Strategic Legal Support for Businesses and Individuals Who <span class="text-accent">Expect Results</span>
             </h1>
-            <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+
+            <!-- Hero Subtitle -->
+            <p class="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed">
               Clear, efficient, and results-driven legal solutions across disputes, employment, commercial, and personal
               legal matters.
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
               <a href="book-consultation.html"
-                class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-8 h-12 text-base">
-                Book Consultation <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+                class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-6 sm:px-8 h-11 sm:h-12 text-sm sm:text-base w-full sm:w-auto shadow-sm">
+                Book Consultation <i data-lucide="arrow-right" class="ml-2 h-4 w-4 sm:h-5 sm:w-5"></i>
               </a>
               <a href="https://wa.me/27763000443?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20legal%20services."
                 target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center justify-center rounded-md border border-foreground/20 hover:bg-foreground/5 font-medium px-8 h-12 text-base shrink-0">
-                <i data-lucide="message-circle" class="mr-2 h-5 w-5"></i> Chat on WhatsApp
+                class="inline-flex items-center justify-center rounded-md border border-foreground/20 hover:bg-foreground/5 font-medium px-6 sm:px-8 h-11 sm:h-12 text-sm sm:text-base shrink-0 w-full sm:w-auto bg-background/50 backdrop-blur-xs">
+                <i data-lucide="message-circle" class="mr-2 h-4 w-4 sm:h-5 sm:w-5"></i> Chat on WhatsApp
               </a>
             </div>
-            <div class="mt-16 pt-8 border-t border-border/50">
-              <p class="text-sm text-muted-foreground mb-4">Trusted by individuals and growing businesses</p>
-              <div class="flex items-center justify-center gap-8 text-muted-foreground/60">
-                <div class="flex items-center gap-2">
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+
+            <!-- Trust Highlights -->
+            <div class="mt-8 sm:mt-10 lg:mt-12 pt-5 sm:pt-6 border-t border-border/50">
+              <p class="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">Trusted by individuals and growing businesses</p>
+              <div class="flex items-center justify-center gap-4 sm:gap-8 text-muted-foreground/60 flex-wrap">
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd" />
                   </svg>
-                  <span class="text-sm">Professional Service</span>
+                  <span class="text-xs sm:text-sm">Professional Service</span>
                 </div>
-                <div class="flex items-center gap-2">
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd" />
                   </svg>
-                  <span class="text-sm">Clear Communication</span>
+                  <span class="text-xs sm:text-sm">Clear Communication</span>
                 </div>
-                <div class="hidden sm:flex items-center gap-2">
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd" />
                   </svg>
-                  <span class="text-sm">Results-Driven</span>
+                  <span class="text-xs sm:text-sm">Results-Driven</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-12 sm:h-20 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
       </section>
 
       <!-- Pathway Section -->
@@ -738,11 +751,11 @@
     <!-- WhatsApp Button -->
     <a href="https://wa.me/27763000443?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20legal%20services."
       target="_blank" rel="noopener noreferrer"
-      class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
       aria-label="Chat on WhatsApp">
-      <i data-lucide="message-circle" class="h-7 w-7 text-white"></i>
+      <i data-lucide="message-circle" class="h-6 w-6 sm:h-7 sm:w-7 text-white"></i>
       <span
-        class="absolute right-full mr-3 px-3 py-1.5 bg-foreground text-background text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Chat
+        class="absolute right-full mr-3 px-3 py-1.5 bg-foreground text-background text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden sm:block">Chat
         on WhatsApp</span>
     </a>
   </div>
