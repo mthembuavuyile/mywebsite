@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate & Commercial Law | Sethu Mkhwanazi Attorneys Inc.</title>
+  <meta name="description" content="Business formation, commercial contracts, compliance, and corporate governance for growing enterprises. Practical legal support for South African businesses.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --color-background: var(--background);
+      --color-foreground: var(--foreground);
+      --color-card: var(--card);
+      --color-card-foreground: var(--card-foreground);
+      --color-popover: var(--popover);
+      --color-popover-foreground: var(--popover-foreground);
+      --color-primary: var(--primary);
+      --color-primary-foreground: var(--primary-foreground);
+      --color-secondary: var(--secondary);
+      --color-secondary-foreground: var(--secondary-foreground);
+      --color-muted: var(--muted);
+      --color-muted-foreground: var(--muted-foreground);
+      --color-accent: var(--accent);
+      --color-accent-foreground: var(--accent-foreground);
+      --color-destructive: var(--destructive);
+      --color-destructive-foreground: var(--destructive-foreground);
+      --color-border: var(--border);
+      --color-input: var(--input);
+      --color-ring: var(--ring);
+      --color-gold: var(--gold);
+      --color-gold-light: var(--gold-light);
+      --color-gold-dark: var(--gold-dark);
+      --radius-sm: calc(var(--radius) - 2px);
+      --radius-md: var(--radius);
+      --radius-lg: calc(var(--radius) + 2px);
+      --radius-xl: calc(var(--radius) + 4px);
+    }
+
+    :root {
+      --background: oklch(0.99 0 0);
+      --foreground: oklch(0.13 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.13 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.13 0 0);
+      --primary: oklch(0.13 0 0);
+      --primary-foreground: oklch(0.99 0 0);
+      --secondary: oklch(0.96 0 0);
+      --secondary-foreground: oklch(0.13 0 0);
+      --muted: oklch(0.96 0.005 90);
+      --muted-foreground: oklch(0.45 0 0);
+      --accent: oklch(0.72 0.12 85);
+      --accent-foreground: oklch(0.13 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --destructive-foreground: oklch(0.577 0.245 27.325);
+      --border: oklch(0.90 0.005 90);
+      --input: oklch(0.92 0 0);
+      --ring: oklch(0.72 0.12 85);
+      --radius: 0.25rem;
+      --gold: oklch(0.72 0.12 85);
+      --gold-light: oklch(0.82 0.10 85);
+      --gold-dark: oklch(0.58 0.14 85);
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .heading-display {
+      font-family: var(--font-serif);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .btn-premium {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-transition {
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-foreground bg-background">
+  <div class="min-h-screen page-transition">
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+      <nav class="mx-auto max-w-7xl px-6 md:px-8">
+        <div class="flex h-20 items-center justify-between">
+          <a href="../index.html" class="flex items-center gap-3">
+            <img src="../images/sethu-logo-light.jpeg" alt="Sethu Mkhwanazi Attorneys Inc." class="h-12 w-auto" width="50" height="50">
+            <div class="hidden sm:block">
+              <p class="font-serif text-lg font-semibold tracking-tight text-foreground">Sethu Mkhwanazi</p>
+              <p class="text-xs tracking-wider text-muted-foreground uppercase">Attorneys Inc.</p>
+            </div>
+          </a>
+          <div class="hidden lg:flex lg:items-center lg:gap-10">
+            <a href="../index.html" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">Home</a>
+            <a href="index.html" class="text-sm font-medium text-accent transition-colors">Services</a>
+            <a href="../about.html" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">About</a>
+            <a href="../contact.html" class="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">Contact</a>
+          </div>
+          <div class="hidden lg:flex lg:items-center lg:gap-4">
+            <a href="../book-consultation.html" class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-6 h-10">Book Consultation</a>
+          </div>
+          <button type="button" id="mobile-menu-btn" class="lg:hidden p-2 text-foreground" aria-label="Toggle menu">
+            <i data-lucide="menu" id="menu-icon-open" class="h-6 w-6"></i>
+            <i data-lucide="x" id="menu-icon-close" class="h-6 w-6 hidden"></i>
+          </button>
+        </div>
+      </nav>
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-background border-t border-border">
+        <div class="px-6 py-6 space-y-4">
+          <a href="../index.html" class="block text-base font-medium text-foreground hover:text-accent transition-colors">Home</a>
+          <a href="index.html" class="block text-base font-medium text-accent transition-colors">Services</a>
+          <a href="../about.html" class="block text-base font-medium text-foreground hover:text-accent transition-colors">About</a>
+          <a href="../contact.html" class="block text-base font-medium text-foreground hover:text-accent transition-colors">Contact</a>
+          <div class="pt-4 border-t border-border">
+            <a href="../book-consultation.html" class="flex items-center justify-center rounded-md w-full bg-accent text-accent-foreground hover:bg-accent/90 h-10 px-4 py-2">Book Consultation</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="pt-20">
+      <!-- Breadcrumb & Hero Header -->
+      <section class="pt-16 pb-16 lg:pt-24 lg:pb-20 bg-muted/30 border-b border-border/60">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+            <a href="index.html" class="hover:text-accent transition-colors">Services</a>
+            <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            <span class="text-foreground font-medium">Corporate Law</span>
+          </div>
+          <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+              <i data-lucide="building" class="h-4 w-4"></i>
+              Business Law
+            </div>
+            <h1 class="font-serif text-4xl sm:text-5xl font-semibold tracking-tight text-foreground mb-6">Corporate & Commercial Law</h1>
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              Growing businesses need practical legal support that enables rather than hinders progress. We provide business-focused advice on corporate matters, commercial transactions, and regulatory compliance.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pain Points Section -->
+      <section class="py-16 lg:py-20 bg-background border-b border-border/60">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="bg-card border border-border rounded-2xl p-8 sm:p-10 shadow-sm">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-foreground mb-6">Does your business need help with any of these?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              <div class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border/40">
+                <i data-lucide="alert-circle" class="h-5 w-5 text-accent mt-0.5 shrink-0"></i>
+                <span class="text-sm sm:text-base text-foreground font-medium">Setting up a new company or optimizing business structure</span>
+              </div>
+              <div class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border/40">
+                <i data-lucide="alert-circle" class="h-5 w-5 text-accent mt-0.5 shrink-0"></i>
+                <span class="text-sm sm:text-base text-foreground font-medium">Drafting or reviewing critical commercial contracts</span>
+              </div>
+              <div class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border/40">
+                <i data-lucide="alert-circle" class="h-5 w-5 text-accent mt-0.5 shrink-0"></i>
+                <span class="text-sm sm:text-base text-foreground font-medium">Navigating shareholder disputes or corporate governance issues</span>
+              </div>
+              <div class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border/40">
+                <i data-lucide="alert-circle" class="h-5 w-5 text-accent mt-0.5 shrink-0"></i>
+                <span class="text-sm sm:text-base text-foreground font-medium">Legal due diligence for acquisitions or incoming investments</span>
+              </div>
+              <div class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border/40">
+                <i data-lucide="alert-circle" class="h-5 w-5 text-accent mt-0.5 shrink-0"></i>
+                <span class="text-sm sm:text-base text-foreground font-medium">Ensuring regulatory compliance and commercial risk management</span>
+              </div>
+              <div class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border/40">
+                <i data-lucide="alert-circle" class="h-5 w-5 text-accent mt-0.5 shrink-0"></i>
+                <span class="text-sm sm:text-base text-foreground font-medium">Corporate restructuring, mergers, or winding up business entities</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Grid Section -->
+      <section class="py-16 lg:py-24 bg-background">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="max-w-2xl mb-12">
+            <p class="text-sm font-medium tracking-wider uppercase text-accent mb-3">What We Cover</p>
+            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-foreground">Business-Focused Legal Support</h2>
+            <p class="text-muted-foreground mt-4 leading-relaxed">
+              We understand that businesses need legal advice that is practical and commercially aware. We work alongside you to support your business objectives while managing legal risk effectively.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-card border border-border rounded-xl p-8 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-6">
+                <i data-lucide="building-2" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Company Formation</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                Registration of companies, close corporations, and other business entities with tailored governance structures.
+              </p>
+            </div>
+
+            <div class="bg-card border border-border rounded-xl p-8 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-6">
+                <i data-lucide="file-check" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Commercial Contracts</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                Drafting and review of supply agreements, service contracts, distribution agreements, and key commercial documents.
+              </p>
+            </div>
+
+            <div class="bg-card border border-border rounded-xl p-8 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-6">
+                <i data-lucide="users" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Shareholder Agreements</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                Agreements governing relationships between shareholders, including buy-sell provisions, voting rights, and dispute mechanisms.
+              </p>
+            </div>
+
+            <div class="bg-card border border-border rounded-xl p-8 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-6">
+                <i data-lucide="search-check" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Due Diligence</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                Comprehensive legal due diligence for mergers, acquisitions, asset purchases, and investment transactions.
+              </p>
+            </div>
+
+            <div class="bg-card border border-border rounded-xl p-8 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-6">
+                <i data-lucide="shield-check" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Corporate Governance</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                Advice on director duties, board procedures, statutory compliance, and alignment with the South African Companies Act.
+              </p>
+            </div>
+
+            <div class="bg-card border border-border rounded-xl p-8 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-6">
+                <i data-lucide="git-merge" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Mergers & Acquisitions</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                Strategic legal support for business sales, acquisitions, joint ventures, and corporate restructuring transactions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Section -->
+      <section class="py-16 lg:py-24 bg-muted/20 border-t border-b border-border/60">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <p class="text-sm font-medium tracking-wider uppercase text-accent mb-3">Our Workflow</p>
+            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-foreground">How We Support Your Enterprise</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-card p-8 rounded-xl border border-border text-center">
+              <span class="inline-block font-serif text-3xl font-bold text-accent mb-4">01</span>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Understand</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                We learn about your business operations, commercial objectives, and the specific legal context of your matter.
+              </p>
+            </div>
+
+            <div class="bg-card p-8 rounded-xl border border-border text-center">
+              <span class="inline-block font-serif text-3xl font-bold text-accent mb-4">02</span>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Advise</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                We provide clear, practical advice on your options and structure the optimal legal approach to mitigate risk.
+              </p>
+            </div>
+
+            <div class="bg-card p-8 rounded-xl border border-border text-center">
+              <span class="inline-block font-serif text-3xl font-bold text-accent mb-4">03</span>
+              <h3 class="font-serif text-xl font-semibold text-foreground mb-3">Implement</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed">
+                We draft and negotiate necessary agreements and oversee execution efficiently to safeguard your business.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-16 lg:py-24 bg-primary text-primary-foreground">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold mb-6">Empower Your Business With Experienced Counsel</h2>
+          <p class="text-lg text-primary-foreground/70 max-w-2xl mx-auto mb-8">
+            Book a corporate consultation to discuss your company's contracts, governance, or commercial transactions.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="../book-consultation.html" class="inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground hover:bg-accent/90 btn-premium font-medium px-8 h-12 text-base">Book a Consultation</a>
+            <a href="../contact.html" class="inline-flex items-center justify-center rounded-md border border-primary-foreground/20 hover:bg-primary-foreground/10 text-primary-foreground font-medium px-8 h-12 text-base transition-colors">Contact Us</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-primary-foreground border-t border-primary-foreground/10">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div class="md:col-span-2">
+            <p class="font-serif text-xl font-semibold mb-2">Sethu Mkhwanazi Attorneys Inc.</p>
+            <p class="text-sm text-primary-foreground/70 max-w-md">Delivering practical legal solutions with integrity, precision, and dedication across South Africa.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</p>
+            <ul class="space-y-2 text-sm text-primary-foreground/70">
+              <li><a href="../index.html" class="hover:text-primary-foreground transition-colors">Home</a></li>
+              <li><a href="index.html" class="hover:text-primary-foreground transition-colors">Services</a></li>
+              <li><a href="../about.html" class="hover:text-primary-foreground transition-colors">About Us</a></li>
+              <li><a href="../contact.html" class="hover:text-primary-foreground transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-sm uppercase tracking-wider mb-4">Legal</p>
+            <ul class="space-y-2 text-sm text-primary-foreground/70">
+              <li><a href="../book-consultation.html" class="hover:text-primary-foreground transition-colors">Book Consultation</a></li>
+              <li><a href="../contact.html" class="hover:text-primary-foreground transition-colors">Get Directions</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-primary-foreground/10 text-center text-xs text-primary-foreground/50">
+          <p>&copy; 2026 Sethu Mkhwanazi Attorneys Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconOpen = document.getElementById('menu-icon-open');
+    const menuIconClose = document.getElementById('menu-icon-close');
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        menuIconOpen.classList.toggle('hidden');
+        menuIconClose.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body>
+</html>
