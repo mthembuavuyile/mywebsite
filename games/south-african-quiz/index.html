@@ -13,8 +13,8 @@
     <meta property="og:title" content="South Africa Quiz Challenge | Vylex ">
     <meta property="og:description" content="Test your knowledge of South Africa with our interactive quiz about the Rainbow Nation!">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vylex.co.za/sa-quiz-challenge">
-    <meta property="og:image" content="https://vylex.co.za/images/sa-quiz-preview.jpg">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/sa-quiz-challenge">
+    <meta property="og:image" content="https://avuyilemthembu.co.za/images/sa-quiz-preview.jpg">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="South Africa Quiz Challenge | Vylex ">
@@ -277,13 +277,15 @@ body {
     animation: circle-fill 1.5s ease-out forwards;
 }
     </style>
+
+    <link rel="canonical" href="https://avuyilemthembu.co.za/games/south-african-quiz/">
 </head>
 
 <body class="min-h-screen flex flex-col">
     <!-- Enhanced flag component for the header -->
     <header class="w-full bg-white shadow-sm py-2 px-4 fixed top-0 left-0 right-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="https://vylex.co.za" class="flex items-center space-x-2" title="Vylex ">
+            <a href="https://avuyilemthembu.co.za" class="flex items-center space-x-2" title="Vylex ">
                 <div class="sa-flag w-8 h-8">
                     <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 90 60">
                         <title>Flag of South Africa</title>
@@ -1079,7 +1081,7 @@ function shareResults() {
         const percentage = Math.round((score / totalQuestions) * 100);
         const selectedCategory = categorySelect?.value || 'all';
         const categoryText = selectedCategory === 'all' ? 'South Africa' : capitalizeFirstLetter(selectedCategory);
-        const shareText = `I scored ${score}/${totalQuestions} (${percentage}%) on the ${categoryText} Quiz Challenge! Can you beat my score? Try it at https://vylex.co.za/games/sa-quiz-challenge`;
+        const shareText = `I scored ${score}/${totalQuestions} (${percentage}%) on the ${categoryText} Quiz Challenge! Can you beat my score? Try it at https://avuyilemthembu.co.za/games/sa-quiz-challenge`;
 
         if (navigator.share) {
             navigator.share({
@@ -1186,3 +1188,4 @@ function capitalizeFirstLetter(str) {
 </body>
 
 </html>
+
