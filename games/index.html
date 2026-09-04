@@ -57,7 +57,27 @@
       <div class="container">
         <div class="games-grid" id="gamesGrid">
           
-          <!-- Zombie Universe -->
+          <!-- Springbok Flyover 3D -->
+          <article class="game-card" data-category="action racing" data-keywords="springbok flyover 3d jet flight simulator plane rugby stadium cape town dhl ellis loftus mabhida airlink threejs webgl mobile touch">
+            <div class="game-card-media" style="background: linear-gradient(135deg, #007749 0%, #080f1d 100%);">
+              <span class="game-badge badge-action" style="background: rgba(0, 230, 118, 0.2); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.4);">3D Flight Simulator</span>
+              <div class="game-card-icon-wrapper" style="color: #ffd600;">
+                <i class="fas fa-plane-departure"></i>
+              </div>
+            </div>
+            <div class="game-card-body">
+              <h2 class="game-card-title">Springbok Flyover 3D</h2>
+              <p class="game-card-desc">Pilot an Airlink Embraer jet across iconic South African stadiums! Dive low into the stadium bowl, dodge canopy arches, and ignite roaring crowd hype. Includes 3D flight pass, 2D retro arcade, and free cam explorer.</p>
+              <div class="game-tags">
+                <span class="game-tag">Three.js</span>
+                <span class="game-tag">Mobile Ready</span>
+                <span class="game-tag">3 Modes</span>
+              </div>
+              <div class="game-card-footer">
+                <a href="/games/fly-over/index.html" class="play-btn" aria-label="Play Springbok Flyover 3D Stadium Arcade">Play Game <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
           <article class="game-card" data-category="action" data-keywords="zombie universe outbreak protocol shooter v2 3d fps action survival 2d">
             <div class="game-card-media" style="background: linear-gradient(135deg, #7f1d1d 0%, #0f172a 100%);">
               <span class="game-badge badge-action">Action & 3D</span>
@@ -309,7 +329,8 @@
         let visibleCount = 0;
 
         gameCards.forEach(card => {
-          const categoryMatch = (currentCategory === 'all') || (card.getAttribute('data-category') === currentCategory);
+          const cardCats = (card.getAttribute('data-category') || '').split(' ');
+          const categoryMatch = (currentCategory === 'all') || cardCats.includes(currentCategory);
           const keywords = card.getAttribute('data-keywords').toLowerCase();
           const title = card.querySelector('.game-card-title').textContent.toLowerCase();
           const desc = card.querySelector('.game-card-desc').textContent.toLowerCase();
