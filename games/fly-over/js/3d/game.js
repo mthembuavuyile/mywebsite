@@ -72,17 +72,23 @@ class Game {
 
     _initThree() {
         const container = document.getElementById('game-canvas-container');
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 900;
+        const isPortrait = window.innerWidth < window.innerHeight;
+        const initialFov = isPortrait ? 74 : 60;
 
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x70c5e8); // Cape Town coastal sky
         this.scene.fog = new THREE.FogExp2(0x70c5e8, 0.0006);
 
-        this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.5, 4500);
+        this.camera = new THREE.PerspectiveCamera(initialFov, window.innerWidth / window.innerHeight, 0.5, 4500);
         this.camera.position.set(0, 180, 2300);
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+        this.renderer = new THREE.WebGLRenderer({ 
+            antialias: !isMobile, 
+            powerPreference: 'high-performance' 
+        });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 1.75));
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -97,8 +103,9 @@ class Game {
         const sunLight = new THREE.DirectionalLight(0xfffaed, 1.35);
         sunLight.position.set(350, 550, 300);
         sunLight.castShadow = true;
-        sunLight.shadow.mapSize.width = 2048;
-        sunLight.shadow.mapSize.height = 2048;
+        const shadowRes = isMobile ? 1024 : 2048;
+        sunLight.shadow.mapSize.width = shadowRes;
+        sunLight.shadow.mapSize.height = shadowRes;
         sunLight.shadow.camera.near = 20;
         sunLight.shadow.camera.far = 2500;
         sunLight.shadow.camera.left = -400;
@@ -108,7 +115,9 @@ class Game {
         this.scene.add(sunLight);
 
         window.addEventListener('resize', () => {
+            const isPort = window.innerWidth < window.innerHeight;
             this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.fov = isPort ? 74 : 60;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize(window.innerWidth, window.innerHeight);
         });
@@ -191,6 +200,18 @@ class Game {
                 this.startFlight();
             }
         });
+
+        // Mobile Audio Context Unlock on first touch/click
+        const unlockAudio = () => {
+            if (this.audio) {
+                this.audio.init();
+                this.audio.resume();
+            }
+            window.removeEventListener('touchstart', unlockAudio);
+            window.removeEventListener('pointerdown', unlockAudio);
+        };
+        window.addEventListener('touchstart', unlockAudio, { passive: true });
+        window.addEventListener('pointerdown', unlockAudio, { passive: true });
     }
 
     _pollGamepad() {

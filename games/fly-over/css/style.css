@@ -162,13 +162,18 @@ html, body {
    ========================================================================== */
 #menu-screen {
     background: radial-gradient(circle at center 30%, rgba(10, 20, 35, 0.85) 0%, rgba(5, 7, 12, 0.96) 100%);
-    padding: 40px 60px;
+    padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
     align-items: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    justify-content: flex-start;
+    gap: 16px;
 }
 
 .menu-header {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .flag-stripe {
@@ -985,6 +990,7 @@ button {
 @media (max-width: 900px) {
     .stadium-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
     }
     .game-title {
         font-size: 36px;
@@ -997,6 +1003,58 @@ button {
     }
     .cinematic-content {
         margin-left: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .stadium-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .stadium-card {
+        min-height: auto;
+        padding: 16px;
+    }
+    .card-name {
+        font-size: 18px;
+    }
+    .card-hazard {
+        font-size: 11px;
+        margin-top: 8px;
+        padding: 6px 8px;
+    }
+    .game-title {
+        font-size: 26px;
+        letter-spacing: -0.5px;
+    }
+    .game-subtitle {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+    .top-nav-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 4px 8px;
+        max-width: 95%;
+    }
+    .nav-tab {
+        padding: 6px 11px;
+        font-size: 11px;
+    }
+    .cinematic-content {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-bottom: 24px;
+    }
+    .cinematic-title {
+        font-size: 26px;
+    }
+    .cinematic-bars {
+        height: 50px;
+    }
+    .cinematic-hazard {
+        font-size: 12px;
     }
 }
 
@@ -1232,15 +1290,17 @@ button {
     height: 100vh;
     background: rgba(8, 10, 16, 0.96);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 24px;
+    padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
     text-align: center;
 }
 
-.rotate-device-prompt.hidden {
+.rotate-device-prompt.hidden,
+.rotate-device-prompt.dismissed {
     display: none !important;
 }
 
@@ -1248,20 +1308,120 @@ button {
     .rotate-device-prompt:not(.dismissed) {
         display: flex !important;
     }
+
+    /* In-Flight HUD adjustments when user continues in Portrait mode */
+    #hud-screen {
+        padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    }
+
+    .hud-top-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .hud-stadium-card {
+        padding: 4px 12px;
+    }
+    .hud-stadium-name {
+        font-size: 13px;
+    }
+    .hud-stadium-city {
+        font-size: 10px;
+    }
+
+    .hud-center-cluster {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    .hud-hype-container {
+        width: 100%;
+        padding: 4px 10px;
+    }
+    .gate-tracker-tag {
+        font-size: 9px;
+        padding: 2px 8px;
+    }
+
+    .hud-score-card {
+        padding: 4px 12px;
+    }
+    .hud-score-val {
+        font-size: 18px;
+    }
+
+    .hud-clearance-widget {
+        top: 130px;
+        transform: translateX(-50%) scale(0.68);
+        transform-origin: top center;
+    }
+
+    .hud-instruments {
+        bottom: max(140px, env(safe-area-inset-bottom));
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 6px;
+    }
+    .instrument-box {
+        padding: 4px 8px;
+        min-width: 60px;
+    }
+    .inst-val {
+        font-size: 14px;
+    }
+
+    .hud-controls-dock {
+        top: max(12px, env(safe-area-inset-top));
+        right: max(12px, env(safe-area-inset-right));
+        bottom: auto;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .btn-hud {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    .touch-joystick-zone {
+        bottom: max(16px, env(safe-area-inset-bottom));
+        left: max(14px, env(safe-area-inset-left));
+        width: 135px;
+        height: 135px;
+    }
+    .touch-joystick-base {
+        width: 115px;
+        height: 115px;
+    }
+    .touch-joystick-stick {
+        width: 46px;
+        height: 46px;
+    }
+
+    .touch-action-buttons {
+        bottom: max(16px, env(safe-area-inset-bottom));
+        right: max(14px, env(safe-area-inset-right));
+        gap: 12px;
+    }
+    .touch-btn {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 .rotate-phone-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
-    padding: 32px 24px;
-    max-width: 340px;
+    padding: 28px 22px;
+    max-width: 330px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .rotate-phone-icon {
-    font-size: 52px;
-    margin-bottom: 16px;
+    font-size: 48px;
+    margin-bottom: 12px;
     animation: rotateIcon 2.4s ease-in-out infinite;
 }
 
@@ -1272,11 +1432,11 @@ button {
 }
 
 .rotate-phone-card h2 {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--primary-gold);
     font-weight: 900;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .rotate-phone-card p {
@@ -1285,95 +1445,125 @@ button {
     line-height: 1.5;
 }
 
+.rotate-prompt-actions {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prompt-continue-btn {
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.prompt-continue-btn:hover,
+.prompt-continue-btn:active {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
 /* ==========================================================================
    Mobile Landscape Optimizations (< 520px height)
    ========================================================================== */
 @media (max-height: 520px) {
     #hud-screen {
-        padding: 12px 18px;
+        padding: max(8px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
     }
 
     .hud-stadium-card {
-        padding: 6px 12px;
+        padding: 4px 10px;
     }
     .hud-stadium-name {
-        font-size: 13px;
+        font-size: 12px;
+    }
+    .hud-stadium-city {
+        font-size: 9px;
     }
 
     .hud-hype-container {
-        width: 170px;
-        padding: 6px 12px;
+        width: 160px;
+        padding: 4px 10px;
     }
     .gate-tracker-tag {
-        font-size: 9px;
-        padding: 2px 10px;
+        font-size: 8.5px;
+        padding: 2px 8px;
     }
 
     .hud-score-card {
-        padding: 6px 14px;
+        padding: 4px 10px;
     }
     .hud-score-val {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .hud-clearance-widget {
-        top: 68px;
-        transform: translateX(-50%) scale(0.72);
+        top: 60px;
+        transform: translateX(-50%) scale(0.68);
         transform-origin: top center;
     }
 
     .hud-instruments {
-        bottom: 14px;
-        left: 170px; /* Make space for joystick */
-        gap: 6px;
+        bottom: max(10px, env(safe-area-inset-bottom));
+        left: max(150px, calc(130px + env(safe-area-inset-left))); /* Avoid joystick */
+        gap: 4px;
     }
     .instrument-box {
-        padding: 4px 10px;
-        min-width: 65px;
+        padding: 3px 8px;
+        min-width: 58px;
     }
     .inst-val {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .hud-controls-dock {
-        top: 12px;
-        right: 18px;
+        top: max(8px, env(safe-area-inset-top));
+        right: max(12px, env(safe-area-inset-right));
         bottom: auto;
-        gap: 6px;
+        gap: 4px;
     }
     .btn-hud {
-        padding: 6px 10px;
-        font-size: 10px;
+        padding: 5px 8px;
+        font-size: 9.5px;
     }
 
     .touch-joystick-zone {
-        bottom: 10px;
-        left: 10px;
-        width: 130px;
-        height: 130px;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        left: max(10px, env(safe-area-inset-left));
+        width: 120px;
+        height: 120px;
     }
     .touch-joystick-base {
-        width: 110px;
-        height: 110px;
+        width: 100px;
+        height: 100px;
     }
     .touch-joystick-stick {
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
     }
 
     .touch-action-buttons {
-        bottom: 10px;
-        right: 14px;
-        gap: 8px;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        right: max(12px, env(safe-area-inset-right));
+        gap: 6px;
     }
     .touch-btn {
-        width: 54px;
-        height: 54px;
+        width: 52px;
+        height: 52px;
     }
     .touch-btn-icon {
-        font-size: 18px;
+        font-size: 17px;
     }
     .touch-btn-label {
-        font-size: 8px;
+        font-size: 7.5px;
     }
 }

@@ -39,6 +39,7 @@ class UIController {
         this.cockpitCrosshair = document.getElementById('cockpit-crosshair');
         this.reticleHorizon = document.querySelector('.reticle-horizon-line');
         this.rotatePrompt = document.getElementById('rotate-device-prompt');
+        this.btnContinuePortrait = document.getElementById('btn-continue-portrait');
 
         // Virtual Touch Controls
         this.touchJoystickZone = document.getElementById('touch-joystick-zone');
@@ -128,7 +129,16 @@ class UIController {
             });
         }
 
-        // Dismiss Rotate Device Prompt on tap
+        // Dismiss Rotate Device Prompt on tap or continue in portrait button
+        if (this.btnContinuePortrait) {
+            this.btnContinuePortrait.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (this.rotatePrompt) {
+                    this.rotatePrompt.classList.add('dismissed');
+                }
+            });
+        }
+
         if (this.rotatePrompt) {
             this.rotatePrompt.addEventListener('click', () => {
                 this.rotatePrompt.classList.add('dismissed');
@@ -219,9 +229,12 @@ class UIController {
         };
 
         this.touchJoystickZone.addEventListener('touchstart', onTouchStart, { passive: false });
+        this.touchJoystickZone.addEventListener('mousedown', onTouchStart);
         window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('mousemove', onTouchMove);
         window.addEventListener('touchend', onTouchEnd);
         window.addEventListener('touchcancel', onTouchEnd);
+        window.addEventListener('mouseup', onTouchEnd);
 
         // Touch Boost Button
         if (this.btnTouchBoost) {
