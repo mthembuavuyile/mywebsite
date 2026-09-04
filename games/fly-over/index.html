@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Springbok Flyover 3D — Stadium Arcade</title>
-    <meta name="description" content="Pilot an Airlink Embraer jet in 3D across iconic South African stadiums. Dive low over the crowd, dodge roof architecture, and maximize hype points!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Springbok Flyover 3D — Stadium Low-Pass Flight Simulator</title>
+    <meta name="description" content="Pilot an Airlink Embraer jet in 3D across iconic South African stadiums! Dive low through DHL Stadium Cape Town, Ellis Park, Loftus, and Moses Mabhida, dodge roof architecture, and maximize crowd hype. Mobile-friendly 3D arcade simulator.">
+    <meta name="keywords" content="Springbok Flyover 3D, flight simulator, web game, South African stadiums, Three.js game, WebGL 3D, DHL Stadium Cape Town, Ellis Park, Loftus Versfeld, Moses Mabhida, mobile browser game, Avuyile Mthembu">
+    <meta name="author" content="Avuyile Mthembu">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://avuyilemthembu.co.za/games/fly-over/index.html">
+
+    <!-- Mobile Web App & Theme Color -->
+    <meta name="theme-color" content="#08090e">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Springbok Flyover">
+
+    <!-- Open Graph / WhatsApp / Facebook Link Share -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/games/fly-over/index.html">
+    <meta property="og:title" content="Springbok Flyover 3D — Stadium Low-Pass Flight Simulator">
+    <meta property="og:description" content="Pilot an Airlink Embraer jet in 3D across iconic South African stadiums! Dive low through the bowl, dodge canopy arches, and ignite roaring crowd hype. Play free in browser on phone or PC.">
+    <meta property="og:image" content="https://avuyilemthembu.co.za/games/fly-over/assets/og-flyover.jpg">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="720">
+    <meta property="og:image:alt" content="Springbok Flyover 3D - Jet Airliner soaring over South African stadium bowl">
+    <meta property="og:site_name" content="Avuyile Mthembu | Games Arcade">
+    <meta property="og:locale" content="en_ZA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://avuyilemthembu.co.za/games/fly-over/index.html">
+    <meta name="twitter:title" content="Springbok Flyover 3D — Stadium Flight Simulator">
+    <meta name="twitter:description" content="Pilot a Springbok jet in 3D across iconic SA rugby stadiums! Dive low through the bowl, dodge canopy arches, and ignite crowd hype.">
+    <meta name="twitter:image" content="https://avuyilemthembu.co.za/games/fly-over/assets/og-flyover.jpg">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Springbok Flyover 3D",
+      "description": "High-stakes 3D flight arcade simulator piloting an airliner low-pass through South African sports stadiums.",
+      "url": "https://avuyilemthembu.co.za/games/fly-over/index.html",
+      "image": "https://avuyilemthembu.co.za/games/fly-over/assets/og-flyover.jpg",
+      "genre": ["Flight Simulator", "Arcade", "3D Sports"],
+      "gamePlatform": ["Web Browser", "Mobile (Android Samsung, iPhone iOS)", "Desktop (Windows, Mac, Linux)"],
+      "applicationCategory": "Game",
+      "operatingSystem": "Any",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Avuyile Mthembu",
+        "url": "https://avuyilemthembu.co.za/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "ZAR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+
     <link rel="stylesheet" href="css/style.css">
     
     <!-- Three.js (r128) from cdnjs -->
@@ -23,8 +82,11 @@
     <div id="ui-layer">
         <!-- Main Menu -->
         <div id="menu-screen" class="ui-screen active">
-            <!-- Global Game Mode Switcher -->
-            <nav class="top-nav-bar" aria-label="Game Modes">
+            <!-- Global Game Mode Switcher & Reciprocal Navigation -->
+            <nav class="top-nav-bar" aria-label="Game Modes and Arcade Navigation">
+                <a href="/games/index.html" class="nav-tab nav-back" title="Back to Games Arcade Hub">
+                    <span>🎮</span> Arcade Hub
+                </a>
                 <a href="index.html" class="nav-tab active" title="Play 3D Jet Flyover">
                     <span>🛩️</span> 3D Flyover
                 </a>
@@ -222,8 +284,13 @@
         <div id="rotate-device-prompt" class="rotate-device-prompt hidden">
             <div class="rotate-phone-card">
                 <div class="rotate-phone-icon">📱 ↷ 📲</div>
-                <h2>ROTATE TO LANDSCAPE</h2>
-                <p>Springbok Flyover 3D is designed for wide stadium panoramic flight. Please tilt your phone sideways!</p>
+                <h2>ROTATE FOR WIDE VIEW</h2>
+                <p>Springbok Flyover 3D looks best in widescreen landscape! Tilt your phone sideways for the ultimate stadium panoramic view.</p>
+                <div class="rotate-prompt-actions">
+                    <button id="btn-continue-portrait" class="btn-secondary prompt-continue-btn" type="button" aria-label="Play in Portrait Mode">
+                        📱 Continue in Portrait
+                    </button>
+                </div>
             </div>
         </div>
 

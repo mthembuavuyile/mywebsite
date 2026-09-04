@@ -134,12 +134,30 @@
        <changefreq>daily</changefreq>
        <priority>0.6400</priority>
   </url>
-  <url>
-       <loc>https://avuyilemthembu.co.za/games/south-african-quiz/</loc>
-       <lastmod>2026-07-20T11:40:52+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.6400</priority>
-  </url>
+   <url>
+        <loc>https://avuyilemthembu.co.za/games/south-african-quiz/</loc>
+        <lastmod>2026-07-20T11:40:52+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6400</priority>
+   </url>
+   <url>
+        <loc>https://avuyilemthembu.co.za/games/fly-over/index.html</loc>
+        <lastmod>2026-09-04T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8000</priority>
+   </url>
+   <url>
+        <loc>https://avuyilemthembu.co.za/games/fly-over/retro2d.html</loc>
+        <lastmod>2026-09-04T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7000</priority>
+   </url>
+   <url>
+        <loc>https://avuyilemthembu.co.za/games/fly-over/stadiumdemo.html</loc>
+        <lastmod>2026-09-04T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7000</priority>
+   </url>
   <url>
        <loc>https://avuyilemthembu.co.za/blog/the-architecture-of-agentic-ai.html</loc>
        <lastmod>2026-07-20T11:40:52+00:00</lastmod>
