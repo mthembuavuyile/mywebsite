@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Springbok Flyover 3D — Stadium Arcade</title>
+    <meta name="description" content="Pilot an Airlink Embraer jet in 3D across iconic South African stadiums. Dive low over the crowd, dodge roof architecture, and maximize hype points!">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Three.js (r128) from cdnjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 3D WebGL Canvas Container -->
+    <div id="game-canvas-container"></div>
+
+    <!-- UI Overlay Layer -->
+    <div id="ui-layer">
+        <!-- Main Menu -->
+        <div id="menu-screen" class="ui-screen active">
+            <!-- Global Game Mode Switcher -->
+            <nav class="top-nav-bar" aria-label="Game Modes">
+                <a href="index.html" class="nav-tab active" title="Play 3D Jet Flyover">
+                    <span>🛩️</span> 3D Flyover
+                </a>
+                <a href="retro2d.html" class="nav-tab" title="Play 2D Retro Pixel Arcade">
+                    <span>🕹️</span> 2D Retro Arcade
+                </a>
+                <a href="stadiumdemo.html" class="nav-tab" title="3D Stadium Free Cam Inspector">
+                    <span>🏟️</span> Stadium Explorer
+                </a>
+            </nav>
+
+            <div class="menu-header">
+                <div class="flag-stripe">
+                    <span class="flag-green"></span>
+                    <span class="flag-black"></span>
+                    <span class="flag-yellow"></span>
+                    <span class="flag-blue"></span>
+                    <span class="flag-red"></span>
+                    <span class="flag-white"></span>
+                </div>
+                <h1 class="game-title">SPRINGBOK<br><span class="title-accent">FLYOVER 3D</span></h1>
+                <p class="game-subtitle">STADIUM LOW-PASS ARCADE SIMULATOR</p>
+            </div>
+
+            <div class="stadium-select-container">
+                <h2 class="section-title">SELECT STADIUM</h2>
+                <div class="stadium-grid" id="stadium-grid">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+
+            <div class="menu-footer">
+                <div class="control-pills">
+                    <span class="pill laptop-only"><kbd>W</kbd><kbd>S</kbd> Pitch / Dive</span>
+                    <span class="pill laptop-only"><kbd>A</kbd><kbd>D</kbd> Bank Left / Right</span>
+                    <span class="pill laptop-only"><kbd>SPACE</kbd> Rocket Boost</span>
+                    <span class="pill laptop-only"><kbd>C</kbd> Camera</span>
+                    <span class="pill mobile-only">🕹️ Touch Stick to Steer</span>
+                    <span class="pill mobile-only">🚀 Tap Boost & Dive Buttons</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cinematic Intro Overlay -->
+        <div id="cinematic-screen" class="ui-screen hidden">
+            <div class="cinematic-bars top-bar"></div>
+            <div class="cinematic-content">
+                <div class="cinematic-badge" id="cin-city">CAPE TOWN</div>
+                <h2 class="cinematic-title" id="cin-name">DHL STADIUM</h2>
+                <p class="cinematic-subtitle" id="cin-subtitle">Table Mountain Approach • Low Canopy Clearance</p>
+                <div class="cinematic-hazard" id="cin-hazard">
+                    <span class="hazard-icon">⚠️</span>
+                    <span id="cin-hazard-text">DIVE REQUIRED! Plunge below 25m into the stadium bowl or fail.</span>
+                </div>
+            </div>
+            <div class="cinematic-prompt">
+                <button id="btn-start-flight" class="btn-primary pulse-btn">FLY LOW PASS</button>
+                <span class="prompt-hint">Press <kbd>SPACE</kbd> or click to take controls</span>
+            </div>
+            <button id="btn-skip-cinematic" class="btn-secondary skip-btn">SKIP ⏭</button>
+            <div class="cinematic-bars bottom-bar"></div>
+        </div>
+
+        <!-- In-Flight HUD -->
+        <div id="hud-screen" class="ui-screen hidden">
+            <!-- Top Bar: Stadium info & Score -->
+            <div class="hud-top-bar">
+                <div class="hud-stadium-card">
+                    <span class="hud-stadium-name" id="hud-stadium-name">DHL STADIUM</span>
+                    <span class="hud-stadium-city" id="hud-stadium-city">CAPE TOWN</span>
+                </div>
+
+                <!-- Center: Hype Meter & Gate Tracker -->
+                <div class="hud-center-cluster">
+                    <div class="hud-hype-container">
+                        <div class="hype-header">
+                            <span class="hype-title">🔥 CROWD HYPE</span>
+                            <span class="hype-val" id="hud-hype-val">0%</span>
+                        </div>
+                        <div class="hype-bar-track">
+                            <div class="hype-bar-fill" id="hud-hype-fill"></div>
+                        </div>
+                    </div>
+                    <div class="gate-tracker-tag" id="hud-gate-tag">GATE 1/6 • HIGH APPROACH</div>
+                </div>
+
+                <!-- Score & Multiplier -->
+                <div class="hud-score-card">
+                    <div class="score-row">
+                        <span class="hud-label">SCORE</span>
+                        <span class="hud-score-val" id="hud-score">0</span>
+                    </div>
+                    <div class="multiplier-tag" id="hud-multiplier">1.0x MULTIPLIER</div>
+                </div>
+            </div>
+
+            <!-- Real-time Clearance / Danger Radar (Center HUD) -->
+            <div class="hud-clearance-widget" id="hud-clearance-widget">
+                <div class="clearance-dial">
+                    <svg class="dial-svg" viewBox="0 0 120 120">
+                        <circle class="dial-bg" cx="60" cy="60" r="50"></circle>
+                        <circle class="dial-progress" id="dial-progress" cx="60" cy="60" r="50"></circle>
+                    </svg>
+                    <div class="dial-content">
+                        <span class="dial-label">CLEARANCE</span>
+                        <span class="dial-number" id="hud-clearance-num">--</span>
+                        <span class="dial-unit">METERS</span>
+                    </div>
+                </div>
+                <div class="danger-warning-banner" id="hud-danger-warning">
+                    ⚠️ PULL UP! TERRAIN ⚠️
+                </div>
+            </div>
+
+            <!-- Cockpit FPV Reticle & Pitch Ladder -->
+            <div id="cockpit-crosshair" class="cockpit-crosshair hidden">
+                <div class="reticle-circle"></div>
+                <div class="reticle-center-dot"></div>
+                <div class="reticle-horizon-line"></div>
+                <div class="reticle-pitch-lines">
+                    <span class="pitch-line p-up">+10°</span>
+                    <span class="pitch-line p-zero">0°</span>
+                    <span class="pitch-line p-down">-10°</span>
+                </div>
+            </div>
+
+            <!-- Bottom Left Flight Instruments -->
+            <div class="hud-instruments">
+                <div class="instrument-box">
+                    <span class="inst-label">ALTITUDE</span>
+                    <span class="inst-val" id="hud-altitude">180<small>m</small></span>
+                </div>
+                <div class="instrument-box">
+                    <span class="inst-label">AIRSPEED</span>
+                    <span class="inst-val" id="hud-speed">180<small>kts</small></span>
+                </div>
+                <div class="instrument-box">
+                    <span class="inst-label">G-FORCE</span>
+                    <span class="inst-val" id="hud-gforce">1.0<small>G</small></span>
+                </div>
+            </div>
+
+            <!-- Bottom Right Controls Dock -->
+            <div class="hud-controls-dock">
+                <button class="btn-hud" id="btn-hud-cam" title="Switch Camera (C)">
+                    🎥 <span id="cam-label">CHASE</span>
+                </button>
+                <button class="btn-hud" id="btn-hud-retry" title="Restart Pass (R)">
+                    🔄 RETRY
+                </button>
+                <button class="btn-hud" id="btn-fullscreen" title="Fullscreen Mode">
+                    ⛶
+                </button>
+                <button class="btn-hud" id="btn-audio-toggle" title="Toggle Audio (M)">
+                    🔊 AUDIO
+                </button>
+            </div>
+
+            <!-- Virtual Touch Controls for Mobile / Touch Screens -->
+            <div id="touch-controls-layer" class="touch-controls-layer">
+                <!-- Left Thumb: Floating Virtual Flight Stick -->
+                <div id="touch-joystick-zone" class="touch-joystick-zone">
+                    <div id="touch-joystick-base" class="touch-joystick-base">
+                        <div id="touch-joystick-stick" class="touch-joystick-stick"></div>
+                        <div class="stick-guides">
+                            <span class="guide-arrow up">▲ DIVE</span>
+                            <span class="guide-arrow down">▼ CLIMB</span>
+                            <span class="guide-arrow left">◀</span>
+                            <span class="guide-arrow right">▶</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Thumb: Action Buttons -->
+                <div class="touch-action-buttons">
+                    <button id="btn-touch-boost" class="touch-btn btn-boost" aria-label="Rocket Boost">
+                        <span class="touch-btn-icon">🚀</span>
+                        <span class="touch-btn-label">BOOST</span>
+                    </button>
+                    <button id="btn-touch-dive" class="touch-btn btn-dive" aria-label="Bowl Dive Flaps">
+                        <span class="touch-btn-icon">⚡</span>
+                        <span class="touch-btn-label">DIVE</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Danger Zone Screen Border Flash -->
+            <div class="danger-screen-glow" id="danger-screen-glow"></div>
+            
+            <!-- Crowd Bonus Popup Anchor -->
+            <div id="bonus-popup-anchor"></div>
+        </div>
+
+        <!-- Rotate Device Prompt (Mobile Portrait) -->
+        <div id="rotate-device-prompt" class="rotate-device-prompt hidden">
+            <div class="rotate-phone-card">
+                <div class="rotate-phone-icon">📱 ↷ 📲</div>
+                <h2>ROTATE TO LANDSCAPE</h2>
+                <p>Springbok Flyover 3D is designed for wide stadium panoramic flight. Please tilt your phone sideways!</p>
+            </div>
+        </div>
+
+        <!-- Result / Debrief Screen -->
+        <div id="result-screen" class="ui-screen hidden">
+            <div class="result-modal">
+                <div class="result-header" id="result-header">
+                    <h2 class="result-title" id="result-title">STADIUM CLEARED!</h2>
+                    <p class="result-verdict" id="result-verdict">"LOW IS VERY, VERY GOOD!"</p>
+                </div>
+
+                <div class="stars-row" id="result-stars">
+                    <span class="star-icon">★</span>
+                    <span class="star-icon">★</span>
+                    <span class="star-icon">★</span>
+                </div>
+
+                <div class="stats-table">
+                    <div class="stat-row">
+                        <span class="stat-label">CLOSEST CLEARANCE</span>
+                        <span class="stat-val highlight" id="res-clearance">3.8 m</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">GATES CLEARED</span>
+                        <span class="stat-val" id="res-gates">6 / 6</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">PEAK CROWD HYPE</span>
+                        <span class="stat-val" id="res-hype">100%</span>
+                    </div>
+                    <div class="stat-row total-row">
+                        <span class="stat-label">FINAL SCORE</span>
+                        <span class="stat-val gold" id="res-score">38,920</span>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-secondary" id="btn-result-menu">STADIUM SELECT</button>
+                    <button class="btn-primary" id="btn-result-retry">RETRY PASS</button>
+                    <button class="btn-primary green-btn" id="btn-result-next">NEXT STADIUM ▶</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modular Game Scripts in Dependency Order -->
+    <script src="js/shared/audio.js"></script>
+    <script src="js/3d/aircraft.js"></script>
+    <script src="js/3d/stadiums.js"></script>
+    <script src="js/3d/camera.js"></script>
+    <script src="js/3d/ui.js"></script>
+    <script src="js/3d/game.js"></script>
+</body>
+</html>

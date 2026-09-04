@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>3D Stadium Explorer — Springbok Stadiums</title>
+    <meta name="description" content="360-degree interactive procedural 3D stadium explorer and inspection tool.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Three.js (r128) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/stadiumdemo.css">
+</head>
+<body>
+    <!-- Top Global Game Mode Navigation -->
+    <nav class="top-nav-bar" aria-label="Game Modes">
+        <a href="index.html" class="nav-tab" title="Play 3D Jet Flyover">
+            <span>🛩️</span> 3D Flyover
+        </a>
+        <a href="retro2d.html" class="nav-tab" title="Play 2D Retro Pixel Arcade">
+            <span>🕹️</span> 2D Retro Arcade
+        </a>
+        <a href="stadiumdemo.html" class="nav-tab active" title="3D Stadium Free Cam Inspector">
+            <span>🏟️</span> Stadium Explorer
+        </a>
+    </nav>
+
+    <!-- Inspector HUD Card -->
+    <div id="hud">
+        <span class="badge">Architect Free Cam</span>
+        <h2 id="venue-name">DHL Stadium</h2>
+        <p id="venue-city">Cape Town</p>
+        <p>Drag mouse or touch to orbit around the stadium bowl. Scroll or pinch to zoom in on the pitch and seating tiers.</p>
+        
+        <div class="inspector-stats">
+            <div class="stat-row">
+                <span>Capacity:</span>
+                <b id="venue-capacity">55,000</b>
+            </div>
+            <div class="stat-row">
+                <span>Instanced Seats:</span>
+                <b id="venue-seats">2,400+</b>
+            </div>
+            <div class="stat-row">
+                <span>Rendering:</span>
+                <b>100% Procedural WebGL</b>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Venue Selector Pills -->
+    <div class="venue-selector" role="tablist" aria-label="Select Venue">
+        <button class="venue-btn active" data-venue="dhl" role="tab">DHL Stadium (Cape Town)</button>
+        <button class="venue-btn" data-venue="moses" role="tab">Moses Mabhida (Durban)</button>
+        <button class="venue-btn" data-venue="ellis" role="tab">Ellis Park (Joburg)</button>
+        <button class="venue-btn" data-venue="loftus" role="tab">Loftus Versfeld (Pretoria)</button>
+    </div>
+
+    <!-- Procedural Stadium Inspector Script -->
+    <script src="js/inspector/stadium-orbit.js"></script>
+</body>
+</html>

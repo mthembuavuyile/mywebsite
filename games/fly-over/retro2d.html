@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Springbok Flyover — 2D Retro Arcade Edition</title>
+    <meta name="description" content="Classic 16-bit pixel-art arcade flight simulator across iconic South African stadiums.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <!-- Phaser 3 (r3.60.0) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/retro.css">
+</head>
+<body>
+    <!-- Phaser Game Canvas Container -->
+    <div id="game-container"></div>
+
+    <!-- Bottom Left Navigation Dock (Unobstructed top HUD) -->
+    <nav class="bottom-nav-dock" aria-label="Game Modes">
+        <a href="index.html" class="nav-tab" title="Play 3D Jet Flyover">
+            <span>🛩️</span> 3D Flyover
+        </a>
+        <a href="stadiumdemo.html" class="nav-tab" title="3D Stadium Free Cam Inspector">
+            <span>🏟️</span> 3D Orbit
+        </a>
+    </nav>
+
+    <!-- Bottom Center Control Hint -->
+    <div class="bottom-controls-hint" id="retro-controls-hint">
+        <span>HOLD</span> <kbd>SPACE</kbd> <kbd>W</kbd> <kbd>▲</kbd> <span>OR CLICK TO CLIMB</span> &bull; <span>RELEASE TO DIVE</span>
+    </div>
+
+    <!-- Bottom Right Arcade Thrust Button (Touch & Mouse) -->
+    <div class="thrust-btn-anchor">
+        <button id="arcade-thrust-btn" class="arcade-thrust-btn" aria-label="Arcade Jet Thrust">
+            <span class="thrust-icon">🚀</span>
+            <span>THRUST</span>
+        </button>
+    </div>
+
+    <!-- Script to connect HTML thrust button to Phaser -->
+    <script>
+        window._isRetroThrusting = false;
+        const thrustBtn = document.getElementById('arcade-thrust-btn');
+        if (thrustBtn) {
+            const startThrust = (e) => {
+                e.preventDefault();
+                window._isRetroThrusting = true;
+                thrustBtn.classList.add('pressed');
+            };
+            const stopThrust = (e) => {
+                e.preventDefault();
+                window._isRetroThrusting = false;
+                thrustBtn.classList.remove('pressed');
+            };
+            thrustBtn.addEventListener('mousedown', startThrust);
+            thrustBtn.addEventListener('mouseup', stopThrust);
+            thrustBtn.addEventListener('mouseleave', stopThrust);
+            thrustBtn.addEventListener('touchstart', startThrust, { passive: false });
+            thrustBtn.addEventListener('touchend', stopThrust, { passive: false });
+            thrustBtn.addEventListener('touchcancel', stopThrust, { passive: false });
+        }
+    </script>
+
+    <!-- Modular Game Scripts in Dependency Order -->
+    <script src="js/shared/audio.js"></script>
+    <script src="js/2d/levels.js"></script>
+    <script src="js/2d/sprites.js"></script>
+    <script src="js/2d/scenes/BootScene.js"></script>
+    <script src="js/2d/scenes/MenuScene.js"></script>
+    <script src="js/2d/scenes/CinematicScene.js"></script>
+    <script src="js/2d/scenes/GameScene.js"></script>
+    <script src="js/2d/scenes/ResultScene.js"></script>
+    <script src="js/2d/main.js"></script>
+</body>
+</html>

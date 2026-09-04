@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Stadium Orbit Inspector — Stylesheet
+   ========================================================================== */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #0b1220;
+    height: 100%;
+    font-family: 'Outfit', 'Segoe UI', system-ui, sans-serif;
+    color: #e8edf4;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Top Global Navigation Bar */
+.top-nav-bar {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(13, 21, 35, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 6px 10px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    z-index: 100;
+}
+
+.nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: #90a4ae;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    white-space: nowrap;
+}
+
+.nav-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-tab.active {
+    color: #0b1220;
+    background: linear-gradient(135deg, #00e676, #00b0ff);
+    box-shadow: 0 0 16px rgba(0, 230, 118, 0.4);
+}
+
+/* Left Inspector HUD */
+#hud {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    background: rgba(10, 16, 26, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 16px 20px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    z-index: 90;
+}
+
+#hud .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(0, 230, 118, 0.15);
+    color: #00e676;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+#hud h2 {
+    font-size: 18px;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+#hud p {
+    margin: 0 0 12px 0;
+    color: #b0bec5;
+    font-size: 12px;
+}
+
+.inspector-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    color: #78909c;
+    font-size: 11px;
+}
+
+.stat-row b {
+    color: #eceff1;
+}
+
+/* Stadium Theme Chooser */
+.venue-selector {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: rgba(10, 16, 26, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    z-index: 90;
+    max-width: 90vw;
+    overflow-x: auto;
+}
+
+.venue-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #b0bec5;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.venue-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.venue-btn.active {
+    background: #00e676;
+    color: #0b1220;
+    border-color: #00e676;
+    box-shadow: 0 0 12px rgba(0, 230, 118, 0.4);
+}
+
+@media (max-width: 768px) {
+    .top-nav-bar {
+        width: 92%;
+        justify-content: center;
+    }
+    .nav-tab {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    #hud {
+        top: 70px;
+        left: 12px;
+        right: 12px;
+        max-width: none;
+        padding: 12px;
+    }
+    .venue-selector {
+        bottom: 12px;
+    }
+}
