@@ -131,19 +131,33 @@ class UIController {
 
         // Dismiss Rotate Device Prompt on tap or continue in portrait button
         if (this.btnContinuePortrait) {
-            this.btnContinuePortrait.addEventListener('click', (e) => {
+            const handleDismiss = (e) => {
                 e.stopPropagation();
+                if (e.cancelable) e.preventDefault();
                 if (this.rotatePrompt) {
                     this.rotatePrompt.classList.add('dismissed');
                 }
-            });
+            };
+            this.btnContinuePortrait.addEventListener('click', handleDismiss);
+            this.btnContinuePortrait.addEventListener('touchend', handleDismiss);
         }
 
         if (this.rotatePrompt) {
-            this.rotatePrompt.addEventListener('click', () => {
-                this.rotatePrompt.classList.add('dismissed');
-            });
+            const handleBackdropDismiss = (e) => {
+                if (e.target === this.rotatePrompt) {
+                    this.rotatePrompt.classList.add('dismissed');
+                }
+            };
+            this.rotatePrompt.addEventListener('click', handleBackdropDismiss);
+            this.rotatePrompt.addEventListener('touchend', handleBackdropDismiss);
         }
+
+        // When rotating to landscape, reset dismissed status so future portrait switches remind the user
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > window.innerHeight && this.rotatePrompt) {
+                this.rotatePrompt.classList.remove('dismissed');
+            }
+        });
     }
 
     _setupTouchControls() {
