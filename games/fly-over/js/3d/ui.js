@@ -99,7 +99,7 @@ class UIController {
 
         this.btnAudioToggle.addEventListener('click', () => {
             const muted = this.game.toggleAudio();
-            this.btnAudioToggle.textContent = muted ? '🔇 MUTED' : '🔊 AUDIO';
+            this.btnAudioToggle.textContent = muted ? 'MUTED' : 'AUDIO';
         });
 
         // Camera Angle Toggle
@@ -298,7 +298,7 @@ class UIController {
                 this.cockpitCrosshair.classList.add('hidden');
             }
         }
-        this.showBonusPopup(`📷 CAM: ${viewName}`, window.innerWidth / 2, 80);
+        this.showBonusPopup(`CAM: ${viewName}`, window.innerWidth / 2, 80);
     }
 
     showScreen(screenName) {
@@ -343,9 +343,9 @@ class UIController {
                 <div class="card-hazard">${def.hazardText}</div>
                 ${isUnlocked ? `
                 <div class="card-actions-row">
-                    <button class="btn-card-inspect" data-venue="${def.id}" title="Free Cam Orbit Inspection">🔍 3D Inspect</button>
-                    <span class="btn-card-fly">FLY PASS ▶</span>
-                </div>` : '<div class="card-lock-badge">🔒</div>'}
+                    <button class="btn-card-inspect" data-venue="${def.id}" title="Free Cam Orbit Inspection">3D Inspect</button>
+                    <span class="btn-card-fly">FLY PASS</span>
+                </div>` : '<div class="card-lock-badge">[LOCKED]</div>'}
             `;
 
             if (isUnlocked) {

@@ -7,7 +7,7 @@ class Game {
         this.stadiumDefs = StadiumBuilder.getStadiumDefs();
         this.currentStadiumIndex = 0;
         this.state = 'MENU'; // MENU, CINEMATIC, FLIGHT, RESULT
-        
+
         // Flight state & metrics
         this.score = 0;
         this.multiplier = 1.0;
@@ -19,16 +19,16 @@ class Game {
         this.totalGates = 6;
         this.currentGateIndex = 0;
         this.diveGateCleared = false;
-        
+
         // Wind
         this.windTime = 0;
         this.windVector = { x: 0, y: 0 };
         this.isMuted = false;
-        
+
         // Pyrotechnics
         this.pyroParticles = [];
         this.pyroTimer = 0;
-        
+
         // Keyboard Controls
         this.keys = {
             pitchUp: false,
@@ -58,7 +58,7 @@ class Game {
         this._initThree();
         this._initAudio();
         this._initInputs();
-        
+
         this.ui = new UIController(this);
         this.aircraft = new Aircraft(this.scene);
         this.cameraController = new CameraController(this.camera);
@@ -84,12 +84,12 @@ class Game {
         this.camera = new THREE.PerspectiveCamera(initialFov, window.innerWidth / window.innerHeight, 0.5, 7500);
         this.camera.position.set(0, 180, 2300);
 
-        this.renderer = new THREE.WebGLRenderer({ 
-            antialias: !isMobile, 
-            powerPreference: 'high-performance' 
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: !isMobile,
+            powerPreference: 'high-performance'
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 1.75));
+        this.renderer.setPixelRatio(isMobile ? 1.0 : Math.min(window.devicePixelRatio, 1.5));
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -104,7 +104,7 @@ class Game {
         const sunLight = new THREE.DirectionalLight(0xfffaed, 1.35);
         sunLight.position.set(350, 550, 300);
         sunLight.castShadow = true;
-        const shadowRes = isMobile ? 1024 : 2048;
+        const shadowRes = isMobile ? 512 : 2048;
         sunLight.shadow.mapSize.width = shadowRes;
         sunLight.shadow.mapSize.height = shadowRes;
         sunLight.shadow.camera.near = 20;
@@ -263,7 +263,7 @@ class Game {
     launchLevel(index) {
         this._loadStadiumEnvironment(index);
         const def = this.stadiumDefs[index];
-        
+
         this.aircraft.reset(def.startPos);
         this.cameraController.setMode('CINEMATIC_INTRO');
         this.state = 'CINEMATIC';
@@ -279,7 +279,7 @@ class Game {
 
     startFlight() {
         if (this.state !== 'CINEMATIC') return;
-        
+
         this.state = 'FLIGHT';
         this.score = 0;
         this.multiplier = 1.0;
@@ -377,9 +377,9 @@ class Game {
                         // Barrel Roll Stunt Bonus
                         if (Math.abs(this.aircraft.roll) > 0.38) {
                             this.score += 2500;
-                            this.ui.showBonusPopup('🌀 BARREL ROLL! +2,500');
+                            this.ui.showBonusPopup('BARREL ROLL! +2,500');
                         } else {
-                            this.ui.showBonusPopup(`🎯 ${gate.label}! +5,000`);
+                            this.ui.showBonusPopup(`${gate.label}! +5,000`);
                         }
 
                         // Gate flash animation
@@ -428,7 +428,7 @@ class Game {
                 // Grass Skimming Hype Popup
                 if (minClearance < 3.2 && !this._grassSkimTriggered) {
                     this._grassSkimTriggered = true;
-                    this.ui.showBonusPopup('🌱 GRASS SKIMMER! +2,500');
+                    this.ui.showBonusPopup('GRASS SKIMMER! +2,500');
                     this.score += 2500;
                     if (navigator.vibrate) navigator.vibrate([20, 20, 20]);
                 }
@@ -448,7 +448,7 @@ class Game {
                 this._vuvuzelaTriggered = true;
                 if (this.audio) this.audio.vuvuzela(2.5);
                 if (navigator.vibrate) navigator.vibrate([40, 40, 80]);
-                this.ui.showBonusPopup('🎺 VUVUZELA SURGE! +10,000 PTS 🎺');
+                this.ui.showBonusPopup('VUVUZELA SURGE! +10,000 PTS');
                 this.score += 10000;
             }
         } else {
@@ -579,7 +579,7 @@ class Game {
         const progress = this.loadProgress();
         progress[`stars_${stadiumId}`] = Math.max(progress[`stars_${stadiumId}`] || 0, stars);
         progress[`score_${stadiumId}`] = Math.max(progress[`score_${stadiumId}`] || 0, score);
-        
+
         const currentIdx = this.stadiumDefs.findIndex(s => s.id === stadiumId);
         if (currentIdx < this.stadiumDefs.length - 1) {
             const nextId = this.stadiumDefs[currentIdx + 1].id;
