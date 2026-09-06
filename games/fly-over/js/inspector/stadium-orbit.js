@@ -5,7 +5,7 @@
    ========================================================================== */
 
 (function () {
-    const VENUES = {
+    const VENUES = window.VENUES || {
         dhl: {
             name: "DHL Stadium",
             city: "Cape Town",

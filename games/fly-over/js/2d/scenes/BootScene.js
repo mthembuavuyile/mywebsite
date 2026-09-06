@@ -42,11 +42,26 @@ class BootScene extends Phaser.Scene {
         const progressBar = this.add.rectangle(barX + 2, barY + 2, 0, barH, 0x00E676).setOrigin(0, 0);
 
         const tasks = [
-            { label: 'JET SPRITE', fn: () => SpriteGenerator.generateJet(this) },
+            { label: 'JET SQUADRON', fn: () => SpriteGenerator.generateJet(this) },
             { label: 'STUNT GATES', fn: () => SpriteGenerator.generateGates(this) },
-            { label: 'CLOUDS', fn: () => SpriteGenerator.generateClouds(this) },
-            { label: 'PARTICLES', fn: () => SpriteGenerator.generateParticles(this) },
+            { label: 'CLOUDS & ATMOSPHERE', fn: () => SpriteGenerator.generateClouds(this) },
+            { label: 'AEROBATIC PARTICLES', fn: () => SpriteGenerator.generateParticles(this) },
+            { label: 'RUNWAY & TERRAIN', fn: () => SpriteGenerator.generateGroundAssets(this) },
         ];
+
+        // Generate procedural pixel stadium and panorama for each venue
+        const levels = window.LEVELS || [];
+        for (let i = 0; i < levels.length; i++) {
+            const lvl = levels[i];
+            tasks.push({
+                label: `STADIUM: ${lvl.name}`,
+                fn: () => SpriteGenerator.generateStadium(this, i)
+            });
+            tasks.push({
+                label: `PANORAMA: ${lvl.city}`,
+                fn: () => SpriteGenerator.generateBackground(this, i)
+            });
+        }
 
         let currentTask = 0;
         const totalTasks = tasks.length;

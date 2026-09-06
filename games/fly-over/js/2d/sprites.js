@@ -677,14 +677,78 @@ class SpriteGenerator {
         g.destroy();
     }
 
-    // Panorama compatibility
-    static generatePanorama(scene, levelIndex) {
-        this.generateBackground(scene, levelIndex);
-        const level = window.LEVELS[levelIndex];
-        const g = scene.make.graphics({ add: false });
-        g.fillStyle(0x000000, 0);
-        g.fillRect(0, 0, 10, 10);
-        g.generateTexture(`panorama_${level.id}`, 2560, 720);
+    // ════════════════════════════════════════════════════════════════════════
+    //  7. GROUND & OBSTACLE TEXTURES (Runway, Terrain, Radio Towers)
+    // ════════════════════════════════════════════════════════════════════════
+    static generateGroundAssets(scene) {
+        // 1. Tarmac Runway (512x90 tileable)
+        let g = scene.make.graphics({ add: false });
+        g.fillStyle(0x21272A);
+        g.fillRect(0, 0, 512, 90);
+        g.fillStyle(0x161A1D);
+        g.fillRect(0, 70, 512, 20); // Dark bedrock
+
+        // White Runway Centerline Dashes
+        g.fillStyle(0xFFFFFF);
+        for (let x = 16; x < 512; x += 64) {
+            g.fillRect(x, 26, 36, 6);
+        }
+        // White Continuous Edge Stripes
+        g.fillRect(0, 6, 512, 3);
+        g.fillRect(0, 60, 512, 3);
+
+        // Green Threshold Taxiway Lights
+        g.fillStyle(0x00E676);
+        for (let x = 12; x < 512; x += 32) {
+            g.fillRect(x, 2, 6, 3);
+        }
+        g.generateTexture('runway_tarmac', 512, 90);
+        g.destroy();
+
+        // 2. Rolling Terrain Ground (512x90 tileable)
+        g = scene.make.graphics({ add: false });
+        g.fillStyle(0x2E7D32);
+        g.fillRect(0, 0, 512, 90);
+        g.fillStyle(0x1B5E20);
+        for (let x = 0; x < 512; x += 16) {
+            g.fillRect(x, 0, 8, 4);
+        }
+        g.fillStyle(0x3E2723);
+        g.fillRect(0, 65, 512, 25); // Rich African loam soil
+        g.fillStyle(0x4E342E);
+        g.fillRect(0, 45, 512, 20);
+        g.generateTexture('terrain_ground', 512, 90);
+        g.destroy();
+
+        // 3. Aviation Radio Mast / Antenna (28x150)
+        g = scene.make.graphics({ add: false });
+        // Red & white alternating aviation warning segments
+        const segH = 22;
+        for (let i = 0; i < 6; i++) {
+            g.fillStyle(i % 2 === 0 ? 0xD32F2F : 0xFFFFFF);
+            g.fillRect(10, 10 + i * segH, 8, segH);
+            // Cross girders
+            g.fillRect(4, 10 + i * segH, 20, 3);
+        }
+        // Red Flashing Obstacle Beacon Top
+        g.fillStyle(0xFF1744);
+        g.fillCircle(14, 6, 5);
+        g.fillStyle(0xFFFFFF);
+        g.fillCircle(14, 6, 2);
+        g.generateTexture('radio_mast', 28, 150);
+        g.destroy();
+
+        // 4. Stadium Concrete Entrance Arch / Pylon
+        g = scene.make.graphics({ add: false });
+        g.fillStyle(0x455A64);
+        g.fillRect(0, 0, 46, 220);
+        g.fillStyle(0x607D8B);
+        g.fillRect(4, 4, 38, 212);
+        g.fillStyle(0x263238);
+        for (let y = 16; y < 210; y += 30) {
+            g.fillRect(8, y, 30, 4);
+        }
+        g.generateTexture('stadium_pylon', 46, 220);
         g.destroy();
     }
 }

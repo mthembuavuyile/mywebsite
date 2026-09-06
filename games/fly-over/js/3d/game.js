@@ -62,6 +62,7 @@ class Game {
         this.ui = new UIController(this);
         this.aircraft = new Aircraft(this.scene);
         this.cameraController = new CameraController(this.camera);
+        this.cameraController.setupOrbitControls(this.renderer.domElement);
 
         this.currentEnv = null;
         this._loadStadiumEnvironment(0);

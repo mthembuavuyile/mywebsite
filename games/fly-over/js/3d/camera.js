@@ -134,7 +134,86 @@ class CameraController {
                 this.camera.position.copy(this.currentPos).add(shakeVec);
                 this.camera.lookAt(this.currentTarget);
             }
+        } else if (this.mode === 'ORBIT_INSPECTOR') {
+            // ── 4. Architect Free Orbit Inspector Mode ──
+            if (this.isUserOrbiting) {
+                this.orbitTheta += (this.targetOrbitTheta - this.orbitTheta) * 0.15;
+                this.orbitPhi += (this.targetOrbitPhi - this.orbitPhi) * 0.15;
+                this.orbitRadius += (this.targetOrbitRadius - this.orbitRadius) * 0.15;
+            } else {
+                // Slow continuous auto-rotation
+                this.orbitTheta += dt * 0.18;
+                this.targetOrbitTheta = this.orbitTheta;
+            }
+
+            const x = Math.cos(this.orbitTheta) * Math.cos(this.orbitPhi) * this.orbitRadius;
+            const y = Math.sin(this.orbitPhi) * this.orbitRadius;
+            const z = stadiumPos.z + Math.sin(this.orbitTheta) * Math.cos(this.orbitPhi) * this.orbitRadius;
+
+            this.camera.position.set(x, Math.max(8, y), z);
+            this.camera.lookAt(new THREE.Vector3(0, 20, stadiumPos.z));
+            this.camera.fov = 52;
+            this.camera.updateProjectionMatrix();
         }
+    }
+
+    setupOrbitControls(domElement) {
+        this.orbitRadius = 320;
+        this.targetOrbitRadius = 320;
+        this.orbitTheta = 0.5;
+        this.targetOrbitTheta = 0.5;
+        this.orbitPhi = 0.42;
+        this.targetOrbitPhi = 0.42;
+        this.isUserOrbiting = false;
+
+        let isDown = false;
+        let prevX = 0, prevY = 0;
+
+        const onDown = (clientX, clientY) => {
+            isDown = true;
+            this.isUserOrbiting = true;
+            prevX = clientX;
+            prevY = clientY;
+        };
+
+        const onMove = (clientX, clientY) => {
+            if (!isDown || this.mode !== 'ORBIT_INSPECTOR') return;
+            const dx = clientX - prevX;
+            const dy = clientY - prevY;
+            prevX = clientX;
+            prevY = clientY;
+
+            this.targetOrbitTheta -= dx * 0.006;
+            this.targetOrbitPhi = Math.max(0.12, Math.min(1.45, this.targetOrbitPhi + dy * 0.006));
+        };
+
+        const onUp = () => { isDown = false; };
+
+        domElement.addEventListener('mousedown', e => onDown(e.clientX, e.clientY));
+        window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+        window.addEventListener('mouseup', onUp);
+
+        domElement.addEventListener('touchstart', e => {
+            if (e.touches.length === 1) {
+                onDown(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', e => {
+            if (e.touches.length === 1) {
+                onMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchend', onUp);
+
+        domElement.addEventListener('wheel', e => {
+            if (this.mode === 'ORBIT_INSPECTOR') {
+                e.preventDefault();
+                this.targetOrbitRadius = Math.max(80, Math.min(550, this.targetOrbitRadius + e.deltaY * 0.4));
+                this.isUserOrbiting = true;
+            }
+        }, { passive: false });
     }
 }
 

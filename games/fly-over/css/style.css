@@ -1352,10 +1352,22 @@ button {
         font-size: 18px;
     }
 
+    /* Mobile Clearance Widget: Relocated to top-left to clear the center flight path */
     .hud-clearance-widget {
-        top: 130px;
-        transform: translateX(-50%) scale(0.68);
-        transform-origin: top center;
+        top: 75px;
+        left: max(16px, env(safe-area-inset-left));
+        transform: scale(0.65);
+        transform-origin: top left;
+        pointer-events: none;
+    }
+    .danger-warning-banner {
+        position: fixed;
+        top: max(14px, env(safe-area-inset-top));
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 11px;
+        padding: 4px 12px;
+        white-space: nowrap;
     }
 
     .hud-instruments {
@@ -1506,10 +1518,13 @@ button {
         font-size: 16px;
     }
 
+    /* Mobile Landscape: Relocated to top-left under venue name, leaving the entire center 70% unobstructed */
     .hud-clearance-widget {
-        top: 60px;
-        transform: translateX(-50%) scale(0.68);
-        transform-origin: top center;
+        top: 52px;
+        left: max(12px, env(safe-area-inset-left));
+        transform: scale(0.58);
+        transform-origin: top left;
+        pointer-events: none;
     }
 
     .hud-instruments {
