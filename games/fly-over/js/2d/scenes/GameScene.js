@@ -76,20 +76,20 @@ class GameScene extends Phaser.Scene {
             .setScrollFactor(0)
             .setAlpha(0);
 
-        // ── 4. Procedural 16-Bit Stadium World Sprite ──
-        // The stadium bowl is 1600px wide, placed between worldX = 2700 and 4300
-        this.stadiumWorldX = 2700;
-        this.stadiumSprite = this.add.image(-2000, this.baseGroundY - 170, `stadium_${id}`)
-            .setOrigin(0, 0.5)
+        // ── 4. Procedural 2.5D Stadium World Sprite ──
+        // The stadium is 1500px wide, resting on the ground with its roof rim at Y=365
+        this.stadiumWorldX = 2600;
+        this.stadiumWidth = 1500;
+        this.stadiumRimY = this.baseGroundY - 255; // Y = 365px
+        this.stadiumSprite = this.add.image(-2000, this.baseGroundY, `stadium_${id}`)
+            .setOrigin(0, 1.0)
             .setDepth(7)
             .setScrollFactor(0);
 
         // ── 5. Obstacles in World Space ──
         this.worldObstacles = [
-            { worldX: 1650, y: 550, key: 'radio_mast', w: 24, h: 140, hit: false },
-            { worldX: 2350, y: 540, key: 'radio_mast', w: 24, h: 140, hit: false },
-            { worldX: 2680, y: 520, key: 'stadium_pylon', w: 42, h: 220, hit: false },
-            { worldX: 4320, y: 520, key: 'stadium_pylon', w: 42, h: 220, hit: false }
+            { worldX: 1400, y: 560, key: 'radio_mast', w: 24, h: 140, hit: false },
+            { worldX: 2100, y: 550, key: 'radio_mast', w: 24, h: 140, hit: false }
         ];
 
         this.obstacleSprites = this.worldObstacles.map(obs => {
@@ -101,14 +101,14 @@ class GameScene extends Phaser.Scene {
             return obs;
         });
 
-        // ── 6. Flight Stunt Gates in World Space ──
+        // ── 6. Low-Pass Flight Stunt Gates ──
         this.worldGates = [
-            { worldX: 650,  y: 380, key: 'gate_normal', pts: 1000, label: 'TAKEOFF GLIDE', cleared: false },
-            { worldX: 1300, y: 300, key: 'gate_normal', pts: 1000, label: 'COASTAL INTERCEPT', cleared: false },
-            { worldX: 2050, y: 390, key: 'gate_dive',   pts: 1500, label: 'APPROACH DIVE', cleared: false },
-            { worldX: 2650, y: 320, key: 'gate_dive',   pts: 2000, label: 'BOWL ENTRY', cleared: false },
-            { worldX: 3450, y: 510, key: 'gate_apex',   pts: 3500, label: '⚡ PITCH SKIM ⚡', cleared: false },
-            { worldX: 4200, y: 330, key: 'gate_dive',   pts: 2000, label: '🚀 CLIMBOUT GATE 🚀', cleared: false }
+            { worldX: 600,  y: 450, key: 'gate_normal', pts: 1000, label: 'TAKEOFF GLIDE', cleared: false },
+            { worldX: 1350, y: 380, key: 'gate_normal', pts: 1000, label: 'APPROACH CORRIDOR', cleared: false },
+            { worldX: 2100, y: 320, key: 'gate_dive',   pts: 1500, label: 'LINE-UP GLIDESLOPE', cleared: false },
+            { worldX: 2800, y: 320, key: 'gate_dive',   pts: 2000, label: '⚡ CANOPY ENTRY ⚡', cleared: false },
+            { worldX: 3350, y: 310, key: 'gate_apex',   pts: 4000, label: '🔥 LOW-PASS APEX 🔥', cleared: false },
+            { worldX: 3950, y: 320, key: 'gate_dive',   pts: 2000, label: '🚀 EXIT PULL-UP 🚀', cleared: false }
         ];
 
         this.totalGates = this.worldGates.length;
@@ -378,33 +378,47 @@ class GameScene extends Phaser.Scene {
             this.jetVelocityY = Math.max(0, this.jetVelocityY);
         }
 
-        // ── Clearance & Proximity Calculation ──
-        const clearanceM = Math.max(0, (this.currentGroundY - (this.jet.y + 18)) * 0.12);
+        // ── Clearance & Proximity Calculation (Ground vs. Stadium Roof Rim) ──
+        const isOverStadium = (this.worldX >= this.stadiumWorldX - 40 && this.worldX <= this.stadiumWorldX + this.stadiumWidth + 40);
+        const surfaceY = isOverStadium ? this.stadiumRimY : this.baseGroundY;
+
+        const clearanceM = Math.max(0, (surfaceY - (this.jet.y + 12)) * 0.12);
         this.bestClearance = Math.min(this.bestClearance, clearanceM);
 
         this.clearanceVal.setText(clearanceM.toFixed(1) + ' M');
-        if (clearanceM < 6) {
+        if (clearanceM < 5) {
             this.clearanceVal.setColor('#FF1744');
-        } else if (clearanceM < 16) {
+        } else if (clearanceM < 14) {
             this.clearanceVal.setColor('#FFD600');
         } else {
             this.clearanceVal.setColor('#00E676');
         }
 
-        // Proximity scoring & crowd hype
-        if (clearanceM < 20) {
-            const proximityScore = Math.floor((20 - clearanceM) * 14 * dt);
-            this.score += proximityScore;
-            this.scoreVal.setText(this.score.toLocaleString());
-            this.hype = Math.min(100, this.hype + (24 / (clearanceM + 1)) * dt * 15);
-            this._updateHypeBar();
+        // Proximity scoring & crowd hype (High reward for skimming low over the stadium!)
+        if (isOverStadium) {
+            if (clearanceM < 22) {
+                // The lower you fly over the stadium roof, the more score you get!
+                const proximityScore = Math.floor((22 - clearanceM) * 35 * dt);
+                this.score += proximityScore;
+                this.scoreVal.setText(this.score.toLocaleString());
+                this.hype = Math.min(100, this.hype + (40 / (clearanceM + 1)) * dt * 20);
+                this._updateHypeBar();
+            }
         } else {
-            this.hype = Math.max(0, this.hype - dt * 6);
-            this._updateHypeBar();
+            if (clearanceM < 15) {
+                const proximityScore = Math.floor((15 - clearanceM) * 10 * dt);
+                this.score += proximityScore;
+                this.scoreVal.setText(this.score.toLocaleString());
+                this.hype = Math.min(100, this.hype + (16 / (clearanceM + 1)) * dt * 10);
+                this._updateHypeBar();
+            } else {
+                this.hype = Math.max(0, this.hype - dt * 5);
+                this._updateHypeBar();
+            }
         }
 
-        // Low Clearance Warning (< 6m)
-        if (clearanceM < 6) {
+        // Low Clearance Warning (< 5m)
+        if (clearanceM < 5) {
             this.warningText.setAlpha(1);
             if (!this.warningActive) {
                 this.warningActive = true;
@@ -422,19 +436,19 @@ class GameScene extends Phaser.Scene {
             }
         }
 
-        // Near Miss Bonus (< 3.5m)
-        if (clearanceM < 3.5 && !this.nearMissAwarded && this.worldX > 2700) {
+        // Near Miss Bonus (< 3.0m over the stadium rim)
+        if (isOverStadium && clearanceM < 3.0 && !this.nearMissAwarded) {
             this.nearMissAwarded = true;
             if (audio) audio.nearMiss();
-            this._floatingText(this.jet.x, this.jet.y - 40, '⚡ PITCH SKIM! +3,000', '#FF1744');
-            this.score += 3000;
+            this._floatingText(this.jet.x, this.jet.y - 40, '⚡ INSANE ROOF SKIM! +5,000', '#FF1744');
+            this.score += 5000;
             this.scoreVal.setText(this.score.toLocaleString());
-            this.cameras.main.shake(200, 0.006);
+            this.cameras.main.shake(200, 0.007);
         }
 
-        // Moses Mabhida Arch Fly-Through Feature
-        if (level.id === 'moses' && !this.archThreaded && this.worldX > 3300 && this.worldX < 3700) {
-            if (this.jet.y > 180 && this.jet.y < 460) {
+        // Moses Mabhida Arch Fly-Under Feature
+        if (level.id === 'moses' && !this.archThreaded && this.worldX > 3200 && this.worldX < 3650) {
+            if (this.jet.y > 230 && this.jet.y < 360) {
                 this.archThreaded = true;
                 this.score += 5000;
                 this.scoreVal.setText(this.score.toLocaleString());
@@ -442,7 +456,7 @@ class GameScene extends Phaser.Scene {
                     audio.fanfare();
                     audio.crowdRoar(0.9);
                 }
-                this._floatingText(this.jet.x, this.jet.y - 50, '⭐ ARCH THREADED! +5,000 ⭐', '#FFD600');
+                this._floatingText(this.jet.x, this.jet.y - 50, '⭐ UNDER-ARCH THREADED! +5,000 ⭐', '#FFD600');
             }
         }
 
@@ -458,19 +472,10 @@ class GameScene extends Phaser.Scene {
             this.scoreVal.setText(this.score.toLocaleString());
         }
 
-        // ── Ground Crash Collision ──
-        if (this.jet.y >= this.currentGroundY - 8) {
+        // ── Surface Crash Collision (Hit ground or stadium roof) ──
+        if (this.jet.y >= surfaceY - 5) {
             this._crash();
             return;
-        }
-
-        // ── Stadium Canopy Overhang Collision ──
-        if (this.worldX > 2700 && this.worldX < 4300) {
-            // Entry canopy and exit canopy (roof girders at top of bowl)
-            if (this.jet.y < 160 && (this.worldX < 2950 || this.worldX > 4050)) {
-                this._crash();
-                return;
-            }
         }
 
         // ── Victory Check: Cleared Full Journey! ──

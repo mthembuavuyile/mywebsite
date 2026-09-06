@@ -316,224 +316,188 @@ class SpriteGenerator {
     }
 
     // ════════════════════════════════════════════════════════════════════════
-    //  5. AUTHENTIC 16-BIT STADIUM BOWLS
-    //     Sweeping curved stands, colored seats, waving crowd, floodlights!
+    //  5. REALISTIC 2.5D STADIUM (Side-Profile Exterior Bowl & Open Interior)
+    //     Matches the 3D Architect Inspector: Angled concrete hull, open oval rim,
+    //     tiered seating bowl visible inside, green pitch, and floodlight pylons.
     // ════════════════════════════════════════════════════════════════════════
     static generateStadium(scene, levelIndex) {
         const level = window.LEVELS[levelIndex];
         const id = level.id;
-        const W = 1600; // Wide stadium width for a complete flyover experience
-        const H = 420;  // Stadium height
+        const W = 1500; // Wide realistic stadium
+        const H = 340;  // 340px tall (roof rim is at Y=85, base at Y=340)
         const g = scene.make.graphics({ add: false });
 
-        // Stadium Colors
+        // Team Seat Colors (matching official club palettes)
         const SEAT_COLORS = {
-            dhl: [0x002F6C, 0xFFD100, 0x0055A5, 0xFFFFFF],    // Stormers Blue & Yellow
+            dhl: [0x002F6C, 0xFFD100, 0x0055A5, 0xFFFFFF],    // Stormers Blue & Gold
             moses: [0x000000, 0xFFD100, 0x007A3D, 0xFFFFFF],  // Sharks Black, Gold & Green
             ellis: [0xD32F2F, 0xB71C1C, 0xFFFFFF, 0x212121],  // Lions Red & White
             loftus: [0x1565C0, 0x0D47A1, 0x90CAF9, 0xFFFFFF]  // Bulls Sky Blue & Navy
         }[id] || [0x002F6C, 0xFFD100];
 
-        const ROOF_COLOR = 0x263238;
-        const ROOF_GIRDER = 0x455A64;
-        const PITCH_TOP = 0x2E7D32;
-        const PITCH_STRIPE = 0x388E3C;
-        const CONCRETE_BASE = 0x546E7A;
-        const CONCRETE_LIGHT = 0x78909C;
+        const cx = W / 2;
+        const rimY = 85;       // Top rim center Y
+        const rimRx = 660;     // Outer rim half-width
+        const rimRy = 75;      // Outer rim vertical perspective compression
+        const baseY = H;       // Base on ground
+        const baseRx = 440;    // Narrower base width
 
-        // Ground Foundation
-        g.fillStyle(0x1B2428);
-        g.fillRect(0, H - 40, W, 40);
-
-        // ── LEFT GRANDSTAND BOWL (Curved, stepped seating tiers) ──
-        const bowlWidth = 340;
-        const pitchLeft = bowlWidth + 60;
-        const pitchRight = W - bowlWidth - 60;
-        const pitchWidth = pitchRight - pitchLeft;
-
-        // Outer concrete shell
-        g.fillStyle(CONCRETE_BASE);
+        // ── 1. EXTERIOR CONCRETE BOWL HULL (Sweeping curved outer facade) ──
+        // Drawn from the top rim down to the base
+        g.fillStyle(0x14181F);
         g.beginPath();
-        g.moveTo(0, H - 40);
-        g.lineTo(bowlWidth + 30, H - 40);
-        g.lineTo(0, H - 260);
+        g.moveTo(cx - rimRx, rimY);
+        // Curve along bottom of outer rim ellipse
+        for (let a = Math.PI; a >= 0; a -= 0.05) {
+            g.lineTo(cx + Math.cos(a) * rimRx, rimY + Math.sin(a) * rimRy);
+        }
+        // Down to right base
+        g.lineTo(cx + baseRx, baseY);
+        // Base line to left base
+        g.lineTo(cx - baseRx, baseY);
         g.closePath();
         g.fill();
 
-        // Left Tiers (3 distinct tiers)
-        for (let tier = 0; tier < 3; tier++) {
-            const ty = H - 70 - tier * 60;
-            const tx = 20 + tier * 70;
-            const tw = bowlWidth - tier * 60;
-            const th = 48;
-
-            g.fillStyle(CONCRETE_LIGHT);
-            g.fillRect(tx, ty, tw, th);
-            g.fillStyle(CONCRETE_BASE);
-            g.fillRect(tx, ty + th - 4, tw, 4);
-
-            // Crowd & Seats in rows
-            for (let r = 0; r < 4; r++) {
-                const sy = ty + 4 + r * 10;
-                for (let sx = tx + 6; sx < tx + tw - 6; sx += 7) {
-                    const seatCol = this.pick(SEAT_COLORS);
-                    this.rect(g, sx, sy, 5, 4, seatCol);
-                    // Cheering spectator face / hands
-                    if (Math.random() > 0.3) {
-                        this.px(g, sx + 2, sy - 2, 0xFFCC80, 2);
-                        // Springbok green jersey
-                        if (Math.random() > 0.4) this.px(g, sx + 1, sy, 0x007749, 3);
-                    }
-                }
-            }
-        }
-
-        // ── RIGHT GRANDSTAND BOWL (Mirrored) ──
-        g.fillStyle(CONCRETE_BASE);
+        // Architectural shadow & gradient lines along the outer hull
+        g.fillStyle(0x1C232B);
         g.beginPath();
-        g.moveTo(W, H - 40);
-        g.lineTo(W - bowlWidth - 30, H - 40);
-        g.lineTo(W, H - 260);
+        g.moveTo(cx - rimRx + 30, rimY + 10);
+        for (let a = Math.PI * 0.95; a >= Math.PI * 0.05; a -= 0.05) {
+            g.lineTo(cx + Math.cos(a) * (rimRx - 20), rimY + Math.sin(a) * (rimRy - 5));
+        }
+        g.lineTo(cx + baseRx - 30, baseY);
+        g.lineTo(cx - baseRx + 30, baseY);
         g.closePath();
         g.fill();
 
-        for (let tier = 0; tier < 3; tier++) {
-            const ty = H - 70 - tier * 60;
-            const tx = pitchRight + 30 + tier * 20;
-            const tw = bowlWidth - tier * 60;
-            const th = 48;
+        // Radiating structural vertical ribs / facade waves (signature DHL styling)
+        for (let i = -12; i <= 12; i++) {
+            const t = i / 12;
+            const rx0 = cx + t * (rimRx - 40);
+            const ry0 = rimY + Math.sqrt(Math.max(0, 1 - t * t)) * (rimRy - 8);
+            const bx0 = cx + t * (baseRx - 30);
+            const by0 = baseY;
 
-            g.fillStyle(CONCRETE_LIGHT);
-            g.fillRect(tx, ty, tw, th);
-            g.fillStyle(CONCRETE_BASE);
-            g.fillRect(tx, ty + th - 4, tw, 4);
-
-            for (let r = 0; r < 4; r++) {
-                const sy = ty + 4 + r * 10;
-                for (let sx = tx + 6; sx < tx + tw - 6; sx += 7) {
-                    const seatCol = this.pick(SEAT_COLORS);
-                    this.rect(g, sx, sy, 5, 4, seatCol);
-                    if (Math.random() > 0.3) {
-                        this.px(g, sx + 2, sy - 2, 0xFFCC80, 2);
-                        if (Math.random() > 0.4) this.px(g, sx + 1, sy, 0x007749, 3);
-                    }
-                }
-            }
+            g.lineStyle(2, i % 2 === 0 ? 0x2A3440 : 0x0F1318, 0.7);
+            g.lineBetween(rx0, ry0, bx0, by0);
         }
 
-        // ── CENTER PITCH (Lush striped grass & field markings) ──
-        const pitchY = H - 55;
-        const pitchH = 26;
-        g.fillStyle(PITCH_TOP);
-        g.fillRect(pitchLeft, pitchY, pitchWidth, pitchH);
+        // ── 2. INTERIOR BOWL & TIERED SEATING (Looking inside the open bowl) ──
+        // Inner bowl concrete background
+        const innerRx = rimRx - 24;
+        const innerRy = rimRy - 16;
+        g.fillStyle(0x222B35);
+        g.fillEllipse(cx, rimY, innerRx * 2, innerRy * 2);
 
-        // Alternating mow stripes
-        for (let sx = pitchLeft; sx < pitchRight; sx += 40) {
-            g.fillStyle(PITCH_STRIPE);
-            g.fillRect(sx, pitchY, 20, pitchH);
+        // Sunken rugby pitch in the center of the bowl
+        const pitchRx = innerRx * 0.58;
+        const pitchRy = innerRy * 0.48;
+        const pitchY = rimY + 8;
+        g.fillStyle(0x1B5E20);
+        g.fillEllipse(cx, pitchY, pitchRx * 2, pitchRy * 2);
+
+        // Mown grass stripes on the pitch
+        for (let sx = cx - pitchRx + 30; sx < cx + pitchRx - 30; sx += 32) {
+            g.fillStyle(0x2E7D32);
+            g.fillRect(sx, pitchY - pitchRy * 0.75, 16, pitchRy * 1.5);
         }
 
-        // White boundary & pitch lines
-        g.fillStyle(0xFFFFFF);
-        g.fillRect(pitchLeft, pitchY, pitchWidth, 2); // Sideline
-        g.fillRect(pitchLeft + pitchWidth / 2 - 1, pitchY, 2, pitchH); // Halfway line
-        g.fillRect(pitchLeft + 60, pitchY, 2, pitchH); // 22m line left
-        g.fillRect(pitchRight - 60, pitchY, 2, pitchH); // 22m line right
+        // White rugby pitch markings inside the bowl
+        g.lineStyle(1.5, 0xFFFFFF, 0.75);
+        g.strokeEllipse(cx, pitchY, pitchRx * 1.6, pitchRy * 1.5); // Touchline
+        g.lineBetween(cx, pitchY - pitchRy * 0.75, cx, pitchY + pitchRy * 0.75); // Halfway line
 
-        // Rugby H-Posts
-        // Left Goalposts
-        g.fillStyle(0xFFFFFF);
-        g.fillRect(pitchLeft + 80, pitchY - 70, 3, 70);
-        g.fillRect(pitchLeft + 98, pitchY - 70, 3, 70);
-        g.fillRect(pitchLeft + 80, pitchY - 35, 21, 3);
-        // Post padding (Yellow protector pads)
-        g.fillStyle(0xFFD600);
-        g.fillRect(pitchLeft + 79, pitchY - 14, 5, 14);
-        g.fillRect(pitchLeft + 97, pitchY - 14, 5, 14);
-
-        // Right Goalposts
-        g.fillStyle(0xFFFFFF);
-        g.fillRect(pitchRight - 101, pitchY - 70, 3, 70);
-        g.fillRect(pitchRight - 83, pitchY - 70, 3, 70);
-        g.fillRect(pitchRight - 101, pitchY - 35, 21, 3);
-        g.fillStyle(0xFFD600);
-        g.fillRect(pitchRight - 102, pitchY - 14, 5, 14);
-        g.fillRect(pitchRight - 84, pitchY - 14, 5, 14);
-
-        // LED Pitch Perimeter Advertising Ribbon
-        g.fillStyle(0x000000);
-        g.fillRect(pitchLeft, pitchY - 6, pitchWidth, 6);
-        g.fillStyle(0x00E676);
-        for (let bx = pitchLeft + 10; bx < pitchRight - 10; bx += 80) {
-            g.fillRect(bx, pitchY - 5, 60, 4);
-        }
-
-        // ── ROOF CANOPY & STEEL ARCHITECTURE ──
-        // Left Canopy
-        g.fillStyle(ROOF_COLOR);
-        g.beginPath();
-        g.moveTo(0, H - 280);
-        g.lineTo(bowlWidth + 40, H - 240);
-        g.lineTo(bowlWidth + 30, H - 225);
-        g.lineTo(0, H - 265);
-        g.closePath();
-        g.fill();
-
-        // Girders
-        g.fillStyle(ROOF_GIRDER);
-        for (let gx = 40; gx < bowlWidth + 30; gx += 50) {
-            g.fillRect(gx, H - 275, 4, 35);
-        }
-
-        // Right Canopy
-        g.fillStyle(ROOF_COLOR);
-        g.beginPath();
-        g.moveTo(W, H - 280);
-        g.lineTo(W - bowlWidth - 40, H - 240);
-        g.lineTo(W - bowlWidth - 30, H - 225);
-        g.lineTo(W, H - 265);
-        g.closePath();
-        g.fill();
-
-        for (let gx = W - bowlWidth - 20; gx < W - 20; gx += 50) {
-            g.fillRect(gx, H - 275, 4, 35);
-        }
-
-        // ── FLOODLIGHT TOWERS & BEAMS ──
-        [-20, W - 20].forEach(fx => {
-            // Pylon
-            g.fillStyle(0x37474F);
-            g.fillRect(fx > 0 ? fx - 10 : 10, 20, 14, H - 60);
-            // Light Grid
-            g.fillStyle(0x263238);
-            g.fillRect(fx > 0 ? fx - 25 : 0, 10, 44, 24);
-            // Glowing Lamps
-            g.fillStyle(0xFFF9C4);
-            for (let lx = 0; lx < 4; lx++) {
-                for (let ly = 0; ly < 2; ly++) {
-                    g.fillRect((fx > 0 ? fx - 21 : 4) + lx * 10, 14 + ly * 8, 7, 5);
-                }
-            }
+        // Rugby goal posts (H-posts visible on the pitch inside)
+        [-pitchRx * 0.5, pitchRx * 0.5].forEach(gx => {
+            g.lineStyle(2, 0xFFFFFF, 0.9);
+            g.lineBetween(cx + gx - 6, pitchY - 22, cx + gx - 6, pitchY + 6);
+            g.lineBetween(cx + gx + 6, pitchY - 22, cx + gx + 6, pitchY + 6);
+            g.lineBetween(cx + gx - 6, pitchY - 8, cx + gx + 6, pitchY - 8);
+            // Yellow base pads
+            g.fillStyle(0xFFD600);
+            g.fillRect(cx + gx - 8, pitchY - 2, 4, 8);
+            g.fillRect(cx + gx + 4, pitchY - 2, 4, 8);
         });
 
-        // ── VENUE SPECIAL FEATURES ──
-        if (id === 'moses') {
-            // Durban Iconic 106m White Steel Arch
-            const cx = W / 2;
-            const archY0 = H - 55;
-            const archTopY = 30;
-            const spanX = W * 0.44;
+        // Visible Tiered Grandstand Seating Rows around the bowl (Club Colors)
+        for (let ring = 0; ring < 6; ring++) {
+            const ringScale = 0.65 + ring * 0.055;
+            const rx = innerRx * ringScale;
+            const ry = innerRy * ringScale;
+            const count = 38 + ring * 8;
 
-            // Thick Arch
-            g.fillStyle(0xFFFFFF);
-            for (let t = -1; t <= 1; t += 0.005) {
-                const ax = cx + t * spanX;
-                const ay = archTopY + (1 - (1 - t * t)) * (archY0 - archTopY);
-                g.fillRect(ax - 5, ay, 10, 8);
-                // Suspension cables down to pitch
-                if (Math.abs(t) < 0.8 && Math.floor(t * 100) % 8 === 0) {
-                    this.rect(g, ax, ay + 8, 1, archY0 - ay, 0xE0E0E0);
+            for (let s = 0; s < count; s++) {
+                const angle = (s / count) * Math.PI * 2;
+                // Only draw seats in the upper/rear half and flanks where visible
+                if (Math.sin(angle) < 0.35) {
+                    const sx = cx + Math.cos(angle) * rx;
+                    const sy = rimY + Math.sin(angle) * ry;
+                    const col = SEAT_COLORS[s % SEAT_COLORS.length];
+                    this.rect(g, sx - 2, sy - 2, 4, 3, col);
+
+                    // Cheering spectator flashes / Springbok green jerseys
+                    if (Math.random() > 0.4) {
+                        this.px(g, sx, sy - 3, 0xFFCC80, 2);
+                    }
                 }
+            }
+        }
+
+        // ── 3. OUTER CANOPY ROOF RIM (The sleek lip the jet skims over) ──
+        g.lineStyle(8, 0x1C232B, 1.0);
+        g.strokeEllipse(cx, rimY, rimRx * 2, rimRy * 2);
+        g.lineStyle(2, 0x455A64, 0.9);
+        g.strokeEllipse(cx, rimY - 3, rimRx * 2, rimRy * 2);
+
+        // ── 4. CORNER FLOODLIGHT MASTS (Rising above the rim) ──
+        const pylonOffsets = [-0.85, -0.35, 0.35, 0.85];
+        pylonOffsets.forEach(t => {
+            const px = cx + t * rimRx;
+            const py = rimY + Math.sin(Math.acos(Math.min(1, Math.abs(t)))) * rimRy * (t < 0 ? -0.3 : -0.3);
+            const pylonH = 70;
+
+            // Steel mast
+            g.lineStyle(4, 0x37474F, 0.9);
+            g.lineBetween(px, py, px, py - pylonH);
+            g.lineStyle(2, 0x607D8B, 1.0);
+            g.lineBetween(px - 1, py, px - 1, py - pylonH);
+
+            // Light Grid Head
+            g.fillStyle(0x21272A);
+            g.fillRect(px - 14, py - pylonH - 12, 28, 14);
+            // Glowing Lamps
+            g.fillStyle(0xFFF9C4);
+            for (let lx = -10; lx <= 10; lx += 7) {
+                g.fillRect(px + lx, py - pylonH - 9, 5, 4);
+                g.fillRect(px + lx, py - pylonH - 4, 5, 4);
+            }
+            // Lens flare glow
+            g.fillStyle(0xFFF9C4, 0.35);
+            g.fillCircle(px, py - pylonH - 5, 16);
+        });
+
+        // ── 5. VENUE SPECIFIC ARCHITECTURE ──
+        if (id === 'moses') {
+            // Durban 106m Central Arch soaring above the stadium
+            const archPeakY = rimY - 140;
+            const spanX = rimRx * 0.8;
+
+            g.lineStyle(6, 0xFFFFFF, 1.0);
+            g.beginPath();
+            for (let t = -1; t <= 1; t += 0.02) {
+                const ax = cx + t * spanX;
+                const ay = archPeakY + (t * t) * (rimY - archPeakY + 10);
+                if (t === -1) g.moveTo(ax, ay);
+                else g.lineTo(ax, ay);
+            }
+            g.stroke();
+
+            // Arch suspension cables
+            for (let t = -0.7; t <= 0.7; t += 0.15) {
+                const ax = cx + t * spanX;
+                const ay = archPeakY + (t * t) * (rimY - archPeakY + 10);
+                g.lineStyle(1, 0xE0E0E0, 0.5);
+                g.lineBetween(ax, ay, ax, rimY - 10);
             }
         }
 
