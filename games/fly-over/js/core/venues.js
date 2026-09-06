@@ -34,7 +34,7 @@
             // Flight Coordinates
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -700,
+            exitZ: -1550,
             roofY: 38,
             fieldY: 4,
             thresholds: [15000, 35000, 65000],
@@ -46,7 +46,8 @@
                 { id: 3, pos: { x: 0, y: 75, z: 550 },   label: 'STADIUM LINE-UP', radius: 25, required: false },
                 { id: 4, pos: { x: 0, y: 34, z: 60 },    label: '⚡ BOWL DIVE ENTRY ⚡', radius: 22, required: true },
                 { id: 5, pos: { x: 0, y: 10, z: -100 },  label: '🔥 APEX LOW SKIM 🔥', radius: 18, required: true },
-                { id: 6, pos: { x: 0, y: 70, z: -360 },  label: '🚀 PULL UP & CLIMB 🚀', radius: 25, required: true }
+                { id: 6, pos: { x: 0, y: 55, z: -360 },  label: '🚀 PULL UP & CLIMB 🚀', radius: 25, required: true },
+                { id: 7, pos: { x: 0, y: 75, z: -850 },  label: '🛫 AIRFIELD APPROACH 🛫', radius: 32, required: false }
             ],
 
             // 2D Retro Scrolling Journey Specifics
@@ -92,7 +93,7 @@
 
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -700,
+            exitZ: -1550,
             roofY: 36,
             fieldY: 4,
             thresholds: [18000, 40000, 75000],
@@ -103,7 +104,8 @@
                 { id: 3, pos: { x: 0, y: 70, z: 550 },   label: 'ARCH ALIGNMENT', radius: 25, required: false },
                 { id: 4, pos: { x: 0, y: 32, z: 60 },    label: '⚡ UNDER-ARCH DIVE ⚡', radius: 20, required: true },
                 { id: 5, pos: { x: 0, y: 10, z: -100 },  label: '🔥 APEX LOW PASS 🔥', radius: 18, required: true },
-                { id: 6, pos: { x: 0, y: 65, z: -360 },  label: '🚀 EXIT CLIMB 🚀', radius: 25, required: true }
+                { id: 6, pos: { x: 0, y: 55, z: -360 },  label: '🚀 EXIT CLIMB 🚀', radius: 25, required: true },
+                { id: 7, pos: { x: 0, y: 75, z: -850 },  label: '🛫 AIRFIELD GLIDESLOPE 🛫', radius: 32, required: false }
             ],
 
             retro: {
@@ -148,7 +150,7 @@
 
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -700,
+            exitZ: -1550,
             roofY: 44,
             fieldY: 4,
             thresholds: [20000, 45000, 80000],
@@ -159,7 +161,8 @@
                 { id: 3, pos: { x: 0, y: 80, z: 550 },   label: 'TOWER CORRIDOR', radius: 25, required: false },
                 { id: 4, pos: { x: 0, y: 38, z: 60 },    label: '⚡ BOWL PLUNGE ⚡', radius: 22, required: true },
                 { id: 5, pos: { x: 0, y: 12, z: -100 },  label: '🔥 PITCH APEX 🔥', radius: 18, required: true },
-                { id: 6, pos: { x: 0, y: 75, z: -360 },  label: '🚀 FULL POWER CLIMB 🚀', radius: 25, required: true }
+                { id: 6, pos: { x: 0, y: 60, z: -360 },  label: '🚀 FULL POWER CLIMB 🚀', radius: 25, required: true },
+                { id: 7, pos: { x: 0, y: 75, z: -850 },  label: '🛫 METRO AIRPORT 🛫', radius: 32, required: false }
             ],
 
             retro: {
@@ -203,7 +206,7 @@
 
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -700,
+            exitZ: -1550,
             roofY: 46,
             fieldY: 4,
             thresholds: [22000, 50000, 85000],
@@ -214,7 +217,8 @@
                 { id: 3, pos: { x: 0, y: 80, z: 550 },   label: 'CANYON LINE-UP', radius: 25, required: false },
                 { id: 4, pos: { x: 0, y: 38, z: 60 },    label: '⚡ GRANDSTAND DIVE ⚡', radius: 20, required: true },
                 { id: 5, pos: { x: 0, y: 12, z: -100 },  label: '🔥 APEX PASS 🔥', radius: 18, required: true },
-                { id: 6, pos: { x: 0, y: 75, z: -360 },  label: '🚀 SKY CLIMB 🚀', radius: 25, required: true }
+                { id: 6, pos: { x: 0, y: 60, z: -360 },  label: '🚀 SKY CLIMB 🚀', radius: 25, required: true },
+                { id: 7, pos: { x: 0, y: 75, z: -850 },  label: '🛫 AIR BASE RUNWAY 🛫', radius: 32, required: false }
             ],
 
             retro: {

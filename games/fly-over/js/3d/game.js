@@ -79,9 +79,9 @@ class Game {
 
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x70c5e8); // Cape Town coastal sky
-        this.scene.fog = new THREE.FogExp2(0x70c5e8, 0.0006);
+        this.scene.fog = new THREE.FogExp2(0x70c5e8, 0.00038);
 
-        this.camera = new THREE.PerspectiveCamera(initialFov, window.innerWidth / window.innerHeight, 0.5, 4500);
+        this.camera = new THREE.PerspectiveCamera(initialFov, window.innerWidth / window.innerHeight, 0.5, 7500);
         this.camera.position.set(0, 180, 2300);
 
         this.renderer = new THREE.WebGLRenderer({ 
@@ -517,6 +517,7 @@ class Game {
             closestClearance: this.closestClearance,
             peakHype: this.peakHype,
             gatesHit: this.gatesHit,
+            totalGates: def.gates.length,
             proximityBonus: this.proximityBonus,
             finalScore: this.score,
             stars: 0
@@ -538,6 +539,7 @@ class Game {
                 closestClearance: this.closestClearance,
                 peakHype: this.peakHype,
                 gatesHit: this.gatesHit,
+                totalGates: def.gates.length,
                 proximityBonus: 0,
                 finalScore: Math.floor(this.score * 0.2),
                 stars: 0
@@ -566,6 +568,7 @@ class Game {
             closestClearance: this.closestClearance,
             peakHype: this.peakHype,
             gatesHit: this.gatesHit,
+            totalGates: def.gates.length,
             proximityBonus: this.proximityBonus,
             finalScore: this.score,
             stars: stars
@@ -653,6 +656,12 @@ class Game {
                 currentGate: this.currentGateIndex,
                 roll: this.aircraft.roll
             });
+        } else if (this.state === 'RESULT' && !this.aircraft.crashed) {
+            // Autopilot victory rollout / smooth cruise down the airfield runway
+            this.aircraft.targetPitch = -0.01;
+            this.aircraft.targetRoll = 0.0;
+            this.aircraft.targetSpeed = 150;
+            this.aircraft.update(dt, { x: 0, y: 0 });
         }
 
         this.cameraController.update(dt, this.aircraft, new THREE.Vector3(0, 0, -100));

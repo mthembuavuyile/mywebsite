@@ -486,7 +486,7 @@ class UIController {
 
         // Stats
         this.resClearance.textContent = `${result.closestClearance.toFixed(1)} m`;
-        this.resGates.textContent = `${result.gatesHit} / 6`;
+        this.resGates.textContent = `${result.gatesHit} / ${result.totalGates || 7}`;
         this.resHype.textContent = `${Math.floor(result.peakHype)}% ${result.peakHype >= 100 ? '(VUVUZELA SURGE)' : ''}`;
         this.resScore.textContent = Math.floor(result.finalScore).toLocaleString();
 
