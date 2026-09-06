@@ -34,7 +34,7 @@
             // Flight Coordinates
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -1550,
+            exitZ: -1150,
             roofY: 38,
             fieldY: 4,
             thresholds: [15000, 35000, 65000],
@@ -93,7 +93,7 @@
 
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -1550,
+            exitZ: -1150,
             roofY: 36,
             fieldY: 4,
             thresholds: [18000, 40000, 75000],
@@ -150,7 +150,7 @@
 
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -1550,
+            exitZ: -1150,
             roofY: 44,
             fieldY: 4,
             thresholds: [20000, 45000, 80000],
@@ -206,7 +206,7 @@
 
             startPos: { x: 0, y: 180, z: 2200 },
             targetZ: -100,
-            exitZ: -1550,
+            exitZ: -1150,
             roofY: 46,
             fieldY: 4,
             thresholds: [22000, 50000, 85000],

@@ -41,7 +41,7 @@ class StadiumBuilder {
                 unlocked: true,
                 startPos: new THREE.Vector3(0, 180, 2200),
                 targetZ: -100,
-                exitZ: -1550,
+                exitZ: -1150,
                 roofY: 38,
                 fieldY: 4,
                 windFactor: 1.4,

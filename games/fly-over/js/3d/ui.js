@@ -376,7 +376,9 @@ class UIController {
     setupHUD(stadiumDef) {
         this.hudStadiumName.textContent = stadiumDef.name;
         this.hudStadiumCity.textContent = stadiumDef.city;
-        this.hudGateTag.textContent = 'GATE 1/6 • HIGH APPROACH';
+        const total = (stadiumDef.gates && stadiumDef.gates.length) || 7;
+        const firstLabel = (stadiumDef.gates && stadiumDef.gates[0] && stadiumDef.gates[0].label) || 'APPROACH';
+        this.hudGateTag.textContent = `GATE 1/${total} • ${firstLabel}`;
         this.showScreen('hud');
     }
 
@@ -391,8 +393,10 @@ class UIController {
 
         // Gate Tag
         const currentGate = stats.currentGate || 0;
-        const gateDef = this.game.stadiumDefs[this.game.currentStadiumIndex].gates[currentGate] || { label: 'FINAL CLIMB' };
-        this.hudGateTag.textContent = `GATE ${Math.min(6, currentGate + 1)}/6 • ${gateDef.label}`;
+        const gates = (this.game.stadiumDefs[this.game.currentStadiumIndex] && this.game.stadiumDefs[this.game.currentStadiumIndex].gates) || [];
+        const totalGates = gates.length || 7;
+        const gateDef = gates[currentGate] || { label: 'AIRFIELD RUNWAY' };
+        this.hudGateTag.textContent = `GATE ${Math.min(totalGates, currentGate + 1)}/${totalGates} • ${gateDef.label}`;
 
         // Cockpit Artificial Horizon Tilt
         if (this.reticleHorizon && stats.roll !== undefined) {
