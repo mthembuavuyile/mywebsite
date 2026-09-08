@@ -42,17 +42,17 @@ class SiteHeader extends HTMLElement {
     const path = window.location.pathname;
     let activeNav = '';
     
-    if ((path === '/' || path.endsWith('/index.html')) && !path.includes('/blog/') && !path.includes('/games/')) {
+    if ((path === '/' || path.endsWith('/index.html')) && !path.includes('/blog') && !path.includes('/games') && !path.includes('/portfolio')) {
       activeNav = 'home';
-    } else if (path.includes('/about.html')) {
+    } else if (path.includes('/about')) {
       activeNav = 'about';
-    } else if (path.includes('/portfolio.html')) {
+    } else if (path.includes('/portfolio')) {
       activeNav = 'portfolio';
-    } else if (path.includes('/games/')) {
+    } else if (path.includes('/games')) {
       activeNav = 'games';
-    } else if (path.includes('/blog/')) {
+    } else if (path.includes('/blog')) {
       activeNav = 'blog';
-    } else if (path.includes('/contact.html')) {
+    } else if (path.includes('/contact')) {
       activeNav = 'contact';
     }
 

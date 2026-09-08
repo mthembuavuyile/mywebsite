@@ -1,78 +1,9 @@
 /* =========================================
-       Base & Fallback Variables
-    ========================================= */
+   css/portfolio.css - Portfolio Showcase Styles
+   (Inherits standard variables, layout & base styles from global.css)
+   ========================================= */
 :root {
-    --color-brand: #0f172a;
-    --color-brand-light: #1e293b;
-    --color-accent: #3b82f6;
-    --color-accent-hover: #2563eb;
     --color-accent-light: #eff6ff;
-    --color-bg-page: #ffffff;
-    --color-bg-alt: #f8fafc;
-    --color-text-main: #334155;
-    --color-text-muted: #64748b;
-    --color-border: #e2e8f0;
-    --font-main: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
-}
-
-body {
-    font-family: var(--font-main);
-    color: var(--color-text-main);
-    background-color: var(--color-bg-page);
-    margin: 0;
-    line-height: 1.6;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: var(--color-brand);
-    margin-top: 0;
-    line-height: 1.2;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.section {
-    padding: 5rem 0;
-}
-
-.section-alt {
-    background-color: var(--color-bg-alt);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-}
-
-.section-title {
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.section-subtitle {
-    color: var(--color-text-muted);
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto;
 }
 
 /* =========================================
