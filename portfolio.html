@@ -453,26 +453,45 @@
       const filterBtns = document.querySelectorAll('.filter-btn');
       const sections = document.querySelectorAll('.portfolio-section');
 
+      function applyFilter(selectedCategory) {
+        filterBtns.forEach(b => {
+          if (b.getAttribute('data-filter') === selectedCategory) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        sections.forEach(section => {
+          const sectionId = section.getAttribute('id');
+          if (selectedCategory === 'all' || sectionId === `section-${selectedCategory}`) {
+            section.classList.remove('hidden');
+            section.style.display = 'block';
+          } else {
+            section.classList.add('hidden');
+            section.style.display = 'none';
+          }
+        });
+      }
+
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          // Toggle active button
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const selectedCategory = btn.getAttribute('data-filter');
-
-          sections.forEach(section => {
-            const sectionId = section.getAttribute('id');
-            if (selectedCategory === 'all' || sectionId === `section-${selectedCategory}`) {
-              section.classList.remove('hidden');
-              section.style.display = 'block';
-            } else {
-              section.classList.add('hidden');
-              section.style.display = 'none';
-            }
-          });
+          applyFilter(btn.getAttribute('data-filter'));
         });
       });
+
+      // Support direct hash navigation (e.g., #section-saas, #saas, #client)
+      if (window.location.hash) {
+        const rawHash = window.location.hash.replace('#', '').replace('section-', '');
+        const validCategories = ['client', 'saas', 'systems', 'graphics'];
+        if (validCategories.includes(rawHash)) {
+          applyFilter(rawHash);
+          const target = document.getElementById(`section-${rawHash}`);
+          if (target) {
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 150);
+          }
+        }
+      }
     });
   </script>
 
