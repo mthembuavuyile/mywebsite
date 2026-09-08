@@ -205,6 +205,149 @@ a:hover { color: var(--color-accent-hover); }
   margin-top: 0.35rem;
 }
 
+/* Mobile Carousel Controls (Desktop hidden) */
+.grad-carousel-controls {
+  display: none;
+}
+
+.grad-carousel-hint {
+  display: none;
+}
+
+/* Mobile Carousel Layout & Touch Snap */
+@media (max-width: 768px) {
+  .grad-gallery-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.15rem;
+    padding: 0.5rem 1.5rem 1.25rem 1.5rem;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    margin-top: 1.5rem;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .grad-gallery-grid::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+
+  .grad-card {
+    flex: 0 0 80%;
+    max-width: 320px;
+    min-width: 250px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  }
+
+  /* Make photo details legible on mobile touch devices without needing hover */
+  .grad-card .grad-card-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.45) 50%, rgba(15, 23, 42, 0.1) 70%, transparent 100%);
+    padding: 1rem;
+  }
+
+  .grad-card-info h4 {
+    font-size: 0.92rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .grad-card-info p {
+    font-size: 0.78rem;
+    opacity: 0.92;
+  }
+
+  .grad-card-badge {
+    top: 10px;
+    right: 10px;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+  }
+
+  .grad-expand-icon {
+    font-size: 0.72rem;
+    color: #93c5fd;
+  }
+
+  /* Mobile Carousel Controls & Indicators */
+  .grad-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.1rem;
+  }
+
+  .grad-carousel-arrow {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-bg-page);
+    border: 1px solid var(--color-border);
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .grad-carousel-arrow:active {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+    transform: scale(0.94);
+  }
+
+  .grad-carousel-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .grad-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: #cbd5e1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .grad-dot.active {
+    width: 24px;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+  }
+
+  .grad-carousel-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-top: 0.6rem;
+    font-weight: 500;
+  }
+
+  .grad-carousel-hint i {
+    color: var(--color-accent);
+    font-size: 0.72rem;
+  }
+}
+
 /* Lightbox Modal */
 .grad-lightbox {
   display: none;

@@ -392,6 +392,8 @@ a {
 .bg-indigo-light { background-color: #eef2ff; color: #4f46e5; }
 .bg-amber-light { background-color: #fffbeb; color: #d97706; }
 .bg-slate-light { background-color: #f8fafc; color: #475569; }
+.bg-cyan-light { background-color: #ecfeff; color: #0891b2; }
+.bg-violet-light { background-color: #f5f3ff; color: #7c3aed; }
 
 /* Filter animation wrapper */
 .project-card {
