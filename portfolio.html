@@ -607,149 +607,192 @@
 
         <!-- ═══════════════ SECTION: 3D & GAMES ═══════════════ -->
         <div class="portfolio-section" id="section-graphics">
-          <div class="portfolio-section-header">
-            <h2><i class="fa-solid fa-gamepad"></i> Playable Web Games & 3D Graphics</h2>
-            <p>Interactive 3D simulations and playable browser games built with Three.js, HTML5 Canvas, and JavaScript.
-            </p>
+          <div class="portfolio-section-header with-action">
+            <div class="header-info">
+              <h2><i class="fa-solid fa-gamepad"></i> Playable Web Games & 3D Graphics</h2>
+              <p>Interactive 2D and 3D browser games built with JavaScript, HTML5 Canvas, and Three.js.</p>
+            </div>
+            <div class="header-action" style="display: flex; align-items: center; gap: 0.75rem;">
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="games-hub-cta-btn">
+                Explore the Complete Games Hub <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="games-scroll-controls" aria-label="Games horizontal scroll controls">
+                <button type="button" class="games-scroll-nav-btn" id="gamesScrollPrev" aria-label="Scroll left">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" class="games-scroll-nav-btn" id="gamesScrollNext" aria-label="Scroll right">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div class="projects-grid featured-grid">
+          <!-- Horizontal Scrolling Games Showcase -->
+          <div class="games-scroll-wrapper">
+            <div class="games-scroll-track" id="gamesScrollTrack" tabindex="0" role="region" aria-label="Horizontally scrollable list of games">
 
-            <div class="project-card" style="grid-column: 1 / -1; max-width: 850px; margin: 0 auto;">
-              <div class="card-icon-wrapper bg-emerald-light" style="font-size: 2rem; width: 64px; height: 64px;">
-                <i class="fa-solid fa-plane-departure"></i>
-              </div>
-              <span class="card-badge badge-webgl"><i class="fas fa-cube"></i> Three.js WebGL Simulation</span>
-              <h3 style="font-size: 1.5rem;">Springbok Flyover 3D</h3>
-              <p>An interactive 3D flight simulation built with Three.js and WebGL. Lets users fly over 3D models of
-                South African sports stadiums: DHL Cape Town Stadium, Ellis Park, Loftus Versfeld, and Moses Mabhida.
-              </p>
-
-              <ul class="card-bullet-list">
-                <li><strong>Stadium Models:</strong> 3D stadium geometry, pitch markings, floodlights, and crowd
-                  textures.</li>
-                <li><strong>Flight Controls:</strong> Jet flight controls with pitch and roll handling, collision
-                  boundaries, and smoke trails.</li>
-                <li><strong>View Modes:</strong> Toggle between 3D Cockpit Flight, 3D Orbit Free-Camera, and 2D Canvas
-                  Arcade modes.</li>
-              </ul>
-
-              <div class="card-tech-summary">
-                <strong>Tech:</strong> Three.js, WebGL, JavaScript, HTML5 Canvas
-              </div>
-
-              <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
-                <a href="/games/fly-over/index.html" class="btn btn-primary" style="padding: 0.6rem 1.25rem;">
-                  <i class="fas fa-play"></i> Open 3D Flight Simulation
-                </a>
-                <a href="/games/fly-over/stadiumdemo.html" class="btn btn-outline" style="padding: 0.6rem 1.25rem;">
-                  <i class="fas fa-camera"></i> 3D Orbit Camera
-                </a>
-                <a href="/games/fly-over/retro2d.html" class="btn btn-outline" style="padding: 0.6rem 1.25rem;">
-                  <i class="fas fa-gamepad"></i> 2D Retro Canvas Mode
-                </a>
-              </div>
-            </div>
-
-            <div class="project-card">
-              <div class="card-icon-wrapper bg-rose-light">
-                <i class="fa-solid fa-biohazard"></i>
-              </div>
-              <span class="card-badge badge-proto"><i class="fas fa-gamepad"></i> Playable Web Game</span>
-              <h3>Zombie Universe</h3>
-              <p>Survival arcade game featuring three distinct gameplay modes: Classic Top-Down 2D, Arcade V2, and a 3D
-                Outbreak Protocol mode built with Three.js.</p>
-              <div class="card-tech-summary">
-                <strong>Tech:</strong> Three.js, HTML5 Canvas, JavaScript
-              </div>
-              <a href="/games/zombie-universe/index.html" target="_blank" rel="noopener noreferrer"
-                class="project-link">
-                Play Game <i class="fas fa-arrow-up-right-from-square"></i>
+              <!-- 1. Springbok Flyover 3D -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-emerald-light">
+                    <i class="fa-solid fa-plane-departure"></i>
+                  </div>
+                  <span class="game-mini-badge">3D Simulation</span>
+                </div>
+                <h3 class="game-mini-title">Springbok Flyover 3D</h3>
+                <p class="game-mini-desc">Interactive 3D stadium flight simulation across South African sports arenas built with Three.js & WebGL.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
               </a>
-            </div>
 
-            <div class="project-card">
-              <div class="card-icon-wrapper bg-orange-light">
-                <i class="fa-solid fa-flag-checkered"></i>
-              </div>
-              <span class="card-badge badge-proto"><i class="fas fa-gamepad"></i> Playable Web Game</span>
-              <h3>Mr Racer Ultimate</h3>
-              <p>2D canvas obstacle-dodging racing game with keyboard controls, vehicle speed progression, and
-                high-score tracking.</p>
-              <div class="card-tech-summary">
-                <strong>Tech:</strong> HTML5 Canvas, JavaScript
-              </div>
-              <a href="/games/mr-racer-ultimate.html" target="_blank" rel="noopener noreferrer" class="project-link">
-                Play Game <i class="fas fa-arrow-up-right-from-square"></i>
+              <!-- 2. Zombie Universe -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-rose-light">
+                    <i class="fa-solid fa-biohazard"></i>
+                  </div>
+                  <span class="game-mini-badge">Action & 3D</span>
+                </div>
+                <h3 class="game-mini-title">Zombie Universe</h3>
+                <p class="game-mini-desc">Survival arcade featuring Classic 2D, Arcade V2, and 3D Outbreak Protocol modes.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
               </a>
-            </div>
 
-            <div class="project-card">
-              <div class="card-icon-wrapper bg-indigo-light">
-                <i class="fa-solid fa-users"></i>
-              </div>
-              <span class="card-badge badge-proto"><i class="fas fa-gamepad"></i> Playable Party Game</span>
-              <h3>30 Seconds (SA Edition)</h3>
-              <p>South African team-based word-guessing party game where players describe 5 target names and terms to
-                their teammates within a 30-second timer.</p>
-              <div class="card-tech-summary">
-                <strong>Tech:</strong> JavaScript, CSS3, Audio effects
-              </div>
-              <a href="/games/30-seconds.html" target="_blank" rel="noopener noreferrer" class="project-link">
-                Play Game <i class="fas fa-arrow-up-right-from-square"></i>
+              <!-- 3. Mr Racer Ultimate -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-orange-light">
+                    <i class="fa-solid fa-flag-checkered"></i>
+                  </div>
+                  <span class="game-mini-badge">Racing</span>
+                </div>
+                <h3 class="game-mini-title">Mr Racer Ultimate</h3>
+                <p class="game-mini-desc">2D obstacle-dodging canvas racing game with vehicle speed progression and high-score tracking.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
               </a>
-            </div>
 
-            <div class="project-card">
-              <div class="card-icon-wrapper bg-amber-light"
-                style="background: rgba(245, 158, 11, 0.1); color: #d97706;">
-                <i class="fa-solid fa-coins"></i>
-              </div>
-              <span class="card-badge badge-proto"><i class="fas fa-gamepad"></i> Playable Web Game</span>
-              <h3>Bitcoin Adventure</h3>
-              <p>2D crypto-themed side-scrolling platformer runner. Players jump across platforms to collect coins and
-                dodge obstacles.</p>
-              <div class="card-tech-summary">
-                <strong>Tech:</strong> HTML5 Canvas, JavaScript
-              </div>
-              <a href="/games/bitcoin-adventure.html" target="_blank" rel="noopener noreferrer" class="project-link">
-                Play Game <i class="fas fa-arrow-up-right-from-square"></i>
+              <!-- 4. Bitcoin Adventure -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-amber-light">
+                    <i class="fa-solid fa-coins"></i>
+                  </div>
+                  <span class="game-mini-badge">Platformer</span>
+                </div>
+                <h3 class="game-mini-title">Bitcoin Adventure</h3>
+                <p class="game-mini-desc">2D crypto-themed side-scrolling platformer runner with coin collection and obstacle avoidance.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
               </a>
-            </div>
 
-            <div class="project-card">
-              <div class="card-icon-wrapper bg-emerald-light">
-                <i class="fa-solid fa-circle-question"></i>
-              </div>
-              <span class="card-badge badge-proto"><i class="fas fa-gamepad"></i> Playable Web Game</span>
-              <h3>South African Trivia Quiz</h3>
-              <p>Multiple-choice quiz game testing knowledge across South African history, culture, geography, and local
-                pop culture.</p>
-              <div class="card-tech-summary">
-                <strong>Tech:</strong> JavaScript, HTML5/CSS3
-              </div>
-              <a href="/games/south-african-quiz/index.html" target="_blank" rel="noopener noreferrer"
-                class="project-link">
-                Play Game <i class="fas fa-arrow-up-right-from-square"></i>
+              <!-- 5. 30 Seconds (SA Edition) -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-purple-light">
+                    <i class="fa-solid fa-users"></i>
+                  </div>
+                  <span class="game-mini-badge">Party Game</span>
+                </div>
+                <h3 class="game-mini-title">30 Seconds (SA Edition)</h3>
+                <p class="game-mini-desc">Team-based South African word-guessing party game with 30-second countdown timer.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
               </a>
-            </div>
 
+              <!-- 6. South African Trivia Quiz -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-teal-light">
+                    <i class="fa-solid fa-circle-question"></i>
+                  </div>
+                  <span class="game-mini-badge">Trivia Quiz</span>
+                </div>
+                <h3 class="game-mini-title">South African Trivia Quiz</h3>
+                <p class="game-mini-desc">Multiple-choice quiz game covering South African history, culture, geography, and sports.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </a>
+
+              <!-- 7. Car Racing -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-blue-light">
+                    <i class="fa-solid fa-car"></i>
+                  </div>
+                  <span class="game-mini-badge">Track Racing</span>
+                </div>
+                <h3 class="game-mini-title">Car Racing</h3>
+                <p class="game-mini-desc">Fast-paced arcade track racing game featuring responsive keyboard controls and traffic dodging.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </a>
+
+              <!-- 8. Zombie Shooter Classic -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-indigo-light">
+                    <i class="fa-solid fa-skull-crossbones"></i>
+                  </div>
+                  <span class="game-mini-badge">Retro Arcade</span>
+                </div>
+                <h3 class="game-mini-title">Zombie Shooter Classic</h3>
+                <p class="game-mini-desc">The original fast-action top-down 2D canvas survival shooter arcade game.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </a>
+
+              <!-- 9. Slither Snake Game -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-emerald-light">
+                    <i class="fa-solid fa-ghost"></i>
+                  </div>
+                  <span class="game-mini-badge">Arcade</span>
+                </div>
+                <h3 class="game-mini-title">Slither Snake Game</h3>
+                <p class="game-mini-desc">Classic snake arcade gameplay built with HTML5 Canvas movement physics and score progression.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </a>
+
+              <!-- 10. Memory Match -->
+              <a href="https://avuyilemthembu.co.za/games/index.html" class="game-mini-card">
+                <div class="game-mini-card-header">
+                  <div class="game-mini-icon bg-violet-light">
+                    <i class="fa-solid fa-brain"></i>
+                  </div>
+                  <span class="game-mini-badge">Memory Puzzle</span>
+                </div>
+                <h3 class="game-mini-title">Memory Match</h3>
+                <p class="game-mini-desc">Card-matching memory puzzle game designed to test recall speed with move and time counters.</p>
+                <div class="game-mini-footer">
+                  <span>Play on Games Hub</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </a>
+
+            </div>
           </div>
-
-          <!-- Creative Arcade Banner Callout -->
-          <div
-            style="margin-top: 3.5rem; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 2rem; color: #fff; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.1);">
-            <div style="font-size: 2rem; color: #fbbf24;"><i class="fas fa-gamepad"></i></div>
-            <h3 style="color: #fff; margin: 0; font-size: 1.35rem;">Looking for More Web Games & Experiments?</h3>
-            <p style="color: #94a3b8; max-width: 600px; margin: 0; font-size: 0.95rem;">
-              I maintain a dedicated arcade hub with additional games (including Car Racing, Slither Snake, and Memory
-              Match) developed with HTML5 Canvas and JavaScript.
-            </p>
-            <a href="/games/index.html" class="btn btn-primary" style="margin-top: 0.5rem;">
-              Explore the Complete Games Hub <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-
         </div>
 
       </div>
@@ -829,6 +872,20 @@
             setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 150);
           }
         }
+      }
+
+      // Games horizontal scroll controls
+      const gamesTrack = document.getElementById('gamesScrollTrack');
+      const prevBtn = document.getElementById('gamesScrollPrev');
+      const nextBtn = document.getElementById('gamesScrollNext');
+
+      if (gamesTrack && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          gamesTrack.scrollBy({ left: -280, behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+          gamesTrack.scrollBy({ left: 280, behavior: 'smooth' });
+        });
       }
     });
   </script>
