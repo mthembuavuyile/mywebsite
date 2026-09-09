@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Outbreak Protocol - 3D Wave Survival</title>
+
+    <meta name="description" content="Play Outbreak Protocol, a fast-paced 3D wave survival shooter built with Three.js. Defend against mutant waves with multiple weapons, radar scanning, and tactical movement.">
+    <meta name="keywords" content="outbreak protocol, 3d zombie shooter, wave survival, Three.js game, webgl action game">
+    <meta name="author" content="Avuyile Mthembu">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/hud.css">
+    <link rel="stylesheet" href="css/menus.css">
+
+    <link rel="canonical" href="https://avuyilemthembu.co.za/games/outbreak-protocol/index.html">
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen-overlay">
+        <div class="screen-badge">BIOHAZARD CONTAINMENT BREACH</div>
+        <h1 class="screen-title">Outbreak Protocol</h1>
+        <div class="screen-sub">Quarantine Sector 4 has fallen. Neutralize incoming mutant waves, conserve ammunition, and hold the perimeter.</div>
+
+        <div id="startHighScore" class="high-score-badge">Personal Best: 0 pts (Wave 1)</div>
+
+        <div class="instructions-box">
+            <div style="margin-bottom: 8px; color: #fff; font-weight: 700;">Tactical Field Controls:</div>
+            <div><key>W</key><key>A</key><key>S</key><key>D</key> or <key>Arrows</key> to Move | <key>Shift</key> to Sprint</div>
+            <div><key>Mouse</key> to Aim | <key>Left Click</key> or <key>Space</key> to Fire</div>
+            <div><key>R</key> to Reload | <key>1</key> <key>2</key> <key>3</key> <key>4</key> or <key>Scroll Wheel</key> to Switch Weapons</div>
+            <div><key>V</key> to Toggle Camera (1st / 3rd Person) | <key>ESC</key> to Pause</div>
+        </div>
+
+        <button id="startButton" class="btn-primary">INITIATE PROTOCOL</button>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pauseScreen" class="screen-overlay" style="display: none;">
+        <h1 class="screen-title" style="font-size: 2.8rem;">SIMULATION PAUSED</h1>
+        <p class="screen-sub">Sector perimeter paused. Take a breather!</p>
+        <div>
+            <button id="resumeButton" class="btn-primary" style="padding: 12px 36px; font-size: 1rem;">RESUME</button>
+            <button id="viewToggleButton" class="btn-secondary">TOGGLE VIEW (V)</button>
+            <button id="restartButtonPause" class="btn-secondary">RESTART MISSION</button>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOver" class="screen-overlay" style="display: none;">
+        <h1 class="screen-title" style="color: #ef4444;">MISSION FAILED</h1>
+        <div id="finalScore" class="screen-sub" style="font-size: 1.15rem; color: #fff;"></div>
+        <button id="restartButtonGameOver" class="btn-primary">REDEPLOY OPERATIVE</button>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div id="hud">
+        <div class="hud-card">
+            <div class="hud-label">Operative Health</div>
+            <div id="healthVal" class="hud-val" style="color: #22c55e;">100 HP</div>
+            <div class="bar-container">
+                <div id="healthBar" class="bar-fill"></div>
+            </div>
+            <div class="bar-container" style="height: 4px; margin-top: 5px;">
+                <div id="staminaBar" class="bar-fill bar-stamina"></div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div class="hud-label">Score</div>
+                    <div id="scoreVal" class="hud-val">0</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="hud-label">Kills</div>
+                    <div id="killsVal" class="hud-val" style="color: #f87171;">0</div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="hud-label">Wave</div>
+                    <div id="waveVal" class="hud-val" style="color: var(--accent);">1</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <div class="hud-label">Ammo / Mag</div>
+            <div id="ammoVal" class="hud-val" style="color: #eab308;">15 / 15</div>
+        </div>
+    </div>
+
+    <!-- Weapon Selector -->
+    <div id="weaponSelector">
+        <div class="weapon-btn active" data-weapon="0">
+            <span>Tactical 9mm</span>
+            <span class="weapon-key">1</span>
+        </div>
+        <div class="weapon-btn" data-weapon="1">
+            <span>AR-7 Rifle</span>
+            <span class="weapon-key">2</span>
+        </div>
+        <div class="weapon-btn" data-weapon="2">
+            <span>Combat Breacher</span>
+            <span class="weapon-key">3</span>
+        </div>
+        <div class="weapon-btn" data-weapon="3">
+            <span>Plasma Disruptor</span>
+            <span class="weapon-key">4</span>
+        </div>
+    </div>
+
+    <!-- Crosshair & Hit Marker -->
+    <div id="crosshair">
+        <div class="ch-dot"></div>
+        <div class="ch-line ch-top"></div>
+        <div class="ch-line ch-bottom"></div>
+        <div class="ch-line ch-left"></div>
+        <div class="ch-line ch-right"></div>
+    </div>
+    <div id="hitMarker"></div>
+
+    <!-- Damage Screen Flash -->
+    <div id="damageFlash"></div>
+
+    <!-- Minimap Radar -->
+    <div id="minimapContainer">
+        <canvas id="minimapCanvas"></canvas>
+    </div>
+
+    <!-- Wave Notification Banner -->
+    <div id="waveBanner">WAVE 1</div>
+
+    <!-- Touch Controls (Mobile) -->
+    <div id="touchControls">
+        <div id="moveJoystick" class="touch-joystick"><div class="touch-thumb"></div></div>
+        <div id="shootBtnTouch">FIRE</div>
+    </div>
+    <button id="viewBtnTouch">CAM VIEW</button>
+
+    <!-- Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Three.js Engine & GLTF Loaders -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/utils/SkeletonUtils.js"></script>
+
+    <!-- ES6 Modules Entry Point -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
