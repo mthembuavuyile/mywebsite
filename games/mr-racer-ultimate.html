@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Primary Meta Tags -->
-    <title>MR RACER: NEON HIGHWAY — 3D Cyber Arcade Racing | Vylex</title>
+    <title>MR RACER: NEON HIGHWAY — 3D Cyber Arcade Racing | Avuyile Mthembu</title>
     <meta name="title" content="MR RACER: NEON HIGHWAY - 3D Cyber Arcade Racing">
     <meta name="description" content="High-speed 3D arcade highway racing game with cyberpunk aesthetics, traffic overtaking, near-miss combo scoring, dynamic day-night cycle, and responsive desktop and mobile controls.">
-    <meta name="keywords" content="racing game, html5 game, 3d racing, three.js, traffic racer, cyberpunk, neon racer, mr racer, vylex">
-    <meta name="author" content="Vylex">
+    <meta name="keywords" content="racing game, html5 game, 3d racing, three.js, traffic racer, cyberpunk, neon racer, mr racer, avuyile mthembu">
+    <meta name="author" content="Avuyile Mthembu">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://avuyilemthembu.co.za/games/mr-racer-ultimate.html">
 
@@ -20,7 +20,7 @@
     <meta property="og:title" content="MR RACER: NEON HIGHWAY - 3D Cyber Arcade Racing">
     <meta property="og:description" content="Master the neon highway. Overtake traffic, execute near-misses, engage nitro, and climb the leaderboard.">
     <meta property="og:image" content="https://avuyilemthembu.co.za/assets/images/mr-racer-ultimate-share.jpg">
-    <meta property="og:site_name" content="Vylex Games">
+    <meta property="og:site_name" content="Avuyile Mthembu Games">
     <meta property="og:locale" content="en_ZA">
 
     <!-- Twitter -->
@@ -36,7 +36,7 @@
       "@context": "https://schema.org",
       "@type": "VideoGame",
       "name": "MR RACER: NEON HIGHWAY",
-      "author": { "@type": "Organization", "name": "Vylex" },
+      "author": { "@type": "Person", "name": "Avuyile Mthembu" },
       "genre": ["Racing", "Arcade", "3D"],
       "playMode": "SinglePlayer",
       "applicationCategory": "Game",
@@ -510,6 +510,35 @@
         #zone-left .touch-zone-hint { left: 24px; }
         #zone-right .touch-zone-hint { right: 24px; }
 
+        .screen-back-badge {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            color: rgba(255, 255, 255, 0.75);
+            background: rgba(10, 15, 29, 0.85);
+            border: 1px solid rgba(0, 242, 255, 0.35);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .screen-back-badge:hover {
+            color: var(--cyan);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+            transform: translateX(-2px);
+        }
+
         /* ------------------ SCREENS & OVERLAYS ------------------ */
         .screen-overlay {
             position: fixed;
@@ -786,6 +815,7 @@
 
             <!-- Action Controls -->
             <div class="top-action-bar">
+                <a href="/games/index.html" class="action-btn" title="Back to Games Hub" aria-label="Back to Games"><i class="fas fa-arrow-left"></i></a>
                 <button class="action-btn" id="btn-pause" title="Pause Game" aria-label="Pause"><i class="fas fa-pause"></i></button>
                 <button class="action-btn" id="btn-sound" title="Toggle Sound" aria-label="Toggle Sound"><i class="fas fa-volume-up"></i></button>
                 <button class="action-btn" id="btn-graphics" title="Toggle HD Bloom Quality" aria-label="Toggle Quality"><i class="fas fa-magic"></i></button>
