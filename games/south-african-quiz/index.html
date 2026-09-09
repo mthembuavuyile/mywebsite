@@ -4,539 +4,724 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Enhancements -->
+    
+    <!-- SEO & Social Meta Tags -->
     <title>South Africa Quiz Challenge | Test Your Knowledge | Avuyile Mthembu</title>
-    <meta name="description" content="Challenge your knowledge of South Africa with our interactive quiz covering geography, wildlife, culture, languages and landmarks of the Rainbow Nation.">
-    <meta name="keywords" content="South Africa Quiz, Rainbow Nation, South African Knowledge, Interactive Quiz, Avuyile Mthembu">
+    <meta name="description" content="Test your knowledge of South Africa with our interactive trivia quiz covering geography, wildlife, history, culture, languages, and iconic landmarks of the Rainbow Nation.">
+    <meta name="keywords" content="South Africa Quiz, Rainbow Nation, South African Knowledge, Interactive Quiz, Mzansi Trivia, Avuyile Mthembu">
     <meta name="author" content="Avuyile Mthembu">
-    <!-- Open Graph Tags for Social Sharing -->
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://avuyilemthembu.co.za/games/south-african-quiz/">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:title" content="South Africa Quiz Challenge | Avuyile Mthembu">
-    <meta property="og:description" content="Test your knowledge of South Africa with our interactive quiz about the Rainbow Nation!">
+    <meta property="og:description" content="Challenge your knowledge of South Africa across geography, wildlife, culture, and iconic landmarks!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://avuyilemthembu.co.za/games/south-african-quiz/">
     <meta property="og:image" content="https://avuyilemthembu.co.za/images/sa-quiz-preview.jpg">
-    <!-- Twitter Card data -->
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="South Africa Quiz Challenge | Avuyile Mthembu">
-    <meta name="twitter:description" content="Test your knowledge of South Africa with our interactive quiz!">
+    <meta name="twitter:description" content="Test your knowledge of South Africa with an interactive trivia quiz challenge!">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj48cGF0aCBmaWxsPSIjRTAzQzMxIiBkPSJNMCwxMzMuM2MwLDAsMjAwLTEwMCw0MDAtMTAwczQwMCwxMDAsNDAwLDEwMHYxMzMuM0gwVjEzMy4zeiIvPjxwYXRoIGZpbGw9IiMwMDFFNkEiIGQ9Ik0wLDUzMy4zYzAsMCwyMDAsMTAwLDQwMCwxMDBzNDAwLTEwMCw0MDAtMTAwVjQwMEgwVjUzMy4zeiIvPjxwYXRoIGZpbGw9IiMwMDdBM0QiIGQ9Ik0wLDEzMy4zaDgwMFY0MDBIMFYxMzMuM3oiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMCw0MDBIODAwVjUzMy4zSDBWNDAweiIvPjxwYXRoIGZpbGw9IiNGRkI2MTIiIGQ9Ik0zMDAsMTMzLjNMMCw0MDBWMTM0LjNMMzAwLDEzMy4zeiIvPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0zNTAsMTMzLjNMNTAsNDAwVjEzMy4zSDM1MHoiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMzAwLDEzMy4zTDAsNDAwdjEzMy4zTDMwMCw0MDBsMCwxMzMuM2g1MEw1MCw0MDB2MTMzLjNoLTUwTDMwMCw1MzMuM2g1MEwzNTAsNDAwaDUwVjEzMy4zSDMwMHoiLz48L3N2Zz4=">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj48cGF0aCBmaWxsPSIjRTAzQzMxIiBkPSJNMCwxMzMuM2MwLDAsMjAwLTEwMCw0MDAtMTAwczQwMCwxMDAsNDAwLDEwMHYxMzMuM0gwVjEzMy4zeiIvPjxwYXRoIGZpbGw9IiMwMDFFNkEiIGQ9Ik0wLDUzMy4zYzAsMCwyMDAsMTAwLDQwMCwxMDBzNDAwLTEwMCw0MDAtMTAwVjQwMEgwVjUzMy4zeiIvPjxwYXRoIGZpbGw9IiMwMDdBM0QiIGQ9Ik0wLDEzMy4zaDgwMFY0MDBIMFYxMzMuM3oiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMCw0MDBIODAwVjUzMy4zSDBWNDAweiIvPjxwYXRoIGZpbGw9IiNGRkI2MTIiIGQ9Ik0zMDAsMTMzLjNMMCw0MDBVMTM0LjNMMzAwLDEzMy4zeiIvPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0zNTAsMTMzLjNMNTAsNDAwVjEzMy4zSDM1MHoiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMzAwLDEzMy4zTDAsNDAwdjEzMy4zTDMwMCw0MDBsMCwxMzMuM2g1MEw1MCw0MDB2MTMzLjNoLTUwTDMwMCw1MzMuM2g1MEwzNTAsNDAwaDUwVjEzMy4zSDMwMHoiLz48L3N2Zz4=">
+
+    <!-- Tailwind CSS CDN & Google Fonts & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* ==========================================================================
-   Import Fonts
-   ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --sa-red: #E03C31;
+            --sa-blue: #001E6A;
+            --sa-green: #007A3D;
+            --sa-yellow: #FFB612;
+            --sa-black: #111827;
+            --sa-white: #FFFFFF;
+        }
 
-/* ==========================================================================
-   Variables
-   ========================================================================== */
-:root {
-    /* Primary Colors */
-    --primary-color: #0369a1;
-    --primary-hover: #0284c7;
-    --secondary-color: #10b981;
-    
-    /* South African Flag Colors */
-    --sa-red: #E03C31;
-    --sa-blue: #001E6A;
-    --sa-green: #007A3D;
-    --sa-yellow: #FFB612;
-    --sa-black: #000000;
-}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0c1527;
+            background-image: 
+                radial-gradient(at 15% 15%, rgba(0, 122, 61, 0.18) 0px, transparent 50%),
+                radial-gradient(at 85% 20%, rgba(2, 132, 199, 0.2) 0px, transparent 50%),
+                radial-gradient(at 50% 85%, rgba(224, 60, 49, 0.15) 0px, transparent 55%),
+                radial-gradient(at 85% 85%, rgba(255, 182, 18, 0.15) 0px, transparent 50%);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
 
-/* ==========================================================================
-   Base Styles
-   ========================================================================== */
-body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f8fafc;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23bae6fd' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
-}
+        .flag-ribbon {
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(90deg, 
+                #000000 0%, #000000 12%,
+                #FFB612 12%, #FFB612 25%,
+                #007A3D 25%, #007A3D 50%,
+                #E03C31 50%, #E03C31 75%,
+                #001E6A 75%, #001E6A 100%);
+        }
 
-/* ==========================================================================
-   South African Flag Component
-   ========================================================================== */
-.sa-flag {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease;
-}
+        .glass-card {
+            background: rgba(19, 30, 49, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
 
-.sa-flag:hover {
-    transform: rotate3d(0, 1, 0, 15deg);
-}
+        .option-btn {
+            position: relative;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.sa-flag svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-}
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: rgba(45, 62, 90, 0.8);
+            border-color: #38bdf8;
+            box-shadow: 0 8px 20px -4px rgba(14, 165, 233, 0.3);
+        }
 
-/* Flag SVG Hover Effects */
-.sa-flag svg path,
-.sa-flag svg g {
-    transition: all 0.3s ease;
-}
+        .option-btn:disabled {
+            cursor: default;
+        }
 
-.sa-flag:hover svg path[fill="#E03C31"] { fill: #ff4444; }
-.sa-flag:hover svg path[fill="#001489"] { fill: #0026ff; }
-.sa-flag:hover svg path[stroke="#007749"] { stroke: #00994d; }
-.sa-flag:hover svg path[stroke="#ffb81c"] { stroke: #ffcc33; }
+        .correct-answer {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95)) !important;
+            border-color: #34d399 !important;
+            color: #ffffff !important;
+            transform: scale(1.015);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5) !important;
+        }
 
-/* ==========================================================================
-   Buttons and Interactive Elements
-   ========================================================================== */
-.btn-primary {
-    background-color: var(--primary-color);
-    transition: all 0.3s ease;
-}
+        .wrong-answer {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(185, 28, 28, 0.95)) !important;
+            border-color: #f87171 !important;
+            color: #ffffff !important;
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
 
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
 
-.option-btn {
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
+        .flag-container {
+            perspective: 800px;
+        }
 
-.option-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    border-color: var(--primary-color);
-}
+        .flag-card {
+            transition: transform 0.4s ease;
+            transform-style: preserve-3d;
+        }
 
-/* ==========================================================================
-   Quiz Components
-   ========================================================================== */
-.quiz-card {
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 10px 25px -5px rgba(3, 105, 161, 0.1), 0 10px 10px -5px rgba(3, 105, 161, 0.04);
-    transition: transform 0.3s ease;
-}
+        .flag-card:hover {
+            transform: rotateY(12deg) rotateX(4deg);
+        }
 
-.quiz-card:hover {
-    transform: translateY(-5px);
-}
+        /* Confetti */
+        .confetti-piece {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, opacity;
+        }
 
-.correct-answer {
-    background-color: var(--secondary-color) !important;
-    color: white !important;
-    transform: scale(1.02);
-    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1), 0 4px 6px -2px rgba(16, 185, 129, 0.05);
-}
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
 
-.wrong-answer {
-    background-color: #ef4444 !important;
-    color: white !important;
-    transform: scale(0.98);
-}
+        /* Toast notification */
+        .toast {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-.progress-bar {
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* ==========================================================================
-   Brand Styles
-   ========================================================================== */
-.vylex-brand {
-    background: linear-gradient(to right, #0369a1, #0284c7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-}
-
-.brand-pulse {
-    animation: brand-pulse 5s infinite cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-/* ==========================================================================
-   Tooltips
-   ========================================================================== */
-.sa-tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.sa-tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
-    padding: 8px 12px;
-    background-color: var(--sa-blue);
-    color: white;
-    border-radius: 6px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-    font-size: 0.875rem;
-    z-index: 10;
-}
-
-.sa-tooltip:hover::after {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ==========================================================================
-   Animations
-   ========================================================================== */
-/* Flag Animations */
-@keyframes flagWave {
-    0%, 100% { transform: rotate3d(0, 1, 0, 0deg); }
-    50% { transform: rotate3d(0, 1, 0, 10deg); }
-}
-
-@keyframes flag-shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-/* Confetti Animations */
-@keyframes confetti-slow {
-    0% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
-    100% { transform: translate3d(25px, 105vh, 0) rotateX(360deg) rotateY(180deg); }
-}
-
-@keyframes confetti-medium {
-    0% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
-    100% { transform: translate3d(100px, 105vh, 0) rotateX(100deg) rotateY(360deg); }
-}
-
-@keyframes confetti-fast {
-    0% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
-    100% { transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg); }
-}
-
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
-@keyframes brand-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
-}
-
-@keyframes circle-fill {
-    from { stroke-dashoffset: 339.3; }
-    to { stroke-dashoffset: attr(data-offset); }
-}
-
-/* ==========================================================================
-   Animation Utility Classes
-   ========================================================================== */
-.flag-wave {
-    animation: flagWave 6s ease-in-out infinite;
-}
-
-.confetti {
-    position: absolute;
-    z-index: 10;
-    top: -10px;
-    border-radius: 0%;
-    animation-fill-mode: both;
-}
-
-.confetti--animation-slow {
-    animation: confetti-slow 3.25s linear 1 forwards;
-}
-
-.confetti--animation-medium {
-    animation: confetti-medium 2.75s linear 1 forwards;
-}
-
-.confetti--animation-fast {
-    animation: confetti-fast 2.25s linear 1 forwards;
-}
-
-.shimmer {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-}
-
-#result-circle {
-    animation: circle-fill 1.5s ease-out forwards;
-}
+        /* Timer pulse */
+        .timer-warning {
+            animation: pulse-red 1s infinite;
+        }
+        @keyframes pulse-red {
+            0%, 100% { color: #f87171; transform: scale(1); }
+            50% { color: #ef4444; transform: scale(1.08); }
+        }
     </style>
-
-    <link rel="canonical" href="https://avuyilemthembu.co.za/games/south-african-quiz/">
 </head>
 
-<body class="min-h-screen flex flex-col">
-    <!-- Enhanced flag component for the header -->
-    <header class="w-full bg-white shadow-sm py-2 px-4 fixed top-0 left-0 right-0 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="https://avuyilemthembu.co.za" class="flex items-center space-x-2" title="Avuyile Mthembu">
-                <div class="sa-flag w-8 h-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 90 60">
-                        <title>Flag of South Africa</title>
+<body class="flex flex-col min-h-screen text-slate-100 antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Top Flag Accent Line -->
+    <div class="flag-ribbon fixed top-0 left-0 right-0 z-50"></div>
+
+    <!-- Header Navigation -->
+    <header class="w-full bg-slate-900/90 backdrop-blur border-b border-slate-800 py-3 px-4 fixed top-[5px] left-0 right-0 z-40">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="https://avuyilemthembu.co.za" class="flex items-center space-x-2.5 group" title="Avuyile Mthembu Portfolio">
+                <!-- Mini SA Flag SVG -->
+                <div class="w-8 h-6 rounded overflow-hidden shadow-sm border border-slate-700/60 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60" class="w-full h-full">
                         <defs>
-                         <clipPath id="t">
-                          <path d="m0 0 45 30L0 60z"/>
-                         </clipPath>
-                         <clipPath id="f">
-                          <path d="m0 0h90v60H0z"/>
-                         </clipPath>
+                            <clipPath id="t-mini"><path d="m0 0 45 30L0 60z"/></clipPath>
+                            <clipPath id="f-mini"><path d="m0 0h90v60H0z"/></clipPath>
                         </defs>
                         <path fill="#E03C31" d="m0 0h90v30H45z"/>
                         <path fill="#001489" d="m0 60h90V30H45z"/>
-                        <g clip-path="url(#f)" fill="none">
-                         <path stroke="#FFF" stroke-width="20" d="m90 30H45L0 0v60l45-30"/>
-                         <path fill="#000" stroke="#ffb81c" stroke-width="20" clip-path="url(#t)" d="m0 0 45 30L0 60"/>
-                         <path stroke="#007749" stroke-width="12" d="m0 0 45 30h45M0 60l45-30"/>
+                        <g clip-path="url(#f-mini)" fill="none">
+                            <path stroke="#FFF" stroke-width="20" d="m90 30H45L0 0v60l45-30"/>
+                            <path fill="#000" stroke="#ffb81c" stroke-width="20" clip-path="url(#t-mini)" d="m0 0 45 30L0 60"/>
+                            <path stroke="#007749" stroke-width="12" d="m0 0 45 30h45M0 60l45-30"/>
                         </g>
                     </svg>
-                    <div class="flag-shimmer"></div>
                 </div>
-                <span class="vylex-brand text-lg md:text-xl brand-pulse">Avuyile Mthembu</span>
+                <div>
+                    <span class="font-extrabold text-base tracking-tight bg-gradient-to-r from-sky-400 to-teal-300 bg-clip-text text-transparent group-hover:from-sky-300 group-hover:to-teal-200 transition-colors">
+                        Avuyile Mthembu
+                    </span>
+                    <span class="hidden sm:inline-block text-xs text-slate-400 ml-2 pl-2 border-l border-slate-700">South Africa Quiz</span>
+                </div>
             </a>
-            <div class="flex items-center space-x-3 text-xs md:text-sm">
-                <a href="/games/index.html" class="text-sky-600 hover:text-sky-800 font-semibold transition-colors flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    All Games
+
+            <!-- Right Controls -->
+            <div class="flex items-center space-x-3 text-xs sm:text-sm">
+                <!-- Sound Toggle -->
+                <button id="sound-btn" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 border border-slate-700/60" title="Toggle Sound">
+                    <i id="sound-icon" class="fas fa-volume-up"></i>
+                    <span class="hidden md:inline text-xs font-medium">Sound</span>
+                </button>
+
+                <!-- High score tag -->
+                <div id="high-score" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg text-amber-300 text-xs font-semibold">
+                    <i class="fas fa-trophy text-amber-400"></i>
+                    <span id="high-score-text">Best: 0%</span>
+                </div>
+
+                <!-- Back to games link -->
+                <a href="/games/index.html" class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-sky-600/20 hover:bg-sky-600/30 text-sky-400 hover:text-sky-300 border border-sky-500/30 font-medium transition-all">
+                    <i class="fas fa-arrow-left text-xs"></i>
+                    <span>All Games</span>
                 </a>
-                <span class="text-gray-300">|</span>
-                <span class="text-gray-500">South Africa Quiz Challenge</span>
             </div>
         </div>
     </header>
 
-    <!-- Intro/Start Screen with Enhanced UI -->
-    <div id="start-screen" class="flex flex-col items-center justify-center min-h-screen p-4 pt-16">
-        <div class="w-full max-w-md p-6 bg-white rounded-2xl shadow-xl quiz-card">
-            <div class="flag-colors h-4 w-full rounded-t-lg mb-6"></div>
-            <h1 class="text-3xl font-bold text-center mb-2 text-sky-600">South Africa Quiz</h1>
-            <p class="text-center text-gray-600 mb-6">Test your knowledge of the Rainbow Nation!</p>
+    <!-- Main Content Container -->
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 pt-24 pb-12">
+        <div class="w-full max-w-2xl">
 
-            <div class="flex justify-center mb-8">
-                <!-- Updated flag to match the header flag style -->
-                <div class="h-40 w-40 relative flag-wave sa-flag">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 90 60" class="w-full h-full drop-shadow-md">
-                        <title>Flag of South Africa</title>
-                        <defs>
-                         <clipPath id="main-t">
-                          <path d="m0 0 45 30L0 60z"/>
-                         </clipPath>
-                         <clipPath id="main-f">
-                          <path d="m0 0h90v60H0z"/>
-                         </clipPath>
-                        </defs>
-                        <path fill="#E03C31" d="m0 0h90v30H45z"/>
-                        <path fill="#001489" d="m0 60h90V30H45z"/>
-                        <g clip-path="url(#main-f)" fill="none">
-                         <path stroke="#FFF" stroke-width="20" d="m90 30H45L0 0v60l45-30"/>
-                         <path fill="#000" stroke="#ffb81c" stroke-width="20" clip-path="url(#main-t)" d="m0 0 45 30L0 60"/>
-                         <path stroke="#007749" stroke-width="12" d="m0 0 45 30h45M0 60l45-30"/>
-                        </g>
-                    </svg>
-                    <!-- Flag shimmer overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+            <!-- ============================================================== -->
+            <!-- 1. START / SETTINGS SCREEN                                     -->
+            <!-- ============================================================== -->
+            <div id="start-screen" class="glass-card rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl transition-all duration-300">
+                <div class="flag-ribbon"></div>
+                <div class="p-6 sm:p-8">
+                    <!-- Hero Flag Banner -->
+                    <div class="text-center mb-6">
+                        <div class="flag-container inline-block mb-3">
+                            <div class="flag-card w-28 h-18 sm:w-36 sm:h-24 mx-auto rounded-lg overflow-hidden shadow-lg border border-slate-600/40">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60" class="w-full h-full drop-shadow">
+                                    <title>Flag of South Africa</title>
+                                    <defs>
+                                        <clipPath id="t-main"><path d="m0 0 45 30L0 60z"/></clipPath>
+                                        <clipPath id="f-main"><path d="m0 0h90v60H0z"/></clipPath>
+                                    </defs>
+                                    <path fill="#E03C31" d="m0 0h90v30H45z"/>
+                                    <path fill="#001489" d="m0 60h90V30H45z"/>
+                                    <g clip-path="url(#f-main)" fill="none">
+                                        <path stroke="#FFF" stroke-width="20" d="m90 30H45L0 0v60l45-30"/>
+                                        <path fill="#000" stroke="#ffb81c" stroke-width="20" clip-path="url(#t-main)" d="m0 0 45 30L0 60"/>
+                                        <path stroke="#007749" stroke-width="12" d="m0 0 45 30h45M0 60l45-30"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            South Africa <span class="text-sky-400">Quiz Challenge</span>
+                        </h1>
+                        <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-md mx-auto font-normal leading-relaxed">
+                            Test your knowledge of the Rainbow Nation across geography, wildlife, rich culture, languages, and iconic landmarks.
+                        </p>
+                    </div>
+
+                    <!-- Category Selector -->
+                    <div class="mb-5">
+                        <label for="category-select" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
+                            <span><i class="fas fa-layer-group text-sky-400 mr-1.5"></i> Select Category</span>
+                            <span id="category-pool-count" class="text-sky-400 font-medium lowercase">160 questions available</span>
+                        </label>
+                        <div class="relative">
+                            <select id="category-select" class="w-full bg-slate-800/90 text-white p-3.5 pl-4 pr-10 rounded-xl border border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm sm:text-base cursor-pointer appearance-none shadow-inner">
+                                <option value="all">🇿🇦 All Categories (160 Questions)</option>
+                                <option value="landmarks">⛰️ Landmarks & Tourism (44 Questions)</option>
+                                <option value="culture">🎭 Culture & History (56 Questions)</option>
+                                <option value="animals">🦁 Wildlife & Animals (24 Questions)</option>
+                                <option value="geography">🗺️ Geography & Oceans (19 Questions)</option>
+                                <option value="languages">🗣️ Languages & Slang (17 Questions)</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-400">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Difficulty / Mode Selector -->
+                    <div class="mb-6">
+                        <label for="difficulty-select" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
+                            <span><i class="fas fa-stopwatch text-amber-400 mr-1.5"></i> Game Mode & Questions</span>
+                            <span class="text-amber-400 font-medium">Timer per question</span>
+                        </label>
+                        <div class="relative">
+                            <select id="difficulty-select" class="w-full bg-slate-800/90 text-white p-3.5 pl-4 pr-10 rounded-xl border border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm sm:text-base cursor-pointer appearance-none shadow-inner">
+                                <option value="easy" selected>⚡ Quick Sprint (5 Questions · 15s timer)</option>
+                                <option value="medium">🎯 Standard Quiz (10 Questions · 15s timer)</option>
+                                <option value="hard">🏆 Challenge Mode (20 Questions · 12s timer)</option>
+                                <option value="expert">🇿🇦 Marathon Mode (All Category Questions · 10s timer)</option>
+                                <option value="zen">♾️ Zen Mode (10 Questions · Untimed / Relaxed)</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-slate-400">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mode Info Pills -->
+                    <div class="grid grid-cols-3 gap-2 mb-6 text-center text-xs">
+                        <div class="bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400 font-medium mb-0.5">Lifelines</div>
+                            <div class="text-emerald-400 font-bold flex items-center justify-center gap-1">
+                                <i class="fas fa-magic text-[10px]"></i> 1x 50:50
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400 font-medium mb-0.5">Controls</div>
+                            <div class="text-sky-300 font-bold">Keys 1 - 4</div>
+                        </div>
+                        <div class="bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400 font-medium mb-0.5">High Score</div>
+                            <div id="card-high-score" class="text-amber-400 font-bold">0%</div>
+                        </div>
+                    </div>
+
+                    <!-- Start Button -->
+                    <button id="start-btn" class="w-full py-4 px-6 bg-gradient-to-r from-sky-500 via-sky-600 to-teal-500 hover:from-sky-400 hover:via-sky-500 hover:to-teal-400 text-white font-bold rounded-xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 text-base sm:text-lg group cursor-pointer">
+                        <span>Start Quiz</span>
+                        <i class="fas fa-play text-sm group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <p class="text-center text-xs text-slate-400 mt-2.5">Tip: You can press <kbd class="px-1.5 py-0.5 bg-slate-800 rounded border border-slate-700 font-mono text-slate-300">Enter</kbd> to begin</p>
                 </div>
             </div>
 
-            <!-- Enhanced selection boxes -->
-            <div class="mb-6">
-                <label for="category-select" class="block text-sm font-semibold mb-2 text-gray-700">Select Category:</label>
-                <select id="category-select"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white shadow-sm">
-                    <option value="all">All Categories</option>
-                    <option value="geography">Geography</option>
-                    <option value="animals">Wildlife & Animals</option>
-                    <option value="culture">Culture & History</option>
-                    <option value="languages">Languages</option>
-                    <option value="landmarks">Landmarks & Tourism</option>
-                </select>
-            </div>
-                    <div class="mb-4 sm:mb-0">
-                        <div class="text-gray-600 font-semibold">Question <span id="current-question">1</span>/<span
-                                id="total-questions">10</span></div>
-                        <div class="text-sm text-gray-500 flex items-center">
-                            <span class="inline-block w-3 h-3 rounded-full mr-2" style="background-color: var(--primary-color);"></span>
-                            <span id="category-display">Category</span>
+
+            <!-- ============================================================== -->
+            <!-- 2. ACTIVE QUIZ PLAY SCREEN                                     -->
+            <!-- ============================================================== -->
+            <div id="quiz-screen" class="hidden glass-card rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl transition-all duration-300">
+                <div class="flag-ribbon"></div>
+                
+                <div class="p-6 sm:p-8">
+                    <!-- Top HUD Bar -->
+                    <div class="flex items-center justify-between gap-2 mb-4 pb-4 border-b border-slate-700/60 text-xs sm:text-sm">
+                        <!-- Question Counter & Category Badge -->
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30">
+                                Question <span id="current-question">1</span>/<span id="total-questions">10</span>
+                            </span>
+                            <span id="category-display" class="hidden sm:inline-block px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-medium">
+                                Category
+                            </span>
+                        </div>
+
+                        <!-- Right HUD: Streak & Timer & Lifeline -->
+                        <div class="flex items-center gap-2">
+                            <!-- Streak Counter -->
+                            <div id="streak-pill" class="hidden items-center gap-1 px-2.5 py-1 rounded-md bg-orange-500/20 text-orange-400 border border-orange-500/40 font-bold animate-pulse">
+                                <span>🔥</span>
+                                <span id="streak-count">0</span>
+                            </div>
+
+                            <!-- 50:50 Lifeline Button -->
+                            <button id="lifeline-btn" class="px-2.5 py-1 rounded-md bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 font-semibold transition-all flex items-center gap-1 cursor-pointer" title="50:50 Lifeline: Remove 2 wrong answers">
+                                <i class="fas fa-magic text-xs"></i>
+                                <span>50:50</span>
+                            </button>
+
+                            <!-- Timer Display -->
+                            <div id="timer-box" class="px-3 py-1 rounded-md bg-slate-800 text-white font-mono font-bold border border-slate-700 flex items-center gap-1.5">
+                                <i class="far fa-clock text-sky-400 text-xs"></i>
+                                <span id="timer">15s</span>
+                            </div>
+
+                            <!-- Score Badge -->
+                            <div class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+                                Score: <span id="score">0</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <div>
-                            <div class="text-gray-600 font-semibold text-right">Score</div>
-                            <div class="text-sky-600 font-bold text-right"><span id="score">0</span></div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-800 rounded-full h-2.5 mb-6 overflow-hidden border border-slate-700/60">
+                        <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-teal-400 h-full rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+                    </div>
+
+                    <!-- Question Card -->
+                    <div class="mb-6 bg-slate-800/80 p-5 sm:p-6 rounded-xl border border-slate-700/80 shadow-inner">
+                        <h2 id="question-text" class="text-lg sm:text-xl font-bold text-white leading-relaxed">
+                            Loading question...
+                        </h2>
+                    </div>
+
+                    <!-- Options Grid (4 options) -->
+                    <div id="options-container" class="grid grid-cols-1 gap-3 mb-6">
+                        <!-- Options generated dynamically -->
+                    </div>
+
+                    <!-- Feedback Alert / Explanation -->
+                    <div id="feedback" class="hidden rounded-xl p-4 mb-5 border transition-all duration-300">
+                        <div class="flex items-start gap-3">
+                            <span id="feedback-icon" class="text-xl flex-shrink-0 mt-0.5"></span>
+                            <div class="flex-grow">
+                                <p id="feedback-text" class="font-bold text-sm sm:text-base mb-1"></p>
+                                <p id="feedback-detail" class="text-xs sm:text-sm text-slate-300"></p>
+                            </div>
                         </div>
-                        <div class="bg-sky-100 rounded-full p-3 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </div>
+
+                    <!-- Next Button -->
+                    <button id="next-btn" class="hidden w-full py-3.5 px-6 bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-400 hover:to-teal-400 text-white font-bold rounded-xl shadow-md hover:shadow-sky-500/20 transition-all duration-200 flex items-center justify-center gap-2 text-base cursor-pointer">
+                        <span id="next-btn-text">Next Question</span>
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </button>
+                    <p id="next-key-hint" class="hidden text-center text-xs text-slate-400 mt-2">
+                        Press <kbd class="px-1.5 py-0.5 bg-slate-800 rounded border border-slate-700 font-mono text-slate-300">Enter ↵</kbd> for next
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ============================================================== -->
+            <!-- 3. RESULTS & SUMMARY SCREEN                                    -->
+            <!-- ============================================================== -->
+            <div id="result-screen" class="hidden glass-card rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl transition-all duration-300">
+                <div class="flag-ribbon"></div>
+
+                <div class="p-6 sm:p-8">
+                    <!-- Title -->
+                    <div class="text-center mb-6">
+                        <span class="inline-block px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-300 text-xs font-semibold mb-2">
+                            Quiz Completed 🇿🇦
+                        </span>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-white">Your Results</h1>
+                        <p id="result-message" class="text-slate-300 text-sm mt-1.5 max-w-sm mx-auto font-medium">
+                            Outstanding knowledge!
+                        </p>
+                    </div>
+
+                    <!-- Circular Progress Gauge -->
+                    <div class="mb-6 flex flex-col items-center">
+                        <div class="relative w-36 h-36 flex items-center justify-center">
+                            <svg viewBox="0 0 120 120" class="w-full h-full -rotate-90">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#1e293b" stroke-width="10" />
+                                <circle id="result-circle" cx="60" cy="60" r="50" fill="none" stroke="url(#circle-grad)" stroke-width="10"
+                                    stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" class="transition-all duration-1000 ease-out" />
+                                <defs>
+                                    <linearGradient id="circle-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#38bdf8" />
+                                        <stop offset="50%" stop-color="#0284c7" />
+                                        <stop offset="100%" stop-color="#10b981" />
+                                    </linearGradient>
+                                </defs>
                             </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="result-percentage" class="text-3xl font-black text-white">0%</span>
+                                <span class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Accuracy</span>
+                            </div>
+                        </div>
+
+                        <!-- Final Score Breakdown -->
+                        <div class="mt-2 text-center">
+                            <div class="text-sm text-slate-400">Total Correct</div>
+                            <div class="text-xl font-bold text-sky-400">
+                                <span id="final-score">0</span> / <span id="total-questions-result">10</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Enhanced Progress bar -->
-                <div class="w-full bg-gray-200 rounded-full h-3 mb-8 shadow-inner">
-                    <div id="progress-bar" class="bg-sky-600 h-3 rounded-full progress-bar" style="width: 0%"></div>
-                </div>
+                    <!-- Achievement Banner -->
+                    <div id="achievement-section" class="mb-6 bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 border border-amber-500/40 rounded-xl p-4 flex items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl flex-shrink-0">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs uppercase tracking-wider font-bold text-amber-400" id="achievement-title">Rank Earned</div>
+                            <div class="text-sm font-semibold text-white" id="achievement-description">Mzansi Explorer</div>
+                        </div>
+                    </div>
 
-                <!-- Enhanced Question display -->
-                <div id="question-container" class="mb-8 bg-sky-50 p-4 rounded-lg border-l-4 border-sky-500">
-                    <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-gray-800 mb-2"></h2>
-                </div>
+                    <!-- Detailed Stats Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 text-center text-xs">
+                        <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400">Correct</div>
+                            <div id="stat-correct" class="text-emerald-400 font-bold text-sm mt-0.5">0</div>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400">Incorrect</div>
+                            <div id="stat-incorrect" class="text-rose-400 font-bold text-sm mt-0.5">0</div>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400">Best Streak</div>
+                            <div id="stat-streak" class="text-orange-400 font-bold text-sm mt-0.5">0 🔥</div>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                            <div class="text-slate-400">Lifeline</div>
+                            <div id="stat-lifeline" class="text-purple-400 font-bold text-sm mt-0.5">Available</div>
+                        </div>
+                    </div>
 
-                <!-- Options with improved styling -->
-                <div id="options-container" class="grid grid-cols-1 gap-3 mb-6">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
+                    <!-- Action Buttons -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                        <button id="restart-btn" class="w-full py-3.5 px-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fas fa-redo-alt text-sm"></i>
+                            <span>Play Again</span>
+                        </button>
 
-                <!-- Enhanced Feedback -->
-                <div id="feedback" class="hidden rounded-lg p-4 mb-6 border">
-                    <p id="feedback-text" class="text-center"></p>
-                </div>
+                        <button id="share-btn" class="w-full py-3.5 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold rounded-xl shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fas fa-share-alt text-sm text-sky-400"></i>
+                            <span>Share Results</span>
+                        </button>
+                    </div>
 
-                <!-- Enhanced Next button -->
-                <button id="next-btn"
-                    class="hidden w-full py-4 px-6 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center btn-primary">
-                    <span>Next Question</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
+                    <!-- Change Category / Review Toggles -->
+                    <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
+                        <button id="change-settings-btn" class="hover:text-white transition-colors underline cursor-pointer flex items-center gap-1">
+                            <i class="fas fa-sliders-h"></i> Change Category & Mode
+                        </button>
+
+                        <button id="toggle-review-btn" class="hover:text-sky-400 transition-colors font-medium cursor-pointer flex items-center gap-1">
+                            <span>Review Answers</span>
+                            <i id="review-chevron" class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Question Review Section (Collapsible) -->
+                    <div id="review-container" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-3 max-h-80 overflow-y-auto pr-1">
+                        <!-- Questions review items inserted dynamically -->
+                    </div>
+                </div>
             </div>
+
         </div>
+    </main>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 border border-sky-500/40 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 backdrop-blur">
+        <i class="fas fa-check-circle text-emerald-400"></i>
+        <span id="toast-message">Copied to clipboard!</span>
     </div>
 
-    <!-- Result Screen with Enhanced UI -->
-<div id="result-screen" class="hidden flex-col items-center justify-center min-h-screen p-4 pt-16">
-    <div class="w-full max-w-md p-6 bg-white rounded-2xl shadow-xl quiz-card">
-        <div class="flag-colors h-4 w-full rounded-t-lg mb-6"></div>
+    <!-- Footer -->
+    <footer class="w-full py-4 text-center text-xs text-slate-400 border-t border-slate-800/80 bg-slate-950/40">
+        <p>© 2026 Avuyile Mthembu · Built with pride in South Africa 🇿🇦</p>
+    </footer>
 
-        <h1 class="text-3xl font-bold text-center mb-2 text-sky-600">Quiz Results</h1>
-        <p class="text-center text-gray-600 mb-6">You completed the South Africa Quiz!</p>
+    <!-- ============================================================== -->
+    <!-- JAVASCRIPT LOGIC & QUESTION DATABASE                           -->
+    <!-- ============================================================== -->
+    <!-- Load question database with safety fallback -->
+    <script src="js/database.js"></script>
+    <script src="js/sa-quiz-database.js"></script>
 
-        <div class="mb-8 flex flex-col items-center">
-            <div class="mb-4 relative">
-                <!-- Enhanced results circle -->
-                <svg viewBox="0 0 120 120" class="w-32 h-32 drop-shadow-md">
-                    <circle cx="60" cy="60" r="54" fill="none" stroke="#E5E7EB" stroke-width="12" />
-                    <circle id="result-circle" cx="60" cy="60" r="54" fill="none" stroke="url(#result-gradient)" stroke-width="12"
-                        stroke-dasharray="339.3" stroke-dashoffset="339.3" transform="rotate(-90 60 60)" />
-                    <defs>
-                        <linearGradient id="result-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#0ea5e9" />
-                            <stop offset="100%" stop-color="#0284c7" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <span id="result-percentage" class="text-3xl font-bold text-sky-600">0%</span>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <div class="text-gray-700 mb-1">Final Score</div>
-                <div class="text-2xl font-bold text-sky-600"><span id="final-score">0</span>/<span
-                        id="total-questions-result">10</span></div>
-            </div>
-        </div>
-
-        <div id="achievement-section" class="mb-8 hidden">
-            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-center">
-                <div class="bg-yellow-100 rounded-full p-2 mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="font-semibold text-yellow-800" id="achievement-title">Achievement Unlocked!</div>
-                    <div class="text-sm text-yellow-700" id="achievement-description"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="result-message" class="text-center mb-8 text-gray-700">
-            <!-- Result message will be set by JavaScript -->
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-3">
-            <button id="restart-btn"
-                class="flex-1 py-3 px-6 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                        clip-rule="evenodd" />
-                </svg>
-                <span>Play Again</span>
-            </button>
-
-            <button id="share-btn"
-                class="flex-1 py-3 px-6 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path
-                        d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                </svg>
-                <span>Share Results</span>
-            </button>
-        </div>
-    </div>
-</div>
-<!-- QUIiz questions database -->
-
-<div id="confetti-container" class="fixed inset-0 pointer-events-none z-50"></div>
-
-<script src="js/sa-quiz-database.js"></script>
     <script>
-        
+        // =====================================================================
+        // BUILT-IN BACKUP QUESTIONS (Guarantees zero-failure resilience)
+        // =====================================================================
+        const fallbackQuestions = [
+            {
+                question: "What big mountain is the focal point of sunny Cape Town?",
+                answer: "Table Mountain",
+                options: ["Table Mountain", "Lion's Head", "Devil's Peak", "Signal Hill"],
+                category: "landmarks"
+            },
+            {
+                question: "Two oceans join at the southern point of South Africa. What are they called?",
+                answer: "Atlantic Ocean and Indian Ocean",
+                options: ["Atlantic Ocean and Indian Ocean", "Pacific Ocean and Indian Ocean", "Atlantic Ocean and Southern Ocean", "Indian Ocean and Arctic Ocean"],
+                category: "geography"
+            },
+            {
+                question: "How many official languages are recognized in South Africa's constitution?",
+                answer: "12",
+                options: ["12", "11", "9", "8"],
+                category: "languages"
+            },
+            {
+                question: "What is South Africa's national animal?",
+                answer: "Springbok",
+                options: ["Springbok", "Lion", "Elephant", "Blue Crane"],
+                category: "animals"
+            },
+            {
+                question: "What is the largest national park in South Africa, famous for the Big Five?",
+                answer: "Kruger National Park",
+                options: ["Kruger National Park", "Addo Elephant Park", "Hluhluwe-iMfolozi", "Kgalagadi Transfrontier Park"],
+                category: "landmarks"
+            },
+            {
+                question: "Which city is known as the 'City of Gold' or 'eGoli'?",
+                answer: "Johannesburg",
+                options: ["Johannesburg", "Durban", "Cape Town", "Pretoria"],
+                category: "geography"
+            },
+            {
+                question: "What is the traditional South African barbecue called?",
+                answer: "Braai",
+                options: ["Braai", "Potjiekos", "Shisanyama", "Bunny Chow"],
+                category: "culture"
+            },
+            {
+                question: "Who was South Africa's first democratically elected president in 1994?",
+                answer: "Nelson Mandela",
+                options: ["Nelson Mandela", "Oliver Tambo", "Desmond Tutu", "Walter Sisulu"],
+                category: "culture"
+            }
+        ];
 
-        // Variables to track quiz state
+        // Safe getter for questions
+        function getLoadedQuestions() {
+            if (typeof quizQuestions !== 'undefined' && Array.isArray(quizQuestions) && quizQuestions.length > 0) {
+                return quizQuestions;
+            }
+            if (typeof window.quizQuestions !== 'undefined' && Array.isArray(window.quizQuestions) && window.quizQuestions.length > 0) {
+                return window.quizQuestions;
+            }
+            return fallbackQuestions;
+        }
+
+        // =====================================================================
+        // AUDIO SYNTHESIS (Zero external dependencies, Web Audio API)
+        // =====================================================================
+        let audioCtx = null;
+        let isMuted = localStorage.getItem('saQuizMuted') === 'true';
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playTone(freq, type, duration, gainValue = 0.15) {
+            if (isMuted) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(gainValue, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Audio not supported or blocked
+            }
+        }
+
+        const Sound = {
+            click: () => playTone(600, 'sine', 0.08, 0.08),
+            correct: () => {
+                if (isMuted) return;
+                playTone(523.25, 'sine', 0.12, 0.15); // C5
+                setTimeout(() => playTone(659.25, 'sine', 0.15, 0.15), 100); // E5
+                setTimeout(() => playTone(783.99, 'triangle', 0.25, 0.2), 200); // G5
+            },
+            wrong: () => {
+                if (isMuted) return;
+                playTone(240, 'sawtooth', 0.2, 0.12);
+                setTimeout(() => playTone(180, 'sawtooth', 0.3, 0.15), 150);
+            },
+            streak: () => {
+                if (isMuted) return;
+                playTone(587.33, 'triangle', 0.1, 0.15);
+                setTimeout(() => playTone(880, 'sine', 0.25, 0.2), 80);
+            },
+            victory: () => {
+                if (isMuted) return;
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((note, idx) => {
+                    setTimeout(() => playTone(note, 'sine', 0.35, 0.2), idx * 140);
+                });
+            }
+        };
+
+        // =====================================================================
+        // GAME STATE
+        // =====================================================================
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
+        let streak = 0;
+        let bestStreak = 0;
         let answered = false;
         let timerInterval = null;
-        let timeLeft = 0;
-        let quizHistory = [];
-
-        // Load saved quiz history from localStorage if available
-        try {
-            const savedHistory = localStorage.getItem('saQuizHistory');
-            if (savedHistory) {
-                quizHistory = JSON.parse(savedHistory);
-            }
-        } catch (error) {
-            console.error('Error loading quiz history:', error);
-            // Continue with empty history if there's an error
-        }
+        let timeLeft = 15;
+        let maxTime = 15;
+        let lifelineUsed = false;
+        let sessionAnswers = []; // Record of question, player choice, correct answer
 
         // DOM Elements
         const startScreen = document.getElementById('start-screen');
         const quizScreen = document.getElementById('quiz-screen');
         const resultScreen = document.getElementById('result-screen');
+
         const categorySelect = document.getElementById('category-select');
         const difficultySelect = document.getElementById('difficulty-select');
         const startBtn = document.getElementById('start-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const nextBtnText = document.getElementById('next-btn-text');
+        const nextKeyHint = document.getElementById('next-key-hint');
+        const restartBtn = document.getElementById('restart-btn');
+        const shareBtn = document.getElementById('share-btn');
+        const changeSettingsBtn = document.getElementById('change-settings-btn');
+        const toggleReviewBtn = document.getElementById('toggle-review-btn');
+        const reviewContainer = document.getElementById('review-container');
+        const reviewChevron = document.getElementById('review-chevron');
+        const lifelineBtn = document.getElementById('lifeline-btn');
+
         const questionText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
         const currentQuestionEl = document.getElementById('current-question');
@@ -544,619 +729,834 @@ body {
         const totalQuestionsResultEl = document.getElementById('total-questions-result');
         const scoreEl = document.getElementById('score');
         const finalScoreEl = document.getElementById('final-score');
-        const resultPercentageEl = document.getElementById('result-percentage');
-        const resultCircleEl = document.getElementById('result-circle');
         const progressBarEl = document.getElementById('progress-bar');
         const feedbackEl = document.getElementById('feedback');
         const feedbackTextEl = document.getElementById('feedback-text');
-        const nextBtn = document.getElementById('next-btn');
-        const restartBtn = document.getElementById('restart-btn');
-        const shareBtn = document.getElementById('share-btn');
+        const feedbackDetailEl = document.getElementById('feedback-detail');
+        const feedbackIconEl = document.getElementById('feedback-icon');
         const categoryDisplayEl = document.getElementById('category-display');
+        const categoryPoolCountEl = document.getElementById('category-pool-count');
+        const resultPercentageEl = document.getElementById('result-percentage');
+        const resultCircleEl = document.getElementById('result-circle');
         const resultMessageEl = document.getElementById('result-message');
         const achievementSectionEl = document.getElementById('achievement-section');
         const achievementTitleEl = document.getElementById('achievement-title');
         const achievementDescriptionEl = document.getElementById('achievement-description');
         const confettiContainer = document.getElementById('confetti-container');
-        const timerEl = document.getElementById('timer') || document.createElement('div'); // Fallback if timer element doesn't exist
-        const highScoreEl = document.getElementById('high-score') || document.createElement('div'); // Fallback for high score
+        const timerBox = document.getElementById('timer-box');
+        const timerEl = document.getElementById('timer');
+        const highScoreEl = document.getElementById('high-score');
+        const highScoreText = document.getElementById('high-score-text');
+        const cardHighScore = document.getElementById('card-high-score');
+        const streakPill = document.getElementById('streak-pill');
+        const streakCount = document.getElementById('streak-count');
 
-        // Ensure all elements exist to prevent null reference errors
-        if (!startScreen || !quizScreen || !resultScreen) {
-            console.error('Critical elements missing from the DOM');
-            alert('Something went wrong loading the quiz. Please refresh the page.');
-        }
+        const statCorrect = document.getElementById('stat-correct');
+        const statIncorrect = document.getElementById('stat-incorrect');
+        const statStreak = document.getElementById('stat-streak');
+        const statLifeline = document.getElementById('stat-lifeline');
 
-        // Initialize the quiz
+        const soundBtn = document.getElementById('sound-btn');
+        const soundIcon = document.getElementById('sound-icon');
+        const toastEl = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // =====================================================================
+        // INITIALIZATION
+        // =====================================================================
         function init() {
-            // Add event listeners only if elements exist
+            updateSoundUI();
+            updateCategoryCounts();
+            updateHighScoreDisplay();
+
+            // Event Listeners
             if (startBtn) startBtn.addEventListener('click', startQuiz);
             if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
-            if (restartBtn) restartBtn.addEventListener('click', resetQuiz);
+            if (restartBtn) restartBtn.addEventListener('click', startQuiz);
             if (shareBtn) shareBtn.addEventListener('click', shareResults);
-            
-            // Check if we have questions
-            if (!quizQuestions || quizQuestions.length === 0) {
-                console.error('No quiz questions available');
-                alert('Error: No quiz questions available. Please check your connection and refresh the page.');
-                return;
-            }
-            
-            // Display high score if available
-            updateHighScoreDisplay();
-            
-            // Add keyboard navigation
+            if (changeSettingsBtn) changeSettingsBtn.addEventListener('click', returnToStartScreen);
+            if (toggleReviewBtn) toggleReviewBtn.addEventListener('click', toggleReviewDrawer);
+            if (lifelineBtn) lifelineBtn.addEventListener('click', useLifeline);
+
+            if (categorySelect) categorySelect.addEventListener('change', () => {
+                updateCategoryCounts();
+                updateHighScoreDisplay();
+            });
+
+            if (difficultySelect) difficultySelect.addEventListener('change', updateHighScoreDisplay);
+
+            if (soundBtn) soundBtn.addEventListener('click', toggleSound);
+
+            // Global Keyboard handler
             document.addEventListener('keydown', handleKeyPress);
         }
 
-        // Handle keyboard navigation
+        // =====================================================================
+        // KEYBOARD NAVIGATION
+        // =====================================================================
         function handleKeyPress(e) {
-            // Only handle keys when appropriate screens are visible
-            if (!startScreen.classList.contains('hidden') && e.key === 'Enter') {
-                startQuiz();
-            } else if (!quizScreen.classList.contains('hidden')) {
-                // Number keys 1-4 for selecting options
-                if (e.key >= '1' && e.key <= '4' && !answered) {
-                    const optionIndex = parseInt(e.key) - 1;
-                    const options = optionsContainer.querySelectorAll('.option-btn');
-                    if (options[optionIndex]) {
-                        options[optionIndex].click();
+            // Start screen: Enter starts quiz
+            if (!startScreen.classList.contains('hidden')) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    startQuiz();
+                }
+                return;
+            }
+
+            // Quiz screen
+            if (!quizScreen.classList.contains('hidden')) {
+                // Keys 1, 2, 3, 4 for options
+                if (!answered && e.key >= '1' && e.key <= '4') {
+                    const idx = parseInt(e.key, 10) - 1;
+                    const buttons = optionsContainer.querySelectorAll('.option-btn');
+                    if (buttons[idx] && !buttons[idx].disabled) {
+                        e.preventDefault();
+                        buttons[idx].click();
                     }
-                } else if (e.key === 'Enter' && answered) {
+                } else if (answered && e.key === 'Enter') {
+                    e.preventDefault();
                     nextQuestion();
                 }
-            } else if (!resultScreen.classList.contains('hidden') && e.key === 'Enter') {
-                resetQuiz();
+                return;
+            }
+
+            // Result screen
+            if (!resultScreen.classList.contains('hidden')) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    startQuiz();
+                }
             }
         }
 
-        // Display high score
+        // =====================================================================
+        // TOAST NOTIFICATIONS
+        // =====================================================================
+        let toastTimeout = null;
+        function showToast(message, iconClass = 'fa-check-circle') {
+            if (!toastEl || !toastMessage) return;
+            toastMessage.textContent = message;
+            const icon = toastEl.querySelector('i');
+            if (icon) {
+                icon.className = `fas ${iconClass} text-emerald-400`;
+            }
+            toastEl.classList.add('show');
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastEl.classList.remove('show');
+            }, 3000);
+        }
+
+        // =====================================================================
+        // SOUND SYSTEM CONTROLS
+        // =====================================================================
+        function toggleSound() {
+            isMuted = !isMuted;
+            localStorage.setItem('saQuizMuted', isMuted);
+            updateSoundUI();
+            if (!isMuted) {
+                initAudio();
+                Sound.click();
+            }
+        }
+
+        function updateSoundUI() {
+            if (!soundIcon) return;
+            if (isMuted) {
+                soundIcon.className = 'fas fa-volume-mute text-rose-400';
+            } else {
+                soundIcon.className = 'fas fa-volume-up text-sky-400';
+            }
+        }
+
+        // =====================================================================
+        // CATEGORY & HIGH SCORE LOGIC
+        // =====================================================================
+        function updateCategoryCounts() {
+            const allQuestions = getLoadedQuestions();
+            const selectedCat = categorySelect ? categorySelect.value : 'all';
+            let count = allQuestions.length;
+
+            if (selectedCat !== 'all') {
+                count = allQuestions.filter(q => q.category === selectedCat).length;
+            }
+
+            if (categoryPoolCountEl) {
+                categoryPoolCountEl.textContent = `${count} question${count === 1 ? '' : 's'} available`;
+            }
+        }
+
+        function getHighScoreKey() {
+            const cat = categorySelect ? categorySelect.value : 'all';
+            const diff = difficultySelect ? difficultySelect.value : 'medium';
+            return `saQuiz_${cat}_${diff}`;
+        }
+
         function updateHighScoreDisplay() {
-            if (!highScoreEl) return;
-            
-            try {
-                const highScores = {};
-                quizHistory.forEach(record => {
-                    const key = `${record.category}-${record.difficulty}`;
-                    if (!highScores[key] || record.percentage > highScores[key].percentage) {
-                        highScores[key] = record;
-                    }
-                });
-                
-                // Get current selection for display
-                const category = categorySelect ? categorySelect.value : 'all';
-                const difficulty = difficultySelect ? difficultySelect.value : 'easy';
-                const key = `${category}-${difficulty}`;
-                
-                if (highScores[key]) {
-                    highScoreEl.textContent = `High Score: ${highScores[key].percentage}%`;
-                    highScoreEl.classList.remove('hidden');
-                } else {
-                    highScoreEl.classList.add('hidden');
-                }
-            } catch (error) {
-                console.error('Error updating high score display:', error);
+            const key = getHighScoreKey();
+            const saved = localStorage.getItem(key);
+            const scoreText = saved ? `${saved}%` : '0%';
+
+            if (highScoreText) highScoreText.textContent = `Best: ${scoreText}`;
+            if (cardHighScore) cardHighScore.textContent = scoreText;
+
+            if (saved && highScoreEl) {
+                highScoreEl.classList.remove('hidden');
+                highScoreEl.classList.add('flex');
             }
         }
 
-        // Add event listeners to category and difficulty dropdowns
-        if (categorySelect) {
-            categorySelect.addEventListener('change', updateHighScoreDisplay);
-        }
-        if (difficultySelect) {
-            difficultySelect.addEventListener('change', updateHighScoreDisplay);
+        function saveHighScore(percentage) {
+            const key = getHighScoreKey();
+            const prev = parseInt(localStorage.getItem(key) || '0', 10);
+            if (percentage > prev) {
+                localStorage.setItem(key, percentage.toString());
+                updateHighScoreDisplay();
+                return true;
+            }
+            return false;
         }
 
-        // Start the quiz
+        // =====================================================================
+        // START QUIZ
+        // =====================================================================
         function startQuiz() {
-            try {
-                // Filter questions by category if needed
-                let filteredQuestions = quizQuestions;
-                const selectedCategory = categorySelect ? categorySelect.value : 'all';
-                if (selectedCategory !== 'all') {
-                    filteredQuestions = quizQuestions.filter(q => q.category === selectedCategory);
+            Sound.click();
+            const allQuestions = getLoadedQuestions();
+
+            if (!allQuestions || allQuestions.length === 0) {
+                alert('No quiz questions loaded. Please check your connection and refresh.');
+                return;
+            }
+
+            const selectedCat = categorySelect ? categorySelect.value : 'all';
+            let pool = allQuestions;
+            if (selectedCat !== 'all') {
+                pool = allQuestions.filter(q => q.category === selectedCat);
+                if (pool.length === 0) {
+                    pool = allQuestions; // fallback to all
                 }
+            }
 
-                // Check if we have enough questions
-                if (filteredQuestions.length === 0) {
-                    alert(`No questions available for the ${selectedCategory} category. Please select another category.`);
-                    return;
+            const diff = difficultySelect ? difficultySelect.value : 'easy';
+            let count = 10;
+            maxTime = 15;
+
+            switch (diff) {
+                case 'easy':
+                    count = 5;
+                    maxTime = 15;
+                    break;
+                case 'medium':
+                    count = 10;
+                    maxTime = 15;
+                    break;
+                case 'hard':
+                    count = 20;
+                    maxTime = 12;
+                    break;
+                case 'expert':
+                    count = pool.length; // Marathon
+                    maxTime = 10;
+                    break;
+                case 'zen':
+                    count = 10;
+                    maxTime = 0; // Untimed
+                    break;
+                default:
+                    count = 10;
+                    maxTime = 15;
+            }
+
+            count = Math.min(count, pool.length);
+
+            // Shuffle and slice questions
+            currentQuestions = shuffleArray(pool).slice(0, count);
+            currentQuestionIndex = 0;
+            score = 0;
+            streak = 0;
+            bestStreak = 0;
+            lifelineUsed = false;
+            sessionAnswers = [];
+
+            // Reset Lifeline UI
+            if (lifelineBtn) {
+                lifelineBtn.disabled = false;
+                lifelineBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                lifelineBtn.innerHTML = '<i class="fas fa-magic text-xs"></i> <span>50:50</span>';
+            }
+
+            // Update UI elements
+            if (totalQuestionsEl) totalQuestionsEl.textContent = currentQuestions.length;
+            if (totalQuestionsResultEl) totalQuestionsResultEl.textContent = currentQuestions.length;
+            if (scoreEl) scoreEl.textContent = '0';
+            updateStreakUI();
+
+            // Toggle Timer visibility for Zen mode
+            if (timerBox) {
+                if (maxTime === 0) {
+                    timerBox.classList.add('hidden');
+                } else {
+                    timerBox.classList.remove('hidden');
                 }
+            }
 
-                // Determine number of questions based on difficulty
-                const difficulty = difficultySelect ? difficultySelect.value : 'easy';
-                let numQuestions;
+            // Switch screens
+            startScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
 
-                switch (difficulty) {
-                    case 'easy':
-                        numQuestions = 10;
-                        timeLeft = 15; // 15 seconds per question
-                        break;
-                    case 'medium':
-                        numQuestions = 20;
-                        timeLeft = 12; // 12 seconds per question
-                        break;
-                    case 'hard':
-                        numQuestions = 30;
-                        timeLeft = 10; // 10 seconds per question
-                        break;
-                    case 'expert':
-                        numQuestions = 50;
-                        timeLeft = 8; // 8 seconds per question
-                        break;
-                    case 'master':
-                        numQuestions = filteredQuestions.length;
-                        timeLeft = 6; // 6 seconds per question
-                        break;
-                    default:
-                        numQuestions = 10;
-                        timeLeft = 15;
-                }
+            loadQuestion();
+        }
 
-                // Make sure we don't try to get more questions than available
-                numQuestions = Math.min(numQuestions, filteredQuestions.length);
+        // =====================================================================
+        // LOAD QUESTION
+        // =====================================================================
+        function loadQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                finishQuiz();
+                return;
+            }
 
-                // Shuffle and select questions
-                currentQuestions = shuffleArray(filteredQuestions).slice(0, numQuestions);
-                currentQuestionIndex = 0;
-                score = 0;
+            const q = currentQuestions[currentQuestionIndex];
+            answered = false;
 
-                // Update UI
-                if (totalQuestionsEl) totalQuestionsEl.textContent = currentQuestions.length;
-                if (totalQuestionsResultEl) totalQuestionsResultEl.textContent = currentQuestions.length;
-                if (scoreEl) scoreEl.textContent = score;
+            // Reset timer
+            clearInterval(timerInterval);
+            timeLeft = maxTime;
+            updateTimerDisplay();
 
-                // Show quiz screen, hide start screen
-                startScreen.classList.add('hidden');
-                startScreen.classList.remove('flex');
-                quizScreen.classList.remove('hidden');
-                quizScreen.classList.add('flex');
+            // Update Header HUD
+            if (currentQuestionEl) currentQuestionEl.textContent = (currentQuestionIndex + 1);
+            if (categoryDisplayEl) {
+                categoryDisplayEl.textContent = formatCategoryName(q.category);
+            }
 
-                // Load first question
-                loadQuestion();
-            } catch (error) {
-                console.error('Error starting quiz:', error);
-                alert('An error occurred while starting the quiz. Please try again.');
+            // Progress Bar
+            if (progressBarEl) {
+                const pct = (currentQuestionIndex / currentQuestions.length) * 100;
+                progressBarEl.style.width = `${pct}%`;
+            }
+
+            // Question Text
+            if (questionText) questionText.textContent = q.question;
+
+            // Options List
+            if (optionsContainer) {
+                optionsContainer.innerHTML = '';
+                const shuffledOpts = shuffleArray(q.options || [q.answer]);
+
+                shuffledOpts.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn w-full p-4 rounded-xl text-left font-medium text-slate-100 flex items-center justify-between group cursor-pointer';
+                    btn.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-400 group-hover:text-sky-300 group-hover:bg-slate-700 flex items-center justify-center font-bold text-xs border border-slate-700 transition-colors">
+                                ${idx + 1}
+                            </span>
+                            <span class="option-label text-sm sm:text-base">${escapeHtml(opt)}</span>
+                        </div>
+                        <i class="option-icon fas fa-circle text-xs text-slate-600 group-hover:text-sky-400 transition-colors"></i>
+                    `;
+
+                    btn.addEventListener('click', () => handleAnswer(opt, btn));
+                    optionsContainer.appendChild(btn);
+                });
+            }
+
+            // Hide feedback and next button
+            if (feedbackEl) feedbackEl.classList.add('hidden');
+            if (nextBtn) nextBtn.classList.add('hidden');
+            if (nextKeyHint) nextKeyHint.classList.add('hidden');
+
+            // Start countdown timer if not in Zen mode
+            if (maxTime > 0) {
+                startTimer();
             }
         }
 
-        // Start timer for current question
+        // =====================================================================
+        // TIMER LOGIC
+        // =====================================================================
         function startTimer() {
-            if (!timerEl) return;
-            
-            // Clear any existing timer
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            
-            // Set initial time based on difficulty
-            const difficulty = difficultySelect ? difficultySelect.value : 'easy';
-            let seconds = timeLeft;
-            
-            timerEl.textContent = `Time: ${seconds}s`;
-            timerEl.classList.remove('text-red-500');
-            
+            clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                seconds--;
-                timerEl.textContent = `Time: ${seconds}s`;
-                
-                // Warning when time is running low
-                if (seconds <= 5) {
-                    timerEl.classList.add('text-red-500');
-                }
-                
-                // Time's up
-                if (seconds <= 0) {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    if (!answered) {
-                        // Auto-select incorrect answer if time runs out
-                        const currentQuestion = currentQuestions[currentQuestionIndex];
-                        handleTimeUp(currentQuestion);
-                    }
+                    handleTimeOut();
                 }
             }, 1000);
         }
 
-        // Handle time running out
-        function handleTimeUp(question) {
-            answered = true;
-            
-            // Update UI for all option buttons
-            const optionButtons = optionsContainer.querySelectorAll('.option-btn');
-            optionButtons.forEach(button => {
-                if (button.textContent === question.answer) {
-                    // Highlight correct answer
-                    button.classList.add('correct-answer');
-                }
-                
-                // Disable all buttons
-                button.disabled = true;
-            });
-            
-            // Show feedback
-            feedbackEl.classList.remove('hidden');
-            feedbackEl.classList.add('bg-yellow-100');
-            feedbackTextEl.classList.add('text-yellow-800');
-            feedbackTextEl.textContent = `Time's up! The correct answer is: ${question.answer}`;
-            
-            // Show next button
-            nextBtn.classList.remove('hidden');
-        }
+        function updateTimerDisplay() {
+            if (!timerEl) return;
+            timerEl.textContent = `${timeLeft}s`;
 
-        // Load current question
-        function loadQuestion() {
-            try {
-                const question = currentQuestions[currentQuestionIndex];
-                if (!question) {
-                    console.error('Question not found at index', currentQuestionIndex);
-                    nextQuestion(); // Skip this question if it doesn't exist
-                    return;
-                }
-
-                // Update progress
-                if (currentQuestionEl) currentQuestionEl.textContent = currentQuestionIndex + 1;
-                const progressPercentage = ((currentQuestionIndex) / currentQuestions.length) * 100;
-                if (progressBarEl) progressBarEl.style.width = `${progressPercentage}%`;
-
-                // Update category display
-                if (categoryDisplayEl) categoryDisplayEl.textContent = capitalizeFirstLetter(question.category);
-
-                // Set question text
-                if (questionText) questionText.textContent = question.question;
-
-                // Clear previous options
-                if (optionsContainer) optionsContainer.innerHTML = '';
-
-                // Create option buttons
-                if (optionsContainer && question.options) {
-                    const shuffledOptions = shuffleArray([...question.options]);
-                    shuffledOptions.forEach((option, index) => {
-                        const button = document.createElement('button');
-                        button.className = 'option-btn w-full py-3 px-4 bg-white border border-gray-300 rounded-lg text-left font-medium hover:bg-sky-50 hover:border-sky-300 transition-all duration-300';
-                        button.textContent = option;
-                        button.setAttribute('data-index', index + 1);
-                        button.addEventListener('click', () => selectOption(option));
-                        optionsContainer.appendChild(button);
-                    });
-                }
-
-                // Reset state
-                answered = false;
-                if (nextBtn) nextBtn.classList.add('hidden');
-                if (feedbackEl) feedbackEl.classList.add('hidden');
-                
-                // Start timer for this question
-                startTimer();
-            } catch (error) {
-                console.error('Error loading question:', error);
-                nextQuestion(); // Skip problematic question
+            if (timeLeft <= 3) {
+                timerEl.classList.add('timer-warning');
+                timerEl.classList.remove('text-amber-400');
+            } else if (timeLeft <= 6) {
+                timerEl.classList.remove('timer-warning');
+                timerEl.classList.add('text-amber-400');
+            } else {
+                timerEl.classList.remove('timer-warning', 'text-amber-400');
             }
         }
 
-        // Handle option selection
-        function selectOption(selectedOption) {
+        function handleTimeOut() {
             if (answered) return;
-
             answered = true;
-            // Stop the timer
-            if (timerInterval) {
-                clearInterval(timerInterval);
+            Sound.wrong();
+            streak = 0;
+            updateStreakUI();
+
+            const currentQ = currentQuestions[currentQuestionIndex];
+            sessionAnswers.push({
+                question: currentQ.question,
+                chosen: 'Time Out ⏱️',
+                answer: currentQ.answer,
+                isCorrect: false
+            });
+
+            highlightAnswers(null, currentQ.answer);
+
+            // Feedback
+            showFeedback(
+                false,
+                "Time's Up! ⏱️",
+                `The correct answer is: <strong class="text-emerald-400">${escapeHtml(currentQ.answer)}</strong>`
+            );
+
+            showNextControls();
+        }
+
+        // =====================================================================
+        // 50:50 LIFELINE
+        // =====================================================================
+        function useLifeline() {
+            if (answered || lifelineUsed) return;
+            lifelineUsed = true;
+            Sound.streak();
+
+            const currentQ = currentQuestions[currentQuestionIndex];
+            const buttons = Array.from(optionsContainer.querySelectorAll('.option-btn'));
+            const wrongButtons = buttons.filter(btn => {
+                const label = btn.querySelector('.option-label')?.textContent.trim();
+                return label !== currentQ.answer;
+            });
+
+            // Randomly select 2 wrong options to disable
+            const toDisable = shuffleArray(wrongButtons).slice(0, 2);
+            toDisable.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-30', 'pointer-events-none', 'line-through');
+            });
+
+            if (lifelineBtn) {
+                lifelineBtn.disabled = true;
+                lifelineBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                lifelineBtn.innerHTML = '<i class="fas fa-check text-xs"></i> <span>Used</span>';
             }
 
-            const currentQuestion = currentQuestions[currentQuestionIndex];
-            const isCorrect = selectedOption === currentQuestion.answer;
+            showToast("50:50 Lifeline applied! Two wrong options removed.", "fa-magic");
+        }
 
-            // Update score if correct
+        // =====================================================================
+        // ANSWER SELECTION
+        // =====================================================================
+        function handleAnswer(selectedChoice, clickedButton) {
+            if (answered) return;
+            answered = true;
+            clearInterval(timerInterval);
+
+            const currentQ = currentQuestions[currentQuestionIndex];
+            const isCorrect = selectedChoice === currentQ.answer;
+
             if (isCorrect) {
                 score++;
+                streak++;
+                if (streak > bestStreak) bestStreak = streak;
                 if (scoreEl) scoreEl.textContent = score;
-                createConfetti();
+
+                if (streak >= 3) {
+                    Sound.streak();
+                } else {
+                    Sound.correct();
+                }
+                triggerConfetti(window.innerWidth < 640 ? 12 : 24);
+            } else {
+                streak = 0;
+                Sound.wrong();
             }
 
-            // Update UI for all option buttons
-            const optionButtons = optionsContainer ? optionsContainer.querySelectorAll('.option-btn') : [];
-            optionButtons.forEach(button => {
-                if (button.textContent === currentQuestion.answer) {
-                    // Correct answer
-                    button.classList.add('correct-answer');
-                } else if (button.textContent === selectedOption && !isCorrect) {
-                    // User's wrong answer
-                    button.classList.add('wrong-answer');
-                }
+            updateStreakUI();
 
-                // Disable all buttons
-                button.disabled = true;
+            // Record in session
+            sessionAnswers.push({
+                question: currentQ.question,
+                chosen: selectedChoice,
+                answer: currentQ.answer,
+                isCorrect
             });
 
-            // Show feedback
-            if (feedbackEl && feedbackTextEl) {
-                feedbackEl.classList.remove('hidden', 'bg-green-100', 'bg-red-100', 'bg-yellow-100');
-                feedbackTextEl.classList.remove('text-green-800', 'text-red-800', 'text-yellow-800');
-                
-                feedbackEl.classList.add(isCorrect ? 'bg-green-100' : 'bg-red-100');
-                feedbackTextEl.classList.add(isCorrect ? 'text-green-800' : 'text-red-800');
-                feedbackTextEl.textContent = isCorrect ? 'Correct! 🎉' : `Incorrect. The correct answer is: ${currentQuestion.answer}`;
+            // Highlight buttons
+            highlightAnswers(selectedChoice, currentQ.answer);
+
+            // Feedback Banner
+            if (isCorrect) {
+                const streakPraise = streak >= 3 ? ` 🔥 ${streak} in a row!` : '';
+                showFeedback(
+                    true,
+                    `Correct! 🎉${streakPraise}`,
+                    `Spot on! You chose <span class="text-emerald-300 font-semibold">${escapeHtml(currentQ.answer)}</span>.`
+                );
+            } else {
+                showFeedback(
+                    false,
+                    "Not quite right! 🇿🇦",
+                    `The correct answer is <strong class="text-emerald-400 font-semibold">${escapeHtml(currentQ.answer)}</strong>.`
+                );
             }
 
-            // Show next button
-            if (nextBtn) nextBtn.classList.remove('hidden');
+            showNextControls();
         }
 
-        // Move to next question
-        function nextQuestion() {
-            currentQuestionIndex++;
+        function highlightAnswers(userChoice, correctAnswer) {
+            const buttons = optionsContainer.querySelectorAll('.option-btn');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                const label = btn.querySelector('.option-label')?.textContent.trim();
+                const icon = btn.querySelector('.option-icon');
 
+                if (label === correctAnswer) {
+                    btn.classList.add('correct-answer');
+                    if (icon) icon.className = 'option-icon fas fa-check-circle text-white text-sm';
+                } else if (label === userChoice && userChoice !== correctAnswer) {
+                    btn.classList.add('wrong-answer');
+                    if (icon) icon.className = 'option-icon fas fa-times-circle text-white text-sm';
+                } else {
+                    btn.classList.add('opacity-40');
+                }
+            });
+        }
+
+        function showFeedback(isCorrect, heading, detail) {
+            if (!feedbackEl || !feedbackTextEl || !feedbackDetailEl || !feedbackIconEl) return;
+
+            feedbackEl.classList.remove('hidden', 'bg-emerald-500/15', 'border-emerald-500/40', 'bg-rose-500/15', 'border-rose-500/40');
+            if (isCorrect) {
+                feedbackEl.classList.add('bg-emerald-500/15', 'border-emerald-500/40');
+                feedbackIconEl.className = 'fas fa-check-circle text-emerald-400 text-xl flex-shrink-0 mt-0.5';
+                feedbackTextEl.className = 'font-bold text-sm sm:text-base text-emerald-300 mb-1';
+            } else {
+                feedbackEl.classList.add('bg-rose-500/15', 'border-rose-500/40');
+                feedbackIconEl.className = 'fas fa-times-circle text-rose-400 text-xl flex-shrink-0 mt-0.5';
+                feedbackTextEl.className = 'font-bold text-sm sm:text-base text-rose-300 mb-1';
+            }
+
+            feedbackTextEl.innerHTML = heading;
+            feedbackDetailEl.innerHTML = detail;
+        }
+
+        function showNextControls() {
+            if (!nextBtn) return;
+            const isLast = (currentQuestionIndex + 1) >= currentQuestions.length;
+            if (nextBtnText) {
+                nextBtnText.textContent = isLast ? 'View Quiz Results' : 'Next Question';
+            }
+            nextBtn.classList.remove('hidden');
+            if (nextKeyHint) nextKeyHint.classList.remove('hidden');
+        }
+
+        function updateStreakUI() {
+            if (!streakPill || !streakCount) return;
+            streakCount.textContent = `${streak}`;
+            if (streak >= 2) {
+                streakPill.classList.remove('hidden');
+                streakPill.classList.add('flex');
+            } else {
+                streakPill.classList.add('hidden');
+                streakPill.classList.remove('flex');
+            }
+        }
+
+        // =====================================================================
+        // NEXT QUESTION / FINISH
+        // =====================================================================
+        function nextQuestion() {
+            Sound.click();
+            currentQuestionIndex++;
             if (currentQuestionIndex < currentQuestions.length) {
                 loadQuestion();
             } else {
-                showResults();
+                finishQuiz();
             }
         }
 
-        // Show results screen
-        function showResults() {
-            try {
-                // Stop any running timer
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                }
-                
-                quizScreen.classList.add('hidden');
-                quizScreen.classList.remove('flex');
-                resultScreen.classList.remove('hidden');
-                resultScreen.classList.add('flex');
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            Sound.victory();
 
-                // Update final score
-                if (finalScoreEl) finalScoreEl.textContent = score;
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
 
-                // Calculate and display percentage
-                const percentage = Math.round((score / currentQuestions.length) * 100);
-                if (resultPercentageEl) resultPercentageEl.textContent = `${percentage}%`;
+            const total = currentQuestions.length;
+            const percentage = Math.round((score / total) * 100);
 
-                // Save quiz result to history
-                saveQuizResult(percentage);
+            // Final score numbers
+            if (finalScoreEl) finalScoreEl.textContent = score;
+            if (totalQuestionsResultEl) totalQuestionsResultEl.textContent = total;
+            if (resultPercentageEl) resultPercentageEl.textContent = `${percentage}%`;
 
-                // Animate circle
-                if (resultCircleEl) {
-                    const circumference = 2 * Math.PI * 54; // 2πr where r=54
-                    const offset = circumference - (percentage / 100) * circumference;
-                    resultCircleEl.style.strokeDasharray = circumference;
-                    resultCircleEl.style.strokeDashoffset = circumference;
+            // Stats breakdown
+            if (statCorrect) statCorrect.textContent = `${score}`;
+            if (statIncorrect) statIncorrect.textContent = `${total - score}`;
+            if (statStreak) statStreak.textContent = `${bestStreak} 🔥`;
+            if (statLifeline) statLifeline.textContent = lifelineUsed ? 'Used' : 'Saved ⭐';
 
-                    // Animate with setTimeout for a delay
-                    setTimeout(() => {
-                        resultCircleEl.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
-                        resultCircleEl.style.strokeDashoffset = offset;
-                    }, 200);
-                }
+            // High score update
+            const isNewHigh = saveHighScore(percentage);
+            if (isNewHigh) {
+                showToast("🏆 New Personal High Score achieved!", "fa-trophy");
+            }
 
-                // Set result message
-                let message = '';
-                if (percentage >= 90) {
-                    message = "Outstanding! You're a South Africa expert! 🏆";
-                    showAchievement("South Africa Expert", "You scored over 90%! Your knowledge of South Africa is impressive!");
-                    createResultConfetti();
-                } else if (percentage >= 70) {
-                    message = "Great job! You know South Africa well! 🌍";
-                    showAchievement("South Africa Enthusiast", "You scored over 70%! You have solid knowledge about South Africa.");
-                } else if (percentage >= 50) {
-                    message = "Good effort! You're learning about South Africa. 🌱";
-                } else {
-                    message = "Keep learning! South Africa has much to discover. 📚";
-                }
+            // Animate Circle
+            animateResultCircle(percentage);
 
-                if (resultMessageEl) resultMessageEl.textContent = message;
-            } catch (error) {
-                console.error('Error showing results:', error);
-                alert('An error occurred while displaying results. Your score was: ' + score);
+            // Rank & Feedback message
+            setRankAndMessage(percentage);
+
+            // Build Review list
+            renderReviewList();
+
+            // Grand Confetti burst for high scores
+            if (percentage >= 70) {
+                triggerConfetti(40);
+                setTimeout(() => triggerConfetti(30), 500);
             }
         }
 
-        // Save quiz result to history
-        function saveQuizResult(percentage) {
-            try {
-                const selectedCategory = categorySelect ? categorySelect.value : 'all';
-                const difficulty = difficultySelect ? difficultySelect.value : 'easy';
-                
-                const result = {
-                    date: new Date().toISOString(),
-                    score,
-                    total: currentQuestions.length,
-                    percentage,
-                    category: selectedCategory,
-                    difficulty
-                };
-                
-                quizHistory.push(result);
-                
-                // Keep only the last 50 results to avoid storage issues
-                if (quizHistory.length > 50) {
-                    quizHistory = quizHistory.slice(-50);
-                }
-                
-                localStorage.setItem('saQuizHistory', JSON.stringify(quizHistory));
-            } catch (error) {
-                console.error('Error saving quiz result:', error);
-                // Non-critical error, continue without saving
+        function animateResultCircle(percentage) {
+            if (!resultCircleEl) return;
+            const radius = 50;
+            const circumference = 2 * Math.PI * radius; // ~314.16
+            const offset = circumference - (percentage / 100) * circumference;
+
+            resultCircleEl.style.strokeDasharray = `${circumference}`;
+            resultCircleEl.style.strokeDashoffset = `${circumference}`;
+
+            setTimeout(() => {
+                resultCircleEl.style.strokeDashoffset = `${offset}`;
+            }, 100);
+        }
+
+        function setRankAndMessage(percentage) {
+            let rank = "Rainbow Nation Learner";
+            let desc = "Keep exploring, there is so much rich South African culture and history to discover!";
+            let message = "Good effort! Every attempt brings you closer to mastering South Africa trivia.";
+
+            if (percentage >= 90) {
+                rank = "🏆 Springbok Legend";
+                desc = "Extraordinary mastery of South African heritage, geography, and culture!";
+                message = "Hats off to you! You know Mzansi better than a Kruger National Park guide!";
+            } else if (percentage >= 75) {
+                rank = "🌟 Proudly South African Pro";
+                desc = "Solid grasp of South African facts, landmarks, and wildlife!";
+                message = "Excellent job! You are well-versed in the beauty of the Rainbow Nation.";
+            } else if (percentage >= 50) {
+                rank = "🌿 Ubuntu Explorer";
+                desc = "Good general knowledge of South African icons and geography.";
+                message = "Well played! With a bit more practice you'll be a true South Africa expert.";
             }
+
+            if (achievementTitleEl) achievementTitleEl.textContent = rank;
+            if (achievementDescriptionEl) achievementDescriptionEl.textContent = desc;
+            if (resultMessageEl) resultMessageEl.textContent = message;
         }
 
-        // Show achievement
-        function showAchievement(title, description) {
-            if (!achievementSectionEl || !achievementTitleEl || !achievementDescriptionEl) return;
-            
-            achievementSectionEl.classList.remove('hidden');
-            achievementTitleEl.textContent = title;
-            achievementDescriptionEl.textContent = description;
-        }
+        // =====================================================================
+        // QUESTION REVIEW ACCORDION
+        // =====================================================================
+        function renderReviewList() {
+            if (!reviewContainer) return;
+            reviewContainer.innerHTML = '';
 
-        // Create confetti effect for correct answers
-        function createConfetti() {
-            if (!confettiContainer) return;
-            
-            const colors = ['#FFB612', '#007A4D', '#DE3831', '#002395'];
-            const shapes = ['circle', 'square'];
+            sessionAnswers.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = `p-3.5 rounded-xl border text-xs sm:text-sm ${
+                    item.isCorrect 
+                        ? 'bg-emerald-500/10 border-emerald-500/30' 
+                        : 'bg-rose-500/10 border-rose-500/30'
+                }`;
 
-            // Limit total confetti for performance
-            const confettiCount = window.innerWidth < 768 ? 10 : 20;
-
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                const size = Math.random() * (8 - 5) + 5;
-
-                confetti.className = 'confetti';
-                confetti.style.left = `${Math.random() * 100}%`;
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-                if (shapes[Math.floor(Math.random() * shapes.length)] === 'circle') {
-                    confetti.style.borderRadius = '50%';
-                }
-
-                const animation = ['slow', 'medium', 'fast'][Math.floor(Math.random() * 3)];
-                confetti.classList.add(`confetti--animation-${animation}`);
-
-                confettiContainer.appendChild(confetti);
-
-                // Remove confetti after animation completes to prevent memory leaks
-                setTimeout(() => {
-                    if (confetti.parentNode) {
-                        confetti.parentNode.removeChild(confetti);
-                    }
-                }, 3500);
-            }
-        }
-
-        // Create more confetti for results
-        function createResultConfetti() {
-            if (!confettiContainer) return;
-            
-            // Only create a reasonable amount of confetti based on device performance
-            const rounds = window.innerWidth < 768 ? 2 : 3;
-            
-            for (let i = 0; i < rounds; i++) {
-                setTimeout(() => {
-                    createConfetti();
-                }, i * 600);
-            }
-        }
-
-        // Share results
-function shareResults() {
-    try {
-        const totalQuestions = currentQuestions.length;
-        if (totalQuestions === 0) throw new Error('No questions available to calculate score.');
-
-        const percentage = Math.round((score / totalQuestions) * 100);
-        const selectedCategory = categorySelect?.value || 'all';
-        const categoryText = selectedCategory === 'all' ? 'South Africa' : capitalizeFirstLetter(selectedCategory);
-        const shareText = `I scored ${score}/${totalQuestions} (${percentage}%) on the ${categoryText} Quiz Challenge! Can you beat my score? Try it at https://avuyilemthembu.co.za/games/sa-quiz-challenge`;
-
-        if (navigator.share) {
-            navigator.share({
-                title: 'South Africa Quiz Results',
-                text: shareText,
-            }).catch(error => {
-                console.warn('Native sharing failed:', error);
-                fallbackShare(shareText);
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-2 mb-1.5">
+                        <span class="font-bold text-slate-200">
+                            Q${idx + 1}: ${escapeHtml(item.question)}
+                        </span>
+                        <span class="font-bold ${item.isCorrect ? 'text-emerald-400' : 'text-rose-400'} flex items-center gap-1 flex-shrink-0">
+                            <i class="fas ${item.isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                            ${item.isCorrect ? 'Correct' : 'Wrong'}
+                        </span>
+                    </div>
+                    <div class="text-slate-400 space-y-0.5">
+                        <div>Your choice: <span class="${item.isCorrect ? 'text-emerald-300 font-semibold' : 'text-rose-300'}">${escapeHtml(item.chosen)}</span></div>
+                        ${!item.isCorrect ? `<div>Correct answer: <span class="text-emerald-300 font-semibold">${escapeHtml(item.answer)}</span></div>` : ''}
+                    </div>
+                `;
+                reviewContainer.appendChild(card);
             });
-        } else {
-            fallbackShare(shareText);
         }
-    } catch (error) {
-        console.error('Error sharing results:', error);
-        alert(`Unable to share results. Try copying your score manually: ${score}/${currentQuestions.length} (${percentage}%)`);
-    }
-}
 
-// Capitalize first letter of a string
-function capitalizeFirstLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-
-        // Fallback sharing method
-        function fallbackShare(text) {
-            // Create temporary textarea
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-
-            try {
-                // Copy text
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    alert('Results copied to clipboard! Share it with your friends.');
-                } else {
-                    throw new Error('Copy command was unsuccessful');
-                }
-            } catch (err) {
-                console.error('Unable to copy to clipboard:', err);
-                alert('Could not copy results. Please select and copy this text manually:\n\n' + text);
-            } finally {
-                document.body.removeChild(textArea);
+        function toggleReviewDrawer() {
+            if (!reviewContainer || !reviewChevron) return;
+            const isHidden = reviewContainer.classList.contains('hidden');
+            if (isHidden) {
+                reviewContainer.classList.remove('hidden');
+                reviewChevron.className = 'fas fa-chevron-up text-[10px]';
+            } else {
+                reviewContainer.classList.add('hidden');
+                reviewChevron.className = 'fas fa-chevron-down text-[10px]';
             }
         }
 
-        // Reset quiz to start screen
-        function resetQuiz() {
-            // Clear any running timer
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-            
+        function returnToStartScreen() {
+            Sound.click();
             resultScreen.classList.add('hidden');
-            resultScreen.classList.remove('flex');
+            quizScreen.classList.add('hidden');
             startScreen.classList.remove('hidden');
-            startScreen.classList.add('flex');
-
-            // Reset achievement section
-            if (achievementSectionEl) {
-                achievementSectionEl.classList.add('hidden');
-            }
-            
-            // Update high score display with latest data
             updateHighScoreDisplay();
-            
-            // Clear any remaining confetti
-            if (confettiContainer) {
-                confettiContainer.innerHTML = '';
+        }
+
+        // =====================================================================
+        // SHARE RESULTS
+        // =====================================================================
+        function shareResults() {
+            Sound.click();
+            const total = currentQuestions.length;
+            const pct = Math.round((score / total) * 100);
+            const cat = categorySelect ? formatCategoryName(categorySelect.value) : 'South Africa';
+            const shareText = `🇿🇦 I scored ${score}/${total} (${pct}%) on the ${cat} Quiz Challenge! Can you beat my score? Test your South Africa knowledge:`;
+            const shareUrl = 'https://avuyilemthembu.co.za/games/south-african-quiz/';
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'South Africa Quiz Challenge',
+                    text: `${shareText} ${shareUrl}`,
+                    url: shareUrl
+                }).catch(() => {
+                    copyToClipboard(`${shareText} ${shareUrl}`);
+                });
+            } else {
+                copyToClipboard(`${shareText} ${shareUrl}`);
             }
         }
 
-        // Utility function to shuffle array
+        function copyToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast("Results copied to clipboard! Share with friends 🇿🇦");
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            try {
+                document.execCommand('copy');
+                showToast("Results copied to clipboard!");
+            } catch (e) {
+                alert("Score: " + text);
+            }
+            document.body.removeChild(ta);
+        }
+
+        // =====================================================================
+        // CONFETTI EFFECT
+        // =====================================================================
+        function triggerConfetti(count = 25) {
+            if (!confettiContainer) return;
+            const colors = ['#007A3D', '#FFB612', '#E03C31', '#001E6A', '#38bdf8', '#ffffff'];
+
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.className = 'confetti-piece';
+
+                const size = Math.floor(Math.random() * 8) + 6;
+                const isCircle = Math.random() > 0.5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const startX = Math.random() * 100;
+                const duration = (Math.random() * 1.5 + 1.8).toFixed(2);
+                const delay = (Math.random() * 0.3).toFixed(2);
+
+                el.style.left = `${startX}vw`;
+                el.style.top = '-20px';
+                el.style.width = `${size}px`;
+                el.style.height = `${isCircle ? size : size * 1.4}px`;
+                el.style.backgroundColor = color;
+                el.style.borderRadius = isCircle ? '50%' : '2px';
+                el.style.animation = `confettiFall ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s forwards`;
+
+                confettiContainer.appendChild(el);
+
+                setTimeout(() => {
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                }, (parseFloat(duration) + parseFloat(delay) + 0.2) * 1000);
+            }
+        }
+
+        // =====================================================================
+        // UTILITIES
+        // =====================================================================
         function shuffleArray(array) {
-            if (!array || !Array.isArray(array)) {
-                console.error('Invalid array passed to shuffleArray:', array);
-                return [];
-            }
-            
-            const newArray = [...array];
-            for (let i = newArray.length - 1; i > 0; i--) {
+            if (!Array.isArray(array)) return [];
+            const clone = [...array];
+            for (let i = clone.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+                [clone[i], clone[j]] = [clone[j], clone[i]];
             }
-            return newArray;
+            return clone;
         }
 
-        // Utility function to capitalize first letter
-        function capitalizeFirstLetter(string) {
-            if (!string || typeof string !== 'string') {
-                return '';
-            }
-            return string.charAt(0).toUpperCase() + string.slice(1);
+        function formatCategoryName(cat) {
+            const map = {
+                all: 'All Categories',
+                landmarks: 'Landmarks & Tourism',
+                culture: 'Culture & History',
+                animals: 'Wildlife & Animals',
+                geography: 'Geography & Oceans',
+                languages: 'Languages & Slang'
+            };
+            return map[cat] || (cat ? cat.charAt(0).toUpperCase() + cat.slice(1) : 'South Africa');
         }
-        
-        // Initialize the quiz when page loads
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Start when DOM is loaded
         window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 
 </html>
-
