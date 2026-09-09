@@ -2,57 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zombie Universe - The Ultimate Experience</title>
-    <meta name="description" content="Play the ultimate collection of zombie survival games: Classic, V2 Survival, and Outbreak Protocol.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main-menu.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zombie Universe - The Ultimate Survival Engine</title>
+    
+    <meta name="description" content="Play the definitive version of Zombie Universe. The ultimate 3D wave survival game with procedural audio, complex models, multiple weapons, and advanced rendering.">
+    <meta name="keywords" content="zombie universe, 3D zombie shooter, browser survival game, Three.js game, webgl shooting game">
+    <meta name="author" content="Avuyile Mthembu">
 
-    <link rel="canonical" href="https://avuyilemthembu.co.za/games/zombie-universe/">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/hud.css">
+    <link rel="stylesheet" href="css/menus.css">
+
+    <link rel="canonical" href="https://avuyilemthembu.co.za/games/zombie-universe/index.html">
 </head>
 <body>
-    <div class="video-background">
-        <!-- Optional: add a cinematic background -->
-        <div class="overlay"></div>
-    </div>
 
-    <div class="container">
-        <header>
-            <h1 class="glitch" data-text="ZOMBIE UNIVERSE">ZOMBIE UNIVERSE</h1>
-            <p class="subtitle">Select your survival mode</p>
-        </header>
-
-        <main class="mode-selector">
-            <a href="origins.html" class="mode-card">
-                <div class="card-content">
-                    <h2>Origins</h2>
-                    <p>The original top-down / first-person shooter. Survive as long as you can.</p>
-                </div>
-            </a>
-            
-            <a href="escalation.html" class="mode-card">
-                <div class="card-content">
-                    <h2>Escalation</h2>
-                    <p>Advanced weapons, deeper mechanics, and endless waves.</p>
-                </div>
-            </a>
-
-            <a href="outbreak.html" class="mode-card featured">
-                <div class="card-content">
-                    <h2>Outbreak Protocol</h2>
-                    <p>Story-driven extraction mode. Find the cure and escape the quarantine zone.</p>
-                </div>
-            </a>
-        </main>
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen-overlay">
+        <h1 class="screen-title">Zombie Universe</h1>
+        <div class="screen-sub">The Definitive Wave Survival Experience</div>
         
-        <footer>
-            <p>Use W, A, S, D to move. Click screen to lock mouse. Trackpad swipe to turn.</p>
-        </footer>
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Back to Games
-        </a>
+        <div class="instructions-box">
+            <div style="margin-bottom: 8px;"><b>Desktop Controls:</b></div>
+            <div><key>W</key><key>A</key><key>S</key><key>D</key> or <key>Arrows</key> to Move | <key>Mouse</key> to Aim</div>
+            <div><key>Left Click</key> or <key>Space</key> to Shoot | <key>R</key> to Reload</div>
+            <div><key>1</key> <key>2</key> <key>3</key> <key>4</key> or <key>Wheel</key> to Switch Weapons</div>
+            <div><key>V</key> to Toggle Camera View (1st/3rd Person) | <key>ESC</key> to Pause</div>
+        </div>
+
+        <button id="startButton" class="btn-primary">INITIATE SURVIVAL</button>
     </div>
+
+    <!-- Pause Screen -->
+    <div id="pauseScreen" class="screen-overlay" style="display: none;">
+        <h1 class="screen-title" style="font-size: 2.8rem;">PAUSED</h1>
+        <p class="screen-sub">Game paused. Take a breather!</p>
+        <div>
+            <button id="resumeButton" class="btn-primary" style="padding: 12px 35px; font-size: 1rem;">RESUME</button>
+            <button id="viewToggleButton" class="btn-secondary">TOGGLE CAMERA (V)</button>
+            <button id="restartButtonPause" class="btn-secondary">RESTART</button>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOver" class="screen-overlay" style="display: none;">
+        <h1 class="screen-title" style="color: #ff3333;">YOU DIED</h1>
+        <div id="finalScore" class="screen-sub" style="font-size: 1.3rem; color: #fff;"></div>
+        <button id="restartButtonGameOver" class="btn-primary">PLAY AGAIN</button>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div id="hud">
+        <div class="hud-card">
+            <div class="hud-label">Health</div>
+            <div id="healthVal" class="hud-val" style="color: #55ff55;">100 HP</div>
+            <div class="bar-container">
+                <div id="healthBar" class="bar-fill"></div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <div class="hud-label">Score</div>
+                    <div id="scoreVal" class="hud-val">0</div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="hud-label">Wave</div>
+                    <div id="waveVal" class="hud-val" style="color: var(--accent);">1</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <div class="hud-label">Ammo / Weapon</div>
+            <div id="ammoVal" class="hud-val" style="color: #ffcc00;">12 / ∞</div>
+        </div>
+    </div>
+
+    <!-- Weapon Selector -->
+    <div id="weaponSelector">
+        <div class="weapon-btn active" data-weapon="0">
+            <span>Pistol</span>
+            <span class="weapon-key">1</span>
+        </div>
+        <div class="weapon-btn" data-weapon="1">
+            <span>Rifle</span>
+            <span class="weapon-key">2</span>
+        </div>
+        <div class="weapon-btn" data-weapon="2">
+            <span>Shotgun</span>
+            <span class="weapon-key">3</span>
+        </div>
+        <div class="weapon-btn" data-weapon="3">
+            <span>Plasma</span>
+            <span class="weapon-key">4</span>
+        </div>
+    </div>
+
+    <!-- Crosshair & Hit Marker -->
+    <div id="crosshair">
+        <div class="ch-dot"></div>
+        <div class="ch-line ch-top"></div>
+        <div class="ch-line ch-bottom"></div>
+        <div class="ch-line ch-left"></div>
+        <div class="ch-line ch-right"></div>
+    </div>
+    <div id="hitMarker"></div>
+
+    <!-- Screen Flash overlays -->
+    <div id="damageFlash"></div>
+
+    <!-- Minimap Radar -->
+    <div id="minimapContainer">
+        <canvas id="minimapCanvas"></canvas>
+    </div>
+
+    <!-- Wave Notification Banner -->
+    <div id="waveBanner">WAVE 1</div>
+
+    <!-- Touch Controls (Mobile) -->
+    <div id="touchControls">
+        <div id="moveJoystick" class="touch-joystick"><div class="touch-thumb"></div></div>
+        <div id="shootBtnTouch">FIRE</div>
+    </div>
+    <button id="viewBtnTouch">CAM VIEW</button>
+
+    <!-- Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Three.js Engine & GLTF Loaders -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/utils/SkeletonUtils.js"></script>
+
+    <!-- ES6 Modules Engine -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
-

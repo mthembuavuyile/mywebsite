@@ -1,0 +1,207 @@
+/* Glassmorphism HUD */
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hud-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: #fff;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    min-width: 200px;
+}
+
+.hud-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #88a;
+    margin-bottom: 4px;
+}
+
+.hud-val {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.bar-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #ff3333, #ff6600);
+    box-shadow: 0 0 12px var(--primary-glow);
+    transition: width 0.25s ease-out;
+}
+
+/* Weapon Bar */
+#weaponSelector {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 10px;
+    z-index: 10;
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    padding: 8px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.weapon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px 16px;
+    color: #aaa;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    pointer-events: auto;
+}
+
+.weapon-btn.active {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(0, 100, 255, 0.3));
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+.weapon-key {
+    font-size: 10px;
+    color: #667;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.weapon-btn.active .weapon-key {
+    color: var(--accent);
+    background: rgba(0, 240, 255, 0.2);
+}
+
+/* Crosshair & Hit Markers */
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 8;
+    display: none;
+}
+
+.ch-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+
+.ch-line {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+.ch-top { width: 2px; height: 7px; top: 0; left: 11px; }
+.ch-bottom { width: 2px; height: 7px; bottom: 0; left: 11px; }
+.ch-left { width: 7px; height: 2px; left: 0; top: 11px; }
+.ch-right { width: 7px; height: 2px; right: 0; top: 11px; }
+
+#hitMarker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    pointer-events: none;
+    z-index: 9;
+    opacity: 0;
+    transition: opacity 0.05s ease-out;
+}
+
+#hitMarker::before, #hitMarker::after {
+    content: '';
+    position: absolute;
+    background: #ff3333;
+    box-shadow: 0 0 8px #ff0000;
+}
+#hitMarker::before { width: 100%; height: 2px; top: 13px; left: 0; }
+#hitMarker::after { width: 2px; height: 100%; top: 0; left: 13px; }
+
+#damageFlash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 40%, rgba(255, 0, 0, 0.6) 100%);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+}
+
+/* Minimap Radar */
+#minimapContainer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(5, 10, 20, 0.85);
+    border: 2px solid rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 15px rgba(0,0,0,0.8);
+    overflow: hidden;
+    display: none;
+    z-index: 10;
+}
+
+#minimapCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    #hud { top: 10px; left: 10px; }
+    .hud-card { min-width: 140px; padding: 8px 14px; }
+    .hud-val { font-size: 18px; }
+    #weaponSelector { bottom: 110px; padding: 4px; }
+    .weapon-btn { padding: 6px 10px; font-size: 11px; }
+    #minimapContainer { width: 100px; height: 100px; top: 10px; right: 10px; }
+}

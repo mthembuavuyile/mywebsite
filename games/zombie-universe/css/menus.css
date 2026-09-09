@@ -1,0 +1,112 @@
+/* Screens & Overlays */
+.screen-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(15, 5, 10, 0.94), rgba(2, 2, 6, 0.98));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    backdrop-filter: blur(15px);
+}
+
+.screen-title {
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 0 0 8px 0;
+    background: linear-gradient(180deg, #ffffff 30%, #ff3333 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px var(--primary-glow);
+}
+
+.screen-sub {
+    font-size: 1.05rem;
+    color: #aab;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.instructions-box {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 28px;
+    max-width: 560px;
+    text-align: left;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-size: 0.92rem;
+    color: #ccd;
+}
+
+.instructions-box key {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff3333, #bb0000);
+    color: #fff;
+    border: none;
+    padding: 16px 45px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px var(--primary-glow);
+    transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 15px 40px rgba(255, 51, 51, 0.8);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Wave Banner */
+#waveBanner {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 25px var(--primary-glow);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 15;
+    transition: opacity 0.5s ease;
+}
