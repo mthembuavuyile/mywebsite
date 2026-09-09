@@ -5,22 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-    <title>Nexus Memory Challenge - Play Online Memory Match Game | Vylex</title>
-    <meta name="title" content="Nexus Memory Challenge - Play Online Memory Match Game | Vylex">
-    <meta name="description" content="Test your focus with Nexus Memory Challenge by Vylex Game Lab. A free, modern, and mobile-optimized memory match game. Play online now and beat your high score!">
-    <meta name="keywords" content="memory game, memory match, online game, brain trainer, mobile game, Vylex, free puzzle games, memory challenge">
-    <meta name="author" content="Vylex Game Lab">
-    <link rel="canonical" href="https://avuyilemthembu.co.za/memory-match.html">
+    <title>Memory Match - Play Online Memory Match Game | Avuyile Mthembu</title>
+    <meta name="title" content="Memory Match - Play Online Memory Match Game | Avuyile Mthembu">
+    <meta name="description" content="Test your focus with Memory Match by Avuyile Mthembu. A free, modern, and mobile-optimized memory match game. Play online now and beat your high score!">
+    <meta name="keywords" content="memory game, memory match, online game, brain trainer, mobile game, puzzle games, memory challenge, Avuyile Mthembu">
+    <meta name="author" content="Avuyile Mthembu">
+    <link rel="canonical" href="https://avuyilemthembu.co.za/games/memory-match.html">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://avuyilemthembu.co.za/memory-match.html">
-    <meta property="og:title" content="Nexus Memory Challenge - Online Brain Trainer">
+    <meta property="og:url" content="https://avuyilemthembu.co.za/games/memory-match.html">
+    <meta property="og:title" content="Memory Match - Online Brain Trainer | Avuyile Mthembu">
     <meta property="og:description" content="Can you find all the matches? Play the sleekest memory game on your mobile device.">
     <meta property="og:image" content="https://avuyilemthembu.co.za/assets/og-preview.jpg">
+    <meta property="og:site_name" content="Avuyile Mthembu Games">
 
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://avuyilemthembu.co.za/memory-match.html">
-    <meta property="twitter:title" content="Nexus Memory Challenge - Online Brain Trainer">
+    <meta property="twitter:url" content="https://avuyilemthembu.co.za/games/memory-match.html">
+    <meta property="twitter:title" content="Memory Match - Online Brain Trainer | Avuyile Mthembu">
     <meta property="twitter:description" content="Can you find all the matches? Play the sleekest memory game on your mobile device.">
     <meta property="twitter:image" content="https://avuyilemthembu.co.za/assets/og-preview.jpg">
 
@@ -231,7 +232,7 @@
             gap: 20px;
         }
 
-        .vylex-credit {
+        .author-credit {
             font-size: 0.8rem;
             color: var(--text-muted);
             letter-spacing: 0.5px;
@@ -242,11 +243,11 @@
             transition: opacity 0.2s;
         }
         
-        .vylex-credit:hover {
+        .author-credit:hover {
             opacity: 1;
         }
 
-        .vylex-credit span {
+        .author-credit span {
             font-weight: 600;
             color: var(--text-main);
         }
@@ -387,7 +388,7 @@
 
     <div id="app">
         <header>
-            <div class="brand">NEXUS <span class="brand-highlight">MEMORY</span></div>
+            <div class="brand">MEMORY <span class="brand-highlight">MATCH</span></div>
             <div class="stats-bar">
                 <div class="stat-card">
                     <div class="stat-label">Moves</div>
@@ -410,14 +411,15 @@
 
         <footer>
             <button class="btn btn-outline" onclick="showMenu()">Pause Game</button>
-            <div class="vylex-credit">Crafted by <span>Vylex</span></div>
+            <a href="/games/index.html" class="btn btn-outline" style="text-decoration: none;">All Games</a>
+            <div class="author-credit">By <span>Avuyile Mthembu</span></div>
         </footer>
     </div>
 
     <div id="menu-overlay" class="overlay">
         <div class="menu-card">
             <div>
-                <h2 class="brand" style="font-size: 2.2rem; margin-bottom: 8px;">NEXUS</h2>
+                <h2 class="brand" style="font-size: 2.2rem; margin-bottom: 8px;">MEMORY MATCH</h2>
                 <p>Select your challenge level</p>
             </div>
 
@@ -428,9 +430,10 @@
             </div>
 
             <button class="btn" onclick="startGame()">Start Game</button>
+            <a href="/games/index.html" class="btn btn-outline" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">← Back to Games</a>
             
-            <div class="vylex-credit" style="justify-content: center; margin-top: 8px;">
-                by <span>Vylex Game Lab</span>
+            <div class="author-credit" style="justify-content: center; margin-top: 8px;">
+                by <span>Avuyile Mthembu</span>
             </div>
         </div>
     </div>
@@ -445,10 +448,11 @@
             <div style="display: flex; flex-direction: column; gap: 12px;">
                 <button class="btn" onclick="startGame()">Play Again</button>
                 <button class="btn btn-outline" onclick="showMenu()">Main Menu</button>
+                <a href="/games/index.html" class="btn btn-outline" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">Back to Games</a>
             </div>
             
-            <div class="vylex-credit" style="justify-content: center; margin-top: 8px;">
-                by <span>Vylex Game Lab</span>
+            <div class="author-credit" style="justify-content: center; margin-top: 8px;">
+                by <span>Avuyile Mthembu</span>
             </div>
         </div>
     </div>

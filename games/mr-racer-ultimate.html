@@ -2159,8 +2159,8 @@
            STORAGE & HIGH SCORES
         ------------------------------------------------------------- */
         function loadPersistentRecords() {
-            const bestScore = localStorage.getItem('vylex_racer_score') || 0;
-            const bestDist = localStorage.getItem('vylex_racer_dist') || '0.0';
+            const bestScore = localStorage.getItem('mr_racer_score') || 0;
+            const bestDist = localStorage.getItem('mr_racer_dist') || '0.0';
 
             const scoreEl = document.getElementById('menu-high-score');
             const distEl = document.getElementById('menu-high-dist');
@@ -2169,16 +2169,16 @@
         }
 
         function savePersistentRecords() {
-            const prevScore = Number(localStorage.getItem('vylex_racer_score') || 0);
-            const prevDist = Number(localStorage.getItem('vylex_racer_dist') || 0);
+            const prevScore = Number(localStorage.getItem('mr_racer_score') || 0);
+            const prevDist = Number(localStorage.getItem('mr_racer_dist') || 0);
 
             let newRecord = false;
             if (score > prevScore) {
-                localStorage.setItem('vylex_racer_score', score);
+                localStorage.setItem('mr_racer_score', score);
                 newRecord = true;
             }
             if (distanceKm > prevDist) {
-                localStorage.setItem('vylex_racer_dist', distanceKm.toFixed(1));
+                localStorage.setItem('mr_racer_dist', distanceKm.toFixed(1));
             }
             return newRecord;
         }
