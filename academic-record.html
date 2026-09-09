@@ -11,15 +11,17 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <style>
     :root {
       /* Theme Variables */
-      --bg: #0b1220;
+      --bg: #070d18;
       --panel: rgba(255, 255, 255, .06);
       --border: rgba(255, 255, 255, .12);
+      --border-light: rgba(255, 255, 255, .06);
       --text: rgba(255, 255, 255, .92);
       --muted: rgba(255, 255, 255, .70);
       --muted2: rgba(255, 255, 255, .55);
@@ -35,6 +37,7 @@
       --radius: 18px;
       --radius-sm: 14px;
       --max: 1120px;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
     }
 
     * {
@@ -328,7 +331,7 @@
       margin-top: 2px;
     }
 
-    /* --- Transcript Section --- */
+    /* --- Transcript Section & Modern Toolbar --- */
     main {
       padding-bottom: 60px;
     }
@@ -337,14 +340,15 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin: 30px 0 15px;
-      padding-bottom: 10px;
+      margin: 35px 0 16px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
 
     .sectionHead h2 {
       margin: 0;
       font-size: 1.4rem;
+      letter-spacing: -0.5px;
     }
 
     .sectionHead p {
@@ -353,30 +357,155 @@
       font-size: 0.9rem;
     }
 
+    /* Filter Toolbar */
+    .transcriptToolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filterGroup {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filterPill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .filterPill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .filterPill.active {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: rgba(96, 165, 250, 0.4);
+      color: #93c5fd;
+      box-shadow: 0 0 12px rgba(96, 165, 250, 0.15);
+    }
+
+    .toolbarActions .btn-sm {
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* --- Year Container (Clean, Free Structure) --- */
     .year {
-      background: rgba(255, 255, 255, .02);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .year:hover {
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     .yearHeader {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 20px;
-      background: rgba(255, 255, 255, .03);
+      padding: 16px 22px;
+      background: rgba(255, 255, 255, 0.035);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
     }
 
-    .yearHeader .y {
+    .yearHeader:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .yearHeaderLeft {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .yearTitleRow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .yearTitleRow .y {
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.12rem;
+      letter-spacing: -0.3px;
     }
 
-    .yearHeader .desc {
-      font-size: 0.85rem;
+    .year-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+    }
+
+    .year-badge.badge-final {
+      background: rgba(96, 165, 250, 0.12);
+      border-color: rgba(96, 165, 250, 0.3);
+      color: #93c5fd;
+    }
+
+    .year-badge.badge-intermediate {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.3);
+      color: #c084fc;
+    }
+
+    .year-badge.badge-foundation {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+    }
+
+    .yearMetaRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
       color: var(--muted2);
+    }
+
+    .year-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .year-meta-item.highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .year-meta-dot {
+      color: rgba(255, 255, 255, 0.2);
     }
 
     .btn {
@@ -387,12 +516,16 @@
       border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.9rem;
-      transition: .2s;
+      font-size: 0.88rem;
+      transition: all .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .btn:hover {
       background: rgba(255, 255, 255, .15);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .btn.primary {
@@ -401,48 +534,79 @@
       color: #93c5fd;
     }
 
+    .btn.primary:hover {
+      background: rgba(59, 130, 246, .3);
+    }
+
+    .btn-toggle .toggle-arrow {
+      font-size: 0.78rem;
+      transition: transform 0.3s ease;
+    }
+
     /* Collapsible logic */
     .collapse {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out;
+      transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
     }
 
     .collapse.open {
-      max-height: 2000px;
-      transition: max-height 0.6s ease-in;
+      max-height: 2500px;
+      transition: max-height 0.5s ease-in-out;
     }
 
     .yearBody {
       padding: 20px;
-      display: grid;
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
     }
 
+    /* --- Semester Group (Free & Open layout) --- */
     .semester {
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 15px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 16px 18px;
     }
 
     .semesterTop {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .semesterTitleGroup {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .semesterDot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--primary);
     }
 
     .semesterTop .name {
-      font-weight: 800;
+      font-weight: 700;
       color: #fff;
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
     }
 
     .semesterTop .meta {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--muted);
+      font-weight: 500;
     }
 
-    /* Tables */
+    /* --- Table Styles (Desktop View) --- */
     .table {
       width: 100%;
       border-collapse: separate;
@@ -451,69 +615,87 @@
 
     .table th {
       text-align: left;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       color: var(--muted2);
-      padding: 10px;
+      padding: 8px 10px;
       letter-spacing: 1px;
       border-bottom: 1px solid var(--border);
+      font-weight: 600;
     }
 
     .table td {
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, .05);
+      padding: 11px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
       vertical-align: middle;
+      transition: background 0.15s ease;
     }
 
     .table tr:last-child td {
       border-bottom: none;
     }
 
-    .code {
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-family: monospace;
+    .table tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.025);
     }
 
     .moduleName {
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
+      color: #f8fafc;
+      line-height: 1.35;
+    }
+
+    .module-meta-mobile {
+      display: none; /* Hidden on desktop */
+    }
+
+    .code {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.3px;
     }
 
     .credits {
       display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
+      padding: 3px 9px;
+      border-radius: 999px;
       background: rgba(255, 255, 255, .06);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--muted);
     }
 
     .mark {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
     }
 
     .mark.dist {
-      background: rgba(52, 211, 153, .15);
-      color: #6ee7b7;
-      border: 1px solid rgba(52, 211, 153, .3);
+      background: rgba(52, 211, 153, .14);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, .35);
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.12);
     }
 
     .mark.pass {
-      background: rgba(96, 165, 250, .15);
+      background: rgba(96, 165, 250, .14);
       color: #93c5fd;
-      border: 1px solid rgba(96, 165, 250, .3);
+      border: 1px solid rgba(96, 165, 250, .35);
     }
 
     .mark.fail {
-      background: rgba(251, 113, 133, .15);
+      background: rgba(251, 113, 133, .14);
       color: #fda4af;
-      border: 1px solid rgba(251, 113, 133, .3);
+      border: 1px solid rgba(251, 113, 133, .35);
     }
 
     footer {
@@ -525,7 +707,7 @@
       margin-top: 40px;
     }
 
-    /* --- MOBILE STYLES --- */
+    /* --- MOBILE RESPONSIVENESS --- */
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
@@ -546,7 +728,6 @@
     }
 
     @media (max-width: 768px) {
-
       /* Mobile Nav */
       .nav-toggle {
         display: block;
@@ -554,12 +735,11 @@
 
       .nav {
         display: none;
-        /* Hidden by default */
         position: absolute;
         top: 70px;
         left: 0;
         right: 0;
-        background: #111827;
+        background: #0f172a;
         border-bottom: 1px solid var(--border);
         flex-direction: column;
         padding: 20px;
@@ -577,54 +757,197 @@
         background: rgba(255, 255, 255, .05);
       }
 
-      /* Mobile Tables -> Cards */
+      /* FREE THAN TRIPLE CARD: Eliminate nested card containers on mobile */
+      .year {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+
+      .yearHeader {
+        padding: 13px 15px;
+      }
+
+      .yearTitleRow .y {
+        font-size: 1.02rem;
+      }
+
+      .yearMetaRow {
+        font-size: 0.76rem;
+      }
+
+      .yearBody {
+        padding: 0;
+        gap: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Semesters: Open and borderless, no nested cards */
+      .semester {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 14px 14px 8px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.07) !important;
+      }
+
+      .semester:first-child {
+        border-top: none !important;
+      }
+
+      .semesterTop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+        padding: 0 2px 6px;
+      }
+
+      .semesterTitleGroup {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .semesterDot {
+        width: 6px;
+        height: 6px;
+      }
+
+      .semesterTop .name {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .semesterTop .meta {
+        font-size: 0.74rem;
+        color: var(--muted2);
+      }
+
+      /* FREE THAN TRIPLE CARD: Thin, sleek row items instead of 3rd nested cards! */
       .table thead {
         display: none;
       }
 
       .table,
-      .table tbody,
-      .table tr,
-      .table td {
+      .table tbody {
         display: block;
         width: 100%;
       }
 
       .table tr {
-        margin-bottom: 12px;
-        background: rgba(255, 255, 255, .02);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 10px;
-      }
-
-      .table td {
-        padding: 6px 0;
-        border: none;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        text-align: right;
+        justify-content: space-between;
+        padding: 9px 4px;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        border-radius: 0 !important;
+        margin-bottom: 0 !important;
+        gap: 10px;
       }
 
-      .table td::before {
-        content: attr(data-label);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        color: var(--muted2);
-        font-weight: 700;
-        letter-spacing: 1px;
-        margin-right: 10px;
+      .table tr:last-child {
+        border-bottom: none !important;
+      }
+
+      /* Hide separate desktop table columns on mobile */
+      .table td.code-col,
+      .table td.credits-col {
+        display: none !important;
+      }
+
+      /* Module title column on mobile takes left */
+      .table td.module-col {
+        display: block;
+        flex: 1;
+        min-width: 0;
+        padding: 0;
+        border: none;
+        text-align: left;
       }
 
       .moduleName {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #f1f5f9;
+        line-height: 1.35;
+        text-align: left;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      /* Inline meta: Code & Credits */
+      .module-meta-mobile {
+        display: flex !important;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.74rem;
+        color: var(--muted2);
+        font-family: var(--font-mono);
+        margin-top: 2px;
+      }
+
+      .module-meta-mobile .code {
+        color: var(--muted);
+      }
+
+      .module-meta-mobile .dot {
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      .module-meta-mobile .credits-val {
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      /* Mark column on mobile pinned to right */
+      .table td.mark-col {
+        display: block;
+        flex-shrink: 0;
+        padding: 0;
+        border: none;
         text-align: right;
+      }
+
+      .mark {
+        padding: 3px 8px;
+        font-size: 0.82rem;
+        min-width: 46px;
       }
 
       .sectionHead {
         flex-direction: column;
         align-items: flex-start;
         gap: 6px;
+      }
+
+      .transcriptToolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .filterGroup {
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .filterGroup::-webkit-scrollbar {
+        display: none;
+      }
+
+      .toolbarActions {
+        display: flex;
+        justify-content: flex-end;
       }
     }
 
@@ -868,7 +1191,8 @@
       #graduation, 
       #lightbox,
       .nav-toggle,
-      .nav {
+      .nav,
+      .transcriptToolbar {
         display: none !important;
       }
       
@@ -1004,6 +1328,11 @@
         border-bottom: 1px solid #e5e7eb !important;
         color: #000000 !important;
         padding: 8px 6px !important;
+        display: table-cell !important;
+      }
+
+      .module-meta-mobile {
+        display: none !important;
       }
       
       .mark {
@@ -1057,8 +1386,10 @@
 
       <nav class="nav" id="mainNav">
         <a href="#overview">Overview</a>
+        <a href="#graduation">Graduation</a>
         <a href="#transcript">Transcript</a>
-        <a href="#" onclick="window.print()">Print</a>
+        <a href="/portfolio.html"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+        <a href="#" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</a>
       </nav>
     </div>
   </div>
@@ -1099,8 +1430,8 @@
               <div class="lbl">Modules</div>
             </div>
             <div class="kpi">
-              <div class="num">22</div>
-              <div class="lbl">Entries</div>
+              <div class="num" style="color: var(--accent);">13</div>
+              <div class="lbl">Distinctions</div>
             </div>
           </div>
 
@@ -1169,68 +1500,120 @@
   <main id="transcript">
     <div class="wrap">
       <div class="sectionHead">
-        <h2>Academic Record</h2>
-        <p>Official Transcript Data</p>
+        <div>
+          <h2>Academic Record</h2>
+          <p>Official Academic Transcript (2023–2025) • Boston City Campus</p>
+        </div>
+      </div>
+
+      <!-- Interactive Toolbar -->
+      <div class="transcriptToolbar">
+        <div class="filterGroup">
+          <button class="filterPill active" onclick="filterYear('all')">All Years</button>
+          <button class="filterPill" onclick="filterYear('y2025')">Year 3 (2025)</button>
+          <button class="filterPill" onclick="filterYear('y2024')">Year 2 (2024)</button>
+          <button class="filterPill" onclick="filterYear('y2023')">Year 1 (2023)</button>
+        </div>
+        <div class="toolbarActions">
+          <button class="btn btn-sm" id="toggleAllBtn" onclick="toggleAllYears()">
+            <i class="fa-solid fa-arrows-up-down"></i> <span id="toggleAllText">Expand All</span>
+          </button>
+        </div>
       </div>
 
       <!-- YEAR 3 (2025) -->
-      <section class="year">
-        <div class="yearHeader">
-          <div class="left">
-            <div class="y">Year 3 — 2025 (120 credits)</div>
-            <div class="desc">Final Year</div>
+      <section class="year" id="sec-y2025">
+        <div class="yearHeader" onclick="toggleSection('y2025')">
+          <div class="yearHeaderLeft">
+            <div class="yearTitleRow">
+              <span class="y">Year 3 — 2025</span>
+              <span class="year-badge badge-final">Final Year</span>
+            </div>
+            <div class="yearMetaRow">
+              <span class="year-meta-item"><i class="fa-solid fa-graduation-cap"></i> 120 Credits</span>
+              <span class="year-meta-dot">•</span>
+              <span class="year-meta-item highlight"><i class="fa-solid fa-award"></i> 6 Distinctions</span>
+            </div>
           </div>
-          <button class="btn primary" data-toggle="y2025">Hide</button>
+          <div class="yearHeaderRight">
+            <button class="btn btn-toggle" type="button" aria-label="Toggle Year 3" onclick="event.stopPropagation(); toggleSection('y2025')">
+              <span class="btn-text">Hide</span>
+              <i class="fa-solid fa-chevron-up toggle-arrow"></i>
+            </button>
+          </div>
         </div>
 
         <div class="yearBody collapse open" id="y2025">
           <!-- Sem 6 -->
           <div class="semester">
             <div class="semesterTop">
-              <div class="name">Semester 6</div>
-              <div class="meta">Jul – Dec 2025</div>
+              <div class="semesterTitleGroup">
+                <span class="semesterDot"></span>
+                <span class="name">Semester 6</span>
+              </div>
+              <div class="meta">Jul – Dec 2025 • 76 Credits</div>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th width="50%">Module</th>
                   <th width="20%">Code</th>
-                  <th width="15%">Credits</th>
-                  <th width="15%">Mark</th>
+                  <th width="15%" style="text-align:center;">Credits</th>
+                  <th width="15%" style="text-align:right;">Mark</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Praxis S3B (Cyber Law & Project)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HPXS302-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">15 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HPXS302-1</td>
-                  <td data-label="Credits"><span class="credits">15</span></td>
-                  <td data-label="Mark"><span class="mark dist">87%</span></td>
+                  <td class="code-col code">HPXS302-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">15</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">87%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Business Ethics (Repeat)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HBMN201-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">16 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HBMN201-1</td>
-                  <td data-label="Credits"><span class="credits">16</span></td>
-                  <td data-label="Mark"><span class="mark dist">86%</span></td>
+                  <td class="code-col code">HBMN201-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">16</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">86%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Systems Development 3</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSYD300-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">30 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSYD300-1</td>
-                  <td data-label="Credits"><span class="credits">30</span></td>
-                  <td data-label="Mark"><span class="mark dist">80%</span></td>
+                  <td class="code-col code">HSYD300-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">30</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">80%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Software Testing 3</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSFT300-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">15 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSFT300-1</td>
-                  <td data-label="Credits"><span class="credits">15</span></td>
-                  <td data-label="Mark"><span class="mark pass">76%</span></td>
+                  <td class="code-col code">HSFT300-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">15</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">76%</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1239,50 +1622,73 @@
           <!-- Sem 5 -->
           <div class="semester">
             <div class="semesterTop">
-              <div class="name">Semester 5</div>
-              <div class="meta">Jan – Jun 2025</div>
+              <div class="semesterTitleGroup">
+                <span class="semesterDot"></span>
+                <span class="name">Semester 5</span>
+              </div>
+              <div class="meta">Jan – Jun 2025 • 60 Credits</div>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th width="50%">Module</th>
                   <th width="20%">Code</th>
-                  <th width="15%">Credits</th>
-                  <th width="15%">Mark</th>
+                  <th width="15%" style="text-align:center;">Credits</th>
+                  <th width="15%" style="text-align:right;">Mark</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Systems Analysis & Design 3</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSAD300-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">20 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSAD300-1</td>
-                  <td data-label="Credits"><span class="credits">20</span></td>
-                  <td data-label="Mark"><span class="mark dist">94%</span></td>
+                  <td class="code-col code">HSAD300-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">20</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">94%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Systems Dev Project Mgmt 3</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSDP300-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">15 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSDP300-1</td>
-                  <td data-label="Credits"><span class="credits">15</span></td>
-                  <td data-label="Mark"><span class="mark dist">85%</span></td>
+                  <td class="code-col code">HSDP300-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">15</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">85%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Praxis S3A (Ethical Hacking)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HPXS301-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">5 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HPXS301-1</td>
-                  <td data-label="Credits"><span class="credits">5</span></td>
-                  <td data-label="Mark"><span class="mark pass">78%</span></td>
+                  <td class="code-col code">HPXS301-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">5</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">78%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Workflow Management 3</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HWFM300-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">20 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HWFM300-1</td>
-                  <td data-label="Credits"><span class="credits">20</span></td>
-                  <td data-label="Mark"><span class="mark pass">72%</span></td>
+                  <td class="code-col code">HWFM300-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">20</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">72%</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1291,47 +1697,72 @@
       </section>
 
       <!-- YEAR 2 (2024) -->
-      <section class="year">
-        <div class="yearHeader">
-          <div class="left">
-            <div class="y">Year 2 — 2024 (126 credits)</div>
-            <div class="desc">Intermediate Year</div>
+      <section class="year" id="sec-y2024">
+        <div class="yearHeader" onclick="toggleSection('y2024')">
+          <div class="yearHeaderLeft">
+            <div class="yearTitleRow">
+              <span class="y">Year 2 — 2024</span>
+              <span class="year-badge badge-intermediate">Intermediate Year</span>
+            </div>
+            <div class="yearMetaRow">
+              <span class="year-meta-item"><i class="fa-solid fa-graduation-cap"></i> 126 Credits</span>
+              <span class="year-meta-dot">•</span>
+              <span class="year-meta-item highlight"><i class="fa-solid fa-award"></i> 5 Distinctions</span>
+            </div>
           </div>
-          <button class="btn" data-toggle="y2024">Show</button>
+          <div class="yearHeaderRight">
+            <button class="btn btn-toggle" type="button" aria-label="Toggle Year 2" onclick="event.stopPropagation(); toggleSection('y2024')">
+              <span class="btn-text">Show</span>
+              <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+            </button>
+          </div>
         </div>
 
         <div class="yearBody collapse" id="y2024">
           <!-- Sem 4 -->
           <div class="semester">
             <div class="semesterTop">
-              <div class="name">Semester 4</div>
-              <div class="meta">Jul – Dec 2024</div>
+              <div class="semesterTitleGroup">
+                <span class="semesterDot"></span>
+                <span class="name">Semester 4</span>
+              </div>
+              <div class="meta">Jul – Dec 2024 • 60 Credits</div>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th width="50%">Module</th>
                   <th width="20%">Code</th>
-                  <th width="15%">Credits</th>
-                  <th width="15%">Mark</th>
+                  <th width="15%" style="text-align:center;">Credits</th>
+                  <th width="15%" style="text-align:right;">Mark</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Systems Development 2A</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSYD201-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">40 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSYD201-1</td>
-                  <td data-label="Credits"><span class="credits">40</span></td>
-                  <td data-label="Mark"><span class="mark dist">84%</span></td>
+                  <td class="code-col code">HSYD201-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">40</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">84%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Systems Development 2B (Security+)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSYD202-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">20 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSYD202-1</td>
-                  <td data-label="Credits"><span class="credits">20</span></td>
-                  <td data-label="Mark"><span class="mark dist">92%</span></td>
+                  <td class="code-col code">HSYD202-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">20</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">92%</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1340,50 +1771,73 @@
           <!-- Sem 3 -->
           <div class="semester">
             <div class="semesterTop">
-              <div class="name">Semester 3</div>
-              <div class="meta">Jan – Jun 2024</div>
+              <div class="semesterTitleGroup">
+                <span class="semesterDot"></span>
+                <span class="name">Semester 3</span>
+              </div>
+              <div class="meta">Jan – Jun 2024 • 66 Credits</div>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th width="50%">Module</th>
                   <th width="20%">Code</th>
-                  <th width="15%">Credits</th>
-                  <th width="15%">Mark</th>
+                  <th width="15%" style="text-align:center;">Credits</th>
+                  <th width="15%" style="text-align:right;">Mark</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Database Programming 2</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HDBP200-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">20 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HDBP200-1</td>
-                  <td data-label="Credits"><span class="credits">20</span></td>
-                  <td data-label="Mark"><span class="mark dist">84%</span></td>
+                  <td class="code-col code">HDBP200-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">20</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">84%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Praxis S2 (DB Technologies, SQL & Android Dev)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HPXS200-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">20 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HPXS200-1</td>
-                  <td data-label="Credits"><span class="credits">20</span></td>
-                  <td data-label="Mark"><span class="mark dist">86%</span></td>
+                  <td class="code-col code">HPXS200-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">20</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">86%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Business Ethics</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HBMN201-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">16 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HBMN201-1</td>
-                  <td data-label="Credits"><span class="credits">16</span></td>
-                  <td data-label="Mark"><span class="mark fail">41%</span></td>
+                  <td class="code-col code">HBMN201-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">16</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark fail">41%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Android App Development</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HASD200-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">10 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HASD200-1</td>
-                  <td data-label="Credits"><span class="credits">10</span></td>
-                  <td data-label="Mark"><span class="mark dist">87%</span></td>
+                  <td class="code-col code">HASD200-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">10</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">87%</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1391,64 +1845,99 @@
         </div>
       </section>
 
-      <!-- YEAR 1 (2023) - FIXED AND UNIFIED -->
-      <section class="year">
-        <div class="yearHeader">
-          <div class="left">
-            <div class="y">Year 1 — 2023 (118 credits)</div>
-            <div class="desc">Foundation Year</div>
+      <!-- YEAR 1 (2023) -->
+      <section class="year" id="sec-y2023">
+        <div class="yearHeader" onclick="toggleSection('y2023')">
+          <div class="yearHeaderLeft">
+            <div class="yearTitleRow">
+              <span class="y">Year 1 — 2023</span>
+              <span class="year-badge badge-foundation">Foundation Year</span>
+            </div>
+            <div class="yearMetaRow">
+              <span class="year-meta-item"><i class="fa-solid fa-graduation-cap"></i> 118 Credits</span>
+              <span class="year-meta-dot">•</span>
+              <span class="year-meta-item highlight"><i class="fa-solid fa-award"></i> 2 Distinctions</span>
+            </div>
           </div>
-          <button class="btn" data-toggle="y2023">Show</button>
+          <div class="yearHeaderRight">
+            <button class="btn btn-toggle" type="button" aria-label="Toggle Year 1" onclick="event.stopPropagation(); toggleSection('y2023')">
+              <span class="btn-text">Show</span>
+              <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+            </button>
+          </div>
         </div>
 
         <div class="yearBody collapse" id="y2023">
           <!-- Sem 2 -->
           <div class="semester">
             <div class="semesterTop">
-              <div class="name">Semester 2</div>
-              <div class="meta">Jul – Dec 2023</div>
+              <div class="semesterTitleGroup">
+                <span class="semesterDot"></span>
+                <span class="name">Semester 2</span>
+              </div>
+              <div class="meta">Jul – Dec 2023 • 64 Credits</div>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th width="50%">Module</th>
                   <th width="20%">Code</th>
-                  <th width="15%">Credits</th>
-                  <th width="15%">Mark</th>
+                  <th width="15%" style="text-align:center;">Credits</th>
+                  <th width="15%" style="text-align:right;">Mark</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Praxis 1</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HPX100-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">20 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HPX100-1</td>
-                  <td data-label="Credits"><span class="credits">20</span></td>
-                  <td data-label="Mark"><span class="mark dist">95%</span></td>
+                  <td class="code-col code">HPX100-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">20</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">95%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Computer Literacy Advanced</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HCLT108-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">10 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HCLT108-1</td>
-                  <td data-label="Credits"><span class="credits">10</span></td>
-                  <td data-label="Mark"><span class="mark dist">77%</span></td>
+                  <td class="code-col code">HCLT108-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">10</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">77%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Technical Systems & Support (A+)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HTSS100-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">24 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HTSS100-1</td>
-                  <td data-label="Credits"><span class="credits">24</span></td>
-                  <td data-label="Mark"><span class="mark pass">56%</span></td>
+                  <td class="code-col code">HTSS100-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">24</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">56%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Intro to Business Management</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HBMN102-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">10 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HBMN102-1</td>
-                  <td data-label="Credits"><span class="credits">10</span></td>
-                  <td data-label="Mark"><span class="mark pass">68%</span></td>
+                  <td class="code-col code">HBMN102-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">10</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">68%</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1457,50 +1946,73 @@
           <!-- Sem 1 -->
           <div class="semester">
             <div class="semesterTop">
-              <div class="name">Semester 1</div>
-              <div class="meta">Jan – Jun 2023</div>
+              <div class="semesterTitleGroup">
+                <span class="semesterDot"></span>
+                <span class="name">Semester 1</span>
+              </div>
+              <div class="meta">Jan – Jun 2023 • 54 Credits</div>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th width="50%">Module</th>
                   <th width="20%">Code</th>
-                  <th width="15%">Credits</th>
-                  <th width="15%">Mark</th>
+                  <th width="15%" style="text-align:center;">Credits</th>
+                  <th width="15%" style="text-align:right;">Mark</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Systems Development 1 (Java)</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HSYD100-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">12 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HSYD100-1</td>
-                  <td data-label="Credits"><span class="credits">12</span></td>
-                  <td data-label="Mark"><span class="mark dist">75%</span></td>
+                  <td class="code-col code">HSYD100-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">12</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark dist">75%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Academic Literacy</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HALP100-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">14 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HALP100-1</td>
-                  <td data-label="Credits"><span class="credits">14</span></td>
-                  <td data-label="Mark"><span class="mark pass">62%</span></td>
+                  <td class="code-col code">HALP100-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">14</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">62%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">Computer Literacy Introduction</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HCLT101-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">16 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HCLT101-1</td>
-                  <td data-label="Credits"><span class="credits">16</span></td>
-                  <td data-label="Mark"><span class="mark pass">58%</span></td>
+                  <td class="code-col code">HCLT101-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">16</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">58%</span></td>
                 </tr>
                 <tr>
-                  <td data-label="Module">
+                  <td class="module-col">
                     <div class="moduleName">IT Systems Management 1</div>
+                    <div class="module-meta-mobile">
+                      <span class="code">HISM100-1</span>
+                      <span class="dot">•</span>
+                      <span class="credits-val">12 cr</span>
+                    </div>
                   </td>
-                  <td data-label="Code" class="code">HISM100-1</td>
-                  <td data-label="Credits"><span class="credits">12</span></td>
-                  <td data-label="Mark"><span class="mark pass">66%</span></td>
+                  <td class="code-col code">HISM100-1</td>
+                  <td class="credits-col" style="text-align:center;"><span class="credits">12</span></td>
+                  <td class="mark-col" style="text-align:right;"><span class="mark pass">66%</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1544,24 +2056,106 @@
       link.addEventListener('click', () => nav.classList.remove('active'));
     });
 
-    // 2. Collapsible Sections
-    const buttons = document.querySelectorAll('button[data-toggle]');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-toggle');
-        const content = document.getElementById(targetId);
+    // 2. Collapsible Sections & Filter Logic
+    function updateYearButton(yearId, isOpen) {
+      const sec = document.getElementById('sec-' + yearId);
+      if (!sec) return;
+      const btn = sec.querySelector('.btn-toggle');
+      const text = btn ? btn.querySelector('.btn-text') : null;
+      const arrow = btn ? btn.querySelector('.toggle-arrow') : null;
+      if (text) text.textContent = isOpen ? 'Hide' : 'Show';
+      if (arrow) {
+        arrow.className = isOpen ? 'fa-solid fa-chevron-up toggle-arrow' : 'fa-solid fa-chevron-down toggle-arrow';
+      }
+      if (btn) {
+        if (isOpen) btn.classList.add('primary');
+        else btn.classList.remove('primary');
+      }
+    }
 
-        if (content) {
-          content.classList.toggle('open');
-          // Update button text
-          const isOpen = content.classList.contains('open');
-          btn.textContent = isOpen ? 'Hide' : 'Show';
-          // Optional: Toggle primary class
-          if (isOpen) btn.classList.add('primary');
-          else btn.classList.remove('primary');
+    window.toggleSection = function(targetId) {
+      const content = document.getElementById(targetId);
+      if (content) {
+        content.classList.toggle('open');
+        const isOpen = content.classList.contains('open');
+        updateYearButton(targetId, isOpen);
+        checkAllOpenState();
+      }
+    };
+
+    function checkAllOpenState() {
+      const yearIds = ['y2025', 'y2024', 'y2023'];
+      const allOpen = yearIds.every(id => {
+        const el = document.getElementById(id);
+        return el && el.classList.contains('open');
+      });
+      const toggleAllText = document.getElementById('toggleAllText');
+      if (toggleAllText) {
+        toggleAllText.textContent = allOpen ? 'Collapse All' : 'Expand All';
+      }
+    }
+
+    window.toggleAllYears = function() {
+      const yearIds = ['y2025', 'y2024', 'y2023'];
+      const anyClosed = yearIds.some(id => {
+        const el = document.getElementById(id);
+        return el && !el.classList.contains('open');
+      });
+
+      yearIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (anyClosed) {
+            el.classList.add('open');
+            updateYearButton(id, true);
+          } else {
+            el.classList.remove('open');
+            updateYearButton(id, false);
+          }
         }
       });
-    });
+      checkAllOpenState();
+    };
+
+    window.filterYear = function(filter) {
+      const pills = document.querySelectorAll('.filterPill');
+      pills.forEach(p => {
+        if (p.getAttribute('onclick')?.includes("'" + filter + "'")) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+
+      const yearMap = {
+        'y2025': document.getElementById('sec-y2025'),
+        'y2024': document.getElementById('sec-y2024'),
+        'y2023': document.getElementById('sec-y2023')
+      };
+
+      if (filter === 'all') {
+        Object.values(yearMap).forEach(el => {
+          if (el) el.style.display = '';
+        });
+      } else {
+        Object.entries(yearMap).forEach(([id, el]) => {
+          if (el) {
+            if (id === filter) {
+              el.style.display = '';
+              const content = document.getElementById(id);
+              if (content && !content.classList.contains('open')) {
+                content.classList.add('open');
+                updateYearButton(id, true);
+              }
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              el.style.display = 'none';
+            }
+          }
+        });
+      }
+      checkAllOpenState();
+    };
 
     // 3. Graduation Gallery Lightbox
     const gradImages = [
