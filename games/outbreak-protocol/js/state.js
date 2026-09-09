@@ -65,6 +65,12 @@ export function resetGameStats() {
     state.kills = 0;
     state.shotsFired = 0;
     state.shotsHit = 0;
+    state.isPaused = false;
+    state.moveForward = false;
+    state.moveBackward = false;
+    state.moveLeft = false;
+    state.moveRight = false;
+    state.isShooting = false;
 
     // Clean up entities from scene
     if (state.scene) {

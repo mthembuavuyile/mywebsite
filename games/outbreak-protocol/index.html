@@ -9,6 +9,7 @@
     <meta name="keywords" content="outbreak protocol, 3d zombie shooter, wave survival, Three.js game, webgl action game">
     <meta name="author" content="Avuyile Mthembu">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/hud.css">
     <link rel="stylesheet" href="css/menus.css">
@@ -19,6 +20,9 @@
 
     <!-- Start Screen -->
     <div id="startScreen" class="screen-overlay">
+        <a href="/games/index.html" class="screen-back-btn" title="Back to Games Hub">
+            <i class="fas fa-arrow-left"></i> Back to Games
+        </a>
         <div class="screen-badge">BIOHAZARD CONTAINMENT BREACH</div>
         <h1 class="screen-title">Outbreak Protocol</h1>
         <div class="screen-sub">Quarantine Sector 4 has fallen. Neutralize incoming mutant waves, conserve ammunition, and hold the perimeter.</div>
@@ -30,20 +34,28 @@
             <div><key>W</key><key>A</key><key>S</key><key>D</key> or <key>Arrows</key> to Move | <key>Shift</key> to Sprint</div>
             <div><key>Mouse</key> to Aim | <key>Left Click</key> or <key>Space</key> to Fire</div>
             <div><key>R</key> to Reload | <key>1</key> <key>2</key> <key>3</key> <key>4</key> or <key>Scroll Wheel</key> to Switch Weapons</div>
-            <div><key>V</key> to Toggle Camera (1st / 3rd Person) | <key>ESC</key> to Pause</div>
+            <div><key>V</key> to Toggle Camera (1st / 3rd Person) | <key>P</key> or <key>ESC</key> to Pause</div>
         </div>
 
-        <button id="startButton" class="btn-primary">INITIATE PROTOCOL</button>
+        <div class="screen-actions">
+            <button id="startButton" class="btn-primary">INITIATE PROTOCOL</button>
+            <a href="/games/index.html" class="btn-secondary screen-btn-link" title="Return to Games Collection">
+                <i class="fas fa-arrow-left"></i> BACK TO GAMES
+            </a>
+        </div>
     </div>
 
     <!-- Pause Screen -->
     <div id="pauseScreen" class="screen-overlay" style="display: none;">
         <h1 class="screen-title" style="font-size: 2.8rem;">SIMULATION PAUSED</h1>
-        <p class="screen-sub">Sector perimeter paused. Take a breather!</p>
-        <div>
+        <p class="screen-sub">Sector perimeter paused. Take a tactical breather!</p>
+        <div class="screen-actions">
             <button id="resumeButton" class="btn-primary" style="padding: 12px 36px; font-size: 1rem;">RESUME</button>
             <button id="viewToggleButton" class="btn-secondary">TOGGLE VIEW (V)</button>
             <button id="restartButtonPause" class="btn-secondary">RESTART MISSION</button>
+            <a href="/games/index.html" class="btn-secondary screen-btn-link" title="Return to Games Collection">
+                <i class="fas fa-arrow-left"></i> BACK TO GAMES
+            </a>
         </div>
     </div>
 
@@ -51,7 +63,22 @@
     <div id="gameOver" class="screen-overlay" style="display: none;">
         <h1 class="screen-title" style="color: #ef4444;">MISSION FAILED</h1>
         <div id="finalScore" class="screen-sub" style="font-size: 1.15rem; color: #fff;"></div>
-        <button id="restartButtonGameOver" class="btn-primary">REDEPLOY OPERATIVE</button>
+        <div class="screen-actions">
+            <button id="restartButtonGameOver" class="btn-primary">REDEPLOY OPERATIVE</button>
+            <a href="/games/index.html" class="btn-secondary screen-btn-link" title="Return to Games Collection">
+                <i class="fas fa-arrow-left"></i> BACK TO GAMES
+            </a>
+        </div>
+    </div>
+
+    <!-- Top Action Bar (In-game Back to Games & Pause) -->
+    <div id="hudTopBar">
+        <a href="/games/index.html" class="hud-action-btn" id="hudBackBtn" title="Back to Games Hub">
+            <i class="fas fa-arrow-left"></i> <span>GAMES</span>
+        </a>
+        <button type="button" id="hudPauseBtn" class="hud-action-btn" title="Pause Simulation (P or Esc)">
+            <i class="fas fa-pause"></i> <span>PAUSE</span>
+        </button>
     </div>
 
     <!-- HUD Overlay -->

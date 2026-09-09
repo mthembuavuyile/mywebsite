@@ -211,6 +211,54 @@
     height: 100%;
 }
 
+/* In-game Top Action Bar (Back to Games & Pause) */
+#hudTopBar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 12px;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+.hud-action-btn {
+    background: var(--bg-glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border-glass);
+    color: #e2e8f0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+    font-family: inherit;
+    user-select: none;
+}
+
+.hud-action-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.hud-action-btn:active {
+    transform: translateY(0);
+}
+
 @media (max-width: 768px) {
     #hud { top: 10px; left: 10px; gap: 8px; }
     .hud-card { min-width: 150px; padding: 8px 12px; }
@@ -218,4 +266,6 @@
     #weaponSelector { bottom: 115px; padding: 4px; gap: 6px; }
     .weapon-btn { padding: 6px 10px; font-size: 11px; }
     #minimapContainer { width: 110px; height: 110px; top: 10px; right: 10px; }
+    #hudTopBar { top: 10px; gap: 6px; }
+    .hud-action-btn { padding: 6px 12px; font-size: 11px; gap: 5px; }
 }

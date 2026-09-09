@@ -55,15 +55,20 @@ export function createEnvironment() {
 
         wallGroup.position.set(...w.pos);
         state.scene.add(wallGroup);
+        wallGroup.updateMatrixWorld(true);
 
-        // Cache AABB bounding box for wall collision
-        const box = new THREE.Box3().setFromObject(mesh);
+        // Precompute accurate AABB bounding box for wall collision
+        const box = new THREE.Box3().setFromCenterAndSize(
+            new THREE.Vector3(...w.pos),
+            new THREE.Vector3(...w.size)
+        );
         state.obstacleBoxes.push(box);
         state.obstacles.push(mesh);
     });
 
     // Create tactical interior covers and obstacles
     createMapObstacles();
+    state.scene.updateMatrixWorld(true);
 }
 
 function createTacticalGroundTexture() {
@@ -148,6 +153,7 @@ function createMapObstacles() {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
         state.scene.add(mesh);
+        mesh.updateMatrixWorld(true);
 
         // Precompute AABB for physics engine
         const box = new THREE.Box3().setFromObject(mesh);

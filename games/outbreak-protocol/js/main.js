@@ -70,6 +70,8 @@ function startGame() {
     initAudio();
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('hud').style.display = 'flex';
+    const topBar = document.getElementById('hudTopBar');
+    if (topBar) topBar.style.display = 'flex';
     document.getElementById('weaponSelector').style.display = 'flex';
     document.getElementById('crosshair').style.display = state.isThirdPerson ? 'none' : 'block';
     document.getElementById('minimapContainer').style.display = 'block';
@@ -97,13 +99,26 @@ function startGame() {
 function togglePause() {
     if (!state.gameActive) return;
     state.isPaused = !state.isPaused;
-    document.getElementById('pauseScreen').style.display = state.isPaused ? 'flex' : 'none';
+    const pauseScreen = document.getElementById('pauseScreen');
+    if (pauseScreen) pauseScreen.style.display = state.isPaused ? 'flex' : 'none';
 
     if (state.isPaused) {
-        document.exitPointerLock();
+        // Reset active movement and shooting states so operative doesn't slide or shoot when resuming
+        state.moveForward = false;
+        state.moveBackward = false;
+        state.moveLeft = false;
+        state.moveRight = false;
+        state.isShooting = false;
+        state.isSprinting = false;
+
+        if (document.pointerLockElement) {
+            document.exitPointerLock();
+        }
     } else {
         const canvas = document.getElementById('gameCanvas');
-        if (canvas) canvas.requestPointerLock().catch(() => {});
+        if (canvas && document.pointerLockElement !== canvas) {
+            canvas.requestPointerLock().catch(() => {});
+        }
     }
 }
 
@@ -130,6 +145,8 @@ function gameOver() {
     document.exitPointerLock();
 
     document.getElementById('hud').style.display = 'none';
+    const topBar = document.getElementById('hudTopBar');
+    if (topBar) topBar.style.display = 'none';
     document.getElementById('weaponSelector').style.display = 'none';
     document.getElementById('crosshair').style.display = 'none';
     document.getElementById('minimapContainer').style.display = 'none';
@@ -166,6 +183,16 @@ document.addEventListener('gameOver', gameOver);
 function setupEventListeners() {
     window.addEventListener('resize', onResize);
 
+    // Auto-pause if pointer lock is exited while actively playing (e.g. user pressed Escape or switched windows)
+    document.addEventListener('pointerlockchange', () => {
+        const canvas = document.getElementById('gameCanvas');
+        if (document.pointerLockElement !== canvas) {
+            if (state.gameActive && !state.isPaused) {
+                togglePause();
+            }
+        }
+    });
+
     document.addEventListener('keydown', (e) => {
         if (e.code === 'KeyW' || e.code === 'ArrowUp') state.moveForward = true;
         if (e.code === 'KeyS' || e.code === 'ArrowDown') state.moveBackward = true;
@@ -175,7 +202,10 @@ function setupEventListeners() {
         if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') state.isSprinting = true;
         if (e.code === 'KeyR') reloadWeapon();
         if (e.code === 'KeyV') toggleCameraView();
-        if (e.code === 'Escape') togglePause();
+        if (e.code === 'KeyP' || e.code === 'Escape') {
+            e.preventDefault();
+            togglePause();
+        }
         if (e.code === 'Space') state.isShooting = true;
 
         if (e.code === 'Digit1') switchWeapon(0);
@@ -289,6 +319,13 @@ function setupEventListeners() {
     // UI Buttons
     document.getElementById('startButton').addEventListener('click', startGame);
     document.getElementById('resumeButton').addEventListener('click', togglePause);
+    const hudPauseBtn = document.getElementById('hudPauseBtn');
+    if (hudPauseBtn) {
+        hudPauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePause();
+        });
+    }
     document.getElementById('viewToggleButton').addEventListener('click', toggleCameraView);
     document.getElementById('restartButtonPause').addEventListener('click', () => location.reload());
     document.getElementById('restartButtonGameOver').addEventListener('click', () => location.reload());
