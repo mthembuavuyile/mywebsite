@@ -893,6 +893,7 @@
 
     <!-- ------------------ START MENU SCREEN ------------------ -->
     <div class="screen-overlay" id="start-screen">
+        <a href="/games/index.html" class="screen-back-badge" title="Back to Games Hub"><i class="fas fa-arrow-left"></i> Games Hub</a>
         <h1 class="screen-title">MR RACER</h1>
         <p class="screen-subtitle">Neon Highway Arcade</p>
 
@@ -941,7 +942,10 @@
             </div>
         </div>
 
-        <button class="btn-primary" id="btn-start-race"><i class="fas fa-play" style="margin-right: 8px;"></i> Launch Race</button>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-primary" id="btn-start-race"><i class="fas fa-play" style="margin-right: 8px;"></i> Launch Race</button>
+            <a href="/games/index.html" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"><i class="fas fa-arrow-left"></i> All Games</a>
+        </div>
 
         <div style="margin-top: 18px; font-size: 13px; color: rgba(255, 255, 255, 0.5);">
             High Score: <span id="menu-high-score" style="color: var(--cyan); font-family: 'Orbitron', monospace;">0</span> | 
@@ -960,6 +964,7 @@
                 <button class="btn-primary" id="btn-resume-race">Resume Race</button>
                 <button class="btn-secondary" id="btn-restart-from-pause">Restart Race</button>
                 <button class="btn-secondary" id="btn-menu-from-pause">Main Menu</button>
+                <a href="/games/index.html" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"><i class="fas fa-arrow-left"></i> Back to Games</a>
             </div>
         </div>
     </div>
@@ -1005,6 +1010,7 @@
         <div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
             <button class="btn-primary" id="btn-race-again"><i class="fas fa-redo"></i> Race Again</button>
             <button class="btn-secondary" id="btn-gameover-menu"><i class="fas fa-home"></i> Main Menu</button>
+            <a href="/games/index.html" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"><i class="fas fa-arrow-left"></i> All Games</a>
         </div>
     </div>
 
