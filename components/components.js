@@ -7,16 +7,15 @@ class SiteHeader extends HTMLElement {
     this.innerHTML = `
       <header class="site-header">
         <div class="container nav-container">
-          <a href="/index.html" class="brand-logo">MRA ⚡</a>
+          <a href="/index.html" class="brand-logo">Avuyile Mthembu</a>
           <nav aria-label="Primary" class="desktop-nav">
             <ul class="nav-links">
               <li><a href="/index.html" data-nav="home">Home</a></li>
               <li><a href="/about.html" data-nav="about">About</a></li>
               <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
-              <li><a href="/games/index.html" data-nav="games">Games</a></li>
               <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
               <li><a href="/contact.html" data-nav="contact">Contact</a></li>
-              <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
+              <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Vylex</a></li>
             </ul>
           </nav>
           <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
@@ -30,10 +29,9 @@ class SiteHeader extends HTMLElement {
           <li><a href="/index.html" data-nav="home">Home</a></li>
           <li><a href="/about.html" data-nav="about">About</a></li>
           <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
-          <li><a href="/games/index.html" data-nav="games">Games</a></li>
           <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
           <li><a href="/contact.html" data-nav="contact">Contact</a></li>
-          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Company</a></li>
+          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Vylex</a></li>
         </ul>
       </nav>
     `;
@@ -42,14 +40,12 @@ class SiteHeader extends HTMLElement {
     const path = window.location.pathname;
     let activeNav = '';
     
-    if ((path === '/' || path.endsWith('/index.html')) && !path.includes('/blog') && !path.includes('/games') && !path.includes('/portfolio')) {
+    if ((path === '/' || path.endsWith('/index.html')) && !path.includes('/blog') && !path.includes('/portfolio')) {
       activeNav = 'home';
     } else if (path.includes('/about')) {
       activeNav = 'about';
     } else if (path.includes('/portfolio')) {
       activeNav = 'portfolio';
-    } else if (path.includes('/games')) {
-      activeNav = 'games';
     } else if (path.includes('/blog')) {
       activeNav = 'blog';
     } else if (path.includes('/contact')) {
