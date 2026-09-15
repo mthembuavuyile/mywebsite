@@ -956,9 +956,9 @@ options: ["Boomslang", "Black Mamba", "Puff Adder", "Cape Cobra"],
 category: "animals"
 },
 {
-question: "What traditional South African wedding custom involves the payment of 'lobola'?",
-answer: "Bride Price",
-options: ["Bride Price", "Wedding Dance", "Ring Exchange", "Umabo Ceremony"],
+question: "What is the traditional South African custom where the groom's family transfers livestock or property to the bride's family?",
+answer: "Lobola",
+options: ["Lobola", "Umabo", "Umhlonyane", "Umemulo"],
 category: "culture"
 }
 ];
