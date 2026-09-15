@@ -132,8 +132,8 @@
 }
 
 .project-card:hover .card-icon-wrapper {
-    background-color: var(--color-accent);
-    color: #ffffff;
+    background-color: #ffffff;
+    color: var(--color-accent);
 }
 
 .project-card h3 {
