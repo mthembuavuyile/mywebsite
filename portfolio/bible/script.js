@@ -421,7 +421,10 @@ function bibleApp() {
             cleanText = cleanText.replace(/([a-zA-Z])\d+/g, '$1');
             cleanText = cleanText.replace(/\b\d{4,5}\b/g, '');
 
-            // 6. Normalise whitespace
+            // 6. Remove unwanted space before punctuation (e.g. from stripped tags)
+            cleanText = cleanText.replace(/\s+([,.:;?!])/g, '$1');
+
+            // 7. Normalise whitespace
             return cleanText.replace(/\s+/g, ' ').trim();
         },
 
