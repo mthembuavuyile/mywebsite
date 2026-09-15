@@ -1,12 +1,3 @@
-const ALL_EMOJI = [
-    '😀', '😂', '😍', '🥰', '😎', '🤔', '😭', '😡', '🥺', '🤩', '😴', '🤯',
-    '👍', '👎', '❤️', '💔', '💯', '🔥', '✨', '⭐', '🌟', '💫', '🎉', '🎊',
-    '🌈', '☀️', '🌙', '⚡', '❄️', '🌊', '🍕', '🍔', '🍦', '🎂', '🍜', '🌮',
-    '🐶', '🐱', '🦊', '🐻', '🐼', '🦁', '🐸', '🦋', '🌸', '🌺', '🌻', '🌹',
-    '🎵', '🎸', '🎹', '🎤', '🎬', '🎮', '🏆', '⚽', '🎯', '🚀', '🛸', '🌍',
-    '💎', '👑', '🗝️', '📸', '💡', '⚙️', '🔮', '🪄', '💣', '🎭', '🖤', '💜',
-    '🤘', '🙌', '👏', '🤝', '✌️', '🤞', '💪', '🦄', '🐉', '🦅', '🌵', '🌴'
-];
 
 class ImageCraftPro {
     constructor() {
@@ -37,7 +28,6 @@ class ImageCraftPro {
 
         this.initNoisePattern();
         this.initUI();
-        this.initEmoji();
     }
 
     initNoisePattern() {
@@ -299,13 +289,12 @@ class ImageCraftPro {
         document.getElementById('text-input').value = '';
     }
 
-    initEmoji() {
-        document.getElementById('emoji-grid').innerHTML = ALL_EMOJI.map(e => `<button class="emoji-btn" onclick="app.createLayer('${e}', parseInt(document.getElementById('emoji-size').value), 'transparent', true)">${e}</button>`).join('');
-    }
-    searchEmoji(q) {
-        if (!q) return this.initEmoji();
-        const filtered = ALL_EMOJI.filter(e => e.toLowerCase().includes(q.toLowerCase()) || Math.random() > 0.6).slice(0, 30);
-        document.getElementById('emoji-grid').innerHTML = filtered.map(e => `<button class="emoji-btn" onclick="app.createLayer('${e}', parseInt(document.getElementById('emoji-size').value), 'transparent', true)">${e}</button>`).join('');
+    addNativeEmoji() {
+        const val = document.getElementById('emoji-input').value.trim();
+        if (!val) return this.toast('Please enter an emoji first');
+        const size = parseInt(document.getElementById('emoji-size').value);
+        this.createLayer(val, size, 'transparent', true);
+        document.getElementById('emoji-input').value = '';
     }
 
     createLayer(text, size, color, isEmoji) {

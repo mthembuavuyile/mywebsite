@@ -223,16 +223,23 @@
 
                 <div class="tab-pane" id="tab-emoji">
                     <h3>Add Emoji</h3>
-                    <input type="text" class="text-input" id="emoji-search" placeholder="Search emojis..."
-                        oninput="app.searchEmoji(this.value)" style="margin-bottom: 1rem;">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        Use your device's emoji keyboard (<strong>Win + .</strong> on Windows, <strong>Cmd + Ctrl + Space</strong> on Mac) to type and search for emojis natively.
+                    </p>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Type Emoji</label>
+                        <input type="text" class="text-input" id="emoji-input" placeholder="🌟" style="font-size: 1.5rem; text-align: center; margin-bottom: 1rem;">
+                    </div>
 
                     <div class="control-group">
                         <label class="control-label">Emoji Size <span class="range-value"
                                 id="val-emoji-size">120</span></label>
-                        <input type="range" id="emoji-size" min="20" max="400" value="120">
+                        <input type="range" id="emoji-size" min="20" max="400" value="120" oninput="document.getElementById('val-emoji-size').innerText = this.value">
                     </div>
 
-                    <div class="emoji-grid" id="emoji-grid"></div>
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 1.5rem;"
+                        onclick="app.addNativeEmoji()"><i class="fas fa-plus"></i> Add Emoji</button>
                 </div>
 
             </div>
@@ -267,13 +274,8 @@
     <footer class="footer">
         <div class="footer-content">
             <p class="footer-text">
-                Built by <a href="https://avuyilemthembu.co.za" target="_blank">Vylex</a>
+                Built by <a href="https://avuyilemthembu.co.za" target="_blank">Avuyile Mthembu</a>
             </p>
-
-            <div class="footer-links">
-                <a href="/apps/">Apps</a>
-                <a href="/products">Products</a>
-            </div>
         </div>
     </footer>
 
