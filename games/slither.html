@@ -209,6 +209,32 @@
             box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
         }
 
+        .big-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            min-width: 180px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .big-btn-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             .header {
@@ -259,7 +285,6 @@
         <div class="controls">
             <button class="btn" onclick="togglePause()" id="pauseBtn">Pause</button>
             <button class="btn" onclick="resetGame()">Reset</button>
-            <a href="/games/index.html" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Back to Games</a>
         </div>
 
         <div class="overlay">
@@ -267,7 +292,7 @@
             <h2>Game Over!</h2>
             <p style="margin-bottom: 2rem; font-size: 1.2rem; text-align: center">Final Score: <span id="finalScore">0</span></p>
             <button class="big-btn" onclick="startGame()">Play Again</button>
-            <a href="/games/index.html" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; margin-top: 10px; width: 100%; max-width: 260px;">Back to Games</a>
+            <a href="/games/index.html" class="big-btn-secondary">Back to Games</a>
             <p style="margin-top: 1rem; text-align: center">Swipe to control the snake</p>
         </div>
     </div>
