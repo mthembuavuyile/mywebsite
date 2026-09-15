@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vylex Academy Advanced Encryption</title>
+    <title>Advanced Encryption Tool | Avuyile Mthembu</title>
+    <meta name="author" content="Avuyile Mthembu">
     <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
     <meta name="description"
-        content="Advanced symmetric encryption tool by Vylex Academy. Secure your messages with multiple encryption algorithms and customizable settings.">
+        content="Advanced symmetric encryption tool by Avuyile Mthembu. Secure your messages with multiple encryption algorithms and customizable settings.">
 
     <meta property="og:url" content="https://avuyilemthembu.co.za/portfolio/enigma/">
 
@@ -568,7 +569,9 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <div class="logo">Vylex Academy</div>
+            <a href="https://avuyilemthembu.co.za/" style="text-decoration: none;">
+                <div class="logo">Encryption Tool</div>
+            </a>
             <div class="tagline">Advanced Symmetric Encryption Tool</div>
         </div>
 
@@ -642,7 +645,7 @@
                 <div id="classic-output" class="output"></div>
                 <div class="output-controls">
                     <button onclick="copyToClipboard('classic-output')">Copy</button>
-                    <button onclick="downloadText('classic-output', 'vylex-encryption')">Download</button>
+                    <button onclick="downloadText('classic-output', 'encryption-output')">Download</button>
                 </div>
             </div>
         </div>
@@ -658,7 +661,7 @@
                             <option value="aes">AES (Advanced Encryption Standard)</option>
                             <option value="des">Triple DES</option>
                             <option value="rc4">RC4 Stream Cipher</option>
-                            <option value="custom">Custom Vylex Cipher</option>
+                            <option value="custom">Custom Cipher</option>
                         </select>
                     </div>
                     <div style="flex: 3;">
@@ -714,7 +717,7 @@
                 <div id="modern-output" class="output"></div>
                 <div class="output-controls">
                     <button onclick="copyToClipboard('modern-output')">Copy</button>
-                    <button onclick="downloadText('modern-output', 'vylex-encryption')">Download</button>
+                    <button onclick="downloadText('modern-output', 'encryption-output')">Download</button>
                 </div>
             </div>
         </div>
@@ -747,7 +750,7 @@
                     <li><strong>AES:</strong> Advanced Encryption Standard, modern and highly secure.</li>
                     <li><strong>Triple DES:</strong> An extension of the Data Encryption Standard.</li>
                     <li><strong>RC4:</strong> A simple stream cipher (not recommended for high security).</li>
-                    <li><strong>Vylex Cipher:</strong> A custom-designed cipher for educational purposes.</li>
+                    <li><strong>Custom Cipher:</strong> A custom-designed cipher for educational purposes.</li>
                 </ul>
                 <br>
                 <p>For maximum security:</p>
@@ -761,9 +764,8 @@
         </div>
 
         <div class="footer">
-            Vylex Academy Advanced Encryption Tool &copy; 2025<br>
-            <a href="https://avuyilemthembu.co.za/" target="_top">Visit Vylex Academy</a> | <a
-                href="https://avuyilemthembu.co.za/" onclick="showCredits()">About</a>
+            Advanced Encryption Tool &copy; 2025<br>
+            Developed by <a href="https://avuyilemthembu.co.za/" target="_top">Avuyile Mthembu</a> | <a href="javascript:void(0)" onclick="showCredits()">About</a>
         </div>
     </div>
 
@@ -1111,7 +1113,7 @@
             }
         }
 
-        function customVylexCipher(text, key, encrypt = true) {
+        function customCipher(text, key, encrypt = true) {
             // Custom cipher for educational purposes
             const keySum = Array.from(key).reduce((sum, char) => sum + char.charCodeAt(0), 0);
             let result = '';
@@ -1163,7 +1165,7 @@
                             result = rc4Encrypt(input, key);
                             break;
                         case 'custom':
-                            result = customVylexCipher(input, key, true);
+                            result = customCipher(input, key, true);
                             break;
                     }
                 } else { // decrypt
@@ -1178,7 +1180,7 @@
                             result = rc4Decrypt(input, key);
                             break;
                         case 'custom':
-                            result = customVylexCipher(atob(input), key, false);
+                            result = customCipher(atob(input), key, false);
                             break;
                     }
                 }
@@ -1288,11 +1290,11 @@
             updateHistoryDisplay();
 
             // Save to local storage
-            localStorage.setItem('vylexEncryptionHistory', JSON.stringify(encryptionHistory));
+            localStorage.setItem('encryptionHistory', JSON.stringify(encryptionHistory));
         }
 
         function loadHistory() {
-            const saved = localStorage.getItem('vylexEncryptionHistory');
+            const saved = (localStorage.getItem('encryptionHistory') || localStorage.getItem('vylexEncryptionHistory'));
             if (saved) {
                 try {
                     encryptionHistory = JSON.parse(saved);
@@ -1331,7 +1333,7 @@
             if (confirm('Are you sure you want to clear your encryption history?')) {
                 encryptionHistory = [];
                 updateHistoryDisplay();
-                localStorage.removeItem('vylexEncryptionHistory');
+                localStorage.removeItem('encryptionHistory'); localStorage.removeItem('vylexEncryptionHistory');
             }
         }
 
@@ -1364,7 +1366,7 @@
         }
 
         function showCredits() {
-            alert('Vylex Academy Advanced Encryption Tool\nVersion 3.7.2\n\nDeveloped by MR A for educational purposes only.\nThis tool is meant for learning about encryption concepts and should not be used for encrypting sensitive information.');
+            alert('Advanced Encryption Tool\nVersion 3.7.2\n\nDeveloped by Avuyile Mthembu for educational purposes only.\nThis tool is meant for learning about encryption concepts and should not be used for encrypting sensitive information.');
         }
 
         // Initialize
