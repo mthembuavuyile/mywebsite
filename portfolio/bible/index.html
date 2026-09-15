@@ -170,10 +170,6 @@
             color: #fdf6e3 !important;
         }
 
-        html.sepia .verse-active {
-            background-color: #dfc8a6 !important;
-        }
-
         .verse-highlighted {
             background-color: #fef9c3 !important; /* warm yellow */
             border-radius: 4px;
@@ -182,7 +178,10 @@
             background-color: #422006 !important; /* dark amber */
         }
         html.sepia .verse-highlighted {
-            background-color: #fbe4af !important; /* sepia golden */
+            background-color: #f3cb69 !important; /* rich warm golden-amber highlighter */
+            color: #261606 !important; /* deep contrast for high legibility */
+            box-shadow: 0 0 0 1px #e6ba50 inset;
+            border-radius: 4px;
         }
 
         /* Active verse overrides highlight */
@@ -194,7 +193,18 @@
             background-color: #1e284a !important; /* Tailwind's indigo-900/50 */
         }
         html.sepia .verse-active {
-            background-color: #dfc8a6 !important; /* Sepia's verse-active */
+            background-color: #d8b788 !important; /* distinctly deeper parchment selection */
+            color: #1a0f04 !important;
+            border-radius: 4px;
+        }
+
+        /* Sepia action button and badge styling */
+        html.sepia .bg-yellow-100 {
+            background-color: #f3cb69 !important;
+            color: #3b2204 !important;
+        }
+        html.sepia .text-yellow-600 {
+            color: #925304 !important;
         }
     </style>
 </head>
@@ -235,10 +245,21 @@
         </button>
 
         <!-- Right Icons -->
-        <button @click="openTranslations()"
-            class="w-10 h-10 flex items-center justify-center rounded-full active:bg-gray-100 dark:active:bg-gray-800 theme-text-muted">
-            <i class="fas fa-language"></i>
-        </button>
+        <div class="flex items-center space-x-1">
+            <button @click="showHighlightsModal = true"
+                class="relative w-10 h-10 flex items-center justify-center rounded-full active:bg-gray-100 dark:active:bg-gray-800 theme-text-muted transition-colors"
+                title="Saved Highlights">
+                <i class="fas fa-bookmark text-base"></i>
+                <span x-show="highlightsCount > 0" x-cloak
+                    class="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-1 bg-amber-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center"
+                    x-text="highlightsCount > 99 ? '99+' : highlightsCount"></span>
+            </button>
+            <button @click="openTranslations()"
+                class="w-10 h-10 flex items-center justify-center rounded-full active:bg-gray-100 dark:active:bg-gray-800 theme-text-muted transition-colors"
+                title="Translations">
+                <i class="fas fa-language"></i>
+            </button>
+        </div>
     </header>
 
     <!-- MAIN HOME AREA -->
@@ -280,6 +301,43 @@
                 <span class="font-semibold text-sm">Browse Books</span>
                 <span class="text-xs text-gray-400 dark:text-gray-500 theme-text-muted mt-0.5">66 Books</span>
             </button>
+        </div>
+
+        <!-- Saved Highlights Card (Home Page) -->
+        <div class="mb-10 bg-white dark:bg-gray-800 theme-surface rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 theme-border">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-sm">
+                        <i class="fas fa-highlighter"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white theme-text text-base">Saved Highlights</h3>
+                </div>
+                <button @click="showHighlightsModal = true" class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 theme-accent hover:underline">
+                    View all (<span x-text="highlightsCount"></span>)
+                </button>
+            </div>
+            
+            <template x-if="highlightsCount === 0">
+                <p class="text-xs text-gray-500 dark:text-gray-400 theme-text-muted leading-relaxed">
+                    No highlights saved yet. Tap any verse while reading and select <span class="font-semibold text-amber-600 dark:text-amber-400">Highlight</span> to save it here.
+                </p>
+            </template>
+            
+            <template x-if="highlightsCount > 0">
+                <div class="space-y-2.5 mt-3">
+                    <template x-for="h in savedHighlightsList.slice(0, 3)" :key="h.key">
+                        <div @click="openHighlight(h)" class="cursor-pointer p-3.5 rounded-2xl bg-gray-50 dark:bg-gray-900/50 theme-bg border border-gray-100 dark:border-gray-700/60 hover:border-amber-300 dark:hover:border-amber-600/60 transition-all">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-xs text-indigo-600 dark:text-indigo-400 theme-accent" x-text="h.reference"></span>
+                                <span class="text-[10px] text-gray-400 dark:text-gray-500 flex items-center">
+                                    Read <i class="fas fa-arrow-right ml-1 text-[8px]"></i>
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-700 dark:text-gray-300 line-clamp-1 italic font-serif" x-text="h.text ? `&quot;${h.text}&quot;` : 'Tap to read verse in context'"></p>
+                        </div>
+                    </template>
+                </div>
+            </template>
         </div>
 
         <!-- Features Grid -->
@@ -556,6 +614,81 @@
                        :class="{'text-yellow-600 dark:text-yellow-400': isVerseHighlighted(activeVerse), 'text-gray-500 theme-text-muted': !isVerseHighlighted(activeVerse)}"></i>
                     <span class="text-sm font-semibold" x-text="isVerseHighlighted(activeVerse) ? 'Unhighlight' : 'Highlight'"></span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HIGHLIGHTS MODAL -->
+    <div x-show="showHighlightsModal" x-cloak class="fixed inset-0 z-50 flex flex-col justify-end sm:justify-center sm:items-center">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm" @click="showHighlightsModal = false"
+            x-transition.opacity></div>
+
+        <!-- Modal Content -->
+        <div class="relative bg-white dark:bg-gray-900 theme-surface w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl max-h-[85vh] flex flex-col shadow-2xl font-sans overflow-hidden border-t sm:border border-gray-100 dark:border-gray-800"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="translate-y-full sm:translate-y-4 sm:opacity-0"
+            x-transition:enter-end="translate-y-0 sm:opacity-100" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="translate-y-0 sm:opacity-100" x-transition:leave-end="translate-y-full sm:translate-y-4 sm:opacity-0">
+
+            <!-- Mobile drag indicator -->
+            <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full mx-auto mt-3 mb-1 sm:hidden"></div>
+
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-800 theme-border">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-sm">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white theme-text leading-tight">Saved Highlights</h3>
+                        <span class="text-xs text-gray-400 dark:text-gray-500" x-text="`${highlightsCount} verse${highlightsCount === 1 ? '' : 's'} saved`"></span>
+                    </div>
+                </div>
+                <button @click="showHighlightsModal = false"
+                    class="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center theme-text hover:opacity-75 transition-opacity">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-3">
+                <!-- Empty State -->
+                <template x-if="highlightsCount === 0">
+                    <div class="text-center py-12 px-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mx-auto mb-3 text-gray-400">
+                            <i class="fas fa-highlighter text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-200 theme-text mb-1">No Highlights Yet</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 theme-text-muted max-w-xs mx-auto leading-relaxed">
+                            While reading any chapter, tap a verse and select <span class="font-semibold text-amber-600 dark:text-amber-400">Highlight</span> to save your favorite passages here.
+                        </p>
+                    </div>
+                </template>
+
+                <!-- Highlights List -->
+                <template x-if="highlightsCount > 0">
+                    <div class="space-y-3">
+                        <template x-for="item in savedHighlightsList" :key="item.key">
+                            <div class="p-4 bg-gray-50 dark:bg-gray-800/60 theme-bg rounded-2xl border border-gray-100 dark:border-gray-700/60 hover:border-indigo-200 dark:hover:border-indigo-800 transition-all flex flex-col justify-between">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div @click="openHighlight(item)" class="cursor-pointer">
+                                        <span class="font-bold text-sm text-indigo-600 dark:text-indigo-400 theme-accent hover:underline" x-text="item.reference"></span>
+                                    </div>
+                                    <button @click="removeHighlight(item)" class="text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1" title="Remove highlight">
+                                        <i class="fas fa-trash-can text-xs"></i>
+                                    </button>
+                                </div>
+                                <div @click="openHighlight(item)" class="cursor-pointer">
+                                    <p class="text-sm font-serif text-gray-800 dark:text-gray-200 theme-text italic leading-relaxed line-clamp-3"
+                                        x-text="item.text ? `&quot;${item.text}&quot;` : 'Tap to read verse in context'"></p>
+                                    <div class="mt-2.5 text-[11px] font-sans text-indigo-600 dark:text-indigo-400 theme-accent flex items-center font-medium">
+                                        Read chapter <i class="fas fa-arrow-right ml-1 text-[9px]"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
             </div>
         </div>
     </div>

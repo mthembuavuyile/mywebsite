@@ -129,6 +129,7 @@ function bibleApp() {
         activeVerse: null,
         toast: { show: false, message: '', timeout: null },
         targetVerse: null,
+        showHighlightsModal: false,
 
         // Concurrency & Race Condition guards
         activeFetchId: 0,
@@ -189,6 +190,33 @@ function bibleApp() {
             if (!verse) return false;
             const key = `${this.selectedBook}-${this.selectedChapter}-${verse.verse}`;
             return !!this.highlights[key];
+        },
+
+        get savedHighlightsList() {
+            return Object.entries(this.highlights).map(([key, val]) => {
+                const parts = key.split('-');
+                const bookId = (typeof val === 'object' && val?.book) ? val.book : parts[0];
+                const chapter = (typeof val === 'object' && val?.chapter) ? val.chapter : parseInt(parts[1], 10);
+                const verse = (typeof val === 'object' && val?.verse) ? val.verse : parseInt(parts[2], 10);
+                const text = (typeof val === 'object' && val?.text) ? val.text : '';
+                const book = this.bibleBooks.find(b => b.id === bookId);
+                const bookName = book?.name || bookId;
+                const date = (typeof val === 'object' && val?.date) ? val.date : null;
+                return {
+                    key,
+                    bookId,
+                    bookName,
+                    chapter,
+                    verse,
+                    text,
+                    reference: `${bookName} ${chapter}:${verse}`,
+                    date
+                };
+            }).reverse();
+        },
+
+        get highlightsCount() {
+            return Object.keys(this.highlights).length;
         },
 
         // ─────────────────────────────────────────────
@@ -803,6 +831,26 @@ function bibleApp() {
             }
         },
 
+        openHighlight(item) {
+            if (!item) return;
+            this.selectedBook = item.bookId;
+            this.selectedChapter = item.chapter;
+            this.targetVerse = item.verse;
+            this.showHighlightsModal = false;
+            this.currentView = 'reader';
+            this._updateUrl(false);
+            this.fetchVerses();
+        },
+
+        removeHighlight(item) {
+            if (!item || !item.key) return;
+            const newHighlights = { ...this.highlights };
+            delete newHighlights[item.key];
+            this.highlights = newHighlights;
+            this.saveHighlights();
+            this.showToast('Highlight removed');
+        },
+
         toggleHighlight(verse) {
             if (!verse) return;
             const key = `${this.selectedBook}-${this.selectedChapter}-${verse.verse}`;
@@ -813,7 +861,16 @@ function bibleApp() {
                 this.highlights = newHighlights;
                 this.showToast('Verse unhighlighted.');
             } else {
-                this.highlights = { ...this.highlights, [key]: true };
+                this.highlights = {
+                    ...this.highlights,
+                    [key]: {
+                        book: this.selectedBook,
+                        chapter: this.selectedChapter,
+                        verse: verse.verse,
+                        text: verse.text ? verse.text.trim() : '',
+                        date: Date.now()
+                    }
+                };
                 this.showToast('Verse highlighted ✓');
             }
             this.saveHighlights();
