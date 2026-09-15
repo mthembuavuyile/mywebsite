@@ -82,6 +82,19 @@ function bibleApp() {
 
         themes: ['light', 'dark', 'sepia'],
 
+        dailyVerses: [
+            { text: "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life.", reference: "John 3:16", book: "JHN", chapter: 3, verse: 16 },
+            { text: "I can do all things through Christ, who strengthens me.", reference: "Philippians 4:13", book: "PHP", chapter: 4, verse: 13 },
+            { text: "Trust in Yahweh with all your heart, and don’t lean on your own understanding.", reference: "Proverbs 3:5", book: "PRO", chapter: 3, verse: 5 },
+            { text: "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faith, gentleness, and self-control. Against such things there is no law.", reference: "Galatians 5:22-23", book: "GAL", chapter: 5, verse: 22 },
+            { text: "For I know the thoughts that I think toward you, says Yahweh, thoughts of peace, and not of evil, to give you hope and a future.", reference: "Jeremiah 29:11", book: "JER", chapter: 29, verse: 11 },
+            { text: "Yahweh is my shepherd: I shall lack nothing.", reference: "Psalms 23:1", book: "PSA", chapter: 23, verse: 1 },
+            { text: "But those who wait for Yahweh will renew their strength. They will mount up with wings like eagles. They will run, and not be weary. They will walk, and not faint.", reference: "Isaiah 40:31", book: "ISA", chapter: 40, verse: 31 },
+            { text: "And we know that all things work together for good for those who love God, for those who are called according to his purpose.", reference: "Romans 8:28", book: "ROM", chapter: 8, verse: 28 },
+            { text: "Don’t be anxious for anything, but in everything by prayer and petition with thanksgiving, let your requests be made known to God.", reference: "Philippians 4:6", book: "PHP", chapter: 4, verse: 6 },
+            { text: "Therefore if anyone is in Christ, he is a new creation. The old things have passed away. Behold, all things have become new.", reference: "2 Corinthians 5:17", book: "2CO", chapter: 5, verse: 17 }
+        ],
+
         // Translation code mappings per API (primary uses lowercase, bolls uses uppercase)
         // Bolls.life supported translations that overlap with our list
         bollsTranslationMap: {
@@ -98,6 +111,9 @@ function bibleApp() {
         selectedChapter: 3,
         translation: 'web',
         theme: 'light',
+        
+        currentView: 'home',
+        verseOfTheDay: null,
 
         verses: [],
         loading: true,
@@ -180,22 +196,36 @@ function bibleApp() {
             this.loadPreferences();
 
             // --- NEW: Parse URL Parameters ---
+            let hasParams = false;
             const params = new URLSearchParams(window.location.search);
             if (params.has('book')) {
                 const b = params.get('book').toUpperCase();
-                if (this.bibleBooks.find(book => book.id === b)) this.selectedBook = b;
+                if (this.bibleBooks.find(book => book.id === b)) { this.selectedBook = b; hasParams = true; }
             }
             if (params.has('chapter')) {
                 const c = parseInt(params.get('chapter'), 10);
-                if (!isNaN(c) && c > 0) this.selectedChapter = c;
+                if (!isNaN(c) && c > 0) { this.selectedChapter = c; hasParams = true; }
             }
             if (params.has('translation')) {
                 const t = params.get('translation').toLowerCase();
-                if (this.translations.find(trans => trans.id === t)) this.translation = t;
+                if (this.translations.find(trans => trans.id === t)) { this.translation = t; hasParams = true; }
             }
             if (params.has('verse')) {
                 this.targetVerse = parseInt(params.get('verse'), 10);
+                hasParams = true;
             }
+
+            if (hasParams) {
+                this.currentView = 'reader';
+            }
+
+            // Select verse of the day based on day of year
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            this.verseOfTheDay = this.dailyVerses[dayOfYear % this.dailyVerses.length];
 
             this.loadHighlights(); // NEW: Load highlights on init
             this.applyTheme();
@@ -373,6 +403,32 @@ function bibleApp() {
         // ─────────────────────────────────────────────
         // VERSE FETCHING — 3-TIER FALLBACK
         // ─────────────────────────────────────────────
+
+        goHome() {
+            this.currentView = 'home';
+            window.scrollTo(0, 0);
+        },
+
+        openReader() {
+            this.currentView = 'reader';
+            if (this.verses.length === 0) {
+                this.fetchVerses();
+            }
+            window.scrollTo(0, 0);
+        },
+
+        openVerseOfTheDay() {
+            this.selectedBook = this.verseOfTheDay.book;
+            this.selectedChapter = this.verseOfTheDay.chapter;
+            this.targetVerse = this.verseOfTheDay.verse;
+            this.openReader();
+            this.fetchVerses();
+        },
+
+        // --- NEW METHOD TO OPEN TRANSLATIONS FROM HOME ---
+        openTranslations() {
+            this.showTranslationMenu = true;
+        },
 
         async fetchVerses() {
             this.loading = true;
