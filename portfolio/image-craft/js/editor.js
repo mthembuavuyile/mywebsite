@@ -293,7 +293,7 @@ class ImageCraftPro {
         const val = document.getElementById('emoji-input').value.trim();
         if (!val) return this.toast('Please enter an emoji first');
         const size = parseInt(document.getElementById('emoji-size').value);
-        this.createLayer(val, size, 'transparent', true);
+        this.createLayer(val, size, '#ffffff', true);
         document.getElementById('emoji-input').value = '';
     }
 
@@ -323,7 +323,7 @@ class ImageCraftPro {
         node.style.fontWeight = layer.bold ? '700' : '400';
         node.style.fontStyle = layer.italic ? 'italic' : 'normal';
         node.style.textShadow = layer.shadow ? `2px 2px ${6 * this.displayScale}px rgba(0,0,0,0.8)` : 'none';
-        node.style.fontFamily = layer.isEmoji ? 'sans-serif' : "'Inter', sans-serif";
+        node.style.fontFamily = layer.isEmoji ? '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif' : "'Inter', sans-serif";
     }
 
     initDrag(node, layer) {
@@ -605,7 +605,7 @@ class ImageCraftPro {
         ectx.textAlign = 'center'; ectx.textBaseline = 'middle';
         this.layers.forEach(l => {
             ectx.save();
-            ectx.font = `${l.italic ? 'italic ' : ''}${l.bold ? '700 ' : '400 '}${l.size}px ${l.isEmoji ? 'sans-serif' : "'Inter', sans-serif"}`;
+            ectx.font = `${l.italic ? 'italic ' : ''}${l.bold ? '700 ' : '400 '}${l.size}px ${l.isEmoji ? '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif' : "'Inter', sans-serif"}`;
             ectx.fillStyle = l.color;
             if (l.shadow) { ectx.shadowColor = 'rgba(0,0,0,0.8)'; ectx.shadowBlur = 6; ectx.shadowOffsetX = 2; ectx.shadowOffsetY = 2; }
 

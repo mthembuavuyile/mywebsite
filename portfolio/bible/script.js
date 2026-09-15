@@ -208,10 +208,10 @@ function bibleApp() {
 
         loadPreferences() {
             try {
-                this.selectedBook = localStorage.getItem('vylex_bible_book') || 'JHN';
-                this.selectedChapter = parseInt(localStorage.getItem('vylex_bible_chapter') || '3', 10);
-                this.translation = localStorage.getItem('vylex_bible_translation') || 'web';
-                this.theme = localStorage.getItem('vylex_bible_theme') || 'light';
+                this.selectedBook = localStorage.getItem('avuyile_bible_book') || 'JHN';
+                this.selectedChapter = parseInt(localStorage.getItem('avuyile_bible_chapter') || '3', 10);
+                this.translation = localStorage.getItem('avuyile_bible_translation') || 'web';
+                this.theme = localStorage.getItem('avuyile_bible_theme') || 'light';
 
                 // Guard against corrupted values
                 if (!this.bibleBooks.find(b => b.id === this.selectedBook)) this.selectedBook = 'JHN';
@@ -225,10 +225,10 @@ function bibleApp() {
 
         savePreferences() {
             try {
-                localStorage.setItem('vylex_bible_book', this.selectedBook);
-                localStorage.setItem('vylex_bible_chapter', String(this.selectedChapter));
-                localStorage.setItem('vylex_bible_translation', this.translation);
-                localStorage.setItem('vylex_bible_theme', this.theme);
+                localStorage.setItem('avuyile_bible_book', this.selectedBook);
+                localStorage.setItem('avuyile_bible_chapter', String(this.selectedChapter));
+                localStorage.setItem('avuyile_bible_translation', this.translation);
+                localStorage.setItem('avuyile_bible_theme', this.theme);
             } catch {
                 // Ignore write errors (storage quota, etc.)
             }
@@ -237,7 +237,7 @@ function bibleApp() {
         // NEW: Highlight management persistence
         saveHighlights() {
             try {
-                localStorage.setItem('vylex_bible_highlights', JSON.stringify(this.highlights));
+                localStorage.setItem('avuyile_bible_highlights', JSON.stringify(this.highlights));
             } catch (e) {
                 console.warn('Could not save highlights to localStorage:', e);
                 this.showToast('Could not save highlight (storage full?)', 4000);
@@ -246,7 +246,7 @@ function bibleApp() {
 
         loadHighlights() {
             try {
-                const storedHighlights = localStorage.getItem('vylex_bible_highlights');
+                const storedHighlights = localStorage.getItem('avuyile_bible_highlights');
                 this.highlights = storedHighlights ? JSON.parse(storedHighlights) : {};
             } catch (e) {
                 console.warn('Could not load highlights from localStorage, resetting:', e);
@@ -348,7 +348,7 @@ function bibleApp() {
         // ─────────────────────────────────────────────
 
         _cacheKey() {
-            return `vylex_bible_${this.translation}_${this.selectedBook}_${this.selectedChapter}`;
+            return `avuyile_bible_${this.translation}_${this.selectedBook}_${this.selectedChapter}`;
         },
 
         _readCache() {
@@ -564,7 +564,7 @@ function bibleApp() {
             this.activeVerse = (this.activeVerse?.verse === verse.verse) ? null : verse;
         },
         _getShareUrl() {
-            const baseUrl = window.location.origin + window.location.pathname; // Gets https://vylex.co.za/portfolio/bible/index.html
+            const baseUrl = window.location.origin + window.location.pathname; // Gets https://avuyilemthembu.co.za/portfolio/bible/index.html
             return `${baseUrl}?book=${this.selectedBook}&chapter=${this.selectedChapter}&verse=${this.activeVerse.verse}&translation=${this.translation}`;
         },
 
