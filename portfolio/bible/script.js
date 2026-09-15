@@ -95,12 +95,10 @@ function bibleApp() {
             { text: "Therefore if anyone is in Christ, he is a new creation. The old things have passed away. Behold, all things have become new.", reference: "2 Corinthians 5:17", book: "2CO", chapter: 5, verse: 17 }
         ],
 
-        // Translation code mappings per API (primary uses lowercase, bolls uses uppercase)
-        // Bolls.life supported translations that overlap with our list
         bollsTranslationMap: {
             web: 'WEB',
             kjv: 'KJV',
-            bbe: 'BBE'
+            bbe: 'WEB' // Bolls does not host BBE, so fallback gracefully to WEB
         },
 
         // ─────────────────────────────────────────────
@@ -116,7 +114,7 @@ function bibleApp() {
         verseOfTheDay: null,
 
         verses: [],
-        loading: true,
+        loading: false,
         error: false,
         errorMessage: '',
 
@@ -132,21 +130,25 @@ function bibleApp() {
         toast: { show: false, message: '', timeout: null },
         targetVerse: null,
 
+        // Concurrency & Race Condition guards
+        activeFetchId: 0,
+        activeAbortController: null,
+
         // ─────────────────────────────────────────────
         // COMPUTED GETTERS
         // ─────────────────────────────────────────────
 
         get oldTestamentBooks() {
-            const q = this.searchQuery.toLowerCase();
+            const q = this.searchQuery.toLowerCase().trim();
             return this.bibleBooks.filter(
-                b => b.testament === 'OT' && b.name.toLowerCase().includes(q)
+                b => b.testament === 'OT' && (b.name.toLowerCase().includes(q) || b.id.toLowerCase().includes(q))
             );
         },
 
         get newTestamentBooks() {
-            const q = this.searchQuery.toLowerCase();
+            const q = this.searchQuery.toLowerCase().trim();
             return this.bibleBooks.filter(
-                b => b.testament === 'NT' && b.name.toLowerCase().includes(q)
+                b => b.testament === 'NT' && (b.name.toLowerCase().includes(q) || b.id.toLowerCase().includes(q))
             );
         },
 
@@ -156,6 +158,10 @@ function bibleApp() {
 
         get currentBook() {
             return this.bibleBooks.find(b => b.id === this.selectedBook) || null;
+        },
+
+        get currentPassageLabel() {
+            return this.currentBookName ? `${this.currentBookName} ${this.selectedChapter}` : '';
         },
 
         get translationName() {
@@ -179,13 +185,48 @@ function bibleApp() {
             return this.selectedBook === 'REV' && this.selectedChapter === 22;
         },
 
-
-        //Check if a given verse is highlighted
-
         isVerseHighlighted(verse) {
             if (!verse) return false;
             const key = `${this.selectedBook}-${this.selectedChapter}-${verse.verse}`;
             return !!this.highlights[key];
+        },
+
+        // ─────────────────────────────────────────────
+        // HELPERS
+        // ─────────────────────────────────────────────
+
+        _findBook(query) {
+            if (!query) return null;
+            const q = String(query).trim().toLowerCase();
+            return this.bibleBooks.find(b => b.id.toLowerCase() === q || b.name.toLowerCase() === q) || null;
+        },
+
+        _updateUrl(push = false) {
+            try {
+                const url = new URL(window.location.href);
+                if (this.currentView === 'home') {
+                    url.search = '';
+                } else {
+                    url.searchParams.set('book', this.selectedBook);
+                    url.searchParams.set('chapter', String(this.selectedChapter));
+                    if (this.translation !== 'web') {
+                        url.searchParams.set('translation', this.translation);
+                    } else {
+                        url.searchParams.delete('translation');
+                    }
+                    if (this.targetVerse) {
+                        url.searchParams.set('verse', String(this.targetVerse));
+                    } else {
+                        url.searchParams.delete('verse');
+                    }
+                }
+                const state = { view: this.currentView, book: this.selectedBook, chapter: this.selectedChapter };
+                if (push) {
+                    history.pushState(state, '', url.toString());
+                } else {
+                    history.replaceState(state, '', url.toString());
+                }
+            } catch {}
         },
 
         // ─────────────────────────────────────────────
@@ -195,28 +236,55 @@ function bibleApp() {
         init() {
             this.loadPreferences();
 
-            // --- NEW: Parse URL Parameters ---
+            // Handle browser Back / Forward navigation
+            window.addEventListener('popstate', (e) => {
+                if (e.state && e.state.view) {
+                    this.currentView = e.state.view;
+                    if (e.state.book && e.state.chapter) {
+                        this.selectedBook = e.state.book;
+                        this.selectedChapter = e.state.chapter;
+                        this.fetchVerses();
+                    }
+                } else if (this.currentView === 'reader') {
+                    this.currentView = 'home';
+                }
+            });
+
+            // Parse URL Parameters (support both book ID & Name, e.g. "John" or "JHN")
             let hasParams = false;
             const params = new URLSearchParams(window.location.search);
+
             if (params.has('book')) {
-                const b = params.get('book').toUpperCase();
-                if (this.bibleBooks.find(book => book.id === b)) { this.selectedBook = b; hasParams = true; }
-            }
-            if (params.has('chapter')) {
-                const c = parseInt(params.get('chapter'), 10);
-                if (!isNaN(c) && c > 0) { this.selectedChapter = c; hasParams = true; }
-            }
-            if (params.has('translation')) {
-                const t = params.get('translation').toLowerCase();
-                if (this.translations.find(trans => trans.id === t)) { this.translation = t; hasParams = true; }
-            }
-            if (params.has('verse')) {
-                this.targetVerse = parseInt(params.get('verse'), 10);
-                hasParams = true;
+                const matched = this._findBook(params.get('book'));
+                if (matched) {
+                    this.selectedBook = matched.id;
+                    hasParams = true;
+                }
             }
 
-            if (hasParams) {
-                this.currentView = 'reader';
+            if (params.has('chapter')) {
+                const c = parseInt(params.get('chapter'), 10);
+                const currentB = this.currentBook;
+                if (!isNaN(c) && c > 0) {
+                    this.selectedChapter = currentB ? Math.min(c, currentB.chapters) : c;
+                    hasParams = true;
+                }
+            }
+
+            if (params.has('translation')) {
+                const t = params.get('translation').toLowerCase();
+                if (this.translations.find(trans => trans.id === t)) {
+                    this.translation = t;
+                    hasParams = true;
+                }
+            }
+
+            if (params.has('verse')) {
+                const v = parseInt(params.get('verse'), 10);
+                if (!isNaN(v) && v > 0) {
+                    this.targetVerse = v;
+                    hasParams = true;
+                }
             }
 
             // Select verse of the day based on day of year
@@ -227,9 +295,19 @@ function bibleApp() {
             const dayOfYear = Math.floor(diff / oneDay);
             this.verseOfTheDay = this.dailyVerses[dayOfYear % this.dailyVerses.length];
 
-            this.loadHighlights(); // NEW: Load highlights on init
+            this.loadHighlights();
             this.applyTheme();
-            this.fetchVerses();
+
+            // Preload cached passage for instantaneous display
+            const cached = this._readCache();
+            if (cached && Array.isArray(cached) && cached.length > 0) {
+                this.verses = cached;
+            }
+
+            if (hasParams) {
+                this.currentView = 'reader';
+                this.fetchVerses();
+            }
         },
 
         // ─────────────────────────────────────────────
@@ -243,13 +321,16 @@ function bibleApp() {
                 this.translation = localStorage.getItem('avuyile_bible_translation') || 'web';
                 this.theme = localStorage.getItem('avuyile_bible_theme') || 'light';
 
-                // Guard against corrupted values
+                // Guard against corrupted or invalid values
                 if (!this.bibleBooks.find(b => b.id === this.selectedBook)) this.selectedBook = 'JHN';
                 if (!this.translations.find(t => t.id === this.translation)) this.translation = 'web';
                 if (!this.themes.includes(this.theme)) this.theme = 'light';
+                const currentB = this.bibleBooks.find(b => b.id === this.selectedBook);
+                const maxChapters = currentB ? currentB.chapters : 50;
                 if (isNaN(this.selectedChapter) || this.selectedChapter < 1) this.selectedChapter = 1;
+                if (this.selectedChapter > maxChapters) this.selectedChapter = maxChapters;
             } catch {
-                // localStorage unavailable (private browsing, etc.) — use defaults silently
+                // localStorage unavailable (private browsing, etc.) — defaults used silently
             }
         },
 
@@ -260,11 +341,10 @@ function bibleApp() {
                 localStorage.setItem('avuyile_bible_translation', this.translation);
                 localStorage.setItem('avuyile_bible_theme', this.theme);
             } catch {
-                // Ignore write errors (storage quota, etc.)
+                // Ignore storage quota errors
             }
         },
 
-        // NEW: Highlight management persistence
         saveHighlights() {
             try {
                 localStorage.setItem('avuyile_bible_highlights', JSON.stringify(this.highlights));
@@ -282,29 +362,6 @@ function bibleApp() {
                 console.warn('Could not load highlights from localStorage, resetting:', e);
                 this.highlights = {};
             }
-        },
-
-        _finalizeFetch(verses) {
-            this.verses = verses;
-            this._writeCache(this.verses);
-            this.loading = false;
-
-            // Wait for DOM to render, then scroll to verse if deep-linked
-            this.$nextTick(() => {
-                if (this.targetVerse) {
-                    const el = document.getElementById('verse-' + this.targetVerse);
-                    if (el) {
-                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        // Optional: automatically open the menu/highlight the shared verse
-                        const targetV = this.verses.find(v => v.verse == this.targetVerse);
-                        if (targetV) this.activeVerse = targetV;
-                        
-                        // Reset target verse so normal chapter navigation works properly
-                        this.targetVerse = null; 
-                    }
-                }
-            });
         },
 
         // ─────────────────────────────────────────────
@@ -326,50 +383,45 @@ function bibleApp() {
         },
 
         // ─────────────────────────────────────────────
-        // NETWORKING UTILITIES
+        // TEXT SANITIZATION
         // ─────────────────────────────────────────────
 
         /**
-         * Fetch with a configurable timeout. Rejects with an AbortError on timeout.
-         * @param {string} url
-         * @param {number} [timeoutMs=7000]
-         * @returns {Promise<Response>}
-         */
-        async _fetchWithTimeout(url, timeoutMs = 7000) {
-            const controller = new AbortController();
-            const timerId = setTimeout(() => controller.abort(), timeoutMs);
-            try {
-                const response = await fetch(url, { signal: controller.signal });
-                return response;
-            } finally {
-                clearTimeout(timerId);
-            }
-        },
-
-        /**
-         * Strip HTML tags, remove Strong's numbers, remove embedded verse numbers,
-         * and normalise whitespace from a string.
-         * @param {string} str
-         * @returns {string}
+         * Cleans verse text: strips Strong's tags & numbers cleanly,
+         * decodes standard HTML entities, strips remaining tags,
+         * removes duplicate verse prefixes, and normalises whitespace.
          */
         _cleanVerseText(str) {
             if (!str) return '';
 
-            let cleanText = str;
+            let cleanText = String(str);
 
-            // 1. Strip HTML tags
+            // 1. Remove Strong's concordance tags and their inner numbers (<S>1161</S>)
+            cleanText = cleanText.replace(/<[sS][^>]*>[\s\S]*?<\/[sS]>/gi, '');
+
+            // 2. Decode standard HTML entities
+            cleanText = cleanText
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/&apos;/g, "'")
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&nbsp;/g, ' ');
+
+            // 3. Strip any remaining HTML tags
             cleanText = cleanText.replace(/<[^>]*>/g, '');
 
-            // 2. Remove leading verse numbers (e.g., "1And" becomes "And")
-            // This prevents duplicate verse numbers since your UI already adds them
-            cleanText = cleanText.replace(/^\s*\d+\s*/, '');
+            // 4. Remove leading verse numbers (e.g., "1 And" or "1: And")
+            cleanText = cleanText.replace(/^\s*\d+[\s:.-]*/, '');
 
-            // 3. Remove Strong's numbers (digits immediately following letters)
-            // Uses a capture group to keep the word, but drop the attached number
+            // 5. Remove residual bracketed references or Strong's numbers
+            cleanText = cleanText.replace(/\[\d+\]/g, '');
+            cleanText = cleanText.replace(/\(\d+\)/g, '');
             cleanText = cleanText.replace(/([a-zA-Z])\d+/g, '$1');
-            cleanText = cleanText.replace(/\s+\d{3,5}\b/g, '');
+            cleanText = cleanText.replace(/\b\d{4,5}\b/g, '');
 
-            // 4. Normalise whitespace
+            // 6. Normalise whitespace
             return cleanText.replace(/\s+/g, ' ').trim();
         },
 
@@ -401,40 +453,98 @@ function bibleApp() {
         },
 
         // ─────────────────────────────────────────────
-        // VERSE FETCHING — 3-TIER FALLBACK
+        // VERSE FETCHING & COMPLETION
         // ─────────────────────────────────────────────
+
+        _finalizeFetch(verses) {
+            this.verses = verses;
+            this._writeCache(this.verses);
+            this.loading = false;
+            this.error = false;
+            this.errorMessage = '';
+
+            // Handle target verse scrolling (deep links & Verse of the Day)
+            if (this.targetVerse) {
+                const vNum = this.targetVerse;
+                const attemptScroll = (retryCount = 0) => {
+                    const el = document.getElementById('verse-' + vNum);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        const targetV = this.verses.find(v => v.verse == vNum);
+                        if (targetV) this.activeVerse = targetV;
+                        this.targetVerse = null;
+                    } else if (retryCount < 5) {
+                        setTimeout(() => attemptScroll(retryCount + 1), 70);
+                    } else {
+                        this.targetVerse = null;
+                    }
+                };
+
+                if (typeof this.$nextTick === 'function') {
+                    this.$nextTick(() => attemptScroll(0));
+                } else {
+                    setTimeout(() => attemptScroll(0), 50);
+                }
+            }
+        },
 
         goHome() {
             this.currentView = 'home';
-            window.scrollTo(0, 0);
+            this.activeVerse = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            this._updateUrl(false);
         },
 
         openReader() {
             this.currentView = 'reader';
-            if (this.verses.length === 0) {
+            this._updateUrl(false);
+            if (this.verses.length === 0 || this.error) {
                 this.fetchVerses();
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            window.scrollTo(0, 0);
         },
 
         openVerseOfTheDay() {
+            if (!this.verseOfTheDay) return;
             this.selectedBook = this.verseOfTheDay.book;
             this.selectedChapter = this.verseOfTheDay.chapter;
             this.targetVerse = this.verseOfTheDay.verse;
-            this.openReader();
+            this.currentView = 'reader';
+            this._updateUrl(false);
             this.fetchVerses();
         },
 
-        // --- NEW METHOD TO OPEN TRANSLATIONS FROM HOME ---
         openTranslations() {
             this.showTranslationMenu = true;
         },
 
+        closeTranslations() {
+            this.showTranslationMenu = false;
+        },
+
+        setTranslation(id) {
+            if (id === this.translation) {
+                this.closeTranslations();
+                return;
+            }
+            this.translation = id;
+            this.closeTranslations();
+            this._updateUrl();
+            this.fetchVerses();
+        },
+
         async fetchVerses() {
+            // Cancel previous in-flight fetch to eliminate race conditions
+            if (this.activeAbortController) {
+                try { this.activeAbortController.abort(); } catch {}
+            }
+            this.activeAbortController = new AbortController();
+            const currentFetchId = ++this.activeFetchId;
+
             this.loading = true;
             this.error = false;
             this.errorMessage = '';
-            this.verses = [];
             this.activeVerse = null;
 
             if (!this.targetVerse) {
@@ -443,70 +553,102 @@ function bibleApp() {
 
             this.savePreferences();
 
+            // Fast display from cache while network resolves
+            const cached = this._readCache();
+            if (cached && !this.targetVerse) {
+                this.verses = cached;
+                this.loading = false;
+            }
+
             const bookName = this.currentBookName;
             const chapter = this.selectedChapter;
             const bookIndex = this.bibleBooks.findIndex(b => b.id === this.selectedBook) + 1; // 1-based
 
+            const isStale = () => currentFetchId !== this.activeFetchId;
+
             // ── Tier 1: bible-api.com ────────────────
             try {
                 const url = `https://bible-api.com/${encodeURIComponent(bookName)}+${chapter}?translation=${this.translation}`;
-                const response = await this._fetchWithTimeout(url, 7000);
+                const fetchPromise = fetch(url, { signal: this.activeAbortController.signal });
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tier-1 network timeout')), 5000)
+                );
+
+                const response = await Promise.race([fetchPromise, timeoutPromise]);
                 const data = await response.json();
+
+                if (isStale()) return;
 
                 if (!response.ok || data.error) throw new Error(data.error || 'Primary API error');
 
-                const verses = data.verses || [];
-                if (verses.length === 0) throw new Error('Empty response from primary API');
+                const rawVerses = data.verses || [];
+                if (rawVerses.length === 0) throw new Error('Empty response from primary API');
 
-                this.verses = verses.map(v => ({
+                const formattedVerses = rawVerses.map(v => ({
                     verse: v.verse,
                     text: this._cleanVerseText(v.text)
                 }));
 
-                this._writeCache(this.verses);
-                this.loading = false;
+                this._finalizeFetch(formattedVerses);
                 return;
 
             } catch (err1) {
-                console.warn('[Bible] Tier-1 (bible-api.com) failed:', err1.message);
+                if (isStale()) return;
+                if (err1.name !== 'AbortError') {
+                    console.warn('[Bible] Tier-1 (bible-api.com) failed:', err1.message);
+                }
             }
 
             // ── Tier 2: bolls.life ───────────────────
             try {
                 const bollsTranslation = this.bollsTranslationMap[this.translation] || this.translation.toUpperCase();
                 const url = `https://bolls.life/get-chapter/${bollsTranslation}/${bookIndex}/${chapter}/`;
-                const response = await this._fetchWithTimeout(url, 7000);
+                const fetchPromise = fetch(url, { signal: this.activeAbortController.signal });
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tier-2 network timeout')), 5000)
+                );
 
+                const response = await Promise.race([fetchPromise, timeoutPromise]);
+                if (isStale()) return;
                 if (!response.ok) throw new Error(`Bolls API HTTP ${response.status}`);
 
                 const data = await response.json();
+                if (isStale()) return;
 
                 if (!Array.isArray(data) || data.length === 0) throw new Error('Empty response from Bolls API');
 
-                this.verses = data.map(v => ({
+                const formattedVerses = data.map(v => ({
                     verse: v.verse,
                     text: this._cleanVerseText(v.text)
                 }));
 
-                this._writeCache(this.verses);
-                this.loading = false;
+                if (this.translation === 'bbe' && bollsTranslation === 'WEB') {
+                    this.showToast('BBE unavailable; loaded WEB translation.');
+                }
+
+                this._finalizeFetch(formattedVerses);
                 return;
 
             } catch (err2) {
-                console.warn('[Bible] Tier-2 (bolls.life) failed:', err2.message);
+                if (isStale()) return;
+                if (err2.name !== 'AbortError') {
+                    console.warn('[Bible] Tier-2 (bolls.life) failed:', err2.message);
+                }
             }
 
-            // ── Tier 3: Offline device cache ─────────
-            const cached = this._readCache();
-            if (cached) {
-                this.verses = cached;
-                this.loading = false;
+            // ── Tier 3: Offline device cache fallback ─────────
+            const fallbackCached = this._readCache();
+            if (fallbackCached) {
+                this._finalizeFetch(fallbackCached);
                 this.showToast('Offline mode — loaded from device cache.');
                 return;
             }
 
+            if (isStale()) return;
+
             // ── Ultimate failure ──────────────────────
             this.error = true;
+            this.verses = [];
 
             const translationHints = {
                 bbe: 'KJV or WEB',
@@ -515,13 +657,12 @@ function bibleApp() {
             };
 
             const suggestion = translationHints[this.translation];
-
-            this.errorMessage = `Unable to load passage. Check your internet connection and try again.${suggestion ? ` You could also try the ${suggestion} translation.` : ''}`;
+            this.errorMessage = `Unable to load passage. Please check your internet connection and try again.${suggestion ? ` You could also try the ${suggestion} translation.` : ''}`;
             this.loading = false;
         },
 
         // ─────────────────────────────────────────────
-        // NAVIGATION
+        // NAVIGATION & CHAPTER SWITCHING
         // ─────────────────────────────────────────────
 
         openNavigator() {
@@ -539,7 +680,6 @@ function bibleApp() {
         selectNavBook(book) {
             this.navBookId = book.id;
             this.navStep = 'chapters';
-            // Scroll modal back to top after step change
             this.$nextTick?.(() => {
                 const el = document.querySelector('.nav-scroll-container');
                 if (el) el.scrollTop = 0;
@@ -553,7 +693,10 @@ function bibleApp() {
         executeNavigation(chapter) {
             this.selectedBook = this.navBookId;
             this.selectedChapter = chapter;
+            this.targetVerse = null;
+            this.currentView = 'reader'; // Ensure view switches to reader from Home
             this.closeNavigator();
+            this._updateUrl(false);
             this.fetchVerses();
         },
 
@@ -561,7 +704,9 @@ function bibleApp() {
             if (this.loading || this.isFirstChapter) return;
 
             const idx = this.bibleBooks.findIndex(b => b.id === this.selectedBook);
+            if (idx < 0) return;
 
+            this.targetVerse = null;
             if (this.selectedChapter > 1) {
                 this.selectedChapter--;
             } else if (idx > 0) {
@@ -570,6 +715,7 @@ function bibleApp() {
                 this.selectedChapter = prev.chapters;
             }
 
+            this._updateUrl();
             this.fetchVerses();
         },
 
@@ -577,8 +723,10 @@ function bibleApp() {
             if (this.loading || this.isLastChapter) return;
 
             const idx = this.bibleBooks.findIndex(b => b.id === this.selectedBook);
+            if (idx < 0) return;
             const book = this.bibleBooks[idx];
 
+            this.targetVerse = null;
             if (this.selectedChapter < book.chapters) {
                 this.selectedChapter++;
             } else if (idx < this.bibleBooks.length - 1) {
@@ -586,28 +734,7 @@ function bibleApp() {
                 this.selectedChapter = 1;
             }
 
-            this.fetchVerses();
-        },
-
-        // ─────────────────────────────────────────────
-        // TRANSLATION MENU
-        // ─────────────────────────────────────────────
-
-        openTranslations() {
-            this.showTranslationMenu = true;
-        },
-
-        closeTranslations() {
-            this.showTranslationMenu = false;
-        },
-
-        setTranslation(id) {
-            if (id === this.translation) {
-                this.closeTranslations();
-                return;
-            }
-            this.translation = id;
-            this.closeTranslations();
+            this._updateUrl();
             this.fetchVerses();
         },
 
@@ -616,12 +743,13 @@ function bibleApp() {
         // ─────────────────────────────────────────────
 
         selectVerse(verse) {
-            // Toggle: tapping the same verse de-selects it
             this.activeVerse = (this.activeVerse?.verse === verse.verse) ? null : verse;
         },
+
         _getShareUrl() {
-            const baseUrl = window.location.origin + window.location.pathname; // Gets https://avuyilemthembu.co.za/portfolio/bible/index.html
-            return `${baseUrl}?book=${this.selectedBook}&chapter=${this.selectedChapter}&verse=${this.activeVerse.verse}&translation=${this.translation}`;
+            const baseUrl = window.location.origin + window.location.pathname;
+            const vNum = this.activeVerse ? this.activeVerse.verse : '';
+            return `${baseUrl}?book=${this.selectedBook}&chapter=${this.selectedChapter}&verse=${vNum}&translation=${this.translation}`;
         },
 
         clearActiveVerse() {
@@ -644,7 +772,6 @@ function bibleApp() {
             const shareUrl = this._getShareUrl();
 
             try {
-                // Now copies both the text AND the link
                 await navigator.clipboard.writeText(`${text}\n\nRead here: ${shareUrl}`);
                 this.clearActiveVerse();
                 this.showToast('Verse and link copied to clipboard ✓');
@@ -666,33 +793,28 @@ function bibleApp() {
                 })
                     .then(() => this.clearActiveVerse())
                     .catch(err => {
-                        // User cancelled share or share failed — fall back to copy
                         if (err.name !== 'AbortError') this.copyActiveVerse();
                     });
             } else {
-                // Web Share API not available — fall back to copy
                 this.copyActiveVerse();
             }
         },
-        // NEW: Toggle highlight for a verse
+
         toggleHighlight(verse) {
             if (!verse) return;
             const key = `${this.selectedBook}-${this.selectedChapter}-${verse.verse}`;
 
             if (this.highlights[key]) {
-                // Unhighlight
-                // Use Vue/Alpine reactivity workaround: create a new object
                 const newHighlights = { ...this.highlights };
                 delete newHighlights[key];
                 this.highlights = newHighlights;
                 this.showToast('Verse unhighlighted.');
             } else {
-                // Highlight
                 this.highlights = { ...this.highlights, [key]: true };
                 this.showToast('Verse highlighted ✓');
             }
             this.saveHighlights();
-            this.clearActiveVerse(); // Close the action sheet after toggling
+            this.clearActiveVerse();
         },
 
         // ─────────────────────────────────────────────
