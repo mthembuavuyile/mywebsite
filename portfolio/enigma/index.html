@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Encryption Tool | Avuyile Mthembu</title>
+    <title>Cipher Playground & Enigma Simulator | Avuyile Mthembu</title>
     <meta name="author" content="Avuyile Mthembu">
     <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
     <meta name="description"
-        content="Advanced symmetric encryption tool by Avuyile Mthembu. Secure your messages with multiple encryption algorithms and customizable settings.">
+        content="Interactive client-side cipher playground and Enigma rotor simulator by Avuyile Mthembu. Educational demonstration of rotor mechanics, RC4 stream cipher, and cipher algorithms.">
 
     <meta property="og:url" content="https://avuyilemthembu.co.za/portfolio/enigma/">
 
     <style>
         :root {
-            --primary-color: #0a0e17;
+--primary-color: #0a0e17;
             --secondary-color: #1a1f2b;
             --accent-color: #00e5ff;
             --alt-accent: #ff3e7f;
@@ -498,6 +498,22 @@
             margin-top: 1rem;
         }
 
+        
+        .demo-banner {
+            background: rgba(0, 229, 255, 0.07);
+            border-left: 3px solid var(--accent-color);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .demo-banner strong {
+            color: var(--accent-color);
+        }
+
         .advanced-toggle {
             color: var(--accent-color);
             cursor: pointer;
@@ -570,22 +586,26 @@
     <div class="container">
         <div class="logo-container">
             <a href="https://avuyilemthembu.co.za/" style="text-decoration: none;">
-                <div class="logo">Encryption Tool</div>
+                <div class="logo">Cipher Playground</div>
             </a>
-            <div class="tagline">Advanced Symmetric Encryption Tool</div>
+            <div class="tagline">Interactive Cipher & Cryptography Simulator (Educational Demo)</div>
+        </div>
+
+        <div class="demo-banner">
+            <strong>Educational Demonstration:</strong> This client-side web application demonstrates rotor stepping mechanics, an RC4 stream cipher, and educational cipher concepts entirely in your browser. It is not intended for production security or encrypting sensitive personal data.
         </div>
 
         <div class="tabs">
-            <div class="tab active" data-panel="panel-classic">Classic Encryption</div>
-            <div class="tab" data-panel="panel-modern">Modern Encryption</div>
+            <div class="tab active" data-panel="panel-classic">Classic Enigma</div>
+            <div class="tab" data-panel="panel-modern">Stream & Demo Ciphers</div>
             <div class="tab" data-panel="panel-history">History</div>
-            <div class="tab" data-panel="panel-learn">Learn</div>
+            <div class="tab" data-panel="panel-learn">How It Works</div>
         </div>
 
         <!-- Classic Encryption Panel -->
         <div class="panel active" id="panel-classic">
             <div class="section">
-                <div class="section-title">Rotor Configuration</div>
+                <div class="section-title">WWII 3-Rotor Enigma Configuration</div>
                 <div class="rotors">
                     <div class="rotor-group">
                         <label class="rotor-label">ROTOR I</label>
@@ -634,8 +654,8 @@
             </div>
 
             <div class="button-container">
-                <button class="primary-btn" onclick="processClassic('encrypt')">ENCRYPT</button>
-                <button class="secondary-btn" onclick="processClassic('decrypt')">DECRYPT</button>
+                <button class="primary-btn" onclick="processClassic('encrypt')">ENCODE</button>
+                <button class="secondary-btn" onclick="processClassic('decrypt')">DECODE</button>
                 <button class="utility-btn" onclick="randomizeRotors()">RANDOMIZE</button>
                 <button class="utility-btn" onclick="clearClassic()">CLEAR</button>
             </div>
@@ -645,7 +665,7 @@
                 <div id="classic-output" class="output"></div>
                 <div class="output-controls">
                     <button onclick="copyToClipboard('classic-output')">Copy</button>
-                    <button onclick="downloadText('classic-output', 'encryption-output')">Download</button>
+                    <button onclick="downloadText('classic-output', 'enigma-output')">Download</button>
                 </div>
             </div>
         </div>
@@ -653,49 +673,36 @@
         <!-- Modern Encryption Panel -->
         <div class="panel" id="panel-modern">
             <div class="section">
-                <div class="section-title">Encryption Settings</div>
+                <div class="section-title">Cipher Settings</div>
                 <div class="controls">
                     <div style="flex: 2;">
                         <label>Algorithm:</label>
                         <select id="algorithm" class="algo-select">
-                            <option value="aes">AES (Advanced Encryption Standard)</option>
-                            <option value="des">Triple DES</option>
-                            <option value="rc4">RC4 Stream Cipher</option>
-                            <option value="custom">Custom Cipher</option>
+                            <option value="rc4">RC4 Stream Cipher (Functional Byte-Swap)</option>
+                            <option value="custom">Custom Shift Cipher (Keyed Byte Shift)</option>
+                            <option value="aes">Simulated AES (Educational Base64 Demo)</option>
+                            <option value="des">Simulated Triple DES (Educational Demo)</option>
                         </select>
                     </div>
                     <div style="flex: 3;">
-                        <label>Encryption Key:</label>
-                        <input type="text" id="encrypt-key" class="key-input" placeholder="Enter your secret key">
+                        <label>Key:</label>
+                        <input type="text" id="encrypt-key" class="key-input" placeholder="Enter your key">
                         <div class="strength-meter">
                             <div id="key-strength" class="strength-fill"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="advanced-toggle" onclick="toggleAdvancedSettings()">Advanced Settings</div>
+                <div class="advanced-toggle" onclick="toggleAdvancedSettings()">Simulation Parameters</div>
                 <div id="advanced-settings" class="advanced-settings">
                     <div class="controls">
                         <div style="flex: 1;">
-                            <label>Iterations:</label>
-                            <input type="number" id="iterations" class="key-input" value="1000" min="1">
+                            <label>Key Derivation Iterations:</label>
+                            <input type="number" id="iterations" class="key-input" value="1000" min="1" max="10000">
                         </div>
-                        <div style="flex: 1;">
-                            <label>IV Format:</label>
-                            <select id="iv-format" class="algo-select">
-                                <option value="random">Random (Recommended)</option>
-                                <option value="key-derived">Key-Derived</option>
-                                <option value="custom">Custom</option>
-                            </select>
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Output Format:</label>
-                            <select id="output-format" class="algo-select">
-                                <option value="base64">Base64</option>
-                                <option value="hex">Hexadecimal</option>
-                                <option value="binary">Binary</option>
-                            </select>
-                        </div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">
+                        Sets the iteration count for the simulated hash derivation loop used in the educational AES &amp; Triple DES routines.
                     </div>
                 </div>
             </div>
@@ -706,8 +713,8 @@
             </div>
 
             <div class="button-container">
-                <button class="primary-btn" onclick="processModern('encrypt')">ENCRYPT</button>
-                <button class="secondary-btn" onclick="processModern('decrypt')">DECRYPT</button>
+                <button class="primary-btn" onclick="processModern('encrypt')">PROCESS</button>
+                <button class="secondary-btn" onclick="processModern('decrypt')">REVERSE / DECRYPT</button>
                 <button class="utility-btn" onclick="generateSecureKey()">GENERATE KEY</button>
                 <button class="utility-btn" onclick="clearModern()">CLEAR</button>
             </div>
@@ -717,7 +724,7 @@
                 <div id="modern-output" class="output"></div>
                 <div class="output-controls">
                     <button onclick="copyToClipboard('modern-output')">Copy</button>
-                    <button onclick="downloadText('modern-output', 'encryption-output')">Download</button>
+                    <button onclick="downloadText('modern-output', 'cipher-output')">Download</button>
                 </div>
             </div>
         </div>
@@ -725,7 +732,7 @@
         <!-- History Panel -->
         <div class="panel" id="panel-history">
             <div class="section">
-                <div class="section-title">Encryption History</div>
+                <div class="section-title">Operation History</div>
                 <div id="history-list" class="history-list">
                     <!-- History items will be populated here -->
                 </div>
@@ -739,38 +746,52 @@
         <!-- Learn Panel -->
         <div class="panel" id="panel-learn">
             <div class="section">
-                <div class="section-title">Encryption Basics</div>
-                <p>Symmetric encryption uses the same key for both encryption and decryption. This makes it fast and
-                    efficient, but requires secure key exchange.</p>
-                <br>
-                <h3 style="color: var(--accent-color);">Available Algorithms:</h3>
-                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                    <li><strong>Classic Enigma:</strong> Based on the WWII encryption machine with rotors and
-                        reflectors.</li>
-                    <li><strong>AES:</strong> Advanced Encryption Standard, modern and highly secure.</li>
-                    <li><strong>Triple DES:</strong> An extension of the Data Encryption Standard.</li>
-                    <li><strong>RC4:</strong> A simple stream cipher (not recommended for high security).</li>
-                    <li><strong>Custom Cipher:</strong> A custom-designed cipher for educational purposes.</li>
+                <div class="section-title">About This Application</div>
+                <p>This is a <strong>self-contained, client-side cryptography demonstration playground</strong> built with vanilla HTML, CSS, and JavaScript. All execution occurs entirely in your browser with zero backend dependencies, database storage, or external APIs.</p>
+                <p style="margin-top: 0.5rem; color: #ff3e7f;"><strong>Educational Notice:</strong> This project is designed for demonstrating cipher mechanics, historical rotor machines, and algorithmic concepts. It should never be used to protect sensitive personal, financial, or confidential data.</p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Implemented Algorithms &amp; Technical Breakdown</div>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.85rem;">
+                    <li>
+                        <strong>Classic Enigma (WWII 3-Rotor Simulator):</strong>
+                        Simulates the mechanical WWII Enigma machine with three configurable rotors (I, II, III), a selectable reflector (Standard, Wide, Thin), and an optional plugboard. Rotors mechanically rotate forward as each character is processed. Because Enigma is a reciprocal cipher, running the generated ciphertext through identical rotor settings decodes it back to plaintext.
+                    </li>
+                    <li>
+                        <strong>RC4 Stream Cipher (Functional Byte-Level Implementation):</strong>
+                        Implements the classic RC4 stream cipher algorithm. It builds a 256-byte state array (S-box), executes key-scheduling permutation swaps (KSA), generates a pseudo-random keystream (PRGA), and XORs it against character bytes.
+                    </li>
+                    <li>
+                        <strong>Custom Keyed Shift Cipher:</strong>
+                        A key-dependent byte-shifting cipher where characters are shifted based on the numerical ASCII sum and positions of the key.
+                    </li>
+                    <li>
+                        <strong>Simulated AES &amp; Triple DES (Conceptual Demos):</strong>
+                        Educational mock implementations that illustrate round concepts, salt generation, and iterative key derivation loops via repeated Base64 encoding. These are conceptual simulations for educational illustration and are <em>not</em> compliant with official NIST FIPS AES or 3DES specifications.
+                    </li>
                 </ul>
-                <br>
-                <p>For maximum security:</p>
-                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                    <li>Use long, complex keys with mixed characters</li>
-                    <li>Never reuse the same key</li>
-                    <li>Choose modern algorithms (AES) for sensitive data</li>
-                    <li>Use a secure channel to share your encryption key</li>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Technical Architecture</div>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <li><strong>Structure:</strong> Semantic HTML5 defining all controls and inputs.</li>
+                    <li><strong>Styling:</strong> Pure vanilla CSS with dark theme custom properties and responsive layout rules.</li>
+                    <li><strong>Logic:</strong> Pure vanilla JavaScript running directly in the browser.</li>
+                    <li><strong>State Persistence:</strong> Recent operation history is preserved locally using the browser's <code>localStorage</code> API.</li>
                 </ul>
             </div>
         </div>
 
         <div class="footer">
-            Advanced Encryption Tool &copy; 2025<br>
+            Cipher Playground &copy; 2025<br>
             Developed by <a href="https://avuyilemthembu.co.za/" target="_top">Avuyile Mthembu</a> | <a href="javascript:void(0)" onclick="showCredits()">About</a>
         </div>
     </div>
 
     <div class="calculation-overlay">
-        <div class="calculation-animation">PROCESSING ENCRYPTION</div>
+        <div class="calculation-animation">PROCESSING CIPHER</div>
         <div class="loader"></div>
         <div class="status-bar">
             <div class="status-progress"></div>
@@ -938,7 +959,7 @@
         }
 
         function processClassic(action) {
-            showCalculationOverlay('PROCESSING ENIGMA ENCRYPTION');
+            showCalculationOverlay('SIMULATING ENIGMA ROTORS');
 
             setTimeout(() => {
                 const input = document.getElementById('classic-input').value;
@@ -967,10 +988,9 @@
             document.getElementById('classic-output').textContent = '';
         }
 
-        // Modern encryption functions
+        // Modern cipher functions (educational implementations and simulations)
         function sha256(message) {
-            // This is a simplified version for demonstration
-            // In a real application, use a proper crypto library
+            // Simplified hash calculation for educational demonstration
             let hash = 0;
             for (let i = 0; i < message.length; i++) {
                 const char = message.charCodeAt(i);
@@ -980,57 +1000,62 @@
             return hash.toString(16);
         }
 
+        function getIterationCount() {
+            const el = document.getElementById('iterations');
+            return el ? Math.max(1, parseInt(el.value, 10) || 1000) : 1000;
+        }
+
         function deriveKey(key, salt, iterations) {
-            // Simulated key derivation
+            // Simulated iterative key derivation loop
             let result = key + salt;
-            for (let i = 0; i < iterations; i++) {
+            const count = Math.min(Math.max(1, iterations || 1000), 10000);
+            for (let i = 0; i < count; i++) {
                 result = sha256(result + i);
             }
             return result;
         }
 
         function aesEncrypt(text, key) {
-            // Simulated AES encryption (for demonstration only)
+            // Simulated AES encryption (educational demonstration)
             const salt = generateRandomString(16);
             const iv = generateRandomString(16);
-            const derivedKey = deriveKey(key, salt, 1000);
+            const iterations = getIterationCount();
+            const derivedKey = deriveKey(key, salt, iterations);
 
-            // In a real implementation, this would use proper AES encryption
+            // Educational multi-pass encoding
             let encrypted = btoa(text);
             for (let i = 0; i < 3; i++) {
                 encrypted = btoa(encrypted + derivedKey.substring(0, 10));
             }
 
             return {
+                algorithm: "Simulated AES (Educational Demo)",
                 salt,
                 iv,
+                iterations,
                 ciphertext: encrypted
             };
         }
 
         function aesDecrypt(encrypted, key) {
-            // Simulated AES decryption (for demonstration only)
+            // Simulated AES decryption (educational demonstration)
             try {
-                // Parse the encrypted object
                 let encObj;
                 try {
                     encObj = JSON.parse(encrypted);
                 } catch (e) {
-                    // If not JSON, assume it's just the ciphertext
-                    encObj = { ciphertext: encrypted, salt: 'default', iv: 'default' };
+                    encObj = { ciphertext: encrypted, salt: 'default', iv: 'default', iterations: getIterationCount() };
                 }
 
-                const derivedKey = deriveKey(key, encObj.salt || 'default', 1000);
+                const iterations = encObj.iterations || getIterationCount();
+                const derivedKey = deriveKey(key, encObj.salt || 'default', iterations);
 
-                // In a real implementation, this would use proper AES decryption
                 let decrypted = encObj.ciphertext;
                 for (let i = 0; i < 3; i++) {
                     decrypted = atob(decrypted);
                 }
 
-                // Remove the key parts that were added during encryption
                 decrypted = decrypted.replace(new RegExp(derivedKey.substring(0, 10), 'g'), '');
-
                 return decrypted;
             } catch (e) {
                 console.error("Decryption error:", e);
@@ -1039,31 +1064,34 @@
         }
 
         function desEncrypt(text, key) {
-            // Simulated Triple DES (for demonstration only)
+            // Simulated Triple DES (educational demonstration)
             const salt = generateRandomString(8);
-            const derivedKey = deriveKey(key, salt, 500);
+            const iterations = getIterationCount();
+            const derivedKey = deriveKey(key, salt, iterations);
 
-            // In a real implementation, this would use proper Triple DES
             let encrypted = btoa(text);
             encrypted = btoa(encrypted + derivedKey.substring(0, 8));
 
             return {
+                algorithm: "Simulated Triple DES (Educational Demo)",
                 salt,
+                iterations,
                 ciphertext: encrypted
             };
         }
 
         function desDecrypt(encrypted, key) {
-            // Simulated Triple DES decryption
+            // Simulated Triple DES decryption (educational demonstration)
             try {
                 let encObj;
                 try {
                     encObj = JSON.parse(encrypted);
                 } catch (e) {
-                    encObj = { ciphertext: encrypted, salt: 'default' };
+                    encObj = { ciphertext: encrypted, salt: 'default', iterations: getIterationCount() };
                 }
 
-                const derivedKey = deriveKey(key, encObj.salt || 'default', 500);
+                const iterations = encObj.iterations || getIterationCount();
+                const derivedKey = deriveKey(key, encObj.salt || 'default', iterations);
 
                 let decrypted = atob(encObj.ciphertext);
                 decrypted = decrypted.replace(derivedKey.substring(0, 8), '');
@@ -1144,11 +1172,17 @@
             }
 
             if (!key) {
-                alert('Please enter an encryption key');
+                alert('Please enter a key');
                 return;
             }
 
-            showCalculationOverlay('PROCESSING ' + algorithm.toUpperCase());
+                        const overlayLabels = {
+                'rc4': 'PROCESSING RC4 STREAM',
+                'custom': 'PROCESSING CUSTOM SHIFT',
+                'aes': 'SIMULATING AES ROUNDS',
+                'des': 'SIMULATING 3DES DEMO'
+            };
+            showCalculationOverlay(overlayLabels[algorithm] || ('PROCESSING ' + algorithm.toUpperCase()));
 
             setTimeout(() => {
                 let result;
@@ -1188,7 +1222,13 @@
                 document.getElementById('modern-output').textContent = result;
 
                 // Add to history
-                addToHistory(algorithm.toUpperCase(), action, input.substring(0, 30) + (input.length > 30 ? '...' : ''));
+                                const algoDisplayNames = {
+                    'rc4': 'RC4 Stream',
+                    'custom': 'Custom Shift',
+                    'aes': 'Simulated AES',
+                    'des': 'Simulated 3DES'
+                };
+                addToHistory(algoDisplayNames[algorithm] || algorithm.toUpperCase(), action, input.substring(0, 30) + (input.length > 30 ? '...' : ''));
 
                 hideCalculationOverlay();
             }, 1500);
@@ -1366,7 +1406,7 @@
         }
 
         function showCredits() {
-            alert('Advanced Encryption Tool\nVersion 3.7.2\n\nDeveloped by Avuyile Mthembu for educational purposes only.\nThis tool is meant for learning about encryption concepts and should not be used for encrypting sensitive information.');
+            alert('Cipher Playground & Rotor Simulator\n\nDeveloped by Avuyile Mthembu as an educational client-side demonstration of cipher mechanics and historical rotor simulation.\n\nAll operations execute locally in your browser.');
         }
 
         // Initialize
