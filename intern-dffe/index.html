@@ -122,7 +122,10 @@
                 <td style="font-family: Arial, sans-serif; font-size: 13px; color: #000000; line-height: 1.35;">
                     Regards<br>
                     <b>Mr Avuyile Mthembu</b><br>
-                    Information Technology Business Solutions<br>
+                    Intern: Software Developer<br>
+                    Directorate: Information Technology Business Solutions (ITBS)<br>
+                    ICT Services: Infrastructure &amp; Security Support<br>
+                    Branch: Corporate Management Services (CMS)<br>
                     Department of Forestry, Fisheries and the Environment<br>
                     Environment House<br>
                     473 Steve Biko and Soutpansberg Streets<br>
@@ -145,7 +148,7 @@
     </div>
 
     <script>
-        function copySig(email, btn) {
+        async function copySig(email, btn) {
             const emailLink = document.getElementById('sigEmailLink');
             emailLink.innerText = email;
             emailLink.href = 'mailto:' + email;
@@ -158,8 +161,27 @@
             selection.removeAllRanges();
             selection.addRange(range);
 
+            let copied = false;
             try {
-                document.execCommand('copy');
+                copied = document.execCommand('copy');
+            } catch (err) {
+                console.warn('execCommand failed, trying clipboard API', err);
+            }
+
+            if (!copied && navigator.clipboard && window.ClipboardItem) {
+                try {
+                    const blobHtml = new Blob([signatureTable.outerHTML], { type: 'text/html' });
+                    const blobText = new Blob([signatureTable.innerText], { type: 'text/plain' });
+                    await navigator.clipboard.write([
+                        new ClipboardItem({ 'text/html': blobHtml, 'text/plain': blobText })
+                    ]);
+                    copied = true;
+                } catch (e) {
+                    console.error('Clipboard API failed', e);
+                }
+            }
+
+            if (copied) {
                 const span = btn.querySelector('span');
                 const orig = span.innerText;
                 span.innerText = 'Copied Successfully!';
@@ -170,8 +192,7 @@
                     btn.classList.remove('success');
                     selection.removeAllRanges();
                 }, 2500);
-            } catch (err) {
-                console.error('Failed to copy', err);
+            } else {
                 alert('Please highlight the signature and press Ctrl+C to copy.');
             }
         }
