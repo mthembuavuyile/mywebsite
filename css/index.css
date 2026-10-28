@@ -51,34 +51,31 @@
     justify-content: center;
 }
 
-/* Tech Tags Pills */
+/* Tech Tags (Minimalist Developer Tags) */
 .tech-tags {
     display: flex;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
     margin-bottom: 2.5rem;
 }
 
 .tag {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    padding: 0.4rem 1.1rem;
+    font-size: 0.825rem;
+    padding: 0.35rem 0.8rem;
     background-color: var(--color-bg-page);
     border: 1px solid var(--color-border);
-    border-radius: 2rem;
+    border-radius: 4px;
     color: var(--color-text-main);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
     cursor: default;
 }
 
 .tag:hover {
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+    background-color: var(--color-bg-alt);
+    border-color: var(--color-brand);
+    color: var(--color-brand);
 }
 
 

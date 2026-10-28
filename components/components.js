@@ -15,7 +15,7 @@ class SiteHeader extends HTMLElement {
               <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
               <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
               <li><a href="/contact.html" data-nav="contact">Contact</a></li>
-              <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Vylex</a></li>
+              <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Vylex &rarr;</a></li>
             </ul>
           </nav>
           <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
@@ -31,7 +31,7 @@ class SiteHeader extends HTMLElement {
           <li><a href="/portfolio.html" data-nav="portfolio">Portfolio</a></li>
           <li><a href="/blog/index.html" data-nav="blog">Blog</a></li>
           <li><a href="/contact.html" data-nav="contact">Contact</a></li>
-          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Vylex</a></li>
+          <li><a href="https://vylex.co.za" target="_blank" rel="noopener">Vylex &rarr;</a></li>
         </ul>
       </nav>
     `;
