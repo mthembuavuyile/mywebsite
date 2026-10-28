@@ -375,3 +375,73 @@
     margin: 0;
     line-height: 1.5;
 }
+
+
+/* Stacked Skills Row List (Zero Blank Space) */
+.skills-stack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.skill-row-card {
+    display: flex;
+    background: var(--color-bg-page);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-row-card:hover {
+    transform: translateX(4px);
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+}
+
+.skill-accent-bar {
+    width: 6px;
+    flex-shrink: 0;
+}
+
+.skill-row-body {
+    padding: 1.25rem 1.6rem;
+    flex-grow: 1;
+}
+
+.skill-row-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-brand);
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.skill-row-title i {
+    color: var(--color-accent);
+    font-size: 1.05rem;
+}
+
+.skill-row-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.skill-row-bullets li {
+    font-size: 0.925rem;
+    color: var(--color-text-main);
+    line-height: 1.55;
+}
+
+.skill-row-bullets li strong {
+    color: var(--color-brand);
+    font-weight: 600;
+}
