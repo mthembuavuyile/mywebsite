@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,26 +14,31 @@
             flex-direction: column;
             align-items: center;
         }
+
         .header {
             text-align: center;
             margin-bottom: 25px;
         }
+
         .header h1 {
             color: #111827;
             margin-bottom: 8px;
             font-size: 24px;
         }
+
         .header p {
             color: #6b7280;
             margin-bottom: 20px;
             font-size: 15px;
         }
+
         .btn-group {
             display: flex;
             gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
+
         .copy-btn {
             background-color: #0a5c36;
             color: white;
@@ -48,29 +54,36 @@
             align-items: center;
             gap: 8px;
         }
+
         .copy-btn:hover {
             background-color: #074327;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px -2px rgba(10, 92, 54, 0.3);
         }
+
         .copy-btn.secondary {
             background-color: #1f2937;
             box-shadow: 0 4px 6px -1px rgba(31, 41, 55, 0.2);
         }
+
         .copy-btn.secondary:hover {
             background-color: #111827;
         }
+
         .copy-btn:active {
             transform: translateY(0);
         }
+
         .copy-btn svg {
             width: 18px;
             height: 18px;
         }
+
         .copy-btn.success {
             background-color: #10b981 !important;
             box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
         }
+
         .signature-container {
             background: white;
             padding: 30px;
@@ -78,22 +91,26 @@
             border-radius: 8px;
             margin-top: 5px;
         }
+
         .footer-note {
             margin-top: 25px;
             color: #6b7280;
             font-size: 13px;
             text-align: center;
         }
+
         .footer-note a {
             color: #0a5c36;
             text-decoration: none;
             font-weight: 600;
         }
+
         .footer-note a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
 
     <div class="header">
@@ -102,13 +119,17 @@
         <div class="btn-group">
             <button id="copyBtnDffe" class="copy-btn" onclick="copySig('AvMthembu@dffe.gov.za', this)">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                    </path>
                 </svg>
                 <span>Copy (@dffe.gov.za)</span>
             </button>
             <button id="copyBtnEnv" class="copy-btn secondary" onclick="copySig('AvMthembu@environment.gov.za', this)">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                    </path>
                 </svg>
                 <span>Copy (@environment.gov.za)</span>
             </button>
@@ -117,14 +138,15 @@
 
     <div class="signature-container">
         <!-- START OF SIGNATURE TO COPY -->
-        <table id="signatureTable" cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; font-size: 13px; color: #000000; line-height: 1.35; background-color: #ffffff;">
+        <table id="signatureTable" cellpadding="0" cellspacing="0" border="0"
+            style="font-family: Arial, sans-serif; font-size: 13px; color: #000000; line-height: 1.35; background-color: #ffffff;">
             <tr>
                 <td style="font-family: Arial, sans-serif; font-size: 13px; color: #000000; line-height: 1.35;">
                     Regards<br>
                     <b>Mr Avuyile Mthembu</b><br>
                     Intern: Software Developer<br>
                     Directorate: Information Technology Business Solutions (ITBS)<br>
-                    ICT Services: Infrastructure &amp; Security Support<br>
+                    Chief Directorate: Government Information Technology Office (GITO)<br>
                     Branch: Corporate Management Services (CMS)<br>
                     Department of Forestry, Fisheries and the Environment<br>
                     Environment House<br>
@@ -132,11 +154,16 @@
                     PRETORIA<br>
                     Tel: (012) 399 9999<br>
                     Cell: 064 878 4287<br>
-                    E-mail: <a id="sigEmailLink" href="mailto:AvMthembu@dffe.gov.za" style="color: #0000ee; text-decoration: underline;">AvMthembu@dffe.gov.za</a><br>
+                    E-mail: <a id="sigEmailLink" href="mailto:AvMthembu@dffe.gov.za"
+                        style="color: #0000ee; text-decoration: underline;">AvMthembu@dffe.gov.za</a><br>
                     Call Centre: 086 111 2468<br>
-                    Website: <a href="https://www.dffe.gov.za" target="_blank" style="color: #0000ee; text-decoration: underline;">www.dffe.gov.za</a><br>
+                    Website: <a href="https://www.dffe.gov.za" target="_blank"
+                        style="color: #0000ee; text-decoration: underline;">www.dffe.gov.za</a><br>
                     <br>
-                    <img id="sigLogo" src="https://avuyilemthembu.co.za/intern-dffe/dffe-logo.png" alt="Department of Forestry, Fisheries and the Environment" width="280" style="display: block; width: 280px; height: auto; border: 0;" onerror="this.onerror=null; this.src='dffe-logo.png';">
+                    <img id="sigLogo" src="https://avuyilemthembu.co.za/intern-dffe/dffe-logo.png"
+                        alt="Department of Forestry, Fisheries and the Environment" width="280"
+                        style="display: block; width: 280px; height: auto; border: 0;"
+                        onerror="this.onerror=null; this.src='dffe-logo.png';">
                 </td>
             </tr>
         </table>
@@ -144,7 +171,8 @@
     </div>
 
     <div class="footer-note">
-        <a href="../signature.html">&larr; Personal Portfolio Signature</a> &bull; <a href="../index.html">Main Website</a>
+        <a href="../signature.html">&larr; Personal Portfolio Signature</a> &bull; <a href="../index.html">Main
+            Website</a>
     </div>
 
     <script>
@@ -198,4 +226,5 @@
         }
     </script>
 </body>
+
 </html>
